@@ -227,7 +227,7 @@ const Module_NetBroadcast = {
         this.ctx.fillStyle = "#ffffff"; this.ctx.font = "bold 13px sans-serif"; this.ctx.textAlign = "center";
         this.ctx.fillText("NETWORK HUB", hubX + hubW/2, hubY + 30);
         this.ctx.font = "9px monospace"; this.ctx.fillStyle = "#ff6f00";
-        this.ctx.fillText("Broadcast Mode", hubX + hubW/2, hubY + 48);
+        this.ctx.fillText("Broadcast 配信", hubX + hubW/2, hubY + 48);
 
         for (let i = 0; i < 5; i++) {
             const pY = nodeYPositions[i] + nodeH / 2;
@@ -270,7 +270,7 @@ const Module_NetBroadcast = {
             if (this.nodeHeat[i] > 0.7) {
                 this.ctx.fillStyle = "#ffcccc"; this.ctx.fillText("🔥 OVERLOAD", nodeX + 10, nY + 40);
             } else if (this.nodeHeat[i] > 0.3) {
-                this.ctx.fillStyle = "#ffffaa"; this.ctx.fillText("⚠ ゴミ破棄中", nodeX + 10, nY + 40);
+                this.ctx.fillStyle = "#ffffaa"; this.ctx.fillText("⚠ 不要データ破棄中", nodeX + 10, nY + 40);
             } else {
                 this.ctx.fillStyle = "#aaaaaa"; this.ctx.fillText("● 待機・受信", nodeX + 10, nY + 40);
             }

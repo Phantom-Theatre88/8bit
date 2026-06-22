@@ -340,10 +340,10 @@ const Module_NetArtNet = {
 
                     this.ctx.fillStyle = "#222222"; this.ctx.fillRect(labelX, labelY, labelW, 11);
                     this.ctx.fillStyle = "#ffffff"; this.ctx.font = "bold 8px sans-serif"; this.ctx.textAlign = "center";
-                    this.ctx.fillText("ETHERNET / Art-Net PACKET", labelX + labelW/2, labelY + 8);
+                    this.ctx.fillText("ETHERNET / Art-Net UDP PACKET", labelX + labelW/2, labelY + 8);
 
                     this.ctx.textAlign = "left"; this.ctx.font = "bold 8.5px monospace";
-                    this.ctx.fillStyle = "#d32f2f"; this.ctx.fillText(`DST: 192.168.0.50 (Broadcast)`, labelX + 4, labelY + 21);
+                    this.ctx.fillStyle = "#d32f2f"; this.ctx.fillText(`DST: 192.168.0.50 / Broadcast例`, labelX + 4, labelY + 21);
                     this.ctx.fillStyle = "#1976d2"; this.ctx.fillText(`PROT: UDP / Art-Net`, labelX + 4, labelY + 31);
                     
                     this.ctx.fillStyle = this.lineColors[p.uni];

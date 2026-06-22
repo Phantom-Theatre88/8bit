@@ -576,13 +576,13 @@
     
     <div class="tab-separator"></div>
     
-    <button class="main-tab-btn tab-network" id="main-tab-netartnet">5. Art-Net (カプセル)</button>
-    <button class="main-tab-btn tab-network" id="main-tab-netbroadcast">6. Broadcast (自爆)</button>
-    <button class="main-tab-btn tab-network" id="main-tab-netsacn">7. sACN (インテリ)</button>
+    <button class="main-tab-btn tab-network" id="main-tab-netartnet">5. Art-Net（DMXをLANへ）</button>
+    <button class="main-tab-btn tab-network" id="main-tab-netbroadcast">6. Broadcast（全体配信）</button>
+    <button class="main-tab-btn tab-network" id="main-tab-netsacn">7. sACN（必要な相手へ）</button>
     
     <div class="tab-separator"></div>
     
-    <button class="main-tab-btn tab-explain" id="main-tab-explain">8. 結線解説 (Ring/Star)</button>
+    <button class="main-tab-btn tab-explain" id="main-tab-explain">8. 結線 / 冗長化</button>
 </div>
 
 <div class="master-console-container">
@@ -614,10 +614,10 @@
         'sim16bit': `<strong>【16-bit 調光制御：Coarse / Fine の二層構造】</strong><br>16-bitは、上位8bitの <strong>Coarse</strong> で大きな段を決め、下位8bitの <strong>Fine</strong> でその段の中をさらに細かく追い込みます。考え方は <strong>16bit Total = Coarse × 256 + Fine</strong>。8-bitの256段階だけでは粗く見える位置制御や低レベルフェードを、65,536段階まで細かく扱うための入口です。Moving HeadのPAN/TILT精度比較へつながります。`,
         'simdmx': `<strong>【DMX512伝送：1秒間に42回走る定期列車】</strong><br>DMX512信号は、1番から512番までの全チャンネルデータを乗せた「512両編成の超ロングな列車」です。劇場内の調光卓は、オペレーターがフェーダーを一切触っていなくても、値が変化していなくても関係なく、1秒間に約42回（42Hz周波数）の超スピードで、この定期列車を劇場内へ絶え間なく垂れ流しで送り続けています。信号を受け取る灯体側は、常に自分のチャンネル番号の車両（パルス波形）が通りかかるのを待ち構えてデータを抜き出しています。`,
         'movinghead': `<strong>【Moving Head：PAN/TILT、キャリブレーション、16-bit位置制御】</strong><br>ムービングヘッドのPAN/TILT可動域、電源投入時のキャリブレーション、Start/End検出、キャリブレーションエラー、そして8-bitと16-bitの位置分解性能差を学ぶ教材です。16-bit比較では、8-bitでは狙った位置に止まりにくいこと、Fine値によって狙った位置へ細かく近づけられることを、ゴースト表示で確認できます。`,
-        'netartnet': `<strong>【Art-Net伝送：複数系統DMXのネットワークカプセル化】</strong><br>劇場が大型化し、DMXケーブルが1系統（512ch）では足りなくなると、通常は調光室から何十本ものDMXマルチを引き回す必要があります。Art-Netは、そんな何系統分ものDMX列車データ（最大32,768系統）をまるごとイーサネットの「UDPパケット」という段ボール箱の中にカプセル詰め（梱包）し、たった1本のLANケーブル道路へ超高速射出する技術です。これにより、劇場ネットワークの幹線インフラを極限までシンプルに引き算できます。`,
-        'netbroadcast': `<strong>【Broadcast伝送の闇：ハブストームとコピー地獄による過負荷】</strong><br>初期のArt-Net（Art-Net Ⅰ/Ⅱ）や安価なネットワーク構築で使われる「ブロードキャスト（*.255）」は、パケットの宛先を「全員」に指定して送信します。これを受け取ったノンインテリジェントなHUBは、接続されている全てのポートに中身をコピーして無差別バラ撒きを行います。結果、ポート1 of Nodeが欲しいデータ（U0）以外に、関係のないU1〜U4のゴミパケットまで津波のように押し寄せ、Node側はこれを毎フレーム引き算して捨てる摩擦熱でCPUが熱パンク（過負荷ストーム）を起こす危険に晒されます。`,
-        'netsacn': `<strong>【sACN伝送の静寂：マルチキャストによるインテリジェント仕分け】</strong><br>Broadcastのコピー地獄を解決した、現代のスタジアムや大規模劇場のデファクトスタンダードとなる国際規格プロトコルです。sACN（Streaming ACN）は「マルチキャスト（239.255.*.*）」という賢い宛先指定を使用します。インテリジェントなスマートスイッチ（HUB）が各Nodeの「俺はU2が欲しい」「私はU4が欲しい」という声を事前に記憶（IGMPスヌーピング解説）し、HUBの内部で完璧にレーンを仕分けして発射します。各Nodeには最初から正解 of 箱しか届かないため、ネットワーク世界は極めて静かで快適に保たれます。`,
-        'explain': `<strong>【7. 左右分割構造：スター結線星形配置 ＆ 本格円形二重リング結線検証盤】</strong><br>画面上の配線に配置されたハサミマークの <strong>[ ✂ ] ボタン</strong>をクリックしてLANケーブルを切断（断線）させてみましょう。<br><strong>【左半分：スター結線】</strong>は、中央のHubから上下左右斜めに広がる本格的な<strong>星形（スター）トポロジー配置</strong>を完全再現。切断されたポートのNodeだけが局所的に通信途絶（赤点滅）します。<br><strong>【右半分：二重リング結線】</strong>は、3台のHubを美しい正三角形のサークル（輪っか）に配置し、外回り主幹（Primary：青線）と内回り副幹（Secondary：緑線）が並走する<strong>本格的な二重化ライン</strong>を再現。青線をカットしても緑のバックアップ線へパケットの軌道が即座に切り替わり、すべてのNodeが1つも死なずに通信を維持するリダンダンシーの真髄を目視できます。`
+        'netartnet': `<strong>【Art-Net：DMXをEthernetで運ぶ考え方】</strong><br>DMX512は1系統あたり最大512chを送る信号です。劇場やイベント現場で複数のUniverseを扱う場合、DMXケーブルを何本も引く代わりに、Art-NetではDMXの値をEthernet上のUDPパケットとして送ります。これにより、1本のLAN幹線で複数Universeを扱えるようになります。ただし、運用方式によってBroadcast / Unicastなどの通信範囲が関係するため、ネットワーク規模に合わせた設計が必要です。`,
+        'netbroadcast': `<strong>【Broadcast：全体へ届く配信方式】</strong><br>Broadcastは、同じネットワーク内の全機器へ向けてパケットを送る方式です。小規模な構成では分かりやすく、設定も単純にできます。一方で、Universe数や接続機器が増えると、本来そのデータを必要としないNodeにも通信が届きます。そのため、各Nodeは自分に関係するUniverseだけを受け取り、不要なデータを破棄する必要があります。大規模な照明ネットワークでは、この不要通信の増加が負荷や不安定要因になることがあります。`,
+        'netsacn': `<strong>【sACN：必要なUniverseを必要な相手へ届ける】</strong><br>sACN（Streaming ACN）は、照明制御データをEthernet上で扱うための標準的な方式の一つです。代表的にはMulticastを使い、Universeごとに通信グループを分けて送ります。IGMP Snoopingに対応したスイッチを使うと、各Nodeが必要とするUniverseだけを適切なポートへ流しやすくなります。Broadcastのように全機器へ一律に送るのではなく、必要な相手へ必要なデータを届ける考え方として理解すると、現場での設計判断に使いやすくなります。`,
+        'explain': `<strong>【結線 / 冗長化：Star構成とRing構成の違い】</strong><br>画面上の配線にある <strong>[ ✂ ] ボタン</strong>を押すと、LANケーブルの断線を再現できます。<br><strong>【左：Star結線】</strong>は、中央のHubから各Nodeへ個別に配線する基本的な構成です。1本の枝線が切れた場合、その先のNodeだけが通信できなくなります。<br><strong>【右：Ring / 二重化構成】</strong>は、複数のHubを経路でつなぎ、片側の経路が切れても別経路へ回せる考え方を示します。Primary / Secondary のような冗長経路を用意することで、1本の断線が全体停止につながりにくい構成を学べます。`
     };
 
     const modules = {
