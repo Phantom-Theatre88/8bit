@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -175,6 +175,26 @@
             to { opacity: 1; }
         }
 
+
+
+        /* --- MovingHead integrated layout fix v0.18.4 --- */
+        .master-console-container.movinghead-active {
+            gap: 10px;
+        }
+        .master-console-container.movinghead-active .console-main-screen {
+            aspect-ratio: 1200 / 650;
+            flex-shrink: 0;
+        }
+        .master-console-container.movinghead-active .console-help-display {
+            flex: 0 0 96px;
+            min-height: 78px;
+            padding: 10px 18px;
+        }
+        .master-console-container.movinghead-active .help-text-content {
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
         .network-carousel-window {
             width: 100%;
             height: 100%;
@@ -199,6 +219,85 @@
             width: 33.333333%;
             height: 100%;
         }
+
+
+        /* --- MovingHead Module v0.18 integrated styles --- */
+        .movinghead-root { width:100%; height:100%; display:flex; flex-direction:column; gap:10px; background:#151515; border:3px solid #444; border-radius:18px; padding:14px; box-shadow:0 10px 40px rgba(0,0,0,.8); position:relative; isolation:isolate; }
+            .mh-topbar { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-shrink:0; background:#0d0d0d; border:2px solid #333; border-radius:12px; padding:10px 14px; position:relative; z-index:30; }
+            .mh-title { font-size:22px; font-weight:900; color:#fff; }
+            .mh-subtitle { font-size:12px; color:#888; letter-spacing:.8px; margin-top:2px; }
+            .mh-top-controls { display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end; position:relative; z-index:40; }
+            .mh-btn { border:2px solid #444; border-radius:9px; background:#1f1f1f; color:#aaa; padding:9px 14px; font-weight:900; cursor:pointer; font-size:12px; position:relative; z-index:50; pointer-events:auto; touch-action:manipulation; }
+            .mh-btn.active.power { background:#00e676; border-color:#00e676; color:#001b0d; box-shadow:0 0 14px rgba(0,230,118,.45); }
+            .mh-btn.active.error { background:#ff3d00; border-color:#ff3d00; color:#fff; box-shadow:0 0 14px rgba(255,61,0,.45); }
+            .mh-btn.active.compare { background:#b388ff; border-color:#b388ff; color:#110026; box-shadow:0 0 14px rgba(179,136,255,.45); }
+            .mh-mode-switch { display:flex; background:#050505; border:2px solid #333; border-radius:10px; padding:4px; gap:4px; }
+            .mh-mode-btn { border:none; border-radius:7px; padding:8px 15px; background:transparent; color:#666; font-size:12px; font-weight:900; cursor:pointer; }
+            .mh-mode-btn.active { background:#00e5ff; color:#001014; box-shadow:0 0 12px rgba(0,229,255,.5); }
+            .mh-layout { flex-grow:1; min-height:0; display:grid; grid-template-columns:280px minmax(530px,1fr) 300px; gap:12px; overflow:hidden; }
+            .mh-panel { background:#0b0b0b; border:2px solid #3b3b3b; border-radius:12px; padding:12px; min-height:0; box-shadow:inset 0 0 18px rgba(0,0,0,.55); }
+            .mh-panel-title { font-size:12px; font-weight:900; color:#fff; letter-spacing:.9px; margin-bottom:10px; }
+            .mh-control-panel,.mh-info-panel { display:flex; flex-direction:column; gap:8px; overflow:hidden; }
+            .mh-canvas-panel { display:flex; flex-direction:column; }
+            #movinghead-canvas { width:100%; height:100%; display:block; background:#061013; border:2px solid #1d4f5c; border-radius:10px; pointer-events:none; }
+            .mh-fader-bank { display:flex; gap:8px; justify-content:center; flex-shrink:0; }
+            .mh-resolution-faders { display:none; grid-template-columns:1fr 1fr; gap:10px; }
+            .mh-resolution-mode .mh-normal-faders { display:none; }
+            .mh-resolution-mode .mh-resolution-faders { display:grid; }
+            .mh-res-fader-block { padding:8px 6px; }
+            .mh-res-fader-block .mh-fader-head { font-size:10.5px; gap:4px; }
+            .mh-res-fader-wrap { display:grid; grid-template-columns:22px 36px 28px; gap:6px; align-items:center; justify-content:center; }
+            .mh-res-scale { height:220px; display:flex; flex-direction:column; justify-content:space-between; align-items:flex-end; font-family:'Roboto Mono',monospace; font-size:10px; color:#606060; font-weight:900; }
+            .mh-res-track { height:220px; width:42px; }
+            .mh-res-track .mh-fader-track { left:19px; }
+            .mh-res-track .mh-fader-fill { left:19px; }
+            .mh-res-track .mh-fader-knob { left:1px; width:40px; height:46px; bottom:calc(50% - 23px); }
+            .mh-res-step { height:220px; }
+            .mh-res-step .mh-step-btn { width:28px; height:27px; font-size:10px; }
+            .mh-resolution-mode .mh-readout-grid { grid-template-columns:1fr 1fr; gap:5px; }
+            .mh-fader-block { flex:1; min-width:0; background:#111; border:1px solid #2b2b2b; border-radius:10px; padding:8px 7px; }
+            .mh-fader-head { display:flex; justify-content:space-between; font-size:13px; font-weight:900; margin-bottom:8px; }
+            .mh-fader-wrap { display:grid; grid-template-columns:30px 42px 44px; gap:8px; justify-content:center; align-items:center; }
+            .mh-cal-indicator { height:210px; position:relative; border-left:2px solid #333; overflow:visible; }
+            .mh-cal-mark { position:absolute; left:-2px; display:flex; align-items:center; gap:3px; font-size:9px; color:#555; font-weight:900; transform:translateY(-50%); white-space:nowrap; z-index:2; }
+            .mh-cal-mark::before { content:''; width:14px; height:3px; background:#444; display:block; }
+            .mh-cal-mark.end { top:8px; }
+            .mh-cal-mark.start { top:calc(100% - 8px); }
+            .mh-cal-mark.active { color:#00e676; text-shadow:0 0 8px rgba(0,230,118,.7); }
+            .mh-cal-mark.active::before { background:#00e676; box-shadow:0 0 10px rgba(0,230,118,.8); }
+            .mh-cal-mark.current { color:#ffca28; text-shadow:0 0 9px rgba(255,202,40,.85); }
+            .mh-cal-mark.current::before { background:#ffca28; box-shadow:0 0 12px rgba(255,202,40,.85); animation:mhPulse .55s ease-in-out infinite alternate; }
+            @keyframes mhPulse { from { opacity:.45; transform:scaleX(.7); } to { opacity:1; transform:scaleX(1.15); } }
+            .mh-cal-mark.error { color:#ff3d00; text-shadow:0 0 8px rgba(255,61,0,.8); }
+            .mh-cal-mark.error::before { background:#ff3d00; box-shadow:0 0 10px rgba(255,61,0,.8); }
+            .mh-cal-error-stop { position:absolute; left:-2px; display:none; align-items:center; gap:3px; font-size:9px; color:#ff3d00; font-weight:900; transform:translateY(-50%); white-space:nowrap; z-index:3; text-shadow:0 0 8px rgba(255,61,0,.8); pointer-events:none; }
+            .mh-cal-error-stop::before { content:''; width:14px; height:3px; background:#ff3d00; display:block; box-shadow:0 0 10px rgba(255,61,0,.8); }
+            .mh-cal-error-stop.visible { display:flex; }
+            .mh-fader-track-wrap { height:210px; width:42px; position:relative; touch-action:none; cursor:pointer; }
+            .mh-fader-track { position:absolute; left:19px; top:0; width:5px; height:100%; background:#050505; border:1px solid #333; border-radius:4px; }
+            .mh-fader-fill { position:absolute; left:19px; bottom:0; width:5px; height:50%; border-radius:4px; opacity:.85; }
+            .mh-fader-knob { position:absolute; left:1px; width:40px; height:46px; bottom:calc(50% - 23px); border:3px solid #555; border-radius:5px; background:linear-gradient(180deg,#eeeeee 0%,#bdbdbd 45%,#777 100%); box-shadow:0 5px 10px rgba(0,0,0,.7), inset 0 1px 2px rgba(255,255,255,.7); display:flex; align-items:center; justify-content:center; z-index:3; }
+            .mh-fader-knob > div { width:100%; height:3px; }
+            .mh-step-stack { height:210px; display:flex; flex-direction:column; justify-content:space-between; align-items:center; }
+            .mh-step-btn { width:32px; height:30px; border:2px solid #444; border-radius:7px; background:#222; color:#ddd; font-weight:900; cursor:pointer; }
+            .mh-readout-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; flex-shrink:0; }
+            .mh-readout { background:#050505; border:2px solid #333; border-radius:8px; padding:6px 7px; min-width:0; }
+            .mh-readout span { display:block; font-size:10.5px; color:#777; font-weight:900; margin-bottom:3px; }
+            .mh-readout strong { font-family:'Roboto Mono',monospace; font-size:16px; color:#00e5ff; }
+            .mh-resolution-mode .mh-readout { padding:5px 6px; border-width:1px; }
+            .mh-resolution-mode .mh-readout span { font-size:9px; margin-bottom:2px; }
+            .mh-resolution-mode .mh-readout strong { font-size:13.5px; line-height:1.1; }
+            .mh-status-box { background:#050505; border:2px solid #333; border-radius:10px; padding:10px; }
+            .mh-status-line { display:flex; justify-content:space-between; gap:10px; margin:6px 0; font-size:12px; }
+            .mh-status-line b { color:#fff; }
+            .mh-status-value { font-family:'Roboto Mono',monospace; color:#00e676; font-weight:900; text-align:right; }
+            .mh-note { background:#111; border-left:5px solid #00e5ff; border-radius:8px; padding:9px 10px; font-size:11.5px; line-height:1.45; color:#bbb; }
+            .mh-error-note { border-left-color:#ff3d00; }
+            .mh-mini-leds { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+            .mh-led { background:#050505; border:1px solid #333; border-radius:7px; padding:7px 8px; font-size:11px; font-weight:900; color:#555; }
+            .mh-led.ok { color:#00e676; border-color:#00e676; box-shadow:inset 0 0 10px rgba(0,230,118,.15); }
+            .mh-led.err { color:#ff3d00; border-color:#ff3d00; box-shadow:inset 0 0 10px rgba(255,61,0,.15); }
+            @media (max-width: 1000px) { .mh-layout { grid-template-columns:260px 1fr; } .mh-info-panel { display:none; } .mh-title { font-size:18px; } }
     </style>
 
     <script src="Module_Sim8Bit.js"></script>
@@ -208,6 +307,7 @@
     <script src="Module_NetBroadcast.js"></script>
     <script src="Module_NetSacn.js"></script>
     <script src="Module_NetExplain.js"></script>
+    <script src="Module_MovingHead.js"></script>
 
 </head>
 <body>
@@ -216,16 +316,17 @@
     <button class="main-tab-btn tab-dimmer active" id="main-tab-sim8bit">1. 8-bit 調光卓</button>
     <button class="main-tab-btn tab-dimmer" id="main-tab-sim16bit">2. 16-bit 調光卓</button>
     <button class="main-tab-btn tab-dimmer" id="main-tab-simdmx">3. DMX 定期列車</button>
+    <button class="main-tab-btn tab-dimmer" id="main-tab-movinghead">4. Moving Head</button>
     
     <div class="tab-separator"></div>
     
-    <button class="main-tab-btn tab-network" id="main-tab-netartnet">4. Art-Net (カプセル)</button>
-    <button class="main-tab-btn tab-network" id="main-tab-netbroadcast">5. Broadcast (自爆)</button>
-    <button class="main-tab-btn tab-network" id="main-tab-netsacn">6. sACN (インテリ)</button>
+    <button class="main-tab-btn tab-network" id="main-tab-netartnet">5. Art-Net (カプセル)</button>
+    <button class="main-tab-btn tab-network" id="main-tab-netbroadcast">6. Broadcast (自爆)</button>
+    <button class="main-tab-btn tab-network" id="main-tab-netsacn">7. sACN (インテリ)</button>
     
     <div class="tab-separator"></div>
     
-    <button class="main-tab-btn tab-explain" id="main-tab-explain">7. 結線解説 (Ring/Star)</button>
+    <button class="main-tab-btn tab-explain" id="main-tab-explain">8. 結線解説 (Ring/Star)</button>
 </div>
 
 <div class="master-console-container">
@@ -233,6 +334,7 @@
         <div id="panel-sim8bit" class="stage-view-panel fade-type active"></div>
         <div id="panel-sim16bit" class="stage-view-panel fade-type"></div>
         <div id="panel-simdmx" class="stage-view-panel fade-type"></div>
+        <div id="panel-movinghead" class="stage-view-panel fade-type"></div>
 
         <div id="network-carousel-window" class="network-carousel-window">
             <div class="network-slide-carousel" id="network-slide-carousel">
@@ -255,6 +357,7 @@
         'sim8bit': `<strong>【8-bit 調光制御：サイリスタ位相制御と特性カーブ】</strong><br>8-bit DMX信号は調光レベルを0〜255（256段階）の解像度で伝送します。劇場の調光器は、この数値を元にAC100V波形のサイン波を途中でぶった切る「サイリスタ位相制御」を行い、電圧をコントロールします。白熱電球のフィラメントは人間の目に対して直線的には明るくならないため、調光卓側で演出用の特性カーブ（JATET Aなど）を通し、フェーダーの直線的な動きと、実際の電球の「見た目の明るさの変化」をシンクロさせています。`,
         'sim16bit': `<strong>【16-bit 調光制御：Coarse/Fineによる超高解像度駆動】</strong><br>ムービングライトの精密な位置制御や、最新のLED器具の超滑らかな超ローレベル（0.1%以下）のフェードイン・アウトを行う場合、8-bit（256段階）ではステップごとの段差（カクツキ）が目視でバレてしまいます。そこでDMXチャンネルを2つ（2ch分）贅沢に結合し、上位8-bit（Coarse：大雑把なステップ）と下位8-bit（Fine：精密ステップ）で合算。256×256＝65,536段階という、実機コンソール仕様の圧倒的な超微細解像度で調光器を無段階駆動します。`,
         'simdmx': `<strong>【DMX512伝送：1秒間に42回走る定期列車】</strong><br>DMX512信号は、1番から512番までの全チャンネルデータを乗せた「512両編成の超ロングな列車」です。劇場内の調光卓は、オペレーターがフェーダーを一切触っていなくても、値が変化していなくても関係なく、1秒間に約42回（42Hz周波数）の超スピードで、この定期列車を劇場内へ絶え間なく垂れ流しで送り続けています。信号を受け取る灯体側は、常に自分のチャンネル番号の車両（パルス波形）が通りかかるのを待ち構えてデータを抜き出しています。`,
+        'movinghead': `<strong>【Moving Head：PAN/TILT、キャリブレーション、16-bit位置制御】</strong><br>ムービングヘッドのPAN/TILT可動域、電源投入時のキャリブレーション、Start/End検出、キャリブレーションエラー、そして8-bitと16-bitの位置分解性能差を学ぶ教材です。16-bit比較では、8-bitでは狙った位置に止まりにくいこと、Fine値によって狙った位置へ細かく近づけられることを、ゴースト表示で確認できます。`,
         'netartnet': `<strong>【Art-Net伝送：複数系統DMXのネットワークカプセル化】</strong><br>劇場が大型化し、DMXケーブルが1系統（512ch）では足りなくなると、通常は調光室から何十本ものDMXマルチを引き回す必要があります。Art-Netは、そんな何系統分ものDMX列車データ（最大32,768系統）をまるごとイーサネットの「UDPパケット」という段ボール箱の中にカプセル詰め（梱包）し、たった1本のLANケーブル道路へ超高速射出する技術です。これにより、劇場ネットワークの幹線インフラを極限までシンプルに引き算できます。`,
         'netbroadcast': `<strong>【Broadcast伝送の闇：ハブストームとコピー地獄による過負荷】</strong><br>初期のArt-Net（Art-Net Ⅰ/Ⅱ）や安価なネットワーク構築で使われる「ブロードキャスト（*.255）」は、パケットの宛先を「全員」に指定して送信します。これを受け取ったノンインテリジェントなHUBは、接続されている全てのポートに中身をコピーして無差別バラ撒きを行います。結果、ポート1 of Nodeが欲しいデータ（U0）以外に、関係のないU1〜U4のゴミパケットまで津波のように押し寄せ、Node側はこれを毎フレーム引き算して捨てる摩擦熱でCPUが熱パンク（過負荷ストーム）を起こす危険に晒されます。`,
         'netsacn': `<strong>【sACN伝送の静寂：マルチキャストによるインテリジェント仕分け】</strong><br>Broadcastのコピー地獄を解決した、現代のスタジアムや大規模劇場のデファクトスタンダードとなる国際規格プロトコルです。sACN（Streaming ACN）は「マルチキャスト（239.255.*.*）」という賢い宛先指定を使用します。インテリジェントなスマートスイッチ（HUB）が各Nodeの「俺はU2が欲しい」「私はU4が欲しい」という声を事前に記憶（IGMPスヌーピング解説）し、HUBの内部で完璧にレーンを仕分けして発射します。各Nodeには最初から正解 of 箱しか届かないため、ネットワーク世界は極めて静かで快適に保たれます。`,
@@ -265,6 +368,7 @@
         'sim8bit': Module_Sim8Bit,
         'sim16bit': Module_Sim16Bit,
         'simdmx': Module_SimDmx,
+        'movinghead': Module_MovingHead,
         'netartnet': Module_NetArtNet,
         'netbroadcast': Module_NetBroadcast,
         'netsacn': Module_NetSacn,
@@ -280,6 +384,9 @@
             panel.innerHTML = modules[key].getHTML();
         }
     });
+
+    const masterContainer = document.querySelector('.master-console-container');
+    if (masterContainer) masterContainer.classList.toggle('movinghead-active', activeModuleKey === 'movinghead');
 
     if (modules[activeModuleKey] && modules[activeModuleKey].init) {
         modules[activeModuleKey].init();
@@ -309,7 +416,7 @@
             fadePanels.forEach(p => p.classList.remove('active'));
             netWindow.classList.remove('active');
 
-            if (targetKey === 'sim8bit' || targetKey === 'sim16bit' || targetKey === 'simdmx' || targetKey === 'explain') {
+            if (targetKey === 'sim8bit' || targetKey === 'sim16bit' || targetKey === 'simdmx' || targetKey === 'movinghead' || targetKey === 'explain') {
                 document.getElementById(`panel-${targetKey}`).classList.add('active');
             } 
             else {
@@ -320,13 +427,24 @@
             }
 
             activeModuleKey = targetKey;
+            if (masterContainer) masterContainer.classList.toggle('movinghead-active', activeModuleKey === 'movinghead');
             document.getElementById('help-text-target').innerHTML = explanationData[activeModuleKey];
             
             if (modules[activeModuleKey] && modules[activeModuleKey].init) {
                 if (activeModuleKey.startsWith('net')) {
                     modules[activeModuleKey].currentMode = sharedNetworkMode;
                 }
-                modules[activeModuleKey].init();
+                const initActiveModule = () => {
+                    modules[activeModuleKey].init();
+                    if (activeModuleKey === 'movinghead') {
+                        requestAnimationFrame(() => {
+                            if (modules[activeModuleKey].resizeCanvas) modules[activeModuleKey].resizeCanvas();
+                            if (modules[activeModuleKey].updateSystem) modules[activeModuleKey].updateSystem();
+                        });
+                    }
+                };
+                if (activeModuleKey === 'movinghead') requestAnimationFrame(initActiveModule);
+                else initActiveModule();
             }
         });
     });
