@@ -191,9 +191,9 @@ const Module_NetSacn = {
         this.ctx.font = "12px sans-serif";
         this.ctx.textAlign = "center";
         this.ctx.fillStyle = "rgba(0, 230, 118, 0.4)";
-        this.ctx.fillText("【右】入力：卓からの1本のLAN道路 (5系統がカプセル化されている状態)", this.V_WIDTH - 250, 25);
+        this.ctx.fillText("【右】入力：卓からのLAN幹線（複数Universeを含む）", this.V_WIDTH - 250, 25);
         this.ctx.fillStyle = "rgba(0, 230, 118, 0.6)";
-        this.ctx.fillText("【左】静寂：sACNマルチキャストによるインテリジェント仕分け (各Nodeには最初から正解の箱しか届かない)", 400, 25);
+        this.ctx.fillText("【左】sACN Multicast：必要なUniverseを必要なNodeへ届ける", 400, 25);
 
         this.ctx.strokeStyle = "#221105"; this.ctx.lineWidth = 12;
         this.ctx.beginPath(); this.ctx.moveTo(hubX + hubW, lanTrackY); this.ctx.lineTo(this.V_WIDTH, lanTrackY); this.ctx.stroke();
