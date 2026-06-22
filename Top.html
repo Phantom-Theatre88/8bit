@@ -195,6 +195,262 @@
             line-height: 1.5;
         }
 
+        /* --- Sim16Bit UI/UX integration v0.1: Module_Sim16Bit.js logic untouched --- */
+        .master-console-container.sim16bit-active {
+            gap: 10px;
+        }
+        .master-console-container.sim16bit-active .console-main-screen {
+            aspect-ratio: 1200 / 650;
+            flex-shrink: 0;
+        }
+        .master-console-container.sim16bit-active .console-help-display {
+            flex: 0 0 108px;
+            min-height: 86px;
+            padding: 11px 18px;
+        }
+        .master-console-container.sim16bit-active .help-text-content {
+            font-size: 12.5px;
+            line-height: 1.55;
+        }
+
+        #panel-sim16bit.active {
+            height: 100%;
+        }
+        .sim16-integrated-root {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-rows: auto minmax(0, 1fr) auto;
+            gap: 9px;
+            background: #121212;
+            border: 3px solid #444;
+            border-radius: 18px;
+            padding: 12px;
+            box-shadow: 0 12px 40px rgba(0,0,0,.75);
+            overflow: hidden;
+        }
+        .sim16-integrated-header {
+            display: grid;
+            grid-template-columns: 1.08fr 2fr;
+            gap: 10px;
+            align-items: stretch;
+            min-height: 68px;
+        }
+        .sim16-title-card,
+        .sim16-concept-card {
+            background: #070707;
+            border: 2px solid #333;
+            border-radius: 12px;
+            padding: 9px 13px;
+            box-shadow: inset 0 0 16px rgba(0,0,0,.7);
+            min-width: 0;
+        }
+        .sim16-title-main {
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: .3px;
+            color: #fff;
+            line-height: 1.1;
+        }
+        .sim16-title-sub {
+            font-size: 12.5px;
+            color: #aaa;
+            margin-top: 5px;
+            line-height: 1.35;
+        }
+        .sim16-concept-card {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            padding: 8px;
+        }
+        .sim16-concept-pill {
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 8px 10px;
+            min-width: 0;
+        }
+        .sim16-concept-pill b {
+            display: block;
+            font-size: 14px;
+            color: #fff;
+            margin-bottom: 3px;
+        }
+        .sim16-concept-pill span {
+            display: block;
+            font-size: 12.5px;
+            color: #bdbdbd;
+            line-height: 1.35;
+        }
+        .sim16-concept-pill.master { border-left: 5px solid #ff6f00; }
+        .sim16-concept-pill.coarse { border-left: 5px solid #00e5ff; }
+        .sim16-concept-pill.fine { border-left: 5px solid #00e676; }
+        .sim16-integrated-area {
+            min-height: 0;
+            background: #161616;
+            border: 2px solid #3a3a3a;
+            border-radius: 14px;
+            padding: 11px;
+            overflow: hidden;
+        }
+        #sim16bit-root {
+            width: 100%;
+            height: 100%;
+        }
+        #panel-sim16bit #sim16bit-root > div { gap: 16px !important; }
+        #panel-sim16bit #sim16bit-root .col { min-width: 0 !important; }
+        #panel-sim16bit #sim16bit-root .fader-col {
+            width: 34% !important;
+            padding: 12px 8px !important;
+            background: #0b0b0b !important;
+            border: 2px solid #343434 !important;
+            border-radius: 12px !important;
+            overflow: hidden !important;
+        }
+        #panel-sim16bit #sim16bit-root .center-col { width: 36% !important; gap: 10px !important; }
+        #panel-sim16bit #sim16bit-root .bulb-col { width: 30% !important; }
+        #panel-sim16bit #sim16bit-root .section-title {
+            font-size: 13px !important;
+            letter-spacing: 1.1px !important;
+            color: #d0d0d0 !important;
+            margin-bottom: 4px !important;
+        }
+        #panel-sim16bit #sim16bit-root .fader-bank { gap: 8px !important; }
+        #panel-sim16bit #sim16bit-root .fader-cell-wrap { min-width: 72px !important; gap: 6px !important; }
+        #panel-sim16bit #sim16bit-root .fader-area { height: 330px !important; width: 58px !important; }
+        #panel-sim16bit #sim16bit-root .fader-scale {
+            left: -1px !important;
+            height: 286px !important;
+            top: 22px !important;
+            font-size: 12px !important;
+            color: #6d6d6d !important;
+        }
+        #panel-sim16bit #sim16bit-root .fader-track-container {
+            width: 40px !important;
+            height: 286px !important;
+            top: 22px !important;
+            right: 1px !important;
+        }
+        #panel-sim16bit #sim16bit-root .fader-track {
+            left: 18px !important;
+            width: 5px !important;
+            border-color: #3a3a3a !important;
+        }
+        #panel-sim16bit #sim16bit-root .fader-knob {
+            width: 40px !important;
+            height: 52px !important;
+            border-width: 3px !important;
+            box-shadow: 0 6px 12px rgba(0,0,0,.75), inset 0 1px 2px rgba(255,255,255,.55) !important;
+        }
+        #panel-sim16bit #sim16bit-root .step-btn {
+            width: 44px !important;
+            height: 34px !important;
+            font-size: 13px !important;
+            border-radius: 8px !important;
+            touch-action: manipulation !important;
+        }
+        #panel-sim16bit #sim16bit-root .fader-label {
+            font-size: 12px !important;
+            color: #8b8b8b !important;
+            letter-spacing: .2px !important;
+        }
+        #panel-sim16bit #sim16bit-root #sim16bit-label-master { color: #ff8a50 !important; }
+        #panel-sim16bit #sim16bit-root #sim16bit-label-coarse { color: #5eefff !important; }
+        #panel-sim16bit #sim16bit-root #sim16bit-label-fine { color: #52f5a1 !important; }
+        #panel-sim16bit #sim16bit-root .digital-row { gap: 8px !important; }
+        #panel-sim16bit #sim16bit-root .led-panel {
+            padding: 8px 6px !important;
+            border-width: 2px !important;
+            border-radius: 9px !important;
+            background: #040404 !important;
+            min-height: 62px !important;
+        }
+        #panel-sim16bit #sim16bit-root .led-label {
+            font-size: 11px !important;
+            color: #848484 !important;
+            letter-spacing: .35px !important;
+        }
+        #panel-sim16bit #sim16bit-root .led-num {
+            font-size: 22px !important;
+            line-height: 26px !important;
+        }
+        #panel-sim16bit #sim16bit-root #sim16bit-num-dmx { font-size: 18px !important; }
+        #panel-sim16bit #sim16bit-root .panel-box {
+            padding: 10px !important;
+            border-radius: 10px !important;
+            background: #090909 !important;
+            border-color: #3e3e3e !important;
+        }
+        #panel-sim16bit #sim16bit-root #sim16bit-upper-graph-box { min-height: 145px !important; }
+        #panel-sim16bit #sim16bit-root #sim16bit-upper-graph-box span { font-size: 12.5px !important; }
+        #panel-sim16bit #sim16bit-root #sim16bit-txt-coarse-val,
+        #panel-sim16bit #sim16bit-root #sim16bit-txt-fine-val {
+            font-size: 16px !important;
+            font-family: 'Roboto Mono', monospace !important;
+        }
+        #panel-sim16bit #sim16bit-root .matrix-cell {
+            min-width: 20px !important;
+            height: 32px !important;
+            line-height: 28px !important;
+            font-size: 13px !important;
+            border-radius: 5px !important;
+        }
+        #panel-sim16bit #sim16bit-root .dark-room {
+            border-radius: 12px !important;
+            border-color: #3e3e3e !important;
+            overflow: hidden !important;
+        }
+        #panel-sim16bit #sim16bit-root .bulb-image-container {
+            width: 210px !important;
+            height: 340px !important;
+        }
+        .sim16-integrated-footer {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 10px;
+            min-height: 86px;
+        }
+        .sim16-help-block {
+            background: #060606;
+            border: 2px solid #333;
+            border-radius: 12px;
+            padding: 10px 14px;
+            overflow: hidden;
+            color: #c8c8c8;
+            line-height: 1.5;
+            font-size: 12.5px;
+        }
+        .sim16-help-block strong { color: #fff; font-size: 14px; }
+        .sim16-help-block b { color: #fff; }
+        .sim16-formula {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin: 4px 0 3px;
+            letter-spacing: .2px;
+        }
+        .sim16-formula .coarse { color: #00e5ff; }
+        .sim16-formula .fine { color: #00e676; }
+        .sim16-formula .total { color: #b388ff; }
+        @media (max-width: 1050px) {
+            .sim16-integrated-root { padding: 10px; gap: 8px; }
+            .sim16-integrated-header { grid-template-columns: 1fr; min-height: 0; }
+            .sim16-concept-card { grid-template-columns: repeat(3, 1fr); }
+            .sim16-title-main { font-size: 20px; }
+            .sim16-title-sub { font-size: 12px; }
+            #panel-sim16bit #sim16bit-root > div { gap: 10px !important; }
+            #panel-sim16bit #sim16bit-root .fader-col { width: 36% !important; }
+            #panel-sim16bit #sim16bit-root .center-col { width: 34% !important; }
+            #panel-sim16bit #sim16bit-root .bulb-col { width: 30% !important; }
+            #panel-sim16bit #sim16bit-root .fader-area { height: 300px !important; }
+            #panel-sim16bit #sim16bit-root .fader-track-container { height: 260px !important; }
+            #panel-sim16bit #sim16bit-root .fader-scale { height: 260px !important; }
+            .sim16-integrated-footer { grid-template-columns: 1fr; min-height: 76px; }
+            .sim16-help-block { font-size: 12px; line-height: 1.42; }
+        }
+
         .network-carousel-window {
             width: 100%;
             height: 100%;
@@ -219,85 +475,6 @@
             width: 33.333333%;
             height: 100%;
         }
-
-
-        /* --- MovingHead Module v0.18 integrated styles --- */
-        .movinghead-root { width:100%; height:100%; display:flex; flex-direction:column; gap:10px; background:#151515; border:3px solid #444; border-radius:18px; padding:14px; box-shadow:0 10px 40px rgba(0,0,0,.8); position:relative; isolation:isolate; }
-            .mh-topbar { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-shrink:0; background:#0d0d0d; border:2px solid #333; border-radius:12px; padding:10px 14px; position:relative; z-index:30; }
-            .mh-title { font-size:22px; font-weight:900; color:#fff; }
-            .mh-subtitle { font-size:12px; color:#888; letter-spacing:.8px; margin-top:2px; }
-            .mh-top-controls { display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end; position:relative; z-index:40; }
-            .mh-btn { border:2px solid #444; border-radius:9px; background:#1f1f1f; color:#aaa; padding:9px 14px; font-weight:900; cursor:pointer; font-size:12px; position:relative; z-index:50; pointer-events:auto; touch-action:manipulation; }
-            .mh-btn.active.power { background:#00e676; border-color:#00e676; color:#001b0d; box-shadow:0 0 14px rgba(0,230,118,.45); }
-            .mh-btn.active.error { background:#ff3d00; border-color:#ff3d00; color:#fff; box-shadow:0 0 14px rgba(255,61,0,.45); }
-            .mh-btn.active.compare { background:#b388ff; border-color:#b388ff; color:#110026; box-shadow:0 0 14px rgba(179,136,255,.45); }
-            .mh-mode-switch { display:flex; background:#050505; border:2px solid #333; border-radius:10px; padding:4px; gap:4px; }
-            .mh-mode-btn { border:none; border-radius:7px; padding:8px 15px; background:transparent; color:#666; font-size:12px; font-weight:900; cursor:pointer; }
-            .mh-mode-btn.active { background:#00e5ff; color:#001014; box-shadow:0 0 12px rgba(0,229,255,.5); }
-            .mh-layout { flex-grow:1; min-height:0; display:grid; grid-template-columns:280px minmax(530px,1fr) 300px; gap:12px; overflow:hidden; }
-            .mh-panel { background:#0b0b0b; border:2px solid #3b3b3b; border-radius:12px; padding:12px; min-height:0; box-shadow:inset 0 0 18px rgba(0,0,0,.55); }
-            .mh-panel-title { font-size:12px; font-weight:900; color:#fff; letter-spacing:.9px; margin-bottom:10px; }
-            .mh-control-panel,.mh-info-panel { display:flex; flex-direction:column; gap:8px; overflow:hidden; }
-            .mh-canvas-panel { display:flex; flex-direction:column; }
-            #movinghead-canvas { width:100%; height:100%; display:block; background:#061013; border:2px solid #1d4f5c; border-radius:10px; pointer-events:none; }
-            .mh-fader-bank { display:flex; gap:8px; justify-content:center; flex-shrink:0; }
-            .mh-resolution-faders { display:none; grid-template-columns:1fr 1fr; gap:10px; }
-            .mh-resolution-mode .mh-normal-faders { display:none; }
-            .mh-resolution-mode .mh-resolution-faders { display:grid; }
-            .mh-res-fader-block { padding:8px 6px; }
-            .mh-res-fader-block .mh-fader-head { font-size:10.5px; gap:4px; }
-            .mh-res-fader-wrap { display:grid; grid-template-columns:22px 36px 28px; gap:6px; align-items:center; justify-content:center; }
-            .mh-res-scale { height:220px; display:flex; flex-direction:column; justify-content:space-between; align-items:flex-end; font-family:'Roboto Mono',monospace; font-size:10px; color:#606060; font-weight:900; }
-            .mh-res-track { height:220px; width:42px; }
-            .mh-res-track .mh-fader-track { left:19px; }
-            .mh-res-track .mh-fader-fill { left:19px; }
-            .mh-res-track .mh-fader-knob { left:1px; width:40px; height:46px; bottom:calc(50% - 23px); }
-            .mh-res-step { height:220px; }
-            .mh-res-step .mh-step-btn { width:28px; height:27px; font-size:10px; }
-            .mh-resolution-mode .mh-readout-grid { grid-template-columns:1fr 1fr; gap:5px; }
-            .mh-fader-block { flex:1; min-width:0; background:#111; border:1px solid #2b2b2b; border-radius:10px; padding:8px 7px; }
-            .mh-fader-head { display:flex; justify-content:space-between; font-size:13px; font-weight:900; margin-bottom:8px; }
-            .mh-fader-wrap { display:grid; grid-template-columns:30px 42px 44px; gap:8px; justify-content:center; align-items:center; }
-            .mh-cal-indicator { height:210px; position:relative; border-left:2px solid #333; overflow:visible; }
-            .mh-cal-mark { position:absolute; left:-2px; display:flex; align-items:center; gap:3px; font-size:9px; color:#555; font-weight:900; transform:translateY(-50%); white-space:nowrap; z-index:2; }
-            .mh-cal-mark::before { content:''; width:14px; height:3px; background:#444; display:block; }
-            .mh-cal-mark.end { top:8px; }
-            .mh-cal-mark.start { top:calc(100% - 8px); }
-            .mh-cal-mark.active { color:#00e676; text-shadow:0 0 8px rgba(0,230,118,.7); }
-            .mh-cal-mark.active::before { background:#00e676; box-shadow:0 0 10px rgba(0,230,118,.8); }
-            .mh-cal-mark.current { color:#ffca28; text-shadow:0 0 9px rgba(255,202,40,.85); }
-            .mh-cal-mark.current::before { background:#ffca28; box-shadow:0 0 12px rgba(255,202,40,.85); animation:mhPulse .55s ease-in-out infinite alternate; }
-            @keyframes mhPulse { from { opacity:.45; transform:scaleX(.7); } to { opacity:1; transform:scaleX(1.15); } }
-            .mh-cal-mark.error { color:#ff3d00; text-shadow:0 0 8px rgba(255,61,0,.8); }
-            .mh-cal-mark.error::before { background:#ff3d00; box-shadow:0 0 10px rgba(255,61,0,.8); }
-            .mh-cal-error-stop { position:absolute; left:-2px; display:none; align-items:center; gap:3px; font-size:9px; color:#ff3d00; font-weight:900; transform:translateY(-50%); white-space:nowrap; z-index:3; text-shadow:0 0 8px rgba(255,61,0,.8); pointer-events:none; }
-            .mh-cal-error-stop::before { content:''; width:14px; height:3px; background:#ff3d00; display:block; box-shadow:0 0 10px rgba(255,61,0,.8); }
-            .mh-cal-error-stop.visible { display:flex; }
-            .mh-fader-track-wrap { height:210px; width:42px; position:relative; touch-action:none; cursor:pointer; }
-            .mh-fader-track { position:absolute; left:19px; top:0; width:5px; height:100%; background:#050505; border:1px solid #333; border-radius:4px; }
-            .mh-fader-fill { position:absolute; left:19px; bottom:0; width:5px; height:50%; border-radius:4px; opacity:.85; }
-            .mh-fader-knob { position:absolute; left:1px; width:40px; height:46px; bottom:calc(50% - 23px); border:3px solid #555; border-radius:5px; background:linear-gradient(180deg,#eeeeee 0%,#bdbdbd 45%,#777 100%); box-shadow:0 5px 10px rgba(0,0,0,.7), inset 0 1px 2px rgba(255,255,255,.7); display:flex; align-items:center; justify-content:center; z-index:3; }
-            .mh-fader-knob > div { width:100%; height:3px; }
-            .mh-step-stack { height:210px; display:flex; flex-direction:column; justify-content:space-between; align-items:center; }
-            .mh-step-btn { width:32px; height:30px; border:2px solid #444; border-radius:7px; background:#222; color:#ddd; font-weight:900; cursor:pointer; }
-            .mh-readout-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; flex-shrink:0; }
-            .mh-readout { background:#050505; border:2px solid #333; border-radius:8px; padding:6px 7px; min-width:0; }
-            .mh-readout span { display:block; font-size:10.5px; color:#777; font-weight:900; margin-bottom:3px; }
-            .mh-readout strong { font-family:'Roboto Mono',monospace; font-size:16px; color:#00e5ff; }
-            .mh-resolution-mode .mh-readout { padding:5px 6px; border-width:1px; }
-            .mh-resolution-mode .mh-readout span { font-size:9px; margin-bottom:2px; }
-            .mh-resolution-mode .mh-readout strong { font-size:13.5px; line-height:1.1; }
-            .mh-status-box { background:#050505; border:2px solid #333; border-radius:10px; padding:10px; }
-            .mh-status-line { display:flex; justify-content:space-between; gap:10px; margin:6px 0; font-size:12px; }
-            .mh-status-line b { color:#fff; }
-            .mh-status-value { font-family:'Roboto Mono',monospace; color:#00e676; font-weight:900; text-align:right; }
-            .mh-note { background:#111; border-left:5px solid #00e5ff; border-radius:8px; padding:9px 10px; font-size:11.5px; line-height:1.45; color:#bbb; }
-            .mh-error-note { border-left-color:#ff3d00; }
-            .mh-mini-leds { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
-            .mh-led { background:#050505; border:1px solid #333; border-radius:7px; padding:7px 8px; font-size:11px; font-weight:900; color:#555; }
-            .mh-led.ok { color:#00e676; border-color:#00e676; box-shadow:inset 0 0 10px rgba(0,230,118,.15); }
-            .mh-led.err { color:#ff3d00; border-color:#ff3d00; box-shadow:inset 0 0 10px rgba(255,61,0,.15); }
-            @media (max-width: 1000px) { .mh-layout { grid-template-columns:260px 1fr; } .mh-info-panel { display:none; } .mh-title { font-size:18px; } }
     </style>
 
     <script src="Module_Sim8Bit.js"></script>
@@ -307,7 +484,6 @@
     <script src="Module_NetBroadcast.js"></script>
     <script src="Module_NetSacn.js"></script>
     <script src="Module_NetExplain.js"></script>
-    <script src="Module_MovingHead.js"></script>
 
 </head>
 <body>
@@ -316,17 +492,16 @@
     <button class="main-tab-btn tab-dimmer active" id="main-tab-sim8bit">1. 8-bit 調光卓</button>
     <button class="main-tab-btn tab-dimmer" id="main-tab-sim16bit">2. 16-bit 調光卓</button>
     <button class="main-tab-btn tab-dimmer" id="main-tab-simdmx">3. DMX 定期列車</button>
-    <button class="main-tab-btn tab-dimmer" id="main-tab-movinghead">4. Moving Head</button>
     
     <div class="tab-separator"></div>
     
-    <button class="main-tab-btn tab-network" id="main-tab-netartnet">5. Art-Net (カプセル)</button>
-    <button class="main-tab-btn tab-network" id="main-tab-netbroadcast">6. Broadcast (自爆)</button>
-    <button class="main-tab-btn tab-network" id="main-tab-netsacn">7. sACN (インテリ)</button>
+    <button class="main-tab-btn tab-network" id="main-tab-netartnet">4. Art-Net (カプセル)</button>
+    <button class="main-tab-btn tab-network" id="main-tab-netbroadcast">5. Broadcast (自爆)</button>
+    <button class="main-tab-btn tab-network" id="main-tab-netsacn">6. sACN (インテリ)</button>
     
     <div class="tab-separator"></div>
     
-    <button class="main-tab-btn tab-explain" id="main-tab-explain">8. 結線解説 (Ring/Star)</button>
+    <button class="main-tab-btn tab-explain" id="main-tab-explain">7. 結線解説 (Ring/Star)</button>
 </div>
 
 <div class="master-console-container">
@@ -334,7 +509,6 @@
         <div id="panel-sim8bit" class="stage-view-panel fade-type active"></div>
         <div id="panel-sim16bit" class="stage-view-panel fade-type"></div>
         <div id="panel-simdmx" class="stage-view-panel fade-type"></div>
-        <div id="panel-movinghead" class="stage-view-panel fade-type"></div>
 
         <div id="network-carousel-window" class="network-carousel-window">
             <div class="network-slide-carousel" id="network-slide-carousel">
@@ -355,9 +529,8 @@
 <script>
     const explanationData = {
         'sim8bit': `<strong>【8-bit 調光制御：サイリスタ位相制御と特性カーブ】</strong><br>8-bit DMX信号は調光レベルを0〜255（256段階）の解像度で伝送します。劇場の調光器は、この数値を元にAC100V波形のサイン波を途中でぶった切る「サイリスタ位相制御」を行い、電圧をコントロールします。白熱電球のフィラメントは人間の目に対して直線的には明るくならないため、調光卓側で演出用の特性カーブ（JATET Aなど）を通し、フェーダーの直線的な動きと、実際の電球の「見た目の明るさの変化」をシンクロさせています。`,
-        'sim16bit': `<strong>【16-bit 調光制御：Coarse/Fineによる超高解像度駆動】</strong><br>ムービングライトの精密な位置制御や、最新のLED器具の超滑らかな超ローレベル（0.1%以下）のフェードイン・アウトを行う場合、8-bit（256段階）ではステップごとの段差（カクツキ）が目視でバレてしまいます。そこでDMXチャンネルを2つ（2ch分）贅沢に結合し、上位8-bit（Coarse：大雑把なステップ）と下位8-bit（Fine：精密ステップ）で合算。256×256＝65,536段階という、実機コンソール仕様の圧倒的な超微細解像度で調光器を無段階駆動します。`,
+        'sim16bit': `<strong>【16-bit 調光制御：Coarse / Fine の二層構造】</strong><br>16-bitは、上位8bitの <strong>Coarse</strong> で大きな段を決め、下位8bitの <strong>Fine</strong> でその段の中をさらに細かく追い込みます。考え方は <strong>16bit Total = Coarse × 256 + Fine</strong>。8-bitの256段階だけでは粗く見える位置制御や低レベルフェードを、65,536段階まで細かく扱うための入口です。Moving HeadのPAN/TILT精度比較へつながります。`,
         'simdmx': `<strong>【DMX512伝送：1秒間に42回走る定期列車】</strong><br>DMX512信号は、1番から512番までの全チャンネルデータを乗せた「512両編成の超ロングな列車」です。劇場内の調光卓は、オペレーターがフェーダーを一切触っていなくても、値が変化していなくても関係なく、1秒間に約42回（42Hz周波数）の超スピードで、この定期列車を劇場内へ絶え間なく垂れ流しで送り続けています。信号を受け取る灯体側は、常に自分のチャンネル番号の車両（パルス波形）が通りかかるのを待ち構えてデータを抜き出しています。`,
-        'movinghead': `<strong>【Moving Head：PAN/TILT、キャリブレーション、16-bit位置制御】</strong><br>ムービングヘッドのPAN/TILT可動域、電源投入時のキャリブレーション、Start/End検出、キャリブレーションエラー、そして8-bitと16-bitの位置分解性能差を学ぶ教材です。16-bit比較では、8-bitでは狙った位置に止まりにくいこと、Fine値によって狙った位置へ細かく近づけられることを、ゴースト表示で確認できます。`,
         'netartnet': `<strong>【Art-Net伝送：複数系統DMXのネットワークカプセル化】</strong><br>劇場が大型化し、DMXケーブルが1系統（512ch）では足りなくなると、通常は調光室から何十本ものDMXマルチを引き回す必要があります。Art-Netは、そんな何系統分ものDMX列車データ（最大32,768系統）をまるごとイーサネットの「UDPパケット」という段ボール箱の中にカプセル詰め（梱包）し、たった1本のLANケーブル道路へ超高速射出する技術です。これにより、劇場ネットワークの幹線インフラを極限までシンプルに引き算できます。`,
         'netbroadcast': `<strong>【Broadcast伝送の闇：ハブストームとコピー地獄による過負荷】</strong><br>初期のArt-Net（Art-Net Ⅰ/Ⅱ）や安価なネットワーク構築で使われる「ブロードキャスト（*.255）」は、パケットの宛先を「全員」に指定して送信します。これを受け取ったノンインテリジェントなHUBは、接続されている全てのポートに中身をコピーして無差別バラ撒きを行います。結果、ポート1 of Nodeが欲しいデータ（U0）以外に、関係のないU1〜U4のゴミパケットまで津波のように押し寄せ、Node側はこれを毎フレーム引き算して捨てる摩擦熱でCPUが熱パンク（過負荷ストーム）を起こす危険に晒されます。`,
         'netsacn': `<strong>【sACN伝送の静寂：マルチキャストによるインテリジェント仕分け】</strong><br>Broadcastのコピー地獄を解決した、現代のスタジアムや大規模劇場のデファクトスタンダードとなる国際規格プロトコルです。sACN（Streaming ACN）は「マルチキャスト（239.255.*.*）」という賢い宛先指定を使用します。インテリジェントなスマートスイッチ（HUB）が各Nodeの「俺はU2が欲しい」「私はU4が欲しい」という声を事前に記憶（IGMPスヌーピング解説）し、HUBの内部で完璧にレーンを仕分けして発射します。各Nodeには最初から正解 of 箱しか届かないため、ネットワーク世界は極めて静かで快適に保たれます。`,
@@ -368,7 +541,6 @@
         'sim8bit': Module_Sim8Bit,
         'sim16bit': Module_Sim16Bit,
         'simdmx': Module_SimDmx,
-        'movinghead': Module_MovingHead,
         'netartnet': Module_NetArtNet,
         'netbroadcast': Module_NetBroadcast,
         'netsacn': Module_NetSacn,
@@ -381,12 +553,32 @@
     Object.keys(modules).forEach(key => {
         const panel = document.getElementById(`panel-${key}`);
         if (panel && modules[key].getHTML) {
-            panel.innerHTML = modules[key].getHTML();
+            if (key === 'sim16bit') {
+                panel.innerHTML = `
+                    <div class="sim16-integrated-root">
+                        <div class="sim16-integrated-header">
+                            <div class="sim16-title-card">
+                                <div class="sim16-title-main">16-bit 調光卓</div>
+                                <div class="sim16-title-sub">Master / Coarse / Fine を、値の二層構造として読む。</div>
+                            </div>
+                            <div class="sim16-concept-card" aria-label="16bit concept guide">
+                                <div class="sim16-concept-pill master"><b>Master</b><span>16bit全体をまとめて動かす</span></div>
+                                <div class="sim16-concept-pill coarse"><b>Coarse</b><span>大きな段を決める<br>上位8bit</span></div>
+                                <div class="sim16-concept-pill fine"><b>Fine</b><span>段の中を細かく追い込む<br>下位8bit</span></div>
+                            </div>
+                        </div>
+                        <div class="sim16-integrated-area"><div id="sim16bit-root">${modules[key].getHTML()}</div></div>
+                        <div class="sim16-integrated-footer">
+                            <div class="sim16-help-block"><strong>見る順番：</strong>まず <b>Coarse</b> で大きく動かし、次に <b>Fine</b> で段の中を細かく動かします。Moving HeadのPAN/TILT精度比較へつながる前段教材です。</div>
+                            <div class="sim16-help-block"><strong>16bitの考え方：</strong><div class="sim16-formula"><span class="total">16bit Total</span> = <span class="coarse">Coarse</span> × 256 + <span class="fine">Fine</span></div>256段階だけでは粗いので、Fineでさらに256分割します。</div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                panel.innerHTML = modules[key].getHTML();
+            }
         }
     });
-
-    const masterContainer = document.querySelector('.master-console-container');
-    if (masterContainer) masterContainer.classList.toggle('movinghead-active', activeModuleKey === 'movinghead');
 
     if (modules[activeModuleKey] && modules[activeModuleKey].init) {
         modules[activeModuleKey].init();
@@ -397,6 +589,15 @@
     const fadePanels = document.querySelectorAll('.stage-view-panel.fade-type');
     const netWindow = document.getElementById('network-carousel-window');
     const netCarousel = document.getElementById('network-slide-carousel');
+    const masterContainer = document.querySelector('.master-console-container');
+
+    function updateMasterLayoutClass() {
+        if (!masterContainer) return;
+        masterContainer.classList.toggle('movinghead-active', activeModuleKey === 'movinghead');
+        masterContainer.classList.toggle('sim16bit-active', activeModuleKey === 'sim16bit');
+    }
+
+    updateMasterLayoutClass();
 
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
@@ -427,24 +628,14 @@
             }
 
             activeModuleKey = targetKey;
-            if (masterContainer) masterContainer.classList.toggle('movinghead-active', activeModuleKey === 'movinghead');
+            updateMasterLayoutClass();
             document.getElementById('help-text-target').innerHTML = explanationData[activeModuleKey];
             
             if (modules[activeModuleKey] && modules[activeModuleKey].init) {
                 if (activeModuleKey.startsWith('net')) {
                     modules[activeModuleKey].currentMode = sharedNetworkMode;
                 }
-                const initActiveModule = () => {
-                    modules[activeModuleKey].init();
-                    if (activeModuleKey === 'movinghead') {
-                        requestAnimationFrame(() => {
-                            if (modules[activeModuleKey].resizeCanvas) modules[activeModuleKey].resizeCanvas();
-                            if (modules[activeModuleKey].updateSystem) modules[activeModuleKey].updateSystem();
-                        });
-                    }
-                };
-                if (activeModuleKey === 'movinghead') requestAnimationFrame(initActiveModule);
-                else initActiveModule();
+                modules[activeModuleKey].init();
             }
         });
     });
