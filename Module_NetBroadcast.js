@@ -24,6 +24,127 @@ const Module_NetBroadcast = {
     pW: 40,
     pH: 20,
 
+
+
+    // --- Visual test helpers: logic untouched / drawing polish only ---
+    drawRoundedRect(x, y, w, h, r, fillStyle, strokeStyle = null, lineWidth = 1) {
+        const ctx = this.ctx;
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.lineTo(x + w - r, y);
+        ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+        ctx.lineTo(x + w, y + h - r);
+        ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+        ctx.lineTo(x + r, y + h);
+        ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+        ctx.lineTo(x, y + r);
+        ctx.quadraticCurveTo(x, y, x + r, y);
+        ctx.closePath();
+        if (fillStyle) { ctx.fillStyle = fillStyle; ctx.fill(); }
+        if (strokeStyle) { ctx.strokeStyle = strokeStyle; ctx.lineWidth = lineWidth; ctx.stroke(); }
+        ctx.restore();
+    },
+
+    drawTechBackground(accent = '#00e5ff') {
+        const ctx = this.ctx;
+        const g = ctx.createLinearGradient(0, 0, 0, this.V_HEIGHT);
+        g.addColorStop(0, '#061012');
+        g.addColorStop(0.55, '#030506');
+        g.addColorStop(1, '#090909');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, this.V_WIDTH, this.V_HEIGHT);
+
+        ctx.save();
+        ctx.globalAlpha = 0.18;
+        ctx.strokeStyle = accent;
+        ctx.lineWidth = 1;
+        for (let x = 0; x <= this.V_WIDTH; x += 40) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, this.V_HEIGHT); ctx.stroke(); }
+        for (let y = 0; y <= this.V_HEIGHT; y += 40) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(this.V_WIDTH, y); ctx.stroke(); }
+        ctx.globalAlpha = 0.06;
+        for (let x = 0; x <= this.V_WIDTH; x += 200) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, this.V_HEIGHT); ctx.stroke(); }
+        ctx.restore();
+    },
+
+    drawPacket(x, y, w, h, color, label, modeLabel = '') {
+        const ctx = this.ctx;
+        ctx.save();
+        ctx.shadowColor = color;
+        ctx.shadowBlur = 12;
+        const g = ctx.createLinearGradient(x - w, y - h/2, x, y + h/2);
+        g.addColorStop(0, 'rgba(255,255,255,0.65)');
+        g.addColorStop(0.18, color);
+        g.addColorStop(1, 'rgba(0,0,0,0.38)');
+        this.drawRoundedRect(x - w, y - h/2, w, h, 9, g, color, 1.4);
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = '#061012';
+        ctx.font = '900 10px Roboto Mono, monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText(label, x - w/2, y + 4);
+        if (modeLabel) {
+            ctx.fillStyle = 'rgba(255,255,255,0.75)';
+            ctx.font = '700 6px Roboto Mono, monospace';
+            ctx.fillText(modeLabel, x - w/2, y - 8);
+        }
+        ctx.restore();
+    },
+
+    drawSwitchDevice(x, y, w, h, title, subtitle, accent) {
+        const ctx = this.ctx;
+        const body = ctx.createLinearGradient(x, y, x + w, y + h);
+        body.addColorStop(0, '#1e2426');
+        body.addColorStop(0.5, '#0b0f10');
+        body.addColorStop(1, '#242a2c');
+        ctx.save();
+        ctx.shadowColor = accent;
+        ctx.shadowBlur = 14;
+        this.drawRoundedRect(x, y, w, h, 14, body, accent, 2);
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '900 13px Roboto, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(title, x + w/2, y + 30);
+        ctx.fillStyle = accent;
+        ctx.font = '800 9px Roboto Mono, monospace';
+        ctx.fillText(subtitle, x + w/2, y + 49);
+        for (let i = 0; i < 5; i++) {
+            const px = x + 16 + (i * 18);
+            this.drawRoundedRect(px, y + h - 34, 12, 14, 3, '#050707', '#2c484c', 1);
+            ctx.fillStyle = i % 2 ? accent : '#1a1a1a';
+            ctx.beginPath(); ctx.arc(px + 6, y + h - 12, 2.4, 0, Math.PI*2); ctx.fill();
+        }
+        ctx.restore();
+    },
+
+    drawNodeDevice(x, y, w, h, label, status, accent, heat = 0, active = false, danger = false) {
+        const ctx = this.ctx;
+        const glow = danger ? '#ff3d00' : accent;
+        const body = ctx.createLinearGradient(x, y, x + w, y + h);
+        body.addColorStop(0, danger ? '#3a1712' : '#192023');
+        body.addColorStop(0.55, '#0a0d0e');
+        body.addColorStop(1, danger ? '#2d0805' : '#171d1f');
+        ctx.save();
+        ctx.shadowColor = glow;
+        ctx.shadowBlur = danger ? 16 : 8;
+        this.drawRoundedRect(x, y, w, h, 10, body, glow, danger ? 2.7 : 1.8);
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = '#e9f7f8';
+        ctx.font = '900 11px Roboto, sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText(label, x + 11, y + 21);
+        ctx.fillStyle = danger ? '#ffd0ca' : '#a9c8cc';
+        ctx.font = '800 9px Roboto, sans-serif';
+        ctx.fillText(status, x + 11, y + 39);
+
+        for (let k = 0; k < 4; k++) {
+            this.drawRoundedRect(x + 10 + k*16, y + h - 13, 12, 6, 2, '#020303', '#26393c', 0.8);
+        }
+        ctx.fillStyle = active ? accent : '#152024';
+        if (danger && Math.random() < 0.7) ctx.fillStyle = '#ff3d00';
+        ctx.beginPath(); ctx.arc(x + w - 14, y + h/2, 4.2, 0, Math.PI*2); ctx.fill();
+        ctx.restore();
+    },
+
     // --- HTMLテンプレート ---
     getHTML() {
         return `
@@ -38,7 +159,7 @@ const Module_NetBroadcast = {
                     </div>
                 </div>
 
-                <div class="canvas-wrapper" style="background: #000000; border: 3px solid #444444; border-radius: 12px; position: relative; width: 100%; flex-grow: 1; box-shadow: inset 0 0 30px rgba(0,0,0,0.9); overflow: hidden;">
+                <div class="canvas-wrapper" style="background: #030607; border: 3px solid #1f5f66; border-radius: 12px; position: relative; width: 100%; flex-grow: 1; box-shadow: inset 0 0 34px rgba(0,0,0,0.95), 0 0 18px rgba(0,229,255,0.10); overflow: hidden;">
                     <canvas id="net-broadcast-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block;"></canvas>
                 </div>
             </div>
@@ -211,23 +332,14 @@ const Module_NetBroadcast = {
             });
         }
 
-        this.ctx.fillStyle = "#000000";
-        this.ctx.fillRect(0, 0, this.V_WIDTH, this.V_HEIGHT);
+        this.drawTechBackground('#ff6f00');
 
         this.ctx.strokeStyle = "#221105"; this.ctx.lineWidth = 12;
         this.ctx.beginPath(); this.ctx.moveTo(hubX + hubW, lanTrackY); this.ctx.lineTo(this.V_WIDTH, lanTrackY); this.ctx.stroke();
         this.ctx.strokeStyle = "#ff6f00"; this.ctx.lineWidth = 2;
         this.ctx.beginPath(); this.ctx.moveTo(hubX + hubW, lanTrackY); this.ctx.lineTo(this.V_WIDTH, lanTrackY); this.ctx.stroke();
 
-        this.ctx.fillStyle = "#2a2a2a";
-        this.ctx.fillRect(hubX, hubY, hubW, hubH);
-        this.ctx.strokeStyle = "#444444"; this.ctx.lineWidth = 2;
-        this.ctx.strokeRect(hubX, hubY, hubW, hubH);
-
-        this.ctx.fillStyle = "#ffffff"; this.ctx.font = "bold 13px sans-serif"; this.ctx.textAlign = "center";
-        this.ctx.fillText("NETWORK HUB", hubX + hubW/2, hubY + 30);
-        this.ctx.font = "9px monospace"; this.ctx.fillStyle = "#ff6f00";
-        this.ctx.fillText("Broadcast 配信", hubX + hubW/2, hubY + 48);
+        this.drawSwitchDevice(hubX, hubY, hubW, hubH, "NETWORK HUB", "Broadcast 配信", "#ff6f00");
 
         for (let i = 0; i < 5; i++) {
             const pY = nodeYPositions[i] + nodeH / 2;
@@ -251,44 +363,23 @@ const Module_NetBroadcast = {
             let b = Math.floor(34 * (1.0 - this.nodeHeat[i]));
             if (g < 0) g = 0; if (b < 0) b = 0;
 
-            this.ctx.fillStyle = `rgb(${r},${g},${b})`;
-            this.ctx.fillRect(nodeX, nY, nodeW, nodeH);
-            this.ctx.strokeStyle = this.lineColors[i]; this.ctx.lineWidth = this.nodeHeat[i] > 0.7 ? 3 : 2;
-            this.ctx.strokeRect(nodeX, nY, nodeW, nodeH);
-
-            if (this.currentMode === 0) {
-                this.ctx.fillStyle = "#1a1a1a";
-            } else {
-                this.ctx.fillStyle = (Math.random() < 0.5 || this.nodeHeat[i] > 0.6) ? "#00d2ff" : "#1a1a1a";
-            }
-            this.ctx.beginPath(); this.ctx.arc(nodeX + nodeW - 12, nY + nodeH / 2, 3.5, 0, Math.PI*2); this.ctx.fill();
-
-            this.ctx.fillStyle = "#ffffff"; this.ctx.font = "bold 11px sans-serif"; this.ctx.textAlign = "left";
-            this.ctx.fillText(`Port ${i+1} (U${i})`, nodeX + 10, nY + 22);
-
-            this.ctx.font = "bold 9px sans-serif";
-            if (this.nodeHeat[i] > 0.7) {
-                this.ctx.fillStyle = "#ffcccc"; this.ctx.fillText("🔥 OVERLOAD", nodeX + 10, nY + 40);
-            } else if (this.nodeHeat[i] > 0.3) {
-                this.ctx.fillStyle = "#ffffaa"; this.ctx.fillText("⚠ 不要データ破棄中", nodeX + 10, nY + 40);
-            } else {
-                this.ctx.fillStyle = "#aaaaaa"; this.ctx.fillText("● 待機・受信", nodeX + 10, nY + 40);
-            }
+            let status = "STANDBY / RECEIVE";
+            let danger = this.nodeHeat[i] > 0.7;
+            let active = this.currentMode !== 0 && (Math.random() < 0.5 || this.nodeHeat[i] > 0.6);
+            if (this.nodeHeat[i] > 0.7) status = "OVERLOAD / FILTERING";
+            else if (this.nodeHeat[i] > 0.3) status = "FILTERING UNUSED DATA";
+            this.drawNodeDevice(nodeX, nY, nodeW, nodeH, `PORT ${i+1} / U${i}`, status, this.lineColors[i], this.nodeHeat[i], active, danger);
         }
 
         this.inputPackets.forEach(p => {
             if (p.x > hubX + hubW) {
-                this.ctx.fillStyle = this.lineColors[p.uni];
-                this.ctx.fillRect(p.x - this.pW, lanTrackY - this.pH/2, this.pW - 2, this.pH);
-                this.ctx.fillStyle = "#000000"; this.ctx.font = "bold 10px monospace"; this.ctx.textAlign = "center";
-                this.ctx.fillText(`U${p.uni}`, p.x - this.pW/2 - 1, lanTrackY + 4);
+                this.drawPacket(p.x, lanTrackY, this.pW - 2, this.pH, this.lineColors[p.uni], `U${p.uni}`, "UDP");
             }
         });
 
         this.outputPackets.forEach(p => {
             if (p.x > nodeX + nodeW) {
-                this.ctx.fillStyle = this.lineColors[p.uni];
-                this.ctx.fillRect(p.x - this.pW, p.y - this.pH/2, this.pW, this.pH);
+                this.drawPacket(p.x, p.y, this.pW, this.pH, this.lineColors[p.uni], `U${p.uni}`, "BCAST");
 
                 if (this.currentMode === 0) {
                     this.ctx.fillStyle = "#000000"; this.ctx.font = "bold 10px monospace"; this.ctx.textAlign = "center";
@@ -307,17 +398,13 @@ const Module_NetBroadcast = {
         });
 
         this.passedPackets.forEach(p => {
-            this.ctx.fillStyle = this.lineColors[p.uni];
-            this.ctx.fillRect(p.x - this.pW, p.y - this.pH/2, this.pW, this.pH);
-            this.ctx.fillStyle = "#000000"; this.ctx.font = "bold 10px monospace"; this.ctx.textAlign = "center";
-            this.ctx.fillText(`U${p.uni}`, p.x - this.pW/2, p.y + 4);
+            this.drawPacket(p.x, p.y, this.pW, this.pH, this.lineColors[p.uni], `U${p.uni}`, "PASS");
         });
 
         this.rejectedPackets.forEach(p => {
             this.ctx.save();
             this.ctx.globalAlpha = p.alpha;
-            this.ctx.fillStyle = this.lineColors[p.uni];
-            this.ctx.fillRect(p.x - this.pW/2, p.y - this.pH/4, this.pW * 0.7, this.pH * 0.7);
+            this.drawPacket(p.x + this.pW/2, p.y, this.pW * 0.7, this.pH * 0.7, this.lineColors[p.uni], `U${p.uni}`, "DROP");
             this.ctx.restore();
         });
     }
