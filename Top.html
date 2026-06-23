@@ -620,6 +620,7 @@
     <script src="Module_NetArtNet.js"></script>
     <script src="Module_NetBroadcast.js"></script>
     <script src="Module_NetSacn.js"></script>
+    <script src="Network_Visual_SAFE_ShIM_v0_1.js"></script>
     <script src="Module_NetExplain.js"></script>
     <script src="Module_MovingHead.js"></script>
 
@@ -688,6 +689,12 @@
         'netsacn': Module_NetSacn,
         'explain': Module_NetExplain
     };
+
+    // Network SAFE Visual Shim:
+    // 表示補正だけを追加。各Network Moduleの心臓部ロジックは触らない。
+    if (window.NetworkVisualSafeShim) {
+        window.NetworkVisualSafeShim.install(modules);
+    }
 
     let activeModuleKey = 'sim8bit';
     let sharedNetworkMode = 2;
