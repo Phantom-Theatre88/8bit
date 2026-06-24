@@ -18,8 +18,8 @@ const Module_NetSacn = {
     INPUT_SPEED: 500,
     HUB_OUT_SPEED: 950,
     BUNDLE_GAP: 280,
-    V_WIDTH: 1200,
-    V_HEIGHT: 520,
+    V_WIDTH: 760,
+    V_HEIGHT: 760,
     pW: 40,
     pH: 20,
 
@@ -221,26 +221,33 @@ const Module_NetSacn = {
         const rect = this.canvas.getBoundingClientRect();
         this.canvas.width = Math.floor(rect.width * dpr);
         this.canvas.height = Math.floor(rect.height * dpr);
-        this.ctx.restore();
-        this.ctx.save();
-        const scale = rect.width / this.V_WIDTH;
-        this.ctx.scale(scale * dpr, scale * dpr);
+
+        // compact layout v0.1:
+        // 右側50%パネルでも描画が上下に間延びしないよう、仮想キャンバス全体を収める。
+        // 通信ロジック・packet速度・到達判定には影響しない。
+        const scale = Math.min(rect.width / this.V_WIDTH, rect.height / this.V_HEIGHT);
+        const offsetX = (rect.width - (this.V_WIDTH * scale)) / 2;
+        const offsetY = (rect.height - (this.V_HEIGHT * scale)) / 2;
+        this.ctx.setTransform(scale * dpr, 0, 0, scale * dpr, offsetX * dpr, offsetY * dpr);
     },
 
     animateLoop(currentTime) {
         let deltaTime = ((currentTime - this.lastTime) / 1000) * this.speedFactors[this.currentMode];
         this.lastTime = currentTime;
 
+        // compact layout v0.1:
+        // 左右分割の右側パネル用。Switchを小さく、線を短く、縦方向へ整理する。
+        // packet生成・配信・速度・到達判定は既存のまま。
         const centerX = this.V_WIDTH / 2;
-        const hubW = 120;
-        const hubH = 340;
-        const hubX = centerX - hubW / 2;
+        const hubW = 96;
+        const hubH = 400;
+        const hubX = centerX - hubW / 2 + 42;
         const hubY = this.V_HEIGHT / 2 - hubH / 2;
 
-        const nodeX = 140;
-        const nodeW = 120;
-        const nodeH = 50;
-        const nodeYPositions = [90, 162, 234, 306, 378];
+        const nodeX = 64;
+        const nodeW = 116;
+        const nodeH = 52;
+        const nodeYPositions = [122, 232, 342, 452, 562];
         const lanTrackY = this.V_HEIGHT / 2;
 
         if (this.currentMode === 0) {
@@ -311,9 +318,9 @@ const Module_NetSacn = {
         this.ctx.font = "12px sans-serif";
         this.ctx.textAlign = "center";
         this.ctx.fillStyle = "rgba(0, 230, 118, 0.4)";
-        this.ctx.fillText("【右】入力：LAN幹線（複数Universe）", this.V_WIDTH - 250, 25);
+        this.ctx.fillText("【右】入力：LAN幹線（複数Universe）", this.V_WIDTH - 210, 30);
         this.ctx.fillStyle = "rgba(0, 230, 118, 0.6)";
-        this.ctx.fillText("【左】sACN Multicast：必要なUniverseを必要なNodeへ", 400, 25);
+        this.ctx.fillText("【左】sACN Multicast：必要なUniverseを必要なNodeへ", 250, 30);
 
         this.ctx.strokeStyle = "#221105"; this.ctx.lineWidth = 12;
         this.ctx.beginPath(); this.ctx.moveTo(hubX + hubW, lanTrackY); this.ctx.lineTo(this.V_WIDTH, lanTrackY); this.ctx.stroke();

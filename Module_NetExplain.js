@@ -43,7 +43,7 @@ const Module_NetExplain = {
         this.ringSecondaryCuts = [false, false, false];
 
         this.consoleImage = new Image();
-        this.consoleImage.src = 'GrandMa2.png';
+        this.consoleImage.src = 'assets/GrandMa2.png';
         this.consoleImage.onload = () => this.isImageLoaded = true;
         this.consoleImage.onerror = () => this.isImageLoaded = false;
 

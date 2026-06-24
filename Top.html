@@ -535,6 +535,402 @@
         }
 
 
+
+
+
+        /* --- Top Layout v0.3.2: DMX series outer layout correction only --- */
+        .master-console-container.sim8bit-active,
+        .master-console-container.simdmx-active {
+            gap: 8px;
+        }
+
+        .master-console-container.sim8bit-active .console-main-screen,
+        .master-console-container.simdmx-active .console-main-screen {
+            aspect-ratio: 1200 / 650;
+            flex: 1 1 auto;
+            min-height: 0;
+        }
+
+        .master-console-container.sim8bit-active .console-help-display,
+        .master-console-container.simdmx-active .console-help-display {
+            flex: 0 0 92px;
+            min-height: 74px;
+            padding: 10px 18px;
+        }
+
+        .master-console-container.sim8bit-active .help-text-content,
+        .master-console-container.simdmx-active .help-text-content {
+            font-size: 11.5px;
+            line-height: 1.45;
+        }
+
+        .master-console-container.sim16bit-active {
+            gap: 8px;
+        }
+
+        .master-console-container.sim16bit-active .console-main-screen {
+            aspect-ratio: 1200 / 720;
+            flex: 1 1 auto;
+            min-height: 0;
+        }
+
+        .master-console-container.sim16bit-active .console-help-display {
+            display: none !important;
+        }
+
+        .module-page-root.sim8bit,
+        .module-page-root.simdmx {
+            grid-template-rows: 44px minmax(0, 1fr);
+            gap: 8px;
+        }
+
+        .module-page-root.sim8bit .module-page-header,
+        .module-page-root.simdmx .module-page-header {
+            min-height: 44px;
+            padding: 6px 14px;
+        }
+
+        .module-page-root.sim8bit .module-page-title,
+        .module-page-root.simdmx .module-page-title {
+            font-size: 19px;
+            line-height: 1.1;
+        }
+
+        .module-page-root.sim8bit .module-page-sub,
+        .module-page-root.simdmx .module-page-sub {
+            font-size: 11.5px;
+            line-height: 1.15;
+        }
+
+        .module-page-root.sim8bit .module-page-body,
+        .module-page-root.simdmx .module-page-body,
+        .module-page-root.explain .module-page-body {
+            overflow: hidden;
+        }
+
+        /* --- Network Layout v0.3: page headers + 50/50 lesson/simulation layout --- */
+        .master-console-container.network-layout-active {
+            gap: 10px;
+        }
+        .master-console-container.network-layout-active .console-main-screen {
+            aspect-ratio: 1200 / 760;
+            flex: 1 1 auto;
+            min-height: 0;
+        }
+        .master-console-container.network-layout-active .console-help-display {
+            display: none !important;
+        }
+
+        .network-lesson-root {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-rows: auto minmax(0, 1fr);
+            gap: 10px;
+            padding: 10px;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 50% 0%, rgba(0,229,255,0.06), transparent 38%),
+                #070909;
+        }
+        .network-lesson-root.dmxlan {
+            background:
+                radial-gradient(circle at 50% 0%, rgba(255,111,0,0.09), transparent 38%),
+                #070909;
+        }
+        .network-lesson-root.broadcast {
+            background:
+                radial-gradient(circle at 50% 0%, rgba(255,64,129,0.09), transparent 38%),
+                #070909;
+        }
+        .network-lesson-root.sacn {
+            background:
+                radial-gradient(circle at 50% 0%, rgba(0,230,118,0.09), transparent 38%),
+                #070909;
+        }
+
+        .network-lesson-header,
+        .module-page-header {
+            min-height: 50px;
+            border: 2px solid rgba(0,229,255,0.20);
+            border-radius: 14px;
+            background:
+                linear-gradient(180deg, rgba(0,229,255,0.08), rgba(0,0,0,0.25)),
+                rgba(0,0,0,0.42);
+            box-shadow:
+                inset 0 0 18px rgba(0,0,0,0.75),
+                0 0 14px rgba(0,229,255,0.06);
+            padding: 9px 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2px;
+            overflow: hidden;
+        }
+        .network-lesson-root.dmxlan .network-lesson-header { border-color: rgba(255,111,0,0.30); }
+        .network-lesson-root.broadcast .network-lesson-header { border-color: rgba(255,64,129,0.28); }
+        .network-lesson-root.sacn .network-lesson-header { border-color: rgba(0,230,118,0.30); }
+
+        .network-lesson-page-title,
+        .module-page-title {
+            color: #fff;
+            font-size: 21px;
+            font-weight: 900;
+            line-height: 1.15;
+            letter-spacing: .02em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .network-lesson-page-sub,
+        .module-page-sub {
+            color: #b9cacc;
+            font-size: 12.5px;
+            font-weight: 700;
+            line-height: 1.25;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .network-lesson-main {
+            min-height: 0;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 10px;
+            overflow: hidden;
+        }
+        .network-lesson-left {
+            min-height: 0;
+            display: grid;
+            grid-template-rows: minmax(0, 58%) minmax(0, 42%);
+            gap: 10px;
+            overflow: hidden;
+        }
+
+        .network-lesson-sim,
+        .network-lesson-visual,
+        .network-lesson-text {
+            min-height: 0;
+            border: 2px solid rgba(0,229,255,0.18);
+            border-radius: 14px;
+            background: rgba(0,0,0,0.36);
+            box-shadow:
+                inset 0 0 22px rgba(0,0,0,0.80),
+                0 0 14px rgba(0,229,255,0.045);
+            overflow: hidden;
+        }
+        .network-lesson-root.dmxlan .network-lesson-sim,
+        .network-lesson-root.dmxlan .network-lesson-visual,
+        .network-lesson-root.dmxlan .network-lesson-text {
+            border-color: rgba(255,111,0,0.26);
+        }
+        .network-lesson-root.broadcast .network-lesson-sim,
+        .network-lesson-root.broadcast .network-lesson-visual,
+        .network-lesson-root.broadcast .network-lesson-text {
+            border-color: rgba(255,64,129,0.24);
+        }
+        .network-lesson-root.sacn .network-lesson-sim,
+        .network-lesson-root.sacn .network-lesson-visual,
+        .network-lesson-root.sacn .network-lesson-text {
+            border-color: rgba(0,230,118,0.26);
+        }
+
+        .network-lesson-sim {
+            padding: 8px;
+        }
+        .network-lesson-sim > div {
+            width: 100%;
+            height: 100%;
+        }
+        .network-lesson-sim .canvas-wrapper {
+            min-height: 300px !important;
+        }
+
+        .network-lesson-visual {
+            display: grid;
+            grid-template-rows: auto minmax(0, 1fr);
+            gap: 7px;
+            padding: 8px;
+        }
+        .network-lesson-visual-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+        .network-lesson-visual-title {
+            font-size: 13px;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1.25;
+            min-width: 0;
+        }
+        .network-lesson-buttons {
+            display: flex;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+        .network-lesson-btn {
+            min-width: 30px;
+            height: 28px;
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 9px;
+            background: #101516;
+            color: #b9cacc;
+            font-weight: 900;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+        .network-lesson-btn.active.dmxlan { background:#ff6f00; color:#111; box-shadow:0 0 14px rgba(255,111,0,.35); }
+        .network-lesson-btn.active.broadcast { background:#ff4081; color:#111; box-shadow:0 0 14px rgba(255,64,129,.35); }
+        .network-lesson-btn.active.sacn { background:#00e676; color:#001b0d; box-shadow:0 0 14px rgba(0,230,118,.35); }
+
+        .network-lesson-image-box {
+            min-height: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #101010;
+            border: 1px solid rgba(255,255,255,0.14);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .network-lesson-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        .network-lesson-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #9fb4b7;
+            font-size: 15px;
+            font-weight: 900;
+            line-height: 1.7;
+            padding: 18px;
+            border: 1px dashed rgba(255,255,255,.18);
+            border-radius: 10px;
+            background: rgba(255,255,255,.025);
+        }
+
+        .network-lesson-text {
+            padding: 12px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            overscroll-behavior: contain;
+        }
+        .network-lesson-text::-webkit-scrollbar,
+        .module-page-body::-webkit-scrollbar {
+            width: 8px;
+        }
+        .network-lesson-text::-webkit-scrollbar-track,
+        .module-page-body::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.04);
+            border-radius: 8px;
+        }
+        .network-lesson-text::-webkit-scrollbar-thumb,
+        .module-page-body::-webkit-scrollbar-thumb {
+            background: rgba(0,229,255,0.28);
+            border-radius: 8px;
+        }
+        .network-lesson-kicker {
+            font-size: 11.5px;
+            font-weight: 900;
+            letter-spacing: .08em;
+            flex-shrink: 0;
+        }
+        .network-lesson-root.dmxlan .network-lesson-kicker { color:#ffb16d; }
+        .network-lesson-root.broadcast .network-lesson-kicker { color:#ff8aa9; }
+        .network-lesson-root.sacn .network-lesson-kicker { color:#65ffac; }
+        .network-lesson-title {
+            font-size: 19px;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1.25;
+            flex-shrink: 0;
+        }
+        .network-lesson-body {
+            color: #d8eaec;
+            font-size: 14px;
+            line-height: 1.58;
+            flex-shrink: 0;
+        }
+        .network-lesson-map {
+            margin-top: auto;
+            border-top: 1px solid rgba(255,255,255,0.14);
+            padding-top: 8px;
+            color: #b9cacc;
+            font-size: 12px;
+            line-height: 1.48;
+            flex-shrink: 0;
+        }
+        .network-lesson-map code {
+            color: #fff;
+            background: rgba(255,255,255,0.08);
+            border-radius: 5px;
+            padding: 1px 5px;
+        }
+
+        /* --- General page title header v0.3: tabs 1 / 3 / 8 --- */
+        .module-page-root {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-rows: auto minmax(0, 1fr);
+            gap: 10px;
+            overflow: hidden;
+        }
+        .module-page-root.sim8bit .module-page-header {
+            border-color: rgba(255,111,0,0.28);
+        }
+        .module-page-root.simdmx .module-page-header {
+            border-color: rgba(0,229,255,0.28);
+        }
+        .module-page-root.explain .module-page-header {
+            border-color: rgba(0,230,118,0.26);
+        }
+        .module-page-body {
+            min-height: 0;
+            overflow: auto;
+        }
+        .module-page-body > div,
+        .module-page-body > canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        @media (max-width: 980px) {
+            .network-lesson-root {
+                grid-template-rows: auto minmax(0, 1fr);
+            }
+            .network-lesson-main {
+                grid-template-columns: 1fr;
+                grid-template-rows: minmax(0, 46%) minmax(0, 54%);
+            }
+            .network-lesson-left {
+                grid-template-rows: minmax(0, 58%) minmax(0, 42%);
+            }
+            .network-lesson-page-title,
+            .module-page-title {
+                font-size: 18px;
+            }
+            .network-lesson-page-sub,
+            .module-page-sub {
+                font-size: 11.5px;
+            }
+        }
+
         /* --- MovingHead Module v0.18 integrated styles --- */
         .movinghead-root { width:100%; height:100%; display:flex; flex-direction:column; gap:10px; background:#151515; border:3px solid #444; border-radius:18px; padding:14px; box-shadow:0 10px 40px rgba(0,0,0,.8); position:relative; isolation:isolate; }
             .mh-topbar { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-shrink:0; background:#0d0d0d; border:2px solid #333; border-radius:12px; padding:10px 14px; position:relative; z-index:30; }
@@ -617,10 +1013,10 @@
     <script src="Module_Sim8Bit.js"></script>
     <script src="Module_Sim16Bit.js"></script>
     <script src="Module_SimDmx.js"></script>
-    <script src="Module_NetArtNet.js"></script>
-    <script src="Module_NetBroadcast.js"></script>
-    <script src="Module_NetSacn.js"></script>
-    <script src="Network_Visual_SAFE_ShIM_v0_1.js"></script>
+    <script src="Module_NetArtNet.js?v=network-layout-v0-3-1"></script>
+    <script src="Module_NetBroadcast.js?v=network-layout-v0-3-1"></script>
+    <script src="Module_NetSacn.js?v=network-layout-v0-3-1"></script>
+    <script src="Network_Visual_SAFE_ShIM_v0_1.js?v=network-layout-v0-3-1"></script>
     <script src="Module_NetExplain.js"></script>
     <script src="Module_MovingHead.js"></script>
 
@@ -635,9 +1031,9 @@
     
     <div class="tab-separator"></div>
     
-    <button class="main-tab-btn tab-network" id="main-tab-netartnet">5. Art-Net（DMXをLANへ）</button>
-    <button class="main-tab-btn tab-network" id="main-tab-netbroadcast">6. Broadcast（全体配信）</button>
-    <button class="main-tab-btn tab-network" id="main-tab-netsacn">7. sACN（必要な相手へ）</button>
+    <button class="main-tab-btn tab-network" id="main-tab-netartnet">5. DMX on LAN</button>
+    <button class="main-tab-btn tab-network" id="main-tab-netbroadcast">6. Broadcast / Art-Net 1</button>
+    <button class="main-tab-btn tab-network" id="main-tab-netsacn">7. Multicast / sACN</button>
     
     <div class="tab-separator"></div>
     
@@ -674,8 +1070,8 @@
         'simdmx': `<strong>【DMX512伝送：1秒間に42回走る定期列車】</strong><br>DMX512信号は、1番から512番までの全チャンネルデータを乗せた「512両編成の超ロングな列車」です。劇場内の調光卓は、オペレーターがフェーダーを一切触っていなくても、値が変化していなくても関係なく、1秒間に約42回（42Hz周波数）の超スピードで、この定期列車を劇場内へ絶え間なく垂れ流しで送り続けています。信号を受け取る灯体側は、常に自分のチャンネル番号の車両（パルス波形）が通りかかるのを待ち構えてデータを抜き出しています。`,
         'movinghead': `<strong>【Moving Head：PAN/TILT、キャリブレーション、16-bit位置制御】</strong><br>ムービングヘッドのPAN/TILT可動域、電源投入時のキャリブレーション、Start/End検出、キャリブレーションエラー、そして8-bitと16-bitの位置分解性能差を学ぶ教材です。16-bit比較では、8-bitでは狙った位置に止まりにくいこと、Fine値によって狙った位置へ細かく近づけられることを、ゴースト表示で確認できます。`,
         'netartnet': `<strong>【Art-Net：DMXをEthernetで運ぶ考え方】</strong><br>DMX512は1系統あたり最大512chを送る信号です。劇場やイベント現場で複数のUniverseを扱う場合、DMXケーブルを何本も引く代わりに、Art-NetではDMXの値をEthernet上のUDPパケットとして送ります。これにより、1本のLAN幹線で複数Universeを扱えるようになります。ただし、運用方式によってBroadcast / Unicastなどの通信範囲が関係するため、ネットワーク規模に合わせた設計が必要です。`,
-        'netbroadcast': `<strong>【Broadcast：全体へ届く配信方式】</strong><br>Broadcastは、同じネットワーク内の全機器へ向けてパケットを送る方式です。小規模な構成では分かりやすく、設定も単純にできます。一方で、Universe数や接続機器が増えると、本来そのデータを必要としないNodeにも通信が届きます。そのため、各Nodeは自分に関係するUniverseだけを受け取り、不要なデータを破棄する必要があります。大規模な照明ネットワークでは、この不要通信の増加が負荷や不安定要因になることがあります。`,
-        'netsacn': `<strong>【sACN：必要なUniverseを必要な相手へ届ける】</strong><br>sACN（Streaming ACN）は、照明制御データをEthernet上で扱うための標準的な方式の一つです。代表的にはMulticastを使い、Universeごとに通信グループを分けて送ります。IGMP Snoopingに対応したスイッチを使うと、各Nodeが必要とするUniverseだけを適切なポートへ流しやすくなります。Broadcastのように全機器へ一律に送るのではなく、必要な相手へ必要なデータを届ける考え方として理解すると、現場での設計判断に使いやすくなります。`,
+        'netbroadcast': `<strong>【Broadcast / Art-Net 1：同じネットワーク内の全Nodeへ届く】</strong><br>Broadcastは、同じネットワーク内の全機器へ向けてパケットを送る方式です。小規模な構成では分かりやすく、設定も単純にできます。一方で、Universe数や接続機器が増えると、本来そのデータを必要としないNodeにも通信が届きます。そのため、各Nodeは自分に関係するUniverseだけを受け取り、不要なデータを破棄する必要があります。大規模な照明ネットワークでは、この不要通信の増加が負荷や不安定要因になることがあります。`,
+        'netsacn': `<strong>【Multicast / sACN：必要なUniverseを必要なNodeへ届ける】</strong><br>sACN（Streaming ACN）は、照明制御データをEthernet上で扱うための標準的な方式の一つです。代表的にはMulticastを使い、Universeごとに通信グループを分けて送ります。IGMP Snoopingに対応したスイッチを使うと、各Nodeが必要とするUniverseだけを適切なポートへ流しやすくなります。Broadcastのように全機器へ一律に送るのではなく、必要な相手へ必要なデータを届ける考え方として理解すると、現場での設計判断に使いやすくなります。`,
         'explain': `<strong>【結線 / 冗長化：Star構成とRing構成の違い】</strong><br>画面上の配線にある <strong>[ ✂ ] ボタン</strong>を押すと、LANケーブルの断線を再現できます。<br><strong>【左：Star結線】</strong>は、中央のHubから各Nodeへ個別に配線する基本的な構成です。1本の枝線が切れた場合、その先のNodeだけが通信できなくなります。<br><strong>【右：Ring / 二重化構成】</strong>は、複数のHubを経路でつなぎ、片側の経路が切れても別経路へ回せる考え方を示します。Primary / Secondary のような冗長経路を用意することで、1本の断線が全体停止につながりにくい構成を学べます。`
     };
 
@@ -690,6 +1086,266 @@
         'explain': Module_NetExplain
     };
 
+    // --- Network Layout Only v0.1: 表示用データ。Moduleの通信ロジックには触れない ---
+    const networkLessonPanels = {
+        netartnet: [
+            {
+                img: "assets/dmx_on_lan/dmxlan_01_multi_universe_v01.png",
+                label: "1. 複数Universeが出ている",
+                kicker: "DMX ON LAN POINT 1",
+                title: "送信元では、複数のDMX Universeが別々に出ている",
+                body: "まずは卓や制御元から、U1、U2、U3、U4のように複数のDMX Universeが出ています。この段階では、まだLANにまとめて運んでいるわけではありません。",
+                map: "たとえ：<code>複数の列車</code> が、行き先ごとに別々に走り出す準備。"
+            },
+            {
+                img: "assets/dmx_on_lan/dmxlan_02_packetize_v01.png",
+                label: "2. LAN用パケットに包み直す",
+                kicker: "DMX ON LAN POINT 2",
+                title: "Universeごとに、LANで運べる形へ変換する",
+                body: "DMXの値を、Ethernet上で運べるUDPパケットの形に包み直します。大きな一箱に全部を入れるのではなく、Universeごとの小包として順番に扱います。",
+                map: "たとえ：<code>U1 packet</code>、<code>U2 packet</code> のように個別梱包する。"
+            },
+            {
+                img: "assets/dmx_on_lan/dmxlan_03_lan_transport_v01.png",
+                label: "3. LANはDMXよりずっと速い",
+                kicker: "DMX ON LAN POINT 3",
+                title: "順番に流れても、通常は見えるほどのズレになりにくい",
+                body: "LAN上ではパケットが順番に流れます。ただしEthernetはDMXの更新周期よりずっと速いため、通常の規模ではU1と後続Universeのズレは見た目で問題になりにくいです。",
+                map: "注意：<code>完全同時</code> ではなく、<code>高速な直列</code> として理解する。"
+            },
+            {
+                img: "assets/dmx_on_lan/dmxlan_04_node_output_v01.png",
+                label: "4. NodeでDMXとして取り出す",
+                kicker: "DMX ON LAN POINT 4",
+                title: "受け取ったパケットを、必要なDMX出力へ戻す",
+                body: "NodeはLANで届いたUniverseのパケットを受け取り、必要なDMX Universeとして取り出します。LAN幹線で運んだデータを、現場の灯体へ向かうDMX信号に戻す段階です。",
+                map: "たとえ：<code>配送された小包</code> を、出口ごとに開封してDMXへ戻す。"
+            }
+        ],
+        netbroadcast: [
+            {
+                img: "assets/network/bc_01_send_v01.png",
+                label: "1. 送信元がUniverseを送る",
+                kicker: "BROADCAST / ART-NET 1 POINT 1",
+                title: "送信側では、まだ必要／不要は決まっていない",
+                body: "送信元は複数のUniverseデータをまとめてネットワークへ送り出します。この時点では、どのNodeにとって必要かどうかはまだ分かりません。",
+                map: "たとえ：<code>発送元</code> が、いろいろな配布物をまとめて出す段階。"
+            },
+            {
+                img: "assets/network/bc_02_all_v01.png",
+                label: "2. 全Nodeへ同じデータが届く",
+                kicker: "BROADCAST / ART-NET 1 POINT 2",
+                title: "Broadcastは、全員へ同じデータを配る",
+                body: "Broadcastでは、同じネットワーク内の全Nodeへ同じデータが届きます。必要なNodeにも、不要なNodeにも届くことが特徴です。",
+                map: "たとえ：<code>全戸配布</code>。同じ束がすべてのポストへ入る。"
+            },
+            {
+                img: "assets/network/bc_03_sort_v01.png",
+                label: "3. Node側で必要なUniverseだけ使う",
+                kicker: "BROADCAST / ART-NET 1 POINT 3",
+                title: "必要／不要は、受信側で仕分ける",
+                body: "各Nodeは、届いたデータの中から自分に必要なUniverseだけを使います。それ以外の不要なデータは、Node側で破棄します。",
+                map: "たとえ：<code>各家庭</code> が、必要な手紙だけ取り出し、不要なチラシを捨てる。"
+            },
+            {
+                img: "assets/network/bc_04_load_v01.png",
+                label: "4. 増えると負担も増える",
+                kicker: "BROADCAST / ART-NET 1 POINT 4",
+                title: "規模が大きくなると、不要な通信も増える",
+                body: "Broadcastはシンプルですが、Universe数やNode数が増えるほど、不要なデータも多く届きます。受け取る側の仕分け負担と、ネットワーク上の無駄な通信が大きくなります。",
+                map: "たとえ：<code>ポスト</code> が折込チラシであふれ、家ごとの仕分けが追いつかなくなる。"
+            }
+        ],
+        netsacn: [
+            {
+                img: "assets/sACN/sacn_01_publish_v01.png",
+                label: "1. 配信開始",
+                kicker: "MULTICAST / sACN POINT 1",
+                title: "Universeごとに送信準備する",
+                body: "sACNでは、Universeごとにデータを分けてネットワークへ流す考え方を取ります。この時点では、どのNodeが受けるかはまだ決まっていません。",
+                map: "画像：<code>sacn_01_publish_v01.png</code>"
+            },
+            {
+                img: "assets/sACN/sacn_02_igmp_join_v01.png",
+                label: "2. IGMP参加",
+                kicker: "MULTICAST / sACN POINT 2",
+                title: "受信側が、欲しいUniverseを申告する",
+                body: "Nodeや灯具側が、IGMP Joinで「このUniverseを受けたい」とSwitchへ知らせます。この時点ではまだ配送ではなく、参加申請を記録する段階です。",
+                map: "画像：<code>sacn_02_igmp_join_v01.png</code>"
+            },
+            {
+                img: "assets/sACN/sacn_03_snooping_route_v01.png",
+                label: "3. 必要な相手だけへ配信",
+                kicker: "MULTICAST / sACN POINT 3",
+                title: "Switchが必要なポートだけへ流す",
+                body: "IGMP Snoopingにより、Switchは参加リストを見て、必要なUniverseだけを必要なNodeのポートへ流します。不要な通信を減らせます。",
+                map: "画像：<code>sacn_03_snooping_route_v01.png</code>"
+            },
+            {
+                img: "assets/sACN/sacn_04_querier_check_v01.png",
+                label: "4. Querier確認",
+                kicker: "MULTICAST / sACN POINT 4",
+                title: "参加状況を定期的に確認する",
+                body: "IGMP Querierは、どのNodeがどのUniverseをまだ必要としているかを定期的に確認します。不要になった通信を止め、参加リストを保ちます。",
+                map: "画像：<code>sacn_04_querier_check_v01.png</code>"
+            }
+        ]
+    };
+
+    const networkLessonIndex = {
+        netartnet: 0,
+        netbroadcast: 0,
+        netsacn: 0
+    };
+
+    const networkLessonPageMeta = {
+        netartnet: {
+            title: "5. DMX on LAN｜DMXをEthernet上のパケットとして運ぶ",
+            sub: "複数のDMX Universeを、LAN上のパケットとして扱う入口。"
+        },
+        netbroadcast: {
+            title: "6. Broadcast / Art-Net 1｜同じネットワーク内の全Nodeへ届く",
+            sub: "Broadcast的な全体配信と、受信側での仕分け負担を見る。"
+        },
+        netsacn: {
+            title: "7. Multicast / sACN｜必要なUniverseを必要なNodeへ届ける",
+            sub: "IGMP Snoopingを使い、必要な通信だけを必要なポートへ流す考え方。"
+        }
+    };
+
+    const modulePageMeta = {
+        sim8bit: {
+            title: "1. 8-bit 調光卓｜DMX値と見た目の明るさの関係を読む",
+            sub: "0〜255の値、調光カーブ、見た目の明るさの変化を確認する。"
+        },
+        simdmx: {
+            title: "3. DMX 定期列車｜512chを約42Hzで送り続ける信号",
+            sub: "値が変わらなくても、DMXは定期的に全チャンネルを送り続ける。"
+        },
+        explain: {
+            title: "8. 結線 / 冗長化｜Star構成とRing構成の違いを比べる",
+            sub: "断線時の影響範囲と、冗長経路の考え方を比較する。"
+        }
+    };
+
+    function getNetworkTheme(moduleKey) {
+        if (moduleKey === "netartnet") return "dmxlan";
+        if (moduleKey === "netbroadcast") return "broadcast";
+        return "sacn";
+    }
+
+    function setNetworkLessonPanel(moduleKey, index) {
+        const list = networkLessonPanels[moduleKey];
+        if (!list || !list[index]) return;
+        const p = list[index];
+        networkLessonIndex[moduleKey] = index;
+
+        const label = document.getElementById(`${moduleKey}-lesson-label`);
+        const img = document.getElementById(`${moduleKey}-lesson-img`);
+        const placeholder = document.getElementById(`${moduleKey}-lesson-placeholder`);
+        const kicker = document.getElementById(`${moduleKey}-lesson-kicker`);
+        const title = document.getElementById(`${moduleKey}-lesson-title`);
+        const body = document.getElementById(`${moduleKey}-lesson-body`);
+        const map = document.getElementById(`${moduleKey}-lesson-map`);
+
+        if (label) label.textContent = p.label;
+        if (kicker) kicker.textContent = p.kicker;
+        if (title) title.textContent = p.title;
+        if (body) body.textContent = p.body;
+        if (map) map.innerHTML = p.map;
+
+        if (img) {
+            if (p.img) {
+                img.src = p.img;
+                img.style.display = "block";
+                if (placeholder) placeholder.style.display = "none";
+            } else {
+                img.removeAttribute("src");
+                img.style.display = "none";
+                if (placeholder) placeholder.style.display = "flex";
+            }
+        }
+
+        document.querySelectorAll(`.network-lesson-btn[data-module="${moduleKey}"]`).forEach((btn, i) => {
+            btn.classList.toggle("active", i === index);
+        });
+
+        // Network Layout v0.3.1:
+        // Broadcast 4コマの教材切替と、simulation側の表示状態だけを連動復旧する。
+        // packet生成・速度・到達判定・配信ロジックには使わない。
+        if (moduleKey === "netbroadcast" && modules.netbroadcast && typeof modules.netbroadcast.setLessonState === "function") {
+            const broadcastLessonStates = ["normal", "broadcast", "sorting", "overload"];
+            modules.netbroadcast.setLessonState(broadcastLessonStates[index] || "normal");
+        }
+    }
+
+    function bindNetworkLessonControls() {
+        document.querySelectorAll(".network-lesson-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                setNetworkLessonPanel(btn.dataset.module, Number(btn.dataset.panel));
+            });
+        });
+        ["netartnet", "netbroadcast", "netsacn"].forEach(key => {
+            setNetworkLessonPanel(key, networkLessonIndex[key] || 0);
+        });
+    }
+
+    function getNetworkLessonHTML(moduleKey, moduleHTML) {
+        const theme = getNetworkTheme(moduleKey);
+        const list = networkLessonPanels[moduleKey] || [];
+        const first = list[0] || {};
+        const meta = networkLessonPageMeta[moduleKey] || { title: "", sub: "" };
+        const buttons = list.map((_, i) => {
+            return `<button class="network-lesson-btn ${theme}${i === 0 ? " active" : ""}" data-module="${moduleKey}" data-panel="${i}">${i + 1}</button>`;
+        }).join("");
+
+        return `
+            <div class="network-lesson-root ${theme}">
+                <div class="network-lesson-header">
+                    <div class="network-lesson-page-title">${meta.title}</div>
+                    <div class="network-lesson-page-sub">${meta.sub}</div>
+                </div>
+                <div class="network-lesson-main">
+                    <div class="network-lesson-left">
+                        <div class="network-lesson-visual">
+                            <div class="network-lesson-visual-head">
+                                <div class="network-lesson-visual-title" id="${moduleKey}-lesson-label">${first.label || ""}</div>
+                                <div class="network-lesson-buttons">${buttons}</div>
+                            </div>
+                            <div class="network-lesson-image-box">
+                                <img id="${moduleKey}-lesson-img" src="${first.img || ""}" alt="${moduleKey} lesson visual" ${first.img ? "" : 'style="display:none"'} >
+                                <div class="network-lesson-placeholder" id="${moduleKey}-lesson-placeholder" ${first.img ? 'style="display:none"' : ""}>教材イラスト<br>準備中</div>
+                            </div>
+                        </div>
+                        <div class="network-lesson-text">
+                            <div class="network-lesson-kicker" id="${moduleKey}-lesson-kicker">${first.kicker || ""}</div>
+                            <div class="network-lesson-title" id="${moduleKey}-lesson-title">${first.title || ""}</div>
+                            <div class="network-lesson-body" id="${moduleKey}-lesson-body">${first.body || ""}</div>
+                            <div class="network-lesson-map" id="${moduleKey}-lesson-map">${first.map || ""}</div>
+                        </div>
+                    </div>
+                    <div class="network-lesson-sim">${moduleHTML}</div>
+                </div>
+            </div>
+        `;
+    }
+
+    function getModulePageHTML(moduleKey, moduleHTML) {
+        const meta = modulePageMeta[moduleKey];
+        if (!meta) return moduleHTML;
+
+        return `
+            <div class="module-page-root ${moduleKey}">
+                <div class="module-page-header">
+                    <div class="module-page-title">${meta.title}</div>
+                    <div class="module-page-sub">${meta.sub}</div>
+                </div>
+                <div class="module-page-body">${moduleHTML}</div>
+            </div>
+        `;
+    }
+
+
     // Network SAFE Visual Shim:
     // 表示補正だけを追加。各Network Moduleの心臓部ロジックは触らない。
     if (window.NetworkVisualSafeShim) {
@@ -702,7 +1358,9 @@
     Object.keys(modules).forEach(key => {
         const panel = document.getElementById(`panel-${key}`);
         if (panel && modules[key].getHTML) {
-            if (key === 'sim16bit') {
+            if (key === 'netartnet' || key === 'netbroadcast' || key === 'netsacn') {
+                panel.innerHTML = getNetworkLessonHTML(key, modules[key].getHTML());
+            } else if (key === 'sim16bit') {
                 panel.innerHTML = `
                     <div class="sim16-integrated-root">
                         <div class="sim16-integrated-header">
@@ -723,19 +1381,26 @@
                         </div>
                     </div>
                 `;
+            } else if (key === 'sim8bit' || key === 'simdmx' || key === 'explain') {
+                panel.innerHTML = getModulePageHTML(key, modules[key].getHTML());
             } else {
                 panel.innerHTML = modules[key].getHTML();
             }
         }
     });
 
+    bindNetworkLessonControls();
+
     const masterContainer = document.querySelector('.master-console-container');
 
     function updateMasterLayoutClass() {
         if (!masterContainer) return;
         masterContainer.classList.toggle('movinghead-active', activeModuleKey === 'movinghead');
+        masterContainer.classList.toggle('sim8bit-active', activeModuleKey === 'sim8bit');
         masterContainer.classList.toggle('sim16bit-active', activeModuleKey === 'sim16bit');
+        masterContainer.classList.toggle('simdmx-active', activeModuleKey === 'simdmx');
         masterContainer.classList.toggle('network-active', activeModuleKey.startsWith('net') || activeModuleKey === 'explain');
+        masterContainer.classList.toggle('network-layout-active', activeModuleKey === 'netartnet' || activeModuleKey === 'netbroadcast' || activeModuleKey === 'netsacn');
     }
 
     updateMasterLayoutClass();
@@ -788,6 +1453,12 @@
                 }
                 const initActiveModule = () => {
                     modules[activeModuleKey].init();
+                    if (activeModuleKey === 'netartnet' || activeModuleKey === 'netbroadcast' || activeModuleKey === 'netsacn') {
+                        requestAnimationFrame(() => {
+                            if (modules[activeModuleKey].resizeCanvas) modules[activeModuleKey].resizeCanvas();
+                            setNetworkLessonPanel(activeModuleKey, networkLessonIndex[activeModuleKey] || 0);
+                        });
+                    }
                     if (activeModuleKey === 'movinghead') {
                         requestAnimationFrame(() => {
                             if (modules[activeModuleKey].resizeCanvas) modules[activeModuleKey].resizeCanvas();

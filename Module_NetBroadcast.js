@@ -13,14 +13,16 @@ const Module_NetBroadcast = {
     animationFrameId: null,
     canvas: null,
     ctx: null,
+    // --- 教材用表示状態：通信ロジックには使わない ---
+    lessonState: 'normal',
 
     // --- 定数定義 ---
     lineColors: ['#00e5ff', '#ff4081', '#00e676', '#ffca28', '#b388ff'],
     INPUT_SPEED: 500,
     HUB_OUT_SPEED: 950,
     BUNDLE_GAP: 280,
-    V_WIDTH: 1200,
-    V_HEIGHT: 520,
+    V_WIDTH: 760,
+    V_HEIGHT: 760,
     pW: 40,
     pH: 20,
 
@@ -116,13 +118,14 @@ const Module_NetBroadcast = {
         ctx.restore();
     },
 
-    drawNodeDevice(x, y, w, h, label, status, accent, heat = 0, active = false, danger = false) {
+    drawNodeDevice(x, y, w, h, label, status, accent, heat = 0, active = false, danger = false, bodyTint = null) {
         const ctx = this.ctx;
         const glow = danger ? '#ff3d00' : accent;
+        const tint = bodyTint || (danger ? '#3a1712' : '#192023');
         const body = ctx.createLinearGradient(x, y, x + w, y + h);
-        body.addColorStop(0, danger ? '#3a1712' : '#192023');
-        body.addColorStop(0.55, '#0a0d0e');
-        body.addColorStop(1, danger ? '#2d0805' : '#171d1f');
+        body.addColorStop(0, tint);
+        body.addColorStop(0.50, danger ? '#240605' : (bodyTint ? '#241414' : '#0a0d0e'));
+        body.addColorStop(1, danger ? '#2d0805' : (bodyTint ? '#060707' : '#171d1f'));
         ctx.save();
         ctx.shadowColor = glow;
         ctx.shadowBlur = danger ? 16 : 8;
@@ -144,6 +147,61 @@ const Module_NetBroadcast = {
         ctx.beginPath(); ctx.arc(x + w - 14, y + h/2, 4.2, 0, Math.PI*2); ctx.fill();
         ctx.restore();
     },
+
+
+    // --- 教材用表示状態：漫画・説明側から呼ぶ表示切替だけ ---
+    // 1=normal / 2=broadcast-yellow / 3=sorting-pink / 4=overload-red
+    setLessonState(state) {
+        const allowed = ['normal', 'broadcast', 'sorting', 'overload'];
+        this.lessonState = allowed.includes(state) ? state : 'normal';
+    },
+
+    getLessonNodeVisual(baseStatus, baseAccent, baseActive, baseDanger, baseHeat) {
+        // packet生成・配信・速度・到達判定には使わない。
+        // 既存PORT箱のBody / 枠 / status表示だけを変える。
+        if (this.lessonState === 'broadcast') {
+            return {
+                status: 'BROADCAST / ALL DATA',
+                accent: '#ffca28',
+                active: true,
+                danger: false,
+                heat: 0.45,
+                bodyTint: '#6b4a06'
+            };
+        }
+
+        if (this.lessonState === 'sorting') {
+            return {
+                status: 'SORTING / FILTERING',
+                accent: '#ff4081',
+                active: true,
+                danger: false,
+                heat: 0.35,
+                bodyTint: '#66133c'
+            };
+        }
+
+        if (this.lessonState === 'overload') {
+            return {
+                status: 'OVERLOAD / TOO MUCH DATA',
+                accent: '#ff3d00',
+                active: true,
+                danger: true,
+                heat: 1.0,
+                bodyTint: '#75180c'
+            };
+        }
+
+        return {
+            status: baseStatus,
+            accent: baseAccent,
+            active: baseActive,
+            danger: false,
+            heat: 0.0,
+            bodyTint: null
+        };
+    },
+
 
     // --- HTMLテンプレート ---
     getHTML() {
@@ -223,26 +281,33 @@ const Module_NetBroadcast = {
         const rect = this.canvas.getBoundingClientRect();
         this.canvas.width = Math.floor(rect.width * dpr);
         this.canvas.height = Math.floor(rect.height * dpr);
-        this.ctx.restore();
-        this.ctx.save();
-        const scale = rect.width / this.V_WIDTH;
-        this.ctx.scale(scale * dpr, scale * dpr);
+
+        // compact layout v0.1:
+        // 右側50%パネルでも描画が上下に間延びしないよう、仮想キャンバス全体を収める。
+        // 通信ロジック・packet速度・到達判定には影響しない。
+        const scale = Math.min(rect.width / this.V_WIDTH, rect.height / this.V_HEIGHT);
+        const offsetX = (rect.width - (this.V_WIDTH * scale)) / 2;
+        const offsetY = (rect.height - (this.V_HEIGHT * scale)) / 2;
+        this.ctx.setTransform(scale * dpr, 0, 0, scale * dpr, offsetX * dpr, offsetY * dpr);
     },
 
     animateLoop(currentTime) {
         let deltaTime = ((currentTime - this.lastTime) / 1000) * this.speedFactors[this.currentMode];
         this.lastTime = currentTime;
 
+        // compact layout v0.1:
+        // 左右分割の右側パネル用。HUBを小さく、線を短く、縦方向へ整理する。
+        // packet生成・配信・速度・到達判定は既存のまま。
         const centerX = this.V_WIDTH / 2;
-        const hubW = 120;
-        const hubH = 340;
-        const hubX = centerX - hubW / 2;
+        const hubW = 96;
+        const hubH = 400;
+        const hubX = centerX - hubW / 2 + 42;
         const hubY = this.V_HEIGHT / 2 - hubH / 2;
 
-        const nodeX = 140;
-        const nodeW = 120;
-        const nodeH = 50;
-        const nodeYPositions = [90, 162, 234, 306, 378];
+        const nodeX = 64;
+        const nodeW = 116;
+        const nodeH = 52;
+        const nodeYPositions = [122, 232, 342, 452, 562];
         const lanTrackY = this.V_HEIGHT / 2;
 
         if (this.currentMode === 0) {
@@ -302,14 +367,16 @@ const Module_NetBroadcast = {
                     if (p.uni === p.targetNode) {
                         this.passedPackets.push({ x: nodeX + nodeW - 5, y: p.y, uni: p.uni });
                     } else {
-                        const angle = (Math.random() - 0.5) * 1.5 - 0.5; 
+                        // compact layout v0.3:
+                        // 不要packetの飛び散りを抑制。通信ロジックではなく描画演出のみ。
+                        const angle = (Math.random() - 0.5) * 0.7;
                         this.rejectedPackets.push({
                             x: nodeX + nodeW,
                             y: p.y,
-                            vx: (Math.random() * 300 + 200),
-                            vy: Math.sin(angle) * (Math.random() * 400 + 200),
+                            vx: (Math.random() * 120 + 120),
+                            vy: Math.sin(angle) * (Math.random() * 110 + 60),
                             uni: p.uni,
-                            alpha: 1.0
+                            alpha: 0.9
                         });
                         if (this.nodeHeat[p.targetNode] < 1.0) {
                             this.nodeHeat[p.targetNode] += 0.16;
@@ -327,8 +394,10 @@ const Module_NetBroadcast = {
             this.rejectedPackets.forEach((p, index) => {
                 p.x += p.vx * deltaTime;
                 p.y += p.vy * deltaTime;
-                p.alpha -= deltaTime * 2.2;
-                if (p.alpha <= 0) this.rejectedPackets.splice(index, 1);
+                p.alpha -= deltaTime * 2.7;
+                if (p.alpha <= 0 || p.x > this.V_WIDTH - 28 || p.y < 70 || p.y > this.V_HEIGHT - 70) {
+                    this.rejectedPackets.splice(index, 1);
+                }
             });
         }
 
@@ -368,7 +437,25 @@ const Module_NetBroadcast = {
             let active = this.currentMode !== 0 && (Math.random() < 0.5 || this.nodeHeat[i] > 0.6);
             if (this.nodeHeat[i] > 0.7) status = "OVERLOAD / FILTERING";
             else if (this.nodeHeat[i] > 0.3) status = "FILTERING UNUSED DATA";
-            this.drawNodeDevice(nodeX, nY, nodeW, nodeH, `PORT ${i+1} / U${i}`, status, this.lineColors[i], this.nodeHeat[i], active, danger);
+
+            const lessonVisual = this.getLessonNodeVisual(
+                status,
+                this.lineColors[i],
+                active,
+                danger,
+                this.nodeHeat[i]
+            );
+
+            this.drawNodeDevice(
+                nodeX, nY, nodeW, nodeH,
+                `PORT ${i+1} / U${i}`,
+                lessonVisual.status,
+                lessonVisual.accent,
+                lessonVisual.heat,
+                lessonVisual.active,
+                lessonVisual.danger,
+                lessonVisual.bodyTint
+            );
         }
 
         this.inputPackets.forEach(p => {
@@ -401,11 +488,16 @@ const Module_NetBroadcast = {
             this.drawPacket(p.x, p.y, this.pW, this.pH, this.lineColors[p.uni], `U${p.uni}`, "PASS");
         });
 
+        this.ctx.save();
+        this.ctx.beginPath();
+        this.ctx.rect(0, 72, this.V_WIDTH, this.V_HEIGHT - 144);
+        this.ctx.clip();
         this.rejectedPackets.forEach(p => {
             this.ctx.save();
             this.ctx.globalAlpha = p.alpha;
-            this.drawPacket(p.x + this.pW/2, p.y, this.pW * 0.7, this.pH * 0.7, this.lineColors[p.uni], `U${p.uni}`, "DROP");
+            this.drawPacket(p.x + this.pW/2, p.y, this.pW * 0.62, this.pH * 0.62, this.lineColors[p.uni], `U${p.uni}`, "DROP");
             this.ctx.restore();
         });
+        this.ctx.restore();
     }
 };

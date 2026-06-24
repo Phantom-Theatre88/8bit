@@ -26,8 +26,8 @@ const Module_NetArtNet = {
     TRAIN_GAP: 260,
     TRAIN_PERIOD: 725,
     LAN_SPEED: 2400,
-    V_WIDTH: 1200,
-    V_HEIGHT: 520,
+    V_WIDTH: 760,
+    V_HEIGHT: 760,
 
     // --- HTMLテンプレート（スライドスイッチUIおよび固有CSSスタイルを完全復元） ---
     getHTML() {
@@ -115,23 +115,30 @@ const Module_NetArtNet = {
         const rect = this.canvas.getBoundingClientRect();
         this.canvas.width = Math.floor(rect.width * dpr);
         this.canvas.height = Math.floor(rect.height * dpr);
-        this.ctx.restore();
-        this.ctx.save();
-        const scale = rect.width / this.V_WIDTH;
-        this.ctx.scale(scale * dpr, scale * dpr);
+
+        // compact layout v0.1:
+        // 右側50%パネルでも描画が上下に間延びしないよう、仮想キャンバス全体を収める。
+        // 通信ロジック・packet速度・到達判定には影響しない。
+        const scale = Math.min(rect.width / this.V_WIDTH, rect.height / this.V_HEIGHT);
+        const offsetX = (rect.width - (this.V_WIDTH * scale)) / 2;
+        const offsetY = (rect.height - (this.V_HEIGHT * scale)) / 2;
+        this.ctx.setTransform(scale * dpr, 0, 0, scale * dpr, offsetX * dpr, offsetY * dpr);
     },
 
     animateLoop(currentTime) {
         let deltaTime = ((currentTime - this.lastTime) / 1000) * this.speedFactors[this.currentMode];
         this.lastTime = currentTime;
 
+        // compact layout v0.1:
+        // 左右分割の右側パネル用。横長前提のDMX/LAN図を縦長寄りに再配置する。
+        // DMX速度、LAN速度、packet生成、到達判定は既存のまま。
         const centerX = this.V_WIDTH / 2;
-        const nodeW = 130;
-        const nodeH = 400;
-        const nodeX = centerX - nodeW / 2;
-        const nodeY = this.V_HEIGHT / 2 - nodeH / 2;
+        const nodeW = 104;
+        const nodeH = 480;
+        const nodeX = centerX - nodeW / 2 + 8;
+        const nodeY = this.V_HEIGHT / 2 - nodeH / 2 - 10;
         const dmxInLimitX = nodeX + nodeW - 4;
-        const lanTrackY = this.V_HEIGHT / 2 + 25;
+        const lanTrackY = nodeY + nodeH - 14;
 
         let dmxLedActive = [false, false, false, false, false];
         let lanLedActive = false;
@@ -202,14 +209,14 @@ const Module_NetArtNet = {
         this.ctx.font = "12px sans-serif";
         this.ctx.textAlign = "center";
         this.ctx.fillStyle = "rgba(0, 229, 255, 0.4)";
-        this.ctx.fillText("【右】DMX世界 (太いDMXケーブルを42Hzのリアル速度で直進する信号列車流)", centerX + (this.V_WIDTH - centerX) / 2 + 30, 25);
+        this.ctx.fillText("【右】DMX世界：DMX信号列車", centerX + (this.V_WIDTH - centerX) / 2, 30);
         this.ctx.fillStyle = "rgba(255, 111, 0, 0.6)";
-        this.ctx.fillText("【左】NETWORK世界 (たった1本のLANケーブル道路へ梱包・超高速射出)", centerX / 2 - 40, 25);
+        this.ctx.fillText("【左】NETWORK世界：LANパケット", centerX / 2, 30);
 
         const currentBaseOffset = this.trainScrollX % this.TRAIN_PERIOD;
 
         for (let u = 0; u < 5; u++) {
-            const trackY = nodeY + 65 + (u * 74);
+            const trackY = nodeY + 82 + (u * 84);
 
             this.ctx.strokeStyle = "#252525"; this.ctx.lineWidth = 10; 
             this.ctx.beginPath(); this.ctx.moveTo(dmxInLimitX, trackY); this.ctx.lineTo(this.V_WIDTH, trackY); this.ctx.stroke();
@@ -217,7 +224,7 @@ const Module_NetArtNet = {
             this.ctx.beginPath(); this.ctx.moveTo(dmxInLimitX, trackY); this.ctx.lineTo(this.V_WIDTH, trackY); this.ctx.stroke();
 
             this.ctx.fillStyle = "#555555"; this.ctx.font = "bold 9px monospace"; this.ctx.textAlign = "right";
-            this.ctx.fillText(`DMX CABLE LINE ${u+1} (Universe ${u}) ──`, this.V_WIDTH - 15, trackY - 22);
+            this.ctx.fillText(`DMX ${u+1} / U${u}`, this.V_WIDTH - 12, trackY - 22);
 
             if (this.currentMode > 0) {
                 for (let t = -1; t < 2; t++) {
@@ -301,8 +308,8 @@ const Module_NetArtNet = {
         this.ctx.fillStyle = "#111"; this.ctx.fillRect(nodeX - 12, lanTrackY - 12, 12, 24);
         this.ctx.strokeStyle = "#ff6f00"; this.ctx.strokeRect(nodeX - 12, lanTrackY - 12, 12, 24);
 
-        const pW = 190;  
-        const pH = 74; 
+        const pW = 150;  
+        const pH = 58; 
 
         this.packets.forEach(p => {
             if (p.delay <= 0) {
@@ -310,10 +317,10 @@ const Module_NetArtNet = {
 
                 if (this.currentMode === 0) {
                     pX = nodeX - pW - 20; 
-                    pY = nodeY + 25 + (p.uni * 74); 
+                    pY = nodeY + 42 + (p.uni * 84); 
                 } else {
                     pX = p.x - pW - (p.uni * 12); 
-                    pY = lanTrackY - pH + 15 - (p.uni * 14); 
+                    pY = lanTrackY - pH + 8 - (p.uni * 12); 
                 }
 
                 if (pX < nodeX) {

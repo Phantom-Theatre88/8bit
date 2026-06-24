@@ -7,7 +7,7 @@
     LED blinking timing, universe routing, Broadcast/sACN delivery logic,
     or Art-Net DMX receive -> LED -> UDP send timing.
 
-  This shim only patches display surface:
+  compact layout v0.1 compatible.\n  network layout v0.3 compatible.\n\n  This shim only patches display surface:
   - full-canvas background clear appearance
   - outer CSS polish
   - display text normalization
