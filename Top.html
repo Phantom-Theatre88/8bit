@@ -5209,6 +5209,52 @@
 
     
 
+
+        /* --- Index navigation button v0.2 --- */
+        .index-back-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 96px;
+            height: 40px;
+            padding: 0 12px;
+            border-radius: 9px;
+            border: 1px solid rgba(255, 183, 77, .44);
+            background:
+                linear-gradient(180deg, rgba(255, 183, 77, .18), rgba(255, 183, 77, .07)),
+                rgba(0, 0, 0, .42);
+            color: #ffd88a;
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: .02em;
+            text-decoration: none;
+            white-space: nowrap;
+            box-shadow:
+                inset 0 0 0 1px rgba(255,255,255,.045),
+                0 0 12px rgba(255,183,77,.10);
+            transition: border-color .16s ease, background .16s ease, color .16s ease, box-shadow .16s ease;
+        }
+
+        .index-back-btn:hover {
+            border-color: rgba(255, 183, 77, .86);
+            color: #fff2c2;
+            background:
+                linear-gradient(180deg, rgba(255, 183, 77, .28), rgba(255, 183, 77, .11)),
+                rgba(0, 0, 0, .48);
+            box-shadow:
+                inset 0 0 0 1px rgba(255,255,255,.075),
+                0 0 18px rgba(255,183,77,.22);
+        }
+
+        .index-back-divider {
+            width: 1px;
+            height: 32px;
+            margin: 4px 2px;
+            background: linear-gradient(180deg, transparent, rgba(255,183,77,.38), transparent);
+            flex: 0 0 auto;
+        }
+
     </style>
 
     <script src="Module_Sim8Bit.js"></script>
@@ -5227,6 +5273,8 @@
 <body>
 
 <div class="main-tab-container">
+    <a class="index-back-btn" href="index.html" aria-label="目次ページへ戻る">← 目次へ戻る</a>
+    <div class="index-back-divider" aria-hidden="true"></div>
     <button class="main-tab-btn tab-dimmer active" id="main-tab-sim8bit">1. 8-bit 調光卓</button>
     <button class="main-tab-btn tab-dimmer" id="main-tab-sim16bit">2. 16-bit 調光卓</button>
     <button class="main-tab-btn tab-dimmer" id="main-tab-simdmx">3. DMX 定期列車</button>
@@ -5693,6 +5741,57 @@
             if (modules[activeModuleKey].updateSystem) modules[activeModuleKey].updateSystem();
         }
     });
+</script>
+
+
+<script id="index-direct-tab-open">
+  (function () {
+    function resolveLessonTab(raw) {
+      if (!raw) return null;
+      const key = String(raw).trim().toLowerCase();
+      const aliases = {
+        '8bit': 'sim8bit',
+        'sim8bit': 'sim8bit',
+        '16bit': 'sim16bit',
+        'sim16bit': 'sim16bit',
+        'dmx': 'simdmx',
+        'simdmx': 'simdmx',
+        'led': 'ledcolormix',
+        'ledcolor': 'ledcolormix',
+        'ledcolormix': 'ledcolormix',
+        'moving': 'movinghead',
+        'movinghead': 'movinghead',
+        'ip': 'netipaddress',
+        'ipaddress': 'netipaddress',
+        'netipaddress': 'netipaddress',
+        'dmxonlan': 'netartnet',
+        'netartnet': 'netartnet',
+        'broadcast': 'netbroadcast',
+        'artnet': 'netbroadcast',
+        'netbroadcast': 'netbroadcast',
+        'multicast': 'netsacn',
+        'sacn': 'netsacn',
+        'netsacn': 'netsacn',
+        'redundancy': 'netredundancy',
+        'connection': 'netredundancy',
+        'netredundancy': 'netredundancy'
+      };
+      return aliases[key] || key;
+    }
+
+    window.addEventListener('DOMContentLoaded', function () {
+      const params = new URLSearchParams(window.location.search);
+      const requested = resolveLessonTab(params.get('tab') || params.get('lesson') || params.get('page'));
+      if (!requested) return;
+
+      const tabButton = document.getElementById('main-tab-' + requested);
+      if (!tabButton) return;
+
+      requestAnimationFrame(function () {
+        tabButton.click();
+      });
+    });
+  })();
 </script>
 
 </body>
