@@ -64,14 +64,14 @@ const Module_Sim8Bit = {
                     <div class="panel-box" id="sim8bit-upper-graph-box" style="background: #0c0c0c; border: 2px solid #444; border-radius: 8px; padding: 10px; flex-grow: 1; display: flex; flex-direction: column; overflow: hidden;"></div>
 
                     <div class="panel-box" style="background: #0c0c0c; border: 2px solid #444; border-radius: 8px; padding: 10px; flex-grow: 0; display: flex; flex-direction: column; overflow: hidden;">
-                        <div class="led-label" style="text-align: center; font-size: 10px; color: #666; margin-bottom: 2px; font-weight: bold;">DIGITAL BINARY MATRIX (MSB ... LSB)</div>
+                        <div class="led-label" style="text-align: center; font-size: 10px; color: #666; margin-bottom: 2px; font-weight: bold;">DMX値の中身：8個の0/1</div>
                         <div class="matrix-grid" id="sim8bit-binary-matrix-grid" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px; margin-top: 6px;"></div>
                     </div>
 
                     <div class="curve-selector" id="sim8bit-curve-selector-row" style="display: flex; justify-content: center; gap: 8px; margin-top: 2px;">
-                        <button id="sim8bit-curve-jat-a" class="toggle-btn" style="font-weight: bold; font-size: 11px; background: #222; border: 2px solid #444; color: #888; padding: 6px 12px; border-radius: 6px; cursor: pointer; -webkit-tap-highlight-color: transparent;">JATET A (演出)</button>
+                        <button id="sim8bit-curve-jat-a" class="toggle-btn" style="font-weight: bold; font-size: 11px; background: #222; border: 2px solid #444; color: #888; padding: 6px 12px; border-radius: 6px; cursor: pointer; -webkit-tap-highlight-color: transparent;">JATET A (2.3乗)</button>
                         <button id="sim8bit-curve-lin" class="toggle-btn active" style="font-weight: bold; font-size: 11px; background: #ff6f00; border: 2px solid #ff6f00; color: #fff; padding: 6px 12px; border-radius: 6px; cursor: pointer; -webkit-tap-highlight-color: transparent; box-shadow: 0 0 10px rgba(255,111,0,0.5);">LINEAR (直線)</button>
-                        <button id="sim8bit-curve-jat-b" class="toggle-btn" style="font-weight: bold; font-size: 11px; background: #222; border: 2px solid #444; color: #888; padding: 6px 12px; border-radius: 6px; cursor: pointer; -webkit-tap-highlight-color: transparent;">JATET B (スタジオ)</button>
+                        <button id="sim8bit-curve-jat-b" class="toggle-btn" style="font-weight: bold; font-size: 11px; background: #222; border: 2px solid #444; color: #888; padding: 6px 12px; border-radius: 6px; cursor: pointer; -webkit-tap-highlight-color: transparent;">JATET B (2.7乗)</button>
                     </div>
                 </div>
 
