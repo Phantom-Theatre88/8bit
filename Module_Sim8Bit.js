@@ -40,18 +40,18 @@ const Module_Sim8Bit = {
                 </div>
 
                 <div class="col center-col" style="width: 44%; display: flex; flex-direction: column; gap: 12px;">
-                    <div class="section-title" style="font-size: 11px; font-weight: bold; color: #888; letter-spacing: 2px; text-align: center; margin-bottom: 3px;">MONITOR STATUS (8-BIT DMX)</div>
+                    <div class="section-title" style="font-size: 11px; font-weight: bold; color: #888; letter-spacing: 2px; text-align: center; margin-bottom: 3px;">数値モニター</div>
                     <div class="digital-row" style="display: flex; gap: 8px;">
-                        <div class="led-panel" style="background: #050505; border: 2px solid #444; border-radius: 6px; padding: 8px 3px; flex: 1; text-align: center;">
-                            <div class="led-label" style="font-size: 10px; color: #666; margin-bottom: 2px; font-weight: bold;">RATIO</div>
+                        <div class="led-panel" style="background: #090d10; border: 2px solid #3d4b55; border-radius: 6px; padding: 8px 3px; flex: 1; text-align: center;">
+                            <div class="led-label" style="font-size: 11px; color: #9fb2bf; margin-bottom: 2px; font-weight: bold;">明るさの割合</div>
                             <div class="led-num" id="sim8bit-num-percent" style="font-size: 22px; font-weight: 700; color: #00e5ff; text-shadow: 0 0 8px rgba(0,229,255,0.5);">75%</div>
                         </div>
-                        <div class="led-panel" style="background: #050505; border: 2px solid #444; border-radius: 6px; padding: 8px 3px; flex: 1; text-align: center;">
-                            <div class="led-label" style="font-size: 10px; color: #666; margin-bottom: 2px; font-weight: bold;">8-BIT DMX</div>
-                            <div class="led-num" id="sim8bit-num-dmx" style="font-size: 18px; line-height: 26px; font-weight: 700; color: #00e5ff; text-shadow: 0 0 8px rgba(0,229,255,0.5);">191</div>
+                        <div class="led-panel" style="background: #090d10; border: 2px solid #3d4b55; border-radius: 6px; padding: 8px 3px; flex: 1; text-align: center;">
+                            <div class="led-label" style="font-size: 11px; color: #9fb2bf; margin-bottom: 2px; font-weight: bold;">DMX値</div>
+                            <div class="led-num" id="sim8bit-num-dmx" style="font-size: 22px; line-height: 26px; font-weight: 700; color: #66e8ff; text-shadow: 0 0 8px rgba(0,229,255,0.45);">191</div>
                         </div>
                         <div class="led-panel" style="background: #050505; border: 2px solid #ff3d00; border-radius: 6px; padding: 8px 3px; flex: 1; text-align: center;">
-                            <div class="led-label" style="font-size: 10px; color: #ff3d00; margin-bottom: 2px; font-weight: bold;">VOLTAGE</div>
+                            <div class="led-label" style="font-size: 11px; color: #ff6d00; margin-bottom: 2px; font-weight: bold;">出力電圧</div>
                             <div class="led-num" id="sim8bit-num-voltage" style="font-size: 22px; font-weight: 700; color: #ff3d00; text-shadow: 0 0 8px rgba(255,61,0,0.6);">75.0 V</div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@ const Module_Sim8Bit = {
                 </div>
 
                 <div class="col bulb-col" style="width: 38%; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;">
-                    <div class="section-title" style="font-size: 11px; font-weight: bold; color: #888; letter-spacing: 2px; text-align: center; margin-bottom: 3px;">OUTPUT LUMINANCE</div>
+                    <div class="section-title" style="font-size: 11px; font-weight: bold; color: #888; letter-spacing: 2px; text-align: center; margin-bottom: 3px;">見た目の明るさ</div>
                     <div class="dark-room" style="width: 100%; height: 100%; background: #030303; border: 2px solid #444; border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: visible; position: relative;">
                         <div class="ambient-glow" id="sim8bit-ambient-glow" style="position: absolute; top: -5%; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(255,143,0,0.38) 0%, rgba(255,87,34,0.08) 50%, rgba(0,0,0,0) 70%); mix-blend-mode: screen; pointer-events: none; opacity: 0; transform: scale(0.3); transition: opacity 0.05s ease, transform 0.05s ease; z-index: 0;"></div>
                         <div class="bulb-image-container" style="position: relative; width: 220px; height: 360px; display: flex; align-items: center; justify-content: center;">
@@ -279,7 +279,7 @@ const Module_Sim8Bit = {
                 const isSet = (this.dmx8Bit >> i) & 1;
                 if (bar) {
                     if (isSet) {
-                        bar.style.background = '#ffca28'; bar.style.borderColor = '#ffb300'; bar.style.boxShadow = '0 0 8px rgba(255,202,40,0.4)';
+                        bar.style.background = '#66e8ff'; bar.style.borderColor = '#2ad4ff'; bar.style.boxShadow = '0 0 8px rgba(42,212,255,0.35)';
                         bar.style.height = (Math.pow(2, i) / 128 * 110) + 'px';
                     } else {
                         bar.style.background = '#151515'; bar.style.borderColor = '#252525'; bar.style.boxShadow = 'none';
@@ -295,7 +295,7 @@ const Module_Sim8Bit = {
             if (cell) {
                 cell.textContent = isSet ? '1' : '0';
                 if (isSet) {
-                    cell.style.background = '#e65100'; cell.style.color = '#ffffff'; cell.style.borderColor = '#ff6d00'; cell.style.boxShadow = '0 0 6px rgba(255,109,0,0.5)';
+                    cell.style.background = '#123946'; cell.style.color = '#d9fbff'; cell.style.borderColor = '#2ad4ff'; cell.style.boxShadow = '0 0 6px rgba(42,212,255,0.35)';
                 } else {
                     cell.style.background = '#151515'; cell.style.color = '#444'; cell.style.borderColor = '#444'; cell.style.boxShadow = 'none';
                 }
