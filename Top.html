@@ -48,8 +48,8 @@
 
         .main-tab-btn {
             font-family: inherit;
-            font-weight: 700;
-            font-size: 11px;
+            font-weight: 600;
+            font-size: 12px;
             padding: 10px 10px;
             border-radius: 6px 6px 0 0;
             cursor: pointer;
@@ -150,7 +150,7 @@
         }
 
         .help-text-content {
-            font-size: 11.5px;
+            font-size: 13px;
             color: #b0b0b0;
             line-height: 1.65;
             text-align: justify;
@@ -191,7 +191,7 @@
             padding: 10px 18px;
         }
         .master-console-container.movinghead-active .help-text-content {
-            font-size: 11px;
+            font-size: 12.5px;
             line-height: 1.5;
         }
 
@@ -491,7 +491,7 @@
         }
 
         .master-console-container.network-active .help-text-content {
-            font-size: 12px;
+            font-size: 13px;
             line-height: 1.55;
             color: #c1d4d6;
         }
@@ -560,7 +560,7 @@
 
         .master-console-container.sim8bit-active .help-text-content,
         .master-console-container.simdmx-active .help-text-content {
-            font-size: 11.5px;
+            font-size: 13px;
             line-height: 1.45;
         }
 
@@ -1035,7 +1035,7 @@
         }
 
         .master-console-container.ipaddress-active .help-text-content {
-            font-size: 12px;
+            font-size: 13px;
             line-height: 1.5;
             color: #c1d4d6;
         }
@@ -5275,22 +5275,22 @@
 <div class="main-tab-container">
     <a class="index-back-btn" href="index.html" aria-label="目次ページへ戻る">← 目次へ戻る</a>
     <div class="index-back-divider" aria-hidden="true"></div>
-    <button class="main-tab-btn tab-dimmer active" id="main-tab-sim8bit">1. 8-bit 調光卓</button>
-    <button class="main-tab-btn tab-dimmer" id="main-tab-sim16bit">2. 16-bit 調光卓</button>
-    <button class="main-tab-btn tab-dimmer" id="main-tab-simdmx">3. DMX 定期列車</button>
-    <button class="main-tab-btn tab-led" id="main-tab-ledcolormix">10. LED色混ぜ</button>
-    <button class="main-tab-btn tab-dimmer" id="main-tab-movinghead">4. Moving Head</button>
+    <button class="main-tab-btn tab-dimmer active" id="main-tab-sim8bit">8-bit 調光卓</button>
+    <button class="main-tab-btn tab-dimmer" id="main-tab-sim16bit">16-bit 調光卓</button>
+    <button class="main-tab-btn tab-dimmer" id="main-tab-simdmx">DMX 定期列車</button>
+    <button class="main-tab-btn tab-led" id="main-tab-ledcolormix">LED色混ぜ</button>
+    <button class="main-tab-btn tab-dimmer" id="main-tab-movinghead">Moving Head</button>
     
     <div class="tab-separator"></div>
     
-    <button class="main-tab-btn tab-network" id="main-tab-netipaddress">9. IPアドレス</button>
-    <button class="main-tab-btn tab-network" id="main-tab-netartnet">5. DMX on LAN</button>
-    <button class="main-tab-btn tab-network" id="main-tab-netbroadcast">6. Broadcast / Art-Net 1</button>
-    <button class="main-tab-btn tab-network" id="main-tab-netsacn">7. Multicast / sACN</button>
+    <button class="main-tab-btn tab-network" id="main-tab-netipaddress">IPアドレス</button>
+    <button class="main-tab-btn tab-network" id="main-tab-netartnet">DMX on LAN</button>
+    <button class="main-tab-btn tab-network" id="main-tab-netbroadcast">Broadcast / Art-Net 1</button>
+    <button class="main-tab-btn tab-network" id="main-tab-netsacn">Multicast / sACN</button>
     
     <div class="tab-separator"></div>
     
-    <button class="main-tab-btn tab-explain" id="main-tab-explain">8. 結線 / 冗長化</button>
+    <button class="main-tab-btn tab-explain" id="main-tab-explain">結線 / 冗長化</button>
 </div>
 
 <div class="master-console-container">
@@ -5459,30 +5459,30 @@
 
     const networkLessonPageMeta = {
         netartnet: {
-            title: "5. DMX on LAN｜DMXをEthernet上のパケットとして運ぶ",
+            title: "DMX on LAN｜DMXをEthernet上のパケットとして運ぶ",
             sub: "複数のDMX Universeを、LAN上のパケットとして扱う入口。"
         },
         netbroadcast: {
-            title: "6. Broadcast / Art-Net 1｜同じネットワーク内の全Nodeへ届く",
+            title: "Broadcast / Art-Net 1｜同じネットワーク内の全Nodeへ届く",
             sub: "Broadcast的な全体配信と、受信側での仕分け負担を見る。"
         },
         netsacn: {
-            title: "7. Multicast / sACN｜必要なUniverseを必要なNodeへ届ける",
+            title: "Multicast / sACN｜必要なUniverseを必要なNodeへ届ける",
             sub: "IGMP Snoopingを使い、必要な通信だけを必要なポートへ流す考え方。"
         }
     };
 
     const modulePageMeta = {
         sim8bit: {
-            title: "1. 8-bit 調光卓｜DMX値と見た目の明るさの関係を読む",
+            title: "8-bit 調光卓｜DMX値と見た目の明るさの関係を読む",
             sub: "0〜255の値、調光カーブ、見た目の明るさの変化を確認する。"
         },
         simdmx: {
-            title: "3. DMX 定期列車｜512chを約42Hzで送り続ける信号",
+            title: "DMX 定期列車｜512chを約42Hzで送り続ける信号",
             sub: "値が変わらなくても、DMXは定期的に全チャンネルを送り続ける。"
         },
         explain: {
-            title: "8. 結線 / 冗長化｜Star構成とRing構成の違いを比べる",
+            title: "結線 / 冗長化｜Star構成とRing構成の違いを比べる",
             sub: "断線時の影響範囲と、冗長経路の考え方を比較する。"
         }
     };
