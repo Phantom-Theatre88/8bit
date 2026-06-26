@@ -33,7 +33,7 @@ const Module_Sim16Bit = {
 
         return `
             <div style="display: flex; width: 100%; height: 100%; gap: 20px;">
-                <div class="col fader-col" style="width: 32%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-between; background: #0f0f0f; border-radius: 10px; padding: 10px 5px; border: 1px solid #222;">
+                <div class="col fader-col" style="width: 22%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-between; background: #0f0f0f; border-radius: 10px; padding: 10px 5px; border: 1px solid #222;">
                     <div class="fader-bank" style="display: flex; width: 100%; height: 100%; justify-content: center; gap: 5px;">
                         ${createFaderHTML('master', 'Master', '', 'background: #ff3d00;')}
                         ${createFaderHTML('coarse', 'Coarse', 'coarse-knob', 'background: #00e5ff;')}
@@ -41,48 +41,38 @@ const Module_Sim16Bit = {
                     </div>
                 </div>
 
-                <div class="col center-col" style="width: 36%; display: flex; flex-direction: column; gap: 12px;">
-                    <div class="section-title" style="font-size: 11px; font-weight: bold; color: #888; letter-spacing: 2px; text-align: center; margin-bottom: 3px;">MONITOR STATUS (16-BIT FINE)</div>
+                <div class="col center-col" style="width: 52%; display: flex; flex-direction: column; gap: 12px;">
+                    <div class="section-title" style="font-size: 11px; font-weight: bold; color: #888; letter-spacing: 2px; text-align: center; margin-bottom: 3px;">数値モニター</div>
                     <div class="digital-row" style="display: flex; gap: 8px;">
-                        <div class="led-panel" style="background: #050505; border: 2px solid #444; border-radius: 6px; padding: 8px 3px; flex: 1; text-align: center;">
-                            <div class="led-label" style="font-size: 10px; color: #666; margin-bottom: 2px; font-weight: bold;">RATIO</div>
+                        <div class="led-panel" style="background: #090d10; border: 2px solid #3d4b55; border-radius: 6px; padding: 8px 3px; flex: 1; text-align: center;">
+                            <div class="led-label" style="font-size: 11px; color: #9fb2bf; margin-bottom: 2px; font-weight: bold;">明るさの割合</div>
                             <div class="led-num" id="sim16bit-num-percent" style="font-size: 22px; font-weight: 700; color: #00e5ff; text-shadow: 0 0 8px rgba(0,229,255,0.5);">75%</div>
                         </div>
-                        <div class="led-panel" style="background: #050505; border: 2px solid #444; border-radius: 6px; padding: 8px 3px; flex: 1; text-align: center;">
-                            <div class="led-label" style="font-size: 10px; color: #666; margin-bottom: 2px; font-weight: bold;">16-BIT TOTAL</div>
-                            <div class="led-num" id="sim16bit-num-dmx" style="font-size: 18px; line-height: 26px; font-weight: 700; color: #00e5ff; text-shadow: 0 0 8px rgba(0,229,255,0.5);">0</div>
+                        <div class="led-panel" style="background: #090d10; border: 2px solid #3d4b55; border-radius: 6px; padding: 8px 3px; flex: 1; text-align: center;">
+                            <div class="led-label" style="font-size: 11px; color: #9fb2bf; margin-bottom: 2px; font-weight: bold;">16-bit合計値</div>
+                            <div class="led-num" id="sim16bit-num-dmx" style="font-size: 20px; line-height: 26px; font-weight: 700; color: #66e8ff; text-shadow: 0 0 8px rgba(0,229,255,0.45);">0</div>
                         </div>
                         <div class="led-panel" style="background: #050505; border: 2px solid #ff3d00; border-radius: 6px; padding: 8px 3px; flex: 1; text-align: center;">
-                            <div class="led-label" style="font-size: 10px; color: #ff3d00; margin-bottom: 2px; font-weight: bold;">VOLTAGE</div>
+                            <div class="led-label" style="font-size: 11px; color: #ff6d00; margin-bottom: 2px; font-weight: bold;">出力電圧</div>
                             <div class="led-num" id="sim16bit-num-voltage" style="font-size: 22px; font-weight: 700; color: #ff3d00; text-shadow: 0 0 8px rgba(255,61,0,0.6);">75.0 V</div>
                         </div>
                     </div>
 
-                    <div class="panel-box" id="sim16bit-upper-graph-box" style="background: #0c0c0c; border: 2px solid #444; border-radius: 8px; padding: 10px; flex-grow: 1; display: flex; flex-direction: column; overflow: hidden;">
-                        <div class="led-label" style="text-align: center; font-size: 10px; color: #666; margin-bottom: 2px; font-weight: bold;">16-BIT RESOLUTION MONITOR</div>
-                        <div style="display:flex; flex-direction:column; justify-content:center; height:100%; gap:10px; padding:10px 0;">
-                            <div style="display:flex; justify-content:space-between; background:#111; padding:8px; border-radius:4px; border-left:4px solid #00e5ff;">
-                                <span style="font-size:11px; color:#aaa;">Coarse (Ch1 上位):</span>
-                                <span id="sim16bit-txt-coarse-val" style="font-weight:bold; color:#00e5ff;">0</span>
-                            </div>
-                            <div style="display:flex; justify-content:space-between; background:#111; padding:8px; border-radius:4px; border-left:4px solid #00e676;">
-                                <span style="font-size:11px; color:#aaa;">Fine (Ch2 下位):</span>
-                                <span id="sim16bit-txt-fine-val" style="font-weight:bold; color:#00e676;">0</span>
-                            </div>
-                        </div>
+                    <div class="panel-box" id="sim16bit-upper-graph-box" style="background: #0c0c0c; border: 2px solid #444; border-radius: 8px; padding: 8px; flex-grow: 1; display: flex; flex-direction: column; overflow: hidden;">
+                        <img src="assets/16bit_coarse_fine_infographic.png" alt="16-bit Coarse Fine explanation" style="width: 100%; height: 100%; object-fit: contain; display: block;">
                     </div>
 
                     <div class="panel-box" style="background: #0c0c0c; border: 2px solid #444; border-radius: 8px; padding: 10px; flex-grow: 0; display: flex; flex-direction: column; overflow: hidden;">
-                        <div class="led-label" style="text-align: center; font-size: 10px; color: #666; margin-bottom: 2px; font-weight: bold;">16-BIT BINARY MATRIX (HIGH 8-bit ... LOW 8-bit)</div>
+                        <div class="led-label" style="text-align: center; font-size: 10px; color: #666; margin-bottom: 2px; font-weight: bold;">16-bitの中身：上位8bit + 下位8bit</div>
                         <div class="matrix-grid" id="sim16bit-binary-matrix-grid" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px; margin-top: 6px;"></div>
                     </div>
                 </div>
 
-                <div class="col bulb-col" style="width: 32%; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;">
-                    <div class="section-title" style="font-size: 11px; font-weight: bold; color: #888; letter-spacing: 2px; text-align: center; margin-bottom: 3px;">OUTPUT LUMINANCE</div>
+                <div class="col bulb-col" style="width: 26%; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;">
+                    <div class="section-title" style="font-size: 11px; font-weight: bold; color: #888; letter-spacing: 2px; text-align: center; margin-bottom: 3px;">見た目の明るさ</div>
                     <div class="dark-room" style="width: 100%; height: 100%; background: #030303; border: 2px solid #444; border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: visible; position: relative;">
                         <div class="ambient-glow" id="sim16bit-ambient-glow" style="position: absolute; top: -5%; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(255,143,0,0.38) 0%, rgba(255,87,34,0.08) 50%, rgba(0,0,0,0) 70%); mix-blend-mode: screen; pointer-events: none; opacity: 0; transform: scale(0.3); transition: opacity 0.05s ease, transform 0.05s ease; z-index: 0;"></div>
-                        <div class="bulb-image-container" style="position: relative; width: 220px; height: 360px; display: flex; align-items: center; justify-content: center;">
+                        <div class="bulb-image-container" style="position: relative; width: 185px; height: 305px; display: flex; align-items: center; justify-content: center;">
                             <img src="assets/Light.png" class="large-bulb-img" alt="Bulb Base" style="width: 100%; height: 100%; object-fit: contain; z-index: 1; pointer-events: none; opacity: 0.85;">
                             <div class="internal-gas-glow" id="sim16bit-gas-glow" style="position: absolute; top: 6%; left: 5%; width: 90%; height: 55%; border-radius: 50%; background: radial-gradient(circle, rgba(255,213,79,0.9) 0%, rgba(255,109,0,0.3) 55%, rgba(0,0,0,0) 75%); z-index: 2; mix-blend-mode: screen; pointer-events: none; opacity: 0; transition: opacity 0.05s ease;"></div>
                             <div class="filament-glow-layer" id="sim16bit-filament-glow" style="position: absolute; top: 25%; left: 36%; width: 28%; height: 12%; z-index: 3; mix-blend-mode: screen; pointer-events: none; opacity: 0; border-radius: 40% 40% 50% 50%; box-shadow: 0 0 0px rgba(0,0,0,0); transition: opacity 0.05s ease, background-color 0.05s ease, box-shadow 0.05s ease;"></div>
@@ -191,8 +181,6 @@ const Module_Sim16Bit = {
         if (excludeId !== 'master') document.getElementById('sim16bit-knob-master').style.bottom = Math.round((this.dmx16Bit / 65535) * this.MAX_BOTTOM) + 'px';
         if (excludeId !== 'coarse') document.getElementById('sim16bit-knob-coarse').style.bottom = Math.round((cVal / 255) * this.MAX_BOTTOM) + 'px';
         if (excludeId !== 'fine') document.getElementById('sim16bit-knob-fine').style.bottom = Math.round((fVal / 255) * this.MAX_BOTTOM) + 'px';
-        document.getElementById('sim16bit-txt-coarse-val').textContent = `${cVal} (Hex: 0x${cVal.toString(16).toUpperCase().padStart(2,'0')})`;
-        document.getElementById('sim16bit-txt-fine-val').textContent = `${fVal} (Hex: 0x${fVal.toString(16).toUpperCase().padStart(2,'0')})`;
     },
 
     adjustFaderValue(id, delta) {
@@ -219,7 +207,13 @@ const Module_Sim16Bit = {
             const isSet = (this.dmx16Bit >> i) & 1;
             if (cell) {
                 cell.textContent = isSet ? '1' : '0';
-                if (isSet) { cell.style.background = '#e65100'; cell.style.color = '#ffffff'; cell.style.borderColor = '#ff6d00'; cell.style.boxShadow = '0 0 6px rgba(255,109,0,0.5)'; } 
+                if (isSet) {
+                    const isHighByte = i >= 8;
+                    cell.style.background = isHighByte ? '#123946' : '#123b2a';
+                    cell.style.color = isHighByte ? '#d9fbff' : '#d8ffe8';
+                    cell.style.borderColor = isHighByte ? '#2ad4ff' : '#00e676';
+                    cell.style.boxShadow = isHighByte ? '0 0 6px rgba(42,212,255,0.35)' : '0 0 6px rgba(0,230,118,0.35)';
+                } 
                 else { cell.style.background = '#151515'; cell.style.color = '#444'; cell.style.borderColor = '#444'; cell.style.boxShadow = 'none'; }
             }
         }
