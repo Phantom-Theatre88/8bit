@@ -66,7 +66,7 @@ const Module_SimDmx = {
                     <div class="dmx-fader-row-box" id="simdmx-multi-fader-container" style="background: #0a0a0a; border: 2px solid #444; border-radius: 8px; padding: 8px 5px; display: flex; justify-content: space-between;">
                         ${fadersHTML}
                     </div>
-                    <div class="dmx-explain-box" style="background: #111; border: 1px solid #222; border-radius: 6px; padding: 8px 12px; font-size: 11px; color: #aaa; line-height: 1.5em; text-align: justify;">
+                    <div class="dmx-explain-box" style="background: #111; border: 1px solid #333; border-radius: 6px; padding: 9px 12px; font-size: 12px; color: #c8c8c8; line-height: 1.55em; text-align: justify;">
                         <strong>【見る順番】</strong><br>上の波形で、DMX値がチャンネル順に流れる様子を見ます。フェーダーを動かすと、値と波形が変わります。表示スピードは見やすくするための調整で、実際のDMXは約42Hzです。
                     </div>
                 </div>
