@@ -109,17 +109,18 @@ window.Module_LEDColorMixing = {
     c: [0, 220, 255]
   },
 
-  // 教材用の概念座標。実測CIE座標ではなく、画面上の「考え方の地図」用。
+  // CIE 1931 xy色度図の見た目に寄せた教材用座標。
+  // 実測値ではなく、LED色作りの考え方を見せるための概念配置。
   mapPoints: {
-    r: [76, 57],
-    g: [30, 18],
-    b: [25, 79],
-    w: [43, 55],
-    ww: [50, 57],
-    cw: [38, 52],
-    a: [63, 47],
-    l: [42, 31],
-    c: [27, 48]
+    r: [86, 58],
+    g: [24, 14],
+    b: [22, 86],
+    w: [47, 58],
+    ww: [54, 62],
+    cw: [43, 54],
+    a: [74, 53],
+    l: [46, 28],
+    c: [18, 54]
   },
 
   getHTML() {
@@ -139,12 +140,15 @@ window.Module_LEDColorMixing = {
       <header class="ledmix-header">
         <div>
           <h1>LED Color Mixing｜RGBで白は作れるのか</h1>
-          <p>RGB、White、Warm White、Cool White、Amber、Lime、Cyanを「考え方の地図」で見る。</p>
+          <p>右上のボタンでLEDのチャンネル構成を切り替え、RGB、White、Amber、Lime、Cyanなどの位置を色地図で見る。</p>
         </div>
-        <div class="ledmix-mode-tabs">
-          ${Object.entries(this.modes).map(([key, mode]) => {
-            return `<button class="ledmix-mode-btn ${key === this.state.mode ? "active" : ""}" data-mode="${key}">${mode.tab}</button>`;
-          }).join("")}
+        <div class="ledmix-mode-area" aria-label="LED構成選択">
+          <div class="ledmix-mode-label">LED構成を選ぶ</div>
+          <div class="ledmix-mode-tabs">
+            ${Object.entries(this.modes).map(([key, mode]) => {
+              return `<button class="ledmix-mode-btn ${key === this.state.mode ? "active" : ""}" data-mode="${key}">${mode.tab}</button>`;
+            }).join("")}
+          </div>
         </div>
       </header>
     `;
@@ -155,24 +159,25 @@ window.Module_LEDColorMixing = {
       <div class="ledmix-right map-side">
         <div class="ledmix-panel-head">
           <h2>色の地図｜このLED色はどの位置？</h2>
-          <span>外側ほど鮮やかな色。中央寄りほど白・淡色・肌色の説明に近づく。</span>
         </div>
 
         <div class="ledmix-cie-card">
-          <div class="ledmix-cie-soft-glow"></div>
-          <div class="ledmix-cie-color"></div>
-          <div class="ledmix-cie-mask"></div>
-          <div class="ledmix-cie-grid"></div>
+          <div class="ledmix-cie-plot">
+            <div class="ledmix-cie-soft-glow"></div>
+            <img class="ledmix-cie-bg-img" src="assets/led_cie_concept.svg" alt="" aria-hidden="true">
 
-          <svg class="ledmix-gamut-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-            <polygon class="ledmix-poly rgb" points="76,57 30,18 25,79"></polygon>
-            <polygon class="ledmix-poly extended" data-role="extended-poly" points="76,57 30,18 25,79"></polygon>
-            <path class="ledmix-white-locus" d="M 50 57 C 47 56, 45 55, 43 55 C 41 54, 39 53, 38 52"></path>
-          </svg>
+            <div class="ledmix-cie-grid"></div>
 
-          ${this.getColorPointsHTML()}
-          <div class="ledmix-current-point" data-role="current-point">
-            <span data-role="current-point-label">現在色</span>
+            <svg class="ledmix-gamut-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              <polygon class="ledmix-poly rgb" points="86,58 24,14 22,86"></polygon>
+              <polygon class="ledmix-poly extended" data-role="extended-poly" points="86,58 24,14 22,86"></polygon>
+              <path class="ledmix-white-locus" d="M 54 62 C 51 61, 49 59, 47 58 C 45 56, 44 55, 43 54"></path>
+            </svg>
+
+            ${this.getColorPointsHTML()}
+            <div class="ledmix-current-point" data-role="current-point">
+              <span data-role="current-point-label">現在色</span>
+            </div>
           </div>
         </div>
 
@@ -194,9 +199,6 @@ window.Module_LEDColorMixing = {
           <div data-role="mode-note">${this.modes[this.state.mode].note}</div>
         </div>
 
-        <div class="ledmix-warning map-warning">
-          この図はCIE色度図を元にした教材用の概念図です。実際のLED素子のx,y座標、分光分布、演色性、白の質はメーカー・機種・キャリブレーションで変わります。
-        </div>
       </div>
     `;
   },
@@ -242,23 +244,40 @@ window.Module_LEDColorMixing = {
           </div>
         </div>
 
-        <div class="ledmix-fader-head">
-          <b>FADER BANK</b>
-          <span>モードで使えるチャンネルが変わる</span>
+        <div class="ledmix-channel-bank">
+          <div class="ledmix-channel-head">
+            <b>FADER BANK</b>
+            <span data-role="fader-mode-label">選択中のLED構成で使うチャンネル</span>
+          </div>
+
+          <div class="ledmix-channel-grid">
+            ${this.getChannelFaderHTML("r", "Red")}
+            ${this.getChannelFaderHTML("g", "Green")}
+            ${this.getChannelFaderHTML("b", "Blue")}
+            ${this.getChannelFaderHTML("w", "White")}
+            ${this.getChannelFaderHTML("ww", "Warm W")}
+            ${this.getChannelFaderHTML("cw", "Cool W")}
+            ${this.getChannelFaderHTML("a", "Amber")}
+            ${this.getChannelFaderHTML("l", "Lime")}
+            ${this.getChannelFaderHTML("c", "Cyan")}
+          </div>
         </div>
 
-        <div class="ledmix-sliders ledmix-fader-bank">
-          ${this.getSliderHTML("r", "Red")}
-          ${this.getSliderHTML("g", "Green")}
-          ${this.getSliderHTML("b", "Blue")}
-          ${this.getSliderHTML("w", "White")}
-          ${this.getSliderHTML("ww", "Warm W")}
-          ${this.getSliderHTML("cw", "Cool W")}
-          ${this.getSliderHTML("a", "Amber")}
-          ${this.getSliderHTML("l", "Lime")}
-          ${this.getSliderHTML("c", "Cyan")}
-        </div>
+      </div>
+    `;
+  },
 
+  getChannelFaderHTML(ch, label) {
+    return `
+      <div class="ledmix-channel-cell ch-${ch}" data-channel-row="${ch}">
+        <div class="ledmix-channel-label">${label}</div>
+        <div class="ledmix-channel-value" data-channel-output="${ch}">${this.state.values[ch]}</div>
+        <div class="ledmix-channel-slot" data-channel-slot="${ch}" role="slider" aria-label="${label}" aria-valuemin="0" aria-valuemax="255" aria-valuenow="${this.state.values[ch]}" tabindex="0">
+          <div class="ledmix-channel-track"></div>
+          <div class="ledmix-channel-fill" data-channel-fill="${ch}"></div>
+          <div class="ledmix-channel-knob" data-channel-knob="${ch}"></div>
+        </div>
+        <div class="ledmix-channel-zero">0</div>
       </div>
     `;
   },
@@ -293,8 +312,8 @@ window.Module_LEDColorMixing = {
       });
     });
 
-    host.querySelectorAll("[data-fader-slot]").forEach((slot) => {
-      const ch = slot.dataset.faderSlot;
+    host.querySelectorAll("[data-channel-slot]").forEach((slot) => {
+      const ch = slot.dataset.channelSlot;
 
       const setFromPointer = (event) => {
         const mode = this.modes[this.state.mode];
@@ -374,22 +393,32 @@ window.Module_LEDColorMixing = {
     host.querySelector('[data-role="range-score"]').textContent = mode.rangeScore;
     host.querySelector('[data-role="point-title"]').textContent = mode.pointTitle;
     host.querySelector('[data-role="point-text"]').textContent = mode.pointText;
-    host.querySelector('[data-role="mode-note"]').textContent = mode.note;
+    const modeNote = host.querySelector('[data-role="mode-note"]');
+    if (modeNote) {
+      modeNote.textContent = mode.note;
+    }
 
-    host.querySelectorAll("[data-slider-row]").forEach((row) => {
-      const ch = row.dataset.sliderRow;
+    host.querySelectorAll("[data-channel-row]").forEach((row) => {
+      const ch = row.dataset.channelRow;
       const enabled = mode.enabled.includes(ch);
       const value = this.state.values[ch];
       const ratio = Math.max(0, Math.min(1, value / 255));
-      const knob = row.querySelector(`[data-fader-knob="${ch}"]`);
-      const fill = row.querySelector(`[data-fader-fill="${ch}"]`);
-      const slot = row.querySelector(`[data-fader-slot="${ch}"]`);
+      const knob = row.querySelector(`[data-channel-knob="${ch}"]`);
+      const fill = row.querySelector(`[data-channel-fill="${ch}"]`);
+      const slot = row.querySelector(`[data-channel-slot="${ch}"]`);
+      const output = row.querySelector(`[data-channel-output="${ch}"]`);
 
       row.classList.toggle("disabled", !enabled);
-      row.querySelector(`[data-output="${ch}"]`).textContent = value;
+
+      if (output) {
+        output.textContent = value;
+      }
 
       if (knob) {
-        knob.style.bottom = `calc(${ratio * 100}% - 13px)`;
+        const slotHeight = slot ? slot.clientHeight : 0;
+        const knobHeight = knob ? knob.offsetHeight : 18;
+        const travel = Math.max(0, slotHeight - knobHeight);
+        knob.style.bottom = `${travel * ratio}px`;
       }
 
       if (fill) {
@@ -410,16 +439,16 @@ window.Module_LEDColorMixing = {
     const extended = host.querySelector('[data-role="extended-poly"]');
     if (this.state.mode === "rgb") {
       extended.style.opacity = "0";
-      extended.setAttribute("points", "76,57 30,18 25,79");
+      extended.setAttribute("points", "86,58 24,14 22,86");
     } else if (this.state.mode === "rgbw" || this.state.mode === "whiteTemp") {
       extended.style.opacity = "1";
-      extended.setAttribute("points", "76,57 30,18 25,79 43,55 50,57 38,52");
+      extended.setAttribute("points", "86,58 24,14 22,86 47,58 54,62 43,54");
     } else if (this.state.mode === "rgbal") {
       extended.style.opacity = "1";
-      extended.setAttribute("points", "76,57 63,47 42,31 30,18 25,79");
+      extended.setAttribute("points", "86,58 74,53 46,28 24,14 22,86");
     } else {
       extended.style.opacity = "1";
-      extended.setAttribute("points", "76,57 63,47 42,31 30,18 27,48 25,79 43,55 50,57 38,52");
+      extended.setAttribute("points", "86,58 74,53 46,28 24,14 18,54 22,86 47,58 54,62 43,54");
     }
 
     const [r, g, b] = this.mixColor();
@@ -466,8 +495,8 @@ window.Module_LEDColorMixing = {
     }
 
     return [
-      Math.max(18, Math.min(82, x / total)),
-      Math.max(18, Math.min(82, y / total))
+      Math.max(16, Math.min(86, x / total)),
+      Math.max(14, Math.min(88, y / total))
     ];
   },
 
