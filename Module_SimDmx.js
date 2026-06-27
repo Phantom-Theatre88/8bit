@@ -57,7 +57,7 @@ const Module_SimDmx = {
                         <div class="train-container" id="simdmx-train-wagon-line" style="display: flex; position: absolute; bottom: 25px; left: 0; z-index: 2; will-change: transform;"></div>
                     </div>
                     <div class="speed-control-row" style="display: flex; align-items: center; justify-content: space-between; background: #111; padding: 4px 10px; border-radius: 5px; border: 1px solid #222;">
-                        <div class="speed-label-text" style="font-size: 10px; color: #aaa; font-weight: bold;">TRANSMISSION SPEED (DMX規格: 42Hz)</div>
+                        <div class="speed-label-text" style="font-size: 12px; color: #ffd180; font-weight: 600;">表示スピード（実際のDMXは約42Hz）</div>
                         <div class="speed-slider-wrap" style="display: flex; align-items: center; gap: 10px; flex-grow: 1; margin-left: 20px;">
                             <span id="simdmx-speed-display-text" style="font-size: 11px; color: #ff6f00; font-weight: bold; width: 80px;">スロー</span>
                             <input type="range" id="simdmx-speed-range-slider" class="speed-slider" min="0" max="100" value="20" style="flex-grow: 1; -webkit-appearance: none; background: #333; height: 6px; border-radius: 3px; outline: none;">
@@ -67,7 +67,7 @@ const Module_SimDmx = {
                         ${fadersHTML}
                     </div>
                     <div class="dmx-explain-box" style="background: #111; border: 1px solid #222; border-radius: 6px; padding: 8px 12px; font-size: 11px; color: #aaa; line-height: 1.5em; text-align: justify;">
-                        <strong>【DMX512伝送：42Hzの定期列車】</strong><br>DMX信号は、1番から512番までの調光データ（％と 8bitバイナリ）を乗せた「512両編成の超ロングな列車」です。調光卓は、値が変化していなくても関係なく1秒間に約42回（42Hz）、この定期列車を劇場内へ絶え間なく垂れ流しで送り続けています。
+                        <strong>【見る順番】</strong><br>上の波形で、DMX値がチャンネル順に流れる様子を見ます。フェーダーを動かすと、値と波形が変わります。表示スピードは見やすくするための調整で、実際のDMXは約42Hzです。
                     </div>
                 </div>
 
