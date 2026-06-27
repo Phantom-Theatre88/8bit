@@ -58,8 +58,13 @@ const Module_Sim16Bit = {
                         </div>
                     </div>
 
-                    <div class="panel-box" id="sim16bit-upper-graph-box" style="background: #0c0c0c; border: 2px solid #444; border-radius: 8px; padding: 8px; flex-grow: 1; display: flex; flex-direction: column; overflow: hidden;">
+                    <div class="panel-box" id="sim16bit-upper-graph-box" style="background: #0c0c0c; border: 2px solid #444; border-radius: 8px; padding: 8px; flex-grow: 1; display: flex; flex-direction: column; overflow: hidden; position: relative;">
+                        <button type="button" onclick="document.getElementById('sim16bit-zoom-overlay').style.display='flex'" style="position: absolute; top: 8px; right: 8px; z-index: 3; background: rgba(0,0,0,0.72); color: #d9fbff; border: 1px solid #2ad4ff; border-radius: 999px; padding: 5px 10px; font-size: 11px; font-weight: 700; cursor: zoom-in; box-shadow: 0 0 8px rgba(42,212,255,0.28);">🔍 拡大</button>
                         <img src="assets/16bit_coarse_fine_infographic.png" alt="16-bit Coarse Fine explanation" style="width: 100%; height: 100%; object-fit: contain; display: block;">
+                        <div id="sim16bit-zoom-overlay" onclick="this.style.display='none'" style="display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.86); align-items: center; justify-content: center; padding: 28px;">
+                            <button type="button" onclick="document.getElementById('sim16bit-zoom-overlay').style.display='none'; event.stopPropagation();" style="position: fixed; top: 18px; right: 22px; z-index: 10000; background: rgba(0,0,0,0.8); color: #ffffff; border: 1px solid #777; border-radius: 999px; width: 34px; height: 34px; font-size: 18px; cursor: pointer;">×</button>
+                            <img src="assets/16bit_coarse_fine_infographic.png" alt="16-bit Coarse Fine explanation enlarged" onclick="event.stopPropagation()" style="max-width: 94vw; max-height: 88vh; object-fit: contain; border-radius: 12px; box-shadow: 0 0 28px rgba(42,212,255,0.35);">
+                        </div>
                     </div>
 
                     <div class="panel-box" style="background: #0c0c0c; border: 2px solid #444; border-radius: 8px; padding: 10px; flex-grow: 0; display: flex; flex-direction: column; overflow: hidden;">
