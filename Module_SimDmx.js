@@ -24,12 +24,12 @@ const Module_SimDmx = {
     getHTML() {
         let fadersHTML = '';
         const createMiniFaderHTML = (id, label, color) => `
-            <div class="fader-cell-wrap" style="display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 160px; flex: 1;">
+            <div class="fader-cell-wrap" style="display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 180px; flex: 1;">
                 <button class="step-btn" id="simdmx-btn-up-${id}" style="width: 30px; height: 24px; background: #252525; border: 2px solid #444; border-radius: 6px; color: #e0e0e0; font-size: 10px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center;">▲</button>
-                <div class="fader-area" id="simdmx-boundary-${id}" data-fader="${id}" style="height: 95px; width: 34px; position: relative; touch-action: none;">
-                    <div class="fader-track-container" data-fader="${id}" style="position: absolute; right: 0; left: 0; margin: auto; width: 24px; height: 85px; top: 5px;">
-                        <div class="fader-track" style="position: absolute; left: 10px; width: 4px; height: 100%; border: 1px solid #2a2a2a; border-radius: 2px; background:${color}33;"></div>
-                        <div class="fader-knob" id="simdmx-knob-${id}" style="position: absolute; left: 0; width: 24px; height: 26px; border: 2px solid #444; border-radius: 4px; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 2; bottom: 0px; border-color:${color};">
+                <div class="fader-area" id="simdmx-boundary-${id}" data-fader="${id}" style="height: 115px; width: 34px; position: relative; touch-action: none;">
+                    <div class="fader-track-container" data-fader="${id}" style="position: absolute; right: 0; left: 0; margin: auto; width: 24px; height: 105px; top: 5px;">
+                        <div class="fader-track" style="position: absolute; left: 9.5px; width: 5px; height: 100%; border: 1px solid #2a2a2a; border-radius: 2px; background:${color}33;"></div>
+                        <div class="fader-knob" id="simdmx-knob-${id}" style="position: absolute; left: -1px; width: 26px; height: 28px; border: 2px solid #444; border-radius: 4px; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 2; bottom: 0px; border-color:${color};">
                             <div style="width: 100%; height: 3px; background:${id==='dmx1'?'#ff3d00':color};"></div>
                         </div>
                     </div>
@@ -42,7 +42,7 @@ const Module_SimDmx = {
         fadersHTML += `
             <div class="fader-cell-wrap" style="display: flex; flex-direction: column; align-items: center; justify-content: center; opacity:0.15; flex:1; height:160px;">
                 <div style="font-size:18px; font-weight:bold; letter-spacing:1px; transform:rotate(90deg); margin-bottom:15px;">...</div>
-                <div class="fader-label" style="font-size:10px; font-weight:bold;">CH11-512</div>
+                <div class="fader-label" style="font-size:11px; font-weight:600; color:#777;">CH11-512</div>
             </div>`;
 
         return `
@@ -67,7 +67,7 @@ const Module_SimDmx = {
                         ${fadersHTML}
                     </div>
                     <div class="dmx-explain-box" style="background: #111; border: 1px solid #333; border-radius: 6px; padding: 9px 12px; font-size: 12px; color: #c8c8c8; line-height: 1.55em; text-align: justify;">
-                        <strong>【見る順番】</strong><br>上の波形で、DMX値がチャンネル順に流れる様子を見ます。フェーダーを動かすと、値と波形が変わります。表示スピードは見やすくするための調整で、実際のDMXは約42Hzです。
+                        <strong style="color: #66e8ff; font-size: 13px; font-weight: 700;">【見る順番】</strong><br>上の波形で、DMX値がチャンネル順に流れる様子を見ます。フェーダーを動かすと、値と波形が変わります。表示スピードは見やすくするための調整で、実際のDMXは約42Hzです。
                     </div>
                 </div>
 
@@ -121,24 +121,24 @@ const Module_SimDmx = {
     buildTrainWagons() {
         let singleHTML = `
             <div class="car start-code-car" style="width: 80px; height: 48px; border: 2px solid #ffb300; border-radius: 6px 6px 2px 2px; margin-right: 4px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; position: relative; box-shadow: inset 0 4px 6px rgba(255,255,255,0.1); background: repeating-linear-gradient(45deg, #1e1e1e, #1e1e1e 8px, #ffb300 8px, #ffb300 16px);">
-                <div class="car-num-tag" style="font-size: 8px; position: absolute; top: 2px; left: 4px; color: #ffb300;">CH0</div>
-                <div class="car-pct" style="font-size: 11px; font-weight: bold; margin-top: 4px; color: #ffb300;">START</div>
+                <div class="car-num-tag" style="font-size: 9px; position: absolute; top: 2px; left: 4px; color: #ffb300;">CH0</div>
+                <div class="car-pct" style="font-size: 12px; font-weight: 700; margin-top: 4px; color: #ffb300;">START</div>
             </div>`;
 
         for(let i=1; i<=10; i++) {
             let col = this.chColors[i-1];
             singleHTML += `
                 <div class="car" style="width: 80px; height: 48px; border: 2px solid ${col}; background:${col}15; border-radius: 6px 6px 2px 2px; margin-right: 4px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; position: relative; box-shadow: inset 0 4px 6px rgba(255,255,255,0.1);">
-                    <div class="car-num-tag" style="font-size: 8px; position: absolute; top: 2px; left: 4px; color:${col}aa">CH${i}</div>
-                    <div class="car-pct simdmx-pct-ch${i}" style="font-size: 11px; font-weight: bold; margin-top: 4px; color:${col};">0%</div>
-                    <div class="car-bin simdmx-bin-ch${i}" style="font-size: 7px; font-family: monospace; color: #fff; background: rgba(0,0,0,0.5); padding: 1px 2px; border-radius: 2px; margin-top: 2px; letter-spacing: -0.2px;">00000000</div>
+                    <div class="car-num-tag" style="font-size: 9px; position: absolute; top: 2px; left: 4px; color:${col}cc">CH${i}</div>
+                    <div class="car-pct simdmx-pct-ch${i}" style="font-size: 13px; font-weight: 700; margin-top: 4px; color:${col};">0%</div>
+                    <div class="car-bin simdmx-bin-ch${i}" style="font-size: 9px; font-family: monospace; font-weight: 500; color: #e6e6e6; background: rgba(0,0,0,0.72); padding: 1px 4px; border-radius: 3px; margin-top: 2px; letter-spacing: -0.25px;">00000000</div>
                 </div>`;
         }
         for(let i=11; i<=15; i++) {
             singleHTML += `
                 <div class="car gray-car" style="width: 80px; height: 48px; background: #151515; border: 2px solid #333; border-radius: 6px 6px 2px 2px; margin-right: 4px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #444; position: relative; box-shadow: inset 0 4px 6px rgba(255,255,255,0.1);">
-                    <div class="car-num-tag" style="font-size: 8px; position: absolute; top: 2px; left: 4px; color: #333;">CH${i}</div>
-                    <div class="car-pct" style="font-size: 11px; font-weight: bold; margin-top: 4px; color: #444;">- -</div>
+                    <div class="car-num-tag" style="font-size: 9px; position: absolute; top: 2px; left: 4px; color: #444;">CH${i}</div>
+                    <div class="car-pct" style="font-size: 12px; font-weight: 700; margin-top: 4px; color: #555;">- -</div>
                 </div>`;
         }
         singleHTML += `

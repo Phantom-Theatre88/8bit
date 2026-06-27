@@ -564,7 +564,8 @@
             line-height: 1.45;
         }
 
-        .master-console-container.sim8bit-active .help-text-content strong {
+        .master-console-container.sim8bit-active .help-text-content strong,
+        .master-console-container.simdmx-active .help-text-content strong {
             color: #66e8ff;
             font-size: 13.5px;
             font-weight: 700;
@@ -5285,7 +5286,7 @@
     <div class="index-back-divider" aria-hidden="true"></div>
     <button class="main-tab-btn tab-dimmer active" id="main-tab-sim8bit">8-bit 調光卓</button>
     <button class="main-tab-btn tab-dimmer" id="main-tab-sim16bit">16-bit 調光卓</button>
-    <button class="main-tab-btn tab-dimmer" id="main-tab-simdmx">DMX 定期列車</button>
+    <button class="main-tab-btn tab-dimmer" id="main-tab-simdmx">DMX通信列車</button>
     <button class="main-tab-btn tab-led" id="main-tab-ledcolormix">LED色混ぜ</button>
     <button class="main-tab-btn tab-dimmer" id="main-tab-movinghead">Moving Head</button>
     
@@ -5486,7 +5487,7 @@
             sub: "左のフェーダーを動かし、DMX値と見た目の明るさの変化を確認する。"
         },
         simdmx: {
-            title: "DMX 定期列車｜512chを約42Hzで送り続ける信号",
+            title: "DMX通信列車｜512chを約42Hzで送り続ける信号",
             sub: "値が変わらなくても、DMXは定期的に全チャンネルを送り続ける。"
         },
         explain: {
