@@ -6,9 +6,11 @@
   <title>電気を見える化｜電圧・電流・電力シミュレーター</title>
   <style>
     :root{--bg:#080a0d;--panel:#111418;--panel2:#171b20;--line:#343a41;--text:#f4f6f8;--muted:#a9b0b8;--gold:#ffb000;--orange:#ff8a00;--green:#55d62c;--blue:#3597ff;--red:#ff3b30}
-    *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text)}
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text)}
     body{font-family:"Hiragino Sans","Yu Gothic",Meiryo,system-ui,-apple-system,sans-serif;padding:10px;overflow-x:hidden}
-    button,input,select{font:inherit}.app{width:min(1500px,100%);margin:0 auto}
+    button,input,select{font:inherit}
+    .app{width:min(1500px,100%);margin:0 auto}
     .topbar{min-height:52px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 14px;border:1px solid #242a30;border-radius:12px 12px 0 0;background:linear-gradient(180deg,#111418,#0b0d10)}
     .title{display:flex;align-items:center;gap:10px;min-width:0}.bolt{color:#ffd000;font-size:28px}.title h1{margin:0;font-size:clamp(18px,2.2vw,28px);white-space:nowrap}.title span{color:#d0d5da;font-size:clamp(12px,1.4vw,17px);white-space:nowrap}
     .top-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.top-btn,.mode-btn{min-height:36px;padding:0 13px;border-radius:8px;border:1px solid #424950;color:#ddd;background:#171a1e}.mode-btn.active{color:#ffbf3d;border-color:#c77a00;box-shadow:0 0 14px rgba(255,155,0,.18)}
@@ -18,16 +20,42 @@
     .input-card{border:1px solid #3a4046;border-left:5px solid var(--accent);background:rgba(255,255,255,.02);border-radius:9px;padding:12px;margin-bottom:10px}.input-title{color:var(--accent);font-weight:800;font-size:17px}.input-desc{color:#e4e7ea;font-size:13px;margin-top:3px}.input-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;margin-top:12px}.input-row input{width:100%;height:48px;border-radius:7px;border:1px solid #444b52;background:#0b0d10;color:#fff;text-align:right;padding:0 12px;font-size:25px;font-weight:800}.input-row input[readonly]{color:var(--accent);border-color:var(--accent)}.unit{min-width:28px;font-size:18px;font-weight:800}
     .quick{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:9px}.quick button,.auto-btn{min-height:34px;border:1px solid #454c53;border-radius:7px;background:#1a1e22;color:#f2f2f2}.quick button.active,.auto-btn.active{border-color:var(--accent);color:var(--accent)}.auto-line{display:flex;justify-content:flex-end;margin-top:8px}.auto-btn{padding:0 12px;font-size:12px}
     .hint{border:1px solid #3a4046;border-radius:9px;padding:11px;color:#e0e4e8;line-height:1.65;font-size:13px}.hint b{color:#ffd04d}
-    .formula-wrap{display:grid;place-items:center;min-height:100%}.formula-board{width:min(100%,540px);display:grid;grid-template-columns:1fr 82px 1fr;grid-template-rows:auto 70px auto;align-items:center;justify-items:center;padding:34px 28px;border:1px solid #444b52;border-radius:16px;background:radial-gradient(circle at 50% 20%,rgba(255,255,255,.04),transparent 50%),#0d1013;box-shadow:inset 0 0 28px rgba(0,0,0,.5)}
-    .formula-item{text-align:center}.formula-item.power{grid-column:1/4}.formula-item.voltage{grid-column:1}.formula-item.current{grid-column:3}.formula-symbol{font-size:clamp(24px,3vw,42px);line-height:1}.formula-label{font-size:clamp(20px,2.2vw,31px);font-weight:800;margin-top:4px}.formula-value{margin-top:10px;min-width:138px;padding:9px 15px;border-radius:8px;background:#050607;border:1px solid #32363b;color:var(--accent);font-size:clamp(24px,3vw,40px);font-weight:900;box-shadow:inset 0 0 12px rgba(0,0,0,.65)}
-    .divide-left{grid-column:1;grid-row:2}.divide-right{grid-column:3;grid-row:2}.multiply{grid-column:2;grid-row:3;color:var(--red);font-size:54px;font-weight:900;line-height:1}.operator{color:var(--red);font-size:44px;font-weight:900}.formula-line{margin-top:14px;border:1px solid #444b52;border-radius:8px;padding:10px 14px;background:#0e1013;font-weight:800;text-align:center}
+
+    .formula-wrap{display:grid;place-items:center;min-height:100%}
+    .formula-stack{width:min(100%,560px)}
+    .formula-board{position:relative;display:grid;grid-template-rows:auto 86px auto;justify-items:center;padding:30px 28px 28px;border:1px solid #444b52;border-radius:16px;background:radial-gradient(circle at 50% 20%,rgba(255,255,255,.04),transparent 50%),#0d1013;box-shadow:inset 0 0 28px rgba(0,0,0,.5)}
+    .formula-item{text-align:center;position:relative;z-index:2}.formula-symbol{font-size:clamp(24px,3vw,42px);line-height:1}.formula-label{font-size:clamp(20px,2.2vw,31px);font-weight:800;margin-top:4px}.formula-value{margin-top:10px;min-width:138px;padding:9px 15px;border-radius:8px;background:#050607;border:1px solid #32363b;color:var(--accent);font-size:clamp(24px,3vw,40px);font-weight:900;box-shadow:inset 0 0 12px rgba(0,0,0,.65)}
+    .formula-divider{position:relative;width:88%;height:86px}
+    .formula-divider::before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:#d7dde2;transform:translateY(-50%)}
+    .formula-divider::after{content:"";position:absolute;left:50%;top:50%;width:2px;height:152px;background:#d7dde2;transform:translateX(-50%);z-index:0}
+    .operator{position:absolute;top:50%;transform:translate(-50%,-50%);color:var(--red);font-family:"Roboto Mono","SFMono-Regular",Consolas,monospace;font-size:38px;font-weight:400;line-height:1;background:#0d1013;padding:0 7px;z-index:2}.divide-left{left:23%}.divide-right{left:77%}
+    .formula-bottom{position:relative;z-index:2;width:100%;display:grid;grid-template-columns:1fr 84px 1fr;align-items:end;justify-items:center}
+    .multiply{grid-column:2;color:var(--red);font-family:"Roboto Mono","SFMono-Regular",Consolas,monospace;font-size:44px;font-weight:400;line-height:1;background:#0d1013;padding:4px 8px;margin-bottom:16px}
+    .formula-item.voltage{grid-column:1;grid-row:1}.formula-item.current{grid-column:3;grid-row:1}
+    .formula-line{margin-top:14px;border:1px solid #444b52;border-radius:8px;padding:10px 14px;background:#0e1013;font-weight:800;text-align:center}
+
     .right-grid{display:grid;gap:10px}.result-top{display:grid;grid-template-columns:1fr 1.12fr;gap:10px}.result-card{padding:12px;border:1px solid #3a4046;border-radius:9px;background:#121519}.result-title{color:#ffc247;font-weight:800;margin-bottom:8px}
     .bulb-box{position:relative;display:grid;place-items:center;min-height:255px;background:radial-gradient(circle,rgba(255,170,30,.16),transparent 55%);border-radius:8px;overflow:hidden}.bulb-img{width:150px;height:245px;object-fit:contain;opacity:.86;filter:brightness(var(--bulb-brightness,1)) drop-shadow(0 0 var(--bulb-glow,20px) rgba(255,145,0,.8));transition:filter .15s ease,opacity .15s ease}.bulb-glow{position:absolute;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(255,190,70,var(--glow-alpha,.35)),rgba(255,115,0,.12) 45%,transparent 70%);mix-blend-mode:screen;pointer-events:none}
     .meter-value{font-size:38px;font-weight:900;text-align:center;margin:18px 0}.bar{height:18px;border-radius:10px;border:1px solid #555;background:#090b0d;overflow:hidden}.bar>span{display:block;height:100%;width:0;background:linear-gradient(90deg,#2f93ff,#69b6ff);transition:width .2s ease,background .2s ease}.scale{display:flex;justify-content:space-between;color:#d6d9dc;font-size:12px;margin-top:5px}.capacity{display:grid;grid-template-columns:170px 1fr;gap:16px;align-items:center}select{width:100%;height:44px;background:#15191d;color:white;border:1px solid #454c53;border-radius:8px;padding:0 10px}.remaining{text-align:center;font-size:31px;font-weight:900;color:var(--green)}.status{margin-top:8px;font-weight:800;color:var(--green)}.check-list{display:grid;gap:7px;line-height:1.5;font-size:14px}.check-list div::before{content:"✓";display:inline-grid;place-items:center;width:20px;height:20px;border:1px solid #52d728;border-radius:50%;color:#52d728;margin-right:8px}
     .footer-grid{display:grid;grid-template-columns:1.6fr .85fr 1fr;gap:8px;padding:0 8px 8px;background:#0b0d10;border-left:1px solid #242a30;border-right:1px solid #242a30}.teacher,.notes{min-height:150px;padding:13px}.teacher{display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:center}.teacher-placeholder{height:110px;border:1px dashed #555;border-radius:10px;display:grid;place-items:center;color:#777;text-align:center;font-size:12px;background:#0b0d10}.teacher h3,.notes h3{color:#ffd04d;margin:0 0 8px}.teacher p,.notes li{margin:0;line-height:1.7;color:#e0e4e8}.notes ul,.notes ol{margin:0;padding-left:22px}
     .bottomnav{min-height:50px;display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid #242a30;border-radius:0 0 12px 12px;background:#0d1013;padding:8px 14px}.home-link{color:#fff;border:1px solid #444b52;border-radius:8px;padding:9px 13px;text-decoration:none}.brand{color:#aaa}
+
     @media(max-width:1180px){.layout{grid-template-columns:360px 1fr}.right{grid-column:1/-1}.footer-grid{grid-template-columns:1fr}}
-    @media(max-width:760px){body{padding:5px}.topbar{align-items:flex-start;flex-direction:column}.title span{display:none}.layout{grid-template-columns:1fr}.center,.right{grid-column:auto}.formula-board{grid-template-columns:1fr 56px 1fr;padding:24px 12px}.result-top,.capacity,.teacher{grid-template-columns:1fr}}
+    @media(max-width:760px){body{padding:5px}.topbar{align-items:flex-start;flex-direction:column}.title span{display:none}.layout{grid-template-columns:1fr}.center,.right{grid-column:auto}.formula-board{padding:24px 12px}.result-top,.capacity,.teacher{grid-template-columns:1fr}}
+
+    @media(min-width:1024px) and (max-height:1100px){
+      html,body{height:100%;overflow:hidden}
+      body{padding:6px}
+      .app{height:100vh;display:grid;grid-template-rows:auto minmax(0,1fr) auto auto}
+      .topbar{min-height:46px;padding:5px 11px}.title h1{font-size:24px}.title span{font-size:14px}.bolt{font-size:24px}.top-btn,.mode-btn{min-height:32px;padding:0 10px;font-size:13px}
+      .layout{min-height:0;grid-template-columns:31% 36% 33%;gap:6px;padding:6px;overflow:hidden}
+      .left,.center,.right{padding:9px;overflow:hidden}.section-head{font-size:15px}.section-sub{font-size:11px;margin-bottom:7px}
+      .input-card{padding:8px 9px;margin-bottom:6px}.input-title{font-size:15px}.input-desc{font-size:11px}.input-row{margin-top:7px}.input-row input{height:39px;font-size:21px}.unit{font-size:15px}.quick{gap:5px;margin-top:6px}.quick button,.auto-btn{min-height:29px;font-size:12px}.auto-line{margin-top:5px}.hint{padding:7px 9px;line-height:1.45;font-size:11px}
+      .formula-stack{max-width:500px}.formula-board{grid-template-rows:auto 66px auto;padding:19px 22px 17px}.formula-symbol{font-size:28px}.formula-label{font-size:23px}.formula-value{margin-top:7px;min-width:120px;padding:6px 12px;font-size:31px}.formula-divider{height:66px}.formula-divider::after{height:122px}.operator{font-size:30px}.formula-bottom{grid-template-columns:1fr 66px 1fr}.multiply{font-size:34px;margin-bottom:10px}.formula-line{margin-top:8px;padding:7px 10px;font-size:12px}
+      .right-grid{gap:6px}.result-top{gap:6px}.result-card{padding:8px}.result-title{font-size:13px;margin-bottom:5px}.bulb-box{min-height:165px}.bulb-img{width:105px;height:165px}.bulb-glow{width:175px;height:175px}.meter-value{font-size:28px;margin:12px 0}.bar{height:14px}.capacity{grid-template-columns:120px 1fr;gap:10px}select{height:36px}.remaining{font-size:24px}.status{font-size:12px;margin-top:4px}.check-list{gap:4px;font-size:11px}.check-list div::before{width:16px;height:16px;margin-right:5px}
+      .footer-grid{gap:6px;padding:0 6px 6px;grid-template-columns:1.55fr .9fr 1fr}.teacher,.notes{min-height:104px;padding:8px}.teacher{grid-template-columns:78px 1fr;gap:8px}.teacher-placeholder{height:78px;font-size:10px}.teacher h3,.notes h3{font-size:13px;margin-bottom:4px}.teacher p,.notes li{font-size:11px;line-height:1.45}.notes ul,.notes ol{padding-left:18px}
+      .bottomnav{min-height:38px;padding:5px 10px;font-size:12px}.home-link{padding:6px 10px}
+    }
   </style>
 </head>
 <body>
@@ -44,15 +72,19 @@
       <div class="input-card" style="--accent:var(--blue)"><div class="input-title">電流 I（アンペア）</div><div class="input-desc">回路に流れる電流</div><div class="input-row"><input id="currentInput" type="number" min="0" step="0.01" value="5.00" readonly><span class="unit">A</span></div><div class="quick" data-target="currentInput"><button data-v="1">1A</button><button class="active" data-v="5">5A</button><button data-v="10">10A</button><button data-v="20">20A</button></div><div class="auto-line"><button class="auto-btn active" data-auto="I">Iを自動計算</button></div></div>
       <div class="hint"><b>💡 入力のヒント</b><br>現場では「ワット」と「電圧」を決めて、「電流」を確認する使い方が基本です。</div>
     </section>
+
     <section class="panel center">
-      <div class="formula-wrap"><div><div class="formula-board">
+      <div class="formula-wrap"><div class="formula-stack"><div class="formula-board">
         <div class="formula-item power" style="--accent:var(--orange)"><div class="formula-symbol">「P」</div><div class="formula-label">電力（W）</div><div class="formula-value" id="displayP">500</div></div>
-        <div class="operator divide-left">÷</div><div class="operator divide-right">÷</div>
-        <div class="formula-item voltage" style="--accent:var(--green)"><div class="formula-symbol">「E」</div><div class="formula-label">電圧（V）</div><div class="formula-value" id="displayE">100</div></div>
-        <div class="multiply">×</div>
-        <div class="formula-item current" style="--accent:var(--blue)"><div class="formula-symbol">「I」</div><div class="formula-label">電流（A）</div><div class="formula-value" id="displayI">5.00</div></div>
+        <div class="formula-divider"><div class="operator divide-left">÷</div><div class="operator divide-right">÷</div></div>
+        <div class="formula-bottom">
+          <div class="formula-item voltage" style="--accent:var(--green)"><div class="formula-symbol">「E」</div><div class="formula-label">電圧（V）</div><div class="formula-value" id="displayE">100</div></div>
+          <div class="multiply">×</div>
+          <div class="formula-item current" style="--accent:var(--blue)"><div class="formula-symbol">「I」</div><div class="formula-label">電流（A）</div><div class="formula-value" id="displayI">5.00</div></div>
+        </div>
       </div><div class="formula-line">関係式：<span style="color:var(--orange)">P</span> = <span style="color:var(--green)">E</span> × <span style="color:var(--blue)">I</span>　/　E = P ÷ I　/　I = P ÷ E</div></div></div>
     </section>
+
     <section class="panel right"><div class="section-head">② 結果と現場での見方</div><div class="right-grid">
       <div class="result-top"><div class="result-card"><div class="result-title">電球の明るさ（イメージ）</div><div class="bulb-box"><div class="bulb-glow" id="bulbGlow"></div><img id="bulbImage" class="bulb-img" src="assets/Light.png" alt="白熱電球"></div></div>
       <div class="result-card"><div class="result-title" style="color:var(--green)">電流（アンペア）バー</div><div class="meter-value"><span id="meterCurrent">5.00</span> A</div><div class="bar"><span id="currentBar"></span></div><div class="scale"><span>0A</span><span>15A</span><span>30A</span></div><p style="color:#d6d9dc;line-height:1.7">数値が大きいほど、ケーブルやブレーカーへの負担が増えます。</p></div></div>
@@ -60,6 +92,7 @@
       <div class="result-card"><div class="result-title">現場のチェックポイント</div><div class="check-list"><div>合計ワット（W）は、電源の容量内に収まっているか？</div><div>流れる電流（A）は、ブレーカー容量を超えていないか？</div><div>配線の太さは、電流に対して十分か？</div></div></div>
     </div></section>
   </section>
+
   <section class="footer-grid"><section class="panel teacher"><div class="teacher-placeholder">先生キャラクター<br>素材差し替え予定</div><div><h3>先生のひとこと</h3><p id="teacherText">100Vで500Wを使うと、流れる電流は5Aだよ。</p></div></section><section class="panel notes"><h3>よく使う計算</h3><ul><li>P（W）= E（V）× I（A）</li><li>E（V）= P（W）÷ I（A）</li><li>I（A）= P（W）÷ E（V）</li></ul></section><section class="panel notes"><h3>使い方の流れ</h3><ol><li>自動計算する項目を選ぶ</li><li>残り2項目を入力する</li><li>電流とブレーカー容量を見る</li><li>余裕を確認する</li></ol></section></section>
   <footer class="bottomnav"><a class="home-link" href="index.html">⌂ TOPへ</a><div class="brand">8bit Lighting Study</div></footer>
 </main>
