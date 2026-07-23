@@ -23,12 +23,12 @@
 <header class="topbar"><div class="title"><div class="bolt">⚡</div><h1>電気を見える化</h1><span>｜V・W・Aの法則</span></div><div class="modes"><button class="mode active">現場モード（V・W・A）</button><button class="mode" disabled>基礎モード（V・I・R）</button></div></header>
 <section class="layout">
 <section class="panel left">
-<div class="section-head">① 求めたい値を選ぶ</div><div class="section-sub">選んだ1項目を、残り2項目から自動計算します。</div>
+<div class="section-head">① 求めたい値を選ぶ</div><div class="section-sub">求めたい項目を1つ選び、残り2項目はボタンまたは数値入力で設定します。</div>
 <div class="target-row"><button class="target-btn" data-target="P">電力 P</button><button class="target-btn" data-target="E">電圧 E</button><button class="target-btn active" data-target="I">電流 I</button></div>
 <div class="input-card" id="cardP" style="--accent:var(--p)"><div class="input-title">電力 P（ワット）<span class="state" id="stateP">入力</span></div><div class="input-desc">灯体の消費電力の合計</div><div class="input-row"><input id="powerInput" type="number" min="0" step="1" value="500"><span class="unit">W</span></div><div class="quick" data-key="P"><button data-v="100">100W</button><button data-v="300">300W</button><button data-v="500" class="active">500W</button><button data-v="1000">1000W</button></div></div>
 <div class="input-card" id="cardE" style="--accent:var(--e)"><div class="input-title">電圧 E（ボルト）<span class="state" id="stateE">入力</span></div><div class="input-desc">使用する電源電圧</div><div class="input-row"><input id="voltageInput" type="number" min="1" step="1" value="100"><span class="unit">V</span></div><div class="quick" data-key="E"><button data-v="50">50V</button><button data-v="100" class="active">100V</button><button data-v="200">200V</button><button data-v="230">230V</button></div></div>
 <div class="input-card auto" id="cardI" style="--accent:var(--i)"><div class="input-title">電流 I（アンペア）<span class="state" id="stateI">AUTO</span></div><div class="input-desc">回路に流れる電流</div><div class="input-row"><input id="currentInput" type="number" min="0" step="0.01" value="" placeholder="AUTO" readonly><span class="unit">A</span></div><div class="quick" data-key="I"><button data-v="1" disabled>1A</button><button data-v="5" class="active" disabled>5A</button><button data-v="10" disabled>10A</button><button data-v="20" disabled>20A</button></div></div>
-<div class="hint"><b>💡 見方</b><br>「入力」2項目から、「AUTO」1項目が求まります。</div>
+<div class="hint"><b>💡 見方</b><br>数値欄へ直接入力するか、下のボタンで選べます。「入力」2項目から「AUTO」1項目を求めます。</div>
 </section>
 <section class="panel center"><div class="formula-stack">
 <div class="formula-board">
