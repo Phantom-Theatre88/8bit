@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>電気を見える化｜単相3線 L1・N・L2</title>
+<style>
+:root{--bg:#080a0d;--panel:#111418;--panel2:#171b20;--line:#343a41;--text:#f4f6f8;--muted:#a9b0b8;--l1:#ff4238;--n:#e3e5e8;--l2:#3597ff;--v100:#ffd02f;--v200:#bf68ff;--ok:#55d62c;--warn:#ffd000;--danger:#ff3b30}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:var(--bg);color:var(--text)}body{font-family:"Hiragino Sans","Yu Gothic",Meiryo,system-ui,-apple-system,sans-serif;padding:6px;overflow:hidden}button{font:inherit}.app{width:min(1500px,100%);height:100%;margin:auto;display:grid;grid-template-rows:auto minmax(0,1fr) auto auto}.topbar{min-height:46px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:6px 12px;border:1px solid #242a30;border-radius:12px 12px 0 0;background:linear-gradient(#111418,#0b0d10)}.title{display:flex;align-items:center;gap:10px}.bolt{font-size:25px;color:#ffd000}.title h1{margin:0;font-size:24px}.title span{font-size:14px;color:#d0d5da}.help{height:33px;padding:0 13px;border-radius:8px;border:1px solid #555d65;color:#eee;background:#171a1e}.layout{display:grid;grid-template-columns:30% 37% 33%;gap:6px;padding:6px;border-left:1px solid #242a30;border-right:1px solid #242a30;background:#0b0d10;min-height:0}.panel{background:linear-gradient(#171a1e,#111418);border:1px solid var(--line);border-radius:10px;box-shadow:inset 0 0 18px #0006}.left,.center,.right{padding:10px;overflow:hidden}.section-head{font-size:17px;font-weight:800;margin-bottom:4px}.section-sub{font-size:12px;color:var(--muted);line-height:1.45;margin-bottom:7px}.fixture-title{font-size:14px;font-weight:800;margin:7px 0 5px}.fixture-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.fixture-grid.two{grid-template-columns:repeat(2,1fr)}.fixture-btn{min-height:70px;border:1px solid #454c53;border-radius:8px;background:#111418;color:#eee;padding:5px;cursor:pointer;touch-action:manipulation}.fixture-btn strong{display:block;font-size:16px}.fixture-btn span{font-size:12px}.fixture-btn[data-voltage="100"].active{border-color:var(--v100);box-shadow:0 0 12px #ffd02f55;color:var(--v100)}.fixture-btn[data-voltage="200"].active{border-color:var(--v200);box-shadow:0 0 12px #bf68ff55;color:#d7a7ff}.bulb-symbol{font-size:22px;line-height:1}.step{border-top:1px solid #343a41;margin-top:8px;padding-top:7px}.step-title{font-size:15px;font-weight:800;margin-bottom:5px}.destination{display:grid;grid-template-columns:1fr 1fr;gap:6px}.dest-btn{height:39px;border-radius:7px;background:#111418;font-weight:800;cursor:pointer;touch-action:manipulation}.dest-btn.l1{border:1px solid var(--l1);color:var(--l1)}.dest-btn.l2{border:1px solid var(--l2);color:var(--l2)}.dest-btn.active{background:#ffffff0b;box-shadow:0 0 12px currentColor}.dest-btn:disabled{opacity:.35;cursor:default}.selected-box{display:grid;grid-template-columns:1fr 1fr;gap:6px;border:1px solid #3b4249;border-radius:8px;padding:6px;background:#0d1013;margin-bottom:5px}.selected-box div{text-align:center;font-size:12px}.selected-box strong{display:block;font-size:16px;margin-top:2px}.connect{width:100%;height:40px;border:1px solid #39ce35;border-radius:7px;background:linear-gradient(#1e7f20,#125d16);color:#fff;font-size:16px;font-weight:900;cursor:pointer}.clear{width:100%;height:35px;border:1px solid #515860;border-radius:7px;background:#13171b;color:#eee;cursor:pointer}.center{display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:7px}.circuit-title{display:flex;justify-content:space-between;align-items:center}.circuit-title small{font-size:11px;color:var(--muted)}.circuit{position:relative;min-height:0;border:1px solid #3c434a;border-radius:13px;background:radial-gradient(circle at 50% 45%,#ffffff08,transparent 58%),#0d1013;overflow:hidden}.bus{position:absolute;top:50px;bottom:36px;width:5px;border-radius:5px}.bus.l1{left:17%;background:var(--l1);box-shadow:0 0 12px #ff423899}.bus.n{left:50%;background:var(--n);box-shadow:0 0 7px #fff7}.bus.l2{left:83%;background:var(--l2);box-shadow:0 0 12px #3597ff99}.bus-label{position:absolute;top:14px;transform:translateX(-50%);font-size:23px;font-weight:900}.bus-label.l1{left:17%;color:var(--l1)}.bus-label.n{left:50%;color:var(--n)}.bus-label.l2{left:83%;color:var(--l2)}.nodes{position:absolute;inset:56px 8% 40px;display:grid;grid-template-rows:repeat(5,1fr);pointer-events:none}.row{position:relative}.node{position:absolute;top:50%;width:12px;height:12px;border-radius:50%;background:#ddd;transform:translate(-50%,-50%);box-shadow:0 0 6px #fff}.node.l1{left:10.9%}.node.n{left:50%}.node.l2{left:89.1%}.loads{position:absolute;inset:57px 7% 41px;display:grid;grid-template-rows:repeat(5,1fr)}.load-row{position:relative}.load-wire{position:absolute;top:50%;height:2px;background:#d7dde2;transform:translateY(-50%)}.load-card{position:absolute;top:50%;transform:translate(-50%,-50%);min-width:112px;padding:5px 8px;border-radius:8px;background:#0b0d10;text-align:center;font-size:12px;cursor:pointer;z-index:3}.load-card strong{display:block;font-size:15px}.load-card.v100{border:1px solid #c99700;color:#fff}.load-card.v200{border:1px solid #9c4fd0;color:#fff}.load-card.l1{left:30%}.load-card.l2{left:70%}.load-card.v200{left:50%;min-width:130px}.load-wire.l1{left:10.9%;width:39.1%}.load-wire.l2{left:50%;width:39.1%}.load-wire.v200{left:10.9%;width:78.2%;background:#c67aff}.empty{position:absolute;inset:0;display:grid;place-items:center;color:#7f8790;font-size:14px;text-align:center}.circuit-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;border:1px solid #3c434a;border-radius:8px;padding:7px;background:#0d1013}.circuit-summary div{text-align:center;font-size:12px}.circuit-summary strong{display:block;font-size:18px}.right{display:grid;grid-template-rows:auto auto minmax(0,1fr);gap:6px}.breaker-title{font-size:17px;font-weight:800}.breaker-shell{position:relative;min-height:245px;border:1px solid #555d65;border-radius:12px;background:linear-gradient(145deg,#5c6064,#24272a 42%,#0d0f11 88%);box-shadow:inset 8px 8px 18px #ffffff18,inset -9px -9px 20px #000c;padding:13px 18px 15px}.breaker-name{text-align:center;font-size:20px;font-weight:900;background:#090b0d;border:1px solid #555;border-radius:6px;padding:5px}.breaker-body{position:absolute;left:50%;top:62px;width:150px;height:122px;transform:translateX(-50%);border:2px solid #24272a;border-radius:8px;background:linear-gradient(145deg,#45494d,#16191c);box-shadow:inset 5px 5px 9px #ffffff16,inset -6px -6px 12px #000b,0 7px 14px #0009}.rating{text-align:center;font-size:27px;font-weight:900;margin-top:9px}.handle{width:52px;height:52px;margin:5px auto 0;border-radius:5px;background:linear-gradient(#34383c,#090b0d);border:1px solid #555;box-shadow:inset 0 7px 7px #ffffff17}.handle:after{content:"ON";display:block;margin:25px 5px 0;text-align:center;background:#9b1717;color:#fff;font-size:12px;font-weight:900}.breaker-shell.trip .handle{transform:rotate(20deg);transform-origin:center top}.breaker-shell.trip .handle:after{content:"TRIP";background:#e23a2f}.terminals{position:absolute;left:17%;right:17%;bottom:9px;display:grid;grid-template-columns:repeat(3,1fr);text-align:center;font-weight:900}.terminals span:nth-child(1){color:var(--l1)}.terminals span:nth-child(2){color:var(--n)}.terminals span:nth-child(3){color:var(--l2)}.meters{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;min-height:0}.meter{border:1px solid #3b4249;border-radius:8px;background:#0d1013;padding:6px;text-align:center;display:grid;grid-template-rows:auto auto minmax(72px,1fr) auto}.meter-label{font-size:14px;font-weight:900}.meter-value{font-size:20px;font-weight:900}.meter-track{position:relative;margin:5px auto;width:58%;min-height:72px;border:1px solid #555;border-radius:5px;background:repeating-linear-gradient(to top,#ffffff0b 0,#ffffff0b 1px,transparent 1px,transparent 16.66%);overflow:hidden}.meter-fill{position:absolute;left:0;right:0;bottom:0;height:0;transition:.25s}.meter.l1 .meter-label,.meter.l1 .meter-value{color:var(--l1)}.meter.n .meter-label,.meter.n .meter-value{color:var(--ok)}.meter.l2 .meter-label,.meter.l2 .meter-value{color:var(--l2)}.meter.l1 .meter-fill{background:var(--l1)}.meter.n .meter-fill{background:var(--ok)}.meter.l2 .meter-fill{background:var(--l2)}.meter-max{font-size:11px;color:var(--muted)}.key-point{border:1px solid #b88400;border-radius:8px;background:#16130b;padding:7px;font-size:13px;line-height:1.45}.key-point strong{color:#ffd23f;font-size:16px}.teacher{display:grid;grid-template-columns:95px 1fr;gap:14px;align-items:center;margin:0 6px 6px;padding:8px 14px;min-height:108px}.teacher-character{width:95px;height:96px;object-fit:cover;object-position:48% 14%;align-self:end}.teacher h3{margin:0 0 5px;color:#ffd04d;font-size:18px}.teacher p{margin:0;font-size:14px;line-height:1.55}.teacher .l1{color:var(--l1);font-weight:900}.teacher .n{color:var(--ok);font-weight:900}.teacher .l2{color:var(--l2);font-weight:900}.teacher .v100{color:var(--v100);font-weight:900}.teacher .v200{color:var(--v200);font-weight:900}.bottomnav{min-height:38px;display:flex;align-items:center;justify-content:space-between;padding:5px 10px;border:1px solid #242a30;border-radius:0 0 12px 12px;background:#0d1013;font-size:12px}.home{color:#fff;text-decoration:none;border:1px solid #444b52;border-radius:7px;padding:6px 10px}.brand{color:#aaa}@media(max-width:1100px){body{overflow:auto}.app{height:auto}.layout{grid-template-columns:1fr}.left,.center,.right{overflow:visible}.circuit{min-height:520px}}
+</style>
+</head>
+<body>
+<main class="app">
+<header class="topbar"><div class="title"><div class="bolt">⚡</div><h1>電気を見える化</h1><span>｜11. 単相3線（L1・N・L2）｜60Aブレーカーのしくみ</span></div><button class="help" type="button">ⓘ 使い方</button></header>
+<section class="layout">
+<section class="panel left">
+<div class="section-head">① 灯体を選ぶ</div><div class="section-sub">100V灯体はL1-NまたはL2-Nへ、200V灯体はL1-L2へ接続します。</div>
+<div class="fixture-title">100V灯体</div><div class="fixture-grid" id="fixtures100"></div>
+<div class="fixture-title">200V灯体</div><div class="fixture-grid two" id="fixtures200"></div>
+<div class="step"><div class="step-title">② 接続先を選ぶ <small>（100Vのみ）</small></div><div class="destination"><button type="button" class="dest-btn l1 active" data-dest="L1">L1-Nへ接続</button><button type="button" class="dest-btn l2" data-dest="L2">L2-Nへ接続</button></div></div>
+<div class="step"><div class="step-title">③ 接続する</div><div class="selected-box"><div>選択中の灯体<strong id="selectedFixture">500W / 5A</strong></div><div>接続先<strong id="selectedDest" style="color:var(--l1)">L1-N</strong></div></div><button class="connect" id="connectBtn" type="button">🔌 接続する</button></div>
+<div class="step"><div class="step-title">④ 削除する</div><div class="section-sub">中央の灯体をクリックすると1台ずつ削除できます。</div><button class="clear" id="clearBtn" type="button">⌫ すべて削除</button></div>
+</section>
+<section class="panel center">
+<div class="circuit-title"><div class="section-head">② 接続図</div><small>灯体をクリックすると削除</small></div>
+<div class="circuit" id="circuit"><div class="bus-label l1">L1</div><div class="bus-label n">N</div><div class="bus-label l2">L2</div><div class="bus l1"></div><div class="bus n"></div><div class="bus l2"></div><div class="nodes" id="nodes"></div><div class="loads" id="loads"></div><div class="empty" id="emptyMessage">左で灯体と接続先を選び、<br>「接続する」を押してください。</div></div>
+<div class="circuit-summary"><div><span>L1 電流</span><strong id="sumL1" style="color:var(--l1)">0.0A</strong></div><div><span>N線電流</span><strong id="sumN" style="color:var(--ok)">0.0A</strong></div><div><span>L2 電流</span><strong id="sumL2" style="color:var(--l2)">0.0A</strong></div></div>
+</section>
+<section class="panel right">
+<div class="breaker-title">③ 主幹ブレーカー（MAIN 60A）</div>
+<div class="breaker-shell" id="breakerShell"><div class="breaker-name">単相3線 MAIN 60A</div><div class="breaker-body"><div class="rating">60A</div><div class="handle"></div></div><div class="terminals"><span>L1</span><span>N</span><span>L2</span></div></div>
+<div class="meters"><div class="meter l1"><div class="meter-label">L1</div><div class="meter-value" id="meterL1">0.0A</div><div class="meter-track"><div class="meter-fill" id="fillL1"></div></div><div class="meter-max">現在値 / 最大60A</div></div><div class="meter n"><div class="meter-label">N</div><div class="meter-value" id="meterN">0.0A</div><div class="meter-track"><div class="meter-fill" id="fillN"></div></div><div class="meter-max">L1・L2の差</div></div><div class="meter l2"><div class="meter-label">L2</div><div class="meter-value" id="meterL2">0.0A</div><div class="meter-track"><div class="meter-fill" id="fillL2"></div></div><div class="meter-max">現在値 / 最大60A</div></div></div>
+<div class="key-point"><strong>100Vなら合計120A分</strong><br>L1側60A＋L2側60A。200V負荷はL1とL2の両方へ同じ電流が流れ、最大60Aです。</div>
+</section>
+</section>
+<section class="panel teacher"><img class="teacher-character" src="assets/analog_teacher_pointing.webp" alt="照明教材の先生"><div><h3>先生のひとこと</h3><p id="teacherText">まず100V灯体をL1-NかL2-Nへ接続して、右の電流を見てみよう。</p></div></section>
+<footer class="bottomnav"><a class="home" href="index.html">⌂ TOPへ</a><div class="brand">8bit Lighting Study</div></footer>
+</main>
+<script>
+(()=>{
+const fixtures=[
+{id:'w500',voltage:100,name:'500W',amps:5,icon:'💡'},
+{id:'w750',voltage:100,name:'750W',amps:7.5,icon:'💡'},
+{id:'w1000',voltage:100,name:'1000W',amps:10,icon:'💡'},
+{id:'moving200',voltage:200,name:'200V Moving',amps:20,icon:'🟣'},
+{id:'spot200',voltage:200,name:'200V Spot',amps:15,icon:'🟣'}
+];
+let selected=fixtures[0],destination='L1',loads=[],nextId=1;
+const $=id=>document.getElementById(id);
+function fixtureButton(f){return `<button type="button" class="fixture-btn ${selected.id===f.id?'active':''}" data-fixture="${f.id}" data-voltage="${f.voltage}"><div class="bulb-symbol">${f.icon}</div><strong>${f.name}</strong><span>${f.amps}A</span></button>`;}
+function renderFixtureButtons(){
+$('fixtures100').innerHTML=fixtures.filter(f=>f.voltage===100).map(fixtureButton).join('');
+$('fixtures200').innerHTML=fixtures.filter(f=>f.voltage===200).map(fixtureButton).join('');
+document.querySelectorAll('.fixture-btn').forEach(b=>b.addEventListener('click',()=>{selected=fixtures.find(f=>f.id===b.dataset.fixture);if(selected.voltage===200)destination='200';else if(destination==='200')destination='L1';renderFixtureButtons();renderSelection();}));
+}
+function renderSelection(){
+$('selectedFixture').textContent=`${selected.name} / ${selected.amps}A`;
+const is200=selected.voltage===200;
+document.querySelectorAll('.dest-btn').forEach(b=>{b.disabled=is200;b.classList.toggle('active',!is200&&b.dataset.dest===destination);});
+$('selectedDest').textContent=is200?'L1-L2':`${destination}-N`;
+$('selectedDest').style.color=is200?'var(--v200)':destination==='L1'?'var(--l1)':'var(--l2)';
+}
+function current(){
+let l1_100=0,l2_100=0,i200=0;
+loads.forEach(x=>{if(x.voltage===200)i200+=x.amps;else if(x.dest==='L1')l1_100+=x.amps;else l2_100+=x.amps;});
+return {l1:l1_100+i200,l2:l2_100+i200,n:Math.abs(l1_100-l2_100),l1_100,l2_100,i200};
+}
+function renderNodes(){let html='';for(let r=0;r<5;r++)html+=`<div class="row"><span class="node l1"></span><span class="node n"></span><span class="node l2"></span></div>`;$('nodes').innerHTML=html;}
+function renderLoads(){
+$('emptyMessage').style.display=loads.length?'none':'grid';
+$('loads').innerHTML=loads.slice(0,5).map((x,index)=>{const side=x.voltage===200?'v200':x.dest.toLowerCase();const wire=x.voltage===200?'v200':x.dest.toLowerCase();const dest=x.voltage===200?'L1-L2':`${x.dest}-N`;return `<div class="load-row"><div class="load-wire ${wire}"></div><button type="button" class="load-card ${x.voltage===200?'v200':'v100'} ${side}" data-load-id="${x.instance}"><strong>${x.icon} ${x.name}</strong>${x.amps}A<br><span style="color:${x.voltage===200?'var(--v200)':x.dest==='L1'?'var(--l1)':'var(--l2)'}">${dest}</span></button></div>`;}).join('');
+document.querySelectorAll('[data-load-id]').forEach(b=>b.addEventListener('click',()=>{loads=loads.filter(x=>x.instance!==Number(b.dataset.loadId));renderAll();}));
+}
+function setMeter(id,value){$(id).textContent=`${value.toFixed(1)}A`;$('fill'+id.replace('meter','')).style.height=`${Math.min(100,value/60*100)}%`;}
+function renderStatus(){
+const c=current();
+$('sumL1').textContent=`${c.l1.toFixed(1)}A`;$('sumN').textContent=`${c.n.toFixed(1)}A`;$('sumL2').textContent=`${c.l2.toFixed(1)}A`;
+setMeter('meterL1',c.l1);setMeter('meterN',c.n);setMeter('meterL2',c.l2);
+const trip=c.l1>60||c.l2>60;$('breakerShell').classList.toggle('trip',trip);
+let text='';
+if(trip)text=`<span class="l1">容量超過です。</span> L1またはL2が60Aを超えたため、主幹ブレーカーがTRIPします。`;
+else if(!loads.length)text='まず100V灯体をL1-NかL2-Nへ接続して、右の電流を見てみよう。';
+else if(c.i200>0)text=`200V負荷は<span class="l1">L1</span>と<span class="l2">L2</span>の両方へ${c.i200.toFixed(1)}Aずつ加わるよ。100V負荷は片側だけに加わります。`;
+else if(c.n===0&&c.l1>0)text=`<span class="l1">L1</span>と<span class="l2">L2</span>が同じ${c.l1.toFixed(1)}Aなので、<span class="n">N線は0A</span>です。左右が打ち消し合っています。`;
+else text=`<span class="l1">L1 ${c.l1.toFixed(1)}A</span>、<span class="l2">L2 ${c.l2.toFixed(1)}A</span>。N線には100V負荷の差、<span class="n">${c.n.toFixed(1)}A</span>が流れます。`;
+$('teacherText').innerHTML=text;
+}
+function renderAll(){renderLoads();renderStatus();}
+document.querySelectorAll('.dest-btn').forEach(b=>b.addEventListener('click',()=>{if(selected.voltage===200)return;destination=b.dataset.dest;renderSelection();}));
+$('connectBtn').addEventListener('click',()=>{if(loads.length>=5){$('teacherText').textContent='画面に表示できる灯体は5台までです。灯体をクリックして削除してください。';return;}loads.push({...selected,dest:selected.voltage===200?'200':destination,instance:nextId++});renderAll();});
+$('clearBtn').addEventListener('click',()=>{loads=[];renderAll();});
+$('.help');
+renderNodes();renderFixtureButtons();renderSelection();renderAll();
+})();
+</script>
+</body>
+</html>
