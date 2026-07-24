@@ -5,387 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>新人向け 舞台照明インタラクティブ教材</title>
   <style>
-    :root {
-      --bg: #050608;
-      --panel: rgba(13, 17, 22, .88);
-      --line: rgba(255, 183, 77, .38);
-      --cyan: #00e5ff;
-      --gold: #ffb74d;
-      --text: #f5f7fb;
-      --muted: #aeb9c7;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at 20% 0%, rgba(255, 77, 166, .14), transparent 32%),
-        radial-gradient(circle at 80% 8%, rgba(0, 229, 255, .15), transparent 30%),
-        radial-gradient(circle at 50% 100%, rgba(255, 183, 77, .10), transparent 35%),
-        var(--bg);
-      color: var(--text);
-      font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      letter-spacing: .01em;
-    }
-
-    a { color: inherit; text-decoration: none; }
-
-    .page-shell {
-      width: min(1180px, calc(100% - 40px));
-      margin: 0 auto;
-      padding: 28px 0 42px;
-    }
-
-    .hero {
-      position: relative;
-      border: 1px solid rgba(255, 183, 77, .42);
-      border-radius: 26px;
-      overflow: hidden;
-      background: #07090d;
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,.06) inset,
-        0 18px 60px rgba(0,0,0,.55),
-        0 0 34px rgba(255,183,77,.11);
-    }
-
-    .hero img {
-      display: block;
-      width: 100%;
-      aspect-ratio: 16 / 7;
-      object-fit: cover;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,0) 48%, rgba(0,0,0,.30) 100%),
-        radial-gradient(circle at 50% 90%, rgba(255,183,77,.10), transparent 36%);
-      pointer-events: none;
-    }
-
-    .intro {
-      margin: 18px 0;
-      padding: 22px 24px;
-      border: 1px solid rgba(0, 229, 255, .22);
-      border-radius: 20px;
-      background:
-        linear-gradient(90deg, rgba(255,183,77,.075), rgba(0,229,255,.045)),
-        rgba(0,0,0,.44);
-      box-shadow: inset 0 0 20px rgba(0,0,0,.36);
-    }
-
-    .intro-top {
-      display: flex;
-      gap: 18px;
-      justify-content: space-between;
-      align-items: flex-end;
-      flex-wrap: wrap;
-    }
-
-    .intro h1 {
-      margin: 0 0 8px;
-      font-size: clamp(26px, 4.2vw, 46px);
-      line-height: 1.12;
-      letter-spacing: .02em;
-      text-shadow: 0 0 18px rgba(255,183,77,.18);
-    }
-
-    .intro .subtitle {
-      margin: 0;
-      color: var(--gold);
-      font-weight: 700;
-      font-size: clamp(14px, 1.65vw, 18px);
-    }
-
-    .intro p {
-      margin: 14px 0 0;
-      max-width: 900px;
-      color: #dce5ef;
-      font-size: 17px;
-      line-height: 1.85;
-      font-weight: 500;
-    }
-
-    .start-actions {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .start-button,
-    .sub-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 44px;
-      padding: 0 18px;
-      border-radius: 999px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .start-button {
-      background: linear-gradient(180deg, #ffd47a, #ff9f2e);
-      color: #15100a;
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,.22) inset,
-        0 0 22px rgba(255,183,77,.28);
-    }
-
-    .sub-button {
-      border: 1px solid rgba(255,255,255,.16);
-      color: #dbe7f2;
-      background: rgba(255,255,255,.055);
-    }
-
-    .route-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 28px 0 12px;
-      color: #ffffff;
-      font-size: 17px;
-      font-weight: 700;
-      letter-spacing: .05em;
-    }
-
-    .route-title::before {
-      content: "";
-      display: block;
-      width: 34px;
-      height: 3px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--gold), var(--cyan));
-      box-shadow: 0 0 12px rgba(0,229,255,.25);
-    }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-
-    .step-card {
-      position: relative;
-      min-height: 100%;
-      padding: 18px;
-      border-radius: 20px;
-      border: 1px solid rgba(255,183,77,.25);
-      background:
-        linear-gradient(145deg, rgba(255,183,77,.080), rgba(0,229,255,.040)),
-        var(--panel);
-      box-shadow:
-        inset 0 0 18px rgba(0,0,0,.40),
-        0 12px 36px rgba(0,0,0,.28);
-      overflow: hidden;
-    }
-
-    .step-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 92% 0%, rgba(0,229,255,.14), transparent 35%);
-      pointer-events: none;
-    }
-
-    .step-kicker {
-      position: relative;
-      display: inline-flex;
-      padding: 5px 9px;
-      border-radius: 999px;
-      background: rgba(0,0,0,.42);
-      border: 1px solid rgba(255,255,255,.13);
-      color: var(--gold);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .08em;
-    }
-
-    .step-card h2 {
-      position: relative;
-      margin: 12px 0 8px;
-      font-size: 22px;
-      line-height: 1.2;
-      font-weight: 700;
-    }
-
-    .step-card p {
-      position: relative;
-      margin: 0 0 14px;
-      color: #c8d5e2;
-      font-size: 15px;
-      line-height: 1.65;
-      font-weight: 500;
-    }
-
-    .lesson-list {
-      position: relative;
-      display: grid;
-      gap: 8px;
-    }
-
-    .lesson-link {
-      display: grid;
-      gap: 4px;
-      padding: 11px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.10);
-      background:
-        linear-gradient(90deg, rgba(255,255,255,.075), rgba(255,255,255,.030)),
-        rgba(0,0,0,.30);
-      transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
-    }
-
-    .lesson-link:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255,183,77,.52);
-      background:
-        linear-gradient(90deg, rgba(255,183,77,.135), rgba(0,229,255,.065)),
-        rgba(0,0,0,.34);
-      box-shadow: 0 0 18px rgba(255,183,77,.13);
-    }
-
-    .lesson-title {
-      color: #ffffff;
-      font-size: 16px;
-      font-weight: 700;
-    }
-
-    .lesson-desc {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.45;
-      font-weight: 500;
-    }
-
-    .footer-note {
-      margin-top: 18px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      color: #b7c3d0;
-      font-size: 14px;
-      line-height: 1.65;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.34);
-    }
-
-    @media (max-width: 980px) {
-      .steps { grid-template-columns: 1fr; }
-      .hero img { aspect-ratio: 16 / 9; }
-    }
-
-    @media (max-width: 640px) {
-      .page-shell {
-        width: min(100% - 22px, 1180px);
-        padding-top: 14px;
-      }
-      .intro { padding: 18px; }
-      .hero { border-radius: 18px; }
-      .step-card { padding: 16px; }
-    }
+    :root{--bg:#050608;--panel:rgba(13,17,22,.88);--cyan:#00e5ff;--gold:#ffb74d;--text:#f5f7fb;--muted:#aeb9c7}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 20% 0%,rgba(255,77,166,.14),transparent 32%),radial-gradient(circle at 80% 8%,rgba(0,229,255,.15),transparent 30%),radial-gradient(circle at 50% 100%,rgba(255,183,77,.10),transparent 35%),var(--bg);color:var(--text);font-family:"Hiragino Sans","Yu Gothic","Meiryo",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:.01em}a{color:inherit;text-decoration:none}.page-shell{width:min(1180px,calc(100% - 40px));margin:0 auto;padding:28px 0 42px}.hero{position:relative;border:1px solid rgba(255,183,77,.42);border-radius:26px;overflow:hidden;background:#07090d;box-shadow:0 0 0 1px rgba(255,255,255,.06) inset,0 18px 60px rgba(0,0,0,.55),0 0 34px rgba(255,183,77,.11)}.hero img{display:block;width:100%;aspect-ratio:16/7;object-fit:cover}.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 48%,rgba(0,0,0,.30) 100%),radial-gradient(circle at 50% 90%,rgba(255,183,77,.10),transparent 36%);pointer-events:none}.intro{margin:18px 0;padding:22px 24px;border:1px solid rgba(0,229,255,.22);border-radius:20px;background:linear-gradient(90deg,rgba(255,183,77,.075),rgba(0,229,255,.045)),rgba(0,0,0,.44);box-shadow:inset 0 0 20px rgba(0,0,0,.36)}.intro-top{display:flex;gap:18px;justify-content:space-between;align-items:flex-end;flex-wrap:wrap}.intro h1{margin:0 0 8px;font-size:clamp(26px,4.2vw,46px);line-height:1.12;letter-spacing:.02em;text-shadow:0 0 18px rgba(255,183,77,.18)}.intro .subtitle{margin:0;color:var(--gold);font-weight:700;font-size:clamp(14px,1.65vw,18px)}.intro p{margin:14px 0 0;max-width:900px;color:#dce5ef;font-size:17px;line-height:1.85;font-weight:500}.start-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.start-button,.sub-button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:999px;font-weight:700;white-space:nowrap}.start-button{background:linear-gradient(180deg,#ffd47a,#ff9f2e);color:#15100a;box-shadow:0 0 0 1px rgba(255,255,255,.22) inset,0 0 22px rgba(255,183,77,.28)}.sub-button{border:1px solid rgba(255,255,255,.16);color:#dbe7f2;background:rgba(255,255,255,.055)}.route-title{display:flex;align-items:center;gap:10px;margin:28px 0 12px;color:#fff;font-size:17px;font-weight:700;letter-spacing:.05em}.route-title::before{content:"";display:block;width:34px;height:3px;border-radius:999px;background:linear-gradient(90deg,var(--gold),var(--cyan));box-shadow:0 0 12px rgba(0,229,255,.25)}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.step-card{position:relative;min-height:100%;padding:18px;border-radius:20px;border:1px solid rgba(255,183,77,.25);background:linear-gradient(145deg,rgba(255,183,77,.080),rgba(0,229,255,.040)),var(--panel);box-shadow:inset 0 0 18px rgba(0,0,0,.40),0 12px 36px rgba(0,0,0,.28);overflow:hidden}.step-card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 92% 0%,rgba(0,229,255,.14),transparent 35%);pointer-events:none}.step-kicker{position:relative;display:inline-flex;padding:5px 9px;border-radius:999px;background:rgba(0,0,0,.42);border:1px solid rgba(255,255,255,.13);color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.08em}.step-card h2{position:relative;margin:12px 0 8px;font-size:22px;line-height:1.2;font-weight:700}.step-card p{position:relative;margin:0 0 14px;color:#c8d5e2;font-size:15px;line-height:1.65;font-weight:500}.lesson-list{position:relative;display:grid;gap:8px}.lesson-link{display:grid;gap:4px;padding:11px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:linear-gradient(90deg,rgba(255,255,255,.075),rgba(255,255,255,.030)),rgba(0,0,0,.30);transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease}.lesson-link:hover{transform:translateY(-2px);border-color:rgba(255,183,77,.52);background:linear-gradient(90deg,rgba(255,183,77,.135),rgba(0,229,255,.065)),rgba(0,0,0,.34);box-shadow:0 0 18px rgba(255,183,77,.13)}.lesson-title{color:#fff;font-size:16px;font-weight:700}.lesson-desc{color:var(--muted);font-size:14px;line-height:1.45;font-weight:500}.footer-note{margin-top:18px;padding:14px 16px;border-radius:16px;color:#b7c3d0;font-size:14px;line-height:1.65;border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.34)}@media(max-width:980px){.steps{grid-template-columns:1fr}.hero img{aspect-ratio:16/9}}@media(max-width:640px){.page-shell{width:min(100% - 22px,1180px);padding-top:14px}.intro{padding:18px}.hero{border-radius:18px}.step-card{padding:16px}}
   </style>
 </head>
 <body>
   <main class="page-shell">
-    <section class="hero" aria-label="舞台照明インタラクティブ教材 表紙イラスト">
-      <img src="assets/index/hero_lighting_learning.png" alt="調光、DMX、LED色混ぜ、ムービングライト、ネットワーク制御を示す舞台照明教材の表紙イラスト" />
-    </section>
-
+    <section class="hero" aria-label="舞台照明インタラクティブ教材 表紙イラスト"><img src="assets/index/hero_lighting_learning.png" alt="調光、DMX、LED色混ぜ、ムービングライト、ネットワーク制御を示す舞台照明教材の表紙イラスト" /></section>
     <section class="intro">
-      <div class="intro-top">
-        <div>
-          <h1>新人向け<br>舞台照明インタラクティブ教材</h1>
-          <p class="subtitle">触って理解する、照明のしくみ。</p>
-        </div>
-        <div class="start-actions">
-          <a class="start-button" href="Top.html?tab=sim8bit&v=957b8ca">教材を開始する</a>
-          <a class="sub-button" href="Top.html?tab=ledcolormix&v=957b8ca">LED色混ぜから見る</a>
-        </div>
-      </div>
-      <p>
-        舞台照明では、フェーダーを上げるだけでも、内部では数値・信号・灯体・ネットワークがつながって動いています。
-        この教材では、難しい用語を先に覚えるのではなく、画面を触りながら「何が起きているのか」を見ていきます。
-        8-bit、16-bit、DMX、LED色混ぜ、ムービングライト、IPアドレス、Art-Net、sACNなどを、現場で迷わないための入口として整理しています。
-      </p>
+      <div class="intro-top"><div><h1>新人向け<br>舞台照明インタラクティブ教材</h1><p class="subtitle">触って理解する、照明のしくみ。</p></div><div class="start-actions"><a class="start-button" href="Analog.html">教材を開始する</a><a class="sub-button" href="Top.html?tab=ledcolormix&v=957b8ca">LED色混ぜから見る</a></div></div>
+      <p>舞台照明では、フェーダーを上げるだけでも、内部では数値・信号・灯体・ネットワークがつながって動いています。この教材では、難しい用語を先に覚えるのではなく、画面を触りながら「何が起きているのか」を見ていきます。電気の基礎、8-bit、16-bit、DMX、LED色混ぜ、ムービングライト、IPアドレス、Art-Net、sACNなどを、現場で迷わないための入口として整理しています。</p>
     </section>
-
     <div class="route-title">学習ルート</div>
-
     <section class="steps" aria-label="教材目次">
-      
-        <section class="step-card">
-          <div class="step-kicker">STEP 1</div>
-          <h2>調光とDMX</h2>
-          <p>フェーダーの動きが、数値になり、DMX信号として送られる流れをつかむ。</p>
-          <div class="lesson-list">
-            <a class="lesson-link" href="Top.html?tab=sim8bit&v=957b8ca">
-              <span class="lesson-title">8-bit 調光卓</span>
-              <span class="lesson-desc">値 0〜255 とフェーダーの関係を触って確認する。</span>
-            </a>
-            <a class="lesson-link" href="Top.html?tab=sim16bit&v=957b8ca">
-              <span class="lesson-title">16-bit 調光卓</span>
-              <span class="lesson-desc">粗い動きと細かい動きの違いを見る。</span>
-            </a>
-            <a class="lesson-link" href="Top.html?tab=simdmx&v=957b8ca">
-              <span class="lesson-title">DMX通信列車</span>
-              <span class="lesson-desc">DMXが順番に値を運ぶイメージを理解する。</span>
-            </a>
-          </div>
-        </section>
-        <section class="step-card">
-          <div class="step-kicker">STEP 2</div>
-          <h2>LEDと灯体制御</h2>
-          <p>色を作る考え方と、複数パラメータを持つ灯体の動きを見る。</p>
-          <div class="lesson-list">
-            <a class="lesson-link" href="Top.html?tab=ledcolormix&v=957b8ca">
-              <span class="lesson-title">LED色混ぜ</span>
-              <span class="lesson-desc">RGB、White、Amber、Lime、Cyanなどの役割を色地図で見る。</span>
-            </a>
-            <a class="lesson-link" href="Top.html?tab=movinghead&v=957b8ca">
-              <span class="lesson-title">Moving Head</span>
-              <span class="lesson-desc">PAN/TILT、16-bit、キャリブレーションの考え方を確認する。</span>
-            </a>
-          </div>
-        </section>
-        <section class="step-card">
-          <div class="step-kicker">STEP 3</div>
-          <h2>ネットワーク制御</h2>
-          <p>IPアドレスから順に、DMX on LAN、Broadcast、Multicast、結線を整理する。</p>
-          <div class="lesson-list">
-            <a class="lesson-link" href="Top.html?tab=netipaddress&v=957b8ca">
-              <span class="lesson-title">IPアドレス</span>
-              <span class="lesson-desc">機器ごとの住所、同じネットワーク、IP重複を確認する。</span>
-            </a>
-            <a class="lesson-link" href="Top.html?tab=netartnet&v=957b8ca">
-              <span class="lesson-title">DMX on LAN</span>
-              <span class="lesson-desc">DMXをEthernet上のパケットとして運ぶ考え方を見る。</span>
-            </a>
-            <a class="lesson-link" href="Top.html?tab=netbroadcast&v=957b8ca">
-              <span class="lesson-title">Broadcast / Art-Net 1</span>
-              <span class="lesson-desc">同じネットワーク内の全Nodeへ届く送信を確認する。</span>
-            </a>
-            <a class="lesson-link" href="Top.html?tab=netsacn&v=957b8ca">
-              <span class="lesson-title">Multicast / sACN</span>
-              <span class="lesson-desc">必要なUniverseを必要なNodeへ届ける考え方を見る。</span>
-            </a>
-            <a class="lesson-link" href="Top.html?tab=netredundancy&v=957b8ca">
-              <span class="lesson-title">結線 / 冗長化</span>
-              <span class="lesson-desc">Star / Ring / 予備系など、現場の結線と冗長化を整理する。</span>
-            </a>
-          </div>
-        </section>
+      <section class="step-card">
+        <div class="step-kicker">STEP 1</div><h2>電気の基礎と調光</h2><p>電圧・電力・電流から、電源、フェーダー、DMXまでの流れをつかむ。</p>
+        <div class="lesson-list">
+          <a class="lesson-link" href="Analog.html"><span class="lesson-title">V・W・Aの法則</span><span class="lesson-desc">電圧・電力・電流の関係を、数値を動かして確認する。</span></a>
+          <a class="lesson-link" href="SinglePhase3.html"><span class="lesson-title">単相3線（L1・N・L2）</span><span class="lesson-desc">100V・200V、相バランス、主幹60Aのしくみを見る。</span></a>
+          <a class="lesson-link" href="Top.html?tab=sim8bit&v=957b8ca"><span class="lesson-title">8-bit 調光卓</span><span class="lesson-desc">値 0〜255 とフェーダーの関係を触って確認する。</span></a>
+          <a class="lesson-link" href="Top.html?tab=sim16bit&v=957b8ca"><span class="lesson-title">16-bit 調光卓</span><span class="lesson-desc">粗い動きと細かい動きの違いを見る。</span></a>
+          <a class="lesson-link" href="Top.html?tab=simdmx&v=957b8ca"><span class="lesson-title">DMX通信列車</span><span class="lesson-desc">DMXが順番に値を運ぶイメージを理解する。</span></a>
+        </div>
+      </section>
+      <section class="step-card">
+        <div class="step-kicker">STEP 2</div><h2>LEDと灯体制御</h2><p>色を作る考え方と、複数パラメータを持つ灯体の動きを見る。</p>
+        <div class="lesson-list">
+          <a class="lesson-link" href="Top.html?tab=ledcolormix&v=957b8ca"><span class="lesson-title">LED色混ぜ</span><span class="lesson-desc">RGB、White、Amber、Lime、Cyanなどの役割を色地図で見る。</span></a>
+          <a class="lesson-link" href="Top.html?tab=movinghead&v=957b8ca"><span class="lesson-title">Moving Head</span><span class="lesson-desc">PAN/TILT、16-bit、キャリブレーションの考え方を確認する。</span></a>
+        </div>
+      </section>
+      <section class="step-card">
+        <div class="step-kicker">STEP 3</div><h2>ネットワーク制御</h2><p>IPアドレスから順に、DMX on LAN、Broadcast、Multicast、結線を整理する。</p>
+        <div class="lesson-list">
+          <a class="lesson-link" href="Top.html?tab=netipaddress&v=957b8ca"><span class="lesson-title">IPアドレス</span><span class="lesson-desc">機器ごとの住所、同じネットワーク、IP重複を確認する。</span></a>
+          <a class="lesson-link" href="Top.html?tab=netartnet&v=957b8ca"><span class="lesson-title">DMX on LAN</span><span class="lesson-desc">DMXをEthernet上のパケットとして運ぶ考え方を見る。</span></a>
+          <a class="lesson-link" href="Top.html?tab=netbroadcast&v=957b8ca"><span class="lesson-title">Broadcast / Art-Net 1</span><span class="lesson-desc">同じネットワーク内の全Nodeへ届く送信を確認する。</span></a>
+          <a class="lesson-link" href="Top.html?tab=netsacn&v=957b8ca"><span class="lesson-title">Multicast / sACN</span><span class="lesson-desc">必要なUniverseを必要なNodeへ届ける考え方を見る。</span></a>
+          <a class="lesson-link" href="Top.html?tab=netredundancy&v=957b8ca"><span class="lesson-title">結線 / 冗長化</span><span class="lesson-desc">Star / Ring / 予備系など、現場の結線と冗長化を整理する。</span></a>
+        </div>
+      </section>
     </section>
-
-    <section class="footer-note">
-      目次の各項目を押すと、教材本体の該当タブを直接開きます。
-      全体を順番に見る場合は「教材を開始する」から進んでください。
-      ネットワーク制御は、IPアドレス → DMX on LAN → Broadcast / Art-Net 1 → Multicast / sACN → 結線 / 冗長化 の順で見ると分かりやすいです。
-    </section>
+    <section class="footer-note">目次の各項目を押すと、該当する教材を直接開きます。全体を順番に見る場合は「教材を開始する」から進んでください。STEP1は、V・W・A → 単相3線 → 8-bit → 16-bit → DMX通信列車 の順で見ると分かりやすいです。ネットワーク制御は、IPアドレス → DMX on LAN → Broadcast / Art-Net 1 → Multicast / sACN → 結線 / 冗長化 の順で見ると分かりやすいです。</section>
   </main>
 </body>
 </html>
