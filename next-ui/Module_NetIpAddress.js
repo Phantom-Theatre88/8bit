@@ -108,7 +108,6 @@ window.Module_NetIpAddress = {
       <div class="net-ip-left">
         ${this.getSlideHeadHTML(slide)}
         ${this.getLessonVisualHTML(slide, index)}
-        ${this.getPointCardHTML(slide)}
       </div>
     `;
   },
@@ -343,6 +342,7 @@ window.Module_NetIpAddress = {
       return;
     }
 
+    this.updateLessonChrome(host, this.slides[0]);
     this.bindSlideButtons(host);
     this.bindInteractive(host);
     this.updateInteractive(host);
@@ -411,17 +411,7 @@ window.Module_NetIpAddress = {
     host.querySelector('[data-role="image-title"]').textContent =
       slide.imageTitle;
 
-    host.querySelector('[data-role="point-title"]').textContent =
-      slide.pointTitle;
-
-    host.querySelector('[data-role="point-head"]').textContent =
-      slide.pointHead;
-
-    host.querySelector('[data-role="point-text"]').textContent =
-      slide.pointText;
-
-    host.querySelector('[data-role="bottom-note"]').textContent =
-      slide.bottomNote;
+    this.updateLessonChrome(host, slide);
 
     host.querySelector('[data-role="comic-board"]').innerHTML =
       this.getComicHTML(slide.simMode);
@@ -468,15 +458,18 @@ window.Module_NetIpAddress = {
   },
 
   updateResult(host, status) {
-    const resultBox = host.querySelector('[data-role="interactive-result"]');
+    const page = host.closest(".common-lesson-page") || host;
+    const teacher = page.querySelector("#netipaddress-teacher-speech");
 
-    if (!resultBox) {
+    if (!teacher) {
       return;
     }
 
-    resultBox.className = `interactive-result ${status.kind}`;
-    resultBox.querySelector("b").textContent = status.title;
-    resultBox.querySelector("span").textContent = status.message;
+    teacher.dataset.status = status.kind;
+    teacher.innerHTML = `
+      <strong class="ip-teacher-status ${status.kind}">${status.title}</strong>
+      <span>${status.message}</span>
+    `;
   },
 
   updateLines(host, status) {
@@ -539,17 +532,54 @@ window.Module_NetIpAddress = {
   getInteractiveHTML(mode) {
     return `
       <div class="interactive-root mode-${mode}">
-        ${this.getInteractiveHeaderHTML(mode)}
-        ${this.getChallengeHTML(mode)}
-
         <div class="interactive-main">
           ${this.getInputPanelHTML(mode)}
-          ${this.getNetworkDiagramHTML(mode)}
+          <div class="interactive-diagram-wrap">
+            ${this.getNetworkDiagramHTML(mode)}
+          </div>
         </div>
-
-        ${this.getResultHTML()}
       </div>
     `;
+  },
+
+  getCheckerTitles(mode) {
+    const titles = {
+      address: ["IP ADDRESS CHECKER", "IPはネットワーク上の住所"],
+      same: ["SAME NETWORK CHECK", "同じネットワークにいるか判定する"],
+      subnet: ["SUBNET MASK CHECK", "Maskが見る範囲を決める"],
+      duplicate: ["IP DUPLICATE CHECK", "同じIPが2台ないか確認する"]
+    };
+
+    return titles[mode] || titles.address;
+  },
+
+  getCheckerTitleHTML(mode = "address") {
+    const [title, sub] = this.getCheckerTitles(mode);
+    return `
+      <div class="net-ip-checker-title" aria-label="IP判定モード">
+        <b data-role="checker-title">${title}</b>
+        <span data-role="checker-sub">${sub}</span>
+      </div>
+    `;
+  },
+
+  updateLessonChrome(host, slide) {
+    const page = host.closest(".common-lesson-page") || host;
+    const explain = page.querySelector("#netipaddress-common-explain");
+    const checkerTitle = page.querySelector('[data-role="checker-title"]');
+    const checkerSub = page.querySelector('[data-role="checker-sub"]');
+    const [title, sub] = this.getCheckerTitles(slide.simMode);
+
+    if (checkerTitle) checkerTitle.textContent = title;
+    if (checkerSub) checkerSub.textContent = sub;
+    if (explain) {
+      explain.innerHTML = `
+        <div class="network-panel-kicker">${slide.pointTitle}</div>
+        <div class="network-panel-title">${slide.pointHead}</div>
+        <div class="network-panel-body">${slide.pointText}</div>
+        <div class="network-panel-map">${slide.bottomNote}</div>
+      `;
+    }
   },
 
 
@@ -596,14 +626,7 @@ window.Module_NetIpAddress = {
   },
 
   getInteractiveHeaderHTML(mode) {
-    const titles = {
-      address: ["IP ADDRESS CHECKER", "IPはネットワーク上の住所"],
-      same: ["SAME NETWORK CHECK", "同じネットワークにいるか判定する"],
-      subnet: ["SUBNET MASK CHECK", "Maskが見る範囲を決める"],
-      duplicate: ["IP DUPLICATE CHECK", "同じIPが2台ないか確認する"]
-    };
-
-    const [title, sub] = titles[mode];
+    const [title, sub] = this.getCheckerTitles(mode);
 
     return `
       <div class="interactive-header">
@@ -620,12 +643,13 @@ window.Module_NetIpAddress = {
       subnet: "Maskを変えると、見る範囲が変わる。",
       duplicate: "Node A と Node B を同じIPにすると ERROR になる。"
     };
+    const challenge = this.getChallengeData(mode);
 
     return `
       <div class="ip-control-panel role-input">
         <div class="control-title">
-          <b>IP INPUT</b>
-          <span>${modeHelp[mode]}</span>
+          <b>IP INPUT <em>${challenge.title}</em></b>
+          <span>${challenge.action}｜${modeHelp[mode]}</span>
         </div>
 
         <div class="input-rows">
@@ -650,6 +674,37 @@ window.Module_NetIpAddress = {
         </div>
       </div>
     `;
+  },
+
+  getChallengeData(mode) {
+    const challenges = {
+      address: {
+        title: "CHALLENGE 1",
+        action: "各機器の最後の数字を変えてみる",
+        goal: "機器ごとに違う住所を持つことを確認する",
+        hint: "最後の数字を変える"
+      },
+      same: {
+        title: "CHALLENGE 2",
+        action: "Node B を 192.168.1.22 にしてみる",
+        goal: "別ネットワークになると NG になることを確認する",
+        hint: "プリセット：別ネットワーク"
+      },
+      subnet: {
+        title: "CHALLENGE 3",
+        action: "Mask を 255.255.0.0 に変えてみる",
+        goal: "見える範囲が広がることを確認する",
+        hint: "プリセット：Mask /16"
+      },
+      duplicate: {
+        title: "CHALLENGE 4",
+        action: "Node A と Node B を同じIPにしてみる",
+        goal: "ERROR：IP重複になることを確認する",
+        hint: "プリセット：IP重複"
+      }
+    };
+
+    return challenges[mode] || challenges.address;
   },
 
   getIpRowHTML(label, group, values) {

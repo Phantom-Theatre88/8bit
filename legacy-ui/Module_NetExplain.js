@@ -20,10 +20,7 @@ const Module_NetExplain = {
     ringSecondaryCuts: [false, false, false], 
 
     V_WIDTH: 1200,
-    V_HEIGHT: 470,
-    viewScale: 1,
-    viewOffsetX: 0,
-    viewOffsetY: 0,
+    V_HEIGHT: 530,
     clickTriggers: [],
 
     getHTML() {
@@ -75,13 +72,10 @@ const Module_NetExplain = {
         const rect = this.canvas.getBoundingClientRect();
         this.canvas.width = Math.floor(rect.width * dpr);
         this.canvas.height = Math.floor(rect.height * dpr);
-        const scale = Math.min(rect.width / this.V_WIDTH, rect.height / this.V_HEIGHT);
-        const offsetX = (rect.width - this.V_WIDTH * scale) / 2;
-        const offsetY = (rect.height - this.V_HEIGHT * scale) / 2;
-        this.viewScale = scale;
-        this.viewOffsetX = offsetX;
-        this.viewOffsetY = offsetY;
-        this.ctx.setTransform(scale * dpr, 0, 0, scale * dpr, offsetX * dpr, offsetY * dpr);
+        this.ctx.restore();
+        this.ctx.save();
+        const scale = rect.width / this.V_WIDTH;
+        this.ctx.scale(scale * dpr, scale * dpr);
     },
 
     bindClickEvents() {
@@ -90,9 +84,9 @@ const Module_NetExplain = {
             const rect = this.canvas.getBoundingClientRect();
             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
             const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-            const scale = this.viewScale || 1;
-            const clickX = (clientX - rect.left - this.viewOffsetX) / scale;
-            const clickY = (clientY - rect.top - this.viewOffsetY) / scale;
+            const scale = rect.width / this.V_WIDTH;
+            const clickX = (clientX - rect.left) / scale;
+            const clickY = (clientY - rect.top) / scale;
 
             this.clickTriggers.forEach(t => {
                 if (Math.hypot(clickX - t.x, clickY - t.y) <= 15) {

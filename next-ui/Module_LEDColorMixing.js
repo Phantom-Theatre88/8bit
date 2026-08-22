@@ -142,15 +142,21 @@ window.Module_LEDColorMixing = {
           <h1>LED Color Mixing｜RGBで白は作れるのか</h1>
           <p>右上のボタンでLEDのチャンネル構成を切り替え、RGB、White、Amber、Lime、Cyanなどの位置を色地図で見る。</p>
         </div>
-        <div class="ledmix-mode-area" aria-label="LED構成選択">
-          <div class="ledmix-mode-label">LED構成を選ぶ</div>
-          <div class="ledmix-mode-tabs">
-            ${Object.entries(this.modes).map(([key, mode]) => {
-              return `<button class="ledmix-mode-btn ${key === this.state.mode ? "active" : ""}" data-mode="${key}">${mode.tab}</button>`;
-            }).join("")}
-          </div>
-        </div>
+        ${this.getModeControlsHTML()}
       </header>
+    `;
+  },
+
+  getModeControlsHTML() {
+    return `
+      <div class="ledmix-mode-area" aria-label="LED構成選択">
+        <div class="ledmix-mode-label">LED構成を選ぶ</div>
+        <div class="ledmix-mode-tabs">
+          ${Object.entries(this.modes).map(([key, mode]) => {
+            return `<button class="ledmix-mode-btn ${key === this.state.mode ? "active" : ""}" data-mode="${key}">${mode.tab}</button>`;
+          }).join("")}
+        </div>
+      </div>
     `;
   },
 
@@ -304,7 +310,9 @@ window.Module_LEDColorMixing = {
       return;
     }
 
-    host.querySelectorAll("[data-mode]").forEach((button) => {
+    const page = host.closest(".common-lesson-page") || host;
+
+    page.querySelectorAll("[data-mode]").forEach((button) => {
       button.addEventListener("click", () => {
         this.state.mode = button.dataset.mode;
         Object.assign(this.state.values, this.modes[this.state.mode].preset);
@@ -382,7 +390,9 @@ window.Module_LEDColorMixing = {
   update(host) {
     const mode = this.modes[this.state.mode];
 
-    host.querySelectorAll("[data-mode]").forEach((button) => {
+    const page = host.closest(".common-lesson-page") || host;
+
+    page.querySelectorAll("[data-mode]").forEach((button) => {
       button.classList.toggle("active", button.dataset.mode === this.state.mode);
     });
 

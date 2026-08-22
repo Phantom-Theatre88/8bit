@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="next-ui-typography.css">
     
     <style>
         :root {
@@ -37,13 +38,269 @@
             overflow: hidden;
         }
 
-        .main-tab-container {
-            display: flex;
-            gap: 6px;
-            width: 100%;
-            max-width: 1300px;
-            margin: 0 auto 10px auto;
+        .main-tab-container.next-ui-module-tabs { display: none !important; }
+
+        .next-ui-header {
+            position: relative;
+            width: calc(100% + 30px);
+            max-width: none;
+            margin: -15px -15px 10px;
             flex-shrink: 0;
+            border: 0;
+            border-bottom: 1px solid #292f35;
+            border-radius: 0;
+            background:
+                radial-gradient(circle at 15% -50%,rgba(255,111,0,.08),transparent 28%),
+                linear-gradient(180deg,#101419 0%,#080b0e 100%);
+            box-shadow: 0 10px 30px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.035);
+            overflow: visible;
+            z-index: 30;
+        }
+
+        .next-ui-header-top {
+            min-height: 58px;
+            display: flex;
+            align-items: stretch;
+            border-bottom: 1px solid rgba(255,111,0,.72);
+            box-shadow: inset 0 -1px 0 rgba(255,111,0,.08);
+        }
+
+        .next-ui-brand {
+            width: 144px;
+            padding: 8px 20px 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #fff;
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: .03em;
+            line-height: .86;
+            text-decoration: none;
+            white-space: nowrap;
+            text-shadow: 0 0 15px rgba(255,183,77,.17);
+        }
+
+        .next-ui-brand small {
+            margin-top: 6px;
+            color: #d8dde2;
+            font-size: 9px;
+            letter-spacing: .08em;
+        }
+
+        .next-ui-category-tabs {
+            display: flex;
+            align-items: stretch;
+            gap: 4px;
+        }
+
+        .next-ui-category-menu {
+            position: relative;
+            display: flex;
+            align-items: stretch;
+        }
+
+        .next-ui-category-tab {
+            min-width: 124px;
+            height: 100%;
+            padding: 0 17px;
+            border: 1px solid #2b3238;
+            border-bottom: 0;
+            border-radius: 6px 6px 0 0;
+            background: linear-gradient(180deg,rgba(21,26,31,.96),rgba(12,15,18,.96));
+            color: #c3cbd2;
+            font: 800 14px inherit;
+            cursor: pointer;
+            letter-spacing: .02em;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+            transition: color .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease;
+        }
+
+        .next-ui-category-tab:hover {
+            color: #fff;
+            border-color: #4a535b;
+            background: linear-gradient(180deg,#1b2126,#101419);
+        }
+
+        .next-ui-category-tab.active {
+            color: #ff9800;
+            border-color: #b94f00;
+            background:
+                radial-gradient(circle at 50% 110%,rgba(255,111,0,.18),transparent 54%),
+                linear-gradient(180deg,#1b1b19,#11100e);
+            box-shadow:
+                inset 0 -3px 0 #ff6f00,
+                inset 0 1px 0 rgba(255,184,89,.13),
+                0 0 18px rgba(255,111,0,.2);
+            text-shadow: 0 0 10px rgba(255,111,0,.48);
+        }
+
+        .next-ui-category-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            display: inline-flex;
+            vertical-align: middle;
+            color: currentColor;
+        }
+
+        .next-ui-category-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .next-ui-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 50;
+            width: max-content;
+            min-width: 252px;
+            padding: 8px;
+            display: grid;
+            gap: 5px;
+            border: 1px solid #465059;
+            border-top: 2px solid #ff6f00;
+            border-radius: 0 0 8px 8px;
+            background:
+                radial-gradient(circle at 50% 0,rgba(255,111,0,.08),transparent 40%),
+                linear-gradient(180deg,rgba(23,28,33,.995),rgba(8,11,14,.995));
+            box-shadow: 0 20px 46px rgba(0,0,0,.82), 0 0 18px rgba(255,111,0,.08), inset 0 1px 0 rgba(255,255,255,.04);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(-5px);
+            transition: opacity .13s ease, visibility .13s ease, transform .13s ease;
+        }
+
+        .next-ui-category-menu:hover .next-ui-dropdown,
+        .next-ui-category-menu:focus-within .next-ui-dropdown,
+        .next-ui-category-menu.open .next-ui-dropdown {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .next-ui-dropdown a,
+        .next-ui-dropdown button,
+        .next-ui-dropdown span {
+            width: 100%;
+            min-height: 36px;
+            padding: 7px 11px;
+            display: flex;
+            align-items: center;
+            border: 1px solid #343c43;
+            border-radius: 6px;
+            background: #11161a;
+            color: #d8dfe5;
+            font: 700 12px inherit;
+            text-align: left;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .next-ui-dropdown a:hover,
+        .next-ui-dropdown button:hover {
+            border-color: #ff7d16;
+            color: #fff;
+            background: rgba(255,111,0,.11);
+        }
+
+        .next-ui-dropdown .active {
+            border-color: #ff6f00;
+            color: #ff9b3d;
+            box-shadow: inset 3px 0 0 #ff6f00;
+        }
+
+        .next-ui-dropdown .pending {
+            border-style: dashed;
+            color: #68737c;
+            cursor: default;
+        }
+
+        .next-ui-tools {
+            margin-left: auto;
+            padding: 9px 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .next-ui-tool {
+            min-height: 35px;
+            padding: 0 12px;
+            border: 1px solid #394149;
+            border-radius: 6px;
+            background: linear-gradient(180deg,#151a1f,#0c1014);
+            color: #c0c8cf;
+            font-size: 11px;
+            font-weight: 700;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+        }
+
+        .next-ui-tool.menu { min-width: 34px; padding: 0; font-size: 19px; }
+
+        .next-ui-subbar {
+            min-height: 50px;
+            padding: 7px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(180deg,rgba(12,15,18,.94),rgba(7,9,11,.96));
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+        }
+
+        .next-ui-home,
+        .next-ui-page-button {
+            height: 34px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #414a52;
+            border-radius: 6px;
+            background: linear-gradient(180deg,#151a1f,#0c1014);
+            color: #eef2f5;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .next-ui-home { width: 46px; font-size: 19px; }
+
+        .next-ui-current-page {
+            width: min(390px,42vw);
+            height: 34px;
+            padding: 0 13px;
+            display: flex;
+            align-items: center;
+            border: 1px solid #47515a;
+            border-radius: 6px;
+            background: linear-gradient(180deg,#151a1f,#0d1115);
+            color: #eef2f5;
+            font: 700 12px inherit;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+        }
+
+        .next-ui-page-controls { margin-left: auto; display: flex; gap: 10px; }
+        .next-ui-page-button { min-width: 88px; cursor: pointer; }
+        .next-ui-page-button:disabled { opacity: .35; cursor: default; }
+        .next-ui-tools .next-ui-page-controls {
+            margin-left: 6px;
+            padding-left: 10px;
+            gap: 6px;
+            border-left: 1px solid #353d44;
+        }
+
+        @media(max-width:980px) {
+            .next-ui-brand { width: 105px; font-size: 18px; }
+            .next-ui-category-tab { min-width: 88px; padding: 0 9px; }
+            .next-ui-tools .next-ui-tool:not(.menu) { display: none; }
         }
 
         .main-tab-btn {
@@ -4761,7 +5018,320 @@
             flex: 0 0 auto;
         }
 
+        /* --- Next UI Step 2: viewport-height adaptation --- */
+        html,
+        body {
+            height: var(--next-ui-viewport-height, 100dvh);
+            min-height: 0;
+        }
+
+        body {
+            padding-bottom: 10px;
+        }
+
+        .next-ui-header {
+            flex: 0 0 auto;
+        }
+
+        .master-console-container {
+            min-height: 0;
+            height: auto;
+            flex: 1 1 0;
+        }
+
+        .master-console-container .console-main-screen,
+        .master-console-container.movinghead-active .console-main-screen,
+        .master-console-container.sim8bit-active .console-main-screen,
+        .master-console-container.sim16bit-active .console-main-screen,
+        .master-console-container.simdmx-active .console-main-screen,
+        .master-console-container.ledmix-active .console-main-screen,
+        .master-console-container.network-active .console-main-screen,
+        .master-console-container.scroller-active .console-main-screen {
+            min-height: 0;
+            height: auto;
+            aspect-ratio: auto !important;
+            flex: 1 1 0 !important;
+        }
+
+        .master-console-container .console-help-display,
+        .master-console-container.movinghead-active .console-help-display,
+        .master-console-container.sim8bit-active .console-help-display,
+        .master-console-container.sim16bit-active .console-help-display,
+        .master-console-container.simdmx-active .console-help-display,
+        .master-console-container.ledmix-active .console-help-display,
+        .master-console-container.network-active .console-help-display,
+        .master-console-container.scroller-active .console-help-display {
+            min-height: 72px;
+            flex: 0 0 clamp(72px, 12.5vh, 112px) !important;
+        }
+
+        @media (max-height: 860px) {
+            body { padding: 8px 10px 8px; }
+            .next-ui-header {
+                width: calc(100% + 20px);
+                margin: -8px -10px 7px;
+            }
+            .next-ui-header-top { min-height: 50px; }
+            .next-ui-brand { width: 126px; padding-left: 16px; font-size: 22px; }
+            .next-ui-category-tab { min-width: 108px; padding: 0 13px; font-size: 13px; }
+            .next-ui-tools { padding: 7px 10px; }
+            .next-ui-tool { min-height: 32px; padding: 0 9px; font-size: 10px; }
+            .next-ui-subbar { min-height: 43px; padding: 5px 12px; }
+            .next-ui-home,
+            .next-ui-current-page,
+            .next-ui-page-button { height: 32px; }
+            .master-console-container { padding: 12px; gap: 8px; }
+            .master-console-container .console-help-display,
+            .master-console-container.movinghead-active .console-help-display,
+            .master-console-container.sim8bit-active .console-help-display,
+            .master-console-container.sim16bit-active .console-help-display,
+            .master-console-container.simdmx-active .console-help-display,
+            .master-console-container.ledmix-active .console-help-display,
+            .master-console-container.network-active .console-help-display,
+            .master-console-container.scroller-active .console-help-display {
+                min-height: 68px;
+                flex-basis: clamp(68px, 11vh, 88px) !important;
+                padding: 8px 14px;
+            }
+            .help-text-content { font-size: 11.5px !important; line-height: 1.42 !important; }
+        }
+
+        @media (max-height: 720px) {
+            .next-ui-header-top { min-height: 44px; }
+            .next-ui-brand { width: 112px; padding-top: 5px; font-size: 20px; }
+            .next-ui-brand small { margin-top: 4px; font-size: 8px; }
+            .next-ui-category-tab { min-width: 96px; font-size: 12px; }
+            .next-ui-category-icon { width: 17px; height: 17px; margin-right: 6px; }
+            .next-ui-tools .next-ui-tool:not(.menu) { display: none; }
+            .next-ui-subbar { min-height: 39px; padding-top: 3px; padding-bottom: 3px; }
+            .next-ui-home,
+            .next-ui-current-page,
+            .next-ui-page-button { height: 30px; }
+            .master-console-container { padding: 9px; gap: 6px; }
+            .master-console-container .console-help-display,
+            .master-console-container.movinghead-active .console-help-display,
+            .master-console-container.sim8bit-active .console-help-display,
+            .master-console-container.sim16bit-active .console-help-display,
+            .master-console-container.simdmx-active .console-help-display,
+            .master-console-container.ledmix-active .console-help-display,
+            .master-console-container.network-active .console-help-display,
+            .master-console-container.scroller-active .console-help-display {
+                min-height: 58px;
+                flex-basis: 58px !important;
+                padding: 6px 12px;
+            }
+            .help-text-content {
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+        }
+
+        /* --- Two-page implementation: 8-bit lesson common skeleton --- */
+        .master-console-container.sim8bit-active .console-help-display {
+            display: none !important;
+        }
+
+        .master-console-container.sim8bit-active {
+            max-width: none;
+            padding: 0;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+            box-shadow: none;
+        }
+
+        .module-page-root.sim8bit.sim8-common-page {
+            width: 100%;
+            height: 100%;
+            min-height: 0;
+            padding: 0;
+            display: grid;
+            grid-template-rows: clamp(52px, 6vh, 62px) minmax(0, 1fr) clamp(184px, 22vh, 228px) 28px;
+            gap: 8px;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 44% 20%, rgba(255,111,0,.045), transparent 36%),
+                #080a0c;
+        }
+
+        .sim8-page-titlebar {
+            min-height: 0;
+            padding: 8px 14px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border: 0;
+            border-left: 3px solid #ff6f00;
+            background: linear-gradient(90deg,rgba(255,111,0,.055),transparent 52%);
+        }
+
+        .sim8-page-heading { min-width: 0; }
+        .sim8-page-title { margin: 0; color: #f2f5f7; font-size: clamp(20px,1.55vw,27px); line-height: 1.08; }
+        .sim8-page-sub { margin-top: 5px; color: #aab2ba; font-size: clamp(10px,.78vw,13px); }
+        .sim8-page-main {
+            min-height: 0;
+            padding: 10px;
+            overflow: hidden;
+            border: 1px solid #4a5259;
+            border-radius: 8px;
+            background: linear-gradient(180deg,#13171b,#0d1013);
+            box-shadow: inset 0 0 22px rgba(0,0,0,.46);
+        }
+        .sim8-page-main > div { gap: 12px !important; }
+        .sim8-page-main .fader-col,
+        .sim8-page-main .center-col,
+        .sim8-page-main .bulb-col { min-height: 0; }
+        .sim8-page-main .fader-col { border-color: #3b434a !important; background: #0c1013 !important; }
+        .sim8-page-main .led-panel,
+        .sim8-page-main .panel-box,
+        .sim8-page-main .dark-room { box-shadow: inset 0 0 18px rgba(0,0,0,.55); }
+        .sim8-page-main .bulb-col { justify-content: flex-start !important; }
+        .sim8-page-main .bulb-col .dark-room {
+            height: auto !important;
+            min-height: 0;
+            flex: 1 1 0;
+            overflow: hidden !important;
+        }
+        .sim8-page-main .bulb-col .bulb-image-container {
+            height: min(360px, 100%) !important;
+            max-height: 100%;
+        }
+        .sim8-page-main .bulb-col .monitor-title { flex: 0 0 auto; }
+        .sim8-page-main .bulb-col .digital-row { flex: 0 0 auto; width: 100%; }
+
+        /* 8-bit fader: restore physical knob depth without changing its travel */
+        .sim8-page-main #sim8bit-boundary-main .fader-track {
+            background: linear-gradient(90deg,#030303 0%,#111 45%,#242424 50%,#090909 58%,#020202 100%) !important;
+            border-color: #0b0b0b !important;
+            box-shadow:
+                inset 2px 0 3px rgba(0,0,0,.95),
+                inset -1px 0 1px rgba(255,255,255,.08),
+                0 1px 0 rgba(255,255,255,.04);
+        }
+        .sim8-page-main #sim8bit-knob-main {
+            border: 1px solid #202326 !important;
+            border-radius: 5px !important;
+            background:
+                linear-gradient(90deg,rgba(0,0,0,.32),transparent 14%,rgba(255,255,255,.28) 48%,transparent 76%,rgba(0,0,0,.42)),
+                linear-gradient(180deg,#e3e5e5 0%,#b9bcbd 13%,#777b7d 45%,#c8cbcc 51%,#85898b 74%,#4a4d4f 100%) !important;
+            box-shadow:
+                inset 0 2px 1px rgba(255,255,255,.72),
+                inset 0 -4px 4px rgba(0,0,0,.62),
+                inset 2px 0 2px rgba(255,255,255,.13),
+                inset -2px 0 2px rgba(0,0,0,.36),
+                0 8px 10px rgba(0,0,0,.82),
+                0 2px 2px rgba(0,0,0,.95),
+                0 0 0 2px #34383a !important;
+            cursor: grab !important;
+        }
+        .sim8-page-main #sim8bit-knob-main:active { cursor: grabbing !important; }
+        .sim8-page-main #sim8bit-knob-main::before,
+        .sim8-page-main #sim8bit-knob-main::after {
+            content: "";
+            position: absolute;
+            left: 4px;
+            right: 4px;
+            height: 7px;
+            border-radius: 3px;
+            pointer-events: none;
+        }
+        .sim8-page-main #sim8bit-knob-main::before {
+            top: 5px;
+            border-top: 1px solid rgba(255,255,255,.7);
+            background: linear-gradient(180deg,rgba(255,255,255,.24),rgba(0,0,0,.08));
+        }
+        .sim8-page-main #sim8bit-knob-main::after {
+            bottom: 5px;
+            border-bottom: 1px solid rgba(0,0,0,.72);
+            background: linear-gradient(180deg,rgba(255,255,255,.05),rgba(0,0,0,.25));
+        }
+        .sim8-page-main #sim8bit-knob-main > div {
+            position: relative;
+            z-index: 3;
+            height: 3px !important;
+            border-top: 1px solid #ff9a67;
+            border-bottom: 1px solid #5c1000;
+            background: linear-gradient(90deg,#7e1600,#ff3d00 18%,#ff7a31 50%,#ff3d00 82%,#7e1600) !important;
+            box-shadow: 0 0 5px rgba(255,61,0,.75),0 1px 1px rgba(0,0,0,.9);
+        }
+
+        .sim8-page-bottom {
+            min-height: 0;
+            display: grid;
+            grid-template-columns: 34% 46% 20%;
+            gap: 8px;
+        }
+        .sim8-bottom-card {
+            min-height: 0;
+            padding: 10px 13px;
+            overflow: hidden;
+            border: 1px solid #475058;
+            border-radius: 8px;
+            background: linear-gradient(180deg,#13171b,#0d1013);
+            box-shadow: inset 0 0 18px rgba(0,0,0,.4);
+        }
+        .sim8-bottom-title { margin: 0 0 8px; color: #dfe5ea; font-size: 14px; letter-spacing: .04em; }
+        .sim8-explain-list { display: grid; gap: 7px; color: #c8cfd5; font-size: var(--lesson-support-font-size,12px); line-height: 1.48; }
+        .sim8-explain-list b { color: #ff9b36; }
+        .sim8-explain-list .cyan { color: #54dff5; }
+        .sim8-teacher-card { padding: 5px 10px 0; display: grid; grid-template-columns: 132px 1fr; align-items: end; }
+        .sim8-teacher-img { width: 132px; height: 100%; max-height: 212px; object-fit: contain; object-position: center bottom; }
+        .sim8-teacher-copy { align-self: stretch; min-width: 0; display: flex; flex-direction: column; }
+        .sim8-teacher-copy h3 { margin: 0 0 6px; color: #ffd04d; font-size: 17px; }
+        .sim8-teacher-speech {
+            position: relative;
+            flex: 1;
+            padding: 12px 14px;
+            border: 1px solid #d6bd70;
+            border-radius: 10px;
+            background: linear-gradient(180deg,#f6e8bd,#eddca4);
+            color: #171717;
+            font-size: var(--lesson-teacher-font-size,12.5px);
+            font-weight: 700;
+            line-height: 1.55;
+        }
+        .sim8-teacher-speech::before {
+            content: "";
+            position: absolute;
+            left: -13px;
+            top: 35px;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-right: 14px solid #f2e2af;
+        }
+        .sim8-remember { display: flex; flex-direction: column; gap: 7px; color: #d7dde2; font-size: var(--lesson-support-font-size,12px); line-height: 1.45; }
+        .sim8-remember-item { padding: 6px 7px; border: 1px solid #303840; border-radius: 6px; background: #0b0e11; }
+        .sim8-tip { margin-top: auto; padding: 8px; border-left: 2px solid #ff8a00; border-radius: 5px; background: #15191d; color: #ffc247; font-size: 10px; }
+        .sim8-page-footer {
+            padding: 0 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #8f979e;
+            font-size: 10px;
+            background: #080a0d;
+        }
+
+        @media (max-height: 820px) {
+            .module-page-root.sim8bit.sim8-common-page { grid-template-rows: 50px minmax(0,1fr) 166px 24px; gap: 6px; }
+            .sim8-page-titlebar { padding: 6px 11px; }
+            .sim8-page-main { padding: 7px; }
+            .sim8-page-bottom { gap: 6px; }
+            .sim8-bottom-card { padding: 7px 9px; }
+            .sim8-bottom-title { margin-bottom: 5px; font-size: 12px; }
+            .sim8-explain-list,.sim8-remember { gap: 4px; line-height: 1.35; }
+            .sim8-teacher-card { grid-template-columns: 105px 1fr; }
+            .sim8-teacher-img { width: 105px; max-height: 154px; }
+            .sim8-teacher-copy h3 { margin-bottom: 4px; font-size: 14px; }
+            .sim8-teacher-speech { padding: 8px 10px; line-height: 1.4; }
+        }
+
     </style>
+
+    <link rel="stylesheet" href="next-ui-all-lessons.css">
+    <script src="next-ui-lesson-content.js"></script>
 
     <script src="Module_Sim8Bit.js"></script>
     <script src="Module_Sim16Bit.js"></script>
@@ -4774,28 +5344,73 @@
     <script src="Network_Visual_SAFE_ShIM_v0_1.js?v=network-layout-v0-3-1"></script>
     <script src="Module_NetExplain.js"></script>
     <script src="Module_MovingHead.js"></script>
+    <script src="Module_Scroller.js"></script>
 
 </head>
 <body>
 
-<div class="main-tab-container">
-    <a class="index-back-btn" href="index.html" aria-label="目次ページへ戻る">← 目次へ戻る</a>
-    <div class="index-back-divider" aria-hidden="true"></div>
+<header class="next-ui-header" aria-label="8bit図鑑 共通ナビゲーション">
+    <div class="next-ui-header-top">
+        <a class="next-ui-brand" href="index.html" aria-label="教材トップへ">8bit<small>LIGHTING STUDY</small></a>
+        <nav class="next-ui-category-tabs" aria-label="教材の大分類">
+            <div class="next-ui-category-menu" data-category-menu="electric">
+                <button class="next-ui-category-tab" type="button" data-category="electric" aria-expanded="false"><span class="next-ui-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13.5 2 5 13h6l-.5 9L19 10h-6z"/></svg></span>電気</button>
+                <div class="next-ui-dropdown" role="menu">
+                    <a href="Analog.html" role="menuitem">V・W・Aの法則</a>
+                    <a href="SinglePhase3.html" role="menuitem">単相3線</a>
+                    <span class="pending">三相3線（未実装）</span>
+                </div>
+            </div>
+            <div class="next-ui-category-menu" data-category-menu="dimming">
+                <button class="next-ui-category-tab active" type="button" data-category="dimming" aria-expanded="false"><span class="next-ui-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3v18M12 3v18M19 3v18"/><path d="M2.5 8h5M9.5 15h5M16.5 10h5"/></svg></span>調光</button>
+                <div class="next-ui-dropdown" role="menu">
+                    <button class="active" type="button" data-lesson-key="sim8bit" role="menuitem">8-bit 調光卓</button>
+                    <button type="button" data-lesson-key="sim16bit" role="menuitem">16-bit 調光卓</button>
+                </div>
+            </div>
+            <div class="next-ui-category-menu" data-category-menu="signal">
+                <button class="next-ui-category-tab" type="button" data-category="signal" aria-expanded="false"><span class="next-ui-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 19V5M3 19h18"/><path d="m6 15 4-5 4 3 5-7"/></svg></span>信号</button>
+                <div class="next-ui-dropdown" role="menu">
+                    <button type="button" data-lesson-key="simdmx" role="menuitem">DMX通信列車</button>
+                    <button type="button" data-lesson-key="ledcolormix" role="menuitem">LED色混ぜ</button>
+                    <button type="button" data-lesson-key="scroller" role="menuitem">Scroller</button>
+                    <button type="button" data-lesson-key="movinghead" role="menuitem">Moving Head</button>
+                </div>
+            </div>
+            <div class="next-ui-category-menu" data-category-menu="network">
+                <button class="next-ui-category-tab" type="button" data-category="network" aria-expanded="false"><span class="next-ui-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v4M6 16v-4h12v4"/></svg></span>Network</button>
+                <div class="next-ui-dropdown" role="menu">
+                    <button type="button" data-lesson-key="netipaddress" role="menuitem">IPアドレス</button>
+                    <button type="button" data-lesson-key="netartnet" role="menuitem">DMX on LAN</button>
+                    <button type="button" data-lesson-key="netbroadcast" role="menuitem">Broadcast / Art-Net 1</button>
+                    <button type="button" data-lesson-key="netsacn" role="menuitem">Multicast / sACN</button>
+                    <button type="button" data-lesson-key="explain" role="menuitem">結線 / 冗長化</button>
+                </div>
+            </div>
+        </nav>
+        <div class="next-ui-tools" aria-label="補助メニュー">
+            <button class="next-ui-tool" type="button">▣ 学習ガイド</button>
+            <button class="next-ui-tool" type="button">▱ ブックマーク</button>
+            <button class="next-ui-tool" type="button">⚙ 設定</button>
+            <div class="next-ui-page-controls" aria-label="教材ページ移動">
+                <button class="next-ui-page-button" id="next-ui-prev" type="button">◀ 前</button>
+                <button class="next-ui-page-button" id="next-ui-next" type="button">次 ▶</button>
+            </div>
+            <button class="next-ui-tool menu" type="button" aria-label="メニュー">☰</button>
+        </div>
+    </div>
+</header>
+
+<div class="main-tab-container next-ui-module-tabs" id="next-ui-module-tabs" aria-hidden="true">
     <button class="main-tab-btn tab-dimmer active" id="main-tab-sim8bit">8-bit 調光卓</button>
     <button class="main-tab-btn tab-dimmer" id="main-tab-sim16bit">16-bit 調光卓</button>
     <button class="main-tab-btn tab-dimmer" id="main-tab-simdmx">DMX通信列車</button>
     <button class="main-tab-btn tab-led" id="main-tab-ledcolormix">LED色混ぜ</button>
     <button class="main-tab-btn tab-dimmer" id="main-tab-movinghead">Moving Head</button>
-    
-    <div class="tab-separator"></div>
-    
     <button class="main-tab-btn tab-network" id="main-tab-netipaddress">IPアドレス</button>
     <button class="main-tab-btn tab-network" id="main-tab-netartnet">DMX on LAN</button>
     <button class="main-tab-btn tab-network" id="main-tab-netbroadcast">Broadcast / Art-Net 1</button>
     <button class="main-tab-btn tab-network" id="main-tab-netsacn">Multicast / sACN</button>
-    
-    <div class="tab-separator"></div>
-    
     <button class="main-tab-btn tab-explain" id="main-tab-explain">結線 / 冗長化</button>
 </div>
 
@@ -5008,16 +5623,17 @@
         const label = document.getElementById(`${moduleKey}-lesson-label`);
         const img = document.getElementById(`${moduleKey}-lesson-img`);
         const placeholder = document.getElementById(`${moduleKey}-lesson-placeholder`);
-        const kicker = document.getElementById(`${moduleKey}-lesson-kicker`);
-        const title = document.getElementById(`${moduleKey}-lesson-title`);
-        const body = document.getElementById(`${moduleKey}-lesson-body`);
-        const map = document.getElementById(`${moduleKey}-lesson-map`);
+        const commonExplain = document.getElementById(`${moduleKey}-common-explain`);
 
         if (label) label.textContent = p.label;
-        if (kicker) kicker.textContent = p.kicker;
-        if (title) title.textContent = p.title;
-        if (body) body.textContent = p.body;
-        if (map) map.innerHTML = p.map;
+        if (commonExplain) {
+            commonExplain.innerHTML = `
+                <div class="network-panel-kicker">${p.kicker}</div>
+                <div class="network-panel-title">${p.title}</div>
+                <div class="network-panel-body">${p.body}</div>
+                <div class="network-panel-map">${p.map}</div>
+            `;
+        }
 
         if (img) {
             if (p.img) {
@@ -5082,12 +5698,6 @@
                                 <div class="network-lesson-placeholder" id="${moduleKey}-lesson-placeholder" ${first.img ? 'style="display:none"' : ""}>教材イラスト<br>準備中</div>
                             </div>
                         </div>
-                        <div class="network-lesson-text">
-                            <div class="network-lesson-kicker" id="${moduleKey}-lesson-kicker">${first.kicker || ""}</div>
-                            <div class="network-lesson-title" id="${moduleKey}-lesson-title">${first.title || ""}</div>
-                            <div class="network-lesson-body" id="${moduleKey}-lesson-body">${first.body || ""}</div>
-                            <div class="network-lesson-map" id="${moduleKey}-lesson-map">${first.map || ""}</div>
-                        </div>
                     </div>
                     <div class="network-lesson-sim">${moduleHTML}</div>
                 </div>
@@ -5098,6 +5708,42 @@
     function getModulePageHTML(moduleKey, moduleHTML) {
         const meta = modulePageMeta[moduleKey];
         if (!meta) return moduleHTML;
+
+        if (moduleKey === "sim8bit") {
+            return `
+                <div class="module-page-root sim8bit sim8-common-page">
+                    <header class="sim8-page-titlebar">
+                        <div class="sim8-page-heading">
+                            <h1 class="sim8-page-title">8-bit 調光卓</h1>
+                            <div class="sim8-page-sub">フェーダー位置、DMX値、出力カーブ、見た目の明るさをつなげて読む。</div>
+                        </div>
+                    </header>
+                    <section class="sim8-page-main">${moduleHTML}</section>
+                    <section class="sim8-page-bottom">
+                        <section class="sim8-bottom-card">
+                            <h2 class="sim8-bottom-title">▤ 解説</h2>
+                            <div class="sim8-explain-list">
+                                <div><b>1. フェーダー</b>を動かすと、位置が<span class="cyan">DMX値 0〜255</span>へ変換されます。</div>
+                                <div><b>2. 数値モニター</b>で、割合・DMX値・出力電圧を同時に見比べます。</div>
+                                <div><b>3. カーブ切替</b>で、同じDMX値でも見た目の変化が異なることを確認します。</div>
+                            </div>
+                        </section>
+                        <section class="sim8-bottom-card sim8-teacher-card">
+                            <img class="sim8-teacher-img" src="assets/analog_teacher_pointing.webp" alt="照明教材の先生">
+                            <div class="sim8-teacher-copy"><h3>先生のひとこと</h3><div class="sim8-teacher-speech"><b>値を読むだけで終わらせないのがポイント。</b><br>8個の0/1で作れる組み合わせが256通りだから、DMX値は0〜255になります。さらに、同じ数値でもカーブが変わると灯りの立ち上がり方が変わります。フェーダー・数値・グラフ・灯りを一緒に見てみましょう。</div></div>
+                        </section>
+                        <section class="sim8-bottom-card sim8-remember">
+                            <h2 class="sim8-bottom-title">♙ 覚えておこう</h2>
+                            <div class="sim8-remember-item">□ 8-bit = 256段階</div>
+                            <div class="sim8-remember-item">□ DMX値 = 0〜255</div>
+                            <div class="sim8-remember-item">□ 数値と体感は同じではない</div>
+                            <div class="sim8-tip">⚡ 操作TIP<br>まずLINEARで確認し、次にJATET A / Bを比較。</div>
+                        </section>
+                    </section>
+                    <footer class="sim8-page-footer"><span>8bit Lighting Study　v3.0.1</span><span>フェーダー操作 / 表示切替 / カーブ比較</span></footer>
+                </div>
+            `;
+        }
 
         return `
             <div class="module-page-root ${moduleKey}">
@@ -5123,36 +5769,125 @@
     Object.keys(modules).forEach(key => {
         const panel = document.getElementById(`panel-${key}`);
         if (panel && modules[key].getHTML) {
-            if (key === 'netartnet' || key === 'netbroadcast' || key === 'netsacn') {
-                panel.innerHTML = getNetworkLessonHTML(key, modules[key].getHTML());
-            } else if (key === 'sim16bit') {
-                panel.innerHTML = `
-                    <div class="sim16-integrated-root">
-                        <div class="sim16-integrated-header">
-                            <div class="sim16-title-card">
-                                <div class="sim16-title-main">16-bit 調光卓</div>
-                                <div class="sim16-title-sub">Master / Coarse / Fine を、値の二層構造として読む。</div>
-                            </div>
-                            <div class="sim16-concept-card" aria-label="16bit concept guide">
-                                <div class="sim16-concept-pill master"><b>Master</b><span>16bit全体をまとめて動かす</span></div>
-                                <div class="sim16-concept-pill coarse"><b>Coarse</b><span>大きな段を決める<br>上位8bit</span></div>
-                                <div class="sim16-concept-pill fine"><b>Fine</b><span>段の中を細かく追い込む<br>下位8bit</span></div>
-                            </div>
-                        </div>
-                        <div class="sim16-integrated-area"><div id="sim16bit-root">${modules[key].getHTML()}</div></div>
-                        <div class="sim16-integrated-footer">
-                            <div class="sim16-help-block"><strong>見る順番：</strong><br>まず <b>Coarse</b> を動かして、大きな段の変化を見ます。<br>次に <b>Fine</b> を動かして、その段の中を細かく動かせることを確認します。</div>
-                            <div class="sim16-help-block"><strong>16bitの考え方：</strong><div class="sim16-formula"><span class="total">16bit Total</span> = <span class="coarse">Coarse</span> × 256 + <span class="fine">Fine</span></div>Coarseの1段の中を、Fineがさらに256段階に分けます。</div>
-                        </div>
-                    </div>
-                `;
-            } else if (key === 'sim8bit' || key === 'simdmx' || key === 'explain') {
+            if (key === 'sim8bit') {
                 panel.innerHTML = getModulePageHTML(key, modules[key].getHTML());
             } else {
-                panel.innerHTML = modules[key].getHTML();
+                let moduleHTML = modules[key].getHTML();
+                if (key === 'netartnet' || key === 'netbroadcast' || key === 'netsacn') {
+                    moduleHTML = getNetworkLessonHTML(key, moduleHTML);
+                } else if (key === 'sim16bit') {
+                    moduleHTML = `<div id="sim16bit-root">${moduleHTML}</div>`;
+                }
+                panel.innerHTML = window.NextUiLessonShell.render(key, moduleHTML);
             }
         }
     });
+
+    let closeNetworkSimulationOverlay = () => {};
+
+    function setupNetworkTitleTools() {
+        const configs = {
+            netartnet: { page: '.netartnet-page', control: '.artnet-control-panel', title: 'DMX on LAN｜LANシミュレーション' },
+            netbroadcast: { page: '.netbroadcast-page', control: '.broadcast-control-panel', title: 'Broadcast / Art-Net 1｜配信シミュレーション' },
+            netsacn: { page: '.netsacn-page', control: '.sacn-control-panel', title: 'Multicast / sACN｜配信シミュレーション' }
+        };
+
+        const overlay = document.createElement('div');
+        overlay.className = 'network-sim-overlay';
+        overlay.setAttribute('aria-hidden', 'true');
+        overlay.innerHTML = `
+            <div class="network-sim-overlay-bar">
+                <div class="network-sim-overlay-title"></div>
+                <div class="network-sim-overlay-tools"></div>
+            </div>
+            <div class="network-sim-overlay-body"></div>
+        `;
+        document.body.appendChild(overlay);
+
+        const overlayTitle = overlay.querySelector('.network-sim-overlay-title');
+        const overlayTools = overlay.querySelector('.network-sim-overlay-tools');
+        const overlayBody = overlay.querySelector('.network-sim-overlay-body');
+        let expandedKey = null;
+        let simulationHome = null;
+        let toolsHome = null;
+
+        const resizeModule = key => {
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => modules[key]?.resizeCanvas?.());
+            });
+        };
+
+        const closeOverlay = () => {
+            if (!expandedKey) return;
+            const key = expandedKey;
+            const simulation = overlayBody.querySelector('.network-lesson-sim');
+            const tools = overlayTools.querySelector('.network-title-tools');
+            if (simulationHome && simulation) simulationHome.replaceWith(simulation);
+            if (toolsHome && tools) toolsHome.replaceWith(tools);
+            const button = tools?.querySelector('.network-expand-button');
+            if (button) {
+                button.textContent = '⛶ 拡大';
+                button.setAttribute('aria-label', 'ネットワークシミュレーションを拡大');
+            }
+            overlay.classList.remove('open');
+            overlay.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('network-sim-overlay-open');
+            expandedKey = null;
+            simulationHome = null;
+            toolsHome = null;
+            resizeModule(key);
+        };
+        closeNetworkSimulationOverlay = closeOverlay;
+
+        Object.entries(configs).forEach(([key, config]) => {
+            const page = document.querySelector(config.page);
+            if (!page || page.dataset.titleToolsReady === 'true') return;
+            const speedControl = page.querySelector(config.control);
+            const speedSlot = page.querySelector(`[data-network-speed-slot="${key}"]`);
+            const tools = page.querySelector(`[data-network-tools="${key}"]`);
+            const expandButton = page.querySelector(`[data-network-expand="${key}"]`);
+            const simulation = page.querySelector('.network-lesson-sim');
+            if (!speedControl || !speedSlot || !tools || !expandButton || !simulation) return;
+
+            speedSlot.appendChild(speedControl);
+            page.dataset.titleToolsReady = 'true';
+
+            expandButton.addEventListener('click', () => {
+                if (expandedKey === key) {
+                    closeOverlay();
+                    return;
+                }
+                if (expandedKey) closeOverlay();
+                simulationHome = document.createElement('div');
+                simulationHome.hidden = true;
+                simulationHome.dataset.networkSimulationHome = key;
+                simulation.replaceWith(simulationHome);
+                toolsHome = document.createElement('div');
+                toolsHome.hidden = true;
+                toolsHome.dataset.networkToolsHome = key;
+                tools.replaceWith(toolsHome);
+                overlayTitle.textContent = config.title;
+                overlayTools.appendChild(tools);
+                overlayBody.appendChild(simulation);
+                expandButton.textContent = '× 戻る';
+                expandButton.setAttribute('aria-label', '通常表示へ戻る');
+                expandedKey = key;
+                overlay.classList.add('open');
+                overlay.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('network-sim-overlay-open');
+                resizeModule(key);
+            });
+        });
+
+        overlay.addEventListener('click', event => {
+            if (event.target === overlay) closeOverlay();
+        });
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape') closeOverlay();
+        });
+    }
+
+    setupNetworkTitleTools();
 
     bindNetworkLessonControls();
 
@@ -5160,6 +5895,7 @@
 
     function updateMasterLayoutClass() {
         if (!masterContainer) return;
+        masterContainer.classList.toggle('common-lesson-active', activeModuleKey !== 'sim8bit');
         masterContainer.classList.toggle('movinghead-active', activeModuleKey === 'movinghead');
         masterContainer.classList.toggle('sim8bit-active', activeModuleKey === 'sim8bit');
         masterContainer.classList.toggle('sim16bit-active', activeModuleKey === 'sim16bit');
@@ -5185,6 +5921,7 @@
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
             const targetKey = tab.id.replace('main-tab-', '');
+            closeNetworkSimulationOverlay();
             if (targetKey === activeModuleKey) return; 
 
             if (modules[activeModuleKey] && modules[activeModuleKey].destroy) {
@@ -5214,6 +5951,7 @@
             activeModuleKey = targetKey;
             updateMasterLayoutClass();
             document.getElementById('help-text-target').innerHTML = explanationData[activeModuleKey];
+            if (window.nextUiSyncHeader) window.nextUiSyncHeader(activeModuleKey);
             
             if (modules[activeModuleKey] && modules[activeModuleKey].init) {
                 if (activeModuleKey === 'netartnet' || activeModuleKey === 'netbroadcast' || activeModuleKey === 'netsacn') {
@@ -5249,6 +5987,182 @@
     });
 </script>
 
+<script id="next-ui-category-navigation">
+  (() => {
+    const categoryLessons = {
+      electric: [
+        { value: 'url:Analog.html', label: 'V・W・Aの法則' },
+        { value: 'url:SinglePhase3.html', label: '単相3線' },
+        { value: 'pending:three-phase', label: '三相3線（未実装）', disabled: true }
+      ],
+      dimming: [
+        { value: 'sim8bit', label: '8-bit 調光卓' },
+        { value: 'sim16bit', label: '16-bit 調光卓' }
+      ],
+      signal: [
+        { value: 'simdmx', label: 'DMX通信列車' },
+        { value: 'ledcolormix', label: 'LED色混ぜ' },
+        { value: 'scroller', label: 'Scroller' },
+        { value: 'movinghead', label: 'Moving Head' }
+      ],
+      network: [
+        { value: 'netipaddress', label: 'IPアドレス' },
+        { value: 'netartnet', label: 'DMX on LAN' },
+        { value: 'netbroadcast', label: 'Broadcast / Art-Net 1' },
+        { value: 'netsacn', label: 'Multicast / sACN' },
+        { value: 'explain', label: '結線 / 冗長化' }
+      ],
+      fixture: [
+        { value: 'pending:convex', label: '凸レンズ', disabled: true },
+        { value: 'pending:fresnel', label: 'フレネルレンズ', disabled: true },
+        { value: 'pending:ellipsoidal', label: 'エリプソイダル', disabled: true }
+      ],
+      shoot: [
+        { value: 'pending:shoot', label: '教材を準備中', disabled: true }
+      ]
+    };
+
+    const lessonMeta = {
+      sim8bit:      { category: 'dimming', categoryLabel: '調光', lessonLabel: '8-bit 調光卓' },
+      sim16bit:     { category: 'dimming', categoryLabel: '調光', lessonLabel: '16-bit 調光卓' },
+      simdmx:       { category: 'signal', categoryLabel: '信号', lessonLabel: 'DMX通信列車' },
+      ledcolormix:  { category: 'signal', categoryLabel: '信号', lessonLabel: 'LED色混ぜ' },
+      scroller:     { category: 'signal', categoryLabel: '信号', lessonLabel: 'Scroller' },
+      movinghead:   { category: 'signal', categoryLabel: '信号', lessonLabel: 'Moving Head' },
+      netipaddress: { category: 'network', categoryLabel: 'Network', lessonLabel: 'IPアドレス' },
+      netartnet:    { category: 'network', categoryLabel: 'Network', lessonLabel: 'DMX on LAN' },
+      netbroadcast: { category: 'network', categoryLabel: 'Network', lessonLabel: 'Broadcast / Art-Net 1' },
+      netsacn:      { category: 'network', categoryLabel: 'Network', lessonLabel: 'Multicast / sACN' },
+      explain:      { category: 'network', categoryLabel: 'Network', lessonLabel: '結線 / 冗長化' }
+    };
+
+    let selectedCategory = 'dimming';
+    let currentLessonValue = 'sim8bit';
+
+    function setActiveCategory(category) {
+      selectedCategory = category;
+      document.querySelectorAll('.next-ui-category-tab').forEach(button => {
+        button.classList.toggle('active', button.dataset.category === category);
+      });
+    }
+
+    function currentLessonIndex() {
+      const lessons = categoryLessons[selectedCategory] || [];
+      return lessons.findIndex(lesson => lesson.value === currentLessonValue);
+    }
+
+    function updatePageButtons() {
+      const lessons = categoryLessons[selectedCategory] || [];
+      const index = currentLessonIndex();
+      const prev = document.getElementById('next-ui-prev');
+      const next = document.getElementById('next-ui-next');
+      if (prev) prev.disabled = index <= 0;
+      if (next) next.disabled = index < 0 || index >= lessons.length - 1 || Boolean(lessons[index + 1]?.disabled);
+    }
+
+    function activateLesson(value) {
+      if (!value || value.startsWith('pending:')) return;
+      if (value.startsWith('url:')) {
+        location.href = value.slice(4);
+        return;
+      }
+      const tab = document.getElementById(`main-tab-${value}`);
+      if (tab) {
+        tab.click();
+        requestAnimationFrame(() => window.nextUiSyncHeader(value));
+      }
+    }
+
+    function closeCategoryMenus() {
+      document.querySelectorAll('.next-ui-category-menu.open').forEach(menu => menu.classList.remove('open'));
+      document.querySelectorAll('.next-ui-category-tab').forEach(button => button.setAttribute('aria-expanded', 'false'));
+    }
+
+    function syncViewportHeight() {
+      const height = window.visualViewport?.height || window.innerHeight;
+      document.documentElement.style.setProperty('--next-ui-viewport-height', `${Math.round(height)}px`);
+    }
+
+    syncViewportHeight();
+    window.addEventListener('resize', syncViewportHeight, { passive: true });
+    window.visualViewport?.addEventListener('resize', syncViewportHeight, { passive: true });
+
+    window.nextUiSyncHeader = key => {
+      const meta = lessonMeta[key];
+      if (!meta) return;
+      currentLessonValue = key;
+      setActiveCategory(meta.category);
+      const currentPage = document.getElementById('next-ui-current-page');
+      if (currentPage) currentPage.textContent = meta.lessonLabel;
+      document.querySelectorAll('[data-lesson-key]').forEach(item => {
+        item.classList.toggle('active', item.dataset.lessonKey === key);
+      });
+      updatePageButtons();
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const scrollerRoot = document.querySelector('#panel-scroller > .scr-root');
+      if (scrollerRoot) window.NextUiLessonShell.wrapElement('scroller', scrollerRoot);
+      document.getElementById('main-tab-scroller')?.addEventListener('click', () => {
+        document.querySelector('.master-console-container')?.classList.add('common-lesson-active');
+        requestAnimationFrame(() => window.nextUiSyncHeader('scroller'));
+      });
+      window.nextUiSyncHeader(activeModuleKey);
+
+      document.querySelectorAll('.next-ui-category-tab').forEach(button => {
+        button.addEventListener('click', event => {
+          event.preventDefault();
+          const menu = button.closest('.next-ui-category-menu');
+          const willOpen = !menu?.classList.contains('open');
+          closeCategoryMenus();
+          if (willOpen && menu) {
+            menu.classList.add('open');
+            button.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+
+      document.querySelectorAll('[data-lesson-key]').forEach(item => {
+        item.addEventListener('click', () => {
+          closeCategoryMenus();
+          activateLesson(item.dataset.lessonKey);
+        });
+      });
+
+      document.querySelectorAll('.next-ui-dropdown a').forEach(link => {
+        link.addEventListener('click', closeCategoryMenus);
+      });
+
+      document.getElementById('next-ui-module-tabs')?.addEventListener('click', event => {
+        const tab = event.target.closest('.main-tab-btn');
+        if (!tab) return;
+        const key = tab.id.replace('main-tab-', '');
+        requestAnimationFrame(() => window.nextUiSyncHeader(key));
+      });
+
+      document.getElementById('next-ui-prev')?.addEventListener('click', () => {
+        const lessons = categoryLessons[selectedCategory] || [];
+        const target = lessons[currentLessonIndex() - 1];
+        if (target && !target.disabled) activateLesson(target.value);
+      });
+
+      document.getElementById('next-ui-next')?.addEventListener('click', () => {
+        const lessons = categoryLessons[selectedCategory] || [];
+        const target = lessons[currentLessonIndex() + 1];
+        if (target && !target.disabled) activateLesson(target.value);
+      });
+
+      document.addEventListener('pointerdown', event => {
+        if (!event.target.closest('.next-ui-category-menu')) closeCategoryMenus();
+      });
+
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') closeCategoryMenus();
+      });
+    });
+  })();
+</script>
+
 
 <script id="index-direct-tab-open">
   (function () {
@@ -5278,9 +6192,10 @@
         'multicast': 'netsacn',
         'sacn': 'netsacn',
         'netsacn': 'netsacn',
-        'redundancy': 'netredundancy',
-        'connection': 'netredundancy',
-        'netredundancy': 'netredundancy'
+        'redundancy': 'explain',
+        'connection': 'explain',
+        'netredundancy': 'explain',
+        'explain': 'explain'
       };
       return aliases[key] || key;
     }
