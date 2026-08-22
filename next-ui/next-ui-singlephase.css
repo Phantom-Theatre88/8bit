@@ -1,0 +1,251 @@
+/* 単相3線教材 — 共通UIに合わせたページレイアウト */
+body.singlephase-next-ui {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  min-height: 0;
+  background: #07090b;
+}
+
+body.singlephase-next-ui .app {
+  width: 100%;
+  max-width: none;
+  height: auto;
+  min-height: 0;
+  flex: 1 1 0;
+  padding: 10px 18px 0;
+  display: grid;
+  grid-template-rows: clamp(56px, 7vh, 68px) minmax(0, 1fr) clamp(188px, 24vh, 238px) 30px;
+}
+
+body.singlephase-next-ui .topbar {
+  min-height: 0;
+  border: 0;
+  border-left: 3px solid #ff6f00;
+  border-radius: 0;
+  padding: 8px 14px;
+  background: linear-gradient(90deg, rgba(255,111,0,.055), transparent 50%);
+}
+
+body.singlephase-next-ui .title h1 { font-size: clamp(20px, 1.65vw, 27px); }
+body.singlephase-next-ui .title span { padding-left: 4px; font-size: clamp(11px, .9vw, 14px); }
+body.singlephase-next-ui .bolt { color: #ffb300; font-size: 28px; }
+body.singlephase-next-ui .help {
+  min-width: 108px;
+  height: 36px;
+  justify-content: center;
+  font-weight: 800;
+}
+
+body.singlephase-next-ui .layout {
+  display: grid;
+  grid-template-columns: 30% 37% 33%;
+  grid-template-rows: minmax(0, 1fr);
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  min-height: 0;
+}
+
+body.singlephase-next-ui .panel {
+  border-color: #4a5259;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #13171b, #0d1013);
+}
+
+body.singlephase-next-ui .left,
+body.singlephase-next-ui .center,
+body.singlephase-next-ui .right {
+  grid-column: auto;
+  grid-row: auto;
+  padding: 10px;
+}
+
+body.singlephase-next-ui .section-head,
+body.singlephase-next-ui .breaker-title { font-size: clamp(14px, 1.1vw, 18px); }
+body.singlephase-next-ui .fixture-btn { min-height: 58px; }
+body.singlephase-next-ui .circuit { border-radius: 8px; }
+body.singlephase-next-ui .circuit-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+body.singlephase-next-ui .circuit-actions small {
+  color: var(--muted);
+  font-size: 11px;
+  white-space: nowrap;
+}
+body.singlephase-next-ui .circuit-actions .clear {
+  width: auto;
+  height: 29px;
+  padding: 0 10px;
+  border-color: #7a4a43;
+  color: #ffd5cf;
+  white-space: nowrap;
+}
+body.singlephase-next-ui .circuit-actions .clear:hover {
+  border-color: #d45a4b;
+  background: #251513;
+}
+
+body.singlephase-next-ui .lesson-bottom {
+  display: grid;
+  grid-template-columns: 34% 46% 20%;
+  gap: 8px;
+  min-height: 0;
+  padding-top: 8px;
+}
+
+body.singlephase-next-ui .bottom-explain,
+body.singlephase-next-ui .bottom-remember {
+  padding: 10px 13px;
+  overflow: hidden;
+}
+
+body.singlephase-next-ui .bottom-title {
+  margin: 0 0 8px;
+  color: #dfe5ea;
+  font-size: 14px;
+  letter-spacing: .04em;
+}
+
+body.singlephase-next-ui .explain-list,
+body.singlephase-next-ui .remember-list {
+  display: grid;
+  gap: 7px;
+  color: #d7dce0;
+  font-size: var(--lesson-support-font-size, 12px);
+  line-height: 1.5;
+}
+
+body.singlephase-next-ui .explain-list strong { color: #ffb232; }
+body.singlephase-next-ui .explain-list .l1 { color: var(--l1); }
+body.singlephase-next-ui .explain-list .n { color: var(--n); }
+body.singlephase-next-ui .explain-list .l2 { color: var(--l2); }
+
+body.singlephase-next-ui .teacher {
+  margin: 0;
+  padding: 6px 10px 0;
+  display: grid;
+  grid-column: auto;
+  grid-row: auto;
+  grid-template-columns: 128px 1fr;
+  gap: 10px;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+body.singlephase-next-ui .teacher-character {
+  width: 128px;
+  height: 100%;
+  max-height: 210px;
+  object-fit: contain;
+  object-position: center bottom;
+  align-self: end;
+}
+
+body.singlephase-next-ui .teacher-copy {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+body.singlephase-next-ui .teacher h3 {
+  margin: 0 0 5px;
+  color: #ffd04d;
+  font-size: 17px;
+}
+
+body.singlephase-next-ui .teacher-speech {
+  position: relative;
+  flex: 1;
+  margin: 0;
+  border-radius: 12px;
+  background: #f2e4b2;
+  color: #151515;
+  padding: 10px 12px;
+  font-size: var(--lesson-teacher-font-size, 12.5px);
+  line-height: 1.55;
+  font-weight: 700;
+}
+
+body.singlephase-next-ui .teacher-speech::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 24px;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  border-right: 13px solid #f2e4b2;
+}
+
+body.singlephase-next-ui .teacher-speech .l1 { color: #c52d25; font-weight: 900; }
+body.singlephase-next-ui .teacher-speech .n { color: #248d1a; font-weight: 900; }
+body.singlephase-next-ui .teacher-speech .l2 { color: #1679d5; font-weight: 900; }
+
+body.singlephase-next-ui .bottom-remember {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+body.singlephase-next-ui .remember-tip {
+  margin-top: auto;
+  padding: 8px;
+  border: 1px solid #3e464e;
+  border-left: 2px solid #ff9d00;
+  border-radius: 6px;
+  background: #111519;
+  color: #ffc247;
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+body.singlephase-next-ui .bottomnav {
+  justify-content: flex-start;
+  border: 0;
+  border-radius: 0;
+  padding: 0 10px;
+  background: #080a0d;
+}
+
+body.singlephase-next-ui .bottomnav .home { display: none; }
+
+@media (max-height: 860px) {
+  body.singlephase-next-ui .app {
+    padding: 7px 12px 0;
+    grid-template-rows: 54px minmax(0, 1fr) 180px 26px;
+  }
+  body.singlephase-next-ui .left,
+  body.singlephase-next-ui .center,
+  body.singlephase-next-ui .right { padding: 7px; }
+  body.singlephase-next-ui .section-sub { margin-bottom: 3px; font-size: 10px; line-height: 1.25; }
+  body.singlephase-next-ui .fixture-title { margin: 3px 0 2px; font-size: 13px; }
+  body.singlephase-next-ui .fixture-btn { min-height: 49px; }
+  body.singlephase-next-ui .step { margin-top: 4px; padding-top: 4px; }
+  body.singlephase-next-ui .step-title { margin-bottom: 2px; font-size: 13px; }
+  body.singlephase-next-ui .dest-btn { height: 31px; }
+  body.singlephase-next-ui .selected-box { margin-bottom: 2px; padding: 3px; }
+  body.singlephase-next-ui .selected-box strong { font-size: 14px; }
+  body.singlephase-next-ui .connect { height: 32px; font-size: 14px; }
+  body.singlephase-next-ui .circuit-actions .clear { height: 27px; padding: 0 8px; }
+  body.singlephase-next-ui .breaker-shell { min-height: 180px; }
+  body.singlephase-next-ui .meter { grid-template-rows: auto auto 58px auto; }
+  body.singlephase-next-ui .meter-track { height: 58px; }
+  body.singlephase-next-ui .explain-list,
+  body.singlephase-next-ui .remember-list { gap: 4px; line-height: 1.35; }
+}
+
+@media (max-width: 1100px) {
+  body.singlephase-next-ui { height: auto; min-height: 100dvh; overflow: auto; }
+  body.singlephase-next-ui .app { height: auto; grid-template-rows: auto; }
+  body.singlephase-next-ui .layout,
+  body.singlephase-next-ui .lesson-bottom { grid-template-columns: 1fr; }
+  body.singlephase-next-ui .left,
+  body.singlephase-next-ui .center,
+  body.singlephase-next-ui .right { overflow: visible; }
+  body.singlephase-next-ui .circuit { min-height: 560px; }
+  body.singlephase-next-ui .teacher { min-height: 190px; }
+}

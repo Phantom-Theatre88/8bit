@@ -1,0 +1,639 @@
+/* 8bit図鑑 — 既存教材を共通UIへ載せるための共通ページ骨格 */
+.master-console-container.common-lesson-active,
+.master-console-container.scroller-active {
+  max-width: none;
+  min-height: 0;
+  padding: 0;
+  gap: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.master-console-container.common-lesson-active .console-main-screen,
+.master-console-container.scroller-active .console-main-screen {
+  min-height: 0;
+  height: auto;
+  flex: 1 1 0 !important;
+  aspect-ratio: auto !important;
+}
+
+.master-console-container.common-lesson-active .console-help-display,
+.master-console-container.scroller-active .console-help-display {
+  display: none !important;
+}
+
+.common-lesson-page {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: clamp(52px, 6vh, 62px) minmax(0, 1fr) clamp(184px, 22vh, 228px) 28px;
+  gap: 8px;
+  overflow: hidden;
+  background: radial-gradient(circle at 44% 20%, rgba(255,111,0,.045), transparent 36%), #080a0c;
+}
+
+.common-page-titlebar {
+  min-height: 0;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-left: 3px solid #ff6f00;
+  background: linear-gradient(90deg, rgba(255,111,0,.055), transparent 52%);
+}
+
+.common-page-heading { min-width: 0; }
+.common-page-title {
+  margin: 0;
+  color: #f2f5f7;
+  font-size: clamp(20px, 1.55vw, 27px);
+  line-height: 1.08;
+}
+.common-page-sub {
+  margin-top: 5px;
+  color: #aab2ba;
+  font-size: clamp(10px, .78vw, 13px);
+  line-height: 1.25;
+}
+
+.common-page-main {
+  min-height: 0;
+  padding: 10px;
+  overflow: hidden;
+  border: 1px solid #4a5259;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #13171b, #0d1013);
+  box-shadow: inset 0 0 22px rgba(0,0,0,.46);
+}
+
+.common-page-main > * {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.common-page-main #sim16bit-root {
+  width: 100%;
+  height: 100%;
+}
+
+.common-page-main.sim16bit-main #sim16bit-root > div {
+  gap: 12px !important;
+}
+
+.common-page-main.sim16bit-main #sim16bit-root .fader-col {
+  width: 32% !important;
+}
+.common-page-main.sim16bit-main #sim16bit-root .center-col {
+  width: 38% !important;
+}
+.common-page-main.sim16bit-main #sim16bit-root .bulb-col {
+  width: 30% !important;
+}
+
+.common-page-main.simdmx-main > div { gap: 12px !important; }
+.common-page-main.simdmx-main .oscilloscope-screen,
+.common-page-main.simdmx-main .train-track-area { height: 76px !important; }
+.common-page-main.simdmx-main .fader-cell-wrap { height: 150px !important; }
+.common-page-main.simdmx-main .fader-area { height: 92px !important; }
+.common-page-main.simdmx-main .fader-track-container { height: 82px !important; }
+.common-page-main.simdmx-main .dmx-explain-box {
+  padding: 6px 9px !important;
+  font-size: 10.5px !important;
+  line-height: 1.4 !important;
+}
+.common-page-main.simdmx-main .dark-room { overflow: hidden !important; }
+.common-page-main.simdmx-main .bulb-image-container {
+  width: min(220px, 70%) !important;
+  height: min(360px, 90%) !important;
+}
+
+.common-page-main.ledcolormix-main .ledmix-root {
+  padding: 0;
+  grid-template-rows: minmax(0, 1fr);
+  gap: 0;
+  background: transparent;
+}
+.common-page-main.ledcolormix-main .ledmix-header {
+  display: none;
+}
+
+.ledcolormix-page .common-page-titlebar .ledmix-mode-area {
+  margin-left: auto;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.ledcolormix-page .common-page-titlebar .ledmix-mode-label {
+  white-space: nowrap;
+}
+.ledcolormix-page .common-page-titlebar .ledmix-mode-btn {
+  min-width: 70px;
+  height: 31px;
+}
+
+.common-page-main.movinghead-main .movinghead-root {
+  padding: 10px;
+  border: 0;
+  border-radius: 8px;
+  background: #0c0f12;
+  box-shadow: none;
+}
+.common-page-main.movinghead-main .mh-topbar { padding: 7px 10px; }
+.common-page-main.movinghead-main .mh-topbar > div:first-child { display: none; }
+.common-page-main.movinghead-main .mh-topbar { justify-content: flex-end; }
+.common-page-main.movinghead-main .mh-title { font-size: 18px; }
+.common-page-main.movinghead-main .mh-btn { padding: 7px 10px; }
+
+.common-page-main.scroller-main {
+  padding: 0;
+}
+.common-page-main.scroller-main .scr-root {
+  border: 0;
+  border-radius: 8px;
+  grid-template-rows: minmax(0, 1fr) 118px;
+  padding: 7px;
+  gap: 7px;
+}
+.common-page-main.scroller-main .scr-left { padding: 6px; gap: 4px; }
+.common-page-main.scroller-main .scr-left-title { padding: 5px 3px; font-size: 11px; }
+.common-page-main.scroller-main .scr-big-value { margin-top: 1px; font-size: 26px; }
+.common-page-main.scroller-main .scr-percent { font-size: 13px; }
+.common-page-main.scroller-main .scr-fader-row { flex: 0 1 205px; }
+.common-page-main.scroller-main .scr-scale,
+.common-page-main.scroller-main .scr-trackbox { height: 205px; }
+.common-page-main.scroller-main .scr-step-row .scr-step { height: 25px; }
+.common-page-main.scroller-main .scr-read { padding: 3px; }
+.common-page-main.scroller-main .scr-power { height: 29px; }
+.common-page-main.scroller-main .scr-deck { padding: 6px 9px; }
+.common-page-main.scroller-main .scr-bottom { padding: 6px 8px; }
+.common-page-main.scroller-main .scr-cal p { margin-bottom: 4px; }
+.common-page-main.scroller-main .scr-stepcard { padding: 3px; }
+
+.common-page-main.netipaddress-main .net-ip-root {
+  padding: 8px;
+  border: 0;
+  border-radius: 8px;
+}
+.common-page-main.netipaddress-main .net-ip-titlebar { display: none; }
+.common-page-main.netipaddress-main .net-ip-stage { height: 100%; min-height: 0; }
+.common-page-main.netipaddress-main .net-ip-left {
+  gap: 0;
+}
+.common-page-main.netipaddress-main .lesson-visual-card.image-asset-card {
+  flex: 1 1 auto;
+  height: auto;
+  min-height: 0;
+  display: flex;
+}
+.common-page-main.netipaddress-main .image-comic-board {
+  flex: 1 1 auto;
+  width: 100%;
+  height: 100%;
+}
+.common-page-main.netipaddress-main .lesson-comic-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.common-page-main.netipaddress-main .interactive-root {
+  display: block !important;
+  padding: 10px !important;
+}
+.common-page-main.netipaddress-main .interactive-main {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  grid-template-rows: 188px minmax(0, 1fr) !important;
+  gap: 9px !important;
+}
+.common-page-main.netipaddress-main .ip-control-panel.role-input {
+  width: 100% !important;
+  height: 188px !important;
+  max-height: 188px !important;
+  grid-template-rows: 42px minmax(0, 1fr) !important;
+}
+.common-page-main.netipaddress-main .control-title b {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+}
+.common-page-main.netipaddress-main .control-title b em {
+  padding: 3px 8px;
+  border: 1px solid rgba(255, 212, 59, .68);
+  border-radius: 999px;
+  color: #ffe58c;
+  font-size: 9px;
+  font-style: normal;
+  letter-spacing: .02em;
+}
+.common-page-main.netipaddress-main .control-title span {
+  margin-top: 4px;
+  font-size: 10px !important;
+}
+.common-page-main.netipaddress-main .interactive-diagram-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+.common-page-main.netipaddress-main .interactive-diagram {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100% !important;
+  min-height: 0 !important;
+}
+.common-page-main.netipaddress-main .diagram-console {
+  top: 84px !important;
+}
+.common-page-main.netipaddress-main .judge-block {
+  top: 72px !important;
+  min-height: 82px !important;
+}
+.common-page-main.netipaddress-main .interactive-node {
+  min-height: 68px !important;
+  padding: 7px 9px !important;
+}
+.common-page-main.netipaddress-main .node-a {
+  top: 18px !important;
+}
+.common-page-main.netipaddress-main .node-b {
+  top: 112px !important;
+}
+.common-page-main.netipaddress-main .line-console {
+  top: 124px !important;
+}
+.common-page-main.netipaddress-main .line-a {
+  top: 104px !important;
+}
+.common-page-main.netipaddress-main .line-b {
+  top: 138px !important;
+}
+.common-page-main.netipaddress-main .packet-to-check {
+  top: 113px !important;
+}
+.common-page-main.netipaddress-main .packet-to-a {
+  top: 84px !important;
+}
+.common-page-main.netipaddress-main .packet-to-b {
+  top: 145px !important;
+}
+
+.netipaddress-page .common-page-titlebar .net-ip-checker-title {
+  min-width: 270px;
+  margin-left: auto;
+  padding: 6px 20px;
+  border: 1px solid #36d9f2;
+  border-radius: 999px;
+  background: rgba(5, 17, 24, .86);
+  box-shadow: 0 0 12px rgba(0, 229, 255, .28);
+  text-align: center;
+}
+.netipaddress-page .net-ip-checker-title b,
+.netipaddress-page .net-ip-checker-title span {
+  display: block;
+}
+.netipaddress-page .net-ip-checker-title b {
+  color: #f2f5f7;
+  font-size: 12px;
+  letter-spacing: .06em;
+}
+.netipaddress-page .net-ip-checker-title span {
+  margin-top: 2px;
+  color: #aeb9c1;
+  font-size: 9px;
+}
+.netipaddress-page #netipaddress-teacher-speech {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+.netipaddress-page .ip-teacher-status {
+  font-size: 15px;
+  line-height: 1.25;
+}
+.netipaddress-page .ip-teacher-status.ok { color: #128a45; }
+.netipaddress-page .ip-teacher-status.ng { color: #9a6a00; }
+.netipaddress-page .ip-teacher-status.error { color: #c62535; }
+.netipaddress-page .ip-teacher-status + span {
+  font-size: var(--lesson-teacher-font-size, 12.5px);
+  line-height: 1.5;
+}
+
+.common-page-main.network-main {
+  padding: 0;
+}
+.common-page-main.network-main .network-lesson-root {
+  padding: 8px;
+  grid-template-rows: minmax(0, 1fr);
+}
+.common-page-main.network-main .network-lesson-header { display: none; }
+.common-page-main.network-main .network-lesson-left {
+  grid-template-rows: minmax(0, 1fr);
+  gap: 0;
+}
+.common-page-main.network-main .network-lesson-visual {
+  height: 100%;
+}
+.common-page-main.network-main .network-lesson-sim .canvas-wrapper {
+  min-height: 0 !important;
+}
+
+.common-page-titlebar .network-title-tools {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+[data-network-speed-slot] {
+  display: flex;
+  align-items: center;
+}
+.common-page-titlebar .artnet-control-panel,
+.common-page-titlebar .broadcast-control-panel,
+.common-page-titlebar .sacn-control-panel,
+.network-sim-overlay-bar .artnet-control-panel,
+.network-sim-overlay-bar .broadcast-control-panel,
+.network-sim-overlay-bar .sacn-control-panel {
+  margin: 0 !important;
+  padding: 5px 10px !important;
+  border-color: #2f555e !important;
+  background: rgba(8, 17, 22, .9) !important;
+}
+.network-expand-button {
+  height: 34px;
+  min-width: 76px;
+  padding: 0 12px;
+  border: 1px solid #ff7a00;
+  border-radius: 7px;
+  background: linear-gradient(180deg, rgba(255,122,0,.18), rgba(0,0,0,.18));
+  color: #ffad55;
+  font-size: 11px;
+  font-weight: 900;
+  cursor: pointer;
+}
+.network-expand-button:hover {
+  color: #fff;
+  box-shadow: 0 0 12px rgba(255,111,0,.32);
+}
+
+.network-sim-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: none;
+  grid-template-rows: 62px minmax(0, 1fr);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(0, 229, 255, .08), transparent 42%),
+    #050708;
+  color: #fff;
+}
+.network-sim-overlay.open { display: grid; }
+body.network-sim-overlay-open { overflow: hidden; }
+.network-sim-overlay-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 16px;
+  border-bottom: 1px solid #ff7200;
+  background: linear-gradient(180deg, #11171c, #090c0f);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, .5);
+}
+.network-sim-overlay-title {
+  margin-right: auto;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: .03em;
+}
+.network-sim-overlay-tools,
+.network-sim-overlay-tools .network-title-tools {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.network-sim-overlay-body {
+  min-height: 0;
+  padding: 14px;
+}
+.network-sim-overlay-body .network-lesson-sim {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  border: 1px solid rgba(0, 229, 255, .34);
+  border-radius: 14px;
+  background: #030607;
+  box-shadow: inset 0 0 36px rgba(0, 0, 0, .9), 0 0 22px rgba(0, 229, 255, .1);
+}
+.network-sim-overlay-body .network-lesson-sim > div {
+  width: 100%;
+  height: 100%;
+}
+.network-sim-overlay-body .network-lesson-sim .canvas-wrapper {
+  min-height: 0 !important;
+  height: 100% !important;
+}
+
+.network-main + .common-page-bottom .common-explain-list,
+.netipaddress-main + .common-page-bottom .common-explain-list {
+  gap: 4px;
+  line-height: 1.35;
+}
+.network-panel-kicker {
+  color: #ff9b36;
+  font-size: 10.5px;
+  font-weight: 900;
+  letter-spacing: .05em;
+}
+.network-panel-title {
+  color: #f2f5f7;
+  font-size: 13px;
+  font-weight: 900;
+}
+.network-panel-body {
+  color: #c8cfd5;
+}
+.network-panel-map {
+  margin-top: 2px;
+  color: #aeb7bf;
+  font-size: 11px;
+}
+.network-panel-map code {
+  color: #f2f5f7;
+  font-family: inherit;
+  font-weight: 800;
+}
+
+.common-page-main.explain-main .module-page-root {
+  grid-template-rows: minmax(0, 1fr);
+  gap: 0;
+}
+.common-page-main.explain-main .module-page-header { display: none; }
+.common-page-main.explain-main .module-page-body { overflow: hidden; }
+
+.common-page-bottom {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 34% 46% 20%;
+  gap: 8px;
+}
+
+.common-bottom-card {
+  min-height: 0;
+  padding: 10px 13px;
+  overflow: hidden;
+  border: 1px solid #475058;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #13171b, #0d1013);
+  box-shadow: inset 0 0 18px rgba(0,0,0,.4);
+}
+
+.common-bottom-title {
+  margin: 0 0 8px;
+  color: #dfe5ea;
+  font-size: 14px;
+  letter-spacing: .04em;
+}
+
+.common-explain-list,
+.common-remember-list {
+  display: grid;
+  gap: 7px;
+  color: #c8cfd5;
+  font-size: var(--lesson-support-font-size, 12px);
+  line-height: 1.48;
+}
+.common-explain-list b { color: #ff9b36; }
+.common-explain-list .cyan { color: #54dff5; }
+.common-explain-list .green { color: #63df83; }
+.common-explain-list .pink { color: #ff79ad; }
+
+.common-teacher-card {
+  padding: 5px 10px 0;
+  display: grid;
+  grid-template-columns: 132px 1fr;
+  align-items: end;
+}
+.common-teacher-img {
+  width: 132px;
+  height: 100%;
+  max-height: 212px;
+  object-fit: contain;
+  object-position: center bottom;
+}
+.common-teacher-copy {
+  align-self: stretch;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.common-teacher-copy h3 {
+  margin: 0 0 6px;
+  color: #ffd04d;
+  font-size: 17px;
+}
+.common-teacher-speech {
+  position: relative;
+  flex: 1;
+  padding: 12px 14px;
+  border: 1px solid #d6bd70;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #f6e8bd, #eddca4);
+  color: #171717;
+  font-size: var(--lesson-teacher-font-size, 12.5px);
+  font-weight: 700;
+  line-height: 1.55;
+}
+.common-teacher-speech::before {
+  content: "";
+  position: absolute;
+  left: -13px;
+  top: 35px;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 14px solid #f2e2af;
+}
+
+.common-remember-card {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.common-remember-item {
+  padding: 6px 7px;
+  border: 1px solid #303840;
+  border-radius: 6px;
+  background: #0b0e11;
+}
+.common-tip {
+  margin-top: auto;
+  padding: 8px;
+  border-left: 2px solid #ff8a00;
+  border-radius: 5px;
+  background: #15191d;
+  color: #ffc247;
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.common-page-footer {
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #8f979e;
+  font-size: 10px;
+  background: #080a0d;
+}
+
+@media (max-height: 820px) {
+  .common-lesson-page {
+    grid-template-rows: 50px minmax(0, 1fr) 166px 24px;
+    gap: 6px;
+  }
+  .common-page-titlebar { padding: 6px 11px; }
+  .common-page-main { padding: 7px; }
+  .common-page-bottom { gap: 6px; }
+  .common-bottom-card { padding: 7px 9px; }
+  .common-bottom-title { margin-bottom: 5px; font-size: 12px; }
+  .common-explain-list,
+  .common-remember-list { gap: 4px; line-height: 1.35; }
+  .common-teacher-card { grid-template-columns: 105px 1fr; }
+  .common-teacher-img { width: 105px; max-height: 154px; }
+  .common-teacher-copy h3 { margin-bottom: 4px; font-size: 14px; }
+  .common-teacher-speech { padding: 8px 10px; line-height: 1.4; }
+  .common-page-main.sim16bit-main #sim16bit-root .fader-area {
+    height: 285px !important;
+  }
+  .common-page-main.sim16bit-main #sim16bit-root .fader-track-container,
+  .common-page-main.sim16bit-main #sim16bit-root .fader-scale {
+    height: 245px !important;
+  }
+  .common-page-main.scroller-main .scr-bottom { grid-template-columns: 1.2fr .8fr; }
+  .common-page-main.scroller-main .scr-root { grid-template-rows: minmax(0, 1fr) 104px; }
+  .common-page-main.scroller-main .scr-fader-row { flex-basis: 155px; }
+  .common-page-main.scroller-main .scr-scale,
+  .common-page-main.scroller-main .scr-trackbox { height: 155px; }
+  .common-page-main.simdmx-main .oscilloscope-screen,
+  .common-page-main.simdmx-main .train-track-area { height: 64px !important; }
+  .common-page-main.simdmx-main .fader-cell-wrap { height: 132px !important; }
+  .common-page-main.simdmx-main .fader-area { height: 76px !important; }
+  .common-page-main.simdmx-main .fader-track-container { height: 68px !important; }
+}
+
+@media (max-width: 1050px) {
+  .common-page-main.movinghead-main .mh-layout {
+    grid-template-columns: 240px minmax(420px, 1fr) 250px;
+  }
+  .common-page-main.network-main .network-lesson-main {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: minmax(0, 1fr);
+  }
+}
