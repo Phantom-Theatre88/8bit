@@ -1,0 +1,159 @@
+/* 「電気って波なの？」— 共通UIを使う波形シミュレーター */
+body.wave-next-ui {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+  background: #07090b;
+  color: #f4f6f8;
+  font-family: "Hiragino Sans", "Yu Gothic", Meiryo, system-ui, -apple-system, sans-serif;
+}
+
+body.wave-next-ui .app {
+  width: 100%;
+  max-width: none;
+  min-height: 0;
+  flex: 1 1 auto;
+  padding: 10px 18px 0;
+  display: grid;
+  grid-template-rows: clamp(56px, 7vh, 68px) minmax(0, 1fr) clamp(174px, 22vh, 214px) 30px;
+}
+
+body.wave-next-ui .topbar {
+  min-height: 0;
+  border: 0;
+  border-left: 3px solid #ff6f00;
+  border-radius: 0;
+  padding: 8px 14px;
+  background: linear-gradient(90deg, rgba(255,111,0,.055), transparent 50%);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.wave-next-ui .title { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.wave-next-ui .bolt { color: #ffb300; font-size: 28px; line-height: 1; }
+.wave-title h1 { margin: 0; color: #f4f6f8; font-size: clamp(21px, 1.7vw, 28px); line-height: 1; white-space: nowrap; }
+.wave-title span { padding-left: 4px; color: #d0d5da; font-size: clamp(11px, .9vw, 14px); white-space: nowrap; }
+.topbar-mode-area { min-width: 0; }
+.topbar-mode-area .wave-modes { flex-wrap: nowrap; justify-content: flex-end; gap: 5px; }
+.topbar-mode-area .wave-mode { min-height: 34px; padding: 0 11px; font-size: 12px; white-space: nowrap; }
+.wave-actions { display: flex; gap: 7px; }
+.wave-actions button {
+  min-width: 108px; height: 36px; border: 1px solid #59616a; border-radius: 6px;
+  background: linear-gradient(180deg,#171c21,#0c1014); color: #eef2f5; font-weight: 800; cursor: pointer;
+}
+.wave-actions button:hover { border-color: #ff852a; }
+
+.wave-simulator {
+  min-height: 0;
+  padding: 12px;
+  border: 1px solid #4a5259;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #13171b, #0d1013);
+  box-shadow: inset 0 0 18px #0006;
+  display: grid;
+  min-height: 0;
+}
+
+.wave-modes { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.wave-mode {
+  min-height: 38px; padding: 0 17px; border: 1px solid #505962; border-radius: 6px;
+  background: linear-gradient(180deg,#151a1f,#0c1014); color: #e8edf0; font-size: 14px; font-weight: 800; cursor: pointer;
+}
+.wave-mode:hover { border-color: #ff8b35; }
+.wave-mode.active { border-color: #ff6f00; background: linear-gradient(135deg,#ff7c16,#f14e0b); color: #fff; box-shadow: 0 0 14px rgba(255,97,0,.3); }
+.wave-mode.motor { border-color: #b16a20; color: #ffcb72; }
+.wave-mode.motor:hover { border-color: #ff9b25; background: #2b1b0c; }
+
+.wave-stage {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 250px;
+  gap: 10px;
+}
+.wave-graph-card, .wave-side-card {
+  min-height: 0; border: 1px solid #394149; border-radius: 8px; background: #0b0f12;
+}
+.wave-graph-card { position: relative; overflow: hidden; display: grid; grid-template-rows: auto minmax(0,1fr) auto; }
+.wave-graph-head { display:flex; align-items:center; justify-content:space-between; gap:10px; padding: 10px 13px 2px; }
+.wave-graph-head h2 { margin:0; font-size: clamp(16px, 1.2vw, 20px); }
+.wave-status { display:inline-flex; align-items:center; gap:6px; color:#aeb7be; font-size:12px; font-weight:700; white-space: nowrap; }
+.wave-status::before { content:""; width:8px; height:8px; border-radius:50%; background:#59d439; box-shadow:0 0 8px #59d439; }
+.wave-graph-card.paused .wave-status::before { background:#ffb000; box-shadow:0 0 8px #ffb000; }
+.wave-svg { width:100%; height:100%; min-height:250px; display:block; }
+.wave-svg .axis { stroke:#88929a; stroke-width:1.4; }
+.wave-svg .grid { stroke:#2b343a; stroke-width:1; stroke-dasharray:3 5; }
+.wave-svg .label { fill:#b9c1c7; font-size:19px; font-weight:700; }
+.wave-svg .small-label { fill:#8c969e; font-size:15px; font-weight:600; }
+.wave-svg .wave { fill:none; stroke-width:4.2; stroke-linecap:round; }
+.wave-svg .wave.single { stroke:#f1f4f5; filter:drop-shadow(0 0 4px rgba(255,255,255,.35)); }
+.wave-svg .wave.l1,.wave-svg .wave.r { stroke:#ff473e; filter:drop-shadow(0 0 4px rgba(255,71,62,.38)); }
+.wave-svg .wave.l2,.wave-svg .wave.t { stroke:#3c9cff; filter:drop-shadow(0 0 4px rgba(60,156,255,.4)); }
+.wave-svg .wave.s { stroke:#f3f5f7; filter:drop-shadow(0 0 4px rgba(243,245,247,.3)); }
+.wave-svg .wave.diff { stroke:#ffae38; stroke-width:3; stroke-dasharray:7 6; }
+.wave-svg .pointer { fill:#ffb22b; stroke:#fff5d5; stroke-width:1.5; }
+.wave-svg .annotation-line { stroke:#ffbb4d; stroke-width:1.4; }
+.wave-svg .annotation { fill:#ffd17c; font-size:16px; font-weight:800; }
+.wave-svg .phase-r { fill:#ff473e; font-size:19px; font-weight:900; }
+.wave-svg .phase-s { fill:#f3f5f7; font-size:19px; font-weight:900; }
+.wave-svg .phase-t { fill:#3c9cff; font-size:19px; font-weight:900; }
+.wave-svg .power { fill:none; stroke:#ff6f00; stroke-width:3; }
+.wave-graph-footer { padding: 0 13px 10px; color:#aeb7be; font-size:12px; }
+
+.wave-side-card { padding: 14px; display:flex; flex-direction:column; gap:12px; }
+.wave-side-card h3 { margin:0; color:#ffbc4f; font-size:16px; }
+.wave-side-card p { margin:0; color:#d9dfe3; font-size:13px; line-height:1.65; }
+.wave-points { display:grid; gap:7px; margin:0; padding:0; list-style:none; font-size:12px; color:#c5cdd3; line-height:1.45; }
+.wave-points li { padding-left:14px; position:relative; }
+.wave-points li::before { content:""; position:absolute; left:0; top:.55em; width:5px; height:5px; border-radius:50%; background:#ff7d18; }
+.wave-control { margin-top:auto; min-height:42px; border:1px solid #f07918; border-radius:6px; background:linear-gradient(180deg,#fa7319,#dc4508); color:#fff; font-weight:900; cursor:pointer; }
+.wave-control:hover { filter:brightness(1.08); }
+.wave-tip { padding:9px; border:1px solid #3d464e; border-left:2px solid #ff9d00; border-radius:6px; background:#111519; color:#ffc247; font-size:11px; line-height:1.45; }
+
+.wave-next-ui .lesson-bottom { display:grid; grid-template-columns:34% 46% 20%; gap:8px; min-height:0; padding-top:8px; }
+.wave-next-ui .panel { border-color:#4a5259; border-radius:8px; background:linear-gradient(180deg,#13171b,#0d1013); }
+.wave-next-ui .bottom-explain,.wave-next-ui .bottom-remember { padding:10px 13px; overflow:hidden; }
+.wave-next-ui .bottom-title { margin:0 0 8px; color:#dfe5ea; font-size:14px; letter-spacing:.04em; }
+.wave-next-ui .explain-list,.wave-next-ui .remember-list { display:grid; gap:7px; color:#d7dce0; font-size:var(--lesson-support-font-size,12px); line-height:1.48; }
+.wave-next-ui .explain-list strong { color:#ffb232; }
+.wave-next-ui .teacher { margin:0; padding:6px 10px 0; display:grid; grid-template-columns:128px 1fr; gap:10px; overflow:hidden; }
+.wave-next-ui .teacher-character { width:128px; height:100%; max-height:205px; object-fit:contain; object-position:center bottom; align-self:end; }
+.wave-next-ui .teacher-copy { min-width:0; display:flex; flex-direction:column; }
+.wave-next-ui .teacher h3 { margin:0 0 5px; color:#ffd04d; font-size:17px; }
+.wave-next-ui .teacher-speech { position:relative; flex:1; margin:0; border-radius:12px; background:#f2e4b2; color:#151515; padding:10px 12px; font-size:var(--lesson-teacher-font-size,12.5px); line-height:1.55; font-weight:700; }
+.wave-next-ui .teacher-speech::before { content:""; position:absolute; left:-12px; top:24px; border-top:9px solid transparent; border-bottom:9px solid transparent; border-right:13px solid #f2e4b2; }
+.wave-next-ui .bottom-remember { display:flex; flex-direction:column; gap:7px; }
+.wave-next-ui .remember-tip { margin-top:auto; padding:8px; border:1px solid #3e464e; border-left:2px solid #ff9d00; border-radius:6px; background:#111519; color:#ffc247; font-size:10px; line-height:1.45; }
+.wave-next-ui .bottomnav { justify-content:flex-start; border:0; border-radius:0; padding:0 10px; background:#080a0d; }
+.wave-next-ui .bottomnav .home { display:none; }
+
+@media (max-height:860px) {
+  body.wave-next-ui .app { padding:7px 12px 0; grid-template-rows:auto minmax(390px,1fr) 168px 26px; }
+  .wave-simulator { padding:8px; gap:7px; }
+  .wave-mode { min-height:32px; padding:0 13px; font-size:12px; }
+  .wave-side-card { padding:10px; gap:8px; }
+  .wave-next-ui .teacher-speech { padding:8px 10px; }
+}
+
+@media (max-width:1250px) {
+  .wave-title span { display: none; }
+  .topbar-mode-area .wave-mode { padding: 0 9px; font-size: 11px; }
+}
+
+@media (max-width:900px) {
+  body.wave-next-ui { height:auto; min-height:100dvh; overflow:auto; }
+  body.wave-next-ui .app { display:block; padding:8px 12px 0; }
+  body.wave-next-ui .topbar { display:flex; flex-wrap:wrap; align-items:center; }
+  .topbar-mode-area { order:3; width:100%; }
+  .topbar-mode-area .wave-modes { flex-wrap:wrap; justify-content:flex-start; }
+  .wave-simulator { margin-top:4px; }
+  .wave-stage,.wave-next-ui .lesson-bottom { grid-template-columns:1fr; }
+  .wave-side-card { min-height:240px; }
+  .wave-next-ui .lesson-bottom { margin-top:8px; }
+  .wave-next-ui .bottom-explain,.wave-next-ui .bottom-remember { min-height:145px; }
+  .wave-next-ui .teacher { min-height:185px; }
+}

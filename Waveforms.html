@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>電気って波なの？｜交流の波形を見る</title>
+<link rel="stylesheet" href="next-ui-typography.css">
+<link rel="stylesheet" href="next-ui-page-shell.css">
+<link rel="stylesheet" href="next-ui-waveforms.css">
+</head>
+<body class="wave-next-ui">
+<header class="next-ui-header" aria-label="8bit図鑑 共通ナビゲーション">
+  <div class="next-ui-header-top">
+    <a class="next-ui-brand" href="index.html" aria-label="教材トップへ">8bit<small>LIGHTING STUDY</small></a>
+    <nav class="next-ui-category-tabs" aria-label="教材の大分類">
+      <div class="next-ui-category-menu"><button class="next-ui-category-tab active" type="button" aria-expanded="false"><span class="next-ui-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13.5 2 5 13h6l-.5 9L19 10h-6z"/></svg></span>電気</button><div class="next-ui-dropdown"><a href="Analog.html">V・W・Aの法則</a><a href="SinglePhase3.html">単相3線</a><a class="active" href="Waveforms.html">電気って波なの？</a><span class="pending">三相3線　次に追加</span></div></div>
+      <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button" aria-expanded="false"><span class="next-ui-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3v18M12 3v18M19 3v18"/><path d="M2.5 8h5M9.5 15h5M16.5 10h5"/></svg></span>調光</button><div class="next-ui-dropdown"><a href="Top.html?tab=sim8bit">8-bit 調光卓</a><a href="Top.html?tab=sim16bit">16-bit 調光卓</a></div></div>
+      <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button" aria-expanded="false"><span class="next-ui-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 19V5M3 19h18"/><path d="m6 15 4-5 4 3 5-7"/></svg></span>信号</button><div class="next-ui-dropdown"><a href="Top.html?tab=simdmx">DMX通信列車</a><a href="Top.html?tab=ledcolormix">LED色混ぜ</a><a href="Top.html?tab=scroller">Scroller</a><a href="Top.html?tab=movinghead">Moving Head</a></div></div>
+      <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button" aria-expanded="false"><span class="next-ui-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v4M6 16v-4h12v4"/></svg></span>Network</button><div class="next-ui-dropdown"><a href="Top.html?tab=netipaddress">IPアドレス</a><a href="Top.html?tab=netartnet">DMX on LAN</a><a href="Top.html?tab=netbroadcast">Broadcast</a><a href="Top.html?tab=netsacn">Multicast</a><a href="Top.html?tab=explain">結線</a></div></div>
+    </nav>
+    <div class="next-ui-tools"><button class="next-ui-tool" type="button">▣ 学習ガイド</button><button class="next-ui-tool" type="button">▱ ブックマーク</button><button class="next-ui-tool" type="button">⚙ 設定</button><div class="next-ui-page-controls" aria-label="教材ページ移動"><button class="next-ui-page-button" type="button" onclick="location.href='SinglePhase3.html'">◀ 前</button><button class="next-ui-page-button" type="button" disabled>次 ▶</button></div><button class="next-ui-tool menu" type="button" aria-label="メニュー">☰</button></div>
+  </div>
+</header>
+
+<main class="app">
+  <header class="topbar">
+    <div class="title wave-title"><div class="bolt">⚡</div><h1>電気って波なの？</h1><span>｜100V・200V・三相の違いを波で見てみよう</span></div>
+    <div class="topbar-mode-area">
+      <div class="wave-modes" role="tablist" aria-label="波形を切り替える">
+        <button class="wave-mode active" type="button" data-mode="single100" role="tab" aria-selected="true">単相100V</button>
+        <button class="wave-mode" type="button" data-mode="single3-100" role="tab" aria-selected="false">単相3線 100V</button>
+        <button class="wave-mode" type="button" data-mode="single3-200" role="tab" aria-selected="false">単相3線 200V</button>
+        <button class="wave-mode" type="button" data-mode="threephase" role="tab" aria-selected="false">三相3線</button>
+        <button class="wave-mode motor" type="button" data-mode="motor">三相モーター（動力）へ</button>
+      </div>
+    </div>
+    <div class="wave-actions"><button id="helpButton" type="button">ⓘ 見かた</button></div>
+  </header>
+
+  <section class="wave-simulator" aria-label="交流の波形シミュレーター">
+    <div class="wave-stage">
+      <section class="wave-graph-card" id="graphCard" aria-live="polite">
+        <div class="wave-graph-head"><h2 id="modeHeading">単相100Vとは？</h2><span class="wave-status" id="waveStatus">波が動いています</span></div>
+        <svg class="wave-svg" id="waveSvg" viewBox="0 0 1000 400" role="img" aria-labelledby="modeHeading waveDescription"></svg>
+        <div class="wave-graph-footer" id="waveDescription">時間と一緒に、プラスとマイナスを行ったり来たりするのが交流です。</div>
+      </section>
+      <aside class="wave-side-card">
+        <h3 id="sideHeading">まずは1つの波</h3>
+        <p id="sideLead">100Vの交流は、見えない電圧が時間と一緒に変化している様子です。</p>
+        <ul class="wave-points" id="sidePoints"></ul>
+        <button class="wave-control" id="waveControl" type="button">⏸ 波を止めて説明を見る</button>
+        <div class="wave-tip" id="waveTip">⚡ 操作TIP<br>波を止めると、その瞬間の山・谷・電圧差を確認できます。</div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="lesson-bottom">
+    <section class="panel bottom-explain"><h3 class="bottom-title">▤ 解説</h3><div class="explain-list" id="explainList"></div></section>
+    <section class="panel teacher"><img class="teacher-character" src="assets/analog_teacher_pointing.webp" alt="照明教材の先生"><div class="teacher-copy"><h3>先生のひとこと</h3><p class="teacher-speech" id="teacherSpeech"></p></div></section>
+    <section class="panel bottom-remember"><h3 class="bottom-title">♙ 覚えておこう</h3><div class="remember-list" id="rememberList"></div><div class="remember-tip">⚡ 現場TIP<br>同じ200Vでも、単相3線と三相3線では波の組み合わせが違います。</div></section>
+  </section>
+  <footer class="bottomnav"><a class="home" href="index.html">⌂ TOPへ</a><div class="brand">8bit Lighting Study　v3.0.1</div></footer>
+</main>
+
+<dialog class="help-dialog" id="helpDialog"><div class="help-head"><h2>波形ページの見かた</h2><button class="help-close" id="helpClose" type="button">閉じる</button></div><div class="help-body"><ol><li>上のボタンで、見たい電源の種類を選びます。</li><li>最初は波が動き、電圧が時間で変化することを見せます。</li><li>「波を止めて説明を見る」を押すと、その瞬間を固定して山・谷・電圧差を確認できます。</li><li>三相モーターは、三相3線ページが追加された時にここから開けます。</li></ol><div class="note">電気の波は、電気そのものが線の中を波打って進む図ではなく、電圧が時間で変化する様子を表しています。</div></div></dialog>
+
+<script>
+(() => {
+  const data = {
+    single100: {
+      heading: '単相100Vとは？', sideHeading: 'まずは1つの波',
+      lead: '100Vの交流は、見えない電圧が時間と一緒に変化している様子です。',
+      points: ['プラス側とマイナス側を交互に行き来する', '山と谷の間で電圧の向きが変わる', 'LとNの間で100Vを使う'],
+      footer: '時間と一緒に、プラスとマイナスを行ったり来たりするのが交流です。',
+      explain: ['単相100Vは、1つの波で電圧が変化します。', '山と谷の間で、電圧の向きが入れ替わります。', '力の強さにも、強い時と弱い時があります。'],
+      teacher: 'まずは、電気はずっと同じ強さではないと覚えよう。<br>プラスとマイナスを行ったり来たりする、この変化が<strong>交流</strong>です。',
+      remember: ['□ 単相100Vは1つの波', '□ 山と谷で向きが変わる', '□ これが交流の基本']
+    },
+    'single3-100': {
+      heading: '単相3線で100Vを取る', sideHeading: '中性線を基準にする',
+      lead: 'L1とL2は逆向きに動いていますが、Nを基準にすればどちらも100Vです。',
+      points: ['L1 − N で100V', 'L2 − N で100V', '100Vの回路を2系統取り出せる'],
+      footer: 'N（中性線）を基準に見ると、L1側もL2側も100Vです。',
+      explain: ['L1とL2は、Nをはさんで反対向きに変化します。', 'それぞれNとの間で100Vが取れます。', '照明の100V負荷を、L1側・L2側へ分けて使えます。'],
+      teacher: '<strong>L1-N</strong>も<strong>L2-N</strong>も100V。<br>「2つの100Vを取れる」が、単相3線の大事なところです。',
+      remember: ['□ L1-Nは100V', '□ L2-Nも100V', '□ Nが基準になる']
+    },
+    'single3-200': {
+      heading: '単相3線で200Vを取る', sideHeading: '山と谷の差を見る',
+      lead: 'L1が山の時、L2は谷。2つの差を使うと、電圧差は200Vになります。',
+      points: ['L1とL2は逆向きの100Vの波', 'L1 − L2 の電圧差は200V', '同じ100Vの波を、取り方で200Vにする'],
+      footer: '赤いL1と青いL2の距離が、L1-L2で使える200Vです。',
+      explain: ['L1とL2の波は、正反対に動いています。', '山と谷の差を取るので、L1-L2では200Vになります。', '「200V専用の山」が来るのではなく、2本の100Vの差を使っています。'],
+      teacher: 'ここが単相3線の見せ場です。<br><strong>L1が山、L2が谷</strong>なら、その差は200V。だから200Vの機器も使えるんだね。',
+      remember: ['□ L1-L2で200V', '□ 2つの波は逆向き', '□ 山と谷の差を使う']
+    },
+    threephase: {
+      heading: '三相3線とは？', sideHeading: '3つの波が順番に働く',
+      lead: 'R・S・Tの3つの波が120°ずれているため、力を受け渡すように使えます。',
+      points: ['R・S・Tは120°ずつずれている', 'どこかの相が次へ引き継ぐ', '力の変化が小さく、途切れにくい'],
+      footer: '3つの波が順番に働くので、力を出し続けやすいのが三相です。',
+      explain: ['三相3線は、120°ずれた3つの波を使います。', '1つが弱くなる時も、次の波が引き継ぎます。', 'そのため力の変化が小さく、モーターの動力に向いています。'],
+      teacher: '三相は、1つの波ががんばるのではなく、<strong>R → S → T</strong>が順番に支えるイメージ。<br>だから力が途切れにくく、動力に使われます。',
+      remember: ['□ R・S・Tは120°ずれ', '□ 順番に引き継ぐ', '□ 力が途切れにくい']
+    }
+  };
+
+  let mode = 'single100';
+  let running = true;
+  let phase = 0;
+  let lastTime = performance.now();
+  const $ = id => document.getElementById(id);
+  const svg = $('waveSvg');
+  const svgNS = 'http://www.w3.org/2000/svg';
+
+  function pathFor({base, amp, offset = 0, start = 70, end = 930}) {
+    let d = '';
+    for (let x = start; x <= end; x += 5) {
+      const angle = ((x - start) / (end - start)) * Math.PI * 4 + phase + offset;
+      const y = base - Math.sin(angle) * amp;
+      d += `${x === start ? 'M' : 'L'}${x.toFixed(1)} ${y.toFixed(1)} `;
+    }
+    return d;
+  }
+
+  function tag(name, attrs, text) {
+    const el = document.createElementNS(svgNS, name);
+    Object.entries(attrs || {}).forEach(([key, value]) => el.setAttribute(key, value));
+    if (text) el.textContent = text;
+    return el;
+  }
+
+  function addLine(x1, y1, x2, y2, className) { svg.append(tag('line', {x1, y1, x2, y2, class: className})); }
+  function addText(x, y, text, className = 'label', anchor) { svg.append(tag('text', {x, y, class: className, ...(anchor ? {'text-anchor': anchor} : {})}, text)); }
+  function addPath(className, spec) { svg.append(tag('path', {d: pathFor(spec), class: `wave ${className}`})); }
+
+  function drawAxes({baseline = 200, title = '電圧 [V]', yLabels = ['+100', '0', '−100'], gridY = [80, 140, baseline, 260, 320], labelY = [80, baseline, 320]}) {
+    gridY.forEach(y => addLine(70, y, 930, y, y === baseline ? 'axis' : 'grid'));
+    addLine(70, 48, 70, 342, 'axis');
+    addLine(70, baseline, 940, baseline, 'axis');
+    addText(28, 57, title, 'small-label');
+    addText(61, labelY[0] + 5, yLabels[0], 'small-label', 'end');
+    addText(61, labelY[1] + 5, yLabels[1], 'small-label', 'end');
+    addText(61, labelY[2] + 5, yLabels[2], 'small-label', 'end');
+    ['0°', '90°', '180°', '270°', '360°'].forEach((label, i) => addText(70 + i * 215, 368, label, 'small-label', i === 0 ? 'start' : 'middle'));
+  }
+
+  function addPointer(spec, label, x = 500) {
+    const angle = ((x - 70) / 860) * Math.PI * 4 + phase + (spec.offset || 0);
+    const y = spec.base - Math.sin(angle) * spec.amp;
+    svg.append(tag('circle', {cx: x, cy: y, r: 6, class: 'pointer'}));
+    addLine(x, y, x, 48, 'annotation-line');
+    addText(x + 10, 67, label, 'annotation');
+  }
+
+  function drawWave() {
+    svg.replaceChildren();
+    if (mode === 'single100') {
+      drawAxes({baseline: 200});
+      const spec = {base: 200, amp: 120};
+      addPath('single', spec);
+      addText(88, 99, 'L − N ＝ 100V', 'label');
+      if (!running) { addPointer(spec, 'いまの電圧'); addText(744, 128, '山（＋側）', 'annotation'); addText(520, 304, '谷（−側）', 'annotation'); }
+    } else if (mode === 'single3-100') {
+      drawAxes({baseline: 200, yLabels:['+100', '0', '−100']});
+      const l1 = {base: 200, amp: 120};
+      const l2 = {base: 200, amp: 120, offset: Math.PI};
+      addPath('l1', l1); addPath('l2', l2);
+      addText(88, 92, 'L1 − N ＝ 100V', 'label');
+      addText(88, 119, 'L2 − N ＝ 100V', 'label');
+      addText(93, 175, 'N（基準）', 'small-label');
+      if (!running) { addPointer(l1, 'L1'); addPointer(l2, 'L2', 610); }
+    } else if (mode === 'single3-200') {
+      drawAxes({baseline: 200, yLabels:['+100', '0', '−100']});
+      const l1 = {base: 200, amp: 120};
+      const l2 = {base: 200, amp: 120, offset: Math.PI};
+      addPath('l1', l1); addPath('l2', l2);
+      addText(88, 92, 'L1', 'label'); addText(88, 320, 'L2', 'label');
+      addLine(888, 80, 888, 320, 'annotation-line'); addLine(874, 80, 902, 80, 'annotation-line'); addLine(874, 320, 902, 320, 'annotation-line');
+      addText(912, 204, '200V', 'annotation');
+      addText(520, 52, 'L1 − L2 の電圧差', 'annotation', 'middle');
+      if (!running) { addPointer(l1, 'L1は山'); addPointer(l2, 'L2は谷', 500); }
+    } else {
+      drawAxes({baseline:200, title:'電圧 [V]', yLabels:['+200', '0', '−200'], gridY:[100, 150, 200, 250, 300], labelY:[100, 200, 300]});
+      const r = {base:200, amp:100}; const s = {base:200, amp:100, offset:-Math.PI * 2 / 3}; const t = {base:200, amp:100, offset:Math.PI * 2 / 3};
+      addPath('r', r); addPath('s', s); addPath('t', t);
+      addText(90, 78, 'R', 'phase-r'); addText(126, 78, 'S', 'phase-s'); addText(162, 78, 'T', 'phase-t');
+      addText(74, 326, '3つの波を合わせた「力のイメージ」', 'small-label');
+      let d = '';
+      for (let x = 70; x <= 930; x += 5) {
+        const a = ((x - 70) / 860) * Math.PI * 4 + phase;
+        const power = (Math.sin(a) ** 2 + Math.sin(a - Math.PI * 2 / 3) ** 2 + Math.sin(a + Math.PI * 2 / 3) ** 2) / 3;
+        const y = 347 - power * 22;
+        d += `${x === 70 ? 'M' : 'L'}${x.toFixed(1)} ${y.toFixed(1)} `;
+      }
+      svg.append(tag('path', {d, class:'power'}));
+      if (!running) { addPointer(r, 'R'); addPointer(s, 'S', 610); addPointer(t, 'T', 720); }
+    }
+  }
+
+  function renderContent() {
+    const item = data[mode];
+    $('modeHeading').textContent = item.heading;
+    $('sideHeading').textContent = item.sideHeading;
+    $('sideLead').textContent = item.lead;
+    $('sidePoints').replaceChildren(...item.points.map(point => { const li = document.createElement('li'); li.textContent = point; return li; }));
+    $('waveDescription').textContent = item.footer;
+    $('explainList').replaceChildren(...item.explain.map(line => { const span = document.createElement('span'); span.textContent = line; return span; }));
+    $('teacherSpeech').innerHTML = item.teacher;
+    $('rememberList').replaceChildren(...item.remember.map(line => { const span = document.createElement('span'); span.textContent = line; return span; }));
+    $('waveTip').innerHTML = running ? '⚡ 操作TIP<br>波を止めると、その瞬間の山・谷・電圧差を確認できます。' : '⚡ 説明モード<br>固定した波を見ながら、注釈の位置を確かめてみよう。';
+    $('waveControl').textContent = running ? '⏸ 波を止めて説明を見る' : '▶ 波を動かす';
+    $('waveStatus').textContent = running ? '波が動いています' : '説明モード：停止中';
+    $('graphCard').classList.toggle('paused', !running);
+    document.querySelectorAll('[data-mode]').forEach(button => { const isActive = button.dataset.mode === mode; button.classList.toggle('active', isActive); button.setAttribute('aria-selected', String(isActive)); });
+  }
+
+  function setMode(nextMode) {
+    mode = nextMode;
+    running = true;
+    renderContent();
+    drawWave();
+  }
+
+  document.querySelectorAll('[data-mode]').forEach(button => button.addEventListener('click', () => {
+    if (button.dataset.mode === 'motor') {
+      $('sideHeading').textContent = '三相モーターは次のページで追加します';
+      $('sideLead').textContent = '三相3線ページを制作したら、ここからモーターのしくみへ進めます。';
+      $('sidePoints').replaceChildren(...['R・S・Tが順番に働く', '回転する磁界を作る', '動力として使われる'].map(point => { const li = document.createElement('li'); li.textContent = point; return li; }));
+      return;
+    }
+    setMode(button.dataset.mode);
+  }));
+  $('waveControl').addEventListener('click', () => { running = !running; renderContent(); drawWave(); });
+  $('helpButton').addEventListener('click', () => $('helpDialog').showModal());
+  $('helpClose').addEventListener('click', () => $('helpDialog').close());
+  $('helpDialog').addEventListener('click', event => { if (event.target === $('helpDialog')) $('helpDialog').close(); });
+  document.querySelectorAll('.next-ui-category-tab').forEach(button => button.addEventListener('click', event => { event.stopPropagation(); const menu = button.closest('.next-ui-category-menu'); document.querySelectorAll('.next-ui-category-menu').forEach(item => { if (item !== menu) item.classList.remove('open'); }); menu.classList.toggle('open'); button.setAttribute('aria-expanded', String(menu.classList.contains('open'))); }));
+  document.addEventListener('click', () => document.querySelectorAll('.next-ui-category-menu').forEach(menu => menu.classList.remove('open')));
+
+  function animate(now) {
+    if (running) phase += (now - lastTime) * 0.0022;
+    lastTime = now;
+    if (running) drawWave();
+    requestAnimationFrame(animate);
+  }
+
+  renderContent();
+  drawWave();
+  requestAnimationFrame(animate);
+})();
+</script>
+</body>
+</html>
