@@ -14,23 +14,28 @@
   border-left: 0 !important;
 }
 
-/* Reserve room for the six main categories. */
-.next-ui-category-tab {
+/* Shared soft category tabs. */
+.next-ui-category-tab,
+body .next-ui-category-tab {
   min-width: 104px !important;
+  height: 46px !important;
+  margin: 7px 0 !important;
   padding-left: 12px !important;
   padding-right: 12px !important;
+  border-radius: 12px !important;
+  border-bottom: 1px solid #2b3238 !important;
 }
 
 /* StageLight TopMenu prototype.
-   Source: 360x96 / Display box: 180x48 / no stretch. */
+   Display box: 180x60. Artwork is used as-is. */
 .next-ui-brand,
 body .next-ui-brand {
   width: 180px !important;
   min-width: 180px !important;
-  height: 48px !important;
-  min-height: 48px !important;
+  height: 60px !important;
+  min-height: 60px !important;
   padding: 0 !important;
-  margin: 5px 8px 5px 0 !important;
+  margin: 0 8px 0 0 !important;
   flex: 0 0 180px !important;
   overflow: hidden !important;
   color: transparent !important;
@@ -40,11 +45,16 @@ body .next-ui-brand {
   background-image: url('assets/stagelight-top-logo.svg') !important;
   background-repeat: no-repeat !important;
   background-position: left center !important;
-  background-size: contain !important;
+  background-size: 180px 60px !important;
 }
 .next-ui-brand small,
 body .next-ui-brand small {
   display: none !important;
+}
+
+.next-ui-header-top,
+body .next-ui-header-top {
+  min-height: 60px !important;
 }
 
 @media (max-height: 820px) {
@@ -55,17 +65,19 @@ body .next-ui-brand small {
 }
 
 @media (max-width: 1180px) {
-  .next-ui-category-tab {
+  .next-ui-category-tab,
+  body .next-ui-category-tab {
     min-width: 92px !important;
     padding-left: 9px !important;
     padding-right: 9px !important;
   }
 
+  /* Logo stays 180x60. Do not shrink it responsively. */
   .next-ui-brand,
   body .next-ui-brand {
-    width: 156px !important;
-    min-width: 156px !important;
-    flex-basis: 156px !important;
-    background-size: contain !important;
+    width: 180px !important;
+    min-width: 180px !important;
+    flex-basis: 180px !important;
+    background-size: 180px 60px !important;
   }
 }
