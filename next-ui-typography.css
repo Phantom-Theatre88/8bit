@@ -3,9 +3,35 @@
   --lesson-teacher-font-size: 12.5px;
 }
 
+/* Shared header: keep only page navigation controls on the right. */
+.next-ui-tools > .next-ui-tool {
+  display: none !important;
+}
+.next-ui-tools > .next-ui-page-controls {
+  display: flex !important;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  border-left: 0 !important;
+}
+
+/* Reserve room for the six main categories: 電気｜調光｜信号｜Network｜灯具｜シュート */
+.next-ui-category-tab {
+  min-width: 104px !important;
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+}
+
 @media (max-height: 820px) {
   :root {
     --lesson-support-font-size: 10.5px;
     --lesson-teacher-font-size: 10.5px;
+  }
+}
+
+@media (max-width: 1180px) {
+  .next-ui-category-tab {
+    min-width: 92px !important;
+    padding-left: 9px !important;
+    padding-right: 9px !important;
   }
 }
