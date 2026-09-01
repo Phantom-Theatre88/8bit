@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>人物の見え方シミュレーター｜8bit Lighting Study</title>
+<link rel="stylesheet" href="next-ui-typography.css">
+<link rel="stylesheet" href="next-ui-page-shell.css">
+<style>
+:root{--orange:#ff6f00;--amber:#ffc14d;--line:#4a5259;--panel:#13171b;--deep:#0d1013;--text:#f4f6f8;--muted:#aab3ba;--cyan:#57dff8}
+*{box-sizing:border-box}
+body.person-lighting-next-ui{min-height:100dvh;margin:0;display:flex;flex-direction:column;overflow:hidden;background:#07090b;color:var(--text);font-family:"Hiragino Sans","Yu Gothic",Meiryo,system-ui,-apple-system,sans-serif}
+button,input{font:inherit}
+body.person-lighting-next-ui .app{width:100%;min-height:0;flex:1 1 auto;padding:10px 18px 0;display:grid;grid-template-rows:clamp(56px,7vh,68px) minmax(0,1fr) clamp(200px,25vh,250px) 30px;gap:8px}
+.topbar{min-height:0;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 14px;border-left:3px solid var(--orange);background:linear-gradient(90deg,rgba(255,111,0,.055),transparent 50%)}
+.title{display:flex;align-items:center;gap:10px;min-width:0}.title-icon{color:#ffb300;font-size:28px;line-height:1}.title h1{margin:0;font-size:clamp(20px,1.65vw,27px);white-space:nowrap}.title span{color:#d0d5da;font-size:clamp(11px,.9vw,14px);white-space:nowrap}
+.top-actions{display:flex;align-items:center;gap:8px}.status,.help{min-height:36px;padding:0 12px;display:inline-flex;align-items:center;justify-content:center;border:1px solid #4a535b;border-radius:6px;background:linear-gradient(180deg,#151a1f,#0c1014);color:#dce3e6;font-size:11px;font-weight:800;white-space:nowrap}.status b{margin-left:5px;color:var(--amber)}.help{min-width:105px;color:#fff;cursor:pointer}
+.main-grid{min-height:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,27%);gap:8px}.panel{min-height:0;overflow:hidden;border:1px solid var(--line);border-radius:8px;background:linear-gradient(180deg,var(--panel),var(--deep));box-shadow:inset 0 0 18px rgba(0,0,0,.4)}
+.view-panel{display:grid;grid-template-rows:44px minmax(0,1fr)}.view-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:6px;border-bottom:1px solid #343d44;background:#0b0f12}.view-tab{border:1px solid #3d464e;border-radius:6px;background:linear-gradient(180deg,#171c20,#0f1316);color:#c7cfd5;font-size:12px;font-weight:900;cursor:pointer}.view-tab.active{border-color:#b94f00;color:#ffae42;background:linear-gradient(180deg,#24170d,#17110c);box-shadow:inset 0 -3px 0 #ff6f00,0 0 14px rgba(255,111,0,.18)}
+.view-canvas{position:relative;min-height:0;margin:8px;border:1px solid #374149;border-radius:7px;overflow:hidden;background:linear-gradient(180deg,#0b0f12,#080b0e)}.view-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(104,123,133,.11) 1px,transparent 1px),linear-gradient(90deg,rgba(104,123,133,.11) 1px,transparent 1px);background-size:32px 32px}.view-placeholder{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#929da5}.view-placeholder strong{display:block;color:#e8edef;font-size:18px;margin-bottom:6px}.view-placeholder span{font-size:11px;line-height:1.55}.view-note{position:absolute;left:12px;bottom:10px;padding:6px 8px;border:1px solid #3e474f;border-left:2px solid var(--orange);border-radius:5px;background:rgba(8,11,14,.9);color:#b8c1c7;font-size:10px;font-weight:700}
+.preview-panel{display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:7px;padding:10px}.section-head{margin:0;font-size:clamp(14px,1.1vw,18px);font-weight:900}.section-sub{color:var(--muted);font-size:11px;line-height:1.45}.portrait-placeholder{min-height:0;display:grid;place-items:center;border:1px solid #384149;border-radius:7px;background:radial-gradient(circle at 50% 38%,rgba(255,255,255,.06),transparent 34%),#080b0e}.portrait-silhouette{width:116px;height:150px;position:relative;opacity:.55}.portrait-silhouette::before{content:"";position:absolute;left:34px;top:10px;width:48px;height:58px;border-radius:50%;background:#59636a}.portrait-silhouette::after{content:"";position:absolute;left:13px;bottom:0;width:90px;height:84px;border-radius:48% 48% 12px 12px;background:#4b555c}.portrait-caption{padding:8px 9px;border:1px solid #333d44;border-radius:6px;background:#0c1013;color:#cbd3d8;font-size:10px;line-height:1.5}.portrait-caption b{color:#ffd171}
+.bottom-grid{min-height:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,27%);gap:8px}.fader-panel{padding:8px 10px;display:grid;grid-template-rows:26px minmax(0,1fr)}.fader-title{display:flex;align-items:center;justify-content:space-between;color:#dfe5ea;font-size:14px;font-weight:900}.fader-title small{color:#8e989f;font-size:10px;font-weight:700}.fader-bank{min-height:0;display:grid;grid-template-columns:repeat(10,minmax(62px,1fr));gap:5px}
+.fader-cell{min-width:0;display:grid;grid-template-rows:26px 22px minmax(0,1fr) 22px;justify-items:center;align-items:center;padding:4px 3px;border:1px solid #30383e;border-radius:6px;background:#0c1013}.channel-button{width:30px;height:24px;border:1px solid #555e65;border-radius:5px;background:#171c20;color:#fff;font-size:11px;font-weight:900;cursor:pointer}.fader-cell.active .channel-button{border-color:#ff6f00;box-shadow:0 0 10px rgba(255,111,0,.35)}.channel-label{width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:center;color:#cbd3d8;font-size:9px;font-weight:800}
+.fader-area{position:relative;width:54px;height:100%;min-height:118px;touch-action:none}.fader-scale{position:absolute;left:0;top:8px;bottom:8px;width:19px;display:flex;flex-direction:column;justify-content:space-between;color:#59636a;font-size:8px;font-weight:900;text-align:right}.fader-track-container{position:absolute;right:0;top:8px;bottom:8px;width:34px}.fader-track{position:absolute;left:15px;top:0;width:4px;height:100%;border:1px solid #2a2a2a;border-radius:2px;background:#000}.fader-knob{position:absolute;left:0;bottom:var(--fader-pos,50%);transform:translateY(50%);width:34px;height:34px;display:flex;align-items:center;justify-content:center;border:3px solid #444;border-radius:4px;background:#d5d5d5;box-shadow:0 4px 8px rgba(0,0,0,.6);cursor:pointer;z-index:2}.fader-knob-line{width:100%;height:3px;background:#ff3d00;box-shadow:0 0 5px rgba(255,61,0,.65)}.fader-value{min-width:46px;padding:3px 5px;border:1px solid #333b41;border-radius:4px;background:#090c0e;color:#e8edef;font-size:10px;font-weight:900;text-align:center}
+.teacher-panel{padding:6px 10px 0;display:grid;grid-template-columns:128px 1fr;gap:10px;overflow:hidden}.teacher-character{width:128px;height:100%;max-height:205px;object-fit:contain;object-position:center bottom;align-self:end}.teacher-copy{min-width:0;display:flex;flex-direction:column}.teacher-copy h3{margin:0 0 5px;color:#ffd04d;font-size:17px}.teacher-speech{position:relative;flex:1;margin:0;padding:10px 12px;border-radius:12px;background:#f2e4b2;color:#151515;font-size:var(--lesson-teacher-font-size,12.5px);line-height:1.55;font-weight:700}.teacher-speech::before{content:"";position:absolute;left:-12px;top:24px;border-top:9px solid transparent;border-bottom:9px solid transparent;border-right:13px solid #f2e4b2}
+.bottomnav{display:flex;align-items:center;justify-content:space-between;padding:0 10px;background:#080a0d;color:#6f7a81;font-size:10px}.step-badge{color:#ffc55a;font-weight:900}
+@media(max-height:860px){body.person-lighting-next-ui .app{padding:7px 12px 0;grid-template-rows:54px minmax(0,1fr) 184px 26px;gap:6px}.fader-area{min-height:96px}.teacher-character{width:112px}.teacher-panel{grid-template-columns:112px 1fr}.teacher-speech{padding:8px 10px}}
+@media(max-width:1050px){.next-ui-brand{width:108px;font-size:19px;padding-left:12px}.next-ui-category-tab{min-width:88px;padding:0 9px}.next-ui-tools .next-ui-tool:not(.menu){display:none}.status{display:none}.title span{display:none}.main-grid,.bottom-grid{grid-template-columns:1fr}.preview-panel{display:none}.teacher-panel{min-height:185px}.fader-bank{overflow-x:auto;grid-template-columns:repeat(10,74px)}}
+</style>
+</head>
+<body class="person-lighting-next-ui">
+<header class="next-ui-header" aria-label="8bit図鑑 共通ナビゲーション">
+  <div class="next-ui-header-top">
+    <a class="next-ui-brand" href="index.html" aria-label="教材トップへ">8bit<small>LIGHTING STUDY</small></a>
+    <nav class="next-ui-category-tabs" aria-label="教材の大分類">
+      <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button" aria-expanded="false">⚡ 電気</button><div class="next-ui-dropdown"><a href="Analog.html">V・W・Aの法則</a><a href="SinglePhase3.html">単相3線</a><a href="Waveforms.html">電気って波なの？</a></div></div>
+      <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button" aria-expanded="false">↕ 調光</button><div class="next-ui-dropdown"><a href="Top.html?tab=sim8bit">8-bit 調光卓</a><a href="Top.html?tab=sim16bit">16-bit 調光卓</a></div></div>
+      <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button" aria-expanded="false">⌁ 信号</button><div class="next-ui-dropdown"><a href="Top.html?tab=simdmx">DMX通信列車</a><a href="Top.html?tab=ledcolormix">LED色混ぜ</a><a href="Top.html?tab=scroller">Scroller</a></div></div>
+      <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button" aria-expanded="false">⌘ Network</button><div class="next-ui-dropdown"><a href="Top.html?tab=netipaddress">IPアドレス</a><a href="Top.html?tab=netartnet">DMX on LAN</a></div></div>
+      <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button" aria-expanded="false">◉ 灯具</button><div class="next-ui-dropdown"><a href="ConvexLens.html">平凸レンズ</a><span class="pending">フレネルレンズ　次に追加</span></div></div>
+    </nav>
+    <div class="next-ui-tools"><button class="next-ui-tool" type="button">▣ 学習ガイド</button><button class="next-ui-tool" type="button">▱ ブックマーク</button><button class="next-ui-tool" type="button">⚙ 設定</button><div class="next-ui-page-controls"><button class="next-ui-page-button" type="button" onclick="location.href='index.html'">◀ 前</button><button class="next-ui-page-button" type="button" disabled>次 ▶</button></div><button class="next-ui-tool menu" type="button" aria-label="メニュー">☰</button></div>
+  </div>
+</header>
+<main class="app">
+  <header class="topbar">
+    <div class="title"><div class="title-icon">◉</div><h1>人物の見え方シミュレーター</h1><span>｜灯具の位置と強さで、人の見え方がどう変わるか</span></div>
+    <div class="top-actions"><div class="status">実装段階：<b>Step 1 / 画面骨格</b></div><button class="help" type="button">ⓘ 使い方</button></div>
+  </header>
+
+  <section class="main-grid">
+    <section class="panel view-panel">
+      <div class="view-tabs" role="tablist" aria-label="照明位置ビュー">
+        <button class="view-tab active" type="button" data-view="top">Top View｜上から</button>
+        <button class="view-tab" type="button" data-view="front">Front View｜正面</button>
+        <button class="view-tab" type="button" data-view="side">Side View｜横から</button>
+      </div>
+      <div class="view-canvas">
+        <div class="view-grid"></div>
+        <div class="view-placeholder"><div><strong id="viewTitle">Top View</strong><span id="viewCopy">Step2で灯具位置を正確に作図します。<br>この段階では作画領域の大きさと比率だけを確認します。</span></div></div>
+        <div class="view-note">中央は1ビューだけを大きく表示。3ビュー同時表示にはしません。</div>
+      </div>
+    </section>
+
+    <section class="panel preview-panel">
+      <h2 class="section-head">人物の見え方</h2>
+      <div class="portrait-placeholder"><div class="portrait-silhouette" aria-hidden="true"></div></div>
+      <div class="portrait-caption"><b>人物プレビュー領域</b><br>最終的には、同一の実写寄り女性モデルを固定し、照明だけを変化させます。</div>
+    </section>
+  </section>
+
+  <section class="bottom-grid">
+    <section class="panel fader-panel">
+      <div class="fader-title"><span>10ポイント調光</span><small>既存8-bit調光卓のFader形状を基準にしたStep1配置</small></div>
+      <div class="fader-bank" id="faderBank"></div>
+    </section>
+    <section class="panel teacher-panel">
+      <img class="teacher-character" src="assets/analog_teacher_pointing.webp" alt="照明教材の先生">
+      <div class="teacher-copy"><h3>先生のひとこと</h3><p class="teacher-speech">まずは画面の骨格だけを確認します。上は大きなView、下は10本のFader。右側では、照明を変えた時の人物の見え方を確認できるようにします。</p></div>
+    </section>
+  </section>
+
+  <footer class="bottomnav"><span>8bit Lighting Study　v3.0.1</span><span class="step-badge">Person Lighting Simulator｜STEP 1</span></footer>
+</main>
+<script>
+(()=>{
+  const channels=[
+    ['CL左',75],['CL中央',75],['CL右',75],['Top Sus',60],['Back Sus',60],
+    ['ブッチ上手',50],['ブッチ下手',50],['Foot',40],['SS上手',60],['SS下手',60]
+  ];
+  const bank=document.getElementById('faderBank');
+  bank.innerHTML=channels.map(([label,value],i)=>`<div class="fader-cell${i===0?' active':''}">
+    <button class="channel-button" type="button" aria-label="${label}を選択">${i+1}</button>
+    <div class="channel-label">${label}</div>
+    <div class="fader-area">
+      <div class="fader-scale"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+      <div class="fader-track-container">
+        <div class="fader-track"></div>
+        <div class="fader-knob" style="--fader-pos:${value}%"><div class="fader-knob-line"></div></div>
+      </div>
+    </div>
+    <div class="fader-value">${value}%</div>
+  </div>`).join('');
+
+  document.querySelectorAll('.channel-button').forEach(button=>button.addEventListener('click',()=>{
+    document.querySelectorAll('.fader-cell').forEach(cell=>cell.classList.remove('active'));
+    button.closest('.fader-cell').classList.add('active');
+  }));
+
+  const viewNames={top:['Top View','上から見た位置関係を表示する領域。'],front:['Front View','正面から見た左右・高さ関係を表示する領域。'],side:['Side View','横から見た高さ・前後・入射角を表示する領域。']};
+  document.querySelectorAll('.view-tab').forEach(button=>button.addEventListener('click',()=>{
+    document.querySelectorAll('.view-tab').forEach(tab=>tab.classList.remove('active'));
+    button.classList.add('active');
+    const [title,copy]=viewNames[button.dataset.view];
+    document.getElementById('viewTitle').textContent=title;
+    document.getElementById('viewCopy').textContent=copy+' Step2で正確な作図へ進みます。';
+  }));
+
+  document.querySelectorAll('.next-ui-category-tab').forEach(button=>button.addEventListener('click',event=>{
+    event.stopPropagation();
+    const menu=button.closest('.next-ui-category-menu');
+    document.querySelectorAll('.next-ui-category-menu').forEach(item=>{if(item!==menu)item.classList.remove('open')});
+    menu.classList.toggle('open');
+    button.setAttribute('aria-expanded',String(menu.classList.contains('open')));
+  }));
+  document.addEventListener('click',()=>document.querySelectorAll('.next-ui-category-menu').forEach(menu=>menu.classList.remove('open')));
+})();
+</script>
+</body>
+</html>
