@@ -1,41 +1,34 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="360" height="96" viewBox="0 0 360 96" role="img" aria-label="StageLight">
-  <defs>
-    <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#ff9a00" stop-opacity="1"/>
-      <stop offset="0.72" stop-color="#ff9a00" stop-opacity="0.95"/>
-      <stop offset="1" stop-color="#ff9a00" stop-opacity="0.22"/>
-    </linearGradient>
-  </defs>
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="96" viewBox="0 0 360 96" role="img" aria-label="StageLight 8bit">
+  <rect width="360" height="96" fill="none"/>
 
-  <!-- locked side-view fixture: 90° profile -->
-  <g fill="none" stroke="#f3f4f6" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-    <path d="M18 13h13v30"/>
-    <path d="M31 13h18v30" opacity="0"/>
-    <path d="M18 43v-7c0-3 2-5 5-5h12"/>
-    <circle cx="24" cy="42" r="4.3"/>
-    <path d="M24 46v7h44V31H24"/>
-    <path d="M68 31h13v22H68"/>
-    <path d="M81 34h8v16h-8"/>
-    <path d="M14 35v18h10"/>
-    <path d="M12 37v14"/>
+  <!-- Fixture: exact side profile, top row -->
+  <g transform="translate(8 7) scale(.78)" fill="#050505" stroke="#f4f4f4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M10 28h15v38H10c-4 0-7-4-7-9V37c0-5 3-9 7-9Z"/>
+    <rect x="25" y="28" width="52" height="38" rx="1"/>
+    <path d="M26 6h14v48a7 7 0 0 1-14 0Z"/>
+    <circle cx="33" cy="53" r="5" fill="#050505"/>
+    <path d="M77 29h13l5 4v28l-5 4H77Z"/>
+    <path d="M83 29c-5 11-5 25 0 36M90 32c-4 9-4 20 0 30" fill="none"/>
+    <rect x="94" y="35" width="5" height="24" rx="1"/>
   </g>
 
-  <!-- straight beam on fixture centerline -->
-  <path d="M89 36 L232 25 L232 59 L89 48 Z" fill="url(#beam)"/>
-  <line x1="89" y1="42" x2="245" y2="42" stroke="#ffd08a" stroke-width="1" opacity="0.55"/>
+  <!-- Horizontal beam from lens center -->
+  <path d="M85 38 L288 21 L288 65 L85 48 Z" fill="#ff9300"/>
+  <line x1="85" y1="43" x2="302" y2="43" stroke="#fff" stroke-width="1.2" opacity=".88"/>
 
-  <!-- 8bit black cutout -->
-  <text x="132" y="49" fill="#050505" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="28" font-weight="900" letter-spacing="-2">8bit</text>
+  <!-- 8bit with thin white separation line -->
+  <text x="170" y="55" fill="#050505" stroke="#fff" stroke-width="1.1" paint-order="stroke fill" font-family="Impact, Haettenschweiler, Arial Narrow Bold, sans-serif" font-size="40" font-weight="900" letter-spacing="-.8">8bit</text>
 
-  <!-- digital fade-out -->
-  <g fill="#ff9a00">
-    <rect x="229" y="26" width="6" height="6" opacity=".95"/><rect x="237" y="24" width="5" height="5" opacity=".9"/><rect x="245" y="28" width="5" height="5" opacity=".85"/>
-    <rect x="233" y="35" width="5" height="5" opacity=".9"/><rect x="241" y="36" width="4" height="4" opacity=".78"/><rect x="250" y="34" width="4" height="4" opacity=".65"/>
-    <rect x="229" y="46" width="6" height="6" opacity=".92"/><rect x="238" y="47" width="5" height="5" opacity=".82"/><rect x="247" y="45" width="4" height="4" opacity=".7"/>
-    <rect x="257" y="28" width="4" height="4" opacity=".55"/><rect x="263" y="39" width="3" height="3" opacity=".45"/><rect x="257" y="50" width="3" height="3" opacity=".4"/>
-    <rect x="270" y="33" width="3" height="3" opacity=".3"/><rect x="274" y="46" width="2.5" height="2.5" opacity=".25"/>
+  <!-- Digital fade only at beam end -->
+  <g fill="#ff9300">
+    <rect x="282" y="21" width="8" height="8"/><rect x="292" y="18" width="6" height="6" opacity=".95"/><rect x="301" y="23" width="5" height="5" opacity=".88"/>
+    <rect x="286" y="32" width="6" height="6"/><rect x="296" y="34" width="5" height="5" opacity=".85"/><rect x="307" y="31" width="4" height="4" opacity=".78"/>
+    <rect x="283" y="44" width="7" height="7"/><rect x="294" y="45" width="5" height="5" opacity=".88"/><rect x="304" y="43" width="4" height="4" opacity=".72"/>
+    <rect x="286" y="56" width="7" height="7"/><rect x="297" y="57" width="5" height="5" opacity=".82"/><rect x="307" y="54" width="4" height="4" opacity=".68"/>
+    <rect x="314" y="25" width="4" height="4" opacity=".62"/><rect x="320" y="36" width="3" height="3" opacity=".52"/><rect x="315" y="49" width="4" height="4" opacity=".46"/><rect x="323" y="59" width="3" height="3" opacity=".35"/>
+    <rect x="330" y="30" width="3" height="3" opacity=".30"/><rect x="334" y="46" width="2" height="2" opacity=".22"/>
   </g>
 
-  <!-- locked StageLight wordmark -->
-  <text x="14" y="86" fill="#f7f7f7" font-family="Sora, Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="29" font-weight="500" letter-spacing=".2">StageLight</text>
+  <!-- Temporary wordmark: current cyan-outline direction. Final font remains a separate lock. -->
+  <text x="10" y="91" fill="#ffffff" stroke="#10b9d7" stroke-width="1.8" paint-order="stroke fill" font-family="Arial Narrow, Helvetica Neue, Arial, sans-serif" font-size="31" font-weight="700" letter-spacing="-1.2">StageLight</text>
 </svg>
