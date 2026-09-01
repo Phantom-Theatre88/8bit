@@ -1,24 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@500;600&display=swap');
+
 :root {
   --lesson-support-font-size: 12px;
   --lesson-teacher-font-size: 12.5px;
+  --shared-top-height: 58px;
+  --shared-brand-width: 180px;
+  --shared-tab-width: 104px;
+  --shared-icon-size: 20px;
 }
 
-/* Shared header: keep only page navigation controls on the right. */
-.next-ui-tools > .next-ui-tool {
-  display: none !important;
+/* =========================================================
+   SHARED TOP BAR — single visual standard for every lesson.
+   The HTML may still exist in each legacy page, but all size,
+   logo and icon presentation is forced here as the one source
+   of truth until the markup is fully componentized.
+   ========================================================= */
+.next-ui-header,
+body .next-ui-header {
+  min-height: var(--shared-top-height) !important;
 }
+
+.next-ui-header-top,
+body .next-ui-header-top {
+  height: var(--shared-top-height) !important;
+  min-height: var(--shared-top-height) !important;
+  max-height: var(--shared-top-height) !important;
+  display: flex !important;
+  align-items: stretch !important;
+  flex-wrap: nowrap !important;
+}
+
+/* Locked StageLight brand: 360x96 source / 180x48 display. */
+.next-ui-brand,
+body .next-ui-brand {
+  width: var(--shared-brand-width) !important;
+  min-width: var(--shared-brand-width) !important;
+  height: var(--shared-top-height) !important;
+  padding: 5px 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  text-shadow: none !important;
+  background: url('assets/stagelight-top-logo.svg') left center / 180px 48px no-repeat !important;
+  flex: 0 0 var(--shared-brand-width) !important;
+}
+.next-ui-brand small,
+body .next-ui-brand small { display: none !important; }
+
+.next-ui-category-tabs,
+body .next-ui-category-tabs {
+  height: var(--shared-top-height) !important;
+  min-height: 0 !important;
+  display: flex !important;
+  align-items: stretch !important;
+  flex-wrap: nowrap !important;
+  gap: 4px !important;
+  overflow: visible !important;
+}
+.next-ui-category-menu,
+body .next-ui-category-menu {
+  height: 100% !important;
+  min-height: 0 !important;
+  display: flex !important;
+  align-items: stretch !important;
+}
+.next-ui-category-tab,
+body .next-ui-category-tab {
+  width: var(--shared-tab-width) !important;
+  min-width: var(--shared-tab-width) !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  padding: 0 10px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  border-radius: 0 !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+/* Remove per-page icon variants and enforce one common icon set. */
+.next-ui-category-icon,
+body .next-ui-category-icon { display: none !important; }
+.next-ui-category-tab::before {
+  width: var(--shared-icon-size);
+  height: var(--shared-icon-size);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 var(--shared-icon-size);
+  color: currentColor;
+  font-family: system-ui, sans-serif;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1;
+}
+.next-ui-category-menu:nth-child(1) > .next-ui-category-tab::before { content: 'ϟ'; font-size: 23px; }
+.next-ui-category-menu:nth-child(2) > .next-ui-category-tab::before { content: '☷'; }
+.next-ui-category-menu:nth-child(3) > .next-ui-category-tab::before { content: '⌁'; font-size: 22px; }
+.next-ui-category-menu:nth-child(4) > .next-ui-category-tab::before { content: '⌘'; }
+.next-ui-category-menu:nth-child(5) > .next-ui-category-tab::before { content: '◉'; }
+.next-ui-category-menu:nth-child(6) > .next-ui-category-tab::before { content: '⌖'; }
+
+/* Shared right side: only Prev / Next remain visible. */
+.next-ui-tools,
+body .next-ui-tools {
+  height: var(--shared-top-height) !important;
+  min-height: 0 !important;
+  margin-left: auto !important;
+  padding: 9px 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  gap: 6px !important;
+}
+.next-ui-tools > .next-ui-tool { display: none !important; }
 .next-ui-tools > .next-ui-page-controls {
   display: flex !important;
   margin-left: 0 !important;
   padding-left: 0 !important;
   border-left: 0 !important;
+  gap: 6px !important;
 }
-
-/* Reserve room for the six main categories: 電気｜調光｜信号｜Network｜灯具｜シュート */
-.next-ui-category-tab {
-  min-width: 104px !important;
-  padding-left: 12px !important;
-  padding-right: 12px !important;
+.next-ui-page-button,
+body .next-ui-page-button {
+  height: 34px !important;
+  min-width: 82px !important;
+  padding: 0 12px !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
 }
 
 @media (max-height: 820px) {
@@ -29,9 +144,21 @@
 }
 
 @media (max-width: 1180px) {
-  .next-ui-category-tab {
-    min-width: 92px !important;
-    padding-left: 9px !important;
-    padding-right: 9px !important;
+  :root {
+    --shared-brand-width: 156px;
+    --shared-tab-width: 92px;
   }
+  .next-ui-brand,
+  body .next-ui-brand {
+    background-size: 156px auto !important;
+  }
+  .next-ui-category-tab,
+  body .next-ui-category-tab {
+    padding-left: 7px !important;
+    padding-right: 7px !important;
+    gap: 5px !important;
+    font-size: 13px !important;
+  }
+  .next-ui-page-button,
+  body .next-ui-page-button { min-width: 70px !important; }
 }
