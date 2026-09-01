@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>8bit Lighting Study｜舞台照明インタラクティブ図鑑</title>
+  <title>StageLight｜舞台照明インタラクティブ図鑑</title>
   <style>
     :root {
       --bg: #050708;
@@ -52,14 +52,14 @@
       align-items: stretch;
     }
     .brand {
-      width: 150px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      width: 180px;
+      min-width: 180px;
+      height: 60px;
+      margin: 2px 0;
+      display: block;
       border-right: 1px solid #283037;
+      background: url('assets/MainLogo.png?v=20260901') left center / 180px 60px no-repeat;
     }
-    .brand strong { font-size: 25px; line-height: .85; letter-spacing: -.04em; }
-    .brand small { margin-top: 5px; font-size: 9px; font-weight: 900; letter-spacing: .12em; }
     .header-copy {
       min-width: 0;
       padding: 0 20px;
@@ -265,7 +265,7 @@
 <body>
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="index.html" aria-label="8bit Lighting Study トップ"><strong>8bit</strong><small>LIGHTING STUDY</small></a>
+      <a class="brand" href="index.html" aria-label="StageLight トップ"></a>
       <div class="header-copy"><span>INTERACTIVE LEARNING</span><strong>舞台照明を、触って理解する。</strong></div>
       <a class="start-button" href="Analog.html">▶ 最初から学ぶ</a>
     </div>
@@ -274,7 +274,7 @@
   <main class="page-shell">
     <section class="hero">
       <div class="hero-copy">
-        <div class="eyebrow">8bit LIGHTING STUDY</div>
+        <div class="eyebrow">STAGELIGHT</div>
         <h1><span>新人向け</span>舞台照明<br>インタラクティブ図鑑</h1>
         <p class="hero-lead">数値・信号・灯体・ネットワークを、画面を触りながら現場の流れにつなげて学ぶ。</p>
         <div class="hero-route"><span>⚡ 電気</span><i>›</i><span>↕ 調光</span><i>›</i><span>⌁ 信号</span><i>›</i><span>⌘ Network</span></div>
@@ -333,7 +333,7 @@
       <div class="future-card"><div class="category-icon">◎</div><div><strong>シュート</strong><span>灯具を合わせる実用編</span></div><div class="future-badge">予定</div></div>
     </section>
 
-    <footer class="site-footer"><span>8bit Lighting Study　v3.0.1</span><span>Interactive Stage Lighting Learning</span></footer>
+    <footer class="site-footer"><span>StageLight　v3.0.1</span><span>Interactive Stage Lighting Learning</span></footer>
   </main>
 </body>
 </html>
