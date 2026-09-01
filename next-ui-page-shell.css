@@ -50,7 +50,7 @@
   padding: 0 17px;
   border: 1px solid #2b3238;
   border-bottom: 0;
-  border-radius: 6px 6px 0 0;
+  border-radius: 12px 12px 0 0;
   background: linear-gradient(180deg,rgba(21,26,31,.96),rgba(12,15,18,.96));
   color: #c3cbd2;
   font-size: 14px;
@@ -129,17 +129,9 @@
 .next-ui-page-button:disabled { opacity:.35; cursor:default; }
 .next-ui-tools .next-ui-page-controls { margin-left:6px; padding-left:10px; gap:6px; border-left:1px solid #353d44; }
 
-/* V・W・A page shell */
 body.analog-next-ui { padding:0; display:flex; flex-direction:column; height:100dvh; min-height:0; background:#07090b; }
-body.analog-next-ui .app {
-  width:100%; max-width:none; height:auto; min-height:0; flex:1 1 0; padding:10px 18px 0;
-  grid-template-rows:clamp(56px,7vh,68px) minmax(0,1fr) clamp(188px,24vh,238px) 30px;
-  gap:0;
-}
-body.analog-next-ui .topbar {
-  border:0; border-radius:0; border-left:3px solid #ff6f00; padding:8px 14px;
-  background:linear-gradient(90deg,rgba(255,111,0,.055),transparent 50%);
-}
+body.analog-next-ui .app { width:100%; max-width:none; height:auto; min-height:0; flex:1 1 0; padding:10px 18px 0; grid-template-rows:clamp(56px,7vh,68px) minmax(0,1fr) clamp(188px,24vh,238px) 30px; gap:0; }
+body.analog-next-ui .topbar { border:0; border-radius:0; border-left:3px solid #ff6f00; padding:8px 14px; background:linear-gradient(90deg,rgba(255,111,0,.055),transparent 50%); }
 body.analog-next-ui .title h1 { font-size:clamp(20px,1.65vw,27px); }
 body.analog-next-ui .title span { padding-left:4px; font-size:clamp(11px,.9vw,14px); }
 body.analog-next-ui .bolt { color:#ffb300; font-size:28px; }
