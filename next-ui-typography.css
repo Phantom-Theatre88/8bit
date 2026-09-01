@@ -17,14 +17,39 @@
 /* Shared soft category tabs. */
 .next-ui-category-tab,
 body .next-ui-category-tab {
-  min-width: 104px !important;
+  min-width: 96px !important;
   height: 46px !important;
   margin: 7px 0 !important;
-  padding-left: 12px !important;
-  padding-right: 12px !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
   border-radius: 12px !important;
   border-bottom: 1px solid #2b3238 !important;
 }
+
+/* New top-level categories: Fixture / Shoot.
+   They are added from the shared stylesheet so every lesson header stays in sync. */
+.next-ui-category-tabs::before,
+.next-ui-category-tabs::after {
+  order: 10;
+  min-width: 96px;
+  height: 46px;
+  margin: 7px 0;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #2b3238;
+  border-radius: 12px;
+  background: linear-gradient(180deg,rgba(21,26,31,.96),rgba(12,15,18,.96));
+  color: #c3cbd2;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+}
+.next-ui-category-tabs::before { content: "◉  灯具"; }
+.next-ui-category-tabs::after  { content: "◎  シュート"; }
 
 /* StageLight TopMenu logo: use the committed PNG file directly. */
 .next-ui-brand,
@@ -66,9 +91,16 @@ body .next-ui-header-top {
 @media (max-width: 1180px) {
   .next-ui-category-tab,
   body .next-ui-category-tab {
-    min-width: 92px !important;
-    padding-left: 9px !important;
-    padding-right: 9px !important;
+    min-width: 82px !important;
+    padding-left: 7px !important;
+    padding-right: 7px !important;
+    font-size: 13px !important;
+  }
+  .next-ui-category-tabs::before,
+  .next-ui-category-tabs::after {
+    min-width: 82px;
+    padding: 0 7px;
+    font-size: 13px;
   }
 
   /* Logo stays 180x60. Do not shrink it responsively. */
