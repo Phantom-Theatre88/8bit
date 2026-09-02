@@ -26,8 +26,7 @@ body .next-ui-category-tab {
   border-bottom: 1px solid #2b3238 !important;
 }
 
-/* New top-level categories: Fixture / Shoot.
-   They are added from the shared stylesheet so every lesson header stays in sync. */
+/* New top-level categories: Fixture / Shoot. */
 .next-ui-category-tabs::before,
 .next-ui-category-tabs::after {
   order: 10;
@@ -51,7 +50,7 @@ body .next-ui-category-tab {
 .next-ui-category-tabs::before { content: "◉  灯具"; }
 .next-ui-category-tabs::after  { content: "◎  シュート"; }
 
-/* StageLight TopMenu logo: use the committed PNG file directly. */
+/* StageLight TopMenu logo. */
 .next-ui-brand,
 body .next-ui-brand {
   width: 180px !important;
@@ -72,17 +71,11 @@ body .next-ui-brand {
   background-size: 180px 60px !important;
 }
 .next-ui-brand small,
-body .next-ui-brand small {
-  display: none !important;
-}
-
+body .next-ui-brand small { display: none !important; }
 .next-ui-header-top,
-body .next-ui-header-top {
-  min-height: 60px !important;
-}
+body .next-ui-header-top { min-height: 60px !important; }
 
-/* Analog lesson UI rule:
-   outlined = interactive, borderless = information/display. */
+/* Analog UI rule: outlined = interactive, borderless = information/display. */
 body.analog-next-ui .panel,
 body.analog-next-ui .formula-board,
 body.analog-next-ui .formula-caption,
@@ -94,21 +87,14 @@ body.analog-next-ui .remember-tip {
   border: 0 !important;
   box-shadow: none !important;
 }
-
-body.analog-next-ui .panel {
-  background: linear-gradient(180deg,#111519,#0b0e11) !important;
-}
+body.analog-next-ui .panel { background: linear-gradient(180deg,#111519,#0b0e11) !important; }
 body.analog-next-ui .center,
-body.analog-next-ui .right {
-  background: #0b0f12 !important;
-}
+body.analog-next-ui .right { background: #0b0f12 !important; }
 body.analog-next-ui .formula-board,
 body.analog-next-ui .result-card,
-body.analog-next-ui .answer-card {
-  background: transparent !important;
-}
+body.analog-next-ui .answer-card { background: transparent !important; }
 
-/* Interactive targets are the only strongly outlined elements. */
+/* Only interactive targets get strong outlines. */
 body.analog-next-ui .target-btn,
 body.analog-next-ui .mode,
 body.analog-next-ui .help,
@@ -126,9 +112,7 @@ body.analog-next-ui .mode:hover,
 body.analog-next-ui .help:hover,
 body.analog-next-ui .quick button:not(:disabled):hover,
 body.analog-next-ui .input-row input:not([readonly]):focus,
-body.analog-next-ui #breaker:focus {
-  filter: brightness(1.18);
-}
+body.analog-next-ui #breaker:focus { filter: brightness(1.18); }
 body.analog-next-ui .target-btn.active {
   box-shadow: 0 0 12px color-mix(in srgb,var(--accent) 38%,transparent), inset 0 0 0 1px color-mix(in srgb,var(--accent) 72%,transparent) !important;
 }
@@ -152,94 +136,93 @@ body.analog-next-ui .quick button:disabled {
   background: rgba(255,255,255,.02) !important;
 }
 
-/* Bottom area: explanation is the main content; teacher and memory are compact. */
+/* Bottom area: 2 columns. Left=current explanation, right=teacher + memory. */
 body.analog-next-ui .app {
   grid-template-rows: clamp(56px,7vh,68px) minmax(0,1fr) clamp(205px,25vh,250px) 28px !important;
 }
 body.analog-next-ui .lesson-bottom {
   position: relative !important;
   display: grid !important;
-  grid-template-columns: 62% 38% !important;
-  grid-template-rows: 1fr 1fr !important;
+  grid-template-columns: minmax(0,62%) minmax(0,38%) !important;
+  grid-template-rows: minmax(0,1fr) minmax(0,1fr) !important;
   gap: 8px !important;
   min-height: 0 !important;
   padding-top: 8px !important;
+  overflow: hidden !important;
 }
 body.analog-next-ui .bottom-explain {
   grid-column: 1 !important;
-  grid-row: 1 / span 2 !important;
+  grid-row: 1 / 3 !important;
   padding: 12px 16px !important;
   overflow: hidden !important;
   background: #0d1114 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
 }
 body.analog-next-ui .bottom-explain #teacherExample1,
-body.analog-next-ui .bottom-explain #teacherExample2 {
-  display: none !important;
-}
+body.analog-next-ui .bottom-explain #teacherExample2 { display: none !important; }
+
+/* Safari-safe: remove absolute positioning. The teacher wrapper becomes transparent to grid. */
 body.analog-next-ui .teacher {
-  grid-column: 2 !important;
-  grid-row: 1 !important;
-  display: grid !important;
-  grid-template-columns: 92px 1fr !important;
-  gap: 10px !important;
-  padding: 8px 12px 6px !important;
-  overflow: visible !important;
-  background: #0e1215 !important;
+  display: contents !important;
 }
 body.analog-next-ui .teacher-character {
-  width: 92px !important;
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  align-self: end !important;
+  justify-self: start !important;
+  width: 88px !important;
   height: 100% !important;
-  max-height: 126px !important;
+  max-height: 118px !important;
   object-fit: contain !important;
   object-position: center bottom !important;
+  z-index: 2 !important;
 }
-body.analog-next-ui .teacher h3 {
+body.analog-next-ui .teacher-intro-wrap {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  margin-left: 96px !important;
+  padding: 8px 12px 6px 0 !important;
+  overflow: hidden !important;
+  background: #0e1215 !important;
+}
+body.analog-next-ui .teacher h3,
+body.analog-next-ui .teacher-intro-wrap h3 {
   margin: 0 0 4px !important;
   font-size: 15px !important;
 }
 body.analog-next-ui .speech {
   padding: 6px 8px !important;
   background: #f2e4b2 !important;
-  font-size: 11px !important;
-  line-height: 1.35 !important;
-}
-body.analog-next-ui .speech::before {
-  display: none !important;
-}
-body.analog-next-ui .bottom-remember {
-  grid-column: 2 !important;
-  grid-row: 2 !important;
-  padding: 8px 12px !important;
-  background: #0d1114 !important;
-}
-body.analog-next-ui .remember-list {
-  grid-template-columns: repeat(3,minmax(0,1fr)) !important;
-  gap: 6px !important;
   font-size: 10.5px !important;
+  line-height: 1.32 !important;
+  max-height: 78px !important;
+  overflow: hidden !important;
 }
-body.analog-next-ui .remember-tip {
-  margin-top: 6px !important;
-  padding: 6px 8px !important;
-  background: rgba(255,157,0,.07) !important;
-  font-size: 9.5px !important;
-}
+body.analog-next-ui .speech::before { display: none !important; }
 
-/* The current AUTO explanation already follows the upper selection in JS.
-   Pull it out of the teacher card and make it the main explanation. */
+/* Current AUTO explanation occupies the left pane, never absolute. */
 body.analog-next-ui .teacher-card.current {
-  position: absolute !important;
-  left: 16px !important;
-  top: 46px !important;
-  width: calc(62% - 32px) !important;
-  max-height: calc(100% - 60px) !important;
-  margin: 0 !important;
+  grid-column: 1 !important;
+  grid-row: 1 / 3 !important;
+  align-self: stretch !important;
+  justify-self: stretch !important;
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  width: auto !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 40px 16px 12px !important;
   padding: 10px 12px !important;
   overflow: auto !important;
   background: transparent !important;
   color: #d7dde2 !important;
   font-size: 13px !important;
   line-height: 1.48 !important;
-  z-index: 2 !important;
+  z-index: 3 !important;
 }
 body.analog-next-ui .teacher-card.current small {
   display: block !important;
@@ -255,6 +238,27 @@ body.analog-next-ui .teacher-card.current strong {
   line-height: 1.3 !important;
 }
 
+body.analog-next-ui .bottom-remember {
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  padding: 8px 12px !important;
+  background: #0d1114 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+body.analog-next-ui .remember-list {
+  grid-template-columns: repeat(3,minmax(0,1fr)) !important;
+  gap: 6px !important;
+  font-size: 10px !important;
+}
+body.analog-next-ui .remember-tip {
+  margin-top: 5px !important;
+  padding: 5px 7px !important;
+  background: rgba(255,157,0,.07) !important;
+  font-size: 9px !important;
+}
+
 @media (max-height: 820px) {
   :root {
     --lesson-support-font-size: 10.5px;
@@ -264,11 +268,11 @@ body.analog-next-ui .teacher-card.current strong {
     grid-template-rows: 54px minmax(0,1fr) 205px 26px !important;
   }
   body.analog-next-ui .teacher-character {
-    width: 78px !important;
-    max-height: 106px !important;
+    width: 72px !important;
+    max-height: 96px !important;
   }
-  body.analog-next-ui .teacher {
-    grid-template-columns: 78px 1fr !important;
+  body.analog-next-ui .teacher-intro-wrap {
+    margin-left: 80px !important;
   }
 }
 
@@ -286,8 +290,6 @@ body.analog-next-ui .teacher-card.current strong {
     padding: 0 7px;
     font-size: 13px;
   }
-
-  /* Logo stays 180x60. Do not shrink it responsively. */
   .next-ui-brand,
   body .next-ui-brand {
     width: 180px !important;
