@@ -81,10 +81,194 @@ body .next-ui-header-top {
   min-height: 60px !important;
 }
 
+/* Analog lesson UI rule:
+   outlined = interactive, borderless = information/display. */
+body.analog-next-ui .panel,
+body.analog-next-ui .formula-board,
+body.analog-next-ui .formula-caption,
+body.analog-next-ui .result-card,
+body.analog-next-ui .answer-card,
+body.analog-next-ui .teacher-card,
+body.analog-next-ui .speech,
+body.analog-next-ui .remember-tip {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+body.analog-next-ui .panel {
+  background: linear-gradient(180deg,#111519,#0b0e11) !important;
+}
+body.analog-next-ui .center,
+body.analog-next-ui .right {
+  background: #0b0f12 !important;
+}
+body.analog-next-ui .formula-board,
+body.analog-next-ui .result-card,
+body.analog-next-ui .answer-card {
+  background: transparent !important;
+}
+
+/* Interactive targets are the only strongly outlined elements. */
+body.analog-next-ui .target-btn,
+body.analog-next-ui .mode,
+body.analog-next-ui .help,
+body.analog-next-ui .quick button:not(:disabled),
+body.analog-next-ui .input-row input:not([readonly]),
+body.analog-next-ui #breaker,
+body.analog-next-ui .next-ui-page-button:not(:disabled) {
+  border-width: 1.5px !important;
+  border-style: solid !important;
+  cursor: pointer !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.035),0 0 0 1px rgba(255,255,255,.015) !important;
+}
+body.analog-next-ui .target-btn:hover,
+body.analog-next-ui .mode:hover,
+body.analog-next-ui .help:hover,
+body.analog-next-ui .quick button:not(:disabled):hover,
+body.analog-next-ui .input-row input:not([readonly]):focus,
+body.analog-next-ui #breaker:focus {
+  filter: brightness(1.18);
+}
+body.analog-next-ui .target-btn.active {
+  box-shadow: 0 0 12px color-mix(in srgb,var(--accent) 38%,transparent), inset 0 0 0 1px color-mix(in srgb,var(--accent) 72%,transparent) !important;
+}
+body.analog-next-ui .input-card {
+  border: 0 !important;
+  border-left: 0 !important;
+  background: rgba(255,255,255,.025) !important;
+  box-shadow: none !important;
+  padding: 8px !important;
+  margin-bottom: 7px !important;
+}
+body.analog-next-ui .input-card.auto {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+body.analog-next-ui .input-card.auto input,
+body.analog-next-ui .input-row input[readonly],
+body.analog-next-ui .quick button:disabled {
+  border: 0 !important;
+  box-shadow: none !important;
+  background: rgba(255,255,255,.02) !important;
+}
+
+/* Bottom area: explanation is the main content; teacher and memory are compact. */
+body.analog-next-ui .app {
+  grid-template-rows: clamp(56px,7vh,68px) minmax(0,1fr) clamp(205px,25vh,250px) 28px !important;
+}
+body.analog-next-ui .lesson-bottom {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: 62% 38% !important;
+  grid-template-rows: 1fr 1fr !important;
+  gap: 8px !important;
+  min-height: 0 !important;
+  padding-top: 8px !important;
+}
+body.analog-next-ui .bottom-explain {
+  grid-column: 1 !important;
+  grid-row: 1 / span 2 !important;
+  padding: 12px 16px !important;
+  overflow: hidden !important;
+  background: #0d1114 !important;
+}
+body.analog-next-ui .bottom-explain #teacherExample1,
+body.analog-next-ui .bottom-explain #teacherExample2 {
+  display: none !important;
+}
+body.analog-next-ui .teacher {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  display: grid !important;
+  grid-template-columns: 92px 1fr !important;
+  gap: 10px !important;
+  padding: 8px 12px 6px !important;
+  overflow: visible !important;
+  background: #0e1215 !important;
+}
+body.analog-next-ui .teacher-character {
+  width: 92px !important;
+  height: 100% !important;
+  max-height: 126px !important;
+  object-fit: contain !important;
+  object-position: center bottom !important;
+}
+body.analog-next-ui .teacher h3 {
+  margin: 0 0 4px !important;
+  font-size: 15px !important;
+}
+body.analog-next-ui .speech {
+  padding: 6px 8px !important;
+  background: #f2e4b2 !important;
+  font-size: 11px !important;
+  line-height: 1.35 !important;
+}
+body.analog-next-ui .speech::before {
+  display: none !important;
+}
+body.analog-next-ui .bottom-remember {
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  padding: 8px 12px !important;
+  background: #0d1114 !important;
+}
+body.analog-next-ui .remember-list {
+  grid-template-columns: repeat(3,minmax(0,1fr)) !important;
+  gap: 6px !important;
+  font-size: 10.5px !important;
+}
+body.analog-next-ui .remember-tip {
+  margin-top: 6px !important;
+  padding: 6px 8px !important;
+  background: rgba(255,157,0,.07) !important;
+  font-size: 9.5px !important;
+}
+
+/* The current AUTO explanation already follows the upper selection in JS.
+   Pull it out of the teacher card and make it the main explanation. */
+body.analog-next-ui .teacher-card.current {
+  position: absolute !important;
+  left: 16px !important;
+  top: 46px !important;
+  width: calc(62% - 32px) !important;
+  max-height: calc(100% - 60px) !important;
+  margin: 0 !important;
+  padding: 10px 12px !important;
+  overflow: auto !important;
+  background: transparent !important;
+  color: #d7dde2 !important;
+  font-size: 13px !important;
+  line-height: 1.48 !important;
+  z-index: 2 !important;
+}
+body.analog-next-ui .teacher-card.current small {
+  display: block !important;
+  margin-bottom: 8px !important;
+  color: #ffb33b !important;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+}
+body.analog-next-ui .teacher-card.current strong {
+  display: inline-block !important;
+  margin: 3px 0 6px !important;
+  font-size: 18px !important;
+  line-height: 1.3 !important;
+}
+
 @media (max-height: 820px) {
   :root {
     --lesson-support-font-size: 10.5px;
     --lesson-teacher-font-size: 10.5px;
+  }
+  body.analog-next-ui .app {
+    grid-template-rows: 54px minmax(0,1fr) 205px 26px !important;
+  }
+  body.analog-next-ui .teacher-character {
+    width: 78px !important;
+    max-height: 106px !important;
+  }
+  body.analog-next-ui .teacher {
+    grid-template-columns: 78px 1fr !important;
   }
 }
 
