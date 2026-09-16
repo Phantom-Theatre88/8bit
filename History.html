@@ -7,220 +7,25 @@
 <link rel="stylesheet" href="next-ui-typography.css">
 <link rel="stylesheet" href="next-ui-page-shell.css">
 <style>
-:root{--bg:#07090b;--panel:#0d1114;--panel2:#11171b;--line:#303840;--text:#f4f6f7;--muted:#99a6af;--orange:#ff6f00;--amber:#ffbd43;--cyan:#42d9f5;--green:#55de85;--pink:#ff5e9d;--blue:#5ca8ff}
-*{box-sizing:border-box}html,body{margin:0;height:100%;background:var(--bg);color:var(--text)}body{font-family:"Hiragino Sans","Yu Gothic",Meiryo,system-ui,-apple-system,sans-serif;overflow:hidden}.history-app{height:calc(100dvh - 60px);display:grid;grid-template-rows:54px minmax(0,1fr) 220px 28px;gap:8px;padding:9px 14px 0}.history-app.detail-open{grid-template-rows:54px minmax(0,1fr) 330px 28px}.history-title{display:flex;align-items:center;gap:12px;padding:0 14px;border-left:3px solid var(--orange);background:linear-gradient(90deg,rgba(255,111,0,.07),transparent 52%)}.history-title h1{margin:0;font-size:22px}.history-title p{margin:0;color:#c5cdd3;font-size:11px}.era-jumps{margin-left:auto;display:flex;gap:5px}.era-jumps button,.close-detail{height:29px;padding:0 10px;border:1px solid #424b53;border-radius:7px;background:#151a1f;color:#dce2e6;font-weight:800;cursor:pointer}.era-jumps button:hover{border-color:var(--orange);color:#fff}.timeline-panel{min-height:0;display:grid;grid-template-columns:112px minmax(0,1fr);border:1px solid #303840;border-radius:9px;background:#090c0f;overflow:hidden}.lane-labels{padding-top:58px;border-right:1px solid #2b3339;background:#0b0f12}.lane-label{display:flex;align-items:center;padding:0 9px;border-bottom:1px solid #1e252a;color:#aeb8bf;font-size:12px;font-weight:900}.lane-label.theatre{height:52px;color:#fff}.lane-label.source{height:48px;color:var(--amber)}.lane-label.color{height:34px}.lane-label.optics{height:34px}.lane-label.fixture{height:38px}.lane-label.output{height:48px;color:var(--cyan)}.lane-label.operation{height:44px}.lane-label.signal{height:28px}.lane-label.network{height:24px}.lane-label.media{height:24px}.timeline-scroll{overflow-x:auto;overflow-y:hidden;touch-action:pan-x;scroll-behavior:smooth;scrollbar-color:#5b6570 #0b0f12}.timeline-canvas{position:relative;width:2700px;min-width:2700px;height:432px;background:repeating-linear-gradient(90deg,transparent 0,transparent 179px,rgba(255,255,255,.035) 180px),linear-gradient(180deg,#0c1013,#080b0e)}.years{height:58px;position:relative;border-bottom:1px solid #374048;color:#b5c0c8;font-size:11px}.year-scale{height:30px;position:relative;border-bottom:1px solid #242c32}.era-scale{height:28px;display:flex;position:relative}.era-band{height:28px;display:flex;align-items:center;justify-content:center;border-right:1px solid #384149;color:#e2e7ea;font-weight:900;background:rgba(255,255,255,.018)}.year{position:absolute;bottom:7px;transform:translateX(-50%);white-space:nowrap}.year::after{content:"";position:absolute;top:17px;left:50%;width:1px;height:351px;background:rgba(255,255,255,.045)}.lane{position:relative;border-bottom:1px solid #1e252a}.lane.theatre{height:52px}.lane.source{height:48px}.lane.color{height:34px}.lane.optics{height:34px}.lane.fixture{height:38px}.lane.output{height:48px}.lane.operation{height:44px}.lane.signal{height:28px}.lane.network{height:24px}.lane.media{height:24px}.event{position:absolute;top:6px;height:calc(100% - 12px);min-width:86px;max-width:165px;padding:5px 8px;border:1px solid #4a545c;border-radius:7px;background:linear-gradient(180deg,#192026,#10151a);color:#eef2f4;text-align:left;font-size:11px;font-weight:800;line-height:1.2;cursor:pointer;box-shadow:0 5px 12px #0008}.event:hover,.event.active{border-color:var(--orange);box-shadow:0 0 14px rgba(255,111,0,.25)}.event strong{display:block;color:var(--amber);font-size:11px;margin-bottom:2px}.event.jp{border-left:3px solid #e44}.event.eu{border-left:3px solid var(--blue)}.event.tech{border-left:3px solid var(--cyan)}.event.pending{border-style:dashed;opacity:.68}.detail-panel{display:grid;grid-template-columns:minmax(0,1fr) 260px;border:1px solid #303840;border-radius:9px;background:linear-gradient(180deg,#11161a,#0b0f12);overflow:hidden}.detail-main{min-width:0;padding:11px 15px;overflow:auto}.detail-head{display:flex;align-items:start;gap:10px}.detail-head h2{margin:0;font-size:18px}.detail-era{color:var(--amber);font-size:12px;font-weight:900}.detail-summary{margin:5px 0 9px;color:#cbd3d8;font-size:13px;line-height:1.55}.history-article{max-width:900px;margin-top:8px;padding:10px 12px;border-left:2px solid #46515a;background:#0b0f12}.history-article p{margin:0;font-size:13px;line-height:1.65;color:#d5dce1}.detail-links{display:flex;gap:6px;margin-top:8px}.detail-links span,.detail-links a{padding:5px 8px;border:1px solid #3a444c;border-radius:6px;color:#aeb9c0;font-size:11px;text-decoration:none}.teacher-pane{position:relative;padding:9px 12px 8px 94px;background:#0e1215;overflow:hidden}.teacher-pane img{position:absolute;right:0;bottom:-3px;width:100px;height:145px;object-fit:contain;object-position:right bottom}.teacher-pane h3{margin:0 0 5px;color:#ffd04d;font-size:15px}.teacher-speech{position:relative;z-index:2;padding:8px 10px;border-radius:10px;background:#f2e4b2;color:#171717;font-size:12.5px;line-height:1.5;font-weight:700}.teacher-source{position:relative;z-index:2;margin-top:7px;color:#8f9aa2;font-size:8.5px;line-height:1.35}.footer{display:flex;align-items:center;justify-content:space-between;padding:0 8px;color:#6f7a81;font-size:11px}.footer a{color:#c8d0d5;text-decoration:none}@media(max-width:1050px){.history-app{padding-left:8px;padding-right:8px}.era-jumps button{padding:0 6px}.detail-panel{grid-template-columns:minmax(0,1fr) 220px}.fact-grid{grid-template-columns:1fr 1fr}.teacher-pane{padding-left:75px}}
-
-/* History visual direction v2: museum / archive, not simulator */
-body{background:#171513;color:#f4efe7}
-.history-app{background:linear-gradient(180deg,#1b1815 0,#131211 100%);padding-left:18px;padding-right:18px}
-.history-title{border-left:0;border-bottom:1px solid #6e604e;background:transparent;padding:0 4px}
-.history-title h1{font-family:Georgia,"Yu Mincho","Hiragino Mincho ProN",serif;font-size:27px;letter-spacing:.04em}
-.history-title p{color:#c5b8a7;font-size:12px}
-.era-jumps button,.close-detail{border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;color:#d7c9b8;font-size:12px}
-.era-jumps button:hover{border-bottom-color:#d39a43;color:#fff0d3}
-.timeline-panel{border:0;border-top:1px solid #776957;border-bottom:1px solid #776957;border-radius:0;background:#201c18}
-.lane-labels{background:#211d19;border-right:1px solid #665b4e}
-.lane-label{border-bottom:1px solid #51483e;color:#d8cec2;font-family:Georgia,"Yu Mincho","Hiragino Mincho ProN",serif}
-.lane-label.source{color:#efc87a}.lane-label.output{color:#9fd6dc}
-.timeline-scroll{scrollbar-color:#8d7b65 #211d19}
-.timeline-canvas{background:repeating-linear-gradient(90deg,transparent 0,transparent 179px,rgba(237,219,193,.055) 180px),linear-gradient(180deg,#25211d,#1c1916)}
-.years{border-bottom-color:#776957;color:#d7c9b8}.year-scale{border-bottom-color:#574d42}
-.era-band{border-right-color:#625649;color:#eadfce;background:rgba(207,170,111,.055);font-family:Georgia,"Yu Mincho","Hiragino Mincho ProN",serif}
-.year::after{background:rgba(239,220,192,.055)}
-.lane{border-bottom-color:#4a4239}
-.event{top:7px;height:calc(100% - 14px);border:0;border-left:3px solid #9e8d79!important;border-radius:2px;background:rgba(244,235,221,.92);color:#28221c;box-shadow:none;padding:5px 9px}
-.event strong{color:#7b4b14}.event.eu{border-left-color:#668fb0!important}.event.jp{border-left-color:#b76052!important}.event.tech{border-left-color:#5b9ca0!important}.event.pending{background:rgba(196,187,173,.35);color:#cfc6ba;border:1px dashed #8e8172!important}
-.event:hover,.event.active{transform:translateY(-1px);outline:2px solid #d69b45;box-shadow:0 5px 16px #0005}
-.detail-panel{grid-template-columns:minmax(0,1fr) 300px;border:0;border-top:1px solid #776957;border-radius:0;background:#eee5d7;color:#2c261f}
-.detail-main{padding:16px 22px}.detail-era{color:#8a581b}.detail-head h2{font-family:Georgia,"Yu Mincho","Hiragino Mincho ProN",serif;font-size:23px;color:#231f1a}
-.detail-summary{max-width:850px;color:#4a4035;font-size:14px}.history-article{max-width:850px;margin-top:10px;padding:0 0 0 14px;border-left:3px solid #b38a55;background:transparent}.history-article p{color:#40372e;font-size:14px}
-.detail-links span,.detail-links a{border:0;border-bottom:1px solid #9b8871;border-radius:0;color:#685946;background:transparent}
-.teacher-pane{padding:15px 15px 12px 112px;background:#302820;color:#f6ead9;border-left:1px solid #7a6956}.teacher-pane h3{color:#efc46c;font-family:Georgia,"Yu Mincho","Hiragino Mincho ProN",serif;font-size:17px}.teacher-speech{background:#f5ead0;color:#29231c;border-radius:3px;box-shadow:0 3px 10px #0004}.teacher-pane img{width:116px;height:165px}.teacher-source{color:#b9aa98}
-.footer{color:#9d8f7e}.footer a{color:#d6c9b8}
-
-
-/* FIX: teacher character must never overlap the speech card */
-.teacher-pane{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) 96px;
-  grid-template-rows:auto 1fr auto;
-  column-gap:10px;
-  padding:15px 10px 10px 14px;
-}
-.teacher-pane h3{grid-column:1 / -1;grid-row:1}
-.teacher-speech{grid-column:1;grid-row:2;align-self:start;position:relative;z-index:2}
-.teacher-source{grid-column:1;grid-row:3;position:relative;z-index:2}
-.teacher-pane img{
-  grid-column:2;
-  grid-row:2 / 4;
-  position:static;
-  align-self:end;
-  justify-self:end;
-  width:92px;
-  height:145px;
-  object-fit:contain;
-  object-position:right bottom;
-  z-index:1;
-}
-@media(max-width:1050px){
- .teacher-pane{padding-left:12px;grid-template-columns:minmax(0,1fr) 78px}
- .teacher-pane img{width:76px;height:125px}
-}
-
-
-
-/* History timeline scroll + fixed detail */
-.history-app{
-  grid-template-rows:54px minmax(260px,1fr) 250px 28px !important;
-}
-.history-app.detail-open{
-  grid-template-rows:54px minmax(260px,1fr) 250px 28px !important;
-}
-.timeline-scroll{
-  overflow:auto !important;
-  touch-action:pan-x pan-y;
-  overscroll-behavior:contain;
-}
-.timeline-canvas{min-height:432px}
-.detail-panel{grid-template-columns:minmax(0,1fr) 360px}
-.detail-main{display:flex;flex-direction:column;align-items:flex-start;overflow:auto}
-.detail-head,.detail-summary,.history-article,.detail-links{width:min(100%,760px)}
-.history-article{max-width:760px}
-.teacher-pane{grid-template-columns:minmax(0,1fr) 112px}
-.teacher-pane img{width:108px;height:158px}
-.media-strip{display:flex;gap:10px;width:min(100%,760px);margin-top:12px;overflow-x:auto;padding-bottom:5px}
-.media-card{flex:0 0 150px;height:88px;border:1px solid #aa9579;background:#ded1bd;color:#4a4035;display:flex;align-items:center;justify-content:center;text-align:center;font-size:11px;font-weight:800;cursor:pointer}
-.media-card:hover{outline:2px solid #d69b45}
-.media-modal{position:fixed;inset:0;z-index:2000;display:none;align-items:center;justify-content:center;background:rgba(8,7,6,.88);padding:28px}
-.media-modal.open{display:flex}
-.media-modal-inner{width:min(1100px,94vw);height:min(720px,88vh);background:#eee5d7;color:#2c261f;position:relative;padding:24px;overflow:auto}
-.media-modal-close{position:absolute;right:12px;top:10px;border:0;background:transparent;font-size:26px;cursor:pointer;color:#332b23}
-@media(max-width:1050px){.detail-panel{grid-template-columns:minmax(0,1fr) 310px}.teacher-pane{grid-template-columns:minmax(0,1fr) 92px}.teacher-pane img{width:88px;height:142px}}
-
-
-/* LOCK: independent scroll regions */
-.timeline-panel{min-height:0;overflow:hidden}
-.timeline-scroll{height:100%;min-height:0;overflow:auto!important;-webkit-overflow-scrolling:touch}
-.timeline-canvas{min-height:560px;height:560px!important}
-.detail-panel{min-height:0;overflow:hidden}
-.detail-main{height:100%;min-height:0;overflow-y:auto!important;overflow-x:hidden;padding-bottom:30px;-webkit-overflow-scrolling:touch}
-.teacher-pane{height:100%;min-height:0;overflow:hidden}
-.media-strip{flex:none;min-height:100px}
-.detail-links{flex:none;padding-bottom:12px}
-
-/* LOCK FIX: detail-left is ONE continuous vertical scroll area */
-.detail-panel{min-height:0;overflow:hidden}
-.detail-main{
-  display:block!important;
-  height:100%!important;
-  min-height:0!important;
-  overflow-y:auto!important;
-  overflow-x:hidden!important;
-  padding:16px 22px 36px!important;
-  -webkit-overflow-scrolling:touch;
-}
-.detail-head,.detail-summary,.history-article,.media-strip,.detail-links{
-  width:min(100%,760px)!important;
-  max-width:760px!important;
-}
-.detail-head,.detail-summary,.history-article,.media-strip,.detail-links{flex:none!important}
-.media-strip{
-  display:flex!important;
-  min-height:100px!important;
-  margin-top:14px!important;
-  overflow-x:auto!important;
-  overflow-y:visible!important;
-}
-.detail-links{padding-bottom:18px!important}
-.teacher-pane{height:100%;min-height:0;overflow:hidden}
-
-
-/* FIX: lane labels and timeline rows share ONE vertical scroll */
-.timeline-panel{
-  display:grid!important;
-  grid-template-columns:120px minmax(0,1fr)!important;
-  min-height:0!important;
-  overflow-y:auto!important;
-  overflow-x:hidden!important;
-  -webkit-overflow-scrolling:touch;
-}
-.lane-labels{
-  position:sticky!important;
-  left:0!important;
-  top:0!important;
-  z-index:12!important;
-  height:560px!important;
-  min-height:560px!important;
-  align-self:start!important;
-}
-.timeline-scroll{
-  height:560px!important;
-  min-height:560px!important;
-  overflow-x:auto!important;
-  overflow-y:hidden!important;
-  align-self:start!important;
-  -webkit-overflow-scrolling:touch;
-}
-.timeline-canvas{height:560px!important;min-height:560px!important}
-
-
-/* LOCK: axis stays visible on vertical scroll; axis and rows sync horizontally */
-.timeline-panel{
-  display:grid!important;
-  grid-template-columns:120px minmax(0,1fr)!important;
-  grid-template-rows:58px minmax(0,1fr)!important;
-  overflow:hidden!important;
-}
-.timeline-corner{
-  grid-column:1;grid-row:1;
-  background:#211d19;
-  border-right:1px solid #665b4e;
-  border-bottom:1px solid #776957;
-  z-index:20;
-}
-.timeline-header-scroll{
-  grid-column:2;grid-row:1;
-  overflow:hidden;
-  min-width:0;
-  background:#201c18;
-}
-.timeline-header-canvas{width:2700px;min-width:2700px;height:58px}
-.timeline-header-canvas .years{height:58px}
-.timeline-body{
-  grid-column:1 / 3;grid-row:2;
-  display:grid;
-  grid-template-columns:120px minmax(0,1fr);
-  min-height:0;
-  overflow-y:auto;
-  overflow-x:hidden;
-  -webkit-overflow-scrolling:touch;
-}
-.timeline-body .lane-labels{
-  grid-column:1;
-  position:sticky!important;
-  left:0!important;
-  top:auto!important;
-  padding-top:0!important;
-  height:354px!important;
-  min-height:354px!important;
-  z-index:12!important;
-}
-.timeline-body .timeline-scroll{
-  grid-column:2;
-  height:354px!important;
-  min-height:354px!important;
-  overflow-x:auto!important;
-  overflow-y:hidden!important;
-  touch-action:pan-x;
-}
-.timeline-body .timeline-canvas{
-  height:354px!important;
-  min-height:354px!important;
-}
-.timeline-header-canvas .year::after{
-  height:500px;
-}
-
+:root{--bg:#171513;--paper:#eee5d7;--ink:#2c261f;--line:#665b4e;--orange:#ff6f00;--amber:#d39a43;--blue:#668fb0;--red:#b76052;--cyan:#5b9ca0}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:var(--bg)}body{font-family:"Hiragino Sans","Yu Gothic",Meiryo,system-ui,-apple-system,sans-serif;overflow:hidden;color:#f4efe7}
+.history-app{height:calc(100dvh - 60px);display:grid;grid-template-rows:54px minmax(280px,1fr) 250px 28px;gap:8px;padding:9px 18px 0;background:linear-gradient(180deg,#1b1815,#131211)}
+.history-title{display:flex;align-items:center;gap:14px;border-bottom:1px solid #6e604e;padding:0 4px}.history-title h1{margin:0;font-family:Georgia,"Yu Mincho","Hiragino Mincho ProN",serif;font-size:27px;letter-spacing:.04em}.history-title p{margin:0;color:#c5b8a7;font-size:12px}.era-jumps{margin-left:auto;display:flex;gap:8px}.era-jumps button{border:0;border-bottom:2px solid transparent;background:transparent;color:#d7c9b8;font-size:12px;font-weight:800;padding:5px 7px;cursor:pointer}.era-jumps button:hover{border-bottom-color:var(--amber);color:#fff0d3}
+.timeline-viewport{min-height:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;background:#201c18;border-top:1px solid #776957;border-bottom:1px solid #776957;scrollbar-color:#8d7b65 #211d19}
+.timeline-board{display:grid;grid-template-columns:120px 2700px;grid-template-rows:58px 522px;width:2820px;min-width:2820px;min-height:580px;position:relative}
+.timeline-corner{grid-column:1;grid-row:1;position:sticky;left:0;top:0;z-index:50;background:#211d19;border-right:1px solid #665b4e;border-bottom:1px solid #776957}
+.timeline-axis{grid-column:2;grid-row:1;position:sticky;top:0;z-index:40;width:2700px;height:58px;background:#201c18;border-bottom:1px solid #776957}
+.year-scale{height:30px;position:relative;border-bottom:1px solid #574d42;color:#d7c9b8;font-size:11px}.year{position:absolute;bottom:7px;transform:translateX(-50%);white-space:nowrap}.year::after{content:"";position:absolute;top:17px;left:50%;width:1px;height:522px;background:rgba(239,220,192,.055)}
+.era-scale{height:28px;display:flex}.era-band{height:28px;display:flex;align-items:center;justify-content:center;border-right:1px solid #625649;color:#eadfce;background:rgba(207,170,111,.055);font-family:Georgia,"Yu Mincho","Hiragino Mincho ProN",serif;font-weight:900}
+.lane-labels{grid-column:1;grid-row:2;position:sticky;left:0;z-index:30;width:120px;height:522px;background:#211d19;border-right:1px solid #665b4e}.lane-label{display:flex;align-items:center;padding:0 10px;border-bottom:1px solid #51483e;color:#d8cec2;font-family:Georgia,"Yu Mincho","Hiragino Mincho ProN",serif;font-size:12px;font-weight:900}.lane-label.source{color:#efc87a}.lane-label.output{color:#9fd6dc}
+.timeline-canvas{grid-column:2;grid-row:2;position:relative;width:2700px;height:522px;background:repeating-linear-gradient(90deg,transparent 0,transparent 179px,rgba(237,219,193,.055) 180px),linear-gradient(180deg,#25211d,#1c1916)}
+.lane{position:relative;border-bottom:1px solid #4a4239}.lane.theatre,.lane-label.theatre{height:64px}.lane.source,.lane-label.source{height:58px}.lane.color,.lane-label.color{height:50px}.lane.optics,.lane-label.optics{height:50px}.lane.fixture,.lane-label.fixture{height:50px}.lane.output,.lane-label.output{height:58px}.lane.operation,.lane-label.operation{height:56px}.lane.signal,.lane-label.signal{height:48px}.lane.network,.lane-label.network{height:44px}.lane.media,.lane-label.media{height:44px}
+.event{position:absolute;top:8px;height:calc(100% - 16px);min-width:105px;max-width:175px;padding:6px 9px;border:0;border-left:3px solid #9e8d79;border-radius:2px;background:rgba(244,235,221,.94);color:#28221c;text-align:left;font-size:11px;font-weight:800;line-height:1.22;cursor:pointer;box-shadow:none}.event strong{display:block;color:#7b4b14;font-size:11px;margin-bottom:2px}.event.eu{border-left-color:var(--blue)}.event.jp{border-left-color:var(--red)}.event.tech{border-left-color:var(--cyan)}.event.pending{background:rgba(196,187,173,.35);color:#cfc6ba;border:1px dashed #8e8172}.event:hover,.event.active{transform:translateY(-1px);outline:2px solid #d69b45;box-shadow:0 5px 16px #0005}
+.detail-panel{min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 360px;overflow:hidden;background:var(--paper);color:var(--ink);border-top:1px solid #776957}.detail-main{height:100%;min-height:0;overflow-y:auto;overflow-x:hidden;padding:16px 22px 36px;-webkit-overflow-scrolling:touch}.detail-content{width:min(100%,760px)}.detail-era{color:#8a581b;font-size:12px;font-weight:900}.detail-head{display:flex;align-items:start;gap:10px}.detail-head h2{margin:2px 0 0;font-family:Georgia,"Yu Mincho","Hiragino Mincho ProN",serif;font-size:23px;color:#231f1a}.detail-summary{margin:7px 0 10px;color:#4a4035;font-size:14px;line-height:1.55}.history-article{margin-top:10px;padding-left:14px;border-left:3px solid #b38a55}.history-article p{margin:0;color:#40372e;font-size:14px;line-height:1.65}.media-strip{display:flex;gap:10px;margin-top:14px;padding-bottom:5px;overflow-x:auto}.media-card{flex:0 0 154px;height:90px;border:1px solid #aa9579;background:#ded1bd;color:#4a4035;display:flex;align-items:center;justify-content:center;text-align:center;font-size:11px;font-weight:800;cursor:pointer}.media-card:hover{outline:2px solid #d69b45}.detail-links{display:flex;gap:8px;margin-top:10px;padding-bottom:18px}.detail-links span,.detail-links a{border-bottom:1px solid #9b8871;color:#685946;font-size:11px;text-decoration:none;padding:4px 7px}
+.teacher-pane{display:grid;grid-template-columns:minmax(0,1fr) 112px;grid-template-rows:auto 1fr auto;column-gap:10px;height:100%;min-height:0;overflow:hidden;padding:15px 10px 10px 14px;background:#302820;color:#f6ead9;border-left:1px solid #7a6956}.teacher-pane h3{grid-column:1/-1;grid-row:1;margin:0 0 5px;color:#efc46c;font-family:Georgia,"Yu Mincho","Hiragino Mincho ProN",serif;font-size:17px}.teacher-speech{grid-column:1;grid-row:2;align-self:start;padding:8px 10px;border-radius:3px;background:#f5ead0;color:#29231c;font-size:12.5px;line-height:1.5;font-weight:700;box-shadow:0 3px 10px #0004}.teacher-source{grid-column:1;grid-row:3;color:#b9aa98;font-size:8.5px;line-height:1.35}.teacher-pane img{grid-column:2;grid-row:2/4;align-self:end;justify-self:end;width:108px;height:158px;object-fit:contain;object-position:right bottom}
+.footer{display:flex;align-items:center;justify-content:space-between;padding:0 8px;color:#9d8f7e;font-size:11px}.footer a{color:#d6c9b8;text-decoration:none}
+.media-modal{position:fixed;inset:0;z-index:2000;display:none;align-items:center;justify-content:center;background:rgba(8,7,6,.88);padding:28px}.media-modal.open{display:flex}.media-modal-inner{width:min(1100px,94vw);height:min(720px,88vh);background:#eee5d7;color:#2c261f;position:relative;padding:24px;overflow:auto}.media-modal-close{position:absolute;right:12px;top:10px;border:0;background:transparent;font-size:26px;cursor:pointer;color:#332b23}
+@media(max-width:1050px){.history-app{padding-left:8px;padding-right:8px}.detail-panel{grid-template-columns:minmax(0,1fr) 310px}.teacher-pane{grid-template-columns:minmax(0,1fr) 92px}.teacher-pane img{width:88px;height:142px}}
 </style>
 </head>
 <body>
@@ -231,17 +36,23 @@ body{background:#171513;color:#f4efe7}
 <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button">↕ 調光</button><div class="next-ui-dropdown"><a href="Top.html?tab=sim8bit">8-bit 調光卓</a><a href="Top.html?tab=sim16bit">16-bit 調光卓</a></div></div>
 <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button">⌁ 信号</button><div class="next-ui-dropdown"><a href="Top.html?tab=simdmx">DMX通信列車</a></div></div>
 <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button">⌘ Network</button><div class="next-ui-dropdown"><a href="Top.html?tab=netipaddress">IPアドレス</a><a href="Top.html?tab=netsacn">Multicast</a></div></div>
-<div class="next-ui-category-menu"><button class="next-ui-category-tab active" type="button">◷ 照明史</button><div class="next-ui-dropdown"><a class="active" href="History.html">舞台照明史 Timeline</a></div></div></nav><div class="next-ui-tools"><div class="next-ui-page-controls"><button class="next-ui-page-button" type="button" onclick="location.href='index.html'">⌂ TOP</button></div></div>
+<div class="next-ui-category-menu"><button class="next-ui-category-tab active" type="button">◷ 照明史</button><div class="next-ui-dropdown"><a class="active" href="History.html">舞台照明史 Timeline</a></div></div>
+</nav><div class="next-ui-tools"><div class="next-ui-page-controls"><button class="next-ui-page-button" type="button" onclick="location.href='index.html'">⌂ TOP</button></div></div>
 </div></header>
 <main class="history-app" id="app">
 <section class="history-title"><div><h1>舞台照明史</h1><p>光源だけではなく、劇場・色・制御・操作が「なぜ変わったか」をたどる。</p></div><div class="era-jumps"><button data-x="0">古代</button><button data-x="580">中世</button><button data-x="1080">ルネサンス</button><button data-x="1700">江戸</button><button data-x="2180">19世紀</button></div></section>
-<section class="timeline-panel">
-<div class="timeline-corner" aria-hidden="true"></div>
-<div class="timeline-header-scroll" id="timelineHeader"><div class="timeline-header-canvas">
-<div class="years"><div class="lane-label theatre">劇場・舞台環境</div><div class="lane-label source">光源</div><div class="lane-label color">色</div><div class="lane-label optics">光学</div><div class="lane-label fixture">灯具</div><div class="lane-label output">出力制御</div><div class="lane-label operation">操作・記憶</div><div class="lane-label signal">信号・規格</div><div class="lane-label network">Network</div><div class="lane-label media">伝送媒体</div></div></div></div>
-<div class="timeline-body" id="timelineBody">
-<div class="lane-labels"><div class="year-scale"><span class="year" style="left:40px">BC500</span><span class="year" style="left:130px">BC400</span><span class="year" style="left:220px">BC300</span><span class="year" style="left:310px">BC200</span><span class="year" style="left:400px">BC100</span><span class="year" style="left:490px">0</span><span class="year" style="left:580px">100</span><span class="year" style="left:670px">200</span><span class="year" style="left:760px">300</span><span class="year" style="left:850px">400</span><span class="year" style="left:940px">500</span><span class="year" style="left:1030px">600</span><span class="year" style="left:1120px">700</span><span class="year" style="left:1210px">800</span><span class="year" style="left:1300px">900</span><span class="year" style="left:1390px">1000</span><span class="year" style="left:1480px">1100</span><span class="year" style="left:1570px">1200</span><span class="year" style="left:1660px">1300</span><span class="year" style="left:1750px">1400</span><span class="year" style="left:1840px">1500</span><span class="year" style="left:1930px">1600</span><span class="year" style="left:2020px">1700</span><span class="year" style="left:2180px">1800</span><span class="year" style="left:2440px">1900</span><span class="year" style="left:2660px">2000</span></div><div class="era-scale"><div class="era-band" style="width:1390px">古代〜中世以前</div><div class="era-band" style="width:450px">中世</div><div class="era-band" style="width:340px">近世</div><div class="era-band" style="width:260px">近代</div><div class="era-band" style="width:260px">現代</div></div></div>
-<div class="timeline-scroll" id="timeline"><div class="timeline-canvas"><div class="lane theatre"><button class="event eu" data-id="sun" style="left:35px;width:150px"><strong>紀元前5世紀頃</strong>古代ギリシャ野外劇場</button><button class="event eu" data-id="church" style="left:640px;width:140px"><strong>中世</strong>教会・典礼劇</button><button class="event jp" data-id="noh" style="left:1010px;width:135px"><strong>14〜16世紀</strong>能舞台</button><button class="event eu" data-id="renaissance" style="left:1190px;width:155px"><strong>16世紀</strong>宮廷・屋内上演</button><button class="event eu" data-id="globe" style="left:1390px;width:150px"><strong>1599〜</strong>Globe / 屋外劇場</button><button class="event eu" data-id="krumlov" style="left:1580px;width:165px"><strong>1613〜1766</strong>Český Krumlov</button><button class="event jp" data-id="edo" style="left:1790px;width:150px"><strong>江戸</strong>全蓋式の芝居小屋</button><button class="event jp" data-id="meiji" style="left:2240px;width:145px"><strong>1872〜</strong>文明開化</button></div>
+<section class="timeline-viewport" id="timelineViewport">
+<div class="timeline-board">
+<div class="timeline-corner"></div>
+<div class="timeline-axis">
+<div class="year-scale">
+<span class="year" style="left:40px">BC500</span><span class="year" style="left:130px">BC400</span><span class="year" style="left:220px">BC300</span><span class="year" style="left:310px">BC200</span><span class="year" style="left:400px">BC100</span><span class="year" style="left:490px">0</span><span class="year" style="left:580px">100</span><span class="year" style="left:670px">200</span><span class="year" style="left:760px">300</span><span class="year" style="left:850px">400</span><span class="year" style="left:940px">500</span><span class="year" style="left:1030px">600</span><span class="year" style="left:1120px">700</span><span class="year" style="left:1210px">800</span><span class="year" style="left:1300px">900</span><span class="year" style="left:1390px">1000</span><span class="year" style="left:1480px">1100</span><span class="year" style="left:1570px">1200</span><span class="year" style="left:1660px">1300</span><span class="year" style="left:1750px">1400</span><span class="year" style="left:1840px">1500</span><span class="year" style="left:1930px">1600</span><span class="year" style="left:2020px">1700</span><span class="year" style="left:2180px">1800</span><span class="year" style="left:2440px">1900</span><span class="year" style="left:2660px">2000</span>
+</div>
+<div class="era-scale"><div class="era-band" style="width:1390px">古代〜中世以前</div><div class="era-band" style="width:450px">中世</div><div class="era-band" style="width:340px">近世</div><div class="era-band" style="width:260px">近代</div><div class="era-band" style="width:260px">現代</div></div>
+</div>
+<div class="lane-labels"><div class="lane-label theatre">劇場・舞台環境</div><div class="lane-label source">光源</div><div class="lane-label color">色</div><div class="lane-label optics">光学</div><div class="lane-label fixture">灯具</div><div class="lane-label output">出力制御</div><div class="lane-label operation">操作・記憶</div><div class="lane-label signal">信号・規格</div><div class="lane-label network">Network</div><div class="lane-label media">伝送媒体</div></div>
+<div class="timeline-canvas">
+<div class="lane theatre"><button class="event eu" data-id="sun" style="left:35px;width:150px"><strong>紀元前5世紀頃</strong>古代ギリシャ野外劇場</button><button class="event eu" data-id="church" style="left:640px;width:140px"><strong>中世</strong>教会・典礼劇</button><button class="event jp" data-id="noh" style="left:1010px;width:135px"><strong>14〜16世紀</strong>能舞台</button><button class="event eu" data-id="renaissance" style="left:1190px;width:155px"><strong>16世紀</strong>宮廷・屋内上演</button><button class="event eu" data-id="globe" style="left:1390px;width:150px"><strong>1599〜</strong>Globe / 屋外劇場</button><button class="event eu" data-id="krumlov" style="left:1580px;width:165px"><strong>1613〜1766</strong>Český Krumlov</button><button class="event jp" data-id="edo" style="left:1790px;width:150px"><strong>江戸</strong>全蓋式の芝居小屋</button><button class="event jp" data-id="meiji" style="left:2240px;width:145px"><strong>1872〜</strong>文明開化</button></div>
 <div class="lane source"><button class="event tech" data-id="sun" style="left:55px;width:110px"><strong>自然光</strong>太陽・天空光</button><button class="event pending" data-id="fire" style="left:410px;width:120px"><strong>古代〜</strong>火・松明・かがり火</button><button class="event tech" data-id="candle" style="left:1120px;width:145px"><strong>中世〜近世</strong>油灯・ろうそく</button><button class="event tech" data-id="gas" style="left:2130px;width:120px"><strong>19世紀</strong>ガス灯</button><button class="event tech" data-id="lime" style="left:2280px;width:115px"><strong>1830年代〜</strong>Limelight</button><button class="event tech" data-id="arc" style="left:2420px;width:115px"><strong>19世紀</strong>Carbon Arc</button><button class="event tech" data-id="bulb" style="left:2550px;width:120px"><strong>1879〜</strong>白熱電球</button></div>
 <div class="lane color"><button class="event eu" data-id="color" style="left:1220px;width:145px"><strong>16世紀〜</strong>色ガラス・色液体</button></div>
 <div class="lane optics"><button class="event eu" data-id="perspective" style="left:1200px;width:155px"><strong>ルネサンス</strong>遠近法・反射の利用</button></div>
@@ -249,65 +60,39 @@ body{background:#171513;color:#f4efe7}
 <div class="lane output"><button class="event eu" data-id="renaissance" style="left:1260px;width:145px"><strong>16世紀</strong>遮光・消灯</button><button class="event jp" data-id="edo" style="left:1780px;width:165px"><strong>江戸</strong>明障子・雨戸で調光</button><button class="event tech" data-id="gas" style="left:2160px;width:150px"><strong>19世紀</strong>Gas Table / Plate</button></div>
 <div class="lane operation"><button class="event eu" data-id="candle" style="left:1150px;width:135px"><strong>ろうそく期</strong>芯切り・保守</button><button class="event jp" data-id="edo" style="left:1830px;width:115px"><strong>江戸</strong>窓番</button></div>
 <div class="lane signal"></div><div class="lane network"></div><div class="lane media"></div>
-</div></div></div></section>
-<section class="detail-panel"><div class="detail-main"><div class="detail-head"><div><div class="detail-era" id="detailEra">紀元前5世紀頃</div><h2 id="detailTitle">太陽光｜最初の舞台照明</h2></div><button class="close-detail" id="closeDetail" hidden>俯瞰へ戻る</button></div><p class="detail-summary" id="detailSummary">古代ギリシャの野外劇場では、太陽・天空光など自然環境そのものが舞台の光を決めていた。</p><div class="history-article" id="historyArticle"><p id="articleText">古代ギリシャの野外劇場では、太陽・天空光など自然環境そのものが舞台の光を決めていた。</p></div><div class="media-strip" id="mediaStrip">
-<div class="media-card" data-kind="photo">写真・史料</div>
-<div class="media-card" data-kind="diagram">図解</div>
-<div class="media-card" data-kind="video">動画</div>
 </div>
-<div class="detail-links" id="detailLinks"><span>資料リンクは項目ごとに追加</span></div></div>
-<aside class="teacher-pane"><h3>先生のひとこと</h3><div class="teacher-speech" id="teacher">悲劇などは上演順によって夕方になり、最後は日没の頃まで上演された、という話もあるよ。自然光そのものが舞台の変化になっていたんだね。</div><div class="teacher-source" id="teacherSource">本文の史実と、逸話・補足は分けて表示します。</div><img src="assets/analog_teacher_pointing.webp" alt="照明教材の先生"></aside></section>
+</div>
+</section>
+<section class="detail-panel"><div class="detail-main"><div class="detail-content"><div class="detail-era" id="detailEra">紀元前5世紀頃</div><div class="detail-head"><h2 id="detailTitle">太陽光｜最初の舞台照明</h2></div><p class="detail-summary" id="detailSummary">古代ギリシャの野外劇場では、太陽・天空光など自然環境そのものが舞台の光を決めていた。</p><div class="history-article"><p id="articleText">古代ギリシャの野外劇場では、太陽・天空光など自然環境そのものが舞台の光を決めていた。</p></div><div class="media-strip"><div class="media-card" data-kind="photo">写真・史料</div><div class="media-card" data-kind="diagram">図解</div><div class="media-card" data-kind="video">動画</div></div><div class="detail-links"><span>資料リンクは項目ごとに追加</span></div></div></div>
+<aside class="teacher-pane"><h3>先生のひとこと</h3><div class="teacher-speech" id="teacher">悲劇などは上演順によって夕方になり、最後は日没の頃まで上演された、という話もあるよ。自然光そのものが舞台の変化になっていたんだね。</div><div class="teacher-source">本文の史実と、逸話・補足は分けて表示します。</div><img src="assets/analog_teacher_pointing.webp" alt="照明教材の先生"></aside></section>
 <footer class="footer"><a href="index.html">⌂ 教材トップ</a><span>横＝時間の変化　｜　縦＝同時代の比較　｜　StageLight History BASE</span></footer>
 <div class="media-modal" id="mediaModal" aria-hidden="true"><div class="media-modal-inner"><button class="media-modal-close" id="mediaModalClose" aria-label="閉じる">×</button><h2 id="mediaModalTitle">資料</h2><p id="mediaModalBody">各項目の確認済み写真・図解・動画をここに表示します。</p></div></div>
 </main>
 <script>
 const items={
-sun:{era:"紀元前5世紀頃",title:"太陽光｜最初の舞台照明",summary:"古代ギリシャの野外劇場では、太陽・天空光など自然環境そのものが舞台の光を決めていた。",what:"人が作る照明ではなく、自然光で舞台を成立させる。",why:"大規模な劇場を人工光で照らす技術はまだなく、上演環境そのものが昼光を前提としていた。",change:"この時点では光を操作できない。後の照明史は「自然任せの光を人が扱えるようにする」歴史でもある。",teacher:"悲劇などは上演順によって夕方になり、最後は日没の頃まで上演された、という話もあるよ。自然光そのものが舞台の変化になっていたんだね。"},
-fire:{era:"古代〜｜年代は追加確認",title:"火・松明・かがり火",summary:"太陽とは違い、人が用意し、持ち運べる人工の光。特定の劇場用途・年代は史料確認後に確定する。",what:"炎を人工光源として利用する。",why:"自然光のない時間・場所でも光を得るため。",change:"人が光を用意できるようになる。ただし舞台照明としての具体的用途は史料ごとに確認する。",teacher:"ここは『松明が舞台照明だった』と先に決めないよ。史料が確認できたところから埋めよう。"},
-church:{era:"中世",title:"教会・典礼劇",summary:"教会内部の典礼から演劇的表現が発達し、建築空間・自然光・灯火が上演環境になる。",what:"教会という既存建築を上演空間として利用する。",why:"宗教儀礼の中で演劇的表現が発達した。",change:"野外劇場とは異なる屋内環境が、灯火の意味と必要性を変える。",teacher:"劇場は一直線に野外から屋内へ進んだわけじゃない。上演する場所そのものが何度も変わっているよ。"},
-noh:{era:"14〜16世紀頃｜日本",title:"能舞台｜自然光を建築で使う",summary:"屋外・半屋外の能舞台では自然光を利用し、白洲の白い石も光を反射する役割を持った。",what:"自然光を前提とした舞台建築。",why:"人工照明が十分でない環境で舞台と観客空間を成立させる。",change:"建築側で自然光を受け、反射して利用する考え方が見える。",teacher:"同時代の離れた地域を縦に比べると面白いよ。影響関係を決めつけず、似た課題への解決を見てみよう。"},
-renaissance:{era:"16世紀｜イタリア",title:"光が『演出』になる",summary:"宮廷劇では人工光の配置、舞台と客席の明暗差、色、場面に応じた消灯・遮光などが記録される。",what:"人工光を上演内容に合わせて扱う。",why:"屋内上演と舞台表現の高度化により、ただ見えるだけでは足りなくなる。",change:"『照らす』から、視線や感情を動かす『照明演出』へ踏み込む。",teacher:"16世紀は大きな転換点。現代の照明キューにつながる発想の芽が、かなり集まってくるよ。"},
-globe:{era:"1599〜｜英国",title:"Globe｜専用劇場でも昼光",summary:"専用劇場が成立しても、Globeのような開放型劇場は昼間の自然光を利用した。",what:"上部が空へ開いた専用劇場。",why:"大勢の観客を収容する常設の上演空間が必要になった。",change:"専用劇場化と人工照明化は同じ速度では進まないことが分かる。",teacher:"同じ頃、屋内劇場も並行して存在する。『新しい劇場＝すぐ人工照明』ではないんだね。"},
-krumlov:{era:"1613〜1766｜ボヘミア",title:"Český Krumlov｜宮廷からバロック劇場へ",summary:"城内ホールでの上演記録から私設劇場、専用劇場、現存する高度なバロック劇場へ発展する過程を追える。",what:"宮廷の上演空間が専用劇場へ育つ実例。",why:"舞台美術・場面転換・観客空間を一体として扱う必要が高まった。",change:"奈落と上部機構を連動させ、少人数で大規模な場面転換を行う劇場技術へ。",teacher:"ここは図解カードで見たいね。額縁、遠近法背景、ウイング、奈落、上部機構、照明を一枚につなげる。"},
-candle:{era:"中世〜近世",title:"ろうそく｜光源からシステムへ",summary:"ろうそくは光源だけでなく、芯切り、遮光調光、反射、色光など複数の技術を生んだ。",what:"炎を安定して使う人工光源。",why:"屋内や夜間の上演で継続的な光が必要になる。",change:"光源を維持するスタッフや、光路を遮って明るさを変える技術が生まれる。",teacher:"光源を自由に弱くできないなら、遮ればいい。考え方はとても機械的で、現代にも通じるよ。"},
-edo:{era:"江戸｜日本",title:"窓で調光する芝居小屋",summary:"明障子と外側の雨戸等を開閉して自然光を調整し、窓番が舞台の明暗を操作した。",what:"建築の窓・戸を自然光の調光装置として使う。",why:"全蓋式の芝居小屋で、取り込む外光を上演に合わせて扱うため。",change:"太陽＝光源、明障子＝採光、雨戸＝遮光・調光、窓番＝操作というシステムが成立する。",teacher:"電気がなくても『調光卓』的な役割は生まれる。光源を変えられないなら、建物側を動かすんだね。"},
-face:{era:"江戸｜日本",title:"面明り・差出しと隈取",summary:"ろうそくを用いた面明り・差出しで役者を見せ、隈取や衣裳の視覚表現との関係から歌舞伎独自の光の要求が生まれる。",what:"役者の顔や花道を近い位置から照らす。",why:"表情・化粧・衣裳を観客へ明確に見せるため。",change:"『役者をどう見せるか』が灯具位置や光の質を決める。",teacher:"西洋と日本を優劣で比べないよ。同じ『役者を見せる』でも、表現方法が違えば必要な光も変わる。"},
-gas:{era:"19世紀",title:"ガス灯｜集中制御へ",summary:"Gas Border、Footlight、Wing lightなどをガス配管で系統化し、Gas Table / Plateでまとめて明暗を扱う時代へ。",what:"ガスを配管して複数のバーナー群を舞台照明として使う。",why:"ろうそくより大きな光量と、系統ごとの集中操作が求められた。",change:"光源→配管→系統→負荷→集中操作という、現代に近い照明システム構造が見えてくる。",teacher:"ここは史料を固めたら実写風AI復元を作る。Gas Borderと操作盤を『使っている状態』で見せたいね。"},
-lime:{era:"1830年代〜",title:"Limelight｜強烈な白い光",summary:"生石灰を強熱して得る強い白色光。電気ではなく、化学・燃焼系の強力な光源。",what:"加熱した石灰から強い白色光を得る。",why:"従来の炎より強く、対象を際立たせる光が必要だった。",change:"舞台上の特定対象へ強い光を向ける技術が発達する。",teacher:"英語の『in the limelight』が舞台照明から来た、という話もここで紹介できるね。"},
-arc:{era:"19世紀",title:"Carbon Arc｜電気の強烈な光",summary:"炭素棒間のアーク放電を利用する強力な電気光源。",what:"炭素電極間にアーク放電を起こして発光させる。",why:"大空間や遠距離へ届く非常に強い光が求められた。",change:"炎とは別系統の『電気そのものによる光』が舞台へ入ってくる。",teacher:"日本でも明治期にアーク灯が劇場へ入ってくる。ここから電気照明の流れが一気に太くなるよ。"},
-bulb:{era:"1879〜",title:"白熱電球｜電気を扱いやすい光へ",summary:"白熱電球の実用化と改良により、電気照明がより小さく扱いやすい光源へ進む。",what:"フィラメントへ電流を流し、加熱して発光させる。",why:"アーク灯とは異なる、扱いやすい電気光源が求められた。",change:"電気を多数の小さな光源として配置できる方向へ進む。",teacher:"改良の過程では京都・八幡の竹もフィラメントに使われた。『日本の竹』は意外なところで世界史に登場するよ。"},
-meiji:{era:"1872〜｜日本",title:"江戸から東京へ｜文明開化",summary:"都市ガス、近代劇場、そして電気へ。都市・エネルギー供給・劇場環境がまとめて変わる日本側の大転換点。",what:"近世の芝居小屋から近代的な都市・劇場インフラへの転換。",why:"都市化と西欧技術の導入により、夜間照明と劇場設備の条件が変化した。",change:"自然光＋ろうそく中心の環境から、ガスを経て電気照明へ急速に進む。",teacher:"日本ではガス時代が長く均等に続いたわけじゃない。導入後ほどなく電気が追いついてくるのがポイント。"},
-color:{era:"16世紀〜",title:"色を付ける｜色ガラス・色液体",summary:"色付きのガラスや、色の付いた液体を入れたガラス容器を光の前に置き、色光を作る技法が記録される。",what:"光源の前に透過物を置いて光の色を変える。",why:"白い光だけでなく、場面や雰囲気を色で表現するため。",change:"光源とは別に『色を選ぶ部品』という考え方が生まれる。",teacher:"光源を作り直さなくても、前に何か置けば色を変えられる。フィルターの発想だね。"},
-perspective:{era:"ルネサンス",title:"遠近法と舞台美術",summary:"古典研究と新しい線遠近法が舞台美術へ結びつき、奥行きを絵として構成する舞台が発達する。",what:"透視図法を舞台背景や建築的舞台美術へ応用する。",why:"限られた舞台奥行きで、都市や遠景を大きく見せるため。",change:"舞台美術の見え方が変わり、その絵をどう照らすかという照明側の要求も変わる。",teacher:"『舞台美術が変わる→照明への要求が変わる』。照明史だけを単独で見ない理由がここにあるよ。"}
+sun:{era:"紀元前5世紀頃",title:"太陽光｜最初の舞台照明",summary:"古代ギリシャの野外劇場では、太陽・天空光など自然環境そのものが舞台の光を決めていた。",teacher:"悲劇などは上演順によって夕方になり、最後は日没の頃まで上演された、という話もあるよ。自然光そのものが舞台の変化になっていたんだね。"},
+fire:{era:"古代〜｜年代は追加確認",title:"火・松明・かがり火",summary:"太陽とは違い、人が用意し、持ち運べる人工の光。特定の劇場用途・年代は史料確認後に確定する。",teacher:"ここは『松明が舞台照明だった』と先に決めないよ。史料が確認できたところから埋めよう。"},
+church:{era:"中世",title:"教会・典礼劇",summary:"教会内部の典礼から演劇的表現が発達し、建築空間・自然光・灯火が上演環境になる。",teacher:"劇場は一直線に野外から屋内へ進んだわけじゃない。上演する場所そのものが何度も変わっているよ。"},
+noh:{era:"14〜16世紀頃｜日本",title:"能舞台｜自然光を建築で使う",summary:"屋外・半屋外の能舞台では自然光を利用し、白洲の白い石も光を反射する役割を持った。",teacher:"同時代の離れた地域を縦に比べると面白いよ。影響関係を決めつけず、似た課題への解決を見てみよう。"},
+renaissance:{era:"16世紀｜イタリア",title:"光が『演出』になる",summary:"宮廷劇では人工光の配置、舞台と客席の明暗差、色、場面に応じた消灯・遮光などが記録される。",teacher:"16世紀は大きな転換点。現代の照明キューにつながる発想の芽が、かなり集まってくるよ。"},
+globe:{era:"1599〜｜英国",title:"Globe｜専用劇場でも昼光",summary:"専用劇場が成立しても、Globeのような開放型劇場は昼間の自然光を利用した。",teacher:"同じ頃、屋内劇場も並行して存在する。『新しい劇場＝すぐ人工照明』ではないんだね。"},
+krumlov:{era:"1613〜1766｜ボヘミア",title:"Český Krumlov｜宮廷からバロック劇場へ",summary:"城内ホールでの上演記録から私設劇場、専用劇場、現存する高度なバロック劇場へ発展する過程を追える。",teacher:"ここは図解カードで見たいね。額縁、遠近法背景、ウイング、奈落、上部機構、照明を一枚につなげる。"},
+candle:{era:"中世〜近世",title:"ろうそく｜光源からシステムへ",summary:"ろうそくは光源だけでなく、芯切り、遮光調光、反射、色光など複数の技術を生んだ。",teacher:"光源を自由に弱くできないなら、遮ればいい。考え方はとても機械的で、現代にも通じるよ。"},
+edo:{era:"江戸｜日本",title:"窓で調光する芝居小屋",summary:"明障子と外側の雨戸等を開閉して自然光を調整し、窓番が舞台の明暗を操作した。",teacher:"電気がなくても『調光卓』的な役割は生まれる。光源を変えられないなら、建物側を動かすんだね。"},
+face:{era:"江戸｜日本",title:"面明り・差出しと隈取",summary:"ろうそくを用いた面明り・差出しで役者を見せ、隈取や衣裳の視覚表現との関係から歌舞伎独自の光の要求が生まれる。",teacher:"西洋と日本を優劣で比べないよ。同じ『役者を見せる』でも、表現方法が違えば必要な光も変わる。"},
+gas:{era:"19世紀",title:"ガス灯｜集中制御へ",summary:"Gas Border、Footlight、Wing lightなどをガス配管で系統化し、Gas Table / Plateでまとめて明暗を扱う時代へ。",teacher:"ここは史料を固めたら実写風AI復元を作る。Gas Borderと操作盤を『使っている状態』で見せたいね。"},
+lime:{era:"1830年代〜",title:"Limelight｜強烈な白い光",summary:"生石灰を強熱して得る強い白色光。電気ではなく、化学・燃焼系の強力な光源。",teacher:"英語の『in the limelight』が舞台照明から来た、という話もここで紹介できるね。"},
+arc:{era:"19世紀",title:"Carbon Arc｜電気の強烈な光",summary:"炭素棒間のアーク放電を利用する強力な電気光源。",teacher:"日本でも明治期にアーク灯が劇場へ入ってくる。ここから電気照明の流れが一気に太くなるよ。"},
+bulb:{era:"1879〜",title:"白熱電球｜電気を扱いやすい光へ",summary:"白熱電球の実用化と改良により、電気照明がより小さく扱いやすい光源へ進む。",teacher:"改良の過程では京都・八幡の竹もフィラメントに使われた。『日本の竹』は意外なところで世界史に登場するよ。"},
+meiji:{era:"1872〜｜日本",title:"江戸から東京へ｜文明開化",summary:"都市ガス、近代劇場、そして電気へ。都市・エネルギー供給・劇場環境がまとめて変わる日本側の大転換点。",teacher:"日本ではガス時代が長く均等に続いたわけじゃない。導入後ほどなく電気が追いついてくるのがポイント。"},
+color:{era:"16世紀〜",title:"色を付ける｜色ガラス・色液体",summary:"色付きのガラスや、色の付いた液体を入れたガラス容器を光の前に置き、色光を作る技法が記録される。",teacher:"光源を作り直さなくても、前に何か置けば色を変えられる。フィルターの発想だね。"},
+perspective:{era:"ルネサンス",title:"遠近法と舞台美術",summary:"古典研究と新しい線遠近法が舞台美術へ結びつき、奥行きを絵として構成する舞台が発達する。",teacher:"『舞台美術が変わる→照明への要求が変わる』。照明史だけを単独で見ない理由がここにあるよ。"}
 };
-const $=id=>document.getElementById(id),app=$("app"),timeline=$("timeline");
-
-const timelineHeader=$("timelineHeader");
-let syncingTimeline=false;
-timeline.addEventListener("scroll",()=>{
- if(syncingTimeline)return;
- syncingTimeline=true;
- timelineHeader.scrollLeft=timeline.scrollLeft;
- requestAnimationFrame(()=>syncingTimeline=false);
-},{passive:true});
-
-function select(id,btn){const d=items[id];if(!d)return;document.querySelectorAll(".event").forEach(x=>x.classList.remove("active"));if(btn)btn.classList.add("active");$("detailEra").textContent=d.era;$("detailTitle").textContent=d.title;$("detailSummary").textContent=d.summary;$("articleText").textContent=d.summary;$("teacher").textContent=d.teacher;$("closeDetail").hidden=false;if(btn){const target=btn.offsetLeft+btn.offsetWidth/2-timeline.clientWidth/2;timeline.scrollTo({left:Math.max(0,target),behavior:"smooth"})}}
-document.querySelectorAll(".event").forEach(btn=>btn.addEventListener("click",()=>select(btn.dataset.id,btn)));
-document.querySelectorAll(".era-jumps button").forEach(btn=>btn.addEventListener("click",()=>timeline.scrollTo({left:Number(btn.dataset.x),behavior:"smooth"})));
-$("closeDetail").addEventListener("click",()=>{app.classList.remove("detail-open");$("closeDetail").hidden=true;document.querySelectorAll(".event").forEach(x=>x.classList.remove("active"))});
-
-
-const mediaModal=$("mediaModal"), mediaModalTitle=$("mediaModalTitle"), mediaModalBody=$("mediaModalBody");
-document.querySelectorAll(".media-card").forEach(card=>card.addEventListener("click",()=>{
- const names={photo:"写真・史料",diagram:"図解",video:"動画"};
- mediaModalTitle.textContent=names[card.dataset.kind]||"資料";
- mediaModalBody.textContent="この項目に紐づく確認済み資料をここへ表示します。";
- mediaModal.classList.add("open");mediaModal.setAttribute("aria-hidden","false");
-}));
-$("mediaModalClose").addEventListener("click",()=>{mediaModal.classList.remove("open");mediaModal.setAttribute("aria-hidden","true")});
-mediaModal.addEventListener("click",e=>{if(e.target===mediaModal)$("mediaModalClose").click()});
-
-document.querySelectorAll(".next-ui-category-tab").forEach(button=>button.addEventListener("click",e=>{e.stopPropagation();const menu=button.closest(".next-ui-category-menu");document.querySelectorAll(".next-ui-category-menu").forEach(x=>{if(x!==menu)x.classList.remove("open")});menu.classList.toggle("open")}));
-document.addEventListener("click",()=>document.querySelectorAll(".next-ui-category-menu").forEach(x=>x.classList.remove("open")));
+const $=id=>document.getElementById(id),viewport=$("timelineViewport");
+function select(id,btn){const d=items[id];if(!d)return;document.querySelectorAll('.event').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');$("detailEra").textContent=d.era;$("detailTitle").textContent=d.title;$("detailSummary").textContent=d.summary;$("articleText").textContent=d.summary;$("teacher").textContent=d.teacher;if(btn){const target=btn.offsetLeft+btn.offsetWidth/2-(viewport.clientWidth-120)/2+120;viewport.scrollTo({left:Math.max(0,target),top:viewport.scrollTop,behavior:'smooth'})}}
+document.querySelectorAll('.event').forEach(btn=>btn.addEventListener('click',()=>select(btn.dataset.id,btn)));
+document.querySelectorAll('.era-jumps button').forEach(btn=>btn.addEventListener('click',()=>viewport.scrollTo({left:Number(btn.dataset.x),top:viewport.scrollTop,behavior:'smooth'})));
+const mediaModal=$("mediaModal"),mediaModalTitle=$("mediaModalTitle"),mediaModalBody=$("mediaModalBody");document.querySelectorAll('.media-card').forEach(card=>card.addEventListener('click',()=>{const names={photo:'写真・史料',diagram:'図解',video:'動画'};mediaModalTitle.textContent=names[card.dataset.kind]||'資料';mediaModalBody.textContent='この項目に紐づく確認済み資料をここへ表示します。';mediaModal.classList.add('open');mediaModal.setAttribute('aria-hidden','false')}));$("mediaModalClose").addEventListener('click',()=>{mediaModal.classList.remove('open');mediaModal.setAttribute('aria-hidden','true')});mediaModal.addEventListener('click',e=>{if(e.target===mediaModal)$("mediaModalClose").click()});
+document.querySelectorAll('.next-ui-category-tab').forEach(button=>button.addEventListener('click',e=>{e.stopPropagation();const menu=button.closest('.next-ui-category-menu');document.querySelectorAll('.next-ui-category-menu').forEach(x=>{if(x!==menu)x.classList.remove('open')});menu.classList.toggle('open')}));document.addEventListener('click',()=>document.querySelectorAll('.next-ui-category-menu').forEach(x=>x.classList.remove('open')));
 </script>
 </body></html>
