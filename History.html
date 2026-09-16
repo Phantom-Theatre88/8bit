@@ -38,6 +38,35 @@ body{background:#171513;color:#f4efe7}
 .teacher-pane{padding:15px 15px 12px 112px;background:#302820;color:#f6ead9;border-left:1px solid #7a6956}.teacher-pane h3{color:#efc46c;font-family:Georgia,"Yu Mincho","Hiragino Mincho ProN",serif;font-size:17px}.teacher-speech{background:#f5ead0;color:#29231c;border-radius:3px;box-shadow:0 3px 10px #0004}.teacher-pane img{width:116px;height:165px}.teacher-source{color:#b9aa98}
 .footer{color:#9d8f7e}.footer a{color:#d6c9b8}
 
+
+/* FIX: teacher character must never overlap the speech card */
+.teacher-pane{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 96px;
+  grid-template-rows:auto 1fr auto;
+  column-gap:10px;
+  padding:15px 10px 10px 14px;
+}
+.teacher-pane h3{grid-column:1 / -1;grid-row:1}
+.teacher-speech{grid-column:1;grid-row:2;align-self:start;position:relative;z-index:2}
+.teacher-source{grid-column:1;grid-row:3;position:relative;z-index:2}
+.teacher-pane img{
+  grid-column:2;
+  grid-row:2 / 4;
+  position:static;
+  align-self:end;
+  justify-self:end;
+  width:92px;
+  height:145px;
+  object-fit:contain;
+  object-position:right bottom;
+  z-index:1;
+}
+@media(max-width:1050px){
+ .teacher-pane{padding-left:12px;grid-template-columns:minmax(0,1fr) 78px}
+ .teacher-pane img{width:76px;height:125px}
+}
+
 </style>
 </head>
 <body>
