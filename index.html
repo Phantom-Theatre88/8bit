@@ -180,6 +180,7 @@
     .category-card.dimming { --accent: var(--orange); }
     .category-card.signal { --accent: var(--pink); }
     .category-card.network { --accent: var(--cyan); }
+    .category-card.history { --accent: var(--amber); }
     .category-head {
       min-height: 82px;
       padding: 14px 15px 11px;
@@ -229,6 +230,10 @@
     .lesson-arrow { flex: none; color: var(--accent); font-size: 13px; font-weight: 900; }
     .lesson-link.pending { opacity: .42; border-style: dashed; pointer-events: none; }
 
+    .history-entry { margin-top: 10px; }
+    .history-entry .category-card { width: 100%; }
+    .history-entry .category-head { min-height: 70px; }
+    .history-entry .lesson-link { min-height: 54px; }
     .future-row { margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .future-card {
       min-height: 62px;
@@ -324,6 +329,15 @@
           <a class="lesson-link" href="Top.html?tab=netbroadcast"><span class="lesson-copy"><span class="lesson-name">Broadcast / Art-Net 1</span><span class="lesson-note">同じ範囲へ一斉送信</span></span><span class="lesson-arrow">›</span></a>
           <a class="lesson-link" href="Top.html?tab=netsacn"><span class="lesson-copy"><span class="lesson-name">Multicast / sACN</span><span class="lesson-note">必要なNodeへ届ける</span></span><span class="lesson-arrow">›</span></a>
           <a class="lesson-link" href="Top.html?tab=explain"><span class="lesson-copy"><span class="lesson-name">結線 / 冗長化</span><span class="lesson-note">Star／Ringと断線時の影響</span></span><span class="lesson-arrow">›</span></a>
+        </div>
+      </article>
+    </section>
+
+    <section class="history-entry" aria-label="照明史">
+      <article class="category-card history">
+        <header class="category-head"><div class="category-icon">◷</div><div><div class="category-kicker">HISTORY</div><div class="category-title">照明史</div><div class="category-desc">太陽光から現代まで。劇場・光源・色・制御・操作が「なぜ変わったか」をたどる。</div></div></header>
+        <div class="lesson-list">
+          <a class="lesson-link" href="History.html"><span class="lesson-copy"><span class="lesson-name">舞台照明史 Timeline</span><span class="lesson-note">横＝時間の変化／縦＝同時代の比較。項目を選ぶと先生と詳細が開きます。</span></span><span class="lesson-arrow">›</span></a>
         </div>
       </article>
     </section>
