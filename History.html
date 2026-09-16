@@ -67,6 +67,46 @@ body{background:#171513;color:#f4efe7}
  .teacher-pane img{width:76px;height:125px}
 }
 
+
+/* History split-view v3 */
+.history-app{
+  --detail-h: 300px;
+  grid-template-rows:54px minmax(220px,1fr) 14px var(--detail-h) 28px !important;
+}
+.history-app.detail-open{
+  grid-template-rows:54px minmax(220px,1fr) 14px var(--detail-h) 28px !important;
+}
+.detail-panel{grid-template-columns:minmax(0,1fr) 360px}
+.detail-main{display:flex;flex-direction:column;align-items:flex-start}
+.detail-head,.detail-summary,.history-article,.detail-links{width:min(100%,760px)}
+.history-article{max-width:760px}
+.teacher-pane{grid-template-columns:minmax(0,1fr) 112px}
+.teacher-pane img{width:108px;height:158px}
+.splitter{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:14px;
+  cursor:ns-resize;
+  touch-action:none;
+  background:#171411;
+  border-top:1px solid #6e604e;
+  border-bottom:1px solid #6e604e;
+  z-index:20;
+}
+.splitter::before{content:"";width:56px;height:4px;border-radius:99px;background:#a28d73}
+.splitter-label{
+  position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  font-size:10px;color:#bba98f;letter-spacing:.04em;pointer-events:none
+}
+.splitter.dragging::before{background:#d69b45}
+@media(max-width:1050px){
+ .detail-panel{grid-template-columns:minmax(0,1fr) 310px}
+ .teacher-pane{grid-template-columns:minmax(0,1fr) 92px}
+ .teacher-pane img{width:88px;height:142px}
+}
+
 </style>
 </head>
 <body>
@@ -92,6 +132,7 @@ body{background:#171513;color:#f4efe7}
 <div class="lane operation"><button class="event eu" data-id="candle" style="left:1150px;width:135px"><strong>ろうそく期</strong>芯切り・保守</button><button class="event jp" data-id="edo" style="left:1830px;width:115px"><strong>江戸</strong>窓番</button></div>
 <div class="lane signal"></div><div class="lane network"></div><div class="lane media"></div>
 </div></div></section>
+<div class="splitter" id="splitter" role="separator" aria-orientation="horizontal" aria-label="タイムラインと詳細の表示比率を調整"><span class="splitter-label">↕ 上下に動かす</span></div>
 <section class="detail-panel"><div class="detail-main"><div class="detail-head"><div><div class="detail-era" id="detailEra">紀元前5世紀頃</div><h2 id="detailTitle">太陽光｜最初の舞台照明</h2></div><button class="close-detail" id="closeDetail" hidden>俯瞰へ戻る</button></div><p class="detail-summary" id="detailSummary">古代ギリシャの野外劇場では、太陽・天空光など自然環境そのものが舞台の光を決めていた。</p><div class="history-article" id="historyArticle"><p id="articleText">古代ギリシャの野外劇場では、太陽・天空光など自然環境そのものが舞台の光を決めていた。</p></div><div class="detail-links" id="detailLinks"><span>資料リンクは項目ごとに追加</span><span>図解カード対応</span></div></div>
 <aside class="teacher-pane"><h3>先生のひとこと</h3><div class="teacher-speech" id="teacher">悲劇などは上演順によって夕方になり、最後は日没の頃まで上演された、という話もあるよ。自然光そのものが舞台の変化になっていたんだね。</div><div class="teacher-source" id="teacherSource">本文の史実と、逸話・補足は分けて表示します。</div><img src="assets/analog_teacher_pointing.webp" alt="照明教材の先生"></aside></section>
 <footer class="footer"><a href="index.html">⌂ 教材トップ</a><span>横＝時間の変化　｜　縦＝同時代の比較　｜　StageLight History BASE</span></footer>
@@ -117,10 +158,29 @@ color:{era:"16世紀〜",title:"色を付ける｜色ガラス・色液体",summ
 perspective:{era:"ルネサンス",title:"遠近法と舞台美術",summary:"古典研究と新しい線遠近法が舞台美術へ結びつき、奥行きを絵として構成する舞台が発達する。",what:"透視図法を舞台背景や建築的舞台美術へ応用する。",why:"限られた舞台奥行きで、都市や遠景を大きく見せるため。",change:"舞台美術の見え方が変わり、その絵をどう照らすかという照明側の要求も変わる。",teacher:"『舞台美術が変わる→照明への要求が変わる』。照明史だけを単独で見ない理由がここにあるよ。"}
 };
 const $=id=>document.getElementById(id),app=$("app"),timeline=$("timeline");
-function select(id,btn){const d=items[id];if(!d)return;document.querySelectorAll(".event").forEach(x=>x.classList.remove("active"));if(btn)btn.classList.add("active");$("detailEra").textContent=d.era;$("detailTitle").textContent=d.title;$("detailSummary").textContent=d.summary;$("articleText").textContent=d.summary;$("teacher").textContent=d.teacher;app.classList.add("detail-open");$("closeDetail").hidden=false;if(btn){const target=btn.offsetLeft+btn.offsetWidth/2-timeline.clientWidth/2;timeline.scrollTo({left:Math.max(0,target),behavior:"smooth"})}}
+function select(id,btn){const d=items[id];if(!d)return;document.querySelectorAll(".event").forEach(x=>x.classList.remove("active"));if(btn)btn.classList.add("active");$("detailEra").textContent=d.era;$("detailTitle").textContent=d.title;$("detailSummary").textContent=d.summary;$("articleText").textContent=d.summary;$("teacher").textContent=d.teacher;$("closeDetail").hidden=false;if(btn){const target=btn.offsetLeft+btn.offsetWidth/2-timeline.clientWidth/2;timeline.scrollTo({left:Math.max(0,target),behavior:"smooth"})}}
 document.querySelectorAll(".event").forEach(btn=>btn.addEventListener("click",()=>select(btn.dataset.id,btn)));
 document.querySelectorAll(".era-jumps button").forEach(btn=>btn.addEventListener("click",()=>timeline.scrollTo({left:Number(btn.dataset.x),behavior:"smooth"})));
 $("closeDetail").addEventListener("click",()=>{app.classList.remove("detail-open");$("closeDetail").hidden=true;document.querySelectorAll(".event").forEach(x=>x.classList.remove("active"))});
+
+const splitter=$("splitter");
+let splitDragging=false;
+function setDetailHeight(clientY){
+ const rect=app.getBoundingClientRect();
+ const footerH=28,titleH=54,splitH=14,gapAllowance=32;
+ const minDetail=190;
+ const minTimeline=250;
+ const available=rect.height-titleH-footerH-splitH-gapAllowance;
+ const desired=rect.bottom-footerH-clientY;
+ const maxDetail=Math.max(minDetail,available-minTimeline);
+ const h=Math.max(minDetail,Math.min(maxDetail,desired));
+ app.style.setProperty("--detail-h",Math.round(h)+"px");
+}
+splitter.addEventListener("pointerdown",e=>{splitDragging=true;splitter.classList.add("dragging");splitter.setPointerCapture(e.pointerId);e.preventDefault()});
+splitter.addEventListener("pointermove",e=>{if(splitDragging)setDetailHeight(e.clientY)});
+splitter.addEventListener("pointerup",e=>{splitDragging=false;splitter.classList.remove("dragging");try{splitter.releasePointerCapture(e.pointerId)}catch(_){}});
+splitter.addEventListener("pointercancel",()=>{splitDragging=false;splitter.classList.remove("dragging")});
+
 document.querySelectorAll(".next-ui-category-tab").forEach(button=>button.addEventListener("click",e=>{e.stopPropagation();const menu=button.closest(".next-ui-category-menu");document.querySelectorAll(".next-ui-category-menu").forEach(x=>{if(x!==menu)x.classList.remove("open")});menu.classList.toggle("open")}));
 document.addEventListener("click",()=>document.querySelectorAll(".next-ui-category-menu").forEach(x=>x.classList.remove("open")));
 </script>
