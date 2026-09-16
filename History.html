@@ -163,6 +163,64 @@ body{background:#171513;color:#f4efe7}
 }
 .timeline-canvas{height:560px!important;min-height:560px!important}
 
+
+/* LOCK: axis stays visible on vertical scroll; axis and rows sync horizontally */
+.timeline-panel{
+  display:grid!important;
+  grid-template-columns:120px minmax(0,1fr)!important;
+  grid-template-rows:58px minmax(0,1fr)!important;
+  overflow:hidden!important;
+}
+.timeline-corner{
+  grid-column:1;grid-row:1;
+  background:#211d19;
+  border-right:1px solid #665b4e;
+  border-bottom:1px solid #776957;
+  z-index:20;
+}
+.timeline-header-scroll{
+  grid-column:2;grid-row:1;
+  overflow:hidden;
+  min-width:0;
+  background:#201c18;
+}
+.timeline-header-canvas{width:2700px;min-width:2700px;height:58px}
+.timeline-header-canvas .years{height:58px}
+.timeline-body{
+  grid-column:1 / 3;grid-row:2;
+  display:grid;
+  grid-template-columns:120px minmax(0,1fr);
+  min-height:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+}
+.timeline-body .lane-labels{
+  grid-column:1;
+  position:sticky!important;
+  left:0!important;
+  top:auto!important;
+  padding-top:0!important;
+  height:354px!important;
+  min-height:354px!important;
+  z-index:12!important;
+}
+.timeline-body .timeline-scroll{
+  grid-column:2;
+  height:354px!important;
+  min-height:354px!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  touch-action:pan-x;
+}
+.timeline-body .timeline-canvas{
+  height:354px!important;
+  min-height:354px!important;
+}
+.timeline-header-canvas .year::after{
+  height:500px;
+}
+
 </style>
 </head>
 <body>
@@ -177,9 +235,13 @@ body{background:#171513;color:#f4efe7}
 </div></header>
 <main class="history-app" id="app">
 <section class="history-title"><div><h1>舞台照明史</h1><p>光源だけではなく、劇場・色・制御・操作が「なぜ変わったか」をたどる。</p></div><div class="era-jumps"><button data-x="0">古代</button><button data-x="580">中世</button><button data-x="1080">ルネサンス</button><button data-x="1700">江戸</button><button data-x="2180">19世紀</button></div></section>
-<section class="timeline-panel"><div class="lane-labels"><div class="lane-label theatre">劇場・舞台環境</div><div class="lane-label source">光源</div><div class="lane-label color">色</div><div class="lane-label optics">光学</div><div class="lane-label fixture">灯具</div><div class="lane-label output">出力制御</div><div class="lane-label operation">操作・記憶</div><div class="lane-label signal">信号・規格</div><div class="lane-label network">Network</div><div class="lane-label media">伝送媒体</div></div>
-<div class="timeline-scroll" id="timeline"><div class="timeline-canvas">
-<div class="years"><div class="year-scale"><span class="year" style="left:40px">BC500</span><span class="year" style="left:130px">BC400</span><span class="year" style="left:220px">BC300</span><span class="year" style="left:310px">BC200</span><span class="year" style="left:400px">BC100</span><span class="year" style="left:490px">0</span><span class="year" style="left:580px">100</span><span class="year" style="left:670px">200</span><span class="year" style="left:760px">300</span><span class="year" style="left:850px">400</span><span class="year" style="left:940px">500</span><span class="year" style="left:1030px">600</span><span class="year" style="left:1120px">700</span><span class="year" style="left:1210px">800</span><span class="year" style="left:1300px">900</span><span class="year" style="left:1390px">1000</span><span class="year" style="left:1480px">1100</span><span class="year" style="left:1570px">1200</span><span class="year" style="left:1660px">1300</span><span class="year" style="left:1750px">1400</span><span class="year" style="left:1840px">1500</span><span class="year" style="left:1930px">1600</span><span class="year" style="left:2020px">1700</span><span class="year" style="left:2180px">1800</span><span class="year" style="left:2440px">1900</span><span class="year" style="left:2660px">2000</span></div><div class="era-scale"><div class="era-band" style="width:1390px">古代〜中世以前</div><div class="era-band" style="width:450px">中世</div><div class="era-band" style="width:340px">近世</div><div class="era-band" style="width:260px">近代</div><div class="era-band" style="width:260px">現代</div></div></div><div class="lane theatre"><button class="event eu" data-id="sun" style="left:35px;width:150px"><strong>紀元前5世紀頃</strong>古代ギリシャ野外劇場</button><button class="event eu" data-id="church" style="left:640px;width:140px"><strong>中世</strong>教会・典礼劇</button><button class="event jp" data-id="noh" style="left:1010px;width:135px"><strong>14〜16世紀</strong>能舞台</button><button class="event eu" data-id="renaissance" style="left:1190px;width:155px"><strong>16世紀</strong>宮廷・屋内上演</button><button class="event eu" data-id="globe" style="left:1390px;width:150px"><strong>1599〜</strong>Globe / 屋外劇場</button><button class="event eu" data-id="krumlov" style="left:1580px;width:165px"><strong>1613〜1766</strong>Český Krumlov</button><button class="event jp" data-id="edo" style="left:1790px;width:150px"><strong>江戸</strong>全蓋式の芝居小屋</button><button class="event jp" data-id="meiji" style="left:2240px;width:145px"><strong>1872〜</strong>文明開化</button></div>
+<section class="timeline-panel">
+<div class="timeline-corner" aria-hidden="true"></div>
+<div class="timeline-header-scroll" id="timelineHeader"><div class="timeline-header-canvas">
+<div class="years"><div class="lane-label theatre">劇場・舞台環境</div><div class="lane-label source">光源</div><div class="lane-label color">色</div><div class="lane-label optics">光学</div><div class="lane-label fixture">灯具</div><div class="lane-label output">出力制御</div><div class="lane-label operation">操作・記憶</div><div class="lane-label signal">信号・規格</div><div class="lane-label network">Network</div><div class="lane-label media">伝送媒体</div></div></div></div>
+<div class="timeline-body" id="timelineBody">
+<div class="lane-labels"><div class="year-scale"><span class="year" style="left:40px">BC500</span><span class="year" style="left:130px">BC400</span><span class="year" style="left:220px">BC300</span><span class="year" style="left:310px">BC200</span><span class="year" style="left:400px">BC100</span><span class="year" style="left:490px">0</span><span class="year" style="left:580px">100</span><span class="year" style="left:670px">200</span><span class="year" style="left:760px">300</span><span class="year" style="left:850px">400</span><span class="year" style="left:940px">500</span><span class="year" style="left:1030px">600</span><span class="year" style="left:1120px">700</span><span class="year" style="left:1210px">800</span><span class="year" style="left:1300px">900</span><span class="year" style="left:1390px">1000</span><span class="year" style="left:1480px">1100</span><span class="year" style="left:1570px">1200</span><span class="year" style="left:1660px">1300</span><span class="year" style="left:1750px">1400</span><span class="year" style="left:1840px">1500</span><span class="year" style="left:1930px">1600</span><span class="year" style="left:2020px">1700</span><span class="year" style="left:2180px">1800</span><span class="year" style="left:2440px">1900</span><span class="year" style="left:2660px">2000</span></div><div class="era-scale"><div class="era-band" style="width:1390px">古代〜中世以前</div><div class="era-band" style="width:450px">中世</div><div class="era-band" style="width:340px">近世</div><div class="era-band" style="width:260px">近代</div><div class="era-band" style="width:260px">現代</div></div></div>
+<div class="timeline-scroll" id="timeline"><div class="timeline-canvas"><div class="lane theatre"><button class="event eu" data-id="sun" style="left:35px;width:150px"><strong>紀元前5世紀頃</strong>古代ギリシャ野外劇場</button><button class="event eu" data-id="church" style="left:640px;width:140px"><strong>中世</strong>教会・典礼劇</button><button class="event jp" data-id="noh" style="left:1010px;width:135px"><strong>14〜16世紀</strong>能舞台</button><button class="event eu" data-id="renaissance" style="left:1190px;width:155px"><strong>16世紀</strong>宮廷・屋内上演</button><button class="event eu" data-id="globe" style="left:1390px;width:150px"><strong>1599〜</strong>Globe / 屋外劇場</button><button class="event eu" data-id="krumlov" style="left:1580px;width:165px"><strong>1613〜1766</strong>Český Krumlov</button><button class="event jp" data-id="edo" style="left:1790px;width:150px"><strong>江戸</strong>全蓋式の芝居小屋</button><button class="event jp" data-id="meiji" style="left:2240px;width:145px"><strong>1872〜</strong>文明開化</button></div>
 <div class="lane source"><button class="event tech" data-id="sun" style="left:55px;width:110px"><strong>自然光</strong>太陽・天空光</button><button class="event pending" data-id="fire" style="left:410px;width:120px"><strong>古代〜</strong>火・松明・かがり火</button><button class="event tech" data-id="candle" style="left:1120px;width:145px"><strong>中世〜近世</strong>油灯・ろうそく</button><button class="event tech" data-id="gas" style="left:2130px;width:120px"><strong>19世紀</strong>ガス灯</button><button class="event tech" data-id="lime" style="left:2280px;width:115px"><strong>1830年代〜</strong>Limelight</button><button class="event tech" data-id="arc" style="left:2420px;width:115px"><strong>19世紀</strong>Carbon Arc</button><button class="event tech" data-id="bulb" style="left:2550px;width:120px"><strong>1879〜</strong>白熱電球</button></div>
 <div class="lane color"><button class="event eu" data-id="color" style="left:1220px;width:145px"><strong>16世紀〜</strong>色ガラス・色液体</button></div>
 <div class="lane optics"><button class="event eu" data-id="perspective" style="left:1200px;width:155px"><strong>ルネサンス</strong>遠近法・反射の利用</button></div>
@@ -187,7 +249,7 @@ body{background:#171513;color:#f4efe7}
 <div class="lane output"><button class="event eu" data-id="renaissance" style="left:1260px;width:145px"><strong>16世紀</strong>遮光・消灯</button><button class="event jp" data-id="edo" style="left:1780px;width:165px"><strong>江戸</strong>明障子・雨戸で調光</button><button class="event tech" data-id="gas" style="left:2160px;width:150px"><strong>19世紀</strong>Gas Table / Plate</button></div>
 <div class="lane operation"><button class="event eu" data-id="candle" style="left:1150px;width:135px"><strong>ろうそく期</strong>芯切り・保守</button><button class="event jp" data-id="edo" style="left:1830px;width:115px"><strong>江戸</strong>窓番</button></div>
 <div class="lane signal"></div><div class="lane network"></div><div class="lane media"></div>
-</div></div></section>
+</div></div></div></section>
 <section class="detail-panel"><div class="detail-main"><div class="detail-head"><div><div class="detail-era" id="detailEra">紀元前5世紀頃</div><h2 id="detailTitle">太陽光｜最初の舞台照明</h2></div><button class="close-detail" id="closeDetail" hidden>俯瞰へ戻る</button></div><p class="detail-summary" id="detailSummary">古代ギリシャの野外劇場では、太陽・天空光など自然環境そのものが舞台の光を決めていた。</p><div class="history-article" id="historyArticle"><p id="articleText">古代ギリシャの野外劇場では、太陽・天空光など自然環境そのものが舞台の光を決めていた。</p></div><div class="media-strip" id="mediaStrip">
 <div class="media-card" data-kind="photo">写真・史料</div>
 <div class="media-card" data-kind="diagram">図解</div>
@@ -219,6 +281,16 @@ color:{era:"16世紀〜",title:"色を付ける｜色ガラス・色液体",summ
 perspective:{era:"ルネサンス",title:"遠近法と舞台美術",summary:"古典研究と新しい線遠近法が舞台美術へ結びつき、奥行きを絵として構成する舞台が発達する。",what:"透視図法を舞台背景や建築的舞台美術へ応用する。",why:"限られた舞台奥行きで、都市や遠景を大きく見せるため。",change:"舞台美術の見え方が変わり、その絵をどう照らすかという照明側の要求も変わる。",teacher:"『舞台美術が変わる→照明への要求が変わる』。照明史だけを単独で見ない理由がここにあるよ。"}
 };
 const $=id=>document.getElementById(id),app=$("app"),timeline=$("timeline");
+
+const timelineHeader=$("timelineHeader");
+let syncingTimeline=false;
+timeline.addEventListener("scroll",()=>{
+ if(syncingTimeline)return;
+ syncingTimeline=true;
+ timelineHeader.scrollLeft=timeline.scrollLeft;
+ requestAnimationFrame(()=>syncingTimeline=false);
+},{passive:true});
+
 function select(id,btn){const d=items[id];if(!d)return;document.querySelectorAll(".event").forEach(x=>x.classList.remove("active"));if(btn)btn.classList.add("active");$("detailEra").textContent=d.era;$("detailTitle").textContent=d.title;$("detailSummary").textContent=d.summary;$("articleText").textContent=d.summary;$("teacher").textContent=d.teacher;$("closeDetail").hidden=false;if(btn){const target=btn.offsetLeft+btn.offsetWidth/2-timeline.clientWidth/2;timeline.scrollTo({left:Math.max(0,target),behavior:"smooth"})}}
 document.querySelectorAll(".event").forEach(btn=>btn.addEventListener("click",()=>select(btn.dataset.id,btn)));
 document.querySelectorAll(".era-jumps button").forEach(btn=>btn.addEventListener("click",()=>timeline.scrollTo({left:Number(btn.dataset.x),behavior:"smooth"})));
