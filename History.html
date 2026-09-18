@@ -28,7 +28,7 @@ button{font:inherit}
   height:calc(100dvh - 60px);
   min-height:0;
   display:grid;
-  grid-template-rows:minmax(0,1fr) 250px 28px;
+  grid-template-rows:minmax(0,1fr) 0 28px;
   gap:8px;
   padding:10px 16px 0;
   background:
@@ -200,13 +200,20 @@ button{font:inherit}
 .empty-era strong{display:block;margin-bottom:6px;color:#d8dde1;font-size:18px}
 .detail-panel{
   min-height:0;
-  display:grid;
+  display:none;
   grid-template-columns:minmax(0,1fr) 330px;
   overflow:hidden;
   border:1px solid #30353a;
   border-radius:12px;
   background:#121416;
 }
+.history-app.detail-open{
+  grid-template-rows:minmax(0,1fr) 250px 28px;
+}
+.history-app.detail-open .detail-panel{
+  display:grid;
+}
+
 .detail-main{
   min-height:0;overflow-y:auto;overflow-x:hidden;
   padding:16px 22px 28px;
@@ -421,7 +428,7 @@ const items={
 };
 
 let currentPeriod=0;
-let selectedId="sun";
+let selectedId=null;
 const $=id=>document.getElementById(id);
 
 function renderPeriodNav(){
@@ -474,6 +481,7 @@ function selectItem(id){
   const d=items[id];
   if(!d)return;
   selectedId=id;
+  $("historyApp").classList.add("detail-open");
   document.querySelectorAll(".history-card").forEach(card=>card.classList.toggle("active",card.dataset.id===id));
   $("detailKicker").textContent=d.categoryLabel+"｜"+d.date+"｜"+d.region;
   $("detailTitle").textContent=d.displayTitle;
@@ -485,10 +493,10 @@ function selectItem(id){
 
 function setPeriod(index){
   currentPeriod=Math.max(0,Math.min(periods.length-1,index));
+  selectedId=null;
+  $("historyApp").classList.remove("detail-open");
   renderPeriodNav();
   renderField();
-  const visible=Object.entries(items).find(([,item])=>item.period===periods[currentPeriod].id);
-  if(visible)selectItem(visible[0]);
 }
 
 $("prevPeriod").addEventListener("click",()=>setPeriod(currentPeriod-1));
@@ -525,7 +533,6 @@ document.addEventListener("click",()=>document.querySelectorAll(".next-ui-catego
 
 renderPeriodNav();
 renderField();
-selectItem("sun");
 </script>
 </body>
 </html>
