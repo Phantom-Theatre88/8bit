@@ -65,16 +65,13 @@ button{font:inherit}
 }
 .stage-title h1{
   margin:0;
-  font-family:Georgia,"Yu Mincho","Hiragino Mincho ProN",serif;
-  font-size:31px;
-  letter-spacing:.04em;
-}
-.stage-title p{
-  margin:6px 0 0;
-  color:#b7bec4;
+  color:#b9c0c5;
   font-size:12px;
-  line-height:1.45;
+  font-weight:800;
+  letter-spacing:.08em;
+  line-height:1.2;
 }
+.stage-title p{display:none}
 .period-rail{
   display:grid;
   grid-template-columns:42px minmax(0,1fr) 42px;
@@ -109,24 +106,17 @@ button{font:inherit}
   position:absolute;z-index:1;left:20px;right:20px;top:88px;bottom:20px;
 }
 .era-copy{
-  position:absolute;left:6px;top:6px;max-width:520px;pointer-events:none;
+  position:absolute;left:6px;top:6px;max-width:620px;pointer-events:none;
 }
-.era-kicker{
-  color:#c99a57;font-size:10px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;
-}
-.era-title{
-  margin:4px 0 0;
-  font-family:Georgia,"Yu Mincho","Hiragino Mincho ProN",serif;
-  font-size:34px;color:#efe2cf;
-}
+.era-kicker,.era-title{display:none}
 .era-summary{
-  margin:6px 0 0;color:#9fa7ae;font-size:12.5px;line-height:1.5;
+  margin:0;color:#8f989f;font-size:11px;line-height:1.45;
 }
 .history-field{
   position:absolute;inset:0;
   overflow:auto;
   -webkit-overflow-scrolling:touch;
-  padding:112px 18px 18px;
+  padding:56px 18px 18px;
 }
 .card-field{
   min-height:100%;
@@ -333,8 +323,7 @@ button{font:inherit}
   <section class="history-stage" aria-label="照明史エクスプローラー">
     <div class="stage-top">
       <div class="stage-title">
-        <h1>舞台照明史</h1>
-        <p>時代を移動しながら、劇場・光・技術・作品のつながりを触ってたどる。</p>
+        <h1>舞台照明史 / HISTORY</h1>
       </div>
 
       <div class="period-rail" aria-label="時代を選ぶ">
@@ -346,8 +335,6 @@ button{font:inherit}
 
     <div class="era-layer">
       <div class="era-copy">
-        <div class="era-kicker">HISTORY FIELD</div>
-        <h2 class="era-title" id="eraTitle">古代</h2>
         <p class="era-summary" id="eraSummary">自然光そのものが、舞台の明るさと時間の変化を決めていた。</p>
       </div>
 
@@ -446,7 +433,6 @@ function renderPeriodNav(){
 
 function renderField(){
   const p=periods[currentPeriod];
-  $("eraTitle").textContent=p.title;
   $("eraSummary").textContent=p.summary;
 
   const grid=$("cardField");
