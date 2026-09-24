@@ -8,8 +8,9 @@
 
 ## 02_orange_roman_theatre.jpg
 - 対象: Roman Theatre of Orange（古代ローマ劇場）
+- Author: Benh LIEU SONG
+- License: CC BY-SA 2.0
 - Source: https://commons.wikimedia.org/wiki/File:Roman_Theatre_in_Orange_2008.jpg
-- 利用時は上記Commonsページ記載の作者・ライセンス表記を画面クレジットへ反映すること。
 
 ## 03_shakespeares_globe.jpg
 - 対象: Shakespeare's Globe（現代の復元劇場）
@@ -27,3 +28,4 @@
 ## 運用
 - History画面に実装する際は、各写真の出典・作者・ライセンス条件を表示または参照可能にする。
 - トリミング・加工を行った場合は、ライセンス条件に応じて改変の明示を行う。
+- `01_epidaurus_greek_theatre_web.webp` と `02_orange_roman_theatre_web.webp` は、Web表示用に元画像を縮小・WebP変換した派生ファイル。

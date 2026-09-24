@@ -173,6 +173,9 @@ button{font:inherit}
 .history-card.large{grid-column:2 / span 4;grid-row:3 / span 2;transform:translateY(-4px)}
 .history-card.medium{grid-column:span 3;grid-row:span 2}
 .history-card.small{grid-column:span 3;grid-row:span 1}
+.history-card[data-id="sun"]{grid-column:2 / span 4;grid-row:2 / span 2}
+.history-card[data-id="greek-theatre"]{grid-column:7 / span 4;grid-row:1 / span 2}
+.history-card[data-id="roman-theatre"]{grid-column:8 / span 4;grid-row:4 / span 2}
 .card-copy{min-width:0;align-self:center}
 .card-visual{
   width:28px;height:28px;border-radius:50%;
@@ -292,6 +295,7 @@ button{font:inherit}
 }
 .media-card:hover{border-color:#d99b50}
 .source-note{margin-top:9px;color:#7f888f;font-size:10px;line-height:1.45}
+.source-note a{color:#aeb8bf;text-underline-offset:2px}
 .teacher-pane{
   min-height:0;height:100%;
   display:grid;
@@ -485,13 +489,57 @@ const items={
     categoryLabel:"光源 / 劇場・舞台環境",
     size:"large",
     icon:"☀",
-    image:"assets/history/sun_ai_reference.jpg",
-    imageAlt:"太陽光を表現したAI生成イメージ",
+    image:"assets/history/sun_blazing_generated.webp",
+    imageAlt:"青空に白く輝く太陽と放射状に広がる光条",
     teaser:"野外劇場では、自然環境そのものが舞台の光だった。",
     summary:"古代ギリシャの野外劇場では、太陽・天空光など自然環境そのものが舞台の光を決めていた。",
     body:"紀元前5世紀頃の古代ギリシャ劇場では、上演は屋外で行われ、舞台の光は太陽と天空光に依存していた。照明装置を操作する以前の段階では、時間帯や天候そのものが舞台の見え方を変える条件だった。",
     teacher:"悲劇などは上演順によって夕方になり、最後は日没の頃まで上演された、という話もあるよ。自然光そのものが舞台の変化になっていたんだね。",
     source:"基礎資料：国立科学博物館 2024「舞台照明用調光装置の系統化調査」"
+  },
+  "greek-theatre":{
+    period:"ancient",
+    title:"ギリシャ劇場",
+    displayTitle:"ギリシャ劇場｜自然地形を生かした上演空間",
+    date:"紀元前4世紀頃",
+    region:"古代ギリシャ",
+    category:"theatre",
+    categoryLabel:"劇場・舞台環境",
+    size:"medium",
+    icon:"♟",
+    image:"assets/history/sunlight/01_epidaurus_greek_theatre_web.webp",
+    imageAlt:"山の斜面に半円形の客席が広がるエピダウロス古代劇場",
+    teaser:"自然の斜面を利用し、客席と円形の演技空間を構成した。",
+    summary:"エピダウロス劇場は、山の自然な斜面に客席を築き、中央の円形オルケストラと舞台建物を組み合わせた野外劇場だった。",
+    body:"エピダウロス劇場は、アスクレピオス聖域の南端にあるキュノルティオン山の自然な斜面へ、現地の石を使って建てられた。現在の研究では、客席は紀元前4世紀末に一体として造られた可能性が高い。音楽・演劇・歌唱の競技や詩の朗誦が行われ、客席・円形のオルケストラ・舞台建物という古代劇場の基本構成を確認できる。屋根で閉じられていないため、舞台の見え方は太陽や天空光などの自然条件に左右された。",
+    teacher:"客席は山の斜面をそのまま生かしているんだね。照明設備がない時代は、劇場の開かれ方そのものが光の条件だったんだよ。",
+    source:"基礎資料：UNESCO『Ancient Greek Theatres』／『Sanctuary of Asklepios at Epidaurus』。写真：Carole Raddato / CC BY-SA 2.0",
+    sourceLinks:[
+      {label:"資料",url:"https://whc.unesco.org/en/tentativelists/5869/"},
+      {label:"写真・ライセンス",url:"https://commons.wikimedia.org/wiki/File:The_great_theater_of_Epidaurus,_designed_by_Polykleitos_the_Younger_in_the_4th_century_BC,_Sanctuary_of_Asklepeios_at_Epidaurus,_Greece_(14015010416).jpg"}
+    ]
+  },
+  "roman-theatre":{
+    period:"ancient",
+    title:"ローマ劇場",
+    displayTitle:"ローマ劇場｜舞台壁がつくる建築的な背景",
+    date:"紀元1世紀頃",
+    region:"古代ローマ / ガリア",
+    category:"theatre",
+    categoryLabel:"劇場・舞台環境",
+    size:"medium",
+    icon:"♟",
+    image:"assets/history/sunlight/02_orange_roman_theatre_web.webp",
+    imageAlt:"半円形の客席から高い舞台壁を望むオランジュ古代劇場",
+    teaser:"半円形客席と高い舞台壁が、舞台空間を建築で囲った。",
+    summary:"オランジュ古代劇場には、半円形客席、側面通路、高く保存された舞台壁というローマ劇場の構成が残っている。",
+    body:"フランス南部のオランジュ古代劇場は、紀元1世紀初頭に建てられたローマ劇場で、半円形の客席、側面の通路、舞台建物を備えている。特に長さ103m・高さ37mの舞台側ファサードが残り、屋外でありながら舞台背後を大きな建築面が構成していたことを確認できる。自然光を使う上演空間でも、周囲の建築によって舞台の背景や光の入り方は変化した。",
+    teacher:"同じ野外劇場でも、オランジュでは高い舞台壁が残っているよ。自然光だけでなく、建物がつくる明暗にも注目してみよう。",
+    source:"基礎資料：UNESCO『Roman Theatre and its Surroundings and the Triumphal Arch of Orange』。写真：Benh LIEU SONG / CC BY-SA 2.0",
+    sourceLinks:[
+      {label:"資料",url:"https://whc.unesco.org/en/list/163/"},
+      {label:"写真・ライセンス",url:"https://commons.wikimedia.org/wiki/File:Roman_Theatre_in_Orange_2008.jpg"}
+    ]
   }
 };
 
@@ -583,7 +631,17 @@ function selectItem(id){
   $("detailSummary").textContent=d.summary;
   $("detailBody").textContent=d.body;
   $("teacherSpeech").textContent=d.teacher;
-  $("sourceNote").textContent=d.source;
+  const sourceNote=$("sourceNote");
+  sourceNote.textContent=d.source;
+  (d.sourceLinks||[]).forEach(link=>{
+    sourceNote.appendChild(document.createTextNode("｜"));
+    const a=document.createElement("a");
+    a.href=link.url;
+    a.target="_blank";
+    a.rel="noopener noreferrer";
+    a.textContent=link.label;
+    sourceNote.appendChild(a);
+  });
 }
 
 function closeDetail(){
@@ -621,7 +679,10 @@ const modal=$("mediaModal");
 document.querySelectorAll(".media-card").forEach(card=>card.addEventListener("click",()=>{
   const names={photo:"写真・史料",diagram:"図解",video:"動画"};
   $("mediaModalTitle").textContent=names[card.dataset.kind]||"資料";
-  $("mediaModalBody").textContent="最初の項目『太陽光』に紐づく実物写真・図解・動画は、次の作り込み工程で確認済み資料だけを追加します。";
+  const activeItem=items[selectedId];
+  $("mediaModalBody").textContent=activeItem
+    ? "「"+activeItem.title+"」に紐づく確認済み資料を、次の作り込み工程で追加します。"
+    : "確認済み資料を、次の作り込み工程で追加します。";
   modal.classList.add("open");
   modal.setAttribute("aria-hidden","false");
 }));
