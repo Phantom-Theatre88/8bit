@@ -190,6 +190,7 @@ button{font:inherit}
 .history-card[data-category="theatre"]{--cat:var(--history-theatre)}
 .history-card[data-category="culture"]{--cat:var(--history-culture)}
 .history-card.large{grid-column:2 / span 4;grid-row:3 / span 2;transform:translateY(-4px)}
+.history-card[data-id="greekTheatre"]{grid-column:7 / span 4;grid-row:3 / span 2;transform:translateY(10px)}
 .history-card.medium{grid-column:span 3;grid-row:span 2}
 .history-card.small{grid-column:span 3;grid-row:span 1}
 .card-copy{min-width:0;align-self:center}
@@ -371,6 +372,7 @@ button{font:inherit}
   .detail-panel{grid-template-columns:minmax(0,1fr) 285px}
   .detail-layout{grid-template-columns:190px minmax(0,1fr)}
   .history-card.large{grid-column:2 / span 5}
+  .history-card[data-id="greekTheatre"]{grid-column:7 / span 5}
 }
 @media(max-width:760px){
   body{overflow:auto}
@@ -381,6 +383,7 @@ button{font:inherit}
   .history-field{padding-top:130px}
   .card-field{grid-template-columns:1fr;grid-template-rows:auto}
   .history-card.large,.history-card.medium,.history-card.small{grid-column:1;grid-row:auto;transform:none}
+  .history-card[data-id="greekTheatre"]{grid-column:1;grid-row:auto;transform:none}
   .detail-panel{grid-template-columns:1fr}
   .detail-layout{grid-template-columns:1fr}
   .detail-hero{max-height:220px}
@@ -512,6 +515,24 @@ const items={
     body:"紀元前5世紀頃の古代ギリシャ劇場では、上演は屋外で行われ、舞台の光は太陽と天空光に依存していた。照明装置を操作する以前の段階では、時間帯や天候そのものが舞台の見え方を変える条件だった。",
     teacher:"悲劇などは上演順によって夕方になり、最後は日没の頃まで上演された、という話もあるよ。自然光そのものが舞台の変化になっていたんだね。",
     source:"基礎資料：国立科学博物館 2024「舞台照明用調光装置の系統化調査」"
+  },
+  greekTheatre:{
+    period:"ancient",
+    title:"古代ギリシャ劇場",
+    displayTitle:"古代ギリシャ劇場｜劇場を巡る入口",
+    date:"紀元前5世紀頃〜",
+    region:"古代ギリシャ",
+    category:"theatre",
+    categoryLabel:"劇場・舞台環境",
+    size:"medium",
+    icon:"🏛",
+    image:"assets/history/sunlight/01_epidaurus_greek_theatre.jpg",
+    imageAlt:"古代ギリシャ劇場の代表例として見るエピダウロス劇場",
+    teaser:"一つの劇場ではなく、確認できた古代劇場を地域と年代から巡る。",
+    summary:"古代ギリシャの劇場を、一つの代表例だけでなく、複数の遺構・地域・年代から見ていく入口。",
+    body:"テアトロン、オルケストラ、スケネなどの劇場構造を、確認できた劇場ごとに比較する。まずはアテネ周辺から、遺構が確認できる劇場、碑文・文献で確認できる劇場活動、調査中の地点を区別しながら巡っていく。代表画像のエピダウロス劇場は紀元前4世紀の後代の代表例であり、紀元前5世紀の劇場そのものではない。",
+    teacher:"一つの劇場を『古代ギリシャ劇場の完成形』として決めつけず、地域・年代・改築の違いを見比べながら進もう。",
+    source:"調査台帳：docs/ancient_greek_theatres_master.md｜UNESCO Ancient Greek Theatres / Attic Inscriptions Online / Paga 2010 / Takeuchi & Wilson 2023"
   }
 };
 
