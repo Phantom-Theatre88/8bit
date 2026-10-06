@@ -304,14 +304,6 @@ button{font:inherit}
 .detail-section{margin-top:12px;padding-top:10px;border-top:1px solid #30353a}
 .detail-section h3{margin:0 0 5px;color:#e0b06d;font-size:14px}
 .detail-section p{margin:0;color:#afb6bc;font-size:17px;line-height:1.62}
-.media-strip{display:flex;gap:8px;overflow-x:auto;margin-top:12px;padding-bottom:3px}
-.media-card{
-  flex:0 0 136px;height:62px;
-  border:1px solid #3e4449;border-radius:9px;
-  background:linear-gradient(180deg,#1d2124,#15181a);
-  color:#dce1e4;font-size:14px;font-weight:900;cursor:pointer;
-}
-.media-card:hover{border-color:#d99b50}
 .source-note{margin-top:9px;color:#7f888f;font-size:12px;line-height:1.45}
 .teacher-pane{
   min-height:0;height:100%;
@@ -349,22 +341,6 @@ button{font:inherit}
   padding:0 7px;color:#737c83;font-size:12px;
 }
 .footer a{color:#aeb5ba;text-decoration:none}
-.media-modal{
-  position:fixed;inset:0;z-index:2000;display:none;
-  align-items:center;justify-content:center;
-  background:rgba(0,0,0,.88);padding:28px;
-}
-.media-modal.open{display:flex}
-.media-modal-inner{
-  width:min(900px,92vw);max-height:84vh;overflow:auto;
-  position:relative;padding:24px;
-  border:1px solid #444b50;border-radius:12px;
-  background:#171a1d;color:#eef1f2;
-}
-.media-modal-close{
-  position:absolute;right:12px;top:9px;
-  border:0;background:transparent;color:#fff;font-size:28px;cursor:pointer;
-}
 @media(max-width:1050px){
   .history-app{padding-left:8px;padding-right:8px}
   .stage-top{grid-template-columns:1fr;gap:10px;align-items:start}
@@ -450,12 +426,6 @@ button{font:inherit}
             <h3>解説</h3>
             <p id="detailBody">紀元前5世紀頃の古代ギリシャ劇場では、上演は屋外で行われ、舞台の光は太陽と天空光に依存していた。照明装置を操作する以前の段階では、時間帯や天候そのものが舞台の見え方を変える条件だった。</p>
           </div>
-
-          <div class="media-strip">
-            <button class="media-card" type="button" data-kind="photo">写真・史料</button>
-            <button class="media-card" type="button" data-kind="diagram">図解</button>
-            <button class="media-card" type="button" data-kind="video">動画</button>
-          </div>
           <div class="source-note" id="sourceNote">基礎資料：国立科学博物館 2024「舞台照明用調光装置の系統化調査」</div>
         </div>
       </div>
@@ -472,14 +442,6 @@ button{font:inherit}
     <a href="index.html">⌂ 教材トップ</a>
     <span>History v2｜時間軸から時代を選び、カードで詳しく見る</span>
   </footer>
-
-  <div class="media-modal" id="mediaModal" aria-hidden="true">
-    <div class="media-modal-inner">
-      <button class="media-modal-close" id="mediaModalClose" type="button" aria-label="閉じる">×</button>
-      <h2 id="mediaModalTitle">資料</h2>
-      <p id="mediaModalBody">この項目の確認済み資料をここへ表示します。</p>
-    </div>
-  </div>
 </main>
 
 <script>
@@ -662,17 +624,6 @@ $("historyField").addEventListener("touchend",e=>{
   if(Math.abs(dx)>70)setPeriod(currentPeriod+(dx<0?1:-1));
 },{passive:true});
 
-const modal=$("mediaModal");
-document.querySelectorAll(".media-card").forEach(card=>card.addEventListener("click",()=>{
-  const names={photo:"写真・史料",diagram:"図解",video:"動画"};
-  $("mediaModalTitle").textContent=names[card.dataset.kind]||"資料";
-  $("mediaModalBody").textContent="最初の項目『太陽光』に紐づく実物写真・図解・動画は、次の作り込み工程で確認済み資料だけを追加します。";
-  modal.classList.add("open");
-  modal.setAttribute("aria-hidden","false");
-}));
-$("mediaModalClose").addEventListener("click",closeModal);
-modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});
-function closeModal(){modal.classList.remove("open");modal.setAttribute("aria-hidden","true")}
 
 document.querySelectorAll(".next-ui-category-tab").forEach(button=>button.addEventListener("click",e=>{
   e.stopPropagation();
