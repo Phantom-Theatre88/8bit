@@ -24,6 +24,7 @@
 html,body{margin:0;height:100%;background:var(--history-bg)}
 body{font-family:"Hiragino Sans","Yu Gothic",Meiryo,system-ui,-apple-system,sans-serif;color:var(--history-text);overflow:hidden}
 button{font:inherit}
+.history-app{font-size:12px}
 .history-app{
   height:calc(100dvh - 60px);
   min-height:0;
@@ -81,12 +82,12 @@ button{font:inherit}
 .stage-title h1{
   margin:0;
   color:#b9c0c5;
-  font-size:12px;
+  font-size:14px;
   font-weight:800;
   letter-spacing:.08em;
   line-height:1.2;
 }
-.stage-title p{margin:5px 0 0;color:#7f8990;font-size:9px;font-weight:800;letter-spacing:.12em}
+.stage-title p{margin:5px 0 0;color:#7f8990;font-size:12px;font-weight:800;letter-spacing:.12em}
 .period-rail{
   display:grid;
   grid-template-columns:42px minmax(0,1fr) 42px;
@@ -123,8 +124,8 @@ button{font:inherit}
   background:#0f1214;box-shadow:0 0 0 3px #0f1214;
 }
 .period-range,.period-name{position:relative;z-index:1;white-space:nowrap}
-.period-range{align-self:start;color:#7f8990;font-size:8.5px;line-height:1.1}
-.period-name{align-self:end;color:#aeb5ba;font-size:12px;line-height:1.1}
+.period-range{align-self:start;color:#7f8990;font-size:12px;line-height:1.1}
+.period-name{align-self:end;color:#aeb5ba;font-size:15px;line-height:1.1}
 .period-btn.active::before{background:linear-gradient(90deg,#876b43,#e2bb78)}
 .period-btn.active::after{border-color:#f2cb86;background:var(--history-accent);box-shadow:0 0 0 3px #2b251c,0 0 14px rgba(255,154,47,.5)}
 .period-btn.active .period-range{color:#5e4a2d}
@@ -144,7 +145,7 @@ button{font:inherit}
 }
 .era-kicker,.era-title{display:none}
 .era-summary{
-  margin:0;color:#8f989f;font-size:11px;line-height:1.45;
+  margin:0;color:#8f989f;font-size:14px;line-height:1.45;
 }
 .history-field{
   position:absolute;inset:0;
@@ -214,7 +215,7 @@ button{font:inherit}
 }
 .card-meta{
   display:flex;gap:6px;align-items:center;flex-wrap:wrap;
-  color:#aab1b7;font-size:9.5px;font-weight:800;
+  color:#aab1b7;font-size:13px;font-weight:800;
 }
 .card-tag{
   padding:3px 7px;border-radius:999px;
@@ -225,9 +226,9 @@ button{font:inherit}
 .history-card h3{
   margin:6px 0 4px;
   font-family:Georgia,"Yu Mincho","Hiragino Mincho ProN",serif;
-  font-size:19px;line-height:1.15;
+  font-size:24px;line-height:1.15;
 }
-.history-card p{margin:0;color:#c0c6cb;font-size:11px;line-height:1.45}
+.history-card p{margin:0;color:#c0c6cb;font-size:15px;line-height:1.45}
 .empty-era{
   grid-column:3 / span 8;grid-row:3 / span 2;
   align-self:center;text-align:center;
@@ -244,7 +245,7 @@ button{font:inherit}
   border-radius:6px;
   background:rgba(8,10,12,.58);
   color:#d4d8db;
-  font-size:9px;
+  font-size:12px;
   line-height:1.3;
   text-decoration:none;
   opacity:.72;
@@ -293,25 +294,25 @@ button{font:inherit}
   box-shadow:0 10px 26px rgba(0,0,0,.28);
 }
 .detail-content{width:100%;min-width:0}
-.detail-kicker{color:#d9a45c;font-size:10.5px;font-weight:900;letter-spacing:.05em}
+.detail-kicker{color:#d9a45c;font-size:13px;font-weight:900;letter-spacing:.05em}
 .detail-title{
   margin:4px 0 6px;
   font-family:Georgia,"Yu Mincho","Hiragino Mincho ProN",serif;
-  font-size:24px;color:#f5f0e9;
+  font-size:30px;color:#f5f0e9;
 }
-.detail-summary{margin:0;color:#c4c9cd;font-size:13.5px;line-height:1.58}
+.detail-summary{margin:0;color:#c4c9cd;font-size:17px;line-height:1.58}
 .detail-section{margin-top:12px;padding-top:10px;border-top:1px solid #30353a}
-.detail-section h3{margin:0 0 5px;color:#e0b06d;font-size:11px}
-.detail-section p{margin:0;color:#afb6bc;font-size:12.5px;line-height:1.62}
+.detail-section h3{margin:0 0 5px;color:#e0b06d;font-size:14px}
+.detail-section p{margin:0;color:#afb6bc;font-size:17px;line-height:1.62}
 .media-strip{display:flex;gap:8px;overflow-x:auto;margin-top:12px;padding-bottom:3px}
 .media-card{
   flex:0 0 136px;height:62px;
   border:1px solid #3e4449;border-radius:9px;
   background:linear-gradient(180deg,#1d2124,#15181a);
-  color:#dce1e4;font-size:11px;font-weight:900;cursor:pointer;
+  color:#dce1e4;font-size:14px;font-weight:900;cursor:pointer;
 }
 .media-card:hover{border-color:#d99b50}
-.source-note{margin-top:9px;color:#7f888f;font-size:10px;line-height:1.45}
+.source-note{margin-top:9px;color:#7f888f;font-size:12px;line-height:1.45}
 .teacher-pane{
   min-height:0;height:100%;
   display:grid;
@@ -327,7 +328,7 @@ button{font:inherit}
   grid-column:1/-1;margin:0;
   color:#f0bd67;
   font-family:Georgia,"Yu Mincho","Hiragino Mincho ProN",serif;
-  font-size:17px;
+  font-size:20px;
 }
 .teacher-speech{
   align-self:start;
@@ -335,7 +336,7 @@ button{font:inherit}
   border-radius:8px;
   background:#f0dfaa;
   color:#1f1d19;
-  font-size:12px;line-height:1.5;font-weight:700;
+  font-size:16px;line-height:1.55;font-weight:700;
 }
 .teacher-pane img{
   grid-column:2;grid-row:2;
@@ -345,7 +346,7 @@ button{font:inherit}
 }
 .footer{
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 7px;color:#737c83;font-size:10px;
+  padding:0 7px;color:#737c83;font-size:12px;
 }
 .footer a{color:#aeb5ba;text-decoration:none}
 .media-modal{
