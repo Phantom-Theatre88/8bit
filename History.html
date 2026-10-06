@@ -522,6 +522,7 @@ const items={
     title:"古代ギリシャ劇場",
     displayTitle:"古代ギリシャ劇場｜劇場を巡る入口",
     date:"紀元前5世紀頃〜",
+    showDateInCard:false,
     region:"古代ギリシャ",
     category:"theatre",
     categoryLabel:"劇場・舞台環境",
@@ -597,7 +598,7 @@ function renderField(){
       '<div class="card-copy">'+
         '<div class="card-meta"><span class="card-visual" aria-hidden="true">'+item.icon+'</span><span class="card-tag">'+item.categoryLabel+'</span></div>'+
         '<h3>'+item.title+'</h3>'+
-        '<div class="card-meta"><span>'+item.date+'</span><span>'+item.region+'</span></div>'+
+        '<div class="card-meta">'+(item.showDateInCard===false?'':'<span>'+item.date+'</span>')+'<span>'+item.region+'</span></div>'+
         '<p>'+item.teaser+'</p>'+
       '</div>'+
       (item.image?'<img class="card-image" src="'+item.image+'" alt="">':'');
