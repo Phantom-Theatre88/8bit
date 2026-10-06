@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>古代劇場 地図モード｜StageLight</title>
+<link rel="stylesheet" href="next-ui-typography.css">
+<link rel="stylesheet" href="next-ui-page-shell.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIINfQ3yn9PoYhYK0Vv/S4+fM5g7xFJ8dQA=" crossorigin="">
+<style>
+:root{
+  --map-bg:#0c0d0e;
+  --map-panel:#151719;
+  --map-line:#34383d;
+  --map-text:#f2f3f4;
+  --map-muted:#b9c0c5;
+  --map-accent:#d7b06a;
+  --map-theatre:#6f94bd;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--map-bg)}
+body{font-family:"Hiragino Sans","Yu Gothic",Meiryo,system-ui,-apple-system,sans-serif;color:var(--map-text)}
+button,a{font:inherit}
+.map-app{
+  height:calc(100dvh - 60px);
+  min-height:0;
+  display:grid;
+  grid-template-rows:auto minmax(0,1fr) auto;
+  gap:10px;
+  padding:12px 16px 10px;
+  background:linear-gradient(180deg,#111315 0%,#090a0b 100%);
+  font-size:12px;
+}
+.map-head{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:18px;
+  padding:2px 2px 0;
+}
+.map-title h1{
+  margin:0;
+  font-family:Georgia,"Yu Mincho","Hiragino Mincho ProN",serif;
+  font-size:30px;
+  line-height:1.15;
+}
+.map-title p{margin:5px 0 0;color:var(--map-muted);font-size:14px;line-height:1.5}
+.map-back{
+  flex:0 0 auto;
+  text-decoration:none;
+  color:#16130f;
+  background:linear-gradient(180deg,#f5e8d1,#dcb879);
+  border:1px solid #e4c892;
+  border-radius:9px;
+  padding:9px 13px;
+  font-size:14px;
+  font-weight:900;
+}
+.map-shell{
+  min-height:0;
+  position:relative;
+  overflow:hidden;
+  border:1px solid #30353a;
+  border-radius:14px;
+  background:#121416;
+}
+#map{width:100%;height:100%;min-height:520px}
+.map-overlay{
+  position:absolute;
+  z-index:500;
+  left:14px;top:14px;
+  width:min(330px,38vw);
+  padding:14px;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:12px;
+  background:rgba(16,18,20,.91);
+  box-shadow:0 10px 30px rgba(0,0,0,.34);
+  backdrop-filter:blur(5px);
+}
+.map-overlay h2{margin:0 0 5px;font-size:20px}
+.map-overlay p{margin:0;color:#c8ced2;font-size:14px;line-height:1.55}
+.legend{display:grid;gap:7px;margin-top:12px}
+.legend-row{display:flex;align-items:center;gap:8px;color:#dce1e4;font-size:13px}
+.legend-dot{
+  width:15px;height:15px;border-radius:50%;
+  border:2px solid #e9edf0;background:#5f84ad;box-shadow:0 0 0 2px rgba(0,0,0,.24)
+}
+.legend-dot.record{background:#d7b06a}
+.legend-dot.research{background:#777}
+.map-foot{
+  display:flex;justify-content:space-between;gap:12px;align-items:center;
+  color:#aab1b7;font-size:12px;line-height:1.45;padding:0 3px;
+}
+.map-foot a{color:#d7c39e}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#151719;color:#eef1f2}
+.leaflet-popup-content{margin:14px 16px;min-width:240px}
+.pin-popup h3{margin:0 0 4px;font-size:20px;line-height:1.2}
+.pin-popup .meta{color:#d7b06a;font-size:13px;font-weight:900;margin-bottom:7px}
+.pin-popup p{margin:0;color:#c7cdd1;font-size:14px;line-height:1.55}
+.pin-popup .status{margin-top:9px;font-size:13px;color:#aeb6bb}
+@media(max-width:850px){
+  .map-app{padding:8px}
+  .map-head{align-items:flex-start}
+  .map-title h1{font-size:26px}
+  .map-overlay{width:min(380px,52vw)}
+}
+@media(max-width:680px){
+  .map-app{height:auto;min-height:calc(100dvh - 60px)}
+  .map-head{flex-direction:column}
+  .map-back{align-self:flex-start}
+  .map-shell{min-height:640px}
+  .map-overlay{left:10px;right:10px;top:10px;width:auto}
+  .map-foot{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+<header class="next-ui-header" aria-label="8bit図鑑 共通ナビゲーション">
+  <div class="next-ui-header-top">
+    <a class="next-ui-brand" href="index.html" aria-label="教材トップへ">8bit<small>LIGHTING STUDY</small></a>
+    <nav class="next-ui-category-tabs" aria-label="教材の大分類">
+      <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button">⚡ 電気</button><div class="next-ui-dropdown"><a href="Analog.html">V・W・Aの法則</a><a href="SinglePhase3.html">単相3線</a><a href="Waveforms.html">電気って波なの？</a></div></div>
+      <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button">↕ 調光</button><div class="next-ui-dropdown"><a href="Top.html?tab=sim8bit">8-bit 調光卓</a><a href="Top.html?tab=sim16bit">16-bit 調光卓</a></div></div>
+      <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button">⌁ 信号</button><div class="next-ui-dropdown"><a href="Top.html?tab=simdmx">DMX通信列車</a></div></div>
+      <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button">⌘ Network</button><div class="next-ui-dropdown"><a href="Top.html?tab=netipaddress">IPアドレス</a><a href="Top.html?tab=netsacn">Multicast</a></div></div>
+      <div class="next-ui-category-menu"><button class="next-ui-category-tab active" type="button">◷ 照明史</button><div class="next-ui-dropdown"><a href="History.html">舞台照明史</a><a class="active" href="HistoryMap.html">地図モード</a></div></div>
+    </nav>
+    <div class="next-ui-tools"><div class="next-ui-page-controls"><button class="next-ui-page-button" type="button" onclick="location.href='index.html'">⌂ TOP</button></div></div>
+  </div>
+</header>
+
+<main class="map-app">
+  <section class="map-head">
+    <div class="map-title">
+      <h1>古代ギリシャ劇場｜地図モード</h1>
+      <p>アテネ周辺（古代アッティカ）を、確認できた劇場の場所から見る。</p>
+    </div>
+    <a class="map-back" href="History.html">← 舞台照明史へ戻る</a>
+  </section>
+
+  <section class="map-shell" aria-label="アテネ周辺の古代劇場地図">
+    <div id="map"></div>
+    <aside class="map-overlay">
+      <h2>アテネ周辺</h2>
+      <p>まずは確認済みの3地点から開始。ピンをタップすると、名称・年代・現在地・確認状態を表示する。</p>
+      <div class="legend" aria-label="確認状態">
+        <div class="legend-row"><span class="legend-dot"></span><span>劇場遺構・位置を確認</span></div>
+        <div class="legend-row"><span class="legend-dot record"></span><span>碑文・文献で確認</span></div>
+        <div class="legend-row"><span class="legend-dot research"></span><span>調査中</span></div>
+      </div>
+    </aside>
+  </section>
+
+  <footer class="map-foot">
+    <span>地図データ © OpenStreetMap contributors｜表示：Leaflet</span>
+    <span>位置確認：UNESCO / DIAZOMA。劇場情報は <code>docs/ancient_greek_theatres_master.md</code> を基準に更新。</span>
+  </footer>
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+const map=L.map("map",{zoomControl:true}).setView([38.005,23.87],9);
+
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
+  maxZoom:18,
+  attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+const theatres=[
+  {
+    name:"ディオニュソス劇場",
+    place:"アテネ｜アクロポリス南麓",
+    date:"紀元前5世紀〜（現存主要部は後世の改築を含む）",
+    lat:37.970383,lng:23.727730,
+    status:"劇場遺構・位置を確認",
+    note:"古代アテネの劇場文化を考える中心的な劇場。"
+  },
+  {
+    name:"トリコス劇場",
+    place:"ラヴリオ周辺｜アッティカ南東部",
+    date:"古代ギリシャ期（詳細年代は個別カードで扱う）",
+    lat:37.7378813,lng:24.0536814,
+    status:"劇場遺構・位置を確認",
+    note:"アッティカ南東部に残る古代劇場。地形と劇場形状を比較する重要例。"
+  },
+  {
+    name:"アンフィアレイオンの劇場",
+    place:"オロポス｜アッティカ北東部",
+    date:"古代ギリシャ期（詳細年代は個別カードで扱う）",
+    lat:38.291581,lng:23.845344,
+    status:"劇場遺構・位置を確認",
+    note:"アンフィアラオス聖域に設けられた劇場。"
+  }
+];
+
+const bounds=[];
+theatres.forEach(t=>{
+  const marker=L.circleMarker([t.lat,t.lng],{
+    radius:9,
+    color:"#eef1f2",
+    weight:2,
+    fillColor:"#5f84ad",
+    fillOpacity:.95
+  }).addTo(map);
+  marker.bindPopup(
+    '<div class="pin-popup">'+
+      '<h3>'+t.name+'</h3>'+
+      '<div class="meta">'+t.place+'</div>'+
+      '<p>'+t.date+'</p>'+
+      '<p style="margin-top:7px">'+t.note+'</p>'+
+      '<div class="status">● '+t.status+'</div>'+
+    '</div>'
+  );
+  bounds.push([t.lat,t.lng]);
+});
+map.fitBounds(bounds,{padding:[48,48],maxZoom:10});
+
+document.querySelectorAll(".next-ui-category-tab").forEach(button=>button.addEventListener("click",e=>{
+  e.stopPropagation();
+  const menu=button.closest(".next-ui-category-menu");
+  document.querySelectorAll(".next-ui-category-menu").forEach(x=>{if(x!==menu)x.classList.remove("open")});
+  menu.classList.toggle("open");
+}));
+document.addEventListener("click",()=>document.querySelectorAll(".next-ui-category-menu").forEach(x=>x.classList.remove("open")));
+</script>
+</body>
+</html>
