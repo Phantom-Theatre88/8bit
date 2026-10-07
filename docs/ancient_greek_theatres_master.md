@@ -373,3 +373,45 @@ History上でも、この確度差を同じ見え方にしない。
 - ローマ側台帳：R1〜R87 = **87 ID**
 - ギリシャ／ヘレニズム側65件との台帳ID総数：**152 ID**
 - 重複・分類要精査を含むため、152は独立した確定劇場数ではなく「調査台帳ID数」。
+
+
+## ローマ時代：追加調査 Batch 6 — イベリア半島地域台帳
+
+### 調査範囲
+- 現代スペイン・ポルトガルを中心に、Roman Hispania / Lusitania の theatre / odeion を確認する。
+- amphitheatre は除外する。
+- 既登録 R8 Mérida、R9 Sagunto、R10 Lisbon、R26 Málaga、R27 Cartagena、R28 Tarragona と重複させない。
+- 確定年代が取れないものも候補として保持し、地図上で確度を区別する。
+
+### 新規追加
+| ID | 名称 | 現在地 | 種別 | 年代・確認事項 | 状態 |
+|---|---|---|---|---|---|
+| R88 | Teatro Romano de Caesaraugusta | Zaragoza / Spain | Theatre | Tiberius期（14–37 AD）に着工、Claudius期（41–54 AD）に完成。Aragón文化遺産公式資料。 | 確認済 |
+| R89 | Teatro Romano de Gades / Theatrum Balbi | Cádiz / Spain | Theatre | 1世紀BC、Lucius Cornelius Balbus Minorが建設。Cádiz市・Junta de Andalucía資料。 | 確認済 |
+| R90 | Teatro Romano de Regina Turdulorum | Casas de Reina / Spain | Theatre | 1世紀AD、Flavian期。Extremadura公的観光情報由来。 | 確認済 |
+| R91 | Teatro Romano de Metellinum | Medellín / Spain | Theatre | ローマ都市Metellinumの劇場。2007年以降発掘、現地自治体資料で遺構確認。建設年代は追加精査。 | 確認済・年代要精査 |
+| R92 | Teatro Romano de Clunia | Peñalba de Castro / Spain | Theatre | Clunia Sulpiciaのローマ劇場。Burgos県公式遺跡サイトで確認。年代精査継続。 | 確認済・年代要精査 |
+| R93 | Teatro Romano de Segóbriga | Saelices / Spain | Theatre | Segóbriga遺跡の主要ローマ劇場。Castilla-La Mancha公式観光資料で存在確認。年代精査継続。 | 確認済・年代要精査 |
+| R94 | Teatro Romano de Bilbilis | Calatayud / Spain | Theatre | Bilbilis Augustaのローマ劇場。Aragón側資料で個別年代を追加照合。 | 候補・要年代精査 |
+| R95 | Teatro Romano de Acinipo | Ronda / Spain | Theatre | Roman theatre。Junta de Andalucíaの考古学遺跡として年代・建築段階を追加照合。 | 候補・要年代精査 |
+| R96 | Teatro Romano de Baelo Claudia | Bolonia / Tarifa / Spain | Theatre | Roman theatre。Junta de Andalucía管理遺跡。1世紀ADを中心に精査。 | 候補・要年代精査 |
+| R97 | Teatro Romano de Itálica | Santiponce / Spain | Theatre | Roman theatre。初期建設段階はAugustan期以前へ遡る可能性があり年代精査。 | 候補・要年代精査 |
+| R98 | Teatro Romano de Córdoba / Corduba | Córdoba / Spain | Theatre | 大型Roman theatreの考古学的遺構。成立年代・可視範囲を要精査。 | 候補・要年代精査 |
+| R99 | Teatro Romano de Carteia | San Roque / Spain | Theatre | Roman theatre。Punic/Republican都市史との関係を含め年代精査。 | 候補・要年代精査 |
+| R100 | Teatro Romano de Pollentia | Alcúdia / Mallorca / Spain | Theatre | Roman theatre。Balearic Roman cityの劇場。建設年代精査。 | 候補・要年代精査 |
+| R101 | Teatro Romano de Complutum | Alcalá de Henares / Spain | Theatre? | Roman city Complutumの娯楽建築としての同定・遺構状態を再確認する。 | 候補・分類要精査 |
+| R102 | Teatro Romano de Lisboa / Olisipo（年代補正項目） | Lisbon / Portugal | Theatre | 既登録R10。Portugal公式観光資料は1世紀AD建設、Nero期再建を確認。新規地点ではなく既存情報の補強。 | 既存R10・重複 |
+| R103 | Roman theatre candidate of Bracara Augusta | Braga / Portugal | Theatre? | Bracara Augustaは27 BC頃に形成。劇場建築の確実な同定・位置については追加考古学資料が必要。 | 候補・存在要精査 |
+| R104 | Roman theatre of Ebora / Évora candidate | Évora / Portugal | Theatre? | Roman city Eboraの劇場候補。神殿等との混同を避け、遺構・文献根拠を要精査。 | 候補・存在要精査 |
+
+### イベリアBatchの重要点
+- Zaragozaは、劇場用地が都市創建時から想定された可能性を持つが、現存する劇場建設はTiberius期開始・Claudius期完成と公的資料で明確。
+- Cádizは1世紀BCで、自治体資料が「イベリア半島で最古」と説明する重要例。
+- Lisbonは新規追加せずR10を補強。Portugal公式観光資料は1世紀AD建設とNero期再建を確認。
+- Braga・Évoraは「ローマ都市だったから劇場もあったはず」と推測で確定しない。候補Pin用の要精査データとしてのみ保持する。
+
+### Batch 6時点の暫定集計
+- 新しい台帳ID：R88〜R104 = **17 ID**（うちR102は既存R10の重複補強）。
+- ローマ側ID番号：R1〜R104 = **104 ID**。
+- ギリシャ／ヘレニズム側65件との台帳ID総数：**169 ID**。
+- ただし重複補強・存在要精査を含むため、169は独立した確定劇場数ではない。
