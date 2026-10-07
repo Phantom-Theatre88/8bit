@@ -124,6 +124,12 @@ button,a{font:inherit}
 .theatre-list-item small{display:block;margin-top:3px;color:#adb5ba;font-size:12px;line-height:1.4}
 .theatre-list-item .state{margin-top:4px;color:#d7c39e;font-size:12px;line-height:1.35}
 .map-overlay p{margin:0;color:#c8ced2;font-size:14px;line-height:1.55}
+.region-filters{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.region-filter{
+  border:1px solid #4a5055;border-radius:999px;background:#171a1d;color:#d9dee1;
+  padding:6px 9px;font-size:12px;font-weight:800;cursor:pointer
+}
+.region-filter.active{border-color:#d7b06a;background:#2a241b;color:#f4d9a6}
 .legend{display:grid;gap:7px;margin-top:12px}
 .legend-row{display:flex;align-items:center;gap:8px;color:#dce1e4;font-size:13px}
 .legend-dot{
@@ -184,7 +190,7 @@ button,a{font:inherit}
   <section class="map-head">
     <div class="map-title">
       <h1>古代ギリシャ劇場｜地図モード</h1>
-      <p>アテネ周辺（古代アッティカ）を、確認できた劇場の場所から見る。</p>
+      <p>アテネ周辺から、ギリシャ本土・エーゲ海・南イタリア／シチリアへ。劇場の広がりを地図から見る。</p>
     </div>
     <a class="map-back" href="History.html">← 舞台照明史へ戻る</a>
   </section>
@@ -192,8 +198,15 @@ button,a{font:inherit}
   <section class="map-shell" aria-label="アテネ周辺の古代劇場地図">
     <div id="map"></div>
     <aside class="map-overlay">
-      <h2>アテネ周辺</h2>
-      <p>古代アッティカでは、アテネ中心部だけでなく港湾都市・地方集落・聖域にも劇場や上演空間が存在した。現在は、遺構・発掘記録・碑文や文献から確認できる地点を区別して地図上に示している。</p>
+      <h2>古代ギリシャ文化圏</h2>
+      <p>古代ギリシャの劇場文化はアテネだけに限られず、本土・島々・地中海各地へ広がった。遺構・発掘記録・碑文や文献から確認できる地点を、証拠の状態を区別して地図上に示す。</p>
+      <div class="region-filters" id="regionFilters" aria-label="地域切替">
+        <button class="region-filter active" type="button" data-region="all">全体</button>
+        <button class="region-filter" type="button" data-region="athens">アテネ周辺</button>
+        <button class="region-filter" type="button" data-region="mainland">ギリシャ本土</button>
+        <button class="region-filter" type="button" data-region="islands">エーゲ海の島々</button>
+        <button class="region-filter" type="button" data-region="sicily">南イタリア・シチリア</button>
+      </div>
       <div class="legend" aria-label="確認状態">
         <div class="legend-row"><span class="legend-dot"></span><span>劇場遺構・位置を確認</span></div>
         <div class="legend-row"><span class="legend-dot record"></span><span>碑文・文献で確認</span></div>
@@ -489,6 +502,184 @@ const theatres=[
     status:"碑文で劇場活動を確認／劇場建築の位置は未確定",
     statusType:"record",
     note:"コロピ北西のクリストス丘周辺に位置したデーモス。碑文は悲劇上演、祭礼運営、プロエドリア（名誉席）を伴う劇場活動を示すが、劇場建築そのものの位置は確認されていない。"
+  },
+  {
+    name:"エピダウロス劇場",
+    place:"エピダウロス｜ペロポネソス",
+    date:"主要建設期は紀元前4世紀末。後世に改修を受けた。",
+    lat:37.596000,lng:23.079200,
+    status:"劇場遺構・位置を確認",
+    statusType:"confirmed",
+    regionGroup:"mainland",
+    note:"アスクレピオス聖域に造られた劇場。整った扇形の客席と円形オルケストラを持つ、後代の古代ギリシャ劇場を代表する遺構の一つ。",
+    image:"assets/history/sunlight/01_epidaurus_greek_theatre.jpg",
+    imageAlt:"現在のエピダウロス劇場",
+    credit:"Carole Raddato / CC BY-SA 2.0",
+    sourceUrl:"https://commons.wikimedia.org/wiki/Category:Ancient_Theatre_of_Epidaurus"
+  },
+  {
+    name:"メガロポリス劇場",
+    place:"メガロポリス｜アルカディア",
+    date:"古代ギリシャ期。建設・改築段階は個別史料で確認を継続する。",
+    lat:37.410170,lng:22.127258,
+    status:"劇場遺構・位置を確認",
+    statusType:"confirmed",
+    regionGroup:"mainland",
+    note:"ペロポネソス中央部のメガロポリスに残る劇場。都市の公共空間の一部として大規模な観客席を備えた遺構が残る。"
+  },
+  {
+    name:"アルゴス劇場",
+    place:"アルゴス｜ペロポネソス",
+    date:"紀元前3世紀。ローマ期に大規模な改修を受けた。",
+    lat:37.631600,lng:22.719600,
+    status:"劇場遺構・位置を確認",
+    statusType:"confirmed",
+    regionGroup:"mainland",
+    note:"ラリサ丘の岩盤を大きく削って客席を造った劇場。現存する姿にはローマ期の改修も重なっている。"
+  },
+  {
+    name:"デルフィ劇場",
+    place:"デルフィ｜中央ギリシャ",
+    date:"現在の主要な石造劇場は紀元前2世紀の整備を含む。",
+    lat:38.482450,lng:22.500706,
+    status:"劇場遺構・位置を確認",
+    statusType:"confirmed",
+    regionGroup:"mainland",
+    note:"アポロン聖域の上方に位置する劇場。聖域・競技・祭礼と劇場空間が近接する構成を現在の遺構から確認できる。",
+    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Theatre_of_Delphi.jpg?width=960",
+    imageAlt:"現在のデルフィ劇場",
+    credit:"Robin Iversen Rönnlund / CC BY-SA 3.0",
+    sourceUrl:"https://commons.wikimedia.org/wiki/File:Theatre_of_Delphi.jpg"
+  },
+  {
+    name:"エレトリア劇場",
+    place:"エレトリア｜エウボイア島",
+    date:"複数の建築段階を持ち、紀元前300年頃に石造客席・舞台建築が整備された。",
+    lat:38.398603,lng:23.790644,
+    status:"劇場遺構・位置を確認",
+    statusType:"confirmed",
+    regionGroup:"islands",
+    note:"複数回の改築を受けた劇場。古代ギリシャ期からローマ期まで、劇場構造が変化した痕跡を追える。"
+  },
+  {
+    name:"ラリサ第1古代劇場",
+    place:"ラリサ｜テッサリア",
+    date:"紀元前3世紀初頭。後にローマ時代のアリーナへ転用された。",
+    lat:39.640315,lng:22.415256,
+    status:"劇場遺構・位置を確認",
+    statusType:"confirmed",
+    regionGroup:"mainland",
+    note:"古代ラリサ中心部に造られた劇場。劇場からローマ時代の闘技空間へ用途が変化した履歴を持つ。",
+    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Ancient_theatre_of_Larisa.jpg?width=960",
+    imageAlt:"現在のラリサ第1古代劇場",
+    credit:"Fsb2004 / Public Domain",
+    sourceUrl:"https://commons.wikimedia.org/wiki/File:Ancient_theatre_of_Larisa.jpg"
+  },
+  {
+    name:"デロス劇場",
+    place:"デロス島｜キクラデス",
+    date:"紀元前310年頃に着工し、紀元前240年頃に完成。",
+    lat:37.397040,lng:25.268105,
+    status:"劇場遺構・位置を確認",
+    statusType:"confirmed",
+    regionGroup:"islands",
+    note:"聖なる島デロスの市街地に造られた石造劇場。島嶼部の都市劇場として、客席・オルケストラ・舞台建築の遺構が残る。",
+    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Ancient_Greek_theatre_in_Delos_01.jpg?width=960",
+    imageAlt:"現在のデロス劇場",
+    credit:"Bernard Gagnon / CC BY-SA 3.0",
+    sourceUrl:"https://commons.wikimedia.org/wiki/File:Ancient_Greek_theatre_in_Delos_01.jpg"
+  },
+  {
+    name:"メロス劇場",
+    place:"ミロス島｜キクラデス",
+    date:"ギリシャ期に起源を持ち、現存形にはローマ期の再建が含まれる。",
+    lat:36.737823,lng:24.421035,
+    status:"劇場遺構・位置を確認",
+    statusType:"confirmed",
+    regionGroup:"islands",
+    note:"ミロス島に残る古代劇場。現在見える遺構にはローマ期の再建が強く反映され、同じ場所が時代を越えて改変された例となる。"
+  },
+  {
+    name:"リンドス劇場",
+    place:"リンドス｜ロドス島",
+    date:"古代ギリシャ期。",
+    lat:36.089886,lng:28.086576,
+    status:"劇場遺構・位置を確認",
+    statusType:"confirmed",
+    regionGroup:"islands",
+    note:"ロドス島リンドスのアクロポリス下に残る劇場。島の都市景観と一体になった劇場空間を確認できる。"
+  },
+  {
+    name:"オイニアダイ劇場",
+    place:"オイニアダイ｜西ギリシャ",
+    date:"最初期段階は紀元前4世紀中頃。ヘレニズム期にプロスケニオンが加わった。",
+    lat:38.409614,lng:21.199028,
+    status:"劇場遺構・位置を確認",
+    statusType:"confirmed",
+    regionGroup:"mainland",
+    note:"西ギリシャに残る劇場。複数段階の建築変化があり、舞台建築の発達を遺構から追うことができる。"
+  },
+  {
+    name:"ドドナ劇場",
+    place:"ドドナ｜イピロス",
+    date:"紀元前3世紀初頭。後にアリーナへ改造された。",
+    lat:39.546492,lng:20.787700,
+    status:"劇場遺構・位置を確認",
+    statusType:"confirmed",
+    regionGroup:"mainland",
+    note:"ゼウスの聖域に造られた大規模劇場。後代にはオルケストラ周辺が改変され、ローマ時代の闘技空間としても使われた。",
+    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Dodona_theater.jpg",
+    imageAlt:"現在のドドナ劇場",
+    credit:"D. Swift / CC BY 2.5",
+    sourceUrl:"https://commons.wikimedia.org/wiki/File:Dodona_theater.jpg"
+  },
+  {
+    name:"アプテラ劇場",
+    place:"アプテラ｜クレタ島",
+    date:"ヘレニズム期からローマ期に複数の建築段階を持つ。",
+    lat:35.461272,lng:24.141436,
+    status:"劇場遺構・位置を確認",
+    statusType:"confirmed",
+    regionGroup:"islands",
+    note:"クレタ島アプテラに残る劇場。ヘレニズム期とローマ期の複数段階が確認され、改築による劇場形態の変化を読み取れる。"
+  },
+  {
+    name:"マロネイア劇場",
+    place:"マロネイア｜トラキア",
+    date:"古代ギリシャ期からローマ期にかけて使用・改築された。",
+    lat:40.878783,lng:25.519250,
+    status:"劇場遺構・位置を確認",
+    statusType:"confirmed",
+    regionGroup:"mainland",
+    note:"トラキアのマロネイアに残る劇場。客席、オルケストラ、舞台建築の遺構が確認される。"
+  },
+  {
+    name:"シラクサのギリシャ劇場",
+    place:"シラクサ｜シチリア",
+    date:"古代ギリシャ期に成立。紀元前4世紀の劇場として知られ、後世の改変も受けた。",
+    lat:37.076111,lng:15.275000,
+    status:"劇場遺構・位置を確認",
+    statusType:"confirmed",
+    regionGroup:"sicily",
+    note:"シチリア東部の古代都市シラクサに残る大規模なギリシャ劇場。岩盤を削って形成された客席を持ち、現在も古典劇上演に利用されている。",
+    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Greek_theater_of_Syracuse_AvL.JPG?width=960",
+    imageAlt:"現在のシラクサのギリシャ劇場",
+    credit:"AlexanderVanLoon / CC BY-SA 3.0",
+    sourceUrl:"https://commons.wikimedia.org/wiki/File:Greek_theater_of_Syracuse_AvL.JPG"
+  },
+  {
+    name:"タオルミーナ古代劇場",
+    place:"タオルミーナ｜シチリア",
+    date:"紀元前3世紀のヘレニズム期に起源を持ち、ローマ期に大規模改築された。",
+    lat:37.852500,lng:15.292222,
+    status:"劇場遺構・位置を確認",
+    statusType:"confirmed",
+    regionGroup:"sicily",
+    note:"シチリア東岸の丘上に造られた劇場。ギリシャ期の劇場を基礎にローマ期に大きく改築され、現在の舞台建築にはローマ期の構成が強く残る。",
+    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Ancient_theatre_of_Taormina_-_Teatro_Antico_di_Taormina.jpg?width=960",
+    imageAlt:"現在のタオルミーナ古代劇場",
+    credit:"Nicolas Chadeville / CC BY-SA 4.0",
+    sourceUrl:"https://commons.wikimedia.org/wiki/File:Ancient_theatre_of_Taormina_-_Teatro_Antico_di_Taormina.jpg"
   }
 ];
 
@@ -541,8 +732,29 @@ theatres.forEach((t,index)=>{
     setActiveListItem(index);
   });
   listHost.appendChild(item);
+  t._marker=marker;
+  t._listItem=item;
 });
-map.fitBounds(bounds,{padding:[48,48],maxZoom:10});
+
+function showRegion(region){
+  const visibleBounds=[];
+  theatres.forEach(t=>{
+    const group=t.regionGroup||"athens";
+    const visible=region==="all"||group===region;
+    if(visible){
+      if(!map.hasLayer(t._marker))t._marker.addTo(map);
+      t._listItem.hidden=false;
+      visibleBounds.push([t.lat,t.lng]);
+    }else{
+      if(map.hasLayer(t._marker))map.removeLayer(t._marker);
+      t._listItem.hidden=true;
+    }
+  });
+  document.querySelectorAll(".region-filter").forEach(b=>b.classList.toggle("active",b.dataset.region===region));
+  if(visibleBounds.length)map.fitBounds(visibleBounds,{padding:[48,48],maxZoom:10});
+}
+document.querySelectorAll(".region-filter").forEach(b=>b.addEventListener("click",()=>showRegion(b.dataset.region)));
+showRegion("all");
 
 function refreshMapSize(){
   map.invalidateSize({pan:false});
