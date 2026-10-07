@@ -216,7 +216,7 @@ button,a{font:inherit}
         <button class="era-step active" type="button" data-era="all">全期間<small>65劇場</small></button>
         <button class="era-step unknown" type="button" data-era="unknown">年代未確定<small>推測しない</small></button>
       </div>
-      <a class="map-back" href="History.html?item=greekTheatre">← 古代ギリシャ劇場へ戻る</a>
+      <a class="map-back" id="mapBack" href="History.html">← 照明史へ戻る</a>
     </div>
   </section>
 
@@ -258,6 +258,14 @@ button,a{font:inherit}
 
 <script src="assets/vendor/leaflet/leaflet.js"></script>
 <script>
+const returnSources={
+  greekTheatre:{href:"History.html?item=greekTheatre",label:"← 古代ギリシャ劇場へ戻る"}
+};
+const sourceId=new URLSearchParams(location.search).get("from");
+const returnSource=returnSources[sourceId];
+const mapBack=document.getElementById("mapBack");
+if(returnSource&&mapBack){mapBack.href=returnSource.href;mapBack.textContent=returnSource.label}
+
 const map=L.map("map",{zoomControl:true}).setView([38.005,23.87],9);
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
@@ -1154,16 +1162,6 @@ function refreshFilters(fit=true){
 
 function showRegion(region){activeRegion=region;refreshFilters(true)}
 function showEra(era){activeEra=era;refreshFilters(true)}
-document.querySelectorAll(".region-filter").forEach(b=>b.classList.toggle("active",b.dataset.region===region));
-
-  const title=document.getElementById("theatreListTitle");
-  if(title)title.textContent="劇場リスト｜"+(regionLabels[region]||"全体")+"（"+visibleCount+"）";
-
-  const list=document.getElementById("theatreList");
-  if(list)list.scrollTop=0;
-
-  if(visibleBounds.length)map.fitBounds(visibleBounds,{padding:[48,48],maxZoom:10});
-}
 document.querySelectorAll(".region-filter").forEach(b=>b.addEventListener("click",()=>showRegion(b.dataset.region)));
 document.querySelectorAll(".era-step").forEach(b=>b.addEventListener("click",()=>showEra(b.dataset.era)));
 refreshFilters(true);
