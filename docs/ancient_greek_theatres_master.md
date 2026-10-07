@@ -333,3 +333,43 @@ History上でも、この確度差を同じ見え方にしない。
 - 既存ギリシャ／ヘレニズム65件との台帳ID総数は **136 ID**。
 - ただし Pompeii Teatro Grande、Neapolis、Catania等は先行ギリシャ／Samnite劇場との関係を精査する必要があり、136は独立した「確定ローマ新築劇場数」ではない。
 - 「イタリアを洗い切る」は永久的な完全網羅を意味しない。現時点で公的・考古学的に追跡可能な theatre / odeion の地域台帳を作り、追加資料が出れば追記する。
+
+
+## ローマ時代：追加調査 Batch 5 — ガリア地域台帳
+
+### 調査範囲
+- 古代ガリア文化圏を、まず現代フランスを中心に確認する。
+- theatre / odeion およびフランス考古学で「théâtre gallo-romain」「théâtre mixte」と分類される劇場建築を母集団に含める。
+- amphitheatre単独は除外する。ただし théâtre-amphithéâtre / mixed theatre は、劇場史上の地域的変形として「混合型」と明示して残す。
+- 既登録 R2 Orange、R29 Lyon Grand Theatre、R30 Lyon Odeon、R31 Autun、R32 Augusta Raurica と重複させない。
+
+### 新規追加
+| ID | 名称 | 現在地 | 種別 | 年代・確認事項 | 状態 |
+|---|---|---|---|---|---|
+| R72 | Théâtre antique d'Arles | Arles / France | Theatre | ローマ植民都市Arelateの劇場。Augustus期。 | 初期確認済 |
+| R73 | Théâtre antique de Vienne | Vienne / France | Theatre | ローマ都市Viennaの劇場。帝政初期を中心に年代精査。 | 候補・要年代精査 |
+| R74 | Théâtre antique de Vaison-la-Romaine | Vaison-la-Romaine / France | Theatre | Vasioのローマ劇場。1世紀ADの建築段階を精査。 | 初期確認済 |
+| R75 | Théâtre antique de Lillebonne | Lillebonne / France | Theatre / mixed phases | 文化省POPがGallo-romainの劇場遺構として登録。複数期・arena化を含むため段階精査。 | 確認済・段階要精査 |
+| R76 | Théâtre romain de Soissons | Soissons / France | Theatre | 文化省POPがAntiquité/Gallo-romainのRoman theatreとして登録。 | 確認済 |
+| R77 | Théâtre gallo-romain de Vieux | Vieux / France | Theatre | 文化省POP登録。Gallo-romain、遺構断片。 | 確認済 |
+| R78 | Théâtre gallo-romain des Bouchauds | Saint-Cybardeaux / France | Theatre | 文化省POP。1〜2世紀AD、直径約107m。 | 確認済 |
+| R79 | Théâtre gallo-romain de Thénac | Thénac / France | Theatre | 文化省POP。平地建設、直径約90m。 | 確認済 |
+| R80 | Théâtre antique de Mandeure | Mandeure / France | Theatre / sanctuary theatre | 文化省考古学サイト。ガリア・帝国でも最大級の劇場の一つ。POPは1世紀の遺構として登録。 | 確認済 |
+| R81 | Théâtre du Vieux-Poitiers | Naintré / France | Theatre | 文化省POP。Gallo-romain / Haut-Empire。 | 確認済 |
+| R82 | Théâtre antique d'Orléans | Orléans / France | Theatre | Inrap。1世紀中頃に最初の劇場建設開始。 | 確認済 |
+| R83 | Théâtre antique de Cadayrac | Salles-la-Source / France | Theatre / sanctuary theatre | 文化省POP。1〜2世紀AD。sanctuary settlement内の劇場。 | 確認済 |
+| R84 | Théâtre gallo-romain d'Alba-la-Romaine | Alba-la-Romaine / France | Theatre | 文化省POPでGallo-romain theatre。登録情報は3〜4世紀の建築段階を含む。都市自体は1 BC〜4 ADに展開。 | 確認済・段階要精査 |
+| R85 | Théâtre mixte des Sarrazins | Montbrison / France | Mixed theatre | 文化省POPが「théâtre mixte gallo-romain」として登録。 | 確認済・混合型 |
+| R86 | Théâtre des Châteliers | Amboise / France | Theatre / sanctuary complex | 文化省POPでfanumとtheatreを含むGallo-romain site。劇場個別年代を要精査。 | 候補・要年代精査 |
+| R87 | Théâtre antique d'Avenches / Aventicum | Avenches / Switzerland | Theatre | Roman Helvetiaの劇場。成立・改築段階をスイス公的資料で追加照合。 | 候補・要年代精査 |
+
+### ガリアBatchの注意
+- ガリアでは、イタリア型の標準的Roman theatreだけでなく、聖域と結びつく大型劇場や「mixed theatre」と呼ばれる地域的形式が存在する。これを単純にamphitheatreとして除外すると劇場史を歪めるため、類型を別属性で保持する。
+- Orange、Lyon、Autun、Augusta Rauricaは既登録のため新規IDを振らない。
+- Arles、Vienne、Vaison等は代表例だが、今回の母集団は代表例だけに限定しない。
+
+### Batch 5時点の暫定集計
+- 今回追加：R72〜R87 = **16 ID**
+- ローマ側台帳：R1〜R87 = **87 ID**
+- ギリシャ／ヘレニズム側65件との台帳ID総数：**152 ID**
+- 重複・分類要精査を含むため、152は独立した確定劇場数ではなく「調査台帳ID数」。
