@@ -120,3 +120,22 @@ History上でも、この確度差を同じ見え方にしない。
   https://whc.unesco.org/en/tentativelists/5869/
 - DIAZOMA: individual theatre dossiers for Thorikos, Ikarion, Acharnai, Zea etc.
   https://diazoma.gr/en/
+
+
+## Batch 3：現在のトルコ西部
+
+新人向け表示は「現在のトルコ西部」。古代地理用語（イオニア、アイオリス、カリア等）は詳細で併記する。
+
+| No. | 劇場 | 現代の場所 | 年代・特徴 | 地図状態 |
+|---:|---|---|---|---|
+| T1 | Great Theatre of Ephesus | Selçuk / İzmir | 紀元前3世紀のヘレニズム期に起源。ローマ期に大規模拡張。 | 写真・位置確認済 |
+| T2 | Theatre of Priene | Güllübahçe / Aydın | ヘレニズム劇場の構成を比較的よく保持。ローマ期改変が比較的少ない。 | 写真・位置確認済 |
+| T3 | Theatre of Pergamon | Bergama / İzmir | ヘレニズム期。急斜面と一体化した劇場。 | 写真・位置確認済 |
+| T4 | Theatre of Assos | Behramkale / Çanakkale | 紀元前4世紀末頃。馬蹄形の典型的ヘレニズム劇場。 | 写真・位置確認済 |
+| T5 | Theatre of Miletus | Balat / Aydın | ギリシャ期に起源。現存形はローマ期の拡張を多く含む。 | 写真・位置確認済 |
+| T6 | Theatre of Aphrodisias | Geyre / Aydın | 紀元前1世紀末頃〜。ヘレニズム末期からローマ期への移行例。 | 写真・位置確認済 |
+
+### 注意
+- 現代の国境は古代の文化圏と一致しない。「現在のトルコ西部」は新人向けの地理案内名として使用する。
+- 現存する巨大な劇場の多くはローマ期の増改築を含むため、ギリシャ期の起源と現在見える姿を分けて説明する。
+- アフロディシアスは古典期ギリシャ劇場の代表例ではなく、ヘレニズム末期〜ローマ期の移行を理解する比較対象として扱う。
