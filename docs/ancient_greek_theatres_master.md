@@ -455,3 +455,53 @@ History上でも、この確度差を同じ見え方にしない。
 - ローマ側ID番号：R1〜R120 = **120 ID**。
 - ギリシャ／ヘレニズム側65件との台帳ID総数：**185 ID**。
 - 重複補強・存在要精査・分類要精査を含むため、185は独立した確定劇場数ではなく調査台帳ID数。
+
+
+## 劇場図鑑 詳細化 Batch A — 代表劇場から情報セット整備開始
+
+185 ID全体の詳細化に先立ち、既存台帳の代表例について「写真・説明・外部リンク・根拠」を持つ図鑑データの整備を開始する。以下の文章は新人向け表示の初稿であり、史実の根拠資料と写真権利情報は別フィールドで保持する。
+
+### Theatre of Marcellus — Rome
+- 分類：Roman Theatre
+- 成立：Augustus期。Caesarが計画を開始し、Augustusが完成・Marcellusに献呈。
+- 図鑑説明初稿：**ローマ中心部に残る大規模な石造劇場。客席を自然斜面だけに頼らず建築構造で支えるローマ劇場の発展を見るうえで重要な例。後世には建物の上部が住宅・宮殿として利用され、古代劇場が都市の中で別用途へ組み込まれていった姿も見える。**
+- 写真候補：Wikimedia Commons category / Theatre of Marcellus。採用時に個別ファイルのauthor/license/source URLを記録する。
+- 日本語Wikipedia：記事の存在を確認してから地図にリンクする。
+- 根拠：Roma Capitale / Turismo Roma等の公的資料を優先。
+
+### Timgad Theatre — Algeria
+- 分類：Roman Theatre
+- 都市成立：ThamugadiはAD100頃、Trajanによる植民都市。
+- 図鑑説明初稿：**北アフリカに新しく計画されたローマ都市に設けられた劇場。既存のギリシャ劇場を改築した例ではなく、都市計画の中に劇場が組み込まれていくローマ帝国の広がりを見る比較例になる。**
+- 写真候補：Wikimedia Commons / Timgad theatre。個別ライセンス確認後採用。
+- 日本語Wikipedia：Timgad/ティムガッドの日本語記事有無を個別確認。
+- 根拠：UNESCO World Heritage Centre, Timgad.
+
+### Tipasa Theatre — Algeria
+- 分類：Roman Theatre
+- 成立：UNESCO提出資料では2世紀末〜3世紀初頭。
+- 特徴：約4,000席。自然斜面ではなく人工支持構造上に客席を構成したとされる。
+- 図鑑説明初稿：**丘の斜面そのものを客席に利用するギリシャ劇場とは異なり、人工的な構造で客席を成立させた北アフリカのローマ劇場。劇場を地形からより自由に配置できるようになった建築技術の変化を比較できる。**
+- 写真候補：Wikimedia Commons / Tipasa archaeological site。劇場を正しく写した個別画像か確認して採用。
+- 根拠：UNESCO documentation for Tipasa.
+
+### Zaragoza / Caesaraugusta Theatre — Spain
+- 分類：Roman Theatre
+- 成立：Tiberius期（AD14–37）着工、Claudius期（AD41–54）完成。
+- 図鑑説明初稿：**ローマ帝国初期にヒスパニアの都市Caesaraugustaへ建設された劇場。建設が複数皇帝の時代にまたがっており、劇場を一つの完成年だけでなく建設過程として見ることができる。**
+- 写真候補：Wikimedia Commons / Teatro romano de Caesaraugusta。個別権利確認後採用。
+- 日本語Wikipedia：日本語記事有無を個別確認。
+- 根拠：Gobierno de Aragón文化遺産資料。
+
+### Mandeure Theatre — France
+- 分類：Gallo-Roman Theatre / sanctuary theatre
+- 図鑑説明初稿：**ガリアで発達した巨大な劇場の一つ。イタリアの都市劇場をそのまま複製したものとしてではなく、聖域との関係を持つ地域的な劇場文化を見るための重要例。ローマ帝国の拡大が各地で同じ劇場を生んだわけではないことを比較できる。**
+- 写真候補：Wikimedia Commons / Théâtre antique de Mandeure。個別権利確認後採用。
+- 根拠：Ministère de la Culture, site archéologique de Mandeure.
+
+### 写真・リンク投入時のチェック
+1. 写真が対象劇場そのものを写しているか。
+2. Commonsファイルページで作者・ライセンス・原典を確認したか。
+3. 日本語Wikipediaリンクは実在記事を確認したか。
+4. Wikipedia本文だけで年代・分類を確定していないか。
+5. 「現在見える姿」と「最初の建設段階」を混同していないか。
