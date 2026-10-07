@@ -208,3 +208,32 @@ History上でも、この確度差を同じ見え方にしない。
 ### 重複判定
 - 例：Argos、Ephesus、Miletus、Taormina等はローマ期改築が大きくても、ギリシャ／ヘレニズム期の成立が確認されているため新規ローマ母集団へは重複登録しない。
 - 「現存形がローマ的」であることだけを理由にローマ新規建築へ分類しない。
+
+
+## ローマ時代：追加調査 Batch 2（2026-10-07）
+
+前回の6件Seedだけでは母集団として不足していたため、公的機関・自治体・UNESCO等を優先して追加調査した。以下は既存65件と重複しないローマ期新築候補として台帳へ追加する。確定度の差は地図上のPin表現で保持する。
+
+| ID | 名称 | 現在地 | 種別 | 年代・確認事項 | 状態 |
+|---|---|---|---|---|---|
+| R7 | Roman Theatre of Gubbio / Iguvium | Gubbio / Italy | Theatre | 約20 BC完成。イタリア文化省がGneo Satrio Rufoによる完成を記載。 | 確認済 |
+| R8 | Roman Theatre of Mérida / Augusta Emerita | Mérida / Spain | Theatre | 16–15 BC、Agrippaによる建設。 | 確認済 |
+| R9 | Roman Theatre of Sagunto | Sagunto / Spain | Theatre | 1世紀AD。 | 確認済 |
+| R10 | Roman Theatre of Lisbon / Olisipo | Lisbon / Portugal | Theatre | Augustus期に建設、Nero期に改修。 | 確認済 |
+| R11 | Roman Theatre of Aosta / Augusta Praetoria | Aosta / Italy | Theatre | 都市創建25 BCの数十年後。地域文化財資料はJulio-Claudian期、20–30 AD頃の着工を示す。 | 確認済 |
+| R12 | Ancient Theatre of Philippopolis | Plovdiv / Bulgaria | Theatre | 1世紀AD後半、Domitian期（90年代AD）とされる。 | 初期確認済 |
+| R13 | Roman Theatre of Stobi | Stobi / North Macedonia | Theatre | ローマ属州Macedoniaの劇場。成立年代の精密化は継続。 | 候補・要年代精査 |
+| R14 | South Theatre of Gerasa | Jerash / Jordan | Theatre | 90–92 AD、Domitian期。 | 確認済 |
+| R15 | North Theatre / Odeon of Gerasa | Jerash / Jordan | Theatre / Odeon | 165 AD建設、235 AD拡張。 | 確認済 |
+| R16 | Roman Theatre of Philadelphia | Amman / Jordan | Theatre | 2世紀AD、Antoninus Pius期。 | 確認済 |
+| R17 | Odeon of Philadelphia | Amman / Jordan | Odeon | 130 AD着工、約141 AD完成。 | 確認済 |
+| R18 | Theatre of Leptis Magna | Khoms / Libya | Theatre | UNESCOがローマ都市の主要劇場遺構として確認。個別建設年代を継続精査。 | 候補・要年代精査 |
+| R19 | Roman Theatre of Sabratha | Sabratha / Libya | Theatre | UNESCOが北アフリカ有数の保存状態を持つRoman theatreとして確認。個別建設年代を継続精査。 | 候補・要年代精査 |
+| R20 | Roman Theatre of Hierapolis | Pamukkale / Türkiye | Theatre | 62 ADに建設開始、206 AD完成とトルコ文化観光省資料。 | 確認済 |
+| R21 | Surviving Roman Theatre of Teos | Sığacık / Türkiye | Theatre | 現存劇場は調査上「exclusively a Roman building」。前ローマ期の劇場活動は別地点の可能性。既存T7の分類再検討対象。 | 確認済・重複整理要 |
+| R22 | Roman Theatre of Marina di Gioiosa Ionica | Calabria / Italy | Theatre | イタリア文化財カタログがRoman cultural context、概ね1世紀BC–1世紀ADとして登録。 | 初期確認済 |
+
+### このBatchで判明した重要な分類修正候補
+- **Teos（既存T7）**：前ローマ期にTeosで劇場活動があったこと自体は碑文等で確認できる一方、現在残る劇場建築についてAnkara University Teos excavationは「pre-Romanに年代づける考古学的根拠がなく、surviving theatre is exclusively a Roman building」とする。したがって、既存ギリシャ65件側のT7とローマ新規R21の関係を再整理する必要がある。
+- ローマ母集団は「有名劇場だけ」ではなく、theatre / odeion をローマ帝国圏全体から収集する。amphitheatreは別類型として除外する。
+- 現段階では **既存65 + ローマ新規22 ID = 87 ID** だが、R21 Teosは既存T7との重複整理対象なので、ユニーク地点として単純に87件確定とは数えない。
