@@ -305,6 +305,14 @@ button{font:inherit}
 .detail-section h3{margin:0 0 5px;color:#e0b06d;font-size:14px}
 .detail-section p{margin:0;color:#afb6bc;font-size:17px;line-height:1.62}
 .source-note{margin-top:9px;color:#7f888f;font-size:12px;line-height:1.45}
+.detail-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.detail-link{
+  display:inline-flex;align-items:center;gap:7px;
+  text-decoration:none;color:#17120a;
+  background:linear-gradient(180deg,#f5e8d1,#dcb879);
+  border:1px solid #e4c892;border-radius:9px;
+  padding:9px 12px;font-size:14px;font-weight:900
+}
 .teacher-pane{
   min-height:0;height:100%;
   display:grid;
@@ -427,6 +435,7 @@ button{font:inherit}
             <p id="detailBody">紀元前5世紀頃の古代ギリシャ劇場では、上演は屋外で行われ、舞台の光は太陽と天空光に依存していた。照明装置を操作する以前の段階では、時間帯や天候そのものが舞台の見え方を変える条件だった。</p>
           </div>
           <div class="source-note" id="sourceNote">基礎資料：国立科学博物館 2024「舞台照明用調光装置の系統化調査」</div>
+          <div class="detail-actions" id="detailActions"></div>
         </div>
       </div>
     </div>
@@ -496,7 +505,9 @@ const items={
     summary:"斜面を利用したテアトロン（観客席）と、コロスが歌い踊るオルケストラを中心に構成された野外劇場。古代ギリシャ各地に造られ、地域や年代によってその形は異なる。",
     body:"古代ギリシャの劇場は、山や丘の斜面を利用してテアトロン（観客席）を設け、その下にコロスが歌い踊るオルケストラを置く構成を基本とした。オルケストラの背後には、のちにスケネと呼ばれる舞台建築が発達し、上演空間の構成も時代とともに変化した。現存する劇場の多くは後世に改築されており、紀元前5世紀の劇場が現在見える完成形のまま存在していたわけではない。地域ごとの違い、建設年代、ヘレニズム期・ローマ期の改築を分けて見ることで、古代ギリシャ劇場が一つの固定した形式ではなかったことが分かる。上演は屋外の自然光の中で行われ、劇場そのものが当時の照明環境の一部だった。代表画像のエピダウロス劇場は紀元前4世紀の代表例であり、紀元前5世紀の劇場そのものではない。",
     teacher:"一つの劇場を『古代ギリシャ劇場の完成形』として決めつけず、地域・年代・改築の違いを見比べながら進もう。",
-    source:"調査台帳：docs/ancient_greek_theatres_master.md｜UNESCO Ancient Greek Theatres / Attic Inscriptions Online / Paga 2010 / Takeuchi & Wilson 2023"
+    source:"調査台帳：docs/ancient_greek_theatres_master.md｜UNESCO Ancient Greek Theatres / Attic Inscriptions Online / Paga 2010 / Takeuchi & Wilson 2023",
+    detailLink:"HistoryMap.html",
+    detailLinkLabel:"地図で劇場を巡る"
   }
 };
 
@@ -591,10 +602,20 @@ function selectItem(id){
   $("detailBody").textContent=d.body;
   $("teacherSpeech").textContent=d.teacher;
   $("sourceNote").textContent=d.source;
+  const actions=$("detailActions");
+  actions.innerHTML="";
+  if(d.detailLink){
+    const a=document.createElement("a");
+    a.className="detail-link";
+    a.href=d.detailLink;
+    a.textContent=d.detailLinkLabel||"関連ページを見る";
+    actions.appendChild(a);
+  }
 }
 
 function closeDetail(){
   selectedId=null;
+  $("detailActions").innerHTML="";
   $("historyApp").classList.remove("detail-open");
   document.querySelectorAll(".history-card").forEach(card=>card.classList.remove("active"));
 }
@@ -635,6 +656,17 @@ document.addEventListener("click",()=>document.querySelectorAll(".next-ui-catego
 
 renderPeriodNav();
 renderField();
+
+const initialItem=new URLSearchParams(location.search).get("item");
+if(initialItem && items[initialItem]){
+  const periodIndex=periods.findIndex(p=>p.id===items[initialItem].period);
+  if(periodIndex>=0 && periodIndex!==currentPeriod){
+    currentPeriod=periodIndex;
+    renderPeriodNav();
+    renderField();
+  }
+  selectItem(initialItem);
+}
 </script>
 </body>
 </html>
