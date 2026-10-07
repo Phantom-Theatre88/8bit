@@ -723,3 +723,158 @@ History上でも、この確度差を同じ見え方にしない。
 - 図鑑説明初稿：**Pompeiiの大劇場の隣に設けられた小劇場。大人数向けの劇場とは別に、より小さな上演・音楽空間が都市に必要とされたことを示す。**
 - 写真候補：Wikimedia Commons / Odeon Pompeii。
 - 根拠：Parco Archeologico di Pompei.
+
+
+## 劇場図鑑 詳細化 Batch F — 既存台帳を片付ける（Attica / Anatolia / Sicily）
+
+> このBatchは既登録地点の図鑑説明整備。新規地点は追加しない。年代・分類の「要精査」は元台帳の状態を維持し、説明文で断定を強めない。
+
+### Ikarion — Attica
+- 分類：Greek theatre space
+- 図鑑説明初稿：**アッティカ地方のデーモスにも演劇・祭礼のための空間が存在したことを示す例。アテネ中心部のDionysos劇場だけで古代ギリシャ演劇を考えないために重要。**
+- 状態：年代は遺構だけで確定困難。既存台帳の確認済／年代慎重扱いを維持。
+
+### Rhamnous — Attica
+- 分類：Greek theatre space
+- 図鑑説明初稿：**前列席proedriaや碑文から劇場空間を読み取れる例。大規模な石造caveaが残る劇場だけでなく、限られた遺構と文字資料を組み合わせて劇場史を復元する方法も学べる。**
+- 状態：観客席の斜面利用は可能性として扱い断定しない。
+
+### Euonymon / Trachones — Attica
+- 分類：Greek Theatre
+- 図鑑説明初稿：**長方形系のorchestraと古い舞台建築を持つ劇場。後世に典型化する円形・半円形のイメージだけでは捉えられない、初期劇場の多様な平面を比較できる。**
+- 状態：既存台帳では5世紀BCから使用。
+
+### Halimous — Attica
+- 分類：Greek theatre remains
+- 図鑑説明初稿：**発掘で前列席や岩盤加工などが確認された地方劇場。巨大な有名遺跡だけでなく、地域共同体にも上演空間が存在したことを示す。**
+- 状態：1986–87年発掘という既存台帳情報を維持。
+
+### Acharnai — Attica
+- 分類：Greek Theatre
+- 図鑑説明初稿：**2007年に発見された劇場遺構。現在も劇場史の資料が発掘によって増え続けていることを、新人に示せる例でもある。**
+- 状態：4世紀BC、horseshoe-shaped orchestraの一部という既存台帳情報を維持。
+
+### Old Theatre of Piraeus / Mounychia
+- 分類：Greek Theatre / location under review
+- 図鑑説明初稿：**港湾都市Piraeusの古典期劇場として文献・研究から知られる一方、遺構と位置の把握には注意が必要な例。地図では『分からないものを分からないまま示す』ための重要地点。**
+- 状態：位置・遺構要再精査。
+
+### Theatre of Zea — Piraeus
+- 分類：Hellenistic Theatre
+- 図鑑説明初稿：**Piraeusに後代に整備された第二の劇場。港を持つ都市にも複数時期の劇場文化が存在したことを示し、Athens中心部との比較にも使える。**
+- 状態：3世紀BC初頭〜2世紀BC。
+
+### Theatre of the Amphiareion — Oropos
+- 分類：Greek sanctuary theatre
+- 図鑑説明初稿：**Amphiaraosの聖域に属する劇場。演劇空間が都市の娯楽施設だけではなく、祭礼や聖域の活動と結びついていたことを理解する例。**
+- 状態：Greater Amphiareia（332 BC以降）との関連を既存台帳どおり保持。
+
+### Theatre of Assos
+- 分類：Hellenistic Theatre
+- 図鑑説明初稿：**都市の斜面を利用したヘレニズム劇場。自然地形と客席を結びつける構成を、同じ西アナトリアのPergamonやPrieneと比較できる。**
+- 状態：4世紀BC末頃という既存台帳値を維持。
+
+### Theatre of Miletus
+- 分類：Greek-origin Theatre → Roman expansion
+- 図鑑説明初稿：**ギリシャ期の劇場を基礎に、ローマ時代に大規模化した劇場。現在の巨大な遺構だけを見て成立時代を判断できない代表例で、建物の『時間層』を学ぶのに向く。**
+- 状態：Greek-originとRoman expansionを同一カード内で表示。
+
+### Theatre of Aphrodisias
+- 分類：Late Hellenistic / Roman transition
+- 図鑑説明初稿：**ヘレニズム末期からローマ時代への移行を見る劇場。GreekかRomanかを単純に二分するより、政治・都市・建築が連続的に変化したことを見る比較例。**
+- 状態：1世紀BC末頃〜という既存台帳情報を維持。
+
+### Theatre of Teos
+- 分類：classification under review
+- 図鑑説明初稿：**Teosではローマ以前の劇場活動が知られる一方、現在確認される劇場建築はローマ建築として再検討が必要。『上演活動の歴史』と『現存建物の建設年代』を分ける重要例。**
+- 状態：T7とR21の重複整理対象。確定まで二重の独立劇場として扱わない。
+
+### Theatre of Metropolis
+- 分類：Late Hellenistic Theatre → Roman alteration
+- 図鑑説明初稿：**後期ヘレニズム期の劇場にローマ時代の舞台建築拡張が重なる例。客席だけでなく、舞台側の建築が時代とともに変わることを比較できる。**
+- 状態：既存台帳の分類を維持。
+
+### Theatre of Erythrai
+- 分類：Hellenistic Theatre
+- 図鑑説明初稿：**アクロポリス北斜面に設けられた劇場。西アナトリアの都市が地形を利用して劇場を組み込んだ複数例の一つとして比較できる。**
+- 状態：3世紀BC頃。
+
+### Hellenistic Theatre of Magnesia ad Maeandrum
+- 分類：Hellenistic Theatre
+- 図鑑説明初稿：**発掘された遺構の多くが再び埋め戻されている劇場。『遺跡が見えること』と『考古学的に存在が確認されていること』は同じではない、と理解する教材にもなる。**
+- 状態：2世紀BC頃。再被覆情報を保持。
+
+### Theatre of Halicarnassus
+- 分類：Greek-origin Theatre → later expansion
+- 図鑑説明初稿：**4世紀BCに起源を持ち、後世の拡張を受けた劇場。長期間使われる劇場では、最初の建設と現在読み取れる規模を分けて考える必要がある。**
+- 状態：既存台帳の年代幅を維持。
+
+### Theatre of Kaunos
+- 分類：Hellenistic Theatre → major Roman alteration
+- 図鑑説明初稿：**ヘレニズム期の劇場にローマ時代の大きな改修が重なる。ギリシャ系劇場がローマ支配下で捨てられるのではなく、改造されながら使われる場合を示す。**
+- 状態：同一劇場カード内で両時代を表示。
+
+### Lower Theatre of Knidos
+- 分類：Greek-origin Theatre
+- 図鑑説明初稿：**港湾都市Knidosに設けられた劇場。劇場と都市地形、港、公共空間との関係を地図上で見るための例。**
+- 状態：Greek-period origin。細かな建築段階は要追加照合。
+
+### Theatre of Alinda
+- 分類：Hellenistic Theatre → Roman alteration
+- 図鑑説明初稿：**3〜2世紀BC頃のヘレニズム劇場にローマ期の変更が加わる例。西アナトリアに劇場文化が広く分布したことを地図で確認できる。**
+- 状態：既存台帳どおり。
+
+### Greek Theatre of Syracuse
+- 分類：Greek Theatre → later alterations
+- 図鑑説明初稿：**シチリアのギリシャ都市を代表する大劇場。現在の主要形はHieron II期を中心とするが、それ以前にも上演空間の段階があり、『有名な完成形』より前の歴史を持つ。**
+- 状態：3世紀BC主要形／より早い段階あり。
+
+### Theatre of Segesta
+- 分類：Hellenistic Theatre
+- 図鑑説明初稿：**シチリア西部の丘上都市に造られた劇場。海と山を望む立地も含め、地形と劇場の関係を視覚的に比較しやすい。**
+- 状態：4〜3世紀BC起源、2世紀BC頃の整備を含む。
+
+### Theatre of Tyndaris
+- 分類：Greek/Hellenistic Theatre → Roman alteration
+- 図鑑説明初稿：**ギリシャ系劇場がローマ時代にも改築されて使われた例。シチリアでは文化圏の交代が建物の断絶ではなく、同じ劇場への改変として残ることがある。**
+- 状態：4世紀末〜3世紀BC頃＋Roman alteration。
+
+### Theatre of Akrai
+- 分類：Hellenistic Theatre
+- 図鑑説明初稿：**巨大都市ではない地方都市の小規模劇場。EpidaurusやSyracuseのような著名な大劇場だけでは見えない、劇場文化の地域的な広がりを示す。**
+- 状態：3世紀BC頃。
+
+### Theatre of Morgantina
+- 分類：Greek/Hellenistic Theatre
+- 図鑑説明初稿：**シチリア内陸都市の劇場。沿岸の植民都市だけでなく内陸にも劇場空間が存在したことを地図上で確認できる。**
+- 状態：4世紀後半〜3世紀BC頃。
+
+### Theatre of Heraclea Minoa
+- 分類：Greek/Hellenistic Theatre
+- 図鑑説明初稿：**比較的小規模なギリシャ系劇場。保存・保護の問題も含め、古代劇場を現代に残す難しさを考える入口になる。**
+- 状態：4世紀BC末頃。
+
+### Theatre of Soluntum
+- 分類：Hellenistic Theatre / Punic-context city
+- 図鑑説明初稿：**Punic系の背景を持つ都市にヘレニズム型劇場が存在する例。政治・民族名だけで建築文化を一対一に分けられないことを示す。**
+- 状態：4〜3世紀BC。
+
+### Hellenistic Theatre of Halaesa Arconidea
+- 分類：Hellenistic Theatre / active research
+- 図鑑説明初稿：**現在も発掘研究が続く劇場。図鑑では完成済みの知識として固定せず、考古学によって情報が更新される地点として表示する。**
+- 状態：調査中表示を維持。
+
+### Theatre of Metapontum
+- 分類：Greek Theatre
+- 図鑑説明初稿：**より古いekklesiasterionに代わって造られた劇場で、自然斜面だけでなく人工的な盛土も利用する。Greek theatre＝必ず山腹を削る、という単純化を避ける重要例。**
+- 状態：4世紀BC。
+
+### Theatre of Velia / Elea
+- 分類：Greek-origin Theatre → Roman rebuilding
+- 図鑑説明初稿：**4世紀BCのギリシャ期から、ローマ時代の再建へ続く劇場。南イタリアで同じ上演空間が異なる時代をまたいで変化する様子を追える。**
+- 状態：Roman新築として重複登録しない。
+
+### Theatre of Locri Epizefiri
+- 分類：Greek-origin Theatre → Roman alteration
+- 図鑑説明初稿：**ギリシャ劇場を基礎としてローマ期に改築された南イタリアの例。『Greek theatre』と『Roman theatre』の境界を建物単位ではなく建築段階で見る教材になる。**
+- 状態：同一カード内で改築履歴を表示。
