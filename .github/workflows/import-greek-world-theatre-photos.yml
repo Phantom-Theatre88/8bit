@@ -1,0 +1,85 @@
+name: Import Greek world theatre photos
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/import-greek-world-theatre-photos.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download rights-checked Commons photos
+        run: |
+          mkdir -p assets/history/maps/greek-world
+          curl -L --fail --retry 3 "https://commons.wikimedia.org/wiki/Special:Redirect/file/Epidaurus_Theater.jpg?width=960" -o assets/history/maps/greek-world/epidaurus.jpg
+          curl -L --fail --retry 3 "https://commons.wikimedia.org/wiki/Special:Redirect/file/Theatre_of_Delphi.jpg?width=960" -o assets/history/maps/greek-world/delphi.jpg
+          curl -L --fail --retry 3 "https://commons.wikimedia.org/wiki/Special:Redirect/file/Dodona_theater.jpg?width=960" -o assets/history/maps/greek-world/dodona.jpg
+          curl -L --fail --retry 3 "https://commons.wikimedia.org/wiki/Special:Redirect/file/Ancient_Greek_theatre_in_Delos_01.jpg?width=960" -o assets/history/maps/greek-world/delos.jpg
+          curl -L --fail --retry 3 "https://commons.wikimedia.org/wiki/Special:Redirect/file/Ancient_theatre_of_Larisa.jpg?width=960" -o assets/history/maps/greek-world/larissa.jpg
+          curl -L --fail --retry 3 "https://commons.wikimedia.org/wiki/Special:Redirect/file/Greek_theater_of_Syracuse_AvL.JPG?width=960" -o assets/history/maps/greek-world/syracuse.jpg
+          curl -L --fail --retry 3 "https://commons.wikimedia.org/wiki/Special:Redirect/file/Ancient_theatre_of_Taormina_-_Teatro_Antico_di_Taormina.jpg?width=960" -o assets/history/maps/greek-world/taormina.jpg
+      - name: Write credits
+        run: |
+          cat > assets/history/maps/greek-world/CREDITS.md <<'EOF'
+          # 古代ギリシャ文化圏・地図写真クレジット
+
+          ## epidaurus.jpg
+          - 対象: Ancient Theatre of Epidaurus
+          - Author: Morn
+          - License: Public Domain
+          - Source: https://commons.wikimedia.org/wiki/File:Epidaurus_Theater.jpg
+
+          ## delphi.jpg
+          - 対象: Theatre of Delphi
+          - Author: Robin Iversen Rönnlund
+          - Date: 29 May 2009
+          - License: CC BY-SA 3.0
+          - Source: https://commons.wikimedia.org/wiki/File:Theatre_of_Delphi.jpg
+
+          ## dodona.jpg
+          - 対象: Theatre of Dodona
+          - Author: D. Swift
+          - License: CC BY 2.5
+          - Source: https://commons.wikimedia.org/wiki/File:Dodona_theater.jpg
+
+          ## delos.jpg
+          - 対象: Greek Theatre of Delos
+          - Author: Bernard Gagnon
+          - Date: 12 October 2011
+          - License: CC BY-SA 3.0
+          - Source: https://commons.wikimedia.org/wiki/File:Ancient_Greek_theatre_in_Delos_01.jpg
+
+          ## larissa.jpg
+          - 対象: Ancient Theatre of Larissa
+          - Author: Fsb2004
+          - License: Public Domain
+          - Source: https://commons.wikimedia.org/wiki/File:Ancient_theatre_of_Larisa.jpg
+
+          ## syracuse.jpg
+          - 対象: Greek Theatre of Syracuse
+          - Author: AlexanderVanLoon
+          - Date: 3 October 2012
+          - License: CC BY-SA 3.0
+          - Source: https://commons.wikimedia.org/wiki/File:Greek_theater_of_Syracuse_AvL.JPG
+
+          ## taormina.jpg
+          - 対象: Ancient Theatre of Taormina
+          - Author: Nicolas Chadeville
+          - Date: 8 January 2019
+          - License: CC BY-SA 4.0
+          - Source: https://commons.wikimedia.org/wiki/File:Ancient_theatre_of_Taormina_-_Teatro_Antico_di_Taormina.jpg
+          EOF
+      - name: Commit imported files and remove workflow
+        run: |
+          rm -f .github/workflows/import-greek-world-theatre-photos.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/history/maps/greek-world .github/workflows/import-greek-world-theatre-photos.yml
+          git commit -m "Add Greek world theatre map photos"
+          git push
