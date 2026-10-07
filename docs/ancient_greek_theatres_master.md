@@ -1038,3 +1038,648 @@ History上でも、この確度差を同じ見え方にしない。
 ### R40 Roman Theatre of Cyrene
 - 図鑑説明初稿：**Greek-origin city Cyreneの劇場。Roman新築かGreek theatreの継承・改築かを確定するまで分類保留とし、時代層を重視する。**
 - 状態：既存R台帳の分類・年代・確認状態を継承。未確定事項は未確定のまま表示する。
+
+
+## 劇場図鑑 詳細化 Batch H — Roman R41–R120
+
+> 既登録IDの現行図鑑ルール化。元台帳の候補・年代要精査・分類要精査・重複状態を保持する。ここでは新規地点を追加しない。
+
+### R41 Theatre of Pompeii / Teatro Grande
+- 地域：Pompeii / Campania
+- 分類：Theatre
+- 年代・建築段階：Samnite/Hellenistic段階を持つ可能性が高く、ローマ新築扱いは危険。ローマ期に大改修。
+- 現在の確認状態：候補・分類要精査
+- 図鑑説明初稿：**Pompeii / Campaniaの劇場。Samnite/Hellenistic段階を持つ可能性が高く、ローマ新築扱いは危険。ローマ期に大改修。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R42 Odeion / Teatro Piccolo of Pompeii
+- 地域：Pompeii / Campania
+- 分類：Odeion
+- 年代・建築段階：ローマ植民市期、80 BC以後の建築として扱える可能性が高い。
+- 現在の確認状態：初期確認済
+- 図鑑説明初稿：**Pompeii / Campaniaのオデイオン。ローマ植民市期、80 BC以後の建築として扱える可能性が高い。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R43 Roman Theatre of Herculaneum
+- 地域：Ercolano / Campania
+- 分類：Theatre
+- 年代・建築段階：Augustan期のローマ劇場。
+- 現在の確認状態：初期確認済
+- 図鑑説明初稿：**Ercolano / Campaniaの劇場。Augustan期のローマ劇場。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R44 Roman Theatre of Neapolis
+- 地域：Naples / Campania
+- 分類：Theatre
+- 年代・建築段階：ローマ期劇場。ギリシャ都市Neapolisの先行劇場との関係を要精査。
+- 現在の確認状態：候補・分類要精査
+- 図鑑説明初稿：**Naples / Campaniaの劇場。ローマ期劇場。ギリシャ都市Neapolisの先行劇場との関係を要精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R45 Roman Theatre of Sessa Aurunca
+- 地域：Sessa Aurunca / Campania
+- 分類：Theatre
+- 年代・建築段階：ローマ劇場遺構。共和政末〜帝政初期の成立段階を要照合。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Sessa Aurunca / Campaniaの劇場。ローマ劇場遺構。共和政末〜帝政初期の成立段階を要照合。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R46 Roman Theatre of Teanum Sidicinum
+- 地域：Teano / Campania
+- 分類：Theatre
+- 年代・建築段階：ローマ劇場。初期建設と2世紀ADの大改築を分離して確認する。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Teano / Campaniaの劇場。ローマ劇場。初期建設と2世紀ADの大改築を分離して確認する。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R47 Roman Theatre of Minturnae
+- 地域：Minturno / Lazio
+- 分類：Theatre
+- 年代・建築段階：ローマ植民都市の劇場。成立段階を要精査。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Minturno / Lazioの劇場。ローマ植民都市の劇場。成立段階を要精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R48 Roman Theatre of Ferento
+- 地域：Viterbo / Lazio
+- 分類：Theatre
+- 年代・建築段階：1世紀ADのローマ劇場として知られる。公的資料で年代再照合。
+- 現在の確認状態：初期確認済
+- 図鑑説明初稿：**Viterbo / Lazioの劇場。1世紀ADのローマ劇場として知られる。公的資料で年代再照合。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R49 Roman Theatre of Volterra
+- 地域：Volterra / Toscana
+- 分類：Theatre
+- 年代・建築段階：Augustus期、1世紀BC末頃のローマ劇場。
+- 現在の確認状態：初期確認済
+- 図鑑説明初稿：**Volterra / Toscanaの劇場。Augustus期、1世紀BC末頃のローマ劇場。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R50 Roman Theatre of Fiesole
+- 地域：Fiesole / Toscana
+- 分類：Theatre
+- 年代・建築段階：ローマ劇場。共和政末〜帝政初期の年代幅を精査。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Fiesole / Toscanaの劇場。ローマ劇場。共和政末〜帝政初期の年代幅を精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R51 Roman Theatre of Arezzo
+- 地域：Arezzo / Toscana
+- 分類：Theatre
+- 年代・建築段階：ローマ劇場遺構。Hadrian期を中心とする年代情報を公的資料で照合。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Arezzo / Toscanaの劇場。ローマ劇場遺構。Hadrian期を中心とする年代情報を公的資料で照合。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R52 Roman Theatre of Trieste / Tergeste
+- 地域：Trieste / Friuli-Venezia Giulia
+- 分類：Theatre
+- 年代・建築段階：1〜2世紀ADのローマ劇場。
+- 現在の確認状態：初期確認済
+- 図鑑説明初稿：**Trieste / Friuli-Venezia Giuliaの劇場。1〜2世紀ADのローマ劇場。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R53 Roman Theatre of Verona
+- 地域：Verona / Veneto
+- 分類：Theatre
+- 年代・建築段階：1世紀BC後半のローマ劇場。
+- 現在の確認状態：初期確認済
+- 図鑑説明初稿：**Verona / Venetoの劇場。1世紀BC後半のローマ劇場。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R54 Roman Theatre of Brescia / Brixia
+- 地域：Brescia / Lombardia
+- 分類：Theatre
+- 年代・建築段階：Roman theatre adjacent to Capitolium。建築段階を精査。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Brescia / Lombardiaの劇場。Roman theatre adjacent to Capitolium。建築段階を精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R55 Roman Theatre of Milan / Mediolanum
+- 地域：Milano / Lombardia
+- 分類：Theatre
+- 年代・建築段階：ローマ劇場の地下遺構。共和政末〜Augustan期候補。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Milano / Lombardiaの劇場。ローマ劇場の地下遺構。共和政末〜Augustan期候補。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R56 Roman Theatre of Bologna / Bononia
+- 地域：Bologna / Emilia-Romagna
+- 分類：Theatre
+- 年代・建築段階：ローマ劇場遺構。初期建設は共和政期まで遡る可能性があり、年代を精査。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Bologna / Emilia-Romagnaの劇場。ローマ劇場遺構。初期建設は共和政期まで遡る可能性があり、年代を精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R57 Roman Theatre of Spoleto / Spoletium
+- 地域：Spoleto / Umbria
+- 分類：Theatre
+- 年代・建築段階：1世紀BCのローマ劇場。
+- 現在の確認状態：初期確認済
+- 図鑑説明初稿：**Spoleto / Umbriaの劇場。1世紀BCのローマ劇場。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R58 Roman Theatre of Falerii Novi
+- 地域：Fabrica di Roma / Lazio
+- 分類：Theatre
+- 年代・建築段階：ローマ都市の劇場。年代精査。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Fabrica di Roma / Lazioの劇場。ローマ都市の劇場。年代精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R59 Roman Theatre of Carsulae
+- 地域：Terni / Umbria
+- 分類：Theatre
+- 年代・建築段階：ローマ都市Carsulaeの劇場遺構。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Terni / Umbriaの劇場。ローマ都市Carsulaeの劇場遺構。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R60 Roman Theatre of Urbs Salvia
+- 地域：Urbisaglia / Marche
+- 分類：Theatre
+- 年代・建築段階：1世紀AD初頭のローマ劇場。
+- 現在の確認状態：初期確認済
+- 図鑑説明初稿：**Urbisaglia / Marcheの劇場。1世紀AD初頭のローマ劇場。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R61 Roman Theatre of Ascoli Piceno / Asculum
+- 地域：Ascoli Piceno / Marche
+- 分類：Theatre
+- 年代・建築段階：ローマ劇場遺構。成立年代を要精査。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Ascoli Piceno / Marcheの劇場。ローマ劇場遺構。成立年代を要精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R62 Roman Theatre of Teramo / Interamnia Praetuttiorum
+- 地域：Teramo / Abruzzo
+- 分類：Theatre
+- 年代・建築段階：Augustan期のローマ劇場。
+- 現在の確認状態：初期確認済
+- 図鑑説明初稿：**Teramo / Abruzzoの劇場。Augustan期のローマ劇場。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R63 Roman Theatre of Amiternum
+- 地域：L'Aquila / Abruzzo
+- 分類：Theatre
+- 年代・建築段階：1世紀BC末〜1世紀AD頃のローマ劇場。
+- 現在の確認状態：初期確認済
+- 図鑑説明初稿：**L'Aquila / Abruzzoの劇場。1世紀BC末〜1世紀AD頃のローマ劇場。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R64 Roman Theatre of Sepino / Saepinum
+- 地域：Sepino / Molise
+- 分類：Theatre
+- 年代・建築段階：ローマ都市Saepinumの劇場。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Sepino / Moliseの劇場。ローマ都市Saepinumの劇場。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R65 Roman Theatre of Venafrum
+- 地域：Venafro / Molise
+- 分類：Theatre
+- 年代・建築段階：ローマ劇場遺構。成立年代を要精査。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Venafro / Moliseの劇場。ローマ劇場遺構。成立年代を要精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R66 Roman Theatre of Grumentum
+- 地域：Grumento Nova / Basilicata
+- 分類：Theatre
+- 年代・建築段階：ローマ都市の劇場。ギリシャ系南イタリア母集団との重複なし。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Grumento Nova / Basilicataの劇場。ローマ都市の劇場。ギリシャ系南イタリア母集団との重複なし。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R67 Roman Theatre of Lecce / Lupiae
+- 地域：Lecce / Puglia
+- 分類：Theatre
+- 年代・建築段階：Roman theatre。Augustan期候補、年代精査。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Lecce / Pugliaの劇場。Roman theatre。Augustan期候補、年代精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R68 Roman Theatre of Catania
+- 地域：Catania / Sicilia
+- 分類：Theatre
+- 年代・建築段階：現存建築はローマ期だが、ギリシャ先行劇場の存在が論点。
+- 現在の確認状態：候補・分類要精査
+- 図鑑説明初稿：**Catania / Siciliaの劇場。現存建築はローマ期だが、ギリシャ先行劇場の存在が論点。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R69 Odeon of Catania
+- 地域：Catania / Sicilia
+- 分類：Odeion
+- 年代・建築段階：ローマodeon。劇場に隣接する別建築。
+- 現在の確認状態：初期確認済
+- 図鑑説明初稿：**Catania / Siciliaのオデイオン。ローマodeon。劇場に隣接する別建築。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R70 Roman Theatre of Bene Vagienna / Augusta Bagiennorum
+- 地域：Bene Vagienna / Piemonte
+- 分類：Theatre
+- 年代・建築段階：ローマ都市の劇場遺構。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Bene Vagienna / Piemonteの劇場。ローマ都市の劇場遺構。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R71 Roman Theatre of Nora
+- 地域：Pula / Sardegna
+- 分類：Theatre
+- 年代・建築段階：ローマ期の劇場。先行Punic都市との関係はあるが劇場建築の成立段階を別途精査。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Pula / Sardegnaの劇場。ローマ期の劇場。先行Punic都市との関係はあるが劇場建築の成立段階を別途精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R72 Théâtre antique d'Arles
+- 地域：Arles / France
+- 分類：Theatre
+- 年代・建築段階：ローマ植民都市Arelateの劇場。Augustus期。
+- 現在の確認状態：初期確認済
+- 図鑑説明初稿：**Arles / Franceの劇場。ローマ植民都市Arelateの劇場。Augustus期。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R73 Théâtre antique de Vienne
+- 地域：Vienne / France
+- 分類：Theatre
+- 年代・建築段階：ローマ都市Viennaの劇場。帝政初期を中心に年代精査。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Vienne / Franceの劇場。ローマ都市Viennaの劇場。帝政初期を中心に年代精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R74 Théâtre antique de Vaison-la-Romaine
+- 地域：Vaison-la-Romaine / France
+- 分類：Theatre
+- 年代・建築段階：Vasioのローマ劇場。1世紀ADの建築段階を精査。
+- 現在の確認状態：初期確認済
+- 図鑑説明初稿：**Vaison-la-Romaine / Franceの劇場。Vasioのローマ劇場。1世紀ADの建築段階を精査。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R75 Théâtre antique de Lillebonne
+- 地域：Lillebonne / France
+- 分類：Theatre / mixed phases
+- 年代・建築段階：文化省POPがGallo-romainの劇場遺構として登録。複数期・arena化を含むため段階精査。
+- 現在の確認状態：確認済・段階要精査
+- 図鑑説明初稿：**Lillebonne / Franceの劇場 / mixed phases。文化省POPがGallo-romainの劇場遺構として登録。複数期・arena化を含むため段階精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R76 Théâtre romain de Soissons
+- 地域：Soissons / France
+- 分類：Theatre
+- 年代・建築段階：文化省POPがAntiquité/Gallo-romainのRoman theatreとして登録。
+- 現在の確認状態：確認済
+- 図鑑説明初稿：**Soissons / Franceの劇場。文化省POPがAntiquité/Gallo-romainのRoman theatreとして登録。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R77 Théâtre gallo-romain de Vieux
+- 地域：Vieux / France
+- 分類：Theatre
+- 年代・建築段階：文化省POP登録。Gallo-romain、遺構断片。
+- 現在の確認状態：確認済
+- 図鑑説明初稿：**Vieux / Franceの劇場。文化省POP登録。Gallo-romain、遺構断片。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R78 Théâtre gallo-romain des Bouchauds
+- 地域：Saint-Cybardeaux / France
+- 分類：Theatre
+- 年代・建築段階：文化省POP。1〜2世紀AD、直径約107m。
+- 現在の確認状態：確認済
+- 図鑑説明初稿：**Saint-Cybardeaux / Franceの劇場。文化省POP。1〜2世紀AD、直径約107m。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R79 Théâtre gallo-romain de Thénac
+- 地域：Thénac / France
+- 分類：Theatre
+- 年代・建築段階：文化省POP。平地建設、直径約90m。
+- 現在の確認状態：確認済
+- 図鑑説明初稿：**Thénac / Franceの劇場。文化省POP。平地建設、直径約90m。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R80 Théâtre antique de Mandeure
+- 地域：Mandeure / France
+- 分類：Theatre / sanctuary theatre
+- 年代・建築段階：文化省考古学サイト。ガリア・帝国でも最大級の劇場の一つ。POPは1世紀の遺構として登録。
+- 現在の確認状態：確認済
+- 図鑑説明初稿：**Mandeure / Franceの劇場 / sanctuary theatre。文化省考古学サイト。ガリア・帝国でも最大級の劇場の一つ。POPは1世紀の遺構として登録。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R81 Théâtre du Vieux-Poitiers
+- 地域：Naintré / France
+- 分類：Theatre
+- 年代・建築段階：文化省POP。Gallo-romain / Haut-Empire。
+- 現在の確認状態：確認済
+- 図鑑説明初稿：**Naintré / Franceの劇場。文化省POP。Gallo-romain / Haut-Empire。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R82 Théâtre antique d'Orléans
+- 地域：Orléans / France
+- 分類：Theatre
+- 年代・建築段階：Inrap。1世紀中頃に最初の劇場建設開始。
+- 現在の確認状態：確認済
+- 図鑑説明初稿：**Orléans / Franceの劇場。Inrap。1世紀中頃に最初の劇場建設開始。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R83 Théâtre antique de Cadayrac
+- 地域：Salles-la-Source / France
+- 分類：Theatre / sanctuary theatre
+- 年代・建築段階：文化省POP。1〜2世紀AD。sanctuary settlement内の劇場。
+- 現在の確認状態：確認済
+- 図鑑説明初稿：**Salles-la-Source / Franceの劇場 / sanctuary theatre。文化省POP。1〜2世紀AD。sanctuary settlement内の劇場。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R84 Théâtre gallo-romain d'Alba-la-Romaine
+- 地域：Alba-la-Romaine / France
+- 分類：Theatre
+- 年代・建築段階：文化省POPでGallo-romain theatre。登録情報は3〜4世紀の建築段階を含む。都市自体は1 BC〜4 ADに展開。
+- 現在の確認状態：確認済・段階要精査
+- 図鑑説明初稿：**Alba-la-Romaine / Franceの劇場。文化省POPでGallo-romain theatre。登録情報は3〜4世紀の建築段階を含む。都市自体は1 BC〜4 ADに展開。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R85 Théâtre mixte des Sarrazins
+- 地域：Montbrison / France
+- 分類：Mixed theatre
+- 年代・建築段階：文化省POPが「théâtre mixte gallo-romain」として登録。
+- 現在の確認状態：確認済・混合型
+- 図鑑説明初稿：**Montbrison / FranceのMixed theatre。文化省POPが「théâtre mixte gallo-romain」として登録。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R86 Théâtre des Châteliers
+- 地域：Amboise / France
+- 分類：Theatre / sanctuary complex
+- 年代・建築段階：文化省POPでfanumとtheatreを含むGallo-romain site。劇場個別年代を要精査。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Amboise / Franceの劇場 / sanctuary complex。文化省POPでfanumとtheatreを含むGallo-romain site。劇場個別年代を要精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R87 Théâtre antique d'Avenches / Aventicum
+- 地域：Avenches / Switzerland
+- 分類：Theatre
+- 年代・建築段階：Roman Helvetiaの劇場。成立・改築段階をスイス公的資料で追加照合。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Avenches / Switzerlandの劇場。Roman Helvetiaの劇場。成立・改築段階をスイス公的資料で追加照合。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R88 Teatro Romano de Caesaraugusta
+- 地域：Zaragoza / Spain
+- 分類：Theatre
+- 年代・建築段階：Tiberius期（14–37 AD）に着工、Claudius期（41–54 AD）に完成。Aragón文化遺産公式資料。
+- 現在の確認状態：確認済
+- 図鑑説明初稿：**Zaragoza / Spainの劇場。Tiberius期（14–37 AD）に着工、Claudius期（41–54 AD）に完成。Aragón文化遺産公式資料。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R89 Teatro Romano de Gades / Theatrum Balbi
+- 地域：Cádiz / Spain
+- 分類：Theatre
+- 年代・建築段階：1世紀BC、Lucius Cornelius Balbus Minorが建設。Cádiz市・Junta de Andalucía資料。
+- 現在の確認状態：確認済
+- 図鑑説明初稿：**Cádiz / Spainの劇場。1世紀BC、Lucius Cornelius Balbus Minorが建設。Cádiz市・Junta de Andalucía資料。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R90 Teatro Romano de Regina Turdulorum
+- 地域：Casas de Reina / Spain
+- 分類：Theatre
+- 年代・建築段階：1世紀AD、Flavian期。Extremadura公的観光情報由来。
+- 現在の確認状態：確認済
+- 図鑑説明初稿：**Casas de Reina / Spainの劇場。1世紀AD、Flavian期。Extremadura公的観光情報由来。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R91 Teatro Romano de Metellinum
+- 地域：Medellín / Spain
+- 分類：Theatre
+- 年代・建築段階：ローマ都市Metellinumの劇場。2007年以降発掘、現地自治体資料で遺構確認。建設年代は追加精査。
+- 現在の確認状態：確認済・年代要精査
+- 図鑑説明初稿：**Medellín / Spainの劇場。ローマ都市Metellinumの劇場。2007年以降発掘、現地自治体資料で遺構確認。建設年代は追加精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R92 Teatro Romano de Clunia
+- 地域：Peñalba de Castro / Spain
+- 分類：Theatre
+- 年代・建築段階：Clunia Sulpiciaのローマ劇場。Burgos県公式遺跡サイトで確認。年代精査継続。
+- 現在の確認状態：確認済・年代要精査
+- 図鑑説明初稿：**Peñalba de Castro / Spainの劇場。Clunia Sulpiciaのローマ劇場。Burgos県公式遺跡サイトで確認。年代精査継続。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R93 Teatro Romano de Segóbriga
+- 地域：Saelices / Spain
+- 分類：Theatre
+- 年代・建築段階：Segóbriga遺跡の主要ローマ劇場。Castilla-La Mancha公式観光資料で存在確認。年代精査継続。
+- 現在の確認状態：確認済・年代要精査
+- 図鑑説明初稿：**Saelices / Spainの劇場。Segóbriga遺跡の主要ローマ劇場。Castilla-La Mancha公式観光資料で存在確認。年代精査継続。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R94 Teatro Romano de Bilbilis
+- 地域：Calatayud / Spain
+- 分類：Theatre
+- 年代・建築段階：Bilbilis Augustaのローマ劇場。Aragón側資料で個別年代を追加照合。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Calatayud / Spainの劇場。Bilbilis Augustaのローマ劇場。Aragón側資料で個別年代を追加照合。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R95 Teatro Romano de Acinipo
+- 地域：Ronda / Spain
+- 分類：Theatre
+- 年代・建築段階：Roman theatre。Junta de Andalucíaの考古学遺跡として年代・建築段階を追加照合。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Ronda / Spainの劇場。Roman theatre。Junta de Andalucíaの考古学遺跡として年代・建築段階を追加照合。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R96 Teatro Romano de Baelo Claudia
+- 地域：Bolonia / Tarifa / Spain
+- 分類：Theatre
+- 年代・建築段階：Roman theatre。Junta de Andalucía管理遺跡。1世紀ADを中心に精査。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Bolonia / Tarifa / Spainの劇場。Roman theatre。Junta de Andalucía管理遺跡。1世紀ADを中心に精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R97 Teatro Romano de Itálica
+- 地域：Santiponce / Spain
+- 分類：Theatre
+- 年代・建築段階：Roman theatre。初期建設段階はAugustan期以前へ遡る可能性があり年代精査。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Santiponce / Spainの劇場。Roman theatre。初期建設段階はAugustan期以前へ遡る可能性があり年代精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R98 Teatro Romano de Córdoba / Corduba
+- 地域：Córdoba / Spain
+- 分類：Theatre
+- 年代・建築段階：大型Roman theatreの考古学的遺構。成立年代・可視範囲を要精査。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Córdoba / Spainの劇場。大型Roman theatreの考古学的遺構。成立年代・可視範囲を要精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R99 Teatro Romano de Carteia
+- 地域：San Roque / Spain
+- 分類：Theatre
+- 年代・建築段階：Roman theatre。Punic/Republican都市史との関係を含め年代精査。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**San Roque / Spainの劇場。Roman theatre。Punic/Republican都市史との関係を含め年代精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R100 Teatro Romano de Pollentia
+- 地域：Alcúdia / Mallorca / Spain
+- 分類：Theatre
+- 年代・建築段階：Roman theatre。Balearic Roman cityの劇場。建設年代精査。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Alcúdia / Mallorca / Spainの劇場。Roman theatre。Balearic Roman cityの劇場。建設年代精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R101 Teatro Romano de Complutum
+- 地域：Alcalá de Henares / Spain
+- 分類：Theatre?
+- 年代・建築段階：Roman city Complutumの娯楽建築としての同定・遺構状態を再確認する。
+- 現在の確認状態：候補・分類要精査
+- 図鑑説明初稿：**Alcalá de Henares / Spainの劇場?。Roman city Complutumの娯楽建築としての同定・遺構状態を再確認する。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R102 Teatro Romano de Lisboa / Olisipo（年代補正項目）
+- 地域：Lisbon / Portugal
+- 分類：Theatre
+- 年代・建築段階：既登録R10。Portugal公式観光資料は1世紀AD建設、Nero期再建を確認。新規地点ではなく既存情報の補強。
+- 現在の確認状態：既存R10・重複
+- 図鑑説明初稿：**Lisbon / Portugalの劇場。既登録R10。Portugal公式観光資料は1世紀AD建設、Nero期再建を確認。新規地点ではなく既存情報の補強。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R103 Roman theatre candidate of Bracara Augusta
+- 地域：Braga / Portugal
+- 分類：Theatre?
+- 年代・建築段階：Bracara Augustaは27 BC頃に形成。劇場建築の確実な同定・位置については追加考古学資料が必要。
+- 現在の確認状態：候補・存在要精査
+- 図鑑説明初稿：**Braga / Portugalの劇場?。Bracara Augustaは27 BC頃に形成。劇場建築の確実な同定・位置については追加考古学資料が必要。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R104 Roman theatre of Ebora / Évora candidate
+- 地域：Évora / Portugal
+- 分類：Theatre?
+- 年代・建築段階：Roman city Eboraの劇場候補。神殿等との混同を避け、遺構・文献根拠を要精査。
+- 現在の確認状態：候補・存在要精査
+- 図鑑説明初稿：**Évora / Portugalの劇場?。Roman city Eboraの劇場候補。神殿等との混同を避け、遺構・文献根拠を要精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R105 Theatre of Bulla Regia
+- 地域：Jendouba / Tunisia
+- 分類：Theatre
+- 年代・建築段階：Tunisia文化省AMVPPCがtheatreを含む都市遺構を公式確認。都市は46 BC以後徐々にRoman化。劇場個別年代は精査継続。
+- 現在の確認状態：確認済・年代要精査
+- 図鑑説明初稿：**Jendouba / Tunisiaの劇場。Tunisia文化省AMVPPCがtheatreを含む都市遺構を公式確認。都市は46 BC以後徐々にRoman化。劇場個別年代は精査継続。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R106 Theatre of Thuburbo Majus
+- 地域：Zaghouan / Tunisia
+- 分類：Theatre
+- 年代・建築段階：Roman-period city theatre。個別建設年代をTunisia公的資料で追加照合。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Zaghouan / Tunisiaの劇場。Roman-period city theatre。個別建設年代をTunisia公的資料で追加照合。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R107 Theatre of Sufetula / Sbeitla
+- 地域：Sbeitla / Tunisia
+- 分類：Theatre
+- 年代・建築段階：Roman cityの劇場遺構。建設年代を個別精査。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Sbeitla / Tunisiaの劇場。Roman cityの劇場遺構。建設年代を個別精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R108 Theatre of Thugga minor regional register candidate
+- 地域：Tunisia
+- 分類：Theatre?
+- 年代・建築段階：Dougga R35との混同防止。独立地点として確証が取れるまでPin候補に留める。
+- 現在の確認状態：候補・存在要精査
+- 図鑑説明初稿：**Tunisiaの劇場?。Dougga R35との混同防止。独立地点として確証が取れるまでPin候補に留める。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R109 Theatre of Timgad / Thamugadi
+- 地域：Batna / Algeria
+- 分類：Theatre
+- 年代・建築段階：UNESCOはAD100にTrajanが建設した植民市にtheatreを含む標準的都市施設一式を確認。
+- 現在の確認状態：確認済
+- 図鑑説明初稿：**Batna / Algeriaの劇場。UNESCOはAD100にTrajanが建設した植民市にtheatreを含む標準的都市施設一式を確認。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R110 Theatre of Tipasa
+- 地域：Tipaza / Algeria
+- 分類：Theatre
+- 年代・建築段階：UNESCO提出資料で2世紀末〜3世紀初頭、約4,000席。自然斜面でなく人工的支持体に構築。
+- 現在の確認状態：確認済
+- 図鑑説明初稿：**Tipaza / Algeriaの劇場。UNESCO提出資料で2世紀末〜3世紀初頭、約4,000席。自然斜面でなく人工的支持体に構築。 現行台帳で確認済みの範囲を基礎に、都市史と上演空間の関係を比較する。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R111 Theatre of Djemila / Cuicul
+- 地域：Djemila / Algeria
+- 分類：Theatre
+- 年代・建築段階：Roman city Cuiculのtheatre。UNESCO世界遺産構成遺構。個別年代精査。
+- 現在の確認状態：確認済・年代要精査
+- 図鑑説明初稿：**Djemila / Algeriaの劇場。Roman city Cuiculのtheatre。UNESCO世界遺産構成遺構。個別年代精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R112 Theatre of Calama
+- 地域：Guelma / Algeria
+- 分類：Theatre
+- 年代・建築段階：Roman theatre。現存遺構は復元を含むため古代部分と近代復元を分けて確認。
+- 現在の確認状態：候補・復元履歴要精査
+- 図鑑説明初稿：**Guelma / Algeriaの劇場。Roman theatre。現存遺構は復元を含むため古代部分と近代復元を分けて確認。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R113 Theatre of Madauros / Madaure
+- 地域：M'Daourouch / Algeria
+- 分類：Theatre
+- 年代・建築段階：Roman-period theatre ruins。個別年代・建築段階を追加照合。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**M'Daourouch / Algeriaの劇場。Roman-period theatre ruins。個別年代・建築段階を追加照合。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R114 Theatre of Khamissa / Thubursicum Numidarum
+- 地域：Khamissa / Algeria
+- 分類：Theatre
+- 年代・建築段階：Numidian起源都市にRoman theatre。劇場建設年代を精査。
+- 現在の確認状態：候補・要年代精査
+- 図鑑説明初稿：**Khamissa / Algeriaの劇場。Numidian起源都市にRoman theatre。劇場建設年代を精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R115 Theatre of Caesarea Mauretaniae
+- 地域：Cherchell / Algeria
+- 分類：Theatre
+- 年代・建築段階：Mauretanian/Roman capitalのtheatre。前ローマ王国期との建築段階を要分類。
+- 現在の確認状態：候補・分類要精査
+- 図鑑説明初稿：**Cherchell / Algeriaの劇場。Mauretanian/Roman capitalのtheatre。前ローマ王国期との建築段階を要分類。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R116 Theatre of Lambaesis
+- 地域：Tazoult / Algeria
+- 分類：Theatre
+- 年代・建築段階：Roman military-city complexのtheatre候補。遺構同定・年代を要精査。
+- 現在の確認状態：候補・存在要精査
+- 図鑑説明初稿：**Tazoult / Algeriaの劇場。Roman military-city complexのtheatre候補。遺構同定・年代を要精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R117 Theatre of Apollonia
+- 地域：Susa / Libya
+- 分類：Theatre
+- 年代・建築段階：CyrenaicaのGreek-origin city。劇場の初期段階がGreek/HellenisticかRomanか要精査。
+- 現在の確認状態：候補・分類要精査
+- 図鑑説明初稿：**Susa / Libyaの劇場。CyrenaicaのGreek-origin city。劇場の初期段階がGreek/HellenisticかRomanか要精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R118 Theatre of Ptolemais
+- 地域：Tolmeita / Libya
+- 分類：Theatre
+- 年代・建築段階：CyrenaicaのHellenistic/Roman city。劇場成立段階を要精査。
+- 現在の確認状態：候補・分類要精査
+- 図鑑説明初稿：**Tolmeita / Libyaの劇場。CyrenaicaのHellenistic/Roman city。劇場成立段階を要精査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R119 Odeon / theatre complex of Kom el-Dikka（年代補正）
+- 地域：Alexandria / Egypt
+- 分類：Odeion
+- 年代・建築段階：既登録R5。Egypt MinistryはRoman/Byzantine 2〜6世紀ADの遺跡群、現存建物をRoman Theater (Odeon)と公式説明。
+- 現在の確認状態：既存R5・情報補強
+- 図鑑説明初稿：**Alexandria / Egyptのオデイオン。既登録R5。Egypt MinistryはRoman/Byzantine 2〜6世紀ADの遺跡群、現存建物をRoman Theater (Odeon)と公式説明。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
+
+### R120 Oxyrhynchus theatre candidate
+- 地域：El-Bahnasa / Egypt
+- 分類：Theatre
+- 年代・建築段階：Greco-Roman cityの大型theatre記録・発掘情報があるが、成立年代・遺構の公的確認を追加調査。
+- 現在の確認状態：候補・要精査
+- 図鑑説明初稿：**El-Bahnasa / Egyptの劇場。Greco-Roman cityの大型theatre記録・発掘情報があるが、成立年代・遺構の公的確認を追加調査。 未確定点を残したまま、現在見える遺構・初期建設・後代改築を分けて扱う。**
+- メタデータ：写真／作者／ライセンス／原典URL／日本語Wikipedia／公的根拠URLは個別照合後に確定する。
