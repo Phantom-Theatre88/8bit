@@ -218,7 +218,7 @@ button,a{font:inherit}
     <button class="theatre-list-toggle" id="theatreListToggle" type="button" aria-controls="theatreListPanel" aria-expanded="true">劇場リスト</button>
     <aside class="theatre-list-panel" id="theatreListPanel" aria-label="劇場リスト">
       <div class="theatre-list-head">
-        <h2>劇場リスト</h2>
+        <h2 id="theatreListTitle">劇場リスト｜全体</h2>
         <button class="theatre-list-close" id="theatreListClose" type="button" aria-label="劇場リストを閉じる">×</button>
       </div>
       <div class="theatre-list" id="theatreList"></div>
@@ -823,6 +823,16 @@ theatres.forEach((t,index)=>{
 
 function showRegion(region){
   const visibleBounds=[];
+  let visibleCount=0;
+  const regionLabels={
+    all:"全体",
+    athens:"アテネ周辺",
+    mainland:"ギリシャ本土",
+    islands:"エーゲ海の島々",
+    turkey:"現在のトルコ西部",
+    sicily:"南イタリア・シチリア"
+  };
+
   theatres.forEach(t=>{
     const group=t.regionGroup||"athens";
     const visible=region==="all"||group===region;
@@ -830,12 +840,22 @@ function showRegion(region){
       if(!map.hasLayer(t._marker))t._marker.addTo(map);
       t._listItem.hidden=false;
       visibleBounds.push([t.lat,t.lng]);
+      visibleCount++;
     }else{
       if(map.hasLayer(t._marker))map.removeLayer(t._marker);
       t._listItem.hidden=true;
+      t._listItem.classList.remove("active");
     }
   });
+
   document.querySelectorAll(".region-filter").forEach(b=>b.classList.toggle("active",b.dataset.region===region));
+
+  const title=document.getElementById("theatreListTitle");
+  if(title)title.textContent="劇場リスト｜"+(regionLabels[region]||"全体")+"（"+visibleCount+"）";
+
+  const list=document.getElementById("theatreList");
+  if(list)list.scrollTop=0;
+
   if(visibleBounds.length)map.fitBounds(visibleBounds,{padding:[48,48],maxZoom:10});
 }
 document.querySelectorAll(".region-filter").forEach(b=>b.addEventListener("click",()=>showRegion(b.dataset.region)));
