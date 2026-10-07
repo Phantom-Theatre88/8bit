@@ -35,6 +35,20 @@ button,a{font:inherit}
   display:flex;align-items:flex-end;justify-content:space-between;gap:18px;
   padding:2px 2px 0;
 }
+.map-head-tools{display:flex;align-items:center;justify-content:flex-end;gap:10px;min-width:0;flex:1}
+.era-bar{display:flex;align-items:stretch;min-width:0;border:1px solid #3a3f44;border-radius:9px;overflow:hidden;background:#111417}
+.era-step{
+  min-height:42px;padding:5px 10px;border:0;border-right:1px solid #34393e;
+  background:#15191c;color:#c9ced2;cursor:pointer;white-space:nowrap;
+  font-size:12px;font-weight:800;line-height:1.2
+}
+.era-step:last-child{border-right:0}
+.era-step small{display:block;color:#8f989f;font-size:11px;font-weight:700;margin-top:2px}
+.era-step.active{background:linear-gradient(180deg,#f5e8d1,#dcb879);color:#17120a}
+.era-step.active small{color:#5f4b2a}
+.era-step.unknown{border-left:1px solid #555}
+.era-step:focus-visible{outline:2px solid #f1c36f;outline-offset:-2px}
+
 .map-title h1{
   margin:0;
   font-family:Georgia,"Yu Mincho","Hiragino Mincho ProN",serif;
@@ -193,7 +207,17 @@ button,a{font:inherit}
       <h1>古代ギリシャ劇場｜地図モード</h1>
       <p>アテネ周辺から、ギリシャ本土・エーゲ海・南イタリア／シチリアへ。劇場の広がりを地図から見る。</p>
     </div>
-    <a class="map-back" href="History.html?item=greekTheatre">← 古代ギリシャ劇場へ戻る</a>
+    <div class="map-head-tools">
+      <div class="era-bar" id="eraBar" aria-label="年代を進めて劇場の広がりを見る">
+        <button class="era-step" type="button" data-era="bc5">BC5世紀以前<small>古典期初期まで</small></button>
+        <button class="era-step" type="button" data-era="bc4">BC4世紀まで<small>古典期後半</small></button>
+        <button class="era-step" type="button" data-era="bc3">BC3〜2世紀まで<small>ヘレニズム期</small></button>
+        <button class="era-step" type="button" data-era="bc1">BC1世紀以降<small>ローマ期への移行</small></button>
+        <button class="era-step active" type="button" data-era="all">全期間<small>65劇場</small></button>
+        <button class="era-step unknown" type="button" data-era="unknown">年代未確定<small>推測しない</small></button>
+      </div>
+      <a class="map-back" href="History.html?item=greekTheatre">← 古代ギリシャ劇場へ戻る</a>
+    </div>
   </section>
 
   <section class="map-shell" aria-label="アテネ周辺の古代劇場地図">
@@ -1009,6 +1033,27 @@ const theatres=[
   }
 ];
 
+
+const theatreStartStage={
+  "ディオニュソス劇場":1,"トリコス劇場":1,"イカリオン劇場":null,"ラムヌース劇場":2,
+  "エウオニュモン劇場（トラコネス）":1,"ハリムース劇場":null,"アカルナイ劇場":2,"ピレウス旧劇場（ムニキア）":1,
+  "ゼア劇場":3,"アンフィアレイオンの劇場":2,"アイギリア":null,"アイクソネ":null,"アナギュルス":null,
+  "アトモノン":2,"エレウシス":null,"ハライ・アイクソニデス":2,"ハライ・アラフェニデス":2,"ケファレ":null,
+  "コリュトス":null,"ランプトライ":null,"マラトン四都市連合":2,"ミュリヌース":null,"オア／パイアニア":null,
+  "パイアニア":null,"フリュア":null,"スフェットス":2,"エピダウロス劇場":2,"メガロポリス劇場":null,
+  "アルゴス劇場":3,"デルフィ劇場":3,"エレトリア劇場":3,"ラリサ第1古代劇場":3,"デロス劇場":3,
+  "メロス劇場":null,"リンドス劇場":null,"オイニアダイ劇場":2,"ドドナ劇場":3,"アプテラ劇場":3,
+  "マロネイア劇場":null,"シラクサのギリシャ劇場":2,"タオルミーナ古代劇場":3,"エフェソス大劇場":3,
+  "プリエネ劇場":2,"ペルガモン劇場":3,"アッソス劇場":2,"ミレトス劇場":null,"アフロディシアス劇場":4,
+  "テオス劇場":3,"メトロポリス劇場":3,"エリュトライ劇場":3,"マグネシア・アド・マエアンドルム劇場":3,
+  "ハリカルナッソス劇場":2,"カウノス劇場":3,"クニドス下劇場":null,"アリンダ劇場":3,
+  "セジェスタ劇場":2,"ティンダリ劇場":2,"アクライ劇場":3,"モルガンティナ劇場":2,
+  "ヘラクレア・ミノア劇場":2,"ソルント劇場":2,"ハラエサ・アルコニデア劇場":3,"メタポントゥム劇場":2,
+  "ヴェリア劇場":2,"ロクリ・エピゼフィリ劇場":null
+};
+const eraStage={bc5:1,bc4:2,bc3:3,bc1:4,all:Infinity};
+theatres.forEach(t=>t.startStage=Object.prototype.hasOwnProperty.call(theatreStartStage,t.name)?theatreStartStage[t.name]:null);
+
 const bounds=[];
 const markerByIndex=[];
 const listHost=document.getElementById("theatreList");
@@ -1062,34 +1107,54 @@ theatres.forEach((t,index)=>{
   t._listItem=item;
 });
 
-function showRegion(region){
+let activeRegion="all";
+let activeEra="all";
+
+function theatreVisible(t){
+  const group=t.regionGroup||"athens";
+  const regionOK=activeRegion==="all"||group===activeRegion;
+  let eraOK=true;
+  if(activeEra==="unknown") eraOK=t.startStage==null;
+  else if(activeEra!=="all") eraOK=t.startStage!=null && t.startStage<=eraStage[activeEra];
+  return regionOK&&eraOK;
+}
+
+function refreshFilters(fit=true){
   const visibleBounds=[];
   let visibleCount=0;
   const regionLabels={
-    all:"全体",
-    athens:"アテネ周辺",
-    mainland:"ギリシャ本土",
-    islands:"エーゲ海の島々",
-    turkey:"現在のトルコ西部",
-    sicily:"南イタリア・シチリア"
+    all:"全体",athens:"アテネ周辺",mainland:"ギリシャ本土",islands:"エーゲ海の島々",
+    turkey:"現在のトルコ西部",sicily:"南イタリア・シチリア"
   };
+  const eraLabels={all:"全期間",bc5:"BC5世紀以前",bc4:"BC4世紀まで",bc3:"BC3〜2世紀まで",bc1:"BC1世紀以降",unknown:"年代未確定"};
 
   theatres.forEach(t=>{
-    const group=t.regionGroup||"athens";
-    const visible=region==="all"||group===region;
+    const visible=theatreVisible(t);
     if(visible){
       if(!map.hasLayer(t._marker))t._marker.addTo(map);
       t._listItem.hidden=false;
-      visibleBounds.push([t.lat,t.lng]);
-      visibleCount++;
+      visibleBounds.push([t.lat,t.lng]);visibleCount++;
     }else{
       if(map.hasLayer(t._marker))map.removeLayer(t._marker);
-      t._listItem.hidden=true;
-      t._listItem.classList.remove("active");
+      t._listItem.hidden=true;t._listItem.classList.remove("active");
     }
   });
 
-  document.querySelectorAll(".region-filter").forEach(b=>b.classList.toggle("active",b.dataset.region===region));
+  document.querySelectorAll(".region-filter").forEach(b=>b.classList.toggle("active",b.dataset.region===activeRegion));
+  document.querySelectorAll(".era-step").forEach(b=>b.classList.toggle("active",b.dataset.era===activeEra));
+
+  const title=document.getElementById("theatreListTitle");
+  if(title){
+    const eraText=activeEra==="all"?"":("｜"+eraLabels[activeEra]);
+    title.textContent="劇場リスト｜"+(regionLabels[activeRegion]||"全体")+eraText+"（"+visibleCount+"）";
+  }
+  const list=document.getElementById("theatreList");if(list)list.scrollTop=0;
+  if(fit&&visibleBounds.length)map.fitBounds(visibleBounds,{padding:[48,48],maxZoom:10});
+}
+
+function showRegion(region){activeRegion=region;refreshFilters(true)}
+function showEra(era){activeEra=era;refreshFilters(true)}
+document.querySelectorAll(".region-filter").forEach(b=>b.classList.toggle("active",b.dataset.region===region));
 
   const title=document.getElementById("theatreListTitle");
   if(title)title.textContent="劇場リスト｜"+(regionLabels[region]||"全体")+"（"+visibleCount+"）";
@@ -1100,7 +1165,8 @@ function showRegion(region){
   if(visibleBounds.length)map.fitBounds(visibleBounds,{padding:[48,48],maxZoom:10});
 }
 document.querySelectorAll(".region-filter").forEach(b=>b.addEventListener("click",()=>showRegion(b.dataset.region)));
-showRegion("all");
+document.querySelectorAll(".era-step").forEach(b=>b.addEventListener("click",()=>showEra(b.dataset.era)));
+refreshFilters(true);
 
 function refreshMapSize(){
   map.invalidateSize({pan:false});
