@@ -1,0 +1,29 @@
+name: Vendor Leaflet 1.9.4
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/vendor-leaflet.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  vendor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download Leaflet assets
+        run: |
+          mkdir -p assets/vendor/leaflet
+          curl -L --fail --retry 3 https://unpkg.com/leaflet@1.9.4/dist/leaflet.css -o assets/vendor/leaflet/leaflet.css
+          curl -L --fail --retry 3 https://unpkg.com/leaflet@1.9.4/dist/leaflet.js -o assets/vendor/leaflet/leaflet.js
+      - name: Commit vendored files and remove workflow
+        run: |
+          rm -f .github/workflows/vendor-leaflet.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/vendor/leaflet/leaflet.css assets/vendor/leaflet/leaflet.js .github/workflows/vendor-leaflet.yml
+          git commit -m "Vendor Leaflet 1.9.4 locally"
+          git push
