@@ -46,7 +46,6 @@ button,a{font:inherit}
 .era-step small{display:block;color:#8f989f;font-size:11px;font-weight:700;margin-top:2px}
 .era-step.active{background:linear-gradient(180deg,#f5e8d1,#dcb879);color:#17120a}
 .era-step.active small{color:#5f4b2a}
-.era-step.unknown{border-left:1px solid #555}
 .era-step:focus-visible{outline:2px solid #f1c36f;outline-offset:-2px}
 
 .map-title h1{
@@ -135,8 +134,6 @@ button,a{font:inherit}
 .theatre-list-item .dot{
   width:12px;height:12px;border-radius:50%;margin-top:4px;border:2px solid #eef1f2;background:#5f84ad
 }
-.theatre-list-item .dot.record{background:#d7b06a}
-.theatre-list-item .dot.research{background:#777}
 .theatre-list-item strong{display:block;font-size:15px;line-height:1.35}
 .theatre-list-item small{display:block;margin-top:3px;color:#adb5ba;font-size:12px;line-height:1.4}
 .theatre-list-item .state{margin-top:4px;color:#d7c39e;font-size:12px;line-height:1.35}
@@ -153,8 +150,6 @@ button,a{font:inherit}
   width:15px;height:15px;border-radius:50%;
   border:2px solid #e9edf0;background:#5f84ad;box-shadow:0 0 0 2px rgba(0,0,0,.24)
 }
-.legend-dot.record{background:#d7b06a}
-.legend-dot.research{background:#777}
 .map-foot{
   display:flex;justify-content:space-between;gap:12px;align-items:center;
   color:#aab1b7;font-size:12px;line-height:1.45;padding:0 3px;
@@ -207,38 +202,39 @@ button,a{font:inherit}
   <section class="map-head">
     <div class="map-title">
       <h1>劇場史｜地図</h1>
-      <p>アテネ周辺から、ギリシャ本土・エーゲ海・南イタリア／シチリアへ。劇場の広がりを地図から見る。</p>
+      <p>古典期ギリシャからヘレニズム世界、ローマ帝国へ。185の劇場・オデイオンを時代色でたどる。</p>
     </div>
     <div class="map-head-tools">
-      <div class="era-bar" id="eraBar" aria-label="年代を進めて劇場の広がりを見る">
-        <button class="era-step" type="button" data-era="bc5">BC5世紀以前<small>古典期初期まで</small></button>
-        <button class="era-step" type="button" data-era="bc4">BC4世紀まで<small>古典期後半</small></button>
-        <button class="era-step" type="button" data-era="bc3">BC3〜2世紀まで<small>ヘレニズム期</small></button>
-        <button class="era-step" type="button" data-era="bc1">BC1世紀以降<small>ローマ期への移行</small></button>
-        <button class="era-step active" type="button" data-era="all">全期間<small>65劇場</small></button>
-        <button class="era-step unknown" type="button" data-era="unknown">年代未確定<small>推測しない</small></button>
+      <div class="era-bar" id="eraBar" aria-label="時代別に劇場を切り替える">
+        <button class="era-step active" type="button" data-era="all">全時代<small>185劇場</small></button>
+        <button class="era-step" type="button" data-era="classical">ギリシャ／古典期<small>14劇場</small></button>
+        <button class="era-step" type="button" data-era="hellenistic">ヘレニズム期<small>29劇場</small></button>
+        <button class="era-step" type="button" data-era="boundary">境界・移行期<small>21劇場</small></button>
+        <button class="era-step" type="button" data-era="roman">ローマ期<small>121劇場</small></button>
       </div>
       <a class="map-back" id="mapBack" href="History.html">← 照明史へ戻る</a>
     </div>
   </section>
 
-  <section class="map-shell" aria-label="アテネ周辺の古代劇場地図">
+  <section class="map-shell" aria-label="古代地中海・ローマ世界の劇場地図">
     <div id="map"></div>
     <aside class="map-overlay">
-      <h2>古代ギリシャ文化圏</h2>
-      <p>古代ギリシャの劇場文化はアテネだけに限られず、本土・島々・地中海各地へ広がった。遺構・発掘記録・碑文や文献から確認できる地点を、証拠の状態を区別して地図上に示す。</p>
+      <h2>古代地中海・ローマ世界</h2>
+      <p>物理的な劇場・オデイオン遺構を確認できる185地点を掲載。ピンの色は証拠確度ではなく、劇場が成立した時代区分を示す。</p>
       <div class="region-filters" id="regionFilters" aria-label="地域切替">
         <button class="region-filter active" type="button" data-region="all">全体</button>
-        <button class="region-filter" type="button" data-region="athens">アテネ周辺</button>
-        <button class="region-filter" type="button" data-region="mainland">ギリシャ本土</button>
-        <button class="region-filter" type="button" data-region="islands">エーゲ海の島々</button>
-        <button class="region-filter" type="button" data-region="turkey">現在のトルコ西部</button>
-        <button class="region-filter" type="button" data-region="sicily">南イタリア・シチリア</button>
+        <button class="region-filter" type="button" data-region="greece">ギリシャ</button>
+        <button class="region-filter" type="button" data-region="anatolia">アナトリア</button>
+        <button class="region-filter" type="button" data-region="italy">イタリア・シチリア</button>
+        <button class="region-filter" type="button" data-region="westEurope">西ヨーロッパ</button>
+        <button class="region-filter" type="button" data-region="eastMed">バルカン・東地中海</button>
+        <button class="region-filter" type="button" data-region="northAfrica">北アフリカ</button>
       </div>
-      <div class="legend" aria-label="確認状態">
-        <div class="legend-row"><span class="legend-dot"></span><span>劇場遺構・位置を確認</span></div>
-        <div class="legend-row"><span class="legend-dot record"></span><span>碑文・文献で確認</span></div>
-        <div class="legend-row"><span class="legend-dot research"></span><span>調査中</span></div>
+      <div class="legend" aria-label="時代区分">
+        <div class="legend-row"><span class="legend-dot" style="background:#d7b06a"></span><span>ギリシャ／古典期</span></div>
+        <div class="legend-row"><span class="legend-dot" style="background:#6f94bd"></span><span>ヘレニズム期</span></div>
+        <div class="legend-row"><span class="legend-dot" style="background:#9b7ab8"></span><span>境界・移行期</span></div>
+        <div class="legend-row"><span class="legend-dot" style="background:#b96755"></span><span>ローマ期</span></div>
       </div>
     </aside>
 
@@ -254,11 +250,12 @@ button,a{font:inherit}
 
   <footer class="map-foot">
     <span>地図データ © OpenStreetMap contributors｜表示：Leaflet</span>
-    <span>位置確認：UNESCO / DIAZOMA。劇場情報は <code>docs/ancient_greek_theatres_master.md</code> を基準に更新。</span>
+    <span>位置確認：各国文化機関 / UNESCO / DIAZOMA / 発掘機関等。正本は <code>docs/ancient_greek_theatres_master.md</code>。</span>
   </footer>
 </main>
 
 <script src="assets/vendor/leaflet/leaflet.js"></script>
+<script src="assets/history/theatre-map-data.js"></script>
 <script>
 const returnSources={
   greekTheatre:{href:"History.html?item=greekTheatre",label:"← 古代ギリシャ劇場へ戻る"}
@@ -268,801 +265,21 @@ const returnSource=returnSources[sourceId];
 const mapBack=document.getElementById("mapBack");
 if(returnSource&&mapBack){mapBack.href=returnSource.href;mapBack.textContent=returnSource.label}
 
-const map=L.map("map",{zoomControl:true}).setView([38.005,23.87],9);
+const map=L.map("map",{zoomControl:true}).setView([38.5,16],4);
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
   maxZoom:18,
   attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-const theatres=[
-  {
-    name:"ディオニュソス劇場",
-    place:"アテネ｜アクロポリス南麓",
-    date:"紀元前5世紀頃から使用。現存する大規模な石造部分は主に紀元前4世紀以降の改築を含む。",
-    lat:37.970383,lng:23.727730,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    note:"アクロポリス南麓、ディオニュソス神域に隣接する劇場。アテネのディオニュソス祭と結びつき、悲劇・喜劇の上演の中心となった。現在見える姿にはヘレニズム期・ローマ期の改変も重なっている。",
-    image:"assets/history/maps/attica/dionysus.jpg",
-    imageAlt:"現在のディオニュソス劇場",
-    credit:"George E. Koronaios / CC BY-SA 2.0",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:The_Theatre_of_Dionysus_in_Athens_on_30_May_2021.jpg"
-  },
-  {
-    name:"トリコス劇場",
-    place:"ラヴリオ周辺｜アッティカ南東部",
-    date:"古典期に成立し、後世に改修を受けた。",
-    lat:37.7378813,lng:24.0536814,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    note:"アッティカ南東部トリコスに残る野外劇場。一般的な半円形とは異なる細長く不規則な客席と、長方形に近いオルケストラを持ち、古代ギリシャ劇場の形が一様ではなかったことを示す。",
-    image:"assets/history/maps/attica/thorikos.jpg",
-    imageAlt:"現在のトリコス劇場",
-    credit:"Rab Lawrence / CC BY 2.0",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Thorikos_-_ancient_Greek_theatre_(48930569458).jpg"
-  },
-  {
-    name:"イカリオン劇場",
-    place:"ディオニュソス｜アッティカ北部",
-    date:"劇場遺構そのものの確実な年代は、現状の資料だけでは確定しにくい。",
-    lat:38.095558,lng:23.900489,
-    status:"劇場空間・位置を確認",
-    statusType:"confirmed",
-    note:"古代イカリオンの宗教・行政中心に残る劇場空間。細長いオルケストラと6席の大理石製プロエドリア（名誉席）が確認され、客席は斜面上に木造で設けられた可能性がある。後世の道路工事で客席部分の多くが失われた。",
-    image:"assets/history/maps/attica/ikarion.jpg",
-    imageAlt:"現在のイカリオン劇場空間",
-    credit:"Dion.Ikar / CC BY-SA 4.0",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:%CE%99%CE%BA%CE%AC%CF%81%CE%B9%CE%BF%CE%BD%2C_%CE%94%CE%B9%CF%8C%CE%BD%CF%85%CF%83%CE%BF%CF%82._%CE%9F_%CE%B8%CE%B5%CE%B1%CF%84%CF%81%CE%B9%CE%BA%CF%8C%CF%82_%CF%87%CF%8E%CF%81%CE%BF%CF%82-_%CE%BF%CF%81%CF%87%CE%AE%CF%83%CF%84%CF%81%CE%B1%2C_%CE%B2%CE%AC%CF%83%CE%B5%CE%B9%CF%82_%CE%BA%CE%B1%CE%B9_%CE%B8%CF%81%CF%8C%CE%BD%CE%BF%CE%B9_%CF%84%CF%89%CE%BD_%CE%B5%CF%80%CE%B9%CF%83%CE%AE%CE%BC%CF%89%CE%BD._4%CE%BF_%CE%B1%CE%B9%CF%8E%CE%BD%CE%B1_%CF%80.%CE%A7.%2C_%CE%9C%CE%B1%CF%81%CE%BC%CE%B1%CF%81%CF%8C_%CE%A0%CE%B5%CE%BD%CF%84%CE%B5%CE%BB%CE%B9%CE%BA%CF%8C._IMG_8795.jpg"
-  },
-  {
-    name:"ラムヌース劇場",
-    place:"ラムヌース｜アッティカ北東部",
-    date:"紀元前4世紀の名誉席・碑文が残る。",
-    lat:38.217578,lng:24.027823,
-    status:"劇場空間・位置を確認",
-    statusType:"confirmed",
-    note:"自然斜面とテラスを利用した劇場空間。大理石のプロエドリア（名誉席）とディオニュソスへの献辞、喜劇競演の勝利を示す碑文が、この場所で劇場活動が行われたことを具体的に伝えている。",
-    image:"assets/history/maps/attica/rhamnous.jpg",
-    imageAlt:"現在のラムヌース劇場跡",
-    credit:"Andreas Kakaris / CC BY-SA 4.0",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Rhamnous_theater_from_above.jpg"
-  },
-  {
-    name:"エウオニュモン劇場（トラコネス）",
-    place:"アリモス｜アテネ南部",
-    date:"紀元前5世紀から使用され、紀元前3世紀半ば以前に放棄されたとされる。",
-    lat:37.9159,lng:23.7414,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    note:"長方形のオルケストラ、前列の大理石席、スケネ（舞台建築）の遺構を持つ。半円形劇場だけではない古代アッティカの多様な劇場形態を示す重要な実例である。",
-    image:"assets/history/maps/attica/euonymon.jpg",
-    imageAlt:"エウオニュモン劇場の現存遺構",
-    credit:"Mark Landon / CC0 1.0",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Trachones_ancient_theater_01.jpg"
-  },
-  {
-    name:"ハリムース劇場",
-    place:"アリモス｜Marinou Antypa Street",
-    date:"1986〜1987年の発掘で劇場空間を確認。出土資料は古代期の利用を示す。",
-    lat:37.9060,lng:23.7321,
-    status:"劇場遺構を確認／ピン位置は古代ハリムース中心付近の概略",
-    statusType:"confirmed",
-    note:"私有地の発掘で、原位置に残る前列の座席と、その背後の岩盤加工が確認された。前列には6基の二人掛けの座席が並び、斜面側には木造席などを設けた可能性を示す加工痕も残る。",
-  },
-  {
-    name:"アカルナイ劇場",
-    place:"アカルネス｜現代市街地",
-    date:"紀元前4世紀前半。",
-    lat:38.080325,lng:23.733298,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    note:"2007年に現代市街地の私有地から発見された劇場。石灰岩の座席、オルケストラの一部、ディアゾーマ、排水路が確認され、馬蹄形のオルケストラを持つ。推定収容人数は約1,500〜2,000人。",
-  },
-  {
-    name:"ピレウス旧劇場（ムニキア）",
-    place:"ピレウス｜ムニキア丘西斜面",
-    date:"古典期。紀元前5世紀後半には集会の場としても記録される。",
-    lat:37.93997,lng:23.65893,
-    status:"文献・19世紀発掘記録で確認／ピン位置はムニキア丘の概略",
-    statusType:"record",
-    note:"ピレウスにあった古典期の旧劇場。1881年に遺構が発掘されたが、その後は埋め戻され、上に市街地が形成された。劇場はムニキア丘の西斜面にあり、演劇だけでなく政治集会にも利用された記録がある。",
-  },
-  {
-    name:"ゼア劇場",
-    place:"ピレウス｜考古学博物館隣接地",
-    date:"紀元前3世紀初頭に建設されたとされ、ヘレニズム期に使用された。",
-    lat:37.93678,lng:23.64455,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    note:"ピレウスのゼア港近くに造られた劇場。コイロン（客席）、オルケストラ、スケネからなるヘレニズム劇場の三部構成を持ち、現在は主に客席を支えた基礎部分が残る。",
-    image:"assets/history/maps/attica/zea.jpg",
-    imageAlt:"現在のゼア劇場",
-    credit:"George E. Koronaios / CC BY-SA 4.0",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Remains_of_the_ancient_Theatre_of_Zea_in_Piraeus_on_July_4%2C_2021.jpg"
-  },
-  {
-    name:"アンフィアレイオンの劇場",
-    place:"オロポス｜アッティカ北東部",
-    date:"紀元前4世紀後半以降。",
-    lat:38.291581,lng:23.845344,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    note:"オロポス近郊のアンフィアラオス聖域に設けられた劇場。都市中心部ではなく、祭祀・競技・集会が行われる聖域の中に劇場が置かれた例である。",
-    image:"assets/history/maps/attica/amphiareion.jpg",
-    imageAlt:"現在のアンフィアレイオンの劇場",
-    credit:"Γεώργιος Βέζας / CC BY-SA 4.0",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Theatre_of_Amphiareion_in_Oropos_(%CE%98%CE%AD%CE%B1%CF%84%CF%81%CE%BF_%CE%91%CE%BC%CF%86%CE%B9%CE%AC%CF%81%CE%B5%CE%B9%CE%BF%CF%85_%CE%A9%CF%81%CF%89%CF%80%CE%BF%CF%8D).jpg"
-  },
+const theatres=THEATRE_MAP_DATA.map(t=>({...t}));
 
-  {
-    name:"アイギリア",
-    place:"フォイニキア付近｜アッティカ南部",
-    date:"地方ディオニュシアの碑文証拠が残る。",
-    lat:37.7975,lng:23.9061,
-    status:"碑文で上演祭礼を確認／ピンは古代デーモス推定地",
-    statusType:"record",
-    note:"古代アッティカ南部のデーモス。地方ディオニュシアの存在が碑文から確認されるが、劇場建築そのものの位置は確定していない。"
-  },
-  {
-    name:"アイクソネ",
-    place:"グリファダ｜アテネ南部",
-    date:"古典期の地方ディオニュシアと劇場活動を碑文で確認。",
-    lat:37.8614,lng:23.7625,
-    status:"碑文・文献で劇場活動を確認／劇場位置は未確定",
-    statusType:"record",
-    note:"現在のグリファダ周辺に位置したデーモス。地方ディオニュシアと劇場活動を示す碑文が残り、19世紀には劇場状の痕跡も報告されたが、劇場建築の位置は確定していない。"
-  },
-  {
-    name:"アナギュルス",
-    place:"ヴァリ｜アッティカ南部",
-    date:"地方ディオニュシアの碑文証拠が残る。",
-    lat:37.8300,lng:23.7976,
-    status:"碑文で上演祭礼を確認／劇場位置は未確定",
-    statusType:"record",
-    note:"現在のヴァリ周辺に位置したデーモス。地方ディオニュシアの存在は碑文から確認できるが、専用劇場の位置や遺構は確定していない。"
-  },
-  {
-    name:"アトモノン",
-    place:"マルーシ｜アテネ北部",
-    date:"紀元前4世紀の地方ディオニュシア関連碑文が残る。",
-    lat:38.0466,lng:23.7880,
-    status:"碑文で上演祭礼を確認／劇場位置は未確定",
-    statusType:"record",
-    note:"現在のマルーシ周辺に位置したデーモス。地方ディオニュシアとコレゴスに関わる碑文があり、劇場活動の存在が分かるが、劇場そのものの遺構は確認されていない。"
-  },
-  {
-    name:"エレウシス",
-    place:"エレフシナ｜アッティカ西部",
-    date:"古典期から地方ディオニュシアと上演活動を碑文で確認。",
-    lat:38.0441,lng:23.5415,
-    status:"碑文・文献で劇場活動を確認／劇場位置は限定的",
-    statusType:"record",
-    note:"エレウシスの宗教都市では、ディオニュソス祭と上演活動を示す碑文が複数残る。祭礼と劇場活動は確認できる一方、劇場建築の位置は確定的ではない。"
-  },
-  {
-    name:"ハライ・アイクソニデス",
-    place:"ヴーラ｜アテネ南部",
-    date:"紀元前4世紀の地方ディオニュシア関連碑文が残る。",
-    lat:37.8341,lng:23.7783,
-    status:"碑文で上演祭礼を確認／劇場位置は未確定",
-    statusType:"record",
-    note:"現在のヴーラ周辺に位置した沿岸デーモス。地方ディオニュシアのコレゴスや祭礼に関する碑文が残るが、劇場建築の位置はまだ確定していない。"
-  },
-  {
-    name:"ハライ・アラフェニデス",
-    place:"ルツァ／アルテミダ周辺｜アッティカ東岸",
-    date:"紀元前4世紀の地方ディオニュシア関連碑文が残る。",
-    lat:37.9872,lng:24.0045,
-    status:"碑文で上演祭礼を確認／ピンは古代デーモス推定地",
-    statusType:"record",
-    note:"アッティカ東岸の沿岸デーモス。地方ディオニュシアのコレゴスを顕彰する碑文が残り、上演祭礼の存在が確認できる。劇場建築の位置は確定していない。"
-  },
-  {
-    name:"ケファレ",
-    place:"ケラテア東方｜アッティカ南東部",
-    date:"地方ディオニュシアの存在が研究上指摘される。",
-    lat:37.8118,lng:23.9964,
-    status:"文献・研究上の確認／劇場位置は未確定",
-    statusType:"record",
-    note:"現在のケラテア東方に推定されるデーモス。地方ディオニュシアの存在が研究で扱われるが、公開碑文や劇場遺構の位置確認は他地点より弱く、慎重な扱いが必要である。"
-  },
-  {
-    name:"コリュトス",
-    place:"アテネ市内｜アゴラ南西部",
-    date:"都市域のデーモスで、地方ディオニュシアの証拠が残る。",
-    lat:37.9670,lng:23.7260,
-    status:"碑文・文献で上演祭礼を確認／劇場位置は未確定",
-    statusType:"record",
-    note:"古代アテネ市街地のデーモス。地方ディオニュシアと劇場活動の証拠があるが、専用劇場の位置は確定していない。"
-  },
-  {
-    name:"ランプトライ",
-    place:"ランブリカ〜キツィ周辺｜アッティカ南部",
-    date:"地方ディオニュシアの碑文証拠が残る。",
-    lat:37.8711,lng:23.8547,
-    status:"碑文で上演祭礼を確認／ピンは上ランプトライ推定地",
-    statusType:"record",
-    note:"上ランプトライと沿岸ランプトライに分かれた地域。地方ディオニュシアの存在は碑文から確認できるが、劇場建築の正確な位置は確定していない。"
-  },
-  {
-    name:"マラトン四都市連合",
-    place:"マラトン周辺｜アッティカ北東部",
-    date:"紀元前4世紀後半に悲劇上演を伴うディオニュシアを確認。",
-    lat:38.1250,lng:23.8750,
-    status:"碑文で上演祭礼を確認／ピンは四都市連合地域の概略",
-    statusType:"record",
-    note:"マラトンを含む四都市連合では、紀元前4世紀後半に悲劇上演を伴うディオニュシアが行われていたことが碑文研究から確認されている。"
-  },
-  {
-    name:"ミュリヌース",
-    place:"メレンダ／マルコポウロ南東｜アッティカ東部",
-    date:"地方ディオニュシアの碑文証拠が残る。",
-    lat:37.8697,lng:23.9714,
-    status:"碑文で上演祭礼を確認／劇場位置は未確定",
-    statusType:"record",
-    note:"現在のメレンダ周辺に位置したデーモス。公共建築や聖域の遺構が知られ、地方ディオニュシアの存在も碑文から確認できるが、劇場建築の位置は確定していない。"
-  },
-  {
-    name:"オア／パイアニア",
-    place:"パイアニア周辺｜アッティカ東部",
-    date:"コレゴス奉献碑の帰属がオアまたはパイアニアとされる。",
-    lat:37.9746,lng:23.8440,
-    status:"碑文帰属が未確定／ピンはパイアニア地域の概略",
-    statusType:"record",
-    note:"地方ディオニュシアに関係する奉献碑が知られるが、碑文の帰属先がオアかパイアニアか確定していないため、一つの地域ピンとして慎重に表示している。"
-  },
-  {
-    name:"パイアニア",
-    place:"パイアニア｜アッティカ東部",
-    date:"地方ディオニュシアの碑文証拠が残る。",
-    lat:37.9746,lng:23.8440,
-    status:"碑文で上演祭礼を確認／劇場位置は未確定",
-    statusType:"record",
-    note:"ヒュメットス山東側のデーモス。地方ディオニュシアに関する碑文が残り、上演祭礼の存在が確認できるが、劇場建築の位置は確定していない。"
-  },
-  {
-    name:"フリュア",
-    place:"ハランドリ｜アテネ北東部",
-    date:"文献・碑文から地方ディオニュシアを確認。",
-    lat:38.0263,lng:23.8068,
-    status:"文献・碑文で上演祭礼を確認／劇場位置は未確定",
-    statusType:"record",
-    note:"現在のハランドリ周辺に位置したデーモス。地方ディオニュシアの存在が文献・碑文から確認されるが、劇場建築の場所は特定されていない。"
-  },
-  {
-    name:"スフェットス",
-    place:"コロピ北西｜アッティカ東部",
-    date:"紀元前4世紀中頃までに悲劇上演とプロエドリアを伴う劇場活動を確認。",
-    lat:37.9050,lng:23.8340,
-    status:"碑文で劇場活動を確認／劇場建築の位置は未確定",
-    statusType:"record",
-    note:"コロピ北西のクリストス丘周辺に位置したデーモス。碑文は悲劇上演、祭礼運営、プロエドリア（名誉席）を伴う劇場活動を示すが、劇場建築そのものの位置は確認されていない。"
-  },
-  {
-    name:"エピダウロス劇場",
-    place:"エピダウロス｜ペロポネソス",
-    date:"主要建設期は紀元前4世紀末。後世に改修を受けた。",
-    lat:37.596000,lng:23.079200,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"mainland",
-    note:"アスクレピオス聖域に造られた劇場。整った扇形の客席と円形オルケストラを持つ、後代の古代ギリシャ劇場を代表する遺構の一つ。",
-    image:"assets/history/sunlight/01_epidaurus_greek_theatre.jpg",
-    imageAlt:"現在のエピダウロス劇場",
-    credit:"Carole Raddato / CC BY-SA 2.0",
-    sourceUrl:"https://commons.wikimedia.org/wiki/Category:Ancient_Theatre_of_Epidaurus"
-  },
-  {
-    name:"メガロポリス劇場",
-    place:"メガロポリス｜アルカディア",
-    date:"古代ギリシャ期。建設・改築段階は個別史料で確認を継続する。",
-    lat:37.410170,lng:22.127258,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"mainland",
-    note:"ペロポネソス中央部のメガロポリスに残る劇場。都市の公共空間の一部として大規模な観客席を備えた遺構が残る。"
-  },
-  {
-    name:"アルゴス劇場",
-    place:"アルゴス｜ペロポネソス",
-    date:"紀元前3世紀。ローマ期に大規模な改修を受けた。",
-    lat:37.631600,lng:22.719600,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"mainland",
-    note:"ラリサ丘の岩盤を大きく削って客席を造った劇場。現存する姿にはローマ期の改修も重なっている。"
-  },
-  {
-    name:"デルフィ劇場",
-    place:"デルフィ｜中央ギリシャ",
-    date:"現在の主要な石造劇場は紀元前2世紀の整備を含む。",
-    lat:38.482450,lng:22.500706,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"mainland",
-    note:"アポロン聖域の上方に位置する劇場。聖域・競技・祭礼と劇場空間が近接する構成を現在の遺構から確認できる。",
-    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Theatre_of_Delphi.jpg?width=960",
-    imageAlt:"現在のデルフィ劇場",
-    credit:"Robin Iversen Rönnlund / CC BY-SA 3.0",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Theatre_of_Delphi.jpg"
-  },
-  {
-    name:"エレトリア劇場",
-    place:"エレトリア｜エウボイア島",
-    date:"複数の建築段階を持ち、紀元前300年頃に石造客席・舞台建築が整備された。",
-    lat:38.398603,lng:23.790644,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"islands",
-    note:"複数回の改築を受けた劇場。古代ギリシャ期からローマ期まで、劇場構造が変化した痕跡を追える。"
-  },
-  {
-    name:"ラリサ第1古代劇場",
-    place:"ラリサ｜テッサリア",
-    date:"紀元前3世紀初頭。後にローマ時代のアリーナへ転用された。",
-    lat:39.640315,lng:22.415256,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"mainland",
-    note:"古代ラリサ中心部に造られた劇場。劇場からローマ時代の闘技空間へ用途が変化した履歴を持つ。",
-    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Ancient_theatre_of_Larisa.jpg?width=960",
-    imageAlt:"現在のラリサ第1古代劇場",
-    credit:"Fsb2004 / Public Domain",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Ancient_theatre_of_Larisa.jpg"
-  },
-  {
-    name:"デロス劇場",
-    place:"デロス島｜キクラデス",
-    date:"紀元前310年頃に着工し、紀元前240年頃に完成。",
-    lat:37.397040,lng:25.268105,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"islands",
-    note:"聖なる島デロスの市街地に造られた石造劇場。島嶼部の都市劇場として、客席・オルケストラ・舞台建築の遺構が残る。",
-    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Ancient_Greek_theatre_in_Delos_01.jpg?width=960",
-    imageAlt:"現在のデロス劇場",
-    credit:"Bernard Gagnon / CC BY-SA 3.0",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Ancient_Greek_theatre_in_Delos_01.jpg"
-  },
-  {
-    name:"メロス劇場",
-    place:"ミロス島｜キクラデス",
-    date:"ギリシャ期に起源を持ち、現存形にはローマ期の再建が含まれる。",
-    lat:36.737823,lng:24.421035,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"islands",
-    note:"ミロス島に残る古代劇場。現在見える遺構にはローマ期の再建が強く反映され、同じ場所が時代を越えて改変された例となる。"
-  },
-  {
-    name:"リンドス劇場",
-    place:"リンドス｜ロドス島",
-    date:"古代ギリシャ期。",
-    lat:36.089886,lng:28.086576,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"islands",
-    note:"ロドス島リンドスのアクロポリス下に残る劇場。島の都市景観と一体になった劇場空間を確認できる。"
-  },
-  {
-    name:"オイニアダイ劇場",
-    place:"オイニアダイ｜西ギリシャ",
-    date:"最初期段階は紀元前4世紀中頃。ヘレニズム期にプロスケニオンが加わった。",
-    lat:38.409614,lng:21.199028,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"mainland",
-    note:"西ギリシャに残る劇場。複数段階の建築変化があり、舞台建築の発達を遺構から追うことができる。"
-  },
-  {
-    name:"ドドナ劇場",
-    place:"ドドナ｜イピロス",
-    date:"紀元前3世紀初頭。後にアリーナへ改造された。",
-    lat:39.546492,lng:20.787700,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"mainland",
-    note:"ゼウスの聖域に造られた大規模劇場。後代にはオルケストラ周辺が改変され、ローマ時代の闘技空間としても使われた。",
-    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Dodona_theater.jpg",
-    imageAlt:"現在のドドナ劇場",
-    credit:"D. Swift / CC BY 2.5",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Dodona_theater.jpg"
-  },
-  {
-    name:"アプテラ劇場",
-    place:"アプテラ｜クレタ島",
-    date:"ヘレニズム期からローマ期に複数の建築段階を持つ。",
-    lat:35.461272,lng:24.141436,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"islands",
-    note:"クレタ島アプテラに残る劇場。ヘレニズム期とローマ期の複数段階が確認され、改築による劇場形態の変化を読み取れる。"
-  },
-  {
-    name:"マロネイア劇場",
-    place:"マロネイア｜トラキア",
-    date:"古代ギリシャ期からローマ期にかけて使用・改築された。",
-    lat:40.878783,lng:25.519250,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"mainland",
-    note:"トラキアのマロネイアに残る劇場。客席、オルケストラ、舞台建築の遺構が確認される。"
-  },
-  {
-    name:"シラクサのギリシャ劇場",
-    place:"シラクサ｜シチリア",
-    date:"古代ギリシャ期に成立。紀元前4世紀の劇場として知られ、後世の改変も受けた。",
-    lat:37.076111,lng:15.275000,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"sicily",
-    note:"シチリア東部の古代都市シラクサに残る大規模なギリシャ劇場。岩盤を削って形成された客席を持ち、現在も古典劇上演に利用されている。",
-    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Greek_theater_of_Syracuse_AvL.JPG?width=960",
-    imageAlt:"現在のシラクサのギリシャ劇場",
-    credit:"AlexanderVanLoon / CC BY-SA 3.0",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Greek_theater_of_Syracuse_AvL.JPG"
-  },
-  {
-    name:"タオルミーナ古代劇場",
-    place:"タオルミーナ｜シチリア",
-    date:"紀元前3世紀のヘレニズム期に起源を持ち、ローマ期に大規模改築された。",
-    lat:37.852500,lng:15.292222,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"sicily",
-    note:"シチリア東岸の丘上に造られた劇場。ギリシャ期の劇場を基礎にローマ期に大きく改築され、現在の舞台建築にはローマ期の構成が強く残る。",
-    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Ancient_theatre_of_Taormina_-_Teatro_Antico_di_Taormina.jpg?width=960",
-    imageAlt:"現在のタオルミーナ古代劇場",
-    credit:"Nicolas Chadeville / CC BY-SA 4.0",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Ancient_theatre_of_Taormina_-_Teatro_Antico_di_Taormina.jpg"
-  },
-  {
-    name:"エフェソス大劇場",
-    place:"セルチュク｜イズミル県",
-    date:"紀元前3世紀のヘレニズム期に建設が始まり、ローマ期に大規模拡張された。",
-    lat:37.941055,lng:27.342316,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"turkey",
-    note:"パナイル山の斜面を利用した大劇場。現在見える巨大な姿はローマ期の増改築を強く反映するが、起源はヘレニズム期にさかのぼる。古代都市エフェソスの主要な公共空間の一つだった。",
-    image:"assets/history/maps/west-turkey/ephesus.jpg",
-    imageAlt:"現在のエフェソス大劇場",
-    credit:"Dennis G. Jarvis / CC BY-SA 2.0",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:The_Great_Theatre_in_Ephesus,_Turkey.jpg"
-  },
-  {
-    name:"プリエネ劇場",
-    place:"ギュルリュバフチェ｜アイドゥン県",
-    date:"紀元前4世紀後半〜3世紀初頭のヘレニズム期。",
-    lat:37.659900,lng:27.297850,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"turkey",
-    note:"ヘレニズム劇場の構成を比較的よく残す劇場。ローマ期の改変が他の大劇場より少なく、オルケストラ、舞台建築、名誉席などから古代ギリシャ劇場の構成を読み取りやすい。",
-    image:"assets/history/maps/west-turkey/priene.jpg",
-    imageAlt:"現在のプリエネ劇場",
-    credit:"Ken and Nyetta / CC BY 2.0",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Theater_of_Priene.jpg"
-  },
-  {
-    name:"ペルガモン劇場",
-    place:"ベルガマ｜イズミル県",
-    date:"ヘレニズム期。アッタロス朝の王都整備の中で発達した。",
-    lat:39.131800,lng:27.183230,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"turkey",
-    note:"カレ丘の急斜面に沿って造られた非常に勾配の大きい劇場。丘上都市ペルガモンの地形と一体になった構成が特徴で、ヘレニズム都市計画と劇場の関係を示す代表例。",
-    image:"assets/history/maps/west-turkey/pergamon.jpg",
-    imageAlt:"現在のペルガモン劇場",
-    credit:"Elelicht / CC BY-SA 3.0",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Pergamon_Theater.JPG"
-  },
-  {
-    name:"アッソス劇場",
-    place:"ベフラムカレ｜チャナッカレ県",
-    date:"紀元前4世紀末ごろ。",
-    lat:39.488306,lng:26.337806,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"turkey",
-    note:"エーゲ海を望む南斜面に設けられた馬蹄形のヘレニズム劇場。岩盤を削った段状テラス上に造られ、アッソスの公共建築群の一部を構成していた。",
-    image:"assets/history/maps/west-turkey/assos.jpg",
-    imageAlt:"現在のアッソス劇場",
-    credit:"Dosseman / CC BY-SA 4.0",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Assos_Theatre_012.jpg"
-  },
-  {
-    name:"ミレトス劇場",
-    place:"バラト｜アイドゥン県",
-    date:"ギリシャ期に起源を持ち、現存する大規模な構成は主にローマ期の拡張を含む。",
-    lat:37.530647,lng:27.275800,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"turkey",
-    note:"イオニアの主要都市ミレトスに残る劇場。古いギリシャ劇場を基礎に、ローマ期に客席と舞台建築が大きく拡張され、現在の巨大な姿になった。",
-    image:"assets/history/maps/west-turkey/miletus.jpg",
-    imageAlt:"現在のミレトス劇場",
-    credit:"Hamed k13 / CC BY-SA 4.0",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Miletus_Ancient_Theater.jpg"
-  },
-  {
-    name:"アフロディシアス劇場",
-    place:"ゲイレ｜アイドゥン県",
-    date:"紀元前1世紀末ごろに整備され、ローマ期に改築された。",
-    lat:37.707370,lng:28.724970,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"turkey",
-    note:"アフロディシアス市街の南端に造られた劇場。古典期ギリシャ劇場の直接例というより、ヘレニズム末期からローマ期へ移る劇場建築の変化を示す例として位置づける。",
-    image:"assets/history/maps/west-turkey/aphrodisias.jpg",
-    imageAlt:"現在のアフロディシアス劇場",
-    credit:"Dosseman / CC BY-SA 4.0",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Aphrodisias_Theatre_General_view_4398.jpg"
-  },
-  {
-    name:"テオス劇場",
-    place:"スアジュク／セフェリヒサル｜イズミル県",
-    date:"ヘレニズム期に成立し、ローマ期に客席などが改修された。",
-    lat:38.179900,lng:26.787540,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"turkey",
-    note:"イオニアの港湾都市テオスにある劇場。ディオニュソス信仰と俳優・音楽家の組合で知られる都市に位置し、ギリシャ劇場の伝統を基礎にしながらローマ期の改修も受けた。",
-    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Teos_theatre.jpg?width=960",
-    imageAlt:"現在のテオス劇場",
-    credit:"Isabeau / Wikimedia Commons",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Teos_theatre.jpg"
-  },
-  {
-    name:"メトロポリス劇場",
-    place:"イェニキョイ／トルバル｜イズミル県",
-    date:"後期ヘレニズム期に建設され、ローマ期に舞台建築が拡張された。",
-    lat:38.124000,lng:27.324500,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"turkey",
-    note:"自然斜面を利用して造られた大理石の劇場。オルケストラ、舞台建築、客席、前列の名誉席が残り、ヘレニズム期からローマ期への改築過程を読み取れる。"
-  },
-  {
-    name:"エリュトライ劇場",
-    place:"イルドゥル／チェシュメ｜イズミル県",
-    date:"紀元前3世紀頃に造られた可能性が高い。",
-    lat:38.382730,lng:26.480710,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"turkey",
-    note:"イオニア都市エリュトライのアクロポリス北斜面に設けられた劇場。1960年代の発掘で部分的に確認され、古代都市の公共空間の一部を構成していた。",
-    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Erythrai_amphitheatre.jpg?width=960",
-    imageAlt:"現在のエリュトライ劇場跡",
-    credit:"Moochocoogle / GFDL",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Erythrai_amphitheatre.jpg"
-  },
-  {
-    name:"マグネシア・アド・マエアンドルム劇場",
-    place:"テキン／ゲルメンジク｜アイドゥン県",
-    date:"ヘレニズム劇場は紀元前2世紀頃。後にローマ期の改変を受けた。",
-    lat:37.850300,lng:27.525690,
-    status:"劇場位置・発掘記録を確認／現況では遺構の視認が難しい",
-    statusType:"confirmed",
-    regionGroup:"turkey",
-    note:"メアンドロス川流域のマグネシアに造られたヘレニズム劇場。発掘後に再び土で覆われた部分が多く、現在の地表からは劇場全体の形を読み取りにくい。",
-    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/TheaterMagnesia1.jpg?width=960",
-    imageAlt:"マグネシア劇場の発掘時写真",
-    credit:"Kpisimon / Wikimedia Commons",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:TheaterMagnesia1.jpg"
-  },
-  {
-    name:"ハリカルナッソス劇場",
-    place:"ボドルム｜ムーラ県",
-    date:"紀元前4世紀に起源を持ち、後世に拡張・改修された。",
-    lat:37.040400,lng:27.421810,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"turkey",
-    note:"古代ハリカルナッソスの北側、ギョクテペ南斜面に造られた劇場。岩盤と斜面を利用した客席を持ち、ローマ帝政期以前の劇場形式を伝える。",
-    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/The_theatre_of_ancient_Halicarnassus%2C_built_in_the_4th_century_BC_during_the_reign_of_King_Mausolos_and_enlarged_in_the_2nd_century_AD%2C_the_original_capacity_of_the_theatre_was_10%2C000%2C_Bodrum%2C_Turkey_%2817053330256%29.jpg?width=960",
-    imageAlt:"現在のハリカルナッソス劇場",
-    credit:"Carole Raddato / Wikimedia Commons",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:The_theatre_of_ancient_Halicarnassus%2C_built_in_the_4th_century_BC_during_the_reign_of_King_Mausolos_and_enlarged_in_the_2nd_century_AD%2C_the_original_capacity_of_the_theatre_was_10%2C000%2C_Bodrum%2C_Turkey_%2817053330256%29.jpg"
-  },
-  {
-    name:"カウノス劇場",
-    place:"ダルヤン｜ムーラ県",
-    date:"ヘレニズム期に成立し、ローマ期に大規模改修された。",
-    lat:36.825640,lng:28.623610,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"turkey",
-    note:"カリアとギリシャ世界の接点に位置する港湾都市カウノスの劇場。約5,000人規模の客席を持ち、ヘレニズム期の基本構成にローマ期の舞台改修が重なる。",
-    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Kaunos_Theatre_6760.jpg?width=960",
-    imageAlt:"現在のカウノス劇場",
-    credit:"Dosseman / Wikimedia Commons",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Kaunos_Theatre_6760.jpg"
-  },
-  {
-    name:"クニドス下劇場",
-    place:"テキル岬／ダッチャ｜ムーラ県",
-    date:"ギリシャ期に起源を持ち、ローマ期にも使用された。",
-    lat:36.685833,lng:27.375000,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"turkey",
-    note:"エーゲ海と地中海の接点にあるクニドスの港近くに造られた劇場。都市には複数の劇場が知られ、下劇場は現在も客席と舞台周辺の遺構を確認できる。",
-    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Knidos_-_antik_tiyatro.jpg?width=960",
-    imageAlt:"現在のクニドス劇場",
-    credit:"Annahme der Existenz / CC BY-SA 2.0",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Knidos_-_antik_tiyatro.jpg"
-  },
-  {
-    name:"アリンダ劇場",
-    place:"カルプズル｜アイドゥン県",
-    date:"紀元前3〜2世紀頃のヘレニズム期。",
-    lat:37.558700,lng:27.826950,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"turkey",
-    note:"内陸カリアの都市アリンダに残るヘレニズム劇場。自然斜面に組み込まれた客席が比較的よく残り、ローマ期にも改修されながら使用された。",
-    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Alinda_Theater.JPG?width=960",
-    imageAlt:"現在のアリンダ劇場",
-    credit:"Ana al'ain / Wikimedia Commons",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Alinda_Theater.JPG"
-  },
-  {
-    name:"セジェスタ劇場",
-    place:"カラタフィーミ＝セジェスタ｜シチリア",
-    date:"初期段階は紀元前4〜3世紀。現存形は紀元前2世紀頃の整備を含む。",
-    lat:37.941320,lng:12.843880,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"sicily",
-    note:"モンテ・バルバロ山頂部に造られた劇場。ギリシャ劇場の構成を持つが、セジェスタ自体はエリュモイ系都市であり、ギリシャ文化との交流を示す重要例である。",
-    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Segesta-theater.JPG?width=960",
-    imageAlt:"現在のセジェスタ劇場",
-    credit:"Mboesch / Wikimedia Commons",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Segesta-theater.JPG"
-  },
-  {
-    name:"ティンダリ劇場",
-    place:"ティンダリ｜シチリア北岸",
-    date:"紀元前4世紀末〜3世紀頃。ローマ期に改築。",
-    lat:38.143700,lng:15.042400,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"sicily",
-    note:"ティンダリの丘上に造られたギリシャ劇場。のちにローマ期の改修を受け、オルケストラ周辺も用途に合わせて変化した。",
-    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Theatre_%28III_Cent._BC%29_-_Tindari%2C_Archeological_Area_%28396BC-%29%2C_Sicily%2C_Italy%2C_August_2018_DR.jpg?width=960",
-    imageAlt:"現在のティンダリ劇場",
-    credit:"Wikimedia Commons",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Theatre_%28III_Cent._BC%29_-_Tindari%2C_Archeological_Area_%28396BC-%29%2C_Sicily%2C_Italy%2C_August_2018_DR.jpg"
-  },
-  {
-    name:"アクライ劇場",
-    place:"パラッツォーロ・アクレイデ｜シチリア",
-    date:"紀元前3世紀頃。",
-    lat:37.057620,lng:14.894684,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"sicily",
-    note:"シラクサの植民都市アクライに造られた比較的小規模な劇場。客席・オルケストラ・舞台周辺をまとまって確認でき、地方都市の劇場規模を比較する教材になる。",
-    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Teatro_greco_Akrai.jpg?width=960",
-    imageAlt:"現在のアクライ劇場",
-    credit:"Mαρκος / Wikimedia Commons",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Teatro_greco_Akrai.jpg"
-  },
-  {
-    name:"モルガンティナ劇場",
-    place:"アイドーネ｜シチリア内陸部",
-    date:"紀元前4世紀後半〜3世紀頃。",
-    lat:37.430071,lng:14.479379,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"sicily",
-    note:"シチリア内陸部の都市モルガンティナにある劇場。石積みの客席、オルケストラ、舞台建築の構成が分かりやすく残り、ディオニュソスへの奉献碑文も知られる。",
-    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/TEATRO_MORGANTINA.jpg?width=960",
-    imageAlt:"現在のモルガンティナ劇場",
-    credit:"Svetlana Colombo / Wikimedia Commons",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:TEATRO_MORGANTINA.jpg"
-  },
-  {
-    name:"ヘラクレア・ミノア劇場",
-    place:"カットーリカ・エラクレーア｜シチリア南岸",
-    date:"紀元前4世紀末頃。",
-    lat:37.394270,lng:13.280700,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"sicily",
-    note:"シチリア南岸のギリシャ植民都市に造られたヘレニズム劇場。海に近い丘陵上にあり、客席とオルケストラが残る。",
-    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Eraclea-Minoa-Theatre-flickr.jpg?width=960",
-    imageAlt:"現在のヘラクレア・ミノア劇場",
-    credit:"Wikimedia Commons",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Eraclea-Minoa-Theatre-flickr.jpg"
-  },
-  {
-    name:"ソルント劇場",
-    place:"サンタ・フラーヴィア｜シチリア北岸",
-    date:"紀元前4〜3世紀のヘレニズム期。",
-    lat:38.094180,lng:13.531910,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"sicily",
-    note:"フェニキア・プニック系の都市ソルントに取り入れられたヘレニズム劇場。文化圏の境界でギリシャ式劇場建築が受容された例として重要である。"
-  },
-  {
-    name:"ハラエサ・アルコニデア劇場",
-    place:"トゥーザ｜シチリア北岸",
-    date:"ヘレニズム期。2026年も発掘調査が継続中。",
-    lat:37.997900,lng:14.262900,
-    status:"ヘレニズム劇場を発掘調査中／位置は遺跡域",
-    statusType:"research",
-    regionGroup:"sicily",
-    note:"ハラエサ・アルコニデアで発掘が進むヘレニズム劇場。現在も調査中のため、完成した平面や年代の細部は今後の研究成果によって更新する。"
-  },
-  {
-    name:"メタポントゥム劇場",
-    place:"メタポント｜バジリカータ",
-    date:"紀元前4世紀。紀元前6世紀のエククレシアステリオンを置き換えて建設。",
-    lat:40.383190,lng:16.826170,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"sicily",
-    note:"南イタリアのギリシャ都市メタポントゥムに造られた劇場。自然斜面ではなく人工盛土上に建設された点が特徴で、より古い市民集会施設を置き換えた。",
-    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Metapontum_theater_AvL.JPG?width=960",
-    imageAlt:"現在のメタポントゥム劇場",
-    credit:"AlexanderVanLoon / Wikimedia Commons",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Metapontum_theater_AvL.JPG"
-  },
-  {
-    name:"ヴェリア劇場",
-    place:"アシェーア｜カンパニア",
-    date:"ギリシャ期は紀元前4世紀。現在見える遺構はローマ期再建を強く反映する。",
-    lat:40.161090,lng:15.155460,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"sicily",
-    note:"ギリシャ植民都市エレア（後のヴェリア）のアクロポリス斜面にある劇場。現在見える形はローマ期の再建だが、その下により古いギリシャ劇場の段階がある。",
-    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Velia_-_Teatro_dell%27Acropoli.jpg?width=960",
-    imageAlt:"現在のヴェリア劇場",
-    credit:"Wikimedia Commons",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Velia_-_Teatro_dell%27Acropoli.jpg"
-  },
-  {
-    name:"ロクリ・エピゼフィリ劇場",
-    place:"ポルティリオーラ／ロクリ｜カラブリア",
-    date:"ギリシャ劇場を基礎に、ローマ期に大きく改築。",
-    lat:38.215870,lng:16.228950,
-    status:"劇場遺構・位置を確認",
-    statusType:"confirmed",
-    regionGroup:"sicily",
-    note:"南イタリアのギリシャ植民都市ロクリにある劇場。ギリシャ期の劇場を基礎としてローマ期に改築され、同じ上演空間が文化・用途の変化に合わせて更新された。",
-    image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Theatre_Locri_Epizefiri.jpg?width=960",
-    imageAlt:"現在のロクリ・エピゼフィリ劇場",
-    credit:"Sandro Baldi / CC BY-SA 4.0",
-    sourceUrl:"https://commons.wikimedia.org/wiki/File:Theatre_Locri_Epizefiri.jpg"
-  }
-];
-
-
-const theatreStartStage={
-  "ディオニュソス劇場":1,"トリコス劇場":1,"イカリオン劇場":null,"ラムヌース劇場":2,
-  "エウオニュモン劇場（トラコネス）":1,"ハリムース劇場":null,"アカルナイ劇場":2,"ピレウス旧劇場（ムニキア）":1,
-  "ゼア劇場":3,"アンフィアレイオンの劇場":2,"アイギリア":null,"アイクソネ":null,"アナギュルス":null,
-  "アトモノン":2,"エレウシス":null,"ハライ・アイクソニデス":2,"ハライ・アラフェニデス":2,"ケファレ":null,
-  "コリュトス":null,"ランプトライ":null,"マラトン四都市連合":2,"ミュリヌース":null,"オア／パイアニア":null,
-  "パイアニア":null,"フリュア":null,"スフェットス":2,"エピダウロス劇場":2,"メガロポリス劇場":null,
-  "アルゴス劇場":3,"デルフィ劇場":3,"エレトリア劇場":3,"ラリサ第1古代劇場":3,"デロス劇場":3,
-  "メロス劇場":null,"リンドス劇場":null,"オイニアダイ劇場":2,"ドドナ劇場":3,"アプテラ劇場":3,
-  "マロネイア劇場":null,"シラクサのギリシャ劇場":2,"タオルミーナ古代劇場":3,"エフェソス大劇場":3,
-  "プリエネ劇場":2,"ペルガモン劇場":3,"アッソス劇場":2,"ミレトス劇場":null,"アフロディシアス劇場":4,
-  "テオス劇場":3,"メトロポリス劇場":3,"エリュトライ劇場":3,"マグネシア・アド・マエアンドルム劇場":3,
-  "ハリカルナッソス劇場":2,"カウノス劇場":3,"クニドス下劇場":null,"アリンダ劇場":3,
-  "セジェスタ劇場":2,"ティンダリ劇場":2,"アクライ劇場":3,"モルガンティナ劇場":2,
-  "ヘラクレア・ミノア劇場":2,"ソルント劇場":2,"ハラエサ・アルコニデア劇場":3,"メタポントゥム劇場":2,
-  "ヴェリア劇場":2,"ロクリ・エピゼフィリ劇場":null
+const eraColors={
+  classical:"#d7b06a",
+  hellenistic:"#6f94bd",
+  boundary:"#9b7ab8",
+  roman:"#b96755"
 };
-const eraStage={bc5:1,bc4:2,bc3:3,bc1:4,all:Infinity};
-theatres.forEach(t=>t.startStage=Object.prototype.hasOwnProperty.call(theatreStartStage,t.name)?theatreStartStage[t.name]:null);
 
 const bounds=[];
 const markerByIndex=[];
@@ -1075,12 +292,11 @@ function setActiveListItem(index){
 }
 
 theatres.forEach((t,index)=>{
-  const statusColors={confirmed:"#5f84ad",record:"#d7b06a",research:"#777"};
   const marker=L.circleMarker([t.lat,t.lng],{
     radius:9,
     color:"#eef1f2",
     weight:2,
-    fillColor:statusColors[t.statusType]||"#777",
+    fillColor:eraColors[t.era]||"#777",
     fillOpacity:.95
   }).addTo(map);
   marker.bindPopup(
@@ -1101,9 +317,8 @@ theatres.forEach((t,index)=>{
   const item=document.createElement("button");
   item.type="button";
   item.className="theatre-list-item";
-  const dotClass=t.statusType==="record"?"record":(t.statusType==="research"?"research":"");
   item.innerHTML=
-    '<span class="dot '+dotClass+'"></span>'+
+    '<span class="dot" style="background:'+(eraColors[t.era]||"#777")+'"></span>'+
     '<span><strong>'+t.name+'</strong>'+
     '<small>'+t.place+'</small>'+
     '<span class="state">'+t.status+'</span></span>';
@@ -1121,11 +336,8 @@ let activeRegion="all";
 let activeEra="all";
 
 function theatreVisible(t){
-  const group=t.regionGroup||"athens";
-  const regionOK=activeRegion==="all"||group===activeRegion;
-  let eraOK=true;
-  if(activeEra==="unknown") eraOK=t.startStage==null;
-  else if(activeEra!=="all") eraOK=t.startStage!=null && t.startStage<=eraStage[activeEra];
+  const regionOK=activeRegion==="all"||t.regionGroup===activeRegion;
+  const eraOK=activeEra==="all"||t.era===activeEra;
   return regionOK&&eraOK;
 }
 
@@ -1133,10 +345,10 @@ function refreshFilters(fit=true){
   const visibleBounds=[];
   let visibleCount=0;
   const regionLabels={
-    all:"全体",athens:"アテネ周辺",mainland:"ギリシャ本土",islands:"エーゲ海の島々",
-    turkey:"現在のトルコ西部",sicily:"南イタリア・シチリア"
+    all:"全体",greece:"ギリシャ",anatolia:"アナトリア",italy:"イタリア・シチリア",
+    westEurope:"西ヨーロッパ",eastMed:"バルカン・東地中海",northAfrica:"北アフリカ"
   };
-  const eraLabels={all:"全期間",bc5:"BC5世紀以前",bc4:"BC4世紀まで",bc3:"BC3〜2世紀まで",bc1:"BC1世紀以降",unknown:"年代未確定"};
+  const eraLabels={all:"全時代",classical:"ギリシャ／古典期",hellenistic:"ヘレニズム期",boundary:"境界・移行期",roman:"ローマ期"};
 
   theatres.forEach(t=>{
     const visible=theatreVisible(t);
