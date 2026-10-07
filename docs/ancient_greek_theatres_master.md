@@ -270,3 +270,66 @@ History上でも、この確度差を同じ見え方にしない。
 - 台帳ID合計：**105 ID**。
 - ただし R21 Teos と R40 Cyrene などは重複／成立分類の精査対象なので、105をそのまま「105の独立した劇場遺構」とは呼ばない。
 - 候補・要精査も地図Pin化できる設計を活用し、今後は「確認できるまで載せない」ではなく「確度を表示して載せる」。
+
+
+## ローマ時代：追加調査 Batch 4 — イタリア地域台帳
+
+### 判定方針
+- 現代イタリア領を一地域として確認する。Sicilia・Sardegnaも対象。
+- theatre / odeion を対象とし、amphitheatre は除外する。
+- 既存65件の南イタリア・シチリア12件と照合し、ギリシャ／ヘレニズム起源のものはローマ新規に二重登録しない。
+- 候補・年代未確定も台帳へ残し、地図では確度表現を使う。
+
+### A：ローマ新規母集団へ追加
+| ID | 名称 | 現在地 | 種別 | 年代・分類メモ | 状態 |
+|---|---|---|---|---|---|
+| R41 | Theatre of Pompeii / Teatro Grande | Pompeii / Campania | Theatre | Samnite/Hellenistic段階を持つ可能性が高く、ローマ新築扱いは危険。ローマ期に大改修。 | 候補・分類要精査 |
+| R42 | Odeion / Teatro Piccolo of Pompeii | Pompeii / Campania | Odeion | ローマ植民市期、80 BC以後の建築として扱える可能性が高い。 | 初期確認済 |
+| R43 | Roman Theatre of Herculaneum | Ercolano / Campania | Theatre | Augustan期のローマ劇場。 | 初期確認済 |
+| R44 | Roman Theatre of Neapolis | Naples / Campania | Theatre | ローマ期劇場。ギリシャ都市Neapolisの先行劇場との関係を要精査。 | 候補・分類要精査 |
+| R45 | Roman Theatre of Sessa Aurunca | Sessa Aurunca / Campania | Theatre | ローマ劇場遺構。共和政末〜帝政初期の成立段階を要照合。 | 候補・要年代精査 |
+| R46 | Roman Theatre of Teanum Sidicinum | Teano / Campania | Theatre | ローマ劇場。初期建設と2世紀ADの大改築を分離して確認する。 | 候補・要年代精査 |
+| R47 | Roman Theatre of Minturnae | Minturno / Lazio | Theatre | ローマ植民都市の劇場。成立段階を要精査。 | 候補・要年代精査 |
+| R48 | Roman Theatre of Ferento | Viterbo / Lazio | Theatre | 1世紀ADのローマ劇場として知られる。公的資料で年代再照合。 | 初期確認済 |
+| R49 | Roman Theatre of Volterra | Volterra / Toscana | Theatre | Augustus期、1世紀BC末頃のローマ劇場。 | 初期確認済 |
+| R50 | Roman Theatre of Fiesole | Fiesole / Toscana | Theatre | ローマ劇場。共和政末〜帝政初期の年代幅を精査。 | 候補・要年代精査 |
+| R51 | Roman Theatre of Arezzo | Arezzo / Toscana | Theatre | ローマ劇場遺構。Hadrian期を中心とする年代情報を公的資料で照合。 | 候補・要年代精査 |
+| R52 | Roman Theatre of Trieste / Tergeste | Trieste / Friuli-Venezia Giulia | Theatre | 1〜2世紀ADのローマ劇場。 | 初期確認済 |
+| R53 | Roman Theatre of Verona | Verona / Veneto | Theatre | 1世紀BC後半のローマ劇場。 | 初期確認済 |
+| R54 | Roman Theatre of Brescia / Brixia | Brescia / Lombardia | Theatre | Roman theatre adjacent to Capitolium。建築段階を精査。 | 候補・要年代精査 |
+| R55 | Roman Theatre of Milan / Mediolanum | Milano / Lombardia | Theatre | ローマ劇場の地下遺構。共和政末〜Augustan期候補。 | 候補・要年代精査 |
+| R56 | Roman Theatre of Bologna / Bononia | Bologna / Emilia-Romagna | Theatre | ローマ劇場遺構。初期建設は共和政期まで遡る可能性があり、年代を精査。 | 候補・要年代精査 |
+| R57 | Roman Theatre of Spoleto / Spoletium | Spoleto / Umbria | Theatre | 1世紀BCのローマ劇場。 | 初期確認済 |
+| R58 | Roman Theatre of Falerii Novi | Fabrica di Roma / Lazio | Theatre | ローマ都市の劇場。年代精査。 | 候補・要年代精査 |
+| R59 | Roman Theatre of Carsulae | Terni / Umbria | Theatre | ローマ都市Carsulaeの劇場遺構。 | 候補・要年代精査 |
+| R60 | Roman Theatre of Urbs Salvia | Urbisaglia / Marche | Theatre | 1世紀AD初頭のローマ劇場。 | 初期確認済 |
+| R61 | Roman Theatre of Ascoli Piceno / Asculum | Ascoli Piceno / Marche | Theatre | ローマ劇場遺構。成立年代を要精査。 | 候補・要年代精査 |
+| R62 | Roman Theatre of Teramo / Interamnia Praetuttiorum | Teramo / Abruzzo | Theatre | Augustan期のローマ劇場。 | 初期確認済 |
+| R63 | Roman Theatre of Amiternum | L'Aquila / Abruzzo | Theatre | 1世紀BC末〜1世紀AD頃のローマ劇場。 | 初期確認済 |
+| R64 | Roman Theatre of Sepino / Saepinum | Sepino / Molise | Theatre | ローマ都市Saepinumの劇場。 | 候補・要年代精査 |
+| R65 | Roman Theatre of Venafrum | Venafro / Molise | Theatre | ローマ劇場遺構。成立年代を要精査。 | 候補・要年代精査 |
+| R66 | Roman Theatre of Grumentum | Grumento Nova / Basilicata | Theatre | ローマ都市の劇場。ギリシャ系南イタリア母集団との重複なし。 | 候補・要年代精査 |
+| R67 | Roman Theatre of Lecce / Lupiae | Lecce / Puglia | Theatre | Roman theatre。Augustan期候補、年代精査。 | 候補・要年代精査 |
+| R68 | Roman Theatre of Catania | Catania / Sicilia | Theatre | 現存建築はローマ期だが、ギリシャ先行劇場の存在が論点。 | 候補・分類要精査 |
+| R69 | Odeon of Catania | Catania / Sicilia | Odeion | ローマodeon。劇場に隣接する別建築。 | 初期確認済 |
+| R70 | Roman Theatre of Bene Vagienna / Augusta Bagiennorum | Bene Vagienna / Piemonte | Theatre | ローマ都市の劇場遺構。 | 候補・要年代精査 |
+| R71 | Roman Theatre of Nora | Pula / Sardegna | Theatre | ローマ期の劇場。先行Punic都市との関係はあるが劇場建築の成立段階を別途精査。 | 候補・要年代精査 |
+
+### B：既存65件側に残す（ローマ新規へ重複登録しない）
+- Syracuse, Taormina, Segesta, Tyndaris, Akrai, Morgantina, Heraclea Minoa, Soluntum, Halaesa Arconidea, Metapontum, Velia/Elea, Locri Epizefiri。
+- これらはギリシャ／ヘレニズム期の成立・起源を持つため、ローマ期の大改築があっても原則として既存側で改築履歴を保持する。
+
+### C：既登録のイタリア・ローマ新規
+- R7 Gubbio
+- R11 Aosta
+- R22 Marina di Gioiosa Ionica
+- R23 Theatre of Marcellus
+- R24 Ostia
+- R25 Benevento
+
+### イタリアBatch終了時の暫定集計
+- 今回の新規台帳候補：R41〜R71 = **31 ID**。
+- 既登録ローマ側40 IDと合わせ、ローマ側台帳は **71 ID**。
+- 既存ギリシャ／ヘレニズム65件との台帳ID総数は **136 ID**。
+- ただし Pompeii Teatro Grande、Neapolis、Catania等は先行ギリシャ／Samnite劇場との関係を精査する必要があり、136は独立した「確定ローマ新築劇場数」ではない。
+- 「イタリアを洗い切る」は永久的な完全網羅を意味しない。現時点で公的・考古学的に追跡可能な theatre / odeion の地域台帳を作り、追加資料が出れば追記する。
