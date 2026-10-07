@@ -176,6 +176,7 @@ const theatres=[
     date:"紀元前5世紀頃から使用。現存する大規模な石造部分は主に紀元前4世紀以降の改築を含む。",
     lat:37.970383,lng:23.727730,
     status:"劇場遺構・位置を確認",
+    statusType:"confirmed",
     note:"アクロポリス南麓、ディオニュソス神域に隣接する劇場。アテネのディオニュソス祭と結びつき、悲劇・喜劇の上演の中心となった。現在見える姿にはヘレニズム期・ローマ期の改変も重なっている。",
     image:"assets/history/maps/attica/dionysus.jpg",
     imageAlt:"現在のディオニュソス劇場",
@@ -185,9 +186,10 @@ const theatres=[
   {
     name:"トリコス劇場",
     place:"ラヴリオ周辺｜アッティカ南東部",
-    date:"初期段階は古典期。後世に改修を受けた。",
+    date:"古典期に成立し、後世に改修を受けた。",
     lat:37.7378813,lng:24.0536814,
     status:"劇場遺構・位置を確認",
+    statusType:"confirmed",
     note:"アッティカ南東部トリコスに残る野外劇場。一般的な半円形とは異なる細長く不規則な客席と、長方形に近いオルケストラを持ち、古代ギリシャ劇場の形が一様ではなかったことを示す。",
     image:"assets/history/maps/attica/thorikos.jpg",
     imageAlt:"現在のトリコス劇場",
@@ -195,11 +197,91 @@ const theatres=[
     sourceUrl:"https://commons.wikimedia.org/wiki/File:Thorikos_-_ancient_Greek_theatre_(48930569458).jpg"
   },
   {
+    name:"イカリオン劇場",
+    place:"ディオニュソス｜アッティカ北部",
+    date:"劇場遺構そのものの確実な年代は、現状の資料だけでは確定しにくい。",
+    lat:38.095558,lng:23.900489,
+    status:"劇場空間・位置を確認",
+    statusType:"confirmed",
+    note:"古代イカリオンの宗教・行政中心に残る劇場空間。細長いオルケストラと6席の大理石製プロエドリア（名誉席）が確認され、客席は斜面上に木造で設けられた可能性がある。後世の道路工事で客席部分の多くが失われた。",
+    image:"assets/history/maps/attica/ikarion.jpg",
+    imageAlt:"現在のイカリオン劇場空間",
+    credit:"Dion.Ikar / CC BY-SA 4.0",
+    sourceUrl:"https://commons.wikimedia.org/wiki/File:%CE%99%CE%BA%CE%AC%CF%81%CE%B9%CE%BF%CE%BD%2C_%CE%94%CE%B9%CF%8C%CE%BD%CF%85%CF%83%CE%BF%CF%82._%CE%9F_%CE%B8%CE%B5%CE%B1%CF%84%CF%81%CE%B9%CE%BA%CF%8C%CF%82_%CF%87%CF%8E%CF%81%CE%BF%CF%82-_%CE%BF%CF%81%CF%87%CE%AE%CF%83%CF%84%CF%81%CE%B1%2C_%CE%B2%CE%AC%CF%83%CE%B5%CE%B9%CF%82_%CE%BA%CE%B1%CE%B9_%CE%B8%CF%81%CF%8C%CE%BD%CE%BF%CE%B9_%CF%84%CF%89%CE%BD_%CE%B5%CF%80%CE%B9%CF%83%CE%AE%CE%BC%CF%89%CE%BD._4%CE%BF_%CE%B1%CE%B9%CF%8E%CE%BD%CE%B1_%CF%80.%CE%A7.%2C_%CE%9C%CE%B1%CF%81%CE%BC%CE%B1%CF%81%CF%8C_%CE%A0%CE%B5%CE%BD%CF%84%CE%B5%CE%BB%CE%B9%CE%BA%CF%8C._IMG_8795.jpg"
+  },
+  {
+    name:"ラムヌース劇場",
+    place:"ラムヌース｜アッティカ北東部",
+    date:"紀元前4世紀の名誉席・碑文が残る。",
+    lat:38.217578,lng:24.027823,
+    status:"劇場空間・位置を確認",
+    statusType:"confirmed",
+    note:"自然斜面とテラスを利用した劇場空間。大理石のプロエドリア（名誉席）とディオニュソスへの献辞、喜劇競演の勝利を示す碑文が、この場所で劇場活動が行われたことを具体的に伝えている。",
+    image:"assets/history/maps/attica/rhamnous.jpg",
+    imageAlt:"現在のラムヌース劇場跡",
+    credit:"Andreas Kakaris / CC BY-SA 4.0",
+    sourceUrl:"https://commons.wikimedia.org/wiki/File:Rhamnous_theater_from_above.jpg"
+  },
+  {
+    name:"エウオニュモン劇場（トラコネス）",
+    place:"アリモス｜アテネ南部",
+    date:"紀元前5世紀から使用され、紀元前3世紀半ば以前に放棄されたとされる。",
+    lat:37.9159,lng:23.7414,
+    status:"劇場遺構・位置を確認",
+    statusType:"confirmed",
+    note:"長方形のオルケストラ、前列の大理石席、スケネ（舞台建築）の遺構を持つ。半円形劇場だけではない古代アッティカの多様な劇場形態を示す重要な実例である。",
+    image:"assets/history/maps/attica/euonymon.jpg",
+    imageAlt:"エウオニュモン劇場の現存遺構",
+    credit:"Mark Landon / CC0 1.0",
+    sourceUrl:"https://commons.wikimedia.org/wiki/File:Trachones_ancient_theater_01.jpg"
+  },
+  {
+    name:"ハリムース劇場",
+    place:"アリモス｜Marinou Antypa Street",
+    date:"1986〜1987年の発掘で劇場空間を確認。出土資料は古代期の利用を示す。",
+    lat:37.9060,lng:23.7321,
+    status:"劇場遺構を確認／ピン位置は古代ハリムース中心付近の概略",
+    statusType:"confirmed",
+    note:"私有地の発掘で、原位置に残る前列の座席と、その背後の岩盤加工が確認された。前列には6基の二人掛けの座席が並び、斜面側には木造席などを設けた可能性を示す加工痕も残る。",
+  },
+  {
+    name:"アカルナイ劇場",
+    place:"アカルネス｜現代市街地",
+    date:"紀元前4世紀前半。",
+    lat:38.080325,lng:23.733298,
+    status:"劇場遺構・位置を確認",
+    statusType:"confirmed",
+    note:"2007年に現代市街地の私有地から発見された劇場。石灰岩の座席、オルケストラの一部、ディアゾーマ、排水路が確認され、馬蹄形のオルケストラを持つ。推定収容人数は約1,500〜2,000人。",
+  },
+  {
+    name:"ピレウス旧劇場（ムニキア）",
+    place:"ピレウス｜ムニキア丘西斜面",
+    date:"古典期。紀元前5世紀後半には集会の場としても記録される。",
+    lat:37.93997,lng:23.65893,
+    status:"文献・19世紀発掘記録で確認／ピン位置はムニキア丘の概略",
+    statusType:"record",
+    note:"ピレウスにあった古典期の旧劇場。1881年に遺構が発掘されたが、その後は埋め戻され、上に市街地が形成された。劇場はムニキア丘の西斜面にあり、演劇だけでなく政治集会にも利用された記録がある。",
+  },
+  {
+    name:"ゼア劇場",
+    place:"ピレウス｜考古学博物館隣接地",
+    date:"紀元前3世紀初頭に建設されたとされ、ヘレニズム期に使用された。",
+    lat:37.93678,lng:23.64455,
+    status:"劇場遺構・位置を確認",
+    statusType:"confirmed",
+    note:"ピレウスのゼア港近くに造られた劇場。コイロン（客席）、オルケストラ、スケネからなるヘレニズム劇場の三部構成を持ち、現在は主に客席を支えた基礎部分が残る。",
+    image:"assets/history/maps/attica/zea.jpg",
+    imageAlt:"現在のゼア劇場",
+    credit:"George E. Koronaios / CC BY-SA 4.0",
+    sourceUrl:"https://commons.wikimedia.org/wiki/File:Remains_of_the_ancient_Theatre_of_Zea_in_Piraeus_on_July_4%2C_2021.jpg"
+  },
+  {
     name:"アンフィアレイオンの劇場",
     place:"オロポス｜アッティカ北東部",
     date:"紀元前4世紀後半以降。",
     lat:38.291581,lng:23.845344,
     status:"劇場遺構・位置を確認",
+    statusType:"confirmed",
     note:"オロポス近郊のアンフィアラオス聖域に設けられた劇場。都市中心部ではなく、祭祀・競技・集会が行われる聖域の中に劇場が置かれた例である。",
     image:"assets/history/maps/attica/amphiareion.jpg",
     imageAlt:"現在のアンフィアレイオンの劇場",
@@ -210,11 +292,12 @@ const theatres=[
 
 const bounds=[];
 theatres.forEach(t=>{
+  const statusColors={confirmed:"#5f84ad",record:"#d7b06a",research:"#777"};
   const marker=L.circleMarker([t.lat,t.lng],{
     radius:9,
     color:"#eef1f2",
     weight:2,
-    fillColor:"#5f84ad",
+    fillColor:statusColors[t.statusType]||"#777",
     fillOpacity:.95
   }).addTo(map);
   marker.bindPopup(
