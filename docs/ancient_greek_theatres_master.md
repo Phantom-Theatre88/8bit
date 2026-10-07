@@ -134,8 +134,42 @@ History上でも、この確度差を同じ見え方にしない。
 | T4 | Theatre of Assos | Behramkale / Çanakkale | 紀元前4世紀末頃。馬蹄形の典型的ヘレニズム劇場。 | 写真・位置確認済 |
 | T5 | Theatre of Miletus | Balat / Aydın | ギリシャ期に起源。現存形はローマ期の拡張を多く含む。 | 写真・位置確認済 |
 | T6 | Theatre of Aphrodisias | Geyre / Aydın | 紀元前1世紀末頃〜。ヘレニズム末期からローマ期への移行例。 | 写真・位置確認済 |
+| T7 | Theatre of Teos | Sığacık / İzmir | ヘレニズム期。ギリシャ劇場の伝統を基礎にローマ期改修。 | 写真・位置確認済 |
+| T8 | Theatre of Metropolis | Yeniköy / Torbalı / İzmir | 後期ヘレニズム期。ローマ期に舞台建築拡張。 | 位置確認済 |
+| T9 | Theatre of Erythrai | Ildırı / Çeşme / İzmir | 紀元前3世紀頃。アクロポリス北斜面。 | 写真・位置確認済 |
+| T10 | Hellenistic Theatre of Magnesia ad Maeandrum | Tekin / Aydın | 紀元前2世紀頃。発掘後に再被覆された部分が多い。 | 写真・位置確認済 |
+| T11 | Theatre of Halicarnassus | Bodrum / Muğla | 紀元前4世紀に起源。後世に拡張。 | 写真・位置確認済 |
+| T12 | Theatre of Kaunos | Dalyan / Muğla | ヘレニズム期。ローマ期に大規模改修。 | 写真・位置確認済 |
+| T13 | Lower Theatre of Knidos | Datça / Muğla | ギリシャ期に起源。港湾都市の劇場。 | 写真・位置確認済 |
+| T14 | Theatre of Alinda | Karpuzlu / Aydın | 紀元前3〜2世紀頃。ヘレニズム劇場、ローマ期改修あり。 | 写真・位置確認済 |
 
 ### 注意
 - 現代の国境は古代の文化圏と一致しない。「現在のトルコ西部」は新人向けの地理案内名として使用する。
 - 現存する巨大な劇場の多くはローマ期の増改築を含むため、ギリシャ期の起源と現在見える姿を分けて説明する。
 - アフロディシアスは古典期ギリシャ劇場の代表例ではなく、ヘレニズム末期〜ローマ期の移行を理解する比較対象として扱う。
+
+
+## Batch 4：南イタリア・シチリア
+
+新人向け表示は「南イタリア・シチリア」。古代のマグナ・グラエキアおよびシチリアのギリシャ文化圏を扱う。ギリシャ人植民都市だけでなく、セジェスタやソルントのように他文化系都市がギリシャ式劇場を受容した例も、文化交流の比較対象として含める。
+
+| No. | 劇場 | 現代の場所 | 年代・特徴 | 地図状態 |
+|---:|---|---|---|---|
+| I1 | Greek Theatre of Syracuse | Syracuse / Sicily | 現在の主要形は紀元前3世紀ヒエロン2世期。より早い上演空間の段階あり。 | 写真・位置確認済 |
+| I2 | Ancient Theatre of Taormina | Taormina / Sicily | 紀元前3〜2世紀起源。現存形はローマ期改築を強く反映。 | 写真・位置確認済 |
+| I3 | Theatre of Segesta | Calatafimi Segesta / Sicily | 紀元前4〜3世紀に起源。現存形は紀元前2世紀頃の整備を含む。 | 写真・位置確認済 |
+| I4 | Theatre of Tyndaris | Tindari / Sicily | 紀元前4世紀末〜3世紀頃。ローマ期改築あり。 | 写真・位置確認済 |
+| I5 | Theatre of Akrai | Palazzolo Acreide / Sicily | 紀元前3世紀頃。地方都市の小規模劇場。 | 写真・位置確認済 |
+| I6 | Theatre of Morgantina | Aidone / Sicily | 紀元前4世紀後半〜3世紀頃。 | 写真・位置確認済 |
+| I7 | Theatre of Heraclea Minoa | Cattolica Eraclea / Sicily | 紀元前4世紀末頃。 | 写真・位置確認済 |
+| I8 | Theatre of Soluntum | Santa Flavia / Sicily | 紀元前4〜3世紀のヘレニズム期。プニック系都市での受容例。 | 位置確認済 |
+| I9 | Hellenistic Theatre of Halaesa Arconidea | Tusa / Sicily | ヘレニズム期。2026年も発掘継続中。 | 調査中として地図表示 |
+| I10 | Theatre of Metapontum | Metaponto / Basilicata | 紀元前4世紀。より古いekklesiasterionを置換。人工盛土上。 | 写真・位置確認済 |
+| I11 | Theatre of Velia / Elea | Ascea / Campania | ギリシャ期は紀元前4世紀。現存形はローマ期再建を含む。 | 写真・位置確認済 |
+| I12 | Theatre of Locri Epizefiri | Portigliola / Calabria | ギリシャ劇場を基礎にローマ期改築。 | 写真・位置確認済 |
+
+### 現段階での完結扱い
+- 「現在のトルコ西部」と「南イタリア・シチリア」は、現行のHistory地図に載せる**第一版の確認済み母集団**として一度区切る。
+- 「完結」は「古代世界に存在した全劇場を永久に網羅した」という意味ではない。新しい発掘・研究・公的資料で確認できたものは今後も追加する。
+- ローマ期に新造された純ローマ劇場だけを無制限に含めず、ギリシャ／ヘレニズム期の起源、またはギリシャ劇場文化との比較上意味のあるものを優先する。
+- 各劇場は、現在見える遺構と最初の建設段階を混同しない。
