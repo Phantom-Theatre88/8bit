@@ -78,6 +78,51 @@ button,a{font:inherit}
   backdrop-filter:blur(5px);
 }
 .map-overlay h2{margin:0 0 5px;font-size:20px}
+.theatre-list-toggle{
+  position:absolute;z-index:620;right:14px;top:14px;
+  border:1px solid #d8bd8a;border-radius:9px;
+  background:linear-gradient(180deg,#f5e8d1,#dcb879);
+  color:#16130f;padding:9px 12px;font-size:14px;font-weight:900;cursor:pointer;
+  box-shadow:0 8px 22px rgba(0,0,0,.26);
+}
+.theatre-list-panel{
+  position:absolute;z-index:610;right:14px;top:14px;bottom:14px;
+  width:min(360px,32vw);
+  display:grid;grid-template-rows:auto minmax(0,1fr);
+  border:1px solid rgba(255,255,255,.16);border-radius:12px;
+  background:rgba(16,18,20,.94);
+  box-shadow:0 12px 34px rgba(0,0,0,.38);
+  backdrop-filter:blur(6px);
+  transform:translateX(0);opacity:1;
+  transition:transform .18s ease,opacity .18s ease;
+}
+.theatre-list-panel.closed{transform:translateX(calc(100% + 28px));opacity:0;pointer-events:none}
+.theatre-list-head{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:12px 12px 10px;border-bottom:1px solid #34383d;
+}
+.theatre-list-head h2{margin:0;font-size:20px}
+.theatre-list-close{
+  border:1px solid #495057;border-radius:8px;background:#1b1f22;color:#f0f2f3;
+  min-width:38px;height:36px;font-size:20px;font-weight:900;cursor:pointer;
+}
+.theatre-list{
+  overflow-y:auto;-webkit-overflow-scrolling:touch;padding:8px;
+}
+.theatre-list-item{
+  width:100%;display:grid;grid-template-columns:16px minmax(0,1fr);gap:9px;
+  text-align:left;border:1px solid #34383d;border-radius:9px;background:#171a1d;
+  color:#eef1f2;padding:10px;margin:0 0 8px;cursor:pointer;
+}
+.theatre-list-item:hover,.theatre-list-item.active{border-color:#d7b06a;background:#202428}
+.theatre-list-item .dot{
+  width:12px;height:12px;border-radius:50%;margin-top:4px;border:2px solid #eef1f2;background:#5f84ad
+}
+.theatre-list-item .dot.record{background:#d7b06a}
+.theatre-list-item .dot.research{background:#777}
+.theatre-list-item strong{display:block;font-size:15px;line-height:1.35}
+.theatre-list-item small{display:block;margin-top:3px;color:#adb5ba;font-size:12px;line-height:1.4}
+.theatre-list-item .state{margin-top:4px;color:#d7c39e;font-size:12px;line-height:1.35}
 .map-overlay p{margin:0;color:#c8ced2;font-size:14px;line-height:1.55}
 .legend{display:grid;gap:7px;margin-top:12px}
 .legend-row{display:flex;align-items:center;gap:8px;color:#dce1e4;font-size:13px}
@@ -106,6 +151,7 @@ button,a{font:inherit}
   .map-head{align-items:flex-start}
   .map-title h1{font-size:26px}
   .map-overlay{width:min(380px,52vw)}
+  .theatre-list-panel{width:min(360px,42vw)}
 }
 @media(max-width:680px){
   .map-app{height:auto;min-height:calc(100dvh - 60px)}
@@ -113,6 +159,8 @@ button,a{font:inherit}
   .map-back{align-self:flex-start}
   .map-shell{min-height:640px}
   .map-overlay{left:10px;right:10px;top:10px;width:auto}
+  .theatre-list-toggle{right:10px;top:10px}
+  .theatre-list-panel{right:10px;top:10px;bottom:10px;width:min(360px,82vw)}
   .map-foot{flex-direction:column;align-items:flex-start}
 }
 </style>
@@ -151,6 +199,15 @@ button,a{font:inherit}
         <div class="legend-row"><span class="legend-dot record"></span><span>碑文・文献で確認</span></div>
         <div class="legend-row"><span class="legend-dot research"></span><span>調査中</span></div>
       </div>
+    </aside>
+
+    <button class="theatre-list-toggle" id="theatreListToggle" type="button" aria-controls="theatreListPanel" aria-expanded="true">劇場リスト</button>
+    <aside class="theatre-list-panel" id="theatreListPanel" aria-label="劇場リスト">
+      <div class="theatre-list-head">
+        <h2>劇場リスト</h2>
+        <button class="theatre-list-close" id="theatreListClose" type="button" aria-label="劇場リストを閉じる">×</button>
+      </div>
+      <div class="theatre-list" id="theatreList"></div>
     </aside>
   </section>
 
@@ -291,7 +348,16 @@ const theatres=[
 ];
 
 const bounds=[];
-theatres.forEach(t=>{
+const markerByIndex=[];
+const listHost=document.getElementById("theatreList");
+
+function setActiveListItem(index){
+  document.querySelectorAll(".theatre-list-item").forEach((el,i)=>el.classList.toggle("active",i===index));
+  const active=document.querySelectorAll(".theatre-list-item")[index];
+  if(active)active.scrollIntoView({block:"nearest",behavior:"smooth"});
+}
+
+theatres.forEach((t,index)=>{
   const statusColors={confirmed:"#5f84ad",record:"#d7b06a",research:"#777"};
   const marker=L.circleMarker([t.lat,t.lng],{
     radius:9,
@@ -311,7 +377,25 @@ theatres.forEach(t=>{
       (t.credit?'<div class="credit">写真：<a href="'+t.sourceUrl+'" target="_blank" rel="noopener noreferrer">'+t.credit+'</a></div>':'')+
     '</div>'
   );
+  marker.on("click",()=>setActiveListItem(index));
+  markerByIndex.push(marker);
   bounds.push([t.lat,t.lng]);
+
+  const item=document.createElement("button");
+  item.type="button";
+  item.className="theatre-list-item";
+  const dotClass=t.statusType==="record"?"record":(t.statusType==="research"?"research":"");
+  item.innerHTML=
+    '<span class="dot '+dotClass+'"></span>'+
+    '<span><strong>'+t.name+'</strong>'+
+    '<small>'+t.place+'</small>'+
+    '<span class="state">'+t.status+'</span></span>';
+  item.addEventListener("click",()=>{
+    map.setView([t.lat,t.lng],Math.max(map.getZoom(),14),{animate:true});
+    marker.openPopup();
+    setActiveListItem(index);
+  });
+  listHost.appendChild(item);
 });
 map.fitBounds(bounds,{padding:[48,48],maxZoom:10});
 
@@ -323,6 +407,19 @@ window.addEventListener("load",refreshMapSize,{once:true});
 window.addEventListener("resize",refreshMapSize);
 window.addEventListener("orientationchange",()=>setTimeout(refreshMapSize,250));
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)setTimeout(refreshMapSize,80)});
+
+const theatreListPanel=document.getElementById("theatreListPanel");
+const theatreListToggle=document.getElementById("theatreListToggle");
+const theatreListClose=document.getElementById("theatreListClose");
+function setTheatreListOpen(open){
+  theatreListPanel.classList.toggle("closed",!open);
+  theatreListToggle.setAttribute("aria-expanded",String(open));
+  theatreListToggle.hidden=open;
+  setTimeout(refreshMapSize,220);
+}
+theatreListToggle.addEventListener("click",()=>setTheatreListOpen(true));
+theatreListClose.addEventListener("click",()=>setTheatreListOpen(false));
+setTheatreListOpen(true);
 
 document.querySelectorAll(".next-ui-category-tab").forEach(button=>button.addEventListener("click",e=>{
   e.stopPropagation();
