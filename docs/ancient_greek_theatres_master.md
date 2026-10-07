@@ -2082,3 +2082,249 @@ History上でも、この確度差を同じ見え方にしない。
 ### I12 Theatre of Locri Epizefiri
 - 図鑑説明：**Portigliola / Calabriaに位置する古代劇場。ギリシャ劇場を基礎にローマ期改築。 現在見える遺構、初期建設、後代の改築を分けて読み、ギリシャ／ヘレニズム系劇場が地域ごとにどのように展開したかを比較する。**
 - 台帳状態：写真・位置確認済
+
+## 地図ピン185 — CANONICAL REGISTRY（2026-10-08）
+
+> **工程2「地図のピン 185/185」の正本。**
+> この節は、地図実装に関して、それ以前の候補・重複・概略位置の記述より優先する。
+
+### 1→5 実施状況
+- 1. **185件の母集団確定：完了**
+  - 物理的な劇場／オデイオンとして扱える185件へ統一した。
+  - 旧65件のうち、劇場建築位置が未確定だった18 ID（A6、A8、G1、G2、G3、G4、G5、G6、G7、G8、G9、G10、G11、G12、G13、G14、G15、G16）は、物理的劇場と位置を確認できる別劇場へ差し替えた。
+  - Roman側の重複・存在未確定8 ID（R21、R101、R102、R104、R106、R108、R116、R119）も差し替えた。
+  - R40、R103、R120 は、同一IDのまま実在劇場として名称・分類を正規化した。
+- 2. **時代区分185/185：完了**
+  - ピン色は証拠確度ではなく時代区分で固定する。
+- 3. **位置確認185/185：完了**
+  - 地図ピンは劇場遺構／劇場遺跡そのものの位置を使う。
+  - 都市中心を劇場位置の代用として使わない。
+- 4. **HistoryMap.html実装：進行中**
+- 5. **機械チェック：4完了後に実施**
+
+### ピン色 — LOCK
+- **ギリシャ／古典期**：Gold `#d7b06a`
+- **ヘレニズム期**：Blue `#6f94bd`
+- **境界・移行期**：Violet `#9b7ab8`
+- **ローマ期**：Terracotta `#b96755`
+
+色は**時代**だけを表す。証拠の確度を灰色などのピン色で表現しない。
+ギリシャ／ヘレニズム期に成立し、ローマ期に改築された劇場は、原則として成立側の時代色を使う。ローマ期に新規成立した劇場・オデイオンはローマ色を使う。
+
+### 地図座標の扱い
+- 緯度・経度は劇場遺構・発掘地点・公的遺跡資料等で確認できる劇場位置をPin用に保持する。
+- 座標値は地図表示用であり、測量・境界確定用途ではない。
+- 同一都市に複数劇場がある場合も、劇場ごとの位置を別々に保持する。
+
+### 今回の差し替え確認に使用した主要資料
+- University of Bologna, Butrint Project — Theatre  
+  https://site.unibo.it/butrint/en/atlas-and-history/theatre
+- Bylis Archaeological Park — Bylis  
+  https://bylisklos.al/en/bylis/
+- University of Bologna, Missione archeologica italo-albanese — Phoinike  
+  https://site.unibo.it/progetto-phoinike/it/nuovi-scavi/ricerche-2000-2016
+- ODAP — Ancient Sicyon  
+  https://www.odap.gr/wp-content/uploads/demo_products/072_ARXAIA_SIKION.pdf
+- DIAZOMA — Ancient Theater of Nicopolis  
+  https://diazoma.gr/en/theaters/ancient-theater-nicopolis/
+- Hellenic Ministry of Culture / All of Greece One Culture — Roman Odeon of Patras  
+  https://allofgreeceone.culture.gov.gr/en/venues/roman-odeon-of-patras/
+- Visit Braga — Teatro Romano  
+  https://visitbraga.travel/en/highlights/monumentos/teatro-romano/
+- Republic of Türkiye, Ministry of Culture and Tourism — Side  
+  https://www.ktb.gov.tr/genel/medya/iltanitimbrosuru-eng/side_eng.pdf
+- Landeshauptstadt Mainz — Roman stage theater  
+  https://internet.mainz.de/en/angebote-entdecken/zu-gast-in-mainz/sehenswertes/roemisches-buehnentheater
+- Türkiye Museums — Termessos Archaeological Site  
+  https://muze.gov.tr/muze-detay?distId=TRM&sectionId=TRM01
+
+### 185件 正式レジストリ
+
+| ID | 名称 | 時代区分 | 緯度 | 経度 | 地域 |
+|---|---|---|---:|---:|---|
+| A1 | ディオニュソス劇場 | ギリシャ／古典期 | 37.970383 | 23.727730 | ギリシャ |
+| A2 | トリコス劇場 | ギリシャ／古典期 | 37.737881 | 24.053681 | ギリシャ |
+| A3 | イカリオン劇場 | ギリシャ／古典期 | 38.095558 | 23.900489 | ギリシャ |
+| A4 | ラムヌース劇場 | ギリシャ／古典期 | 38.217578 | 24.027823 | ギリシャ |
+| A5 | エウオニュモン劇場（トラコネス） | ギリシャ／古典期 | 37.915900 | 23.741400 | ギリシャ |
+| A6 | Theatre of Butrint | ヘレニズム期 | 39.745560 | 20.020280 | バルカン・東地中海 |
+| A7 | アカルナイ劇場 | ギリシャ／古典期 | 38.080325 | 23.733298 | ギリシャ |
+| A8 | Theatre of Byllis | ヘレニズム期 | 40.539720 | 19.738330 | バルカン・東地中海 |
+| A9 | ゼア劇場 | ヘレニズム期 | 37.936780 | 23.644550 | ギリシャ |
+| A10 | アンフィアレイオンの劇場 | 境界・移行期 | 38.291581 | 23.845344 | ギリシャ |
+| G1 | Theatre of Phoinike | ヘレニズム期 | 39.913330 | 20.056390 | バルカン・東地中海 |
+| G2 | Ancient Theatre of Sicyon | 境界・移行期 | 37.984139 | 22.710575 | ギリシャ |
+| G3 | Theatre of Hadrianopolis | ローマ期 | 39.996110 | 20.224440 | バルカン・東地中海 |
+| G4 | Ancient Theatre of Kourion | ヘレニズム期 | 34.664170 | 32.887780 | バルカン・東地中海 |
+| G5 | Theatre of Salamis | ローマ期 | 35.184720 | 33.902500 | バルカン・東地中海 |
+| G6 | Theatre of Patara | ヘレニズム期 | 36.260220 | 29.314300 | アナトリア |
+| G7 | Theatre of Sagalassos | ローマ期 | 37.678060 | 30.521670 | アナトリア |
+| G8 | Theatre of Selge | ローマ期 | 37.229170 | 31.127220 | アナトリア |
+| G9 | Theatre of Termessos | ヘレニズム期 | 36.982220 | 30.464720 | アナトリア |
+| G10 | Theatre of Telmessos | ヘレニズム期 | 36.620830 | 29.105560 | アナトリア |
+| G11 | Theatre of Arykanda | 境界・移行期 | 36.514170 | 30.059720 | アナトリア |
+| G12 | Theatre of Olba | ローマ期 | 36.581110 | 33.926670 | アナトリア |
+| G13 | Theatre of Phaselis | 境界・移行期 | 36.523610 | 30.552500 | アナトリア |
+| G14 | Asklepieion Theatre of Pergamon | ローマ期 | 39.119680 | 27.165410 | アナトリア |
+| G15 | Theatre of Apollonia (Albania) | ヘレニズム期 | 40.723330 | 19.470280 | バルカン・東地中海 |
+| G16 | Ancient Theatre of Ohrid | ヘレニズム期 | 41.114440 | 20.793610 | バルカン・東地中海 |
+| G17 | エピダウロス劇場 | ギリシャ／古典期 | 37.596000 | 23.079200 | ギリシャ |
+| G18 | メガロポリス劇場 | ギリシャ／古典期 | 37.410170 | 22.127258 | ギリシャ |
+| G19 | アルゴス劇場 | ヘレニズム期 | 37.631600 | 22.719600 | ギリシャ |
+| G20 | デルフィ劇場 | ヘレニズム期 | 38.482450 | 22.500706 | ギリシャ |
+| G21 | エレトリア劇場 | 境界・移行期 | 38.398603 | 23.790644 | ギリシャ |
+| G22 | ラリサ第1古代劇場 | ヘレニズム期 | 39.640315 | 22.415256 | ギリシャ |
+| G23 | デロス劇場 | ヘレニズム期 | 37.397040 | 25.268105 | ギリシャ |
+| G24 | メロス劇場 | 境界・移行期 | 36.737823 | 24.421035 | ギリシャ |
+| G25 | リンドス劇場 | ギリシャ／古典期 | 36.089886 | 28.086576 | ギリシャ |
+| G26 | オイニアダイ劇場 | ギリシャ／古典期 | 38.409614 | 21.199028 | ギリシャ |
+| G27 | ドドナ劇場 | ヘレニズム期 | 39.546492 | 20.787700 | ギリシャ |
+| G28 | アプテラ劇場 | ヘレニズム期 | 35.461272 | 24.141436 | ギリシャ |
+| G29 | マロネイア劇場 | 境界・移行期 | 40.878783 | 25.519250 | ギリシャ |
+| I1 | シラクサのギリシャ劇場 | ヘレニズム期 | 37.076111 | 15.275000 | イタリア・シチリア |
+| I2 | タオルミーナ古代劇場 | ヘレニズム期 | 37.852500 | 15.292222 | イタリア・シチリア |
+| T1 | エフェソス大劇場 | ヘレニズム期 | 37.941055 | 27.342316 | アナトリア |
+| T2 | プリエネ劇場 | 境界・移行期 | 37.659900 | 27.297850 | アナトリア |
+| T3 | ペルガモン劇場 | ヘレニズム期 | 39.131800 | 27.183230 | アナトリア |
+| T4 | アッソス劇場 | 境界・移行期 | 39.488306 | 26.337806 | アナトリア |
+| T5 | ミレトス劇場 | 境界・移行期 | 37.530647 | 27.275800 | アナトリア |
+| T6 | アフロディシアス劇場 | 境界・移行期 | 37.707370 | 28.724970 | アナトリア |
+| T7 | テオス劇場 | ローマ期 | 38.179900 | 26.787540 | アナトリア |
+| T8 | メトロポリス劇場 | ヘレニズム期 | 38.124000 | 27.324500 | アナトリア |
+| T9 | エリュトライ劇場 | ヘレニズム期 | 38.382730 | 26.480710 | アナトリア |
+| T10 | マグネシア・アド・マエアンドルム劇場 | ヘレニズム期 | 37.850300 | 27.525690 | アナトリア |
+| T11 | ハリカルナッソス劇場 | ギリシャ／古典期 | 37.040400 | 27.421810 | アナトリア |
+| T12 | カウノス劇場 | ヘレニズム期 | 36.825640 | 28.623610 | アナトリア |
+| T13 | クニドス下劇場 | 境界・移行期 | 36.685833 | 27.375000 | アナトリア |
+| T14 | アリンダ劇場 | ヘレニズム期 | 37.558700 | 27.826950 | アナトリア |
+| I3 | セジェスタ劇場 | 境界・移行期 | 37.941320 | 12.843880 | イタリア・シチリア |
+| I4 | ティンダリ劇場 | 境界・移行期 | 38.143700 | 15.042400 | イタリア・シチリア |
+| I5 | アクライ劇場 | ヘレニズム期 | 37.057620 | 14.894684 | イタリア・シチリア |
+| I6 | モルガンティナ劇場 | 境界・移行期 | 37.430071 | 14.479379 | イタリア・シチリア |
+| I7 | ヘラクレア・ミノア劇場 | 境界・移行期 | 37.394270 | 13.280700 | イタリア・シチリア |
+| I8 | ソルント劇場 | ヘレニズム期 | 38.094180 | 13.531910 | イタリア・シチリア |
+| I9 | ハラエサ・アルコニデア劇場 | ヘレニズム期 | 37.999800 | 14.262500 | イタリア・シチリア |
+| I10 | メタポントゥム劇場 | ギリシャ／古典期 | 40.383190 | 16.826170 | イタリア・シチリア |
+| I11 | ヴェリア劇場 | ギリシャ／古典期 | 40.161090 | 15.155460 | イタリア・シチリア |
+| I12 | ロクリ・エピゼフィリ劇場 | ギリシャ／古典期 | 38.215870 | 16.228950 | イタリア・シチリア |
+| R1 | Odeon of Herodes Atticus | ローマ期 | 37.970756 | 23.724444 | ギリシャ |
+| R2 | Theatre of Orange | ローマ期 | 44.135870 | 4.808860 | 西ヨーロッパ |
+| R3 | Theatre of Aspendos | ローマ期 | 36.938890 | 31.172220 | アナトリア |
+| R4 | Roman Odeion of Kos | ローマ期 | 36.889458 | 27.284840 | ギリシャ |
+| R5 | Kom el-Dikka Roman theatre / odeon | ローマ期 | 31.194666 | 29.904057 | 北アフリカ |
+| R6 | Gortyn Odeon | ローマ期 | 35.063088 | 24.946867 | ギリシャ |
+| R7 | Roman Theatre of Gubbio / Iguvium | ローマ期 | 43.351962 | 12.572652 | イタリア・シチリア |
+| R8 | Roman Theatre of Mérida / Augusta Emerita | ローマ期 | 38.915280 | -6.338610 | 西ヨーロッパ |
+| R9 | Roman Theatre of Sagunto | ローマ期 | 39.676670 | -0.277780 | 西ヨーロッパ |
+| R10 | Roman Theatre of Lisbon / Olisipo | ローマ期 | 38.710560 | -9.132220 | 西ヨーロッパ |
+| R11 | Roman Theatre of Aosta / Augusta Praetoria | ローマ期 | 45.738578 | 7.322380 | イタリア・シチリア |
+| R12 | Ancient Theatre of Philippopolis | ローマ期 | 42.146780 | 24.750940 | バルカン・東地中海 |
+| R13 | Roman Theatre of Stobi | ローマ期 | 41.551390 | 21.974440 | バルカン・東地中海 |
+| R14 | South Theatre of Gerasa | ローマ期 | 32.276789 | 35.889155 | バルカン・東地中海 |
+| R15 | North Theatre / Odeon of Gerasa | ローマ期 | 32.282604 | 35.892341 | バルカン・東地中海 |
+| R16 | Roman Theatre of Philadelphia | ローマ期 | 31.951692 | 35.939306 | バルカン・東地中海 |
+| R17 | Odeon of Philadelphia | ローマ期 | 31.952333 | 35.939889 | バルカン・東地中海 |
+| R18 | Theatre of Leptis Magna | ローマ期 | 32.638330 | 14.290280 | 北アフリカ |
+| R19 | Roman Theatre of Sabratha | ローマ期 | 32.805280 | 12.485000 | 北アフリカ |
+| R20 | Roman Theatre of Hierapolis | ローマ期 | 37.925000 | 29.125833 | アナトリア |
+| R21 | Ancient Theatre of Nicopolis | ローマ期 | 39.023435 | 20.737274 | ギリシャ |
+| R22 | Roman Theatre of Marina di Gioiosa Ionica | ローマ期 | 38.301390 | 16.332870 | イタリア・シチリア |
+| R23 | Theatre of Marcellus | ローマ期 | 41.891667 | 12.479167 | イタリア・シチリア |
+| R24 | Theatre of Ostia | ローマ期 | 41.755926 | 12.291368 | イタリア・シチリア |
+| R25 | Roman Theatre of Benevento | ローマ期 | 41.130686 | 14.771900 | イタリア・シチリア |
+| R26 | Roman Theatre of Málaga | ローマ期 | 36.721110 | -4.416670 | 西ヨーロッパ |
+| R27 | Roman Theatre of Cartagena / Carthago Nova | ローマ期 | 37.599440 | -0.983890 | 西ヨーロッパ |
+| R28 | Roman Theatre of Tarraco | ローマ期 | 41.112780 | 1.249170 | 西ヨーロッパ |
+| R29 | Grand Theatre of Lugdunum | ローマ期 | 45.759722 | 4.819722 | 西ヨーロッパ |
+| R30 | Odeon of Lugdunum | ローマ期 | 45.758610 | 4.819720 | 西ヨーロッパ |
+| R31 | Roman Theatre of Augustodunum | ローマ期 | 46.952500 | 4.309720 | 西ヨーロッパ |
+| R32 | Theatre of Augusta Raurica | ローマ期 | 47.533277 | 7.722011 | 西ヨーロッパ |
+| R33 | Roman Theatre of Bosra | ローマ期 | 32.517780 | 36.481670 | バルカン・東地中海 |
+| R34 | Roman Theatre of Carthage | ローマ期 | 36.857500 | 10.329440 | 北アフリカ |
+| R35 | Roman Theatre of Dougga / Thugga | ローマ期 | 36.423729 | 9.220279 | 北アフリカ |
+| R36 | Roman Theatre of Scythopolis | ローマ期 | 32.501390 | 35.501390 | バルカン・東地中海 |
+| R37 | Roman Theatre of Palmyra | ローマ期 | 34.550768 | 38.268761 | バルカン・東地中海 |
+| R38 | Roman Theatre of Petra | 境界・移行期 | 30.324796 | 35.447029 | バルカン・東地中海 |
+| R39 | Roman Theatre of Byblos | ローマ期 | 34.119170 | 35.644720 | バルカン・東地中海 |
+| R40 | Theatre 2 of Cyrene | ローマ期 | 32.818330 | 21.857780 | 北アフリカ |
+| R41 | Theatre of Pompeii / Teatro Grande | 境界・移行期 | 40.748781 | 14.488423 | イタリア・シチリア |
+| R42 | Odeion / Teatro Piccolo of Pompeii | ローマ期 | 40.748815 | 14.489035 | イタリア・シチリア |
+| R43 | Roman Theatre of Herculaneum | ローマ期 | 40.808330 | 14.347500 | イタリア・シチリア |
+| R44 | Roman Theatre of Neapolis | 境界・移行期 | 40.852220 | 14.256390 | イタリア・シチリア |
+| R45 | Roman Theatre of Sessa Aurunca | ローマ期 | 41.234440 | 13.930560 | イタリア・シチリア |
+| R46 | Roman Theatre of Teanum Sidicinum | ローマ期 | 41.248170 | 14.072730 | イタリア・シチリア |
+| R47 | Roman Theatre of Minturnae | ローマ期 | 41.242464 | 13.768467 | イタリア・シチリア |
+| R48 | Roman Theatre of Ferento | ローマ期 | 42.488469 | 12.132135 | イタリア・シチリア |
+| R49 | Roman Theatre of Volterra | ローマ期 | 43.403611 | 10.860000 | イタリア・シチリア |
+| R50 | Roman Theatre of Fiesole | ローマ期 | 43.807805 | 11.293734 | イタリア・シチリア |
+| R51 | Roman Theatre of Arezzo | ローマ期 | 43.464170 | 11.887220 | イタリア・シチリア |
+| R52 | Roman Theatre of Trieste / Tergeste | ローマ期 | 45.649195 | 13.771698 | イタリア・シチリア |
+| R53 | Roman Theatre of Verona | ローマ期 | 45.447417 | 11.001639 | イタリア・シチリア |
+| R54 | Roman Theatre of Brescia / Brixia | ローマ期 | 45.539914 | 10.226658 | イタリア・シチリア |
+| R55 | Roman Theatre of Milan / Mediolanum | ローマ期 | 45.465156 | 9.182996 | イタリア・シチリア |
+| R56 | Roman Theatre of Bologna / Bononia | ローマ期 | 44.491300 | 11.341060 | イタリア・シチリア |
+| R57 | Roman Theatre of Spoleto / Spoletium | ローマ期 | 42.733303 | 12.735088 | イタリア・シチリア |
+| R58 | Roman Theatre of Falerii Novi | ローマ期 | 42.298524 | 12.360000 | イタリア・シチリア |
+| R59 | Roman Theatre of Carsulae | ローマ期 | 42.639338 | 12.560103 | イタリア・シチリア |
+| R60 | Roman Theatre of Urbs Salvia | ローマ期 | 43.198878 | 13.380658 | イタリア・シチリア |
+| R61 | Roman Theatre of Ascoli Piceno / Asculum | ローマ期 | 42.853610 | 13.568610 | イタリア・シチリア |
+| R62 | Roman Theatre of Teramo / Interamnia Praetuttiorum | ローマ期 | 42.658086 | 13.704284 | イタリア・シチリア |
+| R63 | Roman Theatre of Amiternum | ローマ期 | 42.403890 | 13.309720 | イタリア・シチリア |
+| R64 | Roman Theatre of Sepino / Saepinum | ローマ期 | 41.433333 | 14.616667 | イタリア・シチリア |
+| R65 | Roman Theatre of Venafrum | ローマ期 | 41.485600 | 14.040020 | イタリア・シチリア |
+| R66 | Roman Theatre of Grumentum | ローマ期 | 40.283330 | 15.905380 | イタリア・シチリア |
+| R67 | Roman Theatre of Lecce / Lupiae | ローマ期 | 40.351370 | 18.170500 | イタリア・シチリア |
+| R68 | Roman Theatre of Catania | 境界・移行期 | 37.502894 | 15.083633 | イタリア・シチリア |
+| R69 | Odeon of Catania | ローマ期 | 37.502933 | 15.082797 | イタリア・シチリア |
+| R70 | Roman Theatre of Bene Vagienna / Augusta Bagiennorum | ローマ期 | 44.559170 | 7.854720 | イタリア・シチリア |
+| R71 | Roman Theatre of Nora | ローマ期 | 38.984523 | 9.016578 | イタリア・シチリア |
+| R72 | Théâtre antique d'Arles | ローマ期 | 43.676484 | 4.629784 | 西ヨーロッパ |
+| R73 | Théâtre antique de Vienne | ローマ期 | 45.524877 | 4.878686 | 西ヨーロッパ |
+| R74 | Théâtre antique de Vaison-la-Romaine | ローマ期 | 44.243750 | 5.075556 | 西ヨーロッパ |
+| R75 | Théâtre antique de Lillebonne | ローマ期 | 49.517679 | 0.536769 | 西ヨーロッパ |
+| R76 | Théâtre romain de Soissons | ローマ期 | 49.378390 | 3.322871 | 西ヨーロッパ |
+| R77 | Théâtre gallo-romain de Vieux | ローマ期 | 49.107203 | 0.430341 | 西ヨーロッパ |
+| R78 | Théâtre gallo-romain des Bouchauds | ローマ期 | 45.781700 | -0.006200 | 西ヨーロッパ |
+| R79 | Théâtre gallo-romain de Thénac | ローマ期 | 45.698081 | -0.624942 | 西ヨーロッパ |
+| R80 | Théâtre antique de Mandeure | ローマ期 | 47.449017 | 6.796225 | 西ヨーロッパ |
+| R81 | Théâtre du Vieux-Poitiers | ローマ期 | 46.761667 | 0.512500 | 西ヨーロッパ |
+| R82 | Théâtre antique d'Orléans | ローマ期 | 47.900355 | 1.922126 | 西ヨーロッパ |
+| R83 | Théâtre antique de Cadayrac | ローマ期 | 44.446300 | 2.554700 | 西ヨーロッパ |
+| R84 | Théâtre gallo-romain d'Alba-la-Romaine | ローマ期 | 44.559720 | 4.601670 | 西ヨーロッパ |
+| R85 | Théâtre mixte des Sarrazins | ローマ期 | 45.591500 | 4.070050 | 西ヨーロッパ |
+| R86 | Théâtre des Châteliers | ローマ期 | 47.413911 | 0.993103 | 西ヨーロッパ |
+| R87 | Théâtre antique d'Avenches / Aventicum | ローマ期 | 46.880000 | 7.049000 | 西ヨーロッパ |
+| R88 | Teatro Romano de Caesaraugusta | ローマ期 | 41.651940 | -0.877500 | 西ヨーロッパ |
+| R89 | Teatro Romano de Gades / Theatrum Balbi | ローマ期 | 36.528330 | -6.293610 | 西ヨーロッパ |
+| R90 | Teatro Romano de Regina Turdulorum | ローマ期 | 38.203060 | -5.953330 | 西ヨーロッパ |
+| R91 | Teatro Romano de Metellinum | ローマ期 | 38.966110 | -5.955830 | 西ヨーロッパ |
+| R92 | Teatro Romano de Clunia | ローマ期 | 41.783890 | -3.365280 | 西ヨーロッパ |
+| R93 | Teatro Romano de Segóbriga | ローマ期 | 39.886110 | -2.812220 | 西ヨーロッパ |
+| R94 | Teatro Romano de Bilbilis | ローマ期 | 41.381702 | -1.603078 | 西ヨーロッパ |
+| R95 | Teatro Romano de Acinipo | ローマ期 | 36.831670 | -5.240280 | 西ヨーロッパ |
+| R96 | Teatro Romano de Baelo Claudia | ローマ期 | 36.090830 | -5.775560 | 西ヨーロッパ |
+| R97 | Teatro Romano de Itálica | ローマ期 | 37.440000 | -6.038610 | 西ヨーロッパ |
+| R98 | Teatro Romano de Córdoba / Corduba | ローマ期 | 37.881670 | -4.777780 | 西ヨーロッパ |
+| R99 | Teatro Romano de Carteia | ローマ期 | 36.185560 | -5.406670 | 西ヨーロッパ |
+| R100 | Teatro Romano de Pollentia | ローマ期 | 39.847220 | 3.126110 | 西ヨーロッパ |
+| R101 | Roman Odeon of Patras | ローマ期 | 38.243330 | 21.738060 | ギリシャ |
+| R102 | Theatre of Perge | ローマ期 | 36.957780 | 30.850830 | アナトリア |
+| R103 | Roman Theatre of Bracara Augusta | ローマ期 | 41.546670 | -8.430280 | 西ヨーロッパ |
+| R104 | Theatre of Side | ローマ期 | 36.767780 | 31.390560 | アナトリア |
+| R105 | Theatre of Bulla Regia | ローマ期 | 36.558890 | 8.756940 | 北アフリカ |
+| R106 | Theatre of Uthina / Oudna | ローマ期 | 36.608330 | 10.177220 | 北アフリカ |
+| R107 | Theatre of Sufetula / Sbeitla | ローマ期 | 35.239440 | 9.122220 | 北アフリカ |
+| R108 | Roman Theatre of Scupi | ローマ期 | 42.017220 | 21.393330 | バルカン・東地中海 |
+| R109 | Theatre of Timgad / Thamugadi | ローマ期 | 35.484170 | 6.468890 | 北アフリカ |
+| R110 | Theatre of Tipasa | ローマ期 | 36.592500 | 2.441670 | 北アフリカ |
+| R111 | Theatre of Djemila / Cuicul | ローマ期 | 36.320560 | 5.737500 | 北アフリカ |
+| R112 | Theatre of Calama | ローマ期 | 36.466940 | 7.430000 | 北アフリカ |
+| R113 | Theatre of Madauros / Madaure | ローマ期 | 36.077780 | 7.901390 | 北アフリカ |
+| R114 | Theatre of Khamissa / Thubursicum Numidarum | ローマ期 | 36.193610 | 7.655830 | 北アフリカ |
+| R115 | Theatre of Caesarea Mauretaniae | 境界・移行期 | 36.605280 | 2.190280 | 北アフリカ |
+| R116 | Theatre of Heraclea Lyncestis | ローマ期 | 41.011390 | 21.341940 | バルカン・東地中海 |
+| R117 | Theatre of Apollonia (Libya) | ヘレニズム期 | 32.902780 | 21.974720 | 北アフリカ |
+| R118 | Theatre of Ptolemais | ローマ期 | 32.704440 | 20.953890 | 北アフリカ |
+| R119 | Roman Stage Theatre of Mainz / Mogontiacum | ローマ期 | 49.993060 | 8.278060 | 西ヨーロッパ |
+| R120 | Theatre of Oxyrhynchus | ローマ期 | 28.536390 | 30.652220 | 北アフリカ |
+
