@@ -582,3 +582,144 @@ History上でも、この確度差を同じ見え方にしない。
 - 写真候補：Wikimedia Commons / Odeon of Herodes Atticus。
 - 日本語Wikipedia：日本語記事確認後リンク。
 - 根拠：Greek Ministry of Culture.
+
+
+## 劇場図鑑 詳細化 Batch D — ギリシャ／ヘレニズム系 追加
+
+### Theatre of Thorikos
+- 分類：Early Greek Theatre
+- 図鑑説明初稿：**後世の整った半円形劇場とはかなり違う、細長く不規則な観客席を持つ初期劇場の重要例。ギリシャ劇場の形が最初から完成形だったわけではないことを視覚的に理解できる。**
+- 写真候補：Wikimedia Commons / Theatre of Thorikos。個別権利確認後採用。
+- 根拠：Greek Ministry / archaeological publications.
+
+### Theatre of Argos
+- 分類：Hellenistic Greek Theatre → Roman alteration
+- 図鑑説明初稿：**岩盤を大きく削って客席を形成したヘレニズム劇場。後にローマ時代の改築を受けており、一つの劇場が時代に応じて姿と用途を変える例として重要。**
+- 写真候補：Wikimedia Commons / Ancient Theatre of Argos。
+- 根拠：Greek Ministry of Culture.
+
+### Theatre of Dodona
+- 分類：Hellenistic Theatre / sanctuary theatre
+- 図鑑説明初稿：**Zeusの聖域に造られた大規模劇場。Pyrrhusの時代の建設とされ、後にローマ時代にはarena用途へ変更された。劇場から別種の見世物空間への転用を追える。**
+- 写真候補：Wikimedia Commons / Theatre of Dodona。
+- 根拠：Greek Ministry of Culture.
+
+### Theatre of Priene
+- 分類：Hellenistic Theatre
+- 図鑑説明初稿：**ヘレニズム劇場の構成を比較的よく読み取れる例。客席・orchestra・舞台建築の関係から、後の巨大なローマ劇場へ至る前の劇場空間を観察できる。**
+- 写真候補：Wikimedia Commons / Theatre of Priene。
+- 根拠：excavation / Turkish heritage sources.
+
+### Great Theatre of Ephesus
+- 分類：Greek/Hellenistic origin → major Roman rebuilding
+- 図鑑説明初稿：**ヘレニズム期に起源を持ちながら、現在の巨大な姿にはローマ時代の拡張が強く反映される。『ギリシャ劇場かローマ劇場か』を一語で決めるのではなく、建築の時間層を見るための代表例。**
+- 写真候補：Wikimedia Commons / Great Theatre of Ephesus。
+- 根拠：Türkiye Ministry of Culture / excavation sources.
+
+### Ancient Theatre of Taormina
+- 分類：Greek/Hellenistic origin → Roman rebuilding
+- 図鑑説明初稿：**シチリアに造られたギリシャ系劇場をローマ時代に大きく改築した例。現在の壮大な遺構だけを見るとローマ劇場に見えるため、最初の成立と現在見える姿を分けて理解する必要がある。**
+- 写真候補：Wikimedia Commons / Ancient Theatre of Taormina。
+- 根拠：Parco archeologico Naxos Taormina / regional heritage sources.
+
+## 劇場図鑑 詳細化 Batch E — ローマ帝国各地域 追加
+
+### Roman Theatre of Arles
+- 分類：Roman Theatre
+- 図鑑説明初稿：**Augustus期に南ガリアの都市Arelateへ建設された劇場。ローマ型の劇場建築がイタリア外の都市へ展開していく初期の流れを示す。**
+- 写真候補：Wikimedia Commons / Roman Theatre of Arles。
+- 根拠：French public heritage sources.
+
+### Theatre of Lugdunum — Lyon
+- 分類：Roman Theatre
+- 図鑑説明初稿：**ガリアの中心都市Lugdunumに築かれた劇場。後に隣接してOdeonも設けられ、一つの都市が性格の異なる複数の上演・音楽空間を持つようになる変化を比較できる。**
+- 写真候補：Wikimedia Commons / Ancient Theatre of Fourvière。
+- 根拠：Lugdunum Musée et Théâtres romains.
+
+### Odeon of Lugdunum — Lyon
+- 分類：Roman Odeon
+- 図鑑説明初稿：**大劇場の隣に設けられた、より小規模な音楽・朗誦系空間。TheatreとOdeonを同じ場所で比較できる貴重な例。**
+- 写真候補：Wikimedia Commons / Odeon of Lyon。
+- 根拠：Lugdunum official museum.
+
+### Roman Theatre of Cádiz / Gades
+- 分類：Roman Theatre
+- 成立：1世紀BC。
+- 図鑑説明初稿：**共和政末期のイベリア半島に建設された非常に早いローマ劇場。帝政成立以前からローマ式の恒久的劇場建築が西方へ展開していたことを見ることができる。**
+- 写真候補：Wikimedia Commons / Roman Theatre of Cádiz。
+- 根拠：Junta de Andalucía / Cádiz municipal sources.
+
+### Roman Theatre of Caesaraugusta — Zaragoza
+- 分類：Roman Theatre
+- 図鑑説明初稿：**Tiberius期に着工しClaudius期に完成した劇場。一つの『建設年』だけでなく、複数の皇帝の時代にまたがる建設過程として劇場を見る例。**
+- 写真候補：Wikimedia Commons / Teatro romano de Caesaraugusta。
+- 根拠：Gobierno de Aragón.
+
+### Theatre of Carthage
+- 分類：Roman Theatre
+- 図鑑説明初稿：**かつてローマと争ったカルタゴの地に、ローマ支配下で造られた劇場。北アフリカがローマ帝国の周辺ではなく、地中海文化圏の重要な一部だったことを地図上で実感できる。**
+- 写真候補：Wikimedia Commons / Roman Theatre of Carthage。
+- 根拠：AMVPPC Tunisia.
+
+### Theatre of Dougga / Thugga
+- 分類：Roman Theatre
+- 図鑑説明初稿：**北アフリカ内陸部の都市に残るローマ劇場。地中海沿岸の巨大都市だけでなく、地域都市にも劇場文化が浸透していたことを示す。**
+- 写真候補：Wikimedia Commons / Theatre of Dougga。
+- 根拠：UNESCO / Tunisia heritage authority.
+
+### Theatre of Leptis Magna
+- 分類：Roman Theatre
+- 図鑑説明初稿：**現在のリビアに残るローマ都市の劇場。北アフリカが帝国の重要地域として都市・公共建築を発展させたことを示し、地中海南岸への劇場文化の広がりを理解できる。**
+- 写真候補：Wikimedia Commons / Theatre of Leptis Magna。
+- 根拠：UNESCO.
+
+### Roman Theatre of Bosra
+- 分類：Roman Theatre
+- 図鑑説明初稿：**黒い玄武岩を多用した巨大なローマ劇場。地中海東部・シリア地域までローマ型劇場が展開したことを示し、材料や地域性の違いも比較できる。**
+- 写真候補：Wikimedia Commons / Roman Theatre at Bosra。
+- 根拠：UNESCO.
+
+### South Theatre of Gerasa — Jerash
+- 分類：Roman Theatre
+- 成立：90–92 AD。
+- 図鑑説明初稿：**現在のヨルダンに残る1世紀末のローマ劇場。ローマ帝国の東方都市にも恒久的な劇場建築が組み込まれたことを示す。**
+- 写真候補：Wikimedia Commons / South Theatre Jerash。
+- 根拠：Jordan tourism / antiquities sources.
+
+### North Theatre of Gerasa — Jerash
+- 分類：Roman Theatre / Odeon-like early function
+- 成立：165 AD、後に拡張。
+- 図鑑説明初稿：**同じJerashに後から加わった第二の上演空間。南劇場との年代差・規模・用途を比較すると、都市が一つの劇場だけで完結しなかったことが分かる。**
+- 写真候補：Wikimedia Commons / North Theatre Jerash。
+- 根拠：Jordan official heritage/tourism sources.
+
+### Roman Theatre of Philadelphia — Amman
+- 分類：Roman Theatre
+- 図鑑説明初稿：**現在のアンマン中心部に残る大規模ローマ劇場。現代都市の中に古代の観客席が残り、ローマ都市Philadelphiaから現在までの都市の重なりを視覚的に理解できる。**
+- 写真候補：Wikimedia Commons / Roman Theatre Amman。
+- 根拠：Jordan official sources.
+
+### Odeon of Philadelphia — Amman
+- 分類：Roman Odeon
+- 図鑑説明初稿：**大劇場のすぐ近くに造られた小規模なOdeon。巨大劇場と小さな音楽・朗誦空間を同じ都市で比較できる。**
+- 写真候補：Wikimedia Commons / Odeon Amman。
+- 根拠：Jordan official sources.
+
+### Roman Theatre of Gubbio / Iguvium
+- 分類：Roman Theatre
+- 成立：約20 BC。
+- 図鑑説明初稿：**Augustus時代のイタリア都市に造られた石造劇場。ローマ劇場が首都ローマだけの建築ではなく、イタリア各地の都市文化として普及していたことを示す。**
+- 写真候補：Wikimedia Commons / Roman Theatre of Gubbio。
+- 根拠：Ministero della Cultura.
+
+### Roman Theatre of Verona
+- 分類：Roman Theatre
+- 図鑑説明初稿：**北イタリアの都市に建設されたローマ劇場。丘側の地形も利用しながら都市建築として構成され、ギリシャ劇場とローマ劇場を単純な『斜面利用／人工建築』だけで分けられないことも教えてくれる。**
+- 写真候補：Wikimedia Commons / Roman Theatre Verona。
+- 根拠：Comune / regional heritage sources.
+
+### Odeion of Pompeii
+- 分類：Roman Odeion / covered theatre tradition
+- 図鑑説明初稿：**Pompeiiの大劇場の隣に設けられた小劇場。大人数向けの劇場とは別に、より小さな上演・音楽空間が都市に必要とされたことを示す。**
+- 写真候補：Wikimedia Commons / Odeon Pompeii。
+- 根拠：Parco Archeologico di Pompei.
