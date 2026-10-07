@@ -415,3 +415,43 @@ History上でも、この確度差を同じ見え方にしない。
 - ローマ側ID番号：R1〜R104 = **104 ID**。
 - ギリシャ／ヘレニズム側65件との台帳ID総数：**169 ID**。
 - ただし重複補強・存在要精査を含むため、169は独立した確定劇場数ではない。
+
+
+## ローマ時代：追加調査 Batch 7 — 北アフリカ地域台帳
+
+### 調査範囲
+- 現代のTunisia / Algeria / Libya / Morocco / Egyptを中心に、ローマ支配期のtheatre / odeionを確認する。
+- amphitheatreは除外する。
+- 既登録 R5 Kom el-Dikka、R18 Leptis Magna、R19 Sabratha、R34 Carthage、R35 Dougga、R40 Cyrene と重複させない。
+- Numidian / Punic / Greekの先行都市にローマ劇場が加わった例は、都市起源と劇場建築起源を分離する。
+
+### 新規追加
+| ID | 名称 | 現在地 | 種別 | 年代・確認事項 | 状態 |
+|---|---|---|---|---|---|
+| R105 | Theatre of Bulla Regia | Jendouba / Tunisia | Theatre | Tunisia文化省AMVPPCがtheatreを含む都市遺構を公式確認。都市は46 BC以後徐々にRoman化。劇場個別年代は精査継続。 | 確認済・年代要精査 |
+| R106 | Theatre of Thuburbo Majus | Zaghouan / Tunisia | Theatre | Roman-period city theatre。個別建設年代をTunisia公的資料で追加照合。 | 候補・要年代精査 |
+| R107 | Theatre of Sufetula / Sbeitla | Sbeitla / Tunisia | Theatre | Roman cityの劇場遺構。建設年代を個別精査。 | 候補・要年代精査 |
+| R108 | Theatre of Thugga minor regional register candidate | Tunisia | Theatre? | Dougga R35との混同防止。独立地点として確証が取れるまでPin候補に留める。 | 候補・存在要精査 |
+| R109 | Theatre of Timgad / Thamugadi | Batna / Algeria | Theatre | UNESCOはAD100にTrajanが建設した植民市にtheatreを含む標準的都市施設一式を確認。 | 確認済 |
+| R110 | Theatre of Tipasa | Tipaza / Algeria | Theatre | UNESCO提出資料で2世紀末〜3世紀初頭、約4,000席。自然斜面でなく人工的支持体に構築。 | 確認済 |
+| R111 | Theatre of Djemila / Cuicul | Djemila / Algeria | Theatre | Roman city Cuiculのtheatre。UNESCO世界遺産構成遺構。個別年代精査。 | 確認済・年代要精査 |
+| R112 | Theatre of Calama | Guelma / Algeria | Theatre | Roman theatre。現存遺構は復元を含むため古代部分と近代復元を分けて確認。 | 候補・復元履歴要精査 |
+| R113 | Theatre of Madauros / Madaure | M'Daourouch / Algeria | Theatre | Roman-period theatre ruins。個別年代・建築段階を追加照合。 | 候補・要年代精査 |
+| R114 | Theatre of Khamissa / Thubursicum Numidarum | Khamissa / Algeria | Theatre | Numidian起源都市にRoman theatre。劇場建設年代を精査。 | 候補・要年代精査 |
+| R115 | Theatre of Caesarea Mauretaniae | Cherchell / Algeria | Theatre | Mauretanian/Roman capitalのtheatre。前ローマ王国期との建築段階を要分類。 | 候補・分類要精査 |
+| R116 | Theatre of Lambaesis | Tazoult / Algeria | Theatre | Roman military-city complexのtheatre候補。遺構同定・年代を要精査。 | 候補・存在要精査 |
+| R117 | Theatre of Apollonia | Susa / Libya | Theatre | CyrenaicaのGreek-origin city。劇場の初期段階がGreek/HellenisticかRomanか要精査。 | 候補・分類要精査 |
+| R118 | Theatre of Ptolemais | Tolmeita / Libya | Theatre | CyrenaicaのHellenistic/Roman city。劇場成立段階を要精査。 | 候補・分類要精査 |
+| R119 | Odeon / theatre complex of Kom el-Dikka（年代補正） | Alexandria / Egypt | Odeion | 既登録R5。Egypt MinistryはRoman/Byzantine 2〜6世紀ADの遺跡群、現存建物をRoman Theater (Odeon)と公式説明。 | 既存R5・情報補強 |
+| R120 | Oxyrhynchus theatre candidate | El-Bahnasa / Egypt | Theatre | Greco-Roman cityの大型theatre記録・発掘情報があるが、成立年代・遺構の公的確認を追加調査。 | 候補・要精査 |
+
+### 除外・修正上の重要例
+- **Volubilis / Morocco**：UNESCO/ICOMOS文書は、サイト内に古代theatreが存在したかのような再構成を避けるべきで、同種構造は遺跡内で確認されていないと明記する。したがって現時点では劇場Pinを立てない。
+- 北アフリカでは「都市がPunic / Numidian / Greek起源」であることと「劇場がいつ成立したか」を混同しない。
+- Cyrenaica（Cyrene, Apollonia, Ptolemais）はGreek/Hellenistic起源が強いため、ローマ新規母集団への分類は慎重に行う。
+
+### Batch 7時点の暫定集計
+- 新しい台帳ID：R105〜R120 = **16 ID**（R119は既存R5の情報補強）。
+- ローマ側ID番号：R1〜R120 = **120 ID**。
+- ギリシャ／ヘレニズム側65件との台帳ID総数：**185 ID**。
+- 重複補強・存在要精査・分類要精査を含むため、185は独立した確定劇場数ではなく調査台帳ID数。
