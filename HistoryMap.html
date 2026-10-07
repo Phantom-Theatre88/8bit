@@ -35,18 +35,25 @@ button,a{font:inherit}
   display:flex;align-items:flex-end;justify-content:space-between;gap:18px;
   padding:2px 2px 0;
 }
-.map-head-tools{display:flex;align-items:center;justify-content:flex-end;gap:10px;min-width:0;flex:1}
-.era-bar{display:flex;align-items:stretch;min-width:0;border:1px solid #3a3f44;border-radius:9px;overflow:hidden;background:#111417}
-.era-step{
-  min-height:42px;padding:5px 10px;border:0;border-right:1px solid #34393e;
-  background:#15191c;color:#c9ced2;cursor:pointer;white-space:nowrap;
-  font-size:12px;font-weight:800;line-height:1.2
+.map-head-tools{display:flex;align-items:center;justify-content:flex-end;gap:12px;min-width:0;flex:1}
+.timeline-control{
+  width:min(560px,52vw);min-width:390px;padding:8px 12px 7px;
+  border:1px solid #3a3f44;border-radius:10px;background:#111417;
 }
-.era-step:last-child{border-right:0}
-.era-step small{display:block;color:#8f989f;font-size:11px;font-weight:700;margin-top:2px}
-.era-step.active{background:linear-gradient(180deg,#f5e8d1,#dcb879);color:#17120a}
-.era-step.active small{color:#5f4b2a}
-.era-step:focus-visible{outline:2px solid #f1c36f;outline-offset:-2px}
+.timeline-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:5px}
+.timeline-current{font-size:18px;font-weight:900;color:#f4d9a6;white-space:nowrap}
+.timeline-count{font-size:12px;font-weight:800;color:#d7dde1;white-space:nowrap}
+.timeline-range{
+  width:100%;height:28px;margin:0;accent-color:#d7b06a;cursor:pointer
+}
+.timeline-marks{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:-2px
+}
+.timeline-mark{min-width:0;color:#d9dee1;font-size:11px;font-weight:900;line-height:1.15}
+.timeline-mark:nth-child(2),.timeline-mark:nth-child(3){text-align:center}
+.timeline-mark:last-child{text-align:right}
+.timeline-mark small{display:block;color:#858f96;font-size:10px;font-weight:700;margin-top:2px}
+.timeline-help{margin-top:4px;color:#8f989f;font-size:10px;text-align:right}
 
 .map-title h1{
   margin:0;
@@ -138,12 +145,14 @@ button,a{font:inherit}
 .theatre-list-item small{display:block;margin-top:3px;color:#adb5ba;font-size:12px;line-height:1.4}
 .theatre-list-item .state{margin-top:4px;color:#d7c39e;font-size:12px;line-height:1.35}
 .map-overlay p{margin:0;color:#c8ced2;font-size:14px;line-height:1.55}
-.region-filters{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
-.region-filter{
-  border:1px solid #4a5055;border-radius:999px;background:#171a1d;color:#d9dee1;
-  padding:6px 9px;font-size:12px;font-weight:800;cursor:pointer
+.region-select-wrap{margin-top:12px}
+.region-select-label{display:block;margin-bottom:5px;color:#aeb6bb;font-size:11px;font-weight:800}
+.region-select{
+  width:100%;min-height:40px;padding:7px 34px 7px 10px;
+  border:1px solid #4a5055;border-radius:9px;background:#171a1d;color:#eef1f2;
+  font-size:13px;font-weight:800;
 }
-.region-filter.active{border-color:#d7b06a;background:#2a241b;color:#f4d9a6}
+.region-select:focus{outline:2px solid #d7b06a;outline-offset:1px}
 .legend{display:grid;gap:7px;margin-top:12px}
 .legend-row{display:flex;align-items:center;gap:8px;color:#dce1e4;font-size:13px}
 .legend-dot{
@@ -155,6 +164,7 @@ button,a{font:inherit}
   color:#aab1b7;font-size:12px;line-height:1.45;padding:0 3px;
 }
 .map-foot a{color:#d7c39e}
+.leaflet-interactive{transition:fill-opacity .22s ease,stroke-opacity .22s ease}
 .leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#151719;color:#eef1f2}
 .leaflet-popup-content{margin:14px 16px;min-width:240px}
 .pin-popup img{display:block;width:100%;height:150px;object-fit:cover;border-radius:8px;margin:0 0 10px;border:1px solid rgba(255,255,255,.12)}
@@ -168,12 +178,15 @@ button,a{font:inherit}
   .map-app{padding:8px}
   .map-head{align-items:flex-start}
   .map-title h1{font-size:26px}
-  .map-overlay{width:min(380px,52vw)}
+  .timeline-control{width:min(500px,54vw);min-width:360px}
+  .map-overlay{width:min(330px,40vw)}
   .theatre-list-panel{width:min(360px,42vw)}
 }
 @media(max-width:680px){
   .map-app{height:auto;min-height:calc(100dvh - 60px)}
   .map-head{flex-direction:column}
+  .map-head-tools{width:100%;justify-content:space-between}
+  .timeline-control{width:min(100%,560px);min-width:0}
   .map-back{align-self:flex-start}
   .map-shell{min-height:640px}
   .map-overlay{left:10px;right:10px;top:10px;width:auto}
@@ -202,15 +215,22 @@ button,a{font:inherit}
   <section class="map-head">
     <div class="map-title">
       <h1>劇場史｜地図</h1>
-      <p>古典期ギリシャからヘレニズム世界、ローマ帝国へ。185の劇場・オデイオンを時代色でたどる。</p>
+      <p>BC/ADの時間軸を進めながら、劇場が地中海世界へ広がっていく様子をたどる。</p>
     </div>
     <div class="map-head-tools">
-      <div class="era-bar" id="eraBar" aria-label="時代別に劇場を切り替える">
-        <button class="era-step active" type="button" data-era="all">全時代<small>185劇場</small></button>
-        <button class="era-step" type="button" data-era="classical">ギリシャ／古典期<small>14劇場</small></button>
-        <button class="era-step" type="button" data-era="hellenistic">ヘレニズム期<small>29劇場</small></button>
-        <button class="era-step" type="button" data-era="boundary">境界・移行期<small>21劇場</small></button>
-        <button class="era-step" type="button" data-era="roman">ローマ期<small>121劇場</small></button>
+      <div class="timeline-control" aria-label="劇場史の時間軸">
+        <div class="timeline-top">
+          <span class="timeline-current" id="timelineCurrent">BC500</span>
+          <span class="timeline-count" id="timelineCount">14劇場</span>
+        </div>
+        <input class="timeline-range" id="timelineRange" type="range" min="0" max="3" step="1" value="0" aria-label="年代を進める">
+        <div class="timeline-marks" aria-hidden="true">
+          <span class="timeline-mark">BC500<small>古典期</small></span>
+          <span class="timeline-mark">BC323<small>ヘレニズム期へ</small></span>
+          <span class="timeline-mark">BC31<small>ローマ期へ</small></span>
+          <span class="timeline-mark">AD476<small>古代末</small></span>
+        </div>
+        <div class="timeline-help">← 過去　時間を進める →</div>
       </div>
       <a class="map-back" id="mapBack" href="History.html">← 照明史へ戻る</a>
     </div>
@@ -220,15 +240,18 @@ button,a{font:inherit}
     <div id="map"></div>
     <aside class="map-overlay">
       <h2>古代地中海・ローマ世界</h2>
-      <p>物理的な劇場・オデイオン遺構を確認できる185地点を掲載。ピンの色は証拠確度ではなく、劇場が成立した時代区分を示す。</p>
-      <div class="region-filters" id="regionFilters" aria-label="地域切替">
-        <button class="region-filter active" type="button" data-region="all">全体</button>
-        <button class="region-filter" type="button" data-region="greece">ギリシャ</button>
-        <button class="region-filter" type="button" data-region="anatolia">アナトリア</button>
-        <button class="region-filter" type="button" data-region="italy">イタリア・シチリア</button>
-        <button class="region-filter" type="button" data-region="westEurope">西ヨーロッパ</button>
-        <button class="region-filter" type="button" data-region="eastMed">バルカン・東地中海</button>
-        <button class="region-filter" type="button" data-region="northAfrica">北アフリカ</button>
+      <p>時間を右へ進めるほど、その時点までに成立した劇場が地図へ加わる。ピン色は劇場が成立した時代を示す。</p>
+      <div class="region-select-wrap">
+        <label class="region-select-label" for="regionSelect">地域で絞る</label>
+        <select class="region-select" id="regionSelect">
+          <option value="all">地域：全体</option>
+          <option value="greece">ギリシャ</option>
+          <option value="anatolia">アナトリア</option>
+          <option value="italy">イタリア・シチリア</option>
+          <option value="westEurope">西ヨーロッパ</option>
+          <option value="eastMed">バルカン・東地中海</option>
+          <option value="northAfrica">北アフリカ</option>
+        </select>
       </div>
       <div class="legend" aria-label="時代区分">
         <div class="legend-row"><span class="legend-dot" style="background:#d7b06a"></span><span>ギリシャ／古典期</span></div>
@@ -333,27 +356,45 @@ theatres.forEach((t,index)=>{
 });
 
 let activeRegion="all";
-let activeEra="all";
+let timelineStage=0;
+
+const timelineStages=[
+  {key:"classical",label:"BC500",caption:"古典期",maxOrder:0},
+  {key:"hellenistic",label:"BC323",caption:"ヘレニズム期へ",maxOrder:1},
+  {key:"boundary",label:"BC31",caption:"ローマ期へ",maxOrder:2},
+  {key:"roman",label:"AD476",caption:"古代末",maxOrder:3}
+];
+const eraOrder={classical:0,hellenistic:1,boundary:2,roman:3};
 
 function theatreVisible(t){
   const regionOK=activeRegion==="all"||t.regionGroup===activeRegion;
-  const eraOK=activeEra==="all"||t.era===activeEra;
-  return regionOK&&eraOK;
+  const timeOK=(eraOrder[t.era]??99)<=timelineStages[timelineStage].maxOrder;
+  return regionOK&&timeOK;
 }
 
-function refreshFilters(fit=true){
+function revealMarker(t){
+  if(map.hasLayer(t._marker))return;
+  t._marker.setRadius(4);
+  t._marker.setStyle({opacity:.25,fillOpacity:.15});
+  t._marker.addTo(map);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    t._marker.setRadius(9);
+    t._marker.setStyle({opacity:1,fillOpacity:.95});
+  }));
+}
+
+function refreshFilters(fit=false){
   const visibleBounds=[];
   let visibleCount=0;
   const regionLabels={
     all:"全体",greece:"ギリシャ",anatolia:"アナトリア",italy:"イタリア・シチリア",
     westEurope:"西ヨーロッパ",eastMed:"バルカン・東地中海",northAfrica:"北アフリカ"
   };
-  const eraLabels={all:"全時代",classical:"ギリシャ／古典期",hellenistic:"ヘレニズム期",boundary:"境界・移行期",roman:"ローマ期"};
 
   theatres.forEach(t=>{
     const visible=theatreVisible(t);
     if(visible){
-      if(!map.hasLayer(t._marker))t._marker.addTo(map);
+      revealMarker(t);
       t._listItem.hidden=false;
       visibleBounds.push([t.lat,t.lng]);visibleCount++;
     }else{
@@ -362,23 +403,34 @@ function refreshFilters(fit=true){
     }
   });
 
-  document.querySelectorAll(".region-filter").forEach(b=>b.classList.toggle("active",b.dataset.region===activeRegion));
-  document.querySelectorAll(".era-step").forEach(b=>b.classList.toggle("active",b.dataset.era===activeEra));
+  const stage=timelineStages[timelineStage];
+  const current=document.getElementById("timelineCurrent");
+  const count=document.getElementById("timelineCount");
+  if(current)current.textContent=stage.label;
+  if(count)count.textContent=visibleCount+"劇場";
 
   const title=document.getElementById("theatreListTitle");
   if(title){
-    const eraText=activeEra==="all"?"":("｜"+eraLabels[activeEra]);
-    title.textContent="劇場リスト｜"+(regionLabels[activeRegion]||"全体")+eraText+"（"+visibleCount+"）";
+    title.textContent="劇場リスト｜"+(regionLabels[activeRegion]||"全体")+"｜"+stage.label+"まで（"+visibleCount+"）";
   }
   const list=document.getElementById("theatreList");if(list)list.scrollTop=0;
   if(fit&&visibleBounds.length)map.fitBounds(visibleBounds,{padding:[48,48],maxZoom:10});
 }
 
-function showRegion(region){activeRegion=region;refreshFilters(true)}
-function showEra(era){activeEra=era;refreshFilters(true)}
-document.querySelectorAll(".region-filter").forEach(b=>b.addEventListener("click",()=>showRegion(b.dataset.region)));
-document.querySelectorAll(".era-step").forEach(b=>b.addEventListener("click",()=>showEra(b.dataset.era)));
-refreshFilters(true);
+const regionSelect=document.getElementById("regionSelect");
+if(regionSelect)regionSelect.addEventListener("change",()=>{
+  activeRegion=regionSelect.value;
+  refreshFilters(true);
+});
+
+const timelineRange=document.getElementById("timelineRange");
+if(timelineRange){
+  timelineRange.addEventListener("input",()=>{
+    timelineStage=Number(timelineRange.value);
+    refreshFilters(false);
+  });
+}
+refreshFilters(false);
 
 function refreshMapSize(){
   map.invalidateSize({pan:false});
