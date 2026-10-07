@@ -237,3 +237,36 @@ History上でも、この確度差を同じ見え方にしない。
 - **Teos（既存T7）**：前ローマ期にTeosで劇場活動があったこと自体は碑文等で確認できる一方、現在残る劇場建築についてAnkara University Teos excavationは「pre-Romanに年代づける考古学的根拠がなく、surviving theatre is exclusively a Roman building」とする。したがって、既存ギリシャ65件側のT7とローマ新規R21の関係を再整理する必要がある。
 - ローマ母集団は「有名劇場だけ」ではなく、theatre / odeion をローマ帝国圏全体から収集する。amphitheatreは別類型として除外する。
 - 現段階では **既存65 + ローマ新規22 ID = 87 ID** だが、R21 Teosは既存T7との重複整理対象なので、ユニーク地点として単純に87件確定とは数えない。
+
+
+## ローマ時代：追加調査 Batch 3（母集団拡張）
+
+候補・要精査も地図表示できる前提に合わせ、確実な代表例だけに絞らず母集団を広げる。ただし amphitheatre は別類型として除外し、既存ギリシャ／ヘレニズム65件との重複は避ける。
+
+| ID | 名称 | 現在地 | 種別 | 年代・確認事項 | 状態 |
+|---|---|---|---|---|---|
+| R23 | Theatre of Marcellus | Rome / Italy | Theatre | 17 BC頃完成、13または11 BC開場。ローマ市公式観光資料で確認。 | 確認済 |
+| R24 | Theatre of Ostia | Ostia Antica / Italy | Theatre | ローマ劇場遺構。Agrippa/Augustan期の初期建設段階の年代を個別再確認する。 | 候補・要年代精査 |
+| R25 | Roman Theatre of Benevento | Benevento / Italy | Theatre | イタリア文化省管理のローマ劇場。成立年代の精密化を継続。 | 候補・要年代精査 |
+| R26 | Roman Theatre of Málaga | Málaga / Spain | Theatre | 1世紀AD、Augustus帝期。Spain.infoで確認。 | 確認済 |
+| R27 | Roman Theatre of Cartagena / Carthago Nova | Cartagena / Spain | Theatre | 1世紀BC、Augustus期の都市事業。市観光局・劇場博物館資料で確認。 | 確認済 |
+| R28 | Roman Theatre of Tarraco | Tarragona / Spain | Theatre | 1世紀AD初頭、Augustus帝期。Tarragona観光局資料。 | 確認済 |
+| R29 | Grand Theatre of Lugdunum | Lyon / France | Theatre | ローマ・ガリア最古の劇場とLugdunum公式博物館が説明。初期年代を継続精査。 | 初期確認済 |
+| R30 | Odeon of Lugdunum | Lyon / France | Odeon | Grand Theatreと同一遺跡群に残るローマodeon。建設年代を個別精査。 | 候補・要年代精査 |
+| R31 | Roman Theatre of Augustodunum | Autun / France | Theatre | 約70 AD建設。Autun公式観光資料。 | 確認済 |
+| R32 | Theatre of Augusta Raurica | Augst / Switzerland | Theatre | 現存建物は同地点の第3期劇場。200 AD以降には劇場とamphitheatreが併存。各建築段階の年代は継続精査。 | 初期確認済 |
+| R33 | Roman Theatre of Bosra | Bosra / Syria | Theatre | 2世紀AD、Trajan期の建設とUNESCO。 | 確認済 |
+| R34 | Roman Theatre of Carthage | Carthage / Tunisia | Theatre | 2世紀ADのローマ劇場。チュニジア文化遺産機関資料で遺構・類型確認。 | 確認済 |
+| R35 | Roman Theatre of Dougga / Thugga | Dougga / Tunisia | Theatre | 2世紀ADのローマ劇場。UNESCO遺跡群。詳細年代168–169 ADは追加照合対象。 | 初期確認済 |
+| R36 | Roman Theatre of Scythopolis | Beit She'an / Israel | Theatre | ローマ期劇場。建設段階・年代は公的遺跡資料で追加照合する。 | 候補・要年代精査 |
+| R37 | Roman Theatre of Palmyra | Palmyra / Syria | Theatre | ローマ都市Palmyraの劇場。成立年代・建築段階を個別精査。 | 候補・要年代精査 |
+| R38 | Roman Theatre of Petra | Petra / Jordan | Theatre | Nabataean／Romanの建築段階が絡むため、新規ローマ建築か改修かを要精査。 | 候補・分類要精査 |
+| R39 | Roman Theatre of Byblos | Byblos / Lebanon | Theatre | ローマ期劇場遺構。移築・改変履歴を含め成立段階を要精査。 | 候補・要精査 |
+| R40 | Roman Theatre of Cyrene | Cyrene / Libya | Theatre | ギリシャ起源の可能性を含むため既存ギリシャ母集団との重複・成立段階を要精査。 | 候補・分類要精査 |
+
+### Batch 3時点の数え方
+- ローマ側台帳：R1〜R40 = **40 ID**。
+- 既存ギリシャ／ヘレニズム側：**65件**。
+- 台帳ID合計：**105 ID**。
+- ただし R21 Teos と R40 Cyrene などは重複／成立分類の精査対象なので、105をそのまま「105の独立した劇場遺構」とは呼ばない。
+- 候補・要精査も地図Pin化できる設計を活用し、今後は「確認できるまで載せない」ではなく「確度を表示して載せる」。
