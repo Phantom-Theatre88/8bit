@@ -505,3 +505,80 @@ History上でも、この確度差を同じ見え方にしない。
 3. 日本語Wikipediaリンクは実在記事を確認したか。
 4. Wikipedia本文だけで年代・分類を確定していないか。
 5. 「現在見える姿」と「最初の建設段階」を混同していないか。
+
+
+## 劇場図鑑 詳細化 Batch B — ギリシャ／ヘレニズム代表例
+
+### Theatre of Dionysos — Athens
+- 分類：Greek Theatre
+- 成立：アテネ南斜面のDionysos Eleuthereus聖域と結びつく上演空間。初期段階と、4世紀BC以後の石造化・後世改築を分離して扱う。
+- 図鑑説明初稿：**アテネの演劇祭と強く結びついた劇場。現在見える石造客席だけを「ギリシャ悲劇誕生時の劇場」と考えず、より早い上演空間から石造劇場へ変化した長い歴史を見ることが重要。**
+- 写真候補：Wikimedia Commons / Theatre of Dionysus。個別ファイルの作者・license・source URL確認後採用。
+- 日本語Wikipedia：日本語記事の存在確認後リンク。
+- 根拠：Greek Ministry of Culture等の公的資料を優先。
+
+### Theatre of Epidaurus
+- 分類：Greek Theatre / sanctuary theatre
+- 成立：4世紀BC後半を主要建設期とする。Asklepios聖域の一部。
+- 図鑑説明初稿：**山の斜面を利用した客席と円形に近いorchestraを持つ、古代ギリシャ劇場を理解する代表例。劇場単独ではなく、医療・宗教と結びついたAsklepios聖域の中に置かれていた点も重要。**
+- 写真候補：Wikimedia Commons / Ancient Theatre of Epidaurus。権利確認後採用。
+- 日本語Wikipedia：日本語記事確認後リンク。
+- 根拠：Greek Ministry of Culture / UNESCO.
+
+### Theatre of Delphi
+- 分類：Greek / Hellenistic Theatre / sanctuary theatre
+- 成立：現在の石造劇場は主としてHellenistic期の整備。より早い上演活動・施設段階との区別を維持。
+- 図鑑説明初稿：**Apollo聖域の上方に置かれた劇場。劇場から聖域と谷を見渡す立地そのものが特徴で、古代ギリシャの劇場が都市娯楽施設だけではなく祭礼・聖域と結びついていたことを理解できる。**
+- 写真候補：Wikimedia Commons / Theatre of Delphi。
+- 日本語Wikipedia：Delphi／劇場個別記事の有無を確認し、適切な日本語記事のみリンク。
+- 根拠：Greek Ministry of Culture / UNESCO.
+
+### Theatre of Delos
+- 分類：Hellenistic Greek Theatre
+- 成立：紀元前310年頃着工、紀元前240年頃完成とする既存台帳情報を、公的・発掘資料で最終照合して表示する。
+- 図鑑説明初稿：**エーゲ海の島に築かれた大規模な石造劇場。長い建設期間を持ち、劇場建築が一度に完成するものではなく、都市と社会の変化の中で整備されていくことを示す例。**
+- 写真候補：Wikimedia Commons / Theatre of Delos。
+- 日本語Wikipedia：日本語記事有無を確認。
+- 根拠：Greek Ministry of Culture / UNESCO / excavation records.
+
+### Theatre of Pergamon
+- 分類：Hellenistic Theatre
+- 成立：Hellenistic期。Roman期の変更は同一カード内の建築段階として扱う。
+- 図鑑説明初稿：**非常に急な丘の斜面に客席を展開した劇場。地形を積極的に利用するギリシャ／ヘレニズム劇場の性格が視覚的に分かりやすく、後のローマ劇場との建築的な比較にも向く。**
+- 写真候補：Wikimedia Commons / Pergamon theatre。
+- 日本語Wikipedia：Pergamon／劇場個別記事の有無を確認。
+- 根拠：Türkiye文化観光当局・発掘機関資料等。
+
+## 劇場図鑑 詳細化 Batch C — ローマ代表例
+
+### Theatre of Orange
+- 分類：Roman Theatre
+- 成立：Augustus期、Common Era初頭。
+- 図鑑説明初稿：**巨大な舞台背面壁が残るローマ劇場の代表例。自然景観へ開くギリシャ劇場と比較すると、舞台建築と客席を一体化して閉じた建築空間をつくるローマ劇場の方向性が分かりやすい。**
+- 写真候補：Wikimedia Commons / Roman Theatre of Orange。
+- 日本語Wikipedia：日本語記事確認後リンク。
+- 根拠：UNESCO / French public heritage sources.
+
+### Theatre of Mérida
+- 分類：Roman Theatre
+- 成立：16–15 BC。Agrippaと結びつく建設。
+- 図鑑説明初稿：**ローマがイベリア半島に築いた都市Augusta Emeritaの劇場。帝国の都市形成とともに劇場文化が西方へ広がったことを示し、後世の改築を含む長い使用史も比較できる。**
+- 写真候補：Wikimedia Commons / Roman Theatre of Mérida。
+- 日本語Wikipedia：日本語記事確認後リンク。
+- 根拠：Consorcio Ciudad Monumental de Mérida / UNESCO.
+
+### Theatre of Sabratha
+- 分類：Roman Theatre
+- 成立：Roman imperial period。厳密な建設年代・復元履歴を同一カードで区別する。
+- 図鑑説明初稿：**北アフリカの地中海沿岸に残るローマ劇場。高い舞台建築が印象的だが、現在の姿には近代の復元も関わるため、「古代に残った部分」と「後世に復元された部分」を分けて見る必要がある。**
+- 写真候補：Wikimedia Commons / Theatre of Sabratha。
+- 日本語Wikipedia：Sabratha日本語記事の存在確認後リンク。
+- 根拠：UNESCO / Libyan archaeological sources where available.
+
+### Odeon of Herodes Atticus
+- 分類：Roman Odeion
+- 成立：2世紀AD。Herodes Atticusによる建築。
+- 図鑑説明初稿：**古代ギリシャ劇場のすぐ近くに、ローマ時代になって建てられた屋根付き音楽堂系の建築。Dionysos劇場と地図上で並べて見ることで、同じアテネでも数百年の間に上演空間が大きく変化したことが分かる。**
+- 写真候補：Wikimedia Commons / Odeon of Herodes Atticus。
+- 日本語Wikipedia：日本語記事確認後リンク。
+- 根拠：Greek Ministry of Culture.
