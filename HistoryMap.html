@@ -444,14 +444,44 @@ if(timelineRange){
 }
 refreshFilters(false);
 
+let lastMapWidth=0;
+let lastMapHeight=0;
 function refreshMapSize(){
-  map.invalidateSize({pan:false});
+  const el=map.getContainer();
+  const rect=el.getBoundingClientRect();
+  const width=Math.round(rect.width);
+  const height=Math.round(rect.height);
+  if(width<=0||height<=0)return;
+  map.invalidateSize({pan:false,debounceMoveend:true});
+  lastMapWidth=width;
+  lastMapHeight=height;
 }
+
+const mapShell=document.querySelector(".map-shell");
+if("ResizeObserver" in window && mapShell){
+  const mapResizeObserver=new ResizeObserver(()=>{
+    requestAnimationFrame(refreshMapSize);
+  });
+  mapResizeObserver.observe(mapShell);
+}
+
 requestAnimationFrame(()=>requestAnimationFrame(refreshMapSize));
-window.addEventListener("load",refreshMapSize,{once:true});
-window.addEventListener("resize",refreshMapSize);
-window.addEventListener("orientationchange",()=>setTimeout(refreshMapSize,250));
-document.addEventListener("visibilitychange",()=>{if(!document.hidden)setTimeout(refreshMapSize,80)});
+[80,220,500,1000].forEach(ms=>setTimeout(refreshMapSize,ms));
+window.addEventListener("load",()=>{
+  refreshMapSize();
+  setTimeout(refreshMapSize,250);
+},{once:true});
+window.addEventListener("resize",()=>requestAnimationFrame(refreshMapSize));
+window.addEventListener("orientationchange",()=>{
+  setTimeout(refreshMapSize,120);
+  setTimeout(refreshMapSize,420);
+});
+document.addEventListener("visibilitychange",()=>{
+  if(!document.hidden){
+    setTimeout(refreshMapSize,80);
+    setTimeout(refreshMapSize,300);
+  }
+});
 
 const theatreListPanel=document.getElementById("theatreListPanel");
 const theatreListToggle=document.getElementById("theatreListToggle");
