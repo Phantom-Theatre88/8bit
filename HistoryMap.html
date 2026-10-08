@@ -74,6 +74,10 @@ button,a{font:inherit}
   font-weight:900;
 }
 .map-shell{
+  width:100%;
+  min-width:0;
+  max-width:none;
+  justify-self:stretch;
   min-height:0;
   position:relative;
   overflow:hidden;
@@ -127,10 +131,9 @@ button,a{font:inherit}
   background:rgba(16,18,20,.94);
   box-shadow:0 12px 34px rgba(0,0,0,.38);
   backdrop-filter:blur(6px);
-  transform:translateX(0);opacity:1;
-  transition:transform .18s ease,opacity .18s ease;
+  opacity:1;
 }
-.theatre-list-panel.closed{transform:translateX(calc(100% + 28px));opacity:0;pointer-events:none}
+.theatre-list-panel.closed{display:none!important}
 .theatre-list-head{
   display:flex;align-items:center;justify-content:space-between;gap:10px;
   padding:12px 12px 10px;border-bottom:1px solid #34383d;
@@ -488,9 +491,10 @@ const theatreListToggle=document.getElementById("theatreListToggle");
 const theatreListClose=document.getElementById("theatreListClose");
 function setTheatreListOpen(open){
   theatreListPanel.classList.toggle("closed",!open);
+  theatreListPanel.hidden=!open;
   theatreListToggle.setAttribute("aria-expanded",String(open));
   theatreListToggle.hidden=open;
-  setTimeout(refreshMapSize,220);
+  requestAnimationFrame(refreshMapSize);
 }
 theatreListToggle.addEventListener("click",()=>setTheatreListOpen(true));
 theatreListClose.addEventListener("click",()=>setTheatreListOpen(false));
