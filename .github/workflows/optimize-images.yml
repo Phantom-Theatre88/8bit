@@ -5,6 +5,9 @@ on:
     paths:
       - ".github/workflows/optimize-images.yml"
       - "scripts/optimize_web_images.py"
+      - "**/*.png"
+      - "**/*.jpg"
+      - "**/*.jpeg"
   workflow_dispatch:
 
 permissions:
