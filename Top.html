@@ -5695,7 +5695,7 @@
                                 <div class="network-lesson-buttons">${buttons}</div>
                             </div>
                             <div class="network-lesson-image-box">
-                                <img id="${moduleKey}-lesson-img" src="${first.img || ""}" alt="${moduleKey} lesson visual" ${first.img ? "" : 'style="display:none"'} >
+                                <img id="${moduleKey}-lesson-img" src="${first.img || ""}" alt="${moduleKey} lesson visual" decoding="async" ${first.img ? "" : 'style="display:none"'} >
                                 <div class="network-lesson-placeholder" id="${moduleKey}-lesson-placeholder" ${first.img ? 'style="display:none"' : ""}>教材イラスト<br>準備中</div>
                             </div>
                         </div>
@@ -5730,7 +5730,7 @@
                             </div>
                         </section>
                         <section class="sim8-bottom-card sim8-teacher-card">
-                            <img class="sim8-teacher-img" src="assets/analog_teacher_pointing.webp" alt="照明教材の先生">
+                            <img class="sim8-teacher-img" src="assets/analog_teacher_pointing.webp" alt="照明教材の先生" loading="lazy" decoding="async">
                             <div class="sim8-teacher-copy"><h3>先生のひとこと</h3><div class="sim8-teacher-speech"><b>値を読むだけで終わらせないのがポイント。</b><br>8個の0/1で作れる組み合わせが256通りだから、DMX値は0〜255になります。さらに、同じ数値でもカーブが変わると灯りの立ち上がり方が変わります。フェーダー・数値・グラフ・灯りを一緒に見てみましょう。</div></div>
                         </section>
                         <section class="sim8-bottom-card sim8-remember">
