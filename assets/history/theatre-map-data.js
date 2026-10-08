@@ -12,7 +12,7 @@ const THEATRE_MAP_DATA = [
     "status": "劇場遺構・位置を確認",
     "statusType": "confirmed",
     "note": "アクロポリス南麓、ディオニュソス神域に隣接する劇場。アテネのディオニュソス祭と結びつき、悲劇・喜劇の上演の中心となった。現在見える姿にはヘレニズム期・ローマ期の改変も重なっている。",
-    "image": "assets/history/maps/attica/dionysus.jpg",
+    "image": "assets/history/maps/attica/dionysus.webp",
     "imageAlt": "現在のディオニュソス劇場",
     "credit": "George E. Koronaios / CC BY-SA 2.0",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Theatre_of_Dionysus_in_Athens_on_30_May_2021.jpg"
@@ -29,7 +29,7 @@ const THEATRE_MAP_DATA = [
     "status": "劇場遺構・位置を確認",
     "statusType": "confirmed",
     "note": "アッティカ南東部トリコスに残る野外劇場。一般的な半円形とは異なる細長く不規則な客席と、長方形に近いオルケストラを持ち、古代ギリシャ劇場の形が一様ではなかったことを示す。",
-    "image": "assets/history/maps/attica/thorikos.jpg",
+    "image": "assets/history/maps/attica/thorikos.webp",
     "imageAlt": "現在のトリコス劇場",
     "credit": "Rab Lawrence / CC BY 2.0",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Thorikos_-_ancient_Greek_theatre_(48930569458).jpg"
@@ -46,7 +46,7 @@ const THEATRE_MAP_DATA = [
     "status": "劇場遺構・位置を確認",
     "statusType": "confirmed",
     "note": "古代イカリオンの宗教・行政中心に残る劇場空間。細長いオルケストラと6席の大理石製プロエドリア（名誉席）が確認され、客席は斜面上に木造で設けられた可能性がある。後世の道路工事で客席部分の多くが失われた。",
-    "image": "assets/history/maps/attica/ikarion.jpg",
+    "image": "assets/history/maps/attica/ikarion.webp",
     "imageAlt": "現在のイカリオン劇場空間",
     "credit": "Dion.Ikar / CC BY-SA 4.0",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:%CE%99%CE%BA%CE%AC%CF%81%CE%B9%CE%BF%CE%BD%2C_%CE%94%CE%B9%CF%8C%CE%BD%CF%85%CF%83%CE%BF%CF%82._%CE%9F_%CE%B8%CE%B5%CE%B1%CF%84%CF%81%CE%B9%CE%BA%CF%8C%CF%82_%CF%87%CF%8E%CF%81%CE%BF%CF%82-_%CE%BF%CF%81%CF%87%CE%AE%CF%83%CF%84%CF%81%CE%B1%2C_%CE%B2%CE%AC%CF%83%CE%B5%CE%B9%CF%82_%CE%BA%CE%B1%CE%B9_%CE%B8%CF%81%CF%8C%CE%BD%CE%BF%CE%B9_%CF%84%CF%89%CE%BD_%CE%B5%CF%80%CE%B9%CF%83%CE%AE%CE%BC%CF%89%CE%BD._4%CE%BF_%CE%B1%CE%B9%CF%8E%CE%BD%CE%B1_%CF%80.%CE%A7.%2C_%CE%9C%CE%B1%CF%81%CE%BC%CE%B1%CF%81%CF%8C_%CE%A0%CE%B5%CE%BD%CF%84%CE%B5%CE%BB%CE%B9%CE%BA%CF%8C._IMG_8795.jpg"
@@ -63,7 +63,7 @@ const THEATRE_MAP_DATA = [
     "status": "劇場遺構・位置を確認",
     "statusType": "confirmed",
     "note": "自然斜面とテラスを利用した劇場空間。大理石のプロエドリア（名誉席）とディオニュソスへの献辞、喜劇競演の勝利を示す碑文が、この場所で劇場活動が行われたことを具体的に伝えている。",
-    "image": "assets/history/maps/attica/rhamnous.jpg",
+    "image": "assets/history/maps/attica/rhamnous.webp",
     "imageAlt": "現在のラムヌース劇場跡",
     "credit": "Andreas Kakaris / CC BY-SA 4.0",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rhamnous_theater_from_above.jpg"
@@ -80,7 +80,7 @@ const THEATRE_MAP_DATA = [
     "status": "劇場遺構・位置を確認",
     "statusType": "confirmed",
     "note": "長方形のオルケストラ、前列の大理石席、スケネ（舞台建築）の遺構を持つ。半円形劇場だけではない古代アッティカの多様な劇場形態を示す重要な実例である。",
-    "image": "assets/history/maps/attica/euonymon.jpg",
+    "image": "assets/history/maps/attica/euonymon.webp",
     "imageAlt": "エウオニュモン劇場の現存遺構",
     "credit": "Mark Landon / CC0 1.0",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Trachones_ancient_theater_01.jpg"
@@ -136,7 +136,7 @@ const THEATRE_MAP_DATA = [
     "status": "劇場遺構・位置を確認",
     "statusType": "confirmed",
     "note": "ピレウスのゼア港近くに造られた劇場。コイロン（客席）、オルケストラ、スケネからなるヘレニズム劇場の三部構成を持ち、現在は主に客席を支えた基礎部分が残る。",
-    "image": "assets/history/maps/attica/zea.jpg",
+    "image": "assets/history/maps/attica/zea.webp",
     "imageAlt": "現在のゼア劇場",
     "credit": "George E. Koronaios / CC BY-SA 4.0",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Remains_of_the_ancient_Theatre_of_Zea_in_Piraeus_on_July_4%2C_2021.jpg"
@@ -153,7 +153,7 @@ const THEATRE_MAP_DATA = [
     "status": "劇場遺構・位置を確認",
     "statusType": "confirmed",
     "note": "オロポス近郊のアンフィアラオス聖域に設けられた劇場。都市中心部ではなく、祭祀・競技・集会が行われる聖域の中に劇場が置かれた例である。",
-    "image": "assets/history/maps/attica/amphiareion.jpg",
+    "image": "assets/history/maps/attica/amphiareion.webp",
     "imageAlt": "現在のアンフィアレイオンの劇場",
     "credit": "Γεώργιος Βέζας / CC BY-SA 4.0",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Theatre_of_Amphiareion_in_Oropos_(%CE%98%CE%AD%CE%B1%CF%84%CF%81%CE%BF_%CE%91%CE%BC%CF%86%CE%B9%CE%AC%CF%81%CE%B5%CE%B9%CE%BF%CF%85_%CE%A9%CF%81%CF%89%CF%80%CE%BF%CF%8D).jpg"
@@ -378,7 +378,7 @@ const THEATRE_MAP_DATA = [
     "status": "劇場遺構・位置を確認",
     "statusType": "confirmed",
     "note": "アスクレピオス聖域に造られた劇場。整った扇形の客席と円形オルケストラを持つ、後代の古代ギリシャ劇場を代表する遺構の一つ。",
-    "image": "assets/history/sunlight/01_epidaurus_greek_theatre.jpg",
+    "image": "assets/history/sunlight/01_epidaurus_greek_theatre.webp",
     "imageAlt": "現在のエピダウロス劇場",
     "credit": "Carole Raddato / CC BY-SA 2.0",
     "sourceUrl": "https://commons.wikimedia.org/wiki/Category:Ancient_Theatre_of_Epidaurus"
@@ -601,7 +601,7 @@ const THEATRE_MAP_DATA = [
     "status": "劇場遺構・位置を確認",
     "statusType": "confirmed",
     "note": "パナイル山の斜面を利用した大劇場。現在見える巨大な姿はローマ期の増改築を強く反映するが、起源はヘレニズム期にさかのぼる。古代都市エフェソスの主要な公共空間の一つだった。",
-    "image": "assets/history/maps/west-turkey/ephesus.jpg",
+    "image": "assets/history/maps/west-turkey/ephesus.webp",
     "imageAlt": "現在のエフェソス大劇場",
     "credit": "Dennis G. Jarvis / CC BY-SA 2.0",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Great_Theatre_in_Ephesus,_Turkey.jpg"
@@ -618,7 +618,7 @@ const THEATRE_MAP_DATA = [
     "status": "劇場遺構・位置を確認",
     "statusType": "confirmed",
     "note": "ヘレニズム劇場の構成を比較的よく残す劇場。ローマ期の改変が他の大劇場より少なく、オルケストラ、舞台建築、名誉席などから古代ギリシャ劇場の構成を読み取りやすい。",
-    "image": "assets/history/maps/west-turkey/priene.jpg",
+    "image": "assets/history/maps/west-turkey/priene.webp",
     "imageAlt": "現在のプリエネ劇場",
     "credit": "Ken and Nyetta / CC BY 2.0",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Theater_of_Priene.jpg"
@@ -635,7 +635,7 @@ const THEATRE_MAP_DATA = [
     "status": "劇場遺構・位置を確認",
     "statusType": "confirmed",
     "note": "カレ丘の急斜面に沿って造られた非常に勾配の大きい劇場。丘上都市ペルガモンの地形と一体になった構成が特徴で、ヘレニズム都市計画と劇場の関係を示す代表例。",
-    "image": "assets/history/maps/west-turkey/pergamon.jpg",
+    "image": "assets/history/maps/west-turkey/pergamon.webp",
     "imageAlt": "現在のペルガモン劇場",
     "credit": "Elelicht / CC BY-SA 3.0",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pergamon_Theater.JPG"
@@ -652,7 +652,7 @@ const THEATRE_MAP_DATA = [
     "status": "劇場遺構・位置を確認",
     "statusType": "confirmed",
     "note": "エーゲ海を望む南斜面に設けられた馬蹄形のヘレニズム劇場。岩盤を削った段状テラス上に造られ、アッソスの公共建築群の一部を構成していた。",
-    "image": "assets/history/maps/west-turkey/assos.jpg",
+    "image": "assets/history/maps/west-turkey/assos.webp",
     "imageAlt": "現在のアッソス劇場",
     "credit": "Dosseman / CC BY-SA 4.0",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Assos_Theatre_012.jpg"
@@ -669,7 +669,7 @@ const THEATRE_MAP_DATA = [
     "status": "劇場遺構・位置を確認",
     "statusType": "confirmed",
     "note": "イオニアの主要都市ミレトスに残る劇場。古いギリシャ劇場を基礎に、ローマ期に客席と舞台建築が大きく拡張され、現在の巨大な姿になった。",
-    "image": "assets/history/maps/west-turkey/miletus.jpg",
+    "image": "assets/history/maps/west-turkey/miletus.webp",
     "imageAlt": "現在のミレトス劇場",
     "credit": "Hamed k13 / CC BY-SA 4.0",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Miletus_Ancient_Theater.jpg"
@@ -686,7 +686,7 @@ const THEATRE_MAP_DATA = [
     "status": "劇場遺構・位置を確認",
     "statusType": "confirmed",
     "note": "アフロディシアス市街の南端に造られた劇場。古典期ギリシャ劇場の直接例というより、ヘレニズム末期からローマ期へ移る劇場建築の変化を示す例として位置づける。",
-    "image": "assets/history/maps/west-turkey/aphrodisias.jpg",
+    "image": "assets/history/maps/west-turkey/aphrodisias.webp",
     "imageAlt": "現在のアフロディシアス劇場",
     "credit": "Dosseman / CC BY-SA 4.0",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aphrodisias_Theatre_General_view_4398.jpg"

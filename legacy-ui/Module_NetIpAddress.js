@@ -179,10 +179,10 @@ window.Module_NetIpAddress = {
 
   getComicHTML(mode) {
     const imageMap = {
-      address: "assets/net/net_ip_01_address.png",
-      same: "assets/net/net_ip_02_same_network.png",
-      subnet: "assets/net/net_ip_03_subnet_mask.png",
-      duplicate: "assets/net/net_ip_04_duplicate.png"
+      address: "assets/net/net_ip_01_address.webp",
+      same: "assets/net/net_ip_02_same_network.webp",
+      subnet: "assets/net/net_ip_03_subnet_mask.webp",
+      duplicate: "assets/net/net_ip_04_duplicate.webp"
     };
 
     const altMap = {
