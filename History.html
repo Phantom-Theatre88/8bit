@@ -423,7 +423,7 @@ button{font:inherit}
     <div class="detail-main">
       <div class="detail-layout">
         <div class="detail-hero">
-          <img id="detailImage" src="" alt="">
+          <img id="detailImage" src="" alt="" decoding="async">
         </div>
         <div class="detail-content">
           <div class="detail-kicker" id="detailKicker">光源 / 劇場・舞台環境｜紀元前5世紀頃｜古代ギリシャ</div>
@@ -443,7 +443,7 @@ button{font:inherit}
     <aside class="teacher-pane">
       <h3>先生のひとこと</h3>
       <div class="teacher-speech" id="teacherSpeech">悲劇などは上演順によって夕方になり、最後は日没の頃まで上演された、という話もあるよ。自然光そのものが舞台の変化になっていたんだね。</div>
-      <img src="assets/analog_teacher_pointing.webp" alt="照明教材の先生">
+      <img src="assets/analog_teacher_pointing.webp" alt="照明教材の先生" loading="lazy" decoding="async">
     </aside>
   </section>
 
@@ -574,7 +574,7 @@ function renderField(){
         '<div class="card-meta">'+(item.showDateInCard===false?'':'<span>'+item.date+'</span>')+'<span>'+item.region+'</span></div>'+
         '<p>'+item.teaser+'</p>'+
       '</div>'+
-      (item.image?'<img class="card-image" src="'+item.image+'" alt="">':'');
+      (item.image?'<img class="card-image" src="'+item.image+'" alt="" loading="lazy" decoding="async">':'');
     b.addEventListener("click",()=>selectItem(id));
     grid.appendChild(b);
   });
