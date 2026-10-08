@@ -265,6 +265,70 @@
       .category-grid, .future-row { grid-template-columns: 1fr; }
       .section-heading { align-items: start; flex-direction: column; gap: 3px; }
     }
+
+/* TOP visual redesign — reference locked 2026-10-08 */
+html {scroll-behavior:smooth}
+body {background:linear-gradient(180deg,#080e14 0%,#030609 100%)}
+.site-header {height:68px;background:#090d11}
+.header-inner,.page-shell {width:min(1480px,calc(100% - 40px))}
+.header-copy {margin-right:auto}
+.top-nav {display:flex;align-items:center;gap:22px;margin-left:auto;font-size:12px;font-weight:750}
+.top-nav a {padding:13px 2px;color:#d8e0e5;white-space:nowrap}
+.top-nav a:hover,.top-nav .nav-active {color:#ff9a23}
+.top-nav .nav-active {border-bottom:2px solid #ff9a23}
+.page-shell {padding-top:0}
+.hero {position:relative;min-height:330px;display:block;border:0;border-bottom:1px solid #3b454c;border-radius:0;box-shadow:none;background:#080d12}
+.hero-visual {position:absolute;inset:0;min-height:0}
+.hero-visual::after {background:linear-gradient(90deg,#080d12 0%,rgba(8,13,18,.97) 15%,rgba(8,13,18,.73) 44%,rgba(8,13,18,.12) 78%)}
+.hero-visual img {object-position:center}
+.hero-copy {width:min(810px,75%);min-height:330px;padding:30px 24px;justify-content:center;background:transparent}
+.hero-copy::before {display:none}
+.eyebrow {color:#f0e7db;font-size:12px}
+.hero h1 {margin:14px 0 13px;font-size:clamp(28px,3.5vw,49px);white-space:nowrap;letter-spacing:-.025em}
+.hero h1 .hero-accent {display:inline;color:#ff8d19;font-size:1em;margin:0}
+.hero-lead {color:#e5e9eb;font-size:14px;line-height:1.8;font-weight:500}
+.hero-actions {display:flex;gap:14px;margin-top:20px}
+.hero-actions a {display:flex;align-items:center;gap:14px;min-height:74px;padding:12px 16px;border:1px solid;border-radius:9px;box-shadow:0 5px 22px #0008}
+.hero-actions strong,.hero-actions small {display:block}
+.hero-actions strong {font-size:17px;white-space:nowrap}
+.hero-actions small {margin-top:5px;font-size:10px;white-space:nowrap}
+.hero-primary {background:linear-gradient(115deg,#ff9d14,#c34a04);border-color:#ffc35a!important}
+.hero-secondary {background:#071522d9;border-color:#30c9f6!important}
+.action-symbol {font-size:27px;color:#fff}
+.hero-secondary .action-symbol {color:#67dbff}
+.section-heading {margin:17px 0 15px}
+.section-heading h2 {font-size:21px}
+.category-grid {gap:14px}
+.category-card {position:relative;isolation:isolate;border-color:color-mix(in srgb,var(--accent) 65%,#3a434c);border-radius:10px;background:linear-gradient(180deg,#101a23,#080e13);box-shadow:0 8px 22px #0005}
+.category-card::before {content:"";position:absolute;inset:0 0 auto;height:115px;z-index:-1;opacity:.44;background:linear-gradient(90deg,#0b121b 12%,transparent 100%),radial-gradient(circle at 80% 15%,color-mix(in srgb,var(--accent) 25%,transparent),transparent 60%);pointer-events:none}
+.category-head {min-height:112px;padding:15px 13px 10px;grid-template-columns:52px minmax(0,1fr);gap:12px;border-bottom:0}
+.category-icon {width:52px;height:52px;font-size:26px;background:#0b1118a8}
+.category-title {font-size:20px}
+.category-desc {font-size:11px;max-width:190px}
+.category-kicker {font-size:10px}
+.lesson-list {padding:8px 11px 12px;gap:6px}
+.lesson-link {min-height:41px;padding:7px 11px;background:#17212cba;border-color:#394550}
+.lesson-name {font-size:13px}
+.lesson-note {display:none}
+.category-card.electric {--accent:#ffab39}
+.category-card.dimming {--accent:#2ac7ff}
+.category-card.signal {--accent:#f25baf}
+.category-card.network {--accent:#39d5f2}
+.category-card.history {--accent:#e5a23d}
+.category-card.fixture {--accent:#f5862b}
+.category-card.future {--accent:#8b9aaa}
+.future-row {gap:14px;margin-top:14px}
+.future-row .category-head {min-height:104px}
+.future-row .lesson-list {padding-top:5px}
+.future-row .lesson-link {min-height:44px}
+.future-body {margin:4px 12px 12px;padding:12px;border:1px dashed #47515a;border-radius:7px;color:#adb5bf;font-size:13px;display:flex;justify-content:space-between}
+.pending-label {font-size:10px;border:1px solid #68737c;border-radius:15px;padding:2px 7px}
+.site-footer {margin-top:18px}
+.sr-only {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+@media(max-width:1120px){.category-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.hero-copy{width:85%}.hero-actions strong{font-size:14px}.category-title{font-size:17px}}
+@media(max-width:900px){.top-nav{gap:10px;font-size:10px}.hero h1{white-space:normal}.category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.future-row{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:760px){.header-inner,.page-shell{width:calc(100% - 20px)}.top-nav a:not(.nav-active){display:none}.hero-copy{width:100%;min-height:350px;padding:25px 18px}.hero-visual{min-height:0}.hero-actions{flex-wrap:wrap}.hero-actions a{min-height:60px}.hero-actions strong{font-size:13px}.hero-actions small{font-size:9px}.category-grid,.future-row{grid-template-columns:1fr}.hero h1{font-size:clamp(25px,6vw,38px)}}
+
   </style>
 </head>
 <body>
@@ -272,24 +336,24 @@
     <div class="header-inner">
       <a class="brand" href="index.html" aria-label="StageLight トップ"></a>
       <div class="header-copy"><span>INTERACTIVE LEARNING</span><strong>舞台照明を、触って理解する。</strong></div>
-      <a class="start-button" href="Analog.html">▶ 最初から学ぶ</a>
+      <nav class="top-nav" aria-label="サイトナビ"><a class="nav-active" href="index.html">⌂ ホーム</a><a href="#about">ⓘ このサイトについて</a><a href="#lessons">ⓘ 使い方</a></nav>
     </div>
   </header>
 
   <main class="page-shell">
     <section class="hero">
       <div class="hero-copy">
-        <div class="eyebrow">STAGELIGHT</div>
-        <h1><span>新人向け</span>舞台照明<br>インタラクティブ図鑑</h1>
-        <p class="hero-lead">数値・信号・灯体・ネットワークを、画面を触りながら現場の流れにつなげて学ぶ。</p>
-        <div class="hero-route"><span>⚡ 電気</span><i>›</i><span>↕ 調光</span><i>›</i><span>⌁ 信号</span><i>›</i><span>⌘ Network</span></div>
+        <div class="eyebrow">＼ 触って理解する、照明のしくみ ／</div>
+        <h1>舞台照明<span class="hero-accent">インタラクティブ教材</span></h1>
+        <p class="hero-lead">舞台照明の基礎から応用まで、インタラクティブな教材で学べます。<br>おすすめの順番で学ぶことも、興味のあるテーマから直接始めることもできます。</p>
+        <div class="hero-actions"><a class="hero-primary" href="Analog.html"><span class="action-symbol">▣</span><span><strong>最初から学ぶ →</strong><small>おすすめの順番で基礎から学習する</small></span></a><a class="hero-secondary" href="#lessons"><span class="action-symbol">▦</span><span><strong>テーマから選んで学ぶ →</strong><small>興味のあるトピックに直接アクセス</small></span></a></div>
       </div>
       <div class="hero-visual"><img src="assets/index/hero_lighting_learning.webp" alt="舞台照明の電気、調光、信号、ネットワークを表した教材イラスト" decoding="async" fetchpriority="high"></div>
     </section>
 
-    <div class="section-heading">
-      <h2>教材を選ぶ</h2>
-      <p>大枠から選び、その中の教材を直接開けます。</p>
+    <div class="section-heading" id="lessons">
+      <h2><span style="color:#ff941b">▦</span> 学習テーマ一覧</h2>
+      <p>7つのテーマから、興味のある内容を選んで学習できます。</p>
     </div>
 
     <section class="category-grid" aria-label="教材一覧">
@@ -336,10 +400,11 @@
     <section class="future-row" aria-label="実用・歴史カテゴリ">
 <article class="category-card history"><header class="category-head"><div class="category-icon">◷</div><div><div class="category-kicker">HISTORY</div><div class="category-title">照明史</div><div class="category-desc">劇場・光源・色・制御・操作の変化をたどる。</div></div></header><div class="lesson-list"><a class="lesson-link" href="History.html"><span class="lesson-copy"><span class="lesson-name">舞台照明史 Timeline</span><span class="lesson-note">横＝時間／縦＝同時代を比較。</span></span><span class="lesson-arrow">›</span></a></div></article>
 <article class="category-card fixture"><header class="category-head"><div class="category-icon">●</div><div><div class="category-kicker">FIXTURE</div><div class="category-title">灯具</div><div class="category-desc">灯体・光学・用途を学ぶ。</div></div></header><div class="lesson-list"><a class="lesson-link" href="ConvexLens.html"><span class="lesson-copy"><span class="lesson-name">平凸レンズ</span><span class="lesson-note">Spot〜Floodを体験する</span></span><span class="lesson-arrow">›</span></a></div></article>
-<article class="category-card future"><header class="category-head"><div class="category-icon">◎</div><div><div class="category-kicker">FOCUS</div><div class="category-title">シュート</div><div class="category-desc">光を作る実践へ。</div></div></header><div class="future-body">COMING SOON</div></article>
+<article class="category-card future"><header class="category-head"><div class="category-icon">◎</div><div><div class="category-kicker">FOCUS</div><div class="category-title">シュート</div><div class="category-desc">光を作る実践へ。</div></div></header><div class="future-body">COMING SOON <span class="pending-label">準備中</span></div></article>
 </section>
 
 
+    <div id="about" class="sr-only">舞台照明を触って理解するインタラクティブ教材。各テーマの教材ボタンから学習できます。</div>
     <footer class="site-footer"><span>StageLight　v3.0.1</span><span>Interactive Stage Lighting Learning</span></footer>
   </main>
 </body>
