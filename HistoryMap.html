@@ -339,7 +339,7 @@ theatres.forEach((t,index)=>{
   }).addTo(map);
   marker.bindPopup(
     '<div class="pin-popup">'+
-      (t.image?'<img src="'+t.image+'" alt="'+(t.imageAlt||t.name)+'">':'')+
+      (t.image?'<img src="'+t.image+'" alt="'+(t.imageAlt||t.name)+'" loading="lazy" decoding="async">':'')+
       '<h3>'+t.name+'</h3>'+
       '<div class="meta">'+t.place+'</div>'+
       '<p>'+t.date+'</p>'+
