@@ -190,3 +190,12 @@ body.wave-next-ui .next-learning{font-size:16px;line-height:24px}
  body.wave-next-ui .teacher{grid-template-columns:120px minmax(0,1fr)}
  body.wave-next-ui .teacher-character{width:120px;height:210px}
 }
+
+body.wave-next-ui .wave-graph-head .wave-control{width:160px;height:30px;margin:0;flex-shrink:0;font-size:16px}
+body.wave-next-ui #pointMeaning{height:auto;margin:0;padding:2px 9px;font-size:16px;line-height:24px}
+@media (orientation:landscape) and (min-width:960px) and (max-height:820px){
+ body.wave-next-ui .app{grid-template-rows:32px 60px minmax(0,1fr) 224px 18px}
+ body.wave-next-ui .wave-side-card{padding:4px;gap:3px}
+ body.wave-next-ui #instantReadout{grid-auto-rows:24px;line-height:24px;min-height:48px}
+ body.wave-next-ui .control-group{padding:3px}
+}
