@@ -138,7 +138,8 @@ body.wave-next-ui .teacher{grid-template-columns:50px minmax(0,1fr)}
 body.wave-next-ui .teacher-character{width:50px}
 body.wave-next-ui #instantReadout{min-height:40px}
 body.wave-next-ui #pointMeaning{height:40px;margin:3px 0 0;line-height:20px}
-body.wave-next-ui #periodInfo{min-height:40px}
+body.wave-next-ui #periodInfo{min-height:20px;white-space:nowrap}
+body.wave-next-ui .cursor-controls h3 label{font-size:16px;line-height:21px}
 body.wave-next-ui .wave-graph-footer{font-size:14px}
 @media (orientation:landscape) and (min-width:960px) and (max-height:820px){
  body.wave-next-ui .app{grid-template-rows:32px 56px minmax(0,1fr) 180px 18px}
