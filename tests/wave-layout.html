@@ -2,7 +2,7 @@
 const sizes=[[1024,768],[1024,680],[1180,720],[1366,900],[768,1024],[820,1180]],results=[];
 sizes.forEach(([width,height])=>{
  const title=document.createElement('h2');title.textContent=width+' × '+height;document.body.append(title);
- const frame=document.createElement('iframe');frame.width=width;frame.height=height;frame.title=title.textContent;frame.src='../Waveforms.html?layout-test='+width+'x'+height+'&v=20261010a';
+ const frame=document.createElement('iframe');frame.width=width;frame.height=height;frame.title=title.textContent;frame.src='../Waveforms.html?layout-test='+width+'x'+height+'&v='+Date.now();
  frame.addEventListener('load',async()=>{
  const d=frame.contentDocument,w=frame.contentWindow,issues=[];
  const settle=()=>new Promise(resolve=>w.requestAnimationFrame(()=>w.requestAnimationFrame(resolve)));
