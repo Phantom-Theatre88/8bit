@@ -46,7 +46,7 @@ body.wave-next-ui .wave-svg .original{stroke-dasharray:9 7;opacity:.65;stroke-wi
 body.wave-next-ui .wave-svg .diff{stroke:#ffbd51}
 body.wave-next-ui .wave-svg .conduction-zone{fill:#ffaa3314}
 body.wave-next-ui .wave-svg .cursor-line{stroke:#ffd078;stroke-width:1.5;stroke-dasharray:4 5}
-body.wave-next-ui .wave-svg .cursor-point{fill:#ffd078;stroke:#202934;stroke-width:2}
+body.wave-next-ui .wave-svg .cursor-point{fill:#ff414f;stroke:#fff4ed;stroke-width:2.5}
 body.wave-next-ui .wave-svg .zero-point{fill:#ffdc92}
 body.wave-next-ui .wave-graph-footer{margin:0;padding:2px 9px;font-size:14px;line-height:20px;color:#d2dbe4}
 body.wave-next-ui .wave-side-card{padding:8px;display:flex;flex-direction:column;gap:6px;background:#26313b}
