@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>電気って波なの？｜周波数と調光を見る</title>
-<link rel="stylesheet" href="next-ui-typography.css"><link rel="stylesheet" href="next-ui-page-shell.css"><link rel="stylesheet" href="next-ui-waveforms.css?v=20261010b">
+<link rel="stylesheet" href="next-ui-typography.css"><link rel="stylesheet" href="next-ui-page-shell.css"><link rel="stylesheet" href="next-ui-waveforms.css?v=20261010c">
 <script src="wave-model.js?v=20261010a" defer></script>
 </head>
 <body class="wave-next-ui">
@@ -31,7 +31,7 @@
 <aside class="wave-side-card">
 <section class="control-group"><h3>② 周波数を選ぶ</h3><div class="hz-buttons" role="group" aria-label="周波数"><button data-hz="50" aria-pressed="true">50Hz</button><button data-hz="60" aria-pressed="false">60Hz</button><button id="compareHz" aria-pressed="false">50 / 60比較</button></div><p id="periodInfo">50Hz：1回の波は20ms</p></section>
 <section class="control-group cursor-controls"><h3>③ 止めて、位置を読む</h3><button id="waveControl" class="wave-control">⏸ 波を止める</button><label for="timeSlider">読む時刻 <output id="timeValue">0.00ms</output></label><input id="timeSlider" type="range" min="0" max="40" step="0.01" value="0" aria-label="読む時刻（ミリ秒）"><div class="position-buttons"><button data-position="0">0を通る</button><button data-position="90">山</button><button data-position="270">谷</button></div><dl id="instantReadout" aria-live="off"></dl></section>
-<section id="dimControls" class="control-group" hidden><h3>通し始める位置を変える</h3><label for="dimAngle">点弧角 <output id="dimAngleValue">90°</output></label><input type="range" id="dimAngle" min="0" max="180" step="1" value="90" aria-label="点弧角（度）"><p id="dimOutput"></p></section>
+<section id="dimControls" class="control-group" hidden><h3><label for="dimAngle"><span>点弧角：通し始める位置</span><output id="dimAngleValue">90°</output></label></h3><input type="range" id="dimAngle" min="0" max="180" step="1" value="90" aria-label="点弧角（度）"><p id="dimOutput"></p></section>
 
 </aside>
 </section>
