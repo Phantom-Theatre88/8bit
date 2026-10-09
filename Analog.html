@@ -10,6 +10,65 @@
 </style>
 <link rel="stylesheet" href="next-ui-typography.css">
 <link rel="stylesheet" href="next-ui-page-shell.css">
+
+<style id="analog-readable-ui">
+/* Page-scoped reading sizes and unclipped explanatory sections. */
+body.analog-next-ui {--bg:#171e26;--muted:#ccd3dc;--line:#495663;background:#171e26;height:auto;min-height:100dvh;overflow:auto;font-size:16px}
+body.analog-next-ui .app {flex:none;height:auto;min-height:calc(100dvh - 64px);grid-template-rows:auto minmax(490px,1fr) auto 30px!important;gap:12px;padding:12px 18px 0}
+body.analog-next-ui .topbar {min-height:64px}
+body.analog-next-ui .title span {font-size:16px}
+body.analog-next-ui .layout {grid-template-columns:minmax(0,31fr) minmax(0,33fr) minmax(0,36fr);gap:12px}
+body.analog-next-ui .panel {background:#252e38!important}
+body.analog-next-ui .center {background:#202934!important;display:flex;flex-direction:column;align-items:center}
+body.analog-next-ui .right {background:#26313b!important}
+body.analog-next-ui .left,body.analog-next-ui .center,body.analog-next-ui .right {padding:16px;overflow:visible}
+body.analog-next-ui .center .section-head {align-self:stretch}
+body.analog-next-ui .center .formula-stack {margin:auto 0;padding:16px 0}
+body.analog-next-ui .section-head {font-size:18px;margin-bottom:8px}
+body.analog-next-ui .section-sub {font-size:15px;line-height:1.5;margin-bottom:12px}
+body.analog-next-ui .target-btn {height:40px;font-size:16px}
+body.analog-next-ui .input-title {font-size:16px}
+body.analog-next-ui .input-desc {font-size:14px;line-height:1.5;margin-top:3px}
+body.analog-next-ui .state {font-size:12px}
+body.analog-next-ui .input-card {padding:12px!important;margin-bottom:10px!important}
+body.analog-next-ui .input-row input {height:40px;font-size:24px}
+body.analog-next-ui .unit {font-size:16px}
+body.analog-next-ui .quick {gap:5px}
+body.analog-next-ui .quick button {height:32px;font-size:14px}
+body.analog-next-ui .formula-caption {font-size:18px;padding:10px}
+body.analog-next-ui .flow-note {font-size:15px;line-height:1.5;margin-top:10px}
+body.analog-next-ui .operator,body.analog-next-ui .multiply {background:#202934}
+body.analog-next-ui .answer-kicker,body.analog-next-ui .result-title {font-size:17px}
+body.analog-next-ui .answer-basis {font-size:15px;line-height:1.5}
+body.analog-next-ui .answer-card {min-height:150px}
+body.analog-next-ui .right-grid {gap:16px}
+body.analog-next-ui .capacity-grid {grid-template-columns:132px minmax(0,1fr)}
+body.analog-next-ui .summary-label,body.analog-next-ui .status,body.analog-next-ui .check,body.analog-next-ui .basic-note {font-size:15px;line-height:1.6}
+body.analog-next-ui .scale {font-size:12px}
+body.analog-next-ui .lesson-bottom {grid-template-columns:minmax(0,55fr) minmax(0,45fr)!important;grid-template-rows:auto auto!important;gap:12px!important;overflow:visible!important;padding-top:0!important}
+body.analog-next-ui .bottom-explain {background:#252e38!important;overflow:visible!important}
+body.analog-next-ui .bottom-title,body.analog-next-ui .teacher-intro-wrap h3 {font-size:18px!important}
+body.analog-next-ui .teacher-intro-wrap {margin-left:116px!important;padding:12px 14px 12px 0!important;overflow:visible!important;background:#252e38!important;border-radius:8px}
+body.analog-next-ui .teacher-character {width:104px!important;height:170px!important;max-height:170px!important}
+body.analog-next-ui .speech {font-size:15px!important;line-height:1.6!important;max-height:none!important;overflow:visible!important;padding:12px!important}
+body.analog-next-ui .teacher-card.current {font-size:16px!important;line-height:1.6!important;margin:44px 16px 14px!important;overflow:visible!important;color:#eef2f6!important;justify-content:flex-start}
+body.analog-next-ui .teacher-card.current small {font-size:15px!important}
+body.analog-next-ui .teacher-card.current strong {font-size:22px!important}
+body.analog-next-ui .bottom-remember {background:#252e38!important;overflow:visible!important;padding:14px!important}
+body.analog-next-ui .remember-list {font-size:15px!important;line-height:1.6;grid-template-columns:1fr!important}
+body.analog-next-ui .remember-tip {font-size:14px!important;line-height:1.6!important;padding:10px!important}
+body.analog-next-ui .bottomnav {background:transparent;font-size:12px}
+@media(max-width:1000px){
+ body.analog-next-ui .layout {grid-template-columns:1fr}
+ body.analog-next-ui .lesson-bottom {grid-template-columns:minmax(0,1fr)!important}
+ body.analog-next-ui .bottom-explain,body.analog-next-ui .teacher-card.current {grid-column:1!important;grid-row:1!important}
+ body.analog-next-ui .teacher-character,body.analog-next-ui .teacher-intro-wrap {grid-column:1!important;grid-row:2!important}
+ body.analog-next-ui .bottom-remember {grid-column:1!important;grid-row:3!important}
+ body.analog-next-ui .app {grid-template-rows:auto auto auto 30px!important;padding:10px}
+ body.analog-next-ui .topbar {flex-wrap:wrap}
+ body.analog-next-ui .top-actions {justify-content:flex-start}
+}
+</style>
 </head>
 <body class="analog-next-ui">
 <header class="next-ui-header" aria-label="8bit図鑑 共通ナビゲーション">
@@ -26,7 +85,7 @@
 </header>
 <main class="app">
 <header class="topbar"><div class="title"><div class="bolt">⚡</div><h1>電気を見える化</h1><span id="lessonTitle">｜V・W・Aの法則</span></div><div class="top-actions"><div class="modes"><button type="button" class="mode" data-mode="basic">基礎モード（V・I・R）</button><button type="button" class="mode active" data-mode="field">現場モード（V・W・A）</button></div><div class="group-divider"></div><div class="page-actions"><button type="button" class="help" id="helpBtn">ⓘ 使い方</button></div></div></header>
-<section class="layout"><section class="panel left"><div class="section-head">① 求めたい値を選ぶ</div><div class="section-sub">求めたい項目を1つ選び、残り2項目は数値入力または下のボタンで設定します。</div><div class="target-row" id="targetRow"></div><div id="inputCards"></div></section><section class="panel center"><div class="formula-stack"><div class="formula-board"><div class="formula-item" id="formulaTop"></div><div class="formula-divider"><div class="operator divide-left">÷</div><div class="operator divide-right">÷</div></div><div class="formula-bottom"><div class="formula-item bottom-left" id="formulaLeft"></div><div class="multiply">×</div><div class="formula-item bottom-right" id="formulaRight"></div></div></div><div class="formula-caption" id="activeFormula"></div><div class="flow-note" id="flowNote"></div></div></section><section class="panel right"><div class="section-head" id="rightHead">③ AUTOの答えと現場へのつながり</div><div class="right-grid" id="rightContent"></div></section></section>
+<section class="layout"><section class="panel left"><div class="section-head">① 求めたい値を選ぶ</div><div class="section-sub">求めたい項目を1つ選び、残り2項目は数値入力または下のボタンで設定します。</div><div class="target-row" id="targetRow"></div><div id="inputCards"></div></section><section class="panel center"><div class="section-head">② 式と数値を見比べる</div><div class="formula-stack"><div class="formula-board"><div class="formula-item" id="formulaTop"></div><div class="formula-divider"><div class="operator divide-left">÷</div><div class="operator divide-right">÷</div></div><div class="formula-bottom"><div class="formula-item bottom-left" id="formulaLeft"></div><div class="multiply">×</div><div class="formula-item bottom-right" id="formulaRight"></div></div></div><div class="formula-caption" id="activeFormula"></div><div class="flow-note" id="flowNote"></div></div></section><section class="panel right"><div class="section-head" id="rightHead">③ AUTOの答えと現場へのつながり</div><div class="right-grid" id="rightContent"></div></section></section>
 <section class="lesson-bottom"><section class="panel bottom-explain"><h3 class="bottom-title">▤ 解説</h3><div class="teacher-card example" id="teacherExample1"></div><div class="teacher-card example" id="teacherExample2"></div></section><section class="panel teacher"><img class="teacher-character" src="assets/analog_teacher_pointing.webp" alt="照明教材の先生" loading="lazy" decoding="async"><div class="teacher-intro-wrap"><h3>先生のひとこと</h3><div class="speech" id="teacherIntro"></div></div><div class="teacher-card current" id="teacherCurrent"></div></section><section class="panel bottom-remember"><h3 class="bottom-title">♙ 覚えておこう</h3><div class="remember-list"><span>□ P = V × I（電力）</span><span>□ I = P ÷ V（電流）</span><span>□ V = P ÷ I（電圧）</span></div><div class="remember-tip">⚡ 現場TIP<br>使用率は80%以下が目安。余裕を持った回路設計を。</div></section></section>
 <footer class="bottomnav"><a class="home" href="index.html">⌂ TOPへ</a><div class="brand">8bit Lighting Study　v3.0.1</div></footer>
 </main>
