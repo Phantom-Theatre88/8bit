@@ -10,6 +10,14 @@ sizes.forEach(([width,height])=>{
  for(const mode of ['single100','single3-100','single3-200','threephase','dimming','compare']){
  if(mode==='compare')d.querySelector('#compareHz').click();else d.querySelector('[data-mode="'+mode+'"]').click();
  await settle();
+ const slider=d.querySelector('#timeSlider'),sizes=[];
+ for(const t of [0,4.17,9.99,24.10,39.99]){
+ slider.value=t;slider.dispatchEvent(new w.Event('input',{bubbles:true}));await settle();
+ const cell=d.querySelector('.cursor-controls'),r=d.querySelector('#instantReadout');
+ sizes.push({cell:cell.getBoundingClientRect().height,result:r.getBoundingClientRect().height});
+ r.querySelectorAll('dt,dd').forEach(e=>{if(e.scrollWidth>e.clientWidth+1)issues.push(mode+': voltage text overflow');});
+ }
+ if(sizes.some(s=>s.cell!==sizes[0].cell||s.result!==sizes[0].result))issues.push(mode+': numeric values shift readout height');
  if(d.documentElement.scrollWidth>width+1)issues.push(mode+': horizontal overflow');
  if(width>height){
  if(d.documentElement.scrollHeight>height+1)issues.push(mode+': page vertical overflow');
