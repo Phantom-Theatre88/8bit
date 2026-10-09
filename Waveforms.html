@@ -85,7 +85,7 @@ function render(){
  $('periodInfo').innerHTML=compare?'50Hz：1回20ms ／ 60Hz：約16.67ms':hz+'Hz：1秒に'+hz+'回 ／ 1回'+(hz===50?'20':'約16.67')+'ms';
  document.querySelectorAll('[data-hz]').forEach(b=>b.setAttribute('aria-pressed',String(!compare&&+b.dataset.hz===hz)));
  $('compareHz').setAttribute('aria-pressed',String(compare));
- $('teacherSpeech').innerHTML=compare?'同じ時間で、どちらの波が多く繰り返すかな？':'まずは山・谷・0を見よう。<br>次に50Hzと60Hzを比べよう。同じ時間に、どちらが多く繰り返すかな？';
+ $('teacherSpeech').innerHTML=compare?'同じ時間で、どちらの波が多く繰り返すかな？':'赤い点を、山・谷・0へ動かしてみよう。';
  draw();
 }
 function readCursor(){
