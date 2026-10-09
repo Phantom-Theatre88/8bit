@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>電気って波なの？｜交流と50Hz・60Hzを知る</title>
-<link rel="stylesheet" href="next-ui-typography.css"><link rel="stylesheet" href="next-ui-page-shell.css"><link rel="stylesheet" href="next-ui-waveforms.css?v=20261010g">
+<link rel="stylesheet" href="next-ui-typography.css"><link rel="stylesheet" href="next-ui-page-shell.css"><link rel="stylesheet" href="next-ui-waveforms.css?v=20261010h">
 <script src="wave-model.js?v=20261010a" defer></script>
 </head>
 <body class="wave-next-ui">
@@ -26,10 +26,10 @@
 <header class="topbar"><div class="title"><span class="bolt">⚡</span><h1>電気って波なの？</h1><span>交流の波と、50Hz・60Hzの違い</span></div><button id="helpButton" type="button">ⓘ 見かた</button></header>
 <section class="wave-intro" aria-label="最初に知っておこう"><p><strong>交流</strong>は、電圧の向きが繰り返し変わる電気。波の図は、<strong>時間とともに電圧が変わる様子</strong>を表します。</p><p><strong>Hz（ヘルツ）＝1秒間に繰り返す回数。</strong>山から谷を通って元に戻るまでが「1回の波（1周期）」です。</p></section>
 <section class="wave-stage" aria-label="交流の波を見てみよう">
-<section class="wave-graph-card" id="graphCard"><div class="wave-graph-head"><h2 id="modeHeading">① まず1つの波を見る</h2><span id="waveStatus">停止中</span></div><div class="wave-legend" id="waveLegend">交流の電圧の変化を表示</div><svg id="waveSvg" class="wave-svg" viewBox="0 0 1000 440" role="img" aria-labelledby="modeHeading svgDescription"><desc id="svgDescription"></desc><g id="axes"></g><g id="traces"></g><g id="annotations"></g><g id="cursor"></g></svg><p class="wave-graph-footer">赤い点が、今見ている波の位置です。</p></section>
+<section class="wave-graph-card" id="graphCard"><div class="wave-graph-head"><h2 id="modeHeading">① まず1つの波を見る</h2><span id="waveStatus" hidden>停止中</span><button id="waveControl" class="wave-control">▶ ゆっくり見る</button></div><div class="wave-legend" id="waveLegend">交流の電圧の変化を表示</div><svg id="waveSvg" class="wave-svg" viewBox="0 0 1000 440" role="img" aria-labelledby="modeHeading svgDescription"><desc id="svgDescription"></desc><g id="axes"></g><g id="traces"></g><g id="annotations"></g><g id="cursor"></g></svg><p id="pointMeaning" class="wave-graph-footer"></p></section>
 <aside class="wave-side-card">
 <section class="control-group"><h3>② 50Hz・60Hzを比べる</h3><div class="hz-buttons" role="group" aria-label="周波数"><button data-hz="50" aria-pressed="true">50Hz</button><button data-hz="60" aria-pressed="false">60Hz</button><button id="compareHz" aria-pressed="false">上下で比較</button></div><p id="periodInfo"></p></section>
-<section class="control-group cursor-controls"><h3><label for="timeSlider">③ 波を止めて読む <output id="timeValue">5.00ms</output></label></h3><button id="waveControl" class="wave-control">▶ ゆっくり見る</button><input id="timeSlider" type="range" min="0" max="40" step="0.01" value="5" aria-label="読む時刻（ミリ秒）"><div class="position-buttons"><button data-position="180">0を通る</button><button data-position="90">山</button><button data-position="270">谷</button></div><dl id="instantReadout" aria-live="off"></dl><p id="pointMeaning"></p></section>
+<section class="control-group cursor-controls"><h3><label for="timeSlider">③ 波を止めて読む <output id="timeValue">5.00ms</output></label></h3><input id="timeSlider" type="range" min="0" max="40" step="0.01" value="5" aria-label="読む時刻（ミリ秒）"><div class="position-buttons"><button data-position="180">0を通る</button><button data-position="90">山</button><button data-position="270">谷</button></div><dl id="instantReadout" aria-live="off"></dl></section>
 </aside>
 </section>
 <section class="lesson-bottom">
