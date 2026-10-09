@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>電気って波なの？｜交流と50Hz・60Hzを知る</title>
-<link rel="stylesheet" href="next-ui-typography.css"><link rel="stylesheet" href="next-ui-page-shell.css"><link rel="stylesheet" href="next-ui-waveforms.css?v=20261010e">
+<link rel="stylesheet" href="next-ui-typography.css"><link rel="stylesheet" href="next-ui-page-shell.css"><link rel="stylesheet" href="next-ui-waveforms.css?v=20261010f">
 <script src="wave-model.js?v=20261010a" defer></script>
 </head>
 <body class="wave-next-ui">
@@ -93,7 +93,7 @@ function readCursor(){
  const g=$('cursor');g.replaceChildren();line(g,X(time),55,X(time),365,'cursor-line');
  const waves=series(),r=$('instantReadout');
  if(r.children.length!==waves.length)r.replaceChildren(...waves.map(()=>{const row=document.createElement('div');row.className='voltage-row';row.append(document.createElement('dt'),document.createElement('dd'));return row;}));
- waves.forEach((s,i)=>{let v=M.sine(100,s.freq,time);if(Math.abs(v)<.05)v=0;g.append(el('circle',{cx:X(time),cy:Y(s,time),r:5,class:'cursor-point'}));r.children[i].firstElementChild.textContent=s.name;r.children[i].lastElementChild.textContent=(v>=0?'+':'')+v.toFixed(1)+'V';});
+ waves.forEach((s,i)=>{let v=M.sine(100,s.freq,time);if(Math.abs(v)<.05)v=0;g.append(el('circle',{cx:X(time),cy:Y(s,time),r:8,class:'cursor-point'}));r.children[i].firstElementChild.textContent=s.name;r.children[i].lastElementChild.textContent=(v>=0?'+':'')+v.toFixed(1)+'V';});
  $('timeSlider').value=time.toFixed(2);$('timeValue').value=time.toFixed(2)+'ms';
  const v=M.sine(100,hz,time);
  $('pointMeaning').textContent=compare?'上下の波を、同じ時刻で読み取ります。':Math.abs(v)<.05?'0V：電圧の向きが切り替わるところ。':Math.abs(v)>141.3?(v>0?'山：＋側で最も大きい電圧。':'谷：逆向きで最も大きい電圧。'):(v>0?'＋側：電圧は一方の向き。':'−側：電圧は、その逆向き。');
