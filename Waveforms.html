@@ -26,7 +26,7 @@
 <header class="topbar"><div class="title"><span class="bolt">⚡</span><h1>電気って波なの？</h1><span>交流の波と、50Hz・60Hzの違い</span></div><button id="helpButton" type="button">ⓘ 見かた</button></header>
 <section class="wave-intro" aria-label="最初に知っておこう"><p><strong>交流</strong>は、電圧の向きが繰り返し変わる電気。波の図は、<strong>時間とともに電圧が変わる様子</strong>を表します。</p><p><strong>Hz（ヘルツ）＝1秒間に繰り返す回数。</strong>山から谷を通って元に戻るまでが「1回の波（1周期）」です。</p></section>
 <section class="wave-stage" aria-label="交流の波を見てみよう">
-<section class="wave-graph-card" id="graphCard"><div class="wave-graph-head"><h2 id="modeHeading">① まず1つの波を見る</h2><span id="waveStatus">停止中</span></div><div class="wave-legend" id="waveLegend">100Vの電源を例に表示</div><svg id="waveSvg" class="wave-svg" viewBox="0 0 1000 440" role="img" aria-labelledby="modeHeading svgDescription"><desc id="svgDescription"></desc><g id="axes"></g><g id="traces"></g><g id="annotations"></g><g id="cursor"></g></svg><p class="wave-graph-footer">100Vは電源の大きさを表す「実効値」。この波の山は約141Vです。</p></section>
+<section class="wave-graph-card" id="graphCard"><div class="wave-graph-head"><h2 id="modeHeading">① まず1つの波を見る</h2><span id="waveStatus">停止中</span></div><div class="wave-legend" id="waveLegend">交流の電圧の変化を表示</div><svg id="waveSvg" class="wave-svg" viewBox="0 0 1000 440" role="img" aria-labelledby="modeHeading svgDescription"><desc id="svgDescription"></desc><g id="axes"></g><g id="traces"></g><g id="annotations"></g><g id="cursor"></g></svg><p class="wave-graph-footer">山と谷は、電圧の向きが反対。0を通るところで向きが切り替わります。</p></section>
 <aside class="wave-side-card">
 <section class="control-group"><h3>② 50Hz・60Hzを比べる</h3><div class="hz-buttons" role="group" aria-label="周波数"><button data-hz="50" aria-pressed="true">50Hz</button><button data-hz="60" aria-pressed="false">60Hz</button><button id="compareHz" aria-pressed="false">上下で比較</button></div><p id="periodInfo"></p></section>
 <section class="control-group cursor-controls"><h3><label for="timeSlider">③ 波を止めて読む <output id="timeValue">5.00ms</output></label></h3><button id="waveControl" class="wave-control">▶ ゆっくり見る</button><input id="timeSlider" type="range" min="0" max="40" step="0.01" value="5" aria-label="読む時刻（ミリ秒）"><div class="position-buttons"><button data-position="180">0を通る</button><button data-position="90">山</button><button data-position="270">谷</button></div><dl id="instantReadout" aria-live="off"></dl><p id="pointMeaning"></p></section>
@@ -40,13 +40,12 @@
 </main>
 <dialog id="helpDialog" class="help-dialog"><div class="help-head"><h2>交流の波と周波数</h2><button id="helpClose">閉じる</button></div><div class="help-body">
 <p>電圧は、電気を流そうとする「押す力」にたとえられます。交流では、その向きと大きさが時間とともに変わります。これは電線が波の形に曲がっている図ではありません。</p>
-<p>縦軸はその瞬間の電圧（V）。＋と−は向きの違いで、−が「電気がない」という意味ではありません。横軸は時間（ms）です。</p>
+<p>縦軸は電圧の向きと大きさ。＋と−は向きの違いで、−が「電気がない」という意味ではありません。横軸は時間（ms）です。</p>
 <p>波が同じ状態へ戻るまでが1周期。50Hzは1秒に50回（1周期20ms）、60Hzは60回（約16.67ms）です。上下の比較は同じ0〜40msで表示するので、50Hzは2回、60Hzは2.4回になります。動く目印は実際の100分の1の速さです。</p>
 <p>日本は主に東日本が50Hz、西日本が60Hz。明治時代に東京側がドイツ製、大阪側がアメリカ製の発電機を導入したことが、違いの始まりです。</p>
 <p>電源の波を時間の基準にする時計や、電源の周波数でモーターの速さが決まるテープレコーダーでは、周波数が合わないと進み方やテープ速度が変わります。テープ速度は音の高さや再生時間にも影響します。昔の一部の機器には、切り替えや調整が必要でした。すべての時計や録音機に当てはまる話ではありません。</p>
 <p>機器の電源表示や取扱説明書で「50Hz」「60Hz」「50/60Hz」への対応を確認します。ステッピングモーターは基本的に制御信号の数で角度、信号の速さで回転速度を決めるので、電源の50/60Hzが直接角度を決めるとは限りません。</p>
-<p>100Vは「実効値」。抵抗で同じ発熱を生む直流に置き換えた値です。正弦波の最大値は実効値の約1.414倍なので、100Vの山は約141V。ここでは交流の基本を示す理想的な波を使っています。</p>
-<details><summary>参考資料</summary><ul><li><a href="https://www.kepco.co.jp/brand/for_kids/teach/2016_03/detail1.html" target="_blank" rel="noopener">関西電力：日本の周波数と機器への影響</a></li><li><a href="https://www.orientalmotor.co.jp/ja/products/ac-motors/overview" target="_blank" rel="noopener">オリエンタルモーター：電源周波数とモーターの速さ</a></li><li><a href="https://www.orientalmotor.co.jp/ja/products/stepping-motors/overview" target="_blank" rel="noopener">オリエンタルモーター：ステッピングモーター</a></li><li><a href="https://retronik.silicium.org/DOCUMENTS/Audiovideo/Akai/Akai-X-1810-Service-Manual.pdf" target="_blank" rel="noopener">AKAI X-1810：メーカーのサービス資料（保存版）</a></li><li><a href="https://www.tek.com/en/documents/primer/oscilloscope-basics" target="_blank" rel="noopener">Tektronix：周波数・周期</a></li><li><a href="https://www.fluke.com/en-us/learn/blog/power-quality/power-quality-measurements-at-receptacle-branch-circuits" target="_blank" rel="noopener">Fluke：実効値と最大値</a></li></ul></details></div></dialog>
+<details><summary>参考資料</summary><ul><li><a href="https://www.kepco.co.jp/brand/for_kids/teach/2016_03/detail1.html" target="_blank" rel="noopener">関西電力：日本の周波数と機器への影響</a></li><li><a href="https://www.orientalmotor.co.jp/ja/products/ac-motors/overview" target="_blank" rel="noopener">オリエンタルモーター：電源周波数とモーターの速さ</a></li><li><a href="https://www.orientalmotor.co.jp/ja/products/stepping-motors/overview" target="_blank" rel="noopener">オリエンタルモーター：ステッピングモーター</a></li><li><a href="https://retronik.silicium.org/DOCUMENTS/Audiovideo/Akai/Akai-X-1810-Service-Manual.pdf" target="_blank" rel="noopener">AKAI X-1810：メーカーのサービス資料（保存版）</a></li><li><a href="https://www.tek.com/en/documents/primer/oscilloscope-basics" target="_blank" rel="noopener">Tektronix：周波数・周期</a></li></ul></details></div></dialog>
 <script>
 window.addEventListener('DOMContentLoaded',()=>{
 'use strict';
@@ -70,17 +69,17 @@ function draw(){
   if(compare){text(axes,90,s.base-s.amp-15,s.name,'annotation','start');text(axes,78,s.base+8,'0','axis-text','end');}
  });
  if(!compare){
-  line(axes,90,55,90,335,'axis');text(axes,90,32,'その瞬間の電圧 [V]','axis-text','start');
-  [[90,'+141'],[200,'0'],[310,'−141']].forEach(([y,v])=>text(axes,78,y+8,v,'axis-text','end'));
+  line(axes,90,55,90,335,'axis');text(axes,90,32,'電圧の向きと大きさ','axis-text','start');
+  [[90,'＋'],[200,'0'],[310,'−']].forEach(([y,v])=>text(axes,78,y+8,v,'axis-text','end'));
   const p=M.period(hz);text(notes,X(p/4),70,'山','annotation');text(notes,X(p*3/4),340,'谷','annotation');
   line(notes,X(0),365,X(p),365,'axis');line(notes,X(0),358,X(0),372,'axis');line(notes,X(p),358,X(p),372,'axis');text(notes,X(p/2),355,'1回の波','angle-text');
  }else text(axes,940,32,'同じ時間・同じ電圧の大きさで比較','angle-text','end');
- $('svgDescription').textContent=compare?'同じ0〜40msの時間幅で上下に比較。上の50Hzは2周期、下の60Hzは2.4周期。波の高さの尺度は同じ。':'100Vの交流電源を例にした'+hz+'Hzの波。縦軸は瞬間の電圧、横軸は0〜40ms。山と谷は向きが反対。';
+ $('svgDescription').textContent=compare?'同じ0〜40msの時間幅で上下に比較。上の50Hzは2周期、下の60Hzは2.4周期。波の高さの尺度は同じ。':'交流の電圧の変化を示す'+hz+'Hzの波。縦軸は瞬間の電圧、横軸は0〜40ms。山と谷は向きが反対。';
  readCursor();
 }
 function render(){
  $('modeHeading').textContent=compare?'① 同じ時間に、何回繰り返す？':'① まず1つの波を見る';
- $('waveLegend').textContent=compare?'上：50Hz（東京）／下：60Hz（大阪）':'100Vの電源を例に表示';
+ $('waveLegend').textContent=compare?'上：50Hz（東京）／下：60Hz（大阪）':'交流の電圧の変化を表示';
  $('waveStatus').textContent=running?'目印が100倍ゆっくり動きます':'停止中';
  $('waveControl').textContent=running?'⏸ 止めて見る':'▶ ゆっくり見る';
  $('periodInfo').innerHTML=compare?'50Hz：1回20ms ／ 60Hz：約16.67ms':hz+'Hz：1秒に'+hz+'回 ／ 1回'+(hz===50?'20':'約16.67')+'ms';
@@ -93,10 +92,10 @@ function readCursor(){
  const g=$('cursor');g.replaceChildren();line(g,X(time),55,X(time),365,'cursor-line');
  const waves=series(),r=$('instantReadout');
  if(r.children.length!==waves.length)r.replaceChildren(...waves.map(()=>{const row=document.createElement('div');row.className='voltage-row';row.append(document.createElement('dt'),document.createElement('dd'));return row;}));
- waves.forEach((s,i)=>{let v=M.sine(100,s.freq,time);if(Math.abs(v)<.05)v=0;g.append(el('circle',{cx:X(time),cy:Y(s,time),r:8,class:'cursor-point'}));r.children[i].firstElementChild.textContent=s.name;r.children[i].lastElementChild.textContent=(v>=0?'+':'')+v.toFixed(1)+'V';});
+ waves.forEach((s,i)=>{let v=M.sine(100,s.freq,time);if(Math.abs(v)<.05)v=0;g.append(el('circle',{cx:X(time),cy:Y(s,time),r:8,class:'cursor-point'}));r.children[i].firstElementChild.textContent=s.name;r.children[i].lastElementChild.textContent=v===0?'0':Math.abs(v)>141.3?(v>0?'山（＋）':'谷（−）'):(v>0?'＋の向き':'−の向き');});
  $('timeSlider').value=time.toFixed(2);$('timeValue').value=time.toFixed(2)+'ms';
  const v=M.sine(100,hz,time);
- $('pointMeaning').textContent=compare?'上下の波を、同じ時刻で読み取ります。':Math.abs(v)<.05?'0V：電圧の向きが切り替わるところ。':Math.abs(v)>141.3?(v>0?'山：＋側で最も大きい電圧。':'谷：逆向きで最も大きい電圧。'):(v>0?'＋側：電圧は一方の向き。':'−側：電圧は、その逆向き。');
+ $('pointMeaning').textContent=compare?'上下の波を、同じ時刻で読み取ります。':Math.abs(v)<.05?'0：電圧の向きが切り替わるところ。':Math.abs(v)>141.3?(v>0?'山：＋側で最も大きい電圧。':'谷：逆向きで最も大きい電圧。'):(v>0?'＋側：電圧は一方の向き。':'−側：電圧は、その逆向き。');
 }
 document.querySelectorAll('[data-hz]').forEach(b=>b.addEventListener('click',()=>{hz=+b.dataset.hz;compare=false;time=M.period(hz)/4;running=false;render();}));
 $('compareHz').onclick=()=>{compare=!compare;running=false;render();};
