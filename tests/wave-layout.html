@@ -5,12 +5,14 @@ sizes.forEach(([width,height])=>{
  const frame=document.createElement('iframe');frame.width=width;frame.height=height;frame.title=title.textContent;frame.src='../Waveforms.html?layout-test='+width+'x'+height+'&v='+Date.now();
  frame.addEventListener('load',async()=>{
  const d=frame.contentDocument,w=frame.contentWindow,issues=[];
- const settle=()=>new Promise(resolve=>w.requestAnimationFrame(()=>w.requestAnimationFrame(resolve)));
+ const settle=()=>new Promise(resolve=>w.setTimeout(resolve,20));
  await settle();
- for(const mode of ['single100','single3-100','single3-200','threephase','dimming','compare']){
- if(mode==='compare')d.querySelector('#compareHz').click();else d.querySelector('[data-mode="'+mode+'"]').click();
+ for(const mode of ['50','60','compare']){
+ if(mode==='compare')d.querySelector('#compareHz').click();else d.querySelector('[data-hz="'+mode+'"]').click();
  await settle();
  const slider=d.querySelector('#timeSlider'),sizes=[];
+ if(d.querySelector('[data-mode],#dimControls'))issues.push('advanced controls still present');
+ if(d.querySelectorAll('#traces path').length!==(mode==='compare'?2:1))issues.push(mode+': incorrect trace count');
  for(const t of [0,4.17,9.99,24.10,39.99]){
  slider.value=t;slider.dispatchEvent(new w.Event('input',{bubbles:true}));await settle();
  const cell=d.querySelector('.cursor-controls'),r=d.querySelector('#instantReadout');
@@ -26,7 +28,7 @@ sizes.forEach(([width,height])=>{
  if(e.scrollHeight>e.clientHeight+2||r.bottom>height+1)issues.push(mode+': '+(e.id||e.className)+' overflow');
  });
  }}
- d.querySelector('[data-mode="single100"]').click();d.querySelector('[data-position="90"]').click();
+ d.querySelector('[data-hz="50"]').click();d.querySelector('[data-position="90"]').click();
  results.push({width,height,pass:!issues.length,issues,peak:d.querySelector('#instantReadout').textContent,scrollWidth:d.documentElement.scrollWidth,scrollHeight:d.documentElement.scrollHeight});
  document.getElementById('results').textContent=JSON.stringify(results.sort((a,b)=>a.width-b.width||a.height-b.height),null,2);
  });document.body.append(frame);
