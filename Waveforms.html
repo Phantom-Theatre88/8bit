@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>電気って波なの？｜交流と50Hz・60Hzを知る</title>
-<link rel="stylesheet" href="next-ui-typography.css"><link rel="stylesheet" href="next-ui-page-shell.css"><link rel="stylesheet" href="next-ui-waveforms.css?v=20261010f">
+<link rel="stylesheet" href="next-ui-typography.css"><link rel="stylesheet" href="next-ui-page-shell.css"><link rel="stylesheet" href="next-ui-waveforms.css?v=20261010g">
 <script src="wave-model.js?v=20261010a" defer></script>
 </head>
 <body class="wave-next-ui">
@@ -26,16 +26,16 @@
 <header class="topbar"><div class="title"><span class="bolt">⚡</span><h1>電気って波なの？</h1><span>交流の波と、50Hz・60Hzの違い</span></div><button id="helpButton" type="button">ⓘ 見かた</button></header>
 <section class="wave-intro" aria-label="最初に知っておこう"><p><strong>交流</strong>は、電圧の向きが繰り返し変わる電気。波の図は、<strong>時間とともに電圧が変わる様子</strong>を表します。</p><p><strong>Hz（ヘルツ）＝1秒間に繰り返す回数。</strong>山から谷を通って元に戻るまでが「1回の波（1周期）」です。</p></section>
 <section class="wave-stage" aria-label="交流の波を見てみよう">
-<section class="wave-graph-card" id="graphCard"><div class="wave-graph-head"><h2 id="modeHeading">① まず1つの波を見る</h2><span id="waveStatus">停止中</span></div><div class="wave-legend" id="waveLegend">交流の電圧の変化を表示</div><svg id="waveSvg" class="wave-svg" viewBox="0 0 1000 440" role="img" aria-labelledby="modeHeading svgDescription"><desc id="svgDescription"></desc><g id="axes"></g><g id="traces"></g><g id="annotations"></g><g id="cursor"></g></svg><p class="wave-graph-footer">山と谷は、電圧の向きが反対。0を通るところで向きが切り替わります。</p></section>
+<section class="wave-graph-card" id="graphCard"><div class="wave-graph-head"><h2 id="modeHeading">① まず1つの波を見る</h2><span id="waveStatus">停止中</span></div><div class="wave-legend" id="waveLegend">交流の電圧の変化を表示</div><svg id="waveSvg" class="wave-svg" viewBox="0 0 1000 440" role="img" aria-labelledby="modeHeading svgDescription"><desc id="svgDescription"></desc><g id="axes"></g><g id="traces"></g><g id="annotations"></g><g id="cursor"></g></svg><p class="wave-graph-footer">赤い点が、今見ている波の位置です。</p></section>
 <aside class="wave-side-card">
 <section class="control-group"><h3>② 50Hz・60Hzを比べる</h3><div class="hz-buttons" role="group" aria-label="周波数"><button data-hz="50" aria-pressed="true">50Hz</button><button data-hz="60" aria-pressed="false">60Hz</button><button id="compareHz" aria-pressed="false">上下で比較</button></div><p id="periodInfo"></p></section>
 <section class="control-group cursor-controls"><h3><label for="timeSlider">③ 波を止めて読む <output id="timeValue">5.00ms</output></label></h3><button id="waveControl" class="wave-control">▶ ゆっくり見る</button><input id="timeSlider" type="range" min="0" max="40" step="0.01" value="5" aria-label="読む時刻（ミリ秒）"><div class="position-buttons"><button data-position="180">0を通る</button><button data-position="90">山</button><button data-position="270">谷</button></div><dl id="instantReadout" aria-live="off"></dl><p id="pointMeaning"></p></section>
 </aside>
 </section>
 <section class="lesson-bottom">
-<section class="panel bottom-explain"><h3>波の読みかた</h3><div class="explain-list"><span><strong>横の方向＝時間</strong>。右へ進むほど後の時刻。</span><span><strong>山と谷＝電圧の向きが反対</strong>。谷でも電圧があります。</span><span><strong>0Vを通るところ</strong>で、向きが切り替わります。</span><span>msは時間の単位。1ms＝1秒の1000分の1。</span></div></section>
-<section class="panel equipment"><h3>日本では、地域でHzが違う</h3><p><strong>東京は50Hz、大阪は60Hz。</strong><br>同じ100Vでも、波を繰り返す速さが違います。</p><p>昔の一部の時計は進み方、テープレコーダーは音の高さ・再生時間に影響。50／60Hzの切り替え・調整が必要でした。</p><p class="equipment-check">機材を持ち込むときは、対応するHzも確認。</p></section>
-<section class="panel teacher"><img class="teacher-character" src="assets/analog_teacher_pointing.webp" alt="照明教材の先生" decoding="async"><div class="teacher-copy"><h3>先生のひとこと</h3><p id="teacherSpeech" class="teacher-speech">まずは山・谷・0を見よう。<br>次に50Hzと60Hzを比べよう。同じ時間に、どちらが多く繰り返すかな？</p><p class="next-learning">この波を利用する調光のしくみは、調光の教材で学びます。</p></div></section>
+<section class="panel bottom-explain"><h3>波の読みかた</h3><div class="explain-list"><span><strong>横＝時間</strong>。右へ進むほど後の時刻。</span><span><strong>山と谷は逆向き</strong>。谷でも電圧があります。</span><span><strong>0Vを通るところ</strong>で、向きが切り替わります。</span><span>msは時間の単位。1ms＝1秒の1000分の1。</span></div></section>
+<section class="panel equipment"><h3>日本では、地域でHzが違う</h3><p><strong>東京は50Hz、大阪は60Hz。</strong><br>同じ100Vでも、波を繰り返す速さが違います。</p><p>昔の一部の時計は進み方、テープレコーダーは音の高さが変わるため、50／60Hzの切り替えや調整が必要でした。</p><p class="equipment-check">機材を持ち込むときは、対応するHzも確認。</p></section>
+<section class="panel teacher"><img class="teacher-character" src="assets/wave_teacher_transparent.svg" alt="照明教材の先生" decoding="async"><div class="teacher-copy"><h3>先生のひとこと</h3><p id="teacherSpeech" class="teacher-speech">赤い点を、山・谷・0へ動かしてみよう。</p><p class="next-learning">調光とのつながりは、調光のページへ。</p></div></section>
 </section><footer class="bottomnav">8bit Lighting Study　v3.0.1</footer>
 </main>
 <dialog id="helpDialog" class="help-dialog"><div class="help-head"><h2>交流の波と周波数</h2><button id="helpClose">閉じる</button></div><div class="help-body">
@@ -85,7 +85,7 @@ function render(){
  $('periodInfo').innerHTML=compare?'50Hz：1回20ms ／ 60Hz：約16.67ms':hz+'Hz：1秒に'+hz+'回 ／ 1回'+(hz===50?'20':'約16.67')+'ms';
  document.querySelectorAll('[data-hz]').forEach(b=>b.setAttribute('aria-pressed',String(!compare&&+b.dataset.hz===hz)));
  $('compareHz').setAttribute('aria-pressed',String(compare));
- $('teacherSpeech').innerHTML=compare?'同じ40msでも、50Hzは2回、60Hzは2.4回。<br>Hzが大きいほど、1回の波にかかる時間は短くなります。':'まずは山・谷・0を見よう。<br>次に50Hzと60Hzを比べよう。同じ時間に、どちらが多く繰り返すかな？';
+ $('teacherSpeech').innerHTML=compare?'同じ時間で、どちらの波が多く繰り返すかな？':'まずは山・谷・0を見よう。<br>次に50Hzと60Hzを比べよう。同じ時間に、どちらが多く繰り返すかな？';
  draw();
 }
 function readCursor(){
