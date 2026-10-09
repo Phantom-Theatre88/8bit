@@ -35,7 +35,7 @@
 <section class="lesson-bottom">
 <section class="panel bottom-explain"><h3>波の読みかた</h3><div class="explain-list"><span><strong>横＝時間</strong>。右へ進むほど後の時刻。</span><span><strong>山と谷は逆向き</strong>。谷でも電圧があります。</span><span><strong>0Vを通るところ</strong>で、向きが切り替わります。</span><span>msは時間の単位。1ms＝1秒の1000分の1。</span></div></section>
 <section class="panel equipment"><h3>日本では、地域でHzが違う</h3><p><strong>東京は50Hz、大阪は60Hz。</strong><br>同じ100Vでも、波を繰り返す速さが違います。</p><p>昔の一部の時計は進み方、テープレコーダーは音の高さが変わるため、50／60Hzの切り替えや調整が必要でした。</p><p class="equipment-check">機材を持ち込むときは、対応するHzも確認。</p></section>
-<section class="panel teacher"><img class="teacher-character" src="assets/wave_teacher_transparent.svg" alt="照明教材の先生" decoding="async"><div class="teacher-copy"><h3>先生のひとこと</h3><p id="teacherSpeech" class="teacher-speech">赤い点を、山・谷・0へ動かしてみよう。</p><p class="next-learning">調光とのつながりは、調光のページへ。</p></div></section>
+<section class="panel teacher"><img class="teacher-character" src="assets/wave_teacher_transparent.svg" alt="照明教材の先生" decoding="async"><div class="teacher-copy"><h3>先生のひとこと</h3><p id="teacherSpeech" class="teacher-speech">赤い点を動かして、<br>山・谷・0を見てみよう。</p><p class="next-learning">調光とのつながりは、調光のページへ。</p></div></section>
 </section><footer class="bottomnav">8bit Lighting Study　v3.0.1</footer>
 </main>
 <dialog id="helpDialog" class="help-dialog"><div class="help-head"><h2>交流の波と周波数</h2><button id="helpClose">閉じる</button></div><div class="help-body">
@@ -91,7 +91,7 @@ function render(){
  $('periodInfo').innerHTML=compare?'50Hz：1回20ms ／ 60Hz：約16.67ms':hz+'Hz：1秒に'+hz+'回 ／ 1回'+(hz===50?'20':'約16.67')+'ms';
  document.querySelectorAll('[data-hz]').forEach(b=>b.setAttribute('aria-pressed',String(!compare&&+b.dataset.hz===hz)));
  $('compareHz').setAttribute('aria-pressed',String(compare));
- $('teacherSpeech').innerHTML=compare?'同じ時間で、どちらの波が多く繰り返すかな？':'赤い点を、山・谷・0へ動かしてみよう。';
+ $('teacherSpeech').innerHTML=compare?'同じ時間で、どちらの波が多く繰り返すかな？':'赤い点を動かして、<br>山・谷・0を見てみよう。';
  draw();
 }
 function readCursor(){
