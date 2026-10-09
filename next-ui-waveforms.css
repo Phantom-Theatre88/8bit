@@ -110,6 +110,7 @@ body.wave-next-ui .next-ui-category-menu:nth-last-child(-n+2) .next-ui-dropdown{
  body.wave-next-ui .dimming .position-buttons{display:none}
  body.wave-next-ui .dimming .control-group h3{font-size:15px;line-height:20px}
  body.wave-next-ui .dimming #dimControls{padding:3px 4px}
+ body.wave-next-ui .dimming #dimOutput{margin-top:0}
 }
 @media (orientation:portrait),(max-width:959px),(max-height:639px){
  body.wave-next-ui{height:auto;min-height:100dvh;overflow:auto}
