@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>電気って波なの？｜交流と50Hz・60Hzを知る</title>
-<link rel="stylesheet" href="next-ui-typography.css"><link rel="stylesheet" href="next-ui-page-shell.css"><link rel="stylesheet" href="next-ui-waveforms.css?v=20261010d">
+<link rel="stylesheet" href="next-ui-typography.css"><link rel="stylesheet" href="next-ui-page-shell.css"><link rel="stylesheet" href="next-ui-waveforms.css?v=20261010e">
 <script src="wave-model.js?v=20261010a" defer></script>
 </head>
 <body class="wave-next-ui">
@@ -29,7 +29,7 @@
 <section class="wave-graph-card" id="graphCard"><div class="wave-graph-head"><h2 id="modeHeading">① まず1つの波を見る</h2><span id="waveStatus">停止中</span></div><div class="wave-legend" id="waveLegend">100Vの電源を例に表示</div><svg id="waveSvg" class="wave-svg" viewBox="0 0 1000 440" role="img" aria-labelledby="modeHeading svgDescription"><desc id="svgDescription"></desc><g id="axes"></g><g id="traces"></g><g id="annotations"></g><g id="cursor"></g></svg><p class="wave-graph-footer">100Vは電源の大きさを表す「実効値」。この波の山は約141Vです。</p></section>
 <aside class="wave-side-card">
 <section class="control-group"><h3>② 50Hz・60Hzを比べる</h3><div class="hz-buttons" role="group" aria-label="周波数"><button data-hz="50" aria-pressed="true">50Hz</button><button data-hz="60" aria-pressed="false">60Hz</button><button id="compareHz" aria-pressed="false">上下で比較</button></div><p id="periodInfo"></p></section>
-<section class="control-group cursor-controls"><h3>③ 止めて、山・谷を見る</h3><button id="waveControl" class="wave-control">▶ ゆっくり見る</button><label for="timeSlider">読む時刻 <output id="timeValue">5.00ms</output></label><input id="timeSlider" type="range" min="0" max="40" step="0.01" value="5" aria-label="読む時刻（ミリ秒）"><div class="position-buttons"><button data-position="180">0を通る</button><button data-position="90">山</button><button data-position="270">谷</button></div><dl id="instantReadout" aria-live="off"></dl><p id="pointMeaning"></p></section>
+<section class="control-group cursor-controls"><h3><label for="timeSlider">③ 波を止めて読む <output id="timeValue">5.00ms</output></label></h3><button id="waveControl" class="wave-control">▶ ゆっくり見る</button><input id="timeSlider" type="range" min="0" max="40" step="0.01" value="5" aria-label="読む時刻（ミリ秒）"><div class="position-buttons"><button data-position="180">0を通る</button><button data-position="90">山</button><button data-position="270">谷</button></div><dl id="instantReadout" aria-live="off"></dl><p id="pointMeaning"></p></section>
 </aside>
 </section>
 <section class="lesson-bottom">
@@ -83,7 +83,7 @@ function render(){
  $('waveLegend').textContent=compare?'上：50Hz（東京）／下：60Hz（大阪）':'100Vの電源を例に表示';
  $('waveStatus').textContent=running?'目印が100倍ゆっくり動きます':'停止中';
  $('waveControl').textContent=running?'⏸ 止めて見る':'▶ ゆっくり見る';
- $('periodInfo').innerHTML=compare?'50Hz：1回20ms ／ 60Hz：約16.67ms':'<strong>'+hz+'Hz＝1秒に'+hz+'回</strong><br>1回の波は'+(hz===50?'20':'約16.67')+'ms';
+ $('periodInfo').innerHTML=compare?'50Hz：1回20ms ／ 60Hz：約16.67ms':hz+'Hz：1秒に'+hz+'回 ／ 1回'+(hz===50?'20':'約16.67')+'ms';
  document.querySelectorAll('[data-hz]').forEach(b=>b.setAttribute('aria-pressed',String(!compare&&+b.dataset.hz===hz)));
  $('compareHz').setAttribute('aria-pressed',String(compare));
  $('teacherSpeech').innerHTML=compare?'同じ40msでも、50Hzは2回、60Hzは2.4回。<br>Hzが大きいほど、1回の波にかかる時間は短くなります。':'まずは山・谷・0を見よう。<br>次に50Hzと60Hzを比べよう。同じ時間に、どちらが多く繰り返すかな？';
