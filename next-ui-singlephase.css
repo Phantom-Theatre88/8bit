@@ -99,7 +99,7 @@ body.singlephase-next-ui .next-ui-category-menu:nth-last-child(-n+2) .next-ui-dr
  body.singlephase-next-ui .wire-intro {padding:5px 8px}
  body.singlephase-next-ui .wire-intro h2 {font-size:16px;line-height:21px;margin-bottom:3px}
  body.singlephase-next-ui .left,body.singlephase-next-ui .center,body.singlephase-next-ui .right {padding:6px}
- body.singlephase-next-ui .fixture-btn {min-height:44px}
+ body.singlephase-next-ui .fixture-btn {min-height:44px;padding:0}
  body.singlephase-next-ui .fixture-btn strong {font-size:15px}
  body.singlephase-next-ui .left .step:last-child .step-title {display:none}
  body.singlephase-next-ui .load-card {line-height:22px;white-space:nowrap}
