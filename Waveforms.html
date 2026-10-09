@@ -1,12 +1,10 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>電気って波なの？｜交流の波形を見る</title>
-<link rel="stylesheet" href="next-ui-typography.css">
-<link rel="stylesheet" href="next-ui-page-shell.css">
-<link rel="stylesheet" href="next-ui-waveforms.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>電気って波なの？｜周波数と調光を見る</title>
+<link rel="stylesheet" href="next-ui-typography.css"><link rel="stylesheet" href="next-ui-page-shell.css"><link rel="stylesheet" href="next-ui-waveforms.css?v=20261010a">
+<script src="wave-model.js?v=20261010a" defer></script>
 </head>
 <body class="wave-next-ui">
 <header class="next-ui-header" aria-label="8bit図鑑 共通ナビゲーション">
@@ -17,238 +15,127 @@
       <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button" aria-expanded="false"><span class="next-ui-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3v18M12 3v18M19 3v18"/><path d="M2.5 8h5M9.5 15h5M16.5 10h5"/></svg></span>調光</button><div class="next-ui-dropdown"><a href="Top.html?tab=sim8bit">8-bit 調光卓</a><a href="Top.html?tab=sim16bit">16-bit 調光卓</a></div></div>
       <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button" aria-expanded="false"><span class="next-ui-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 19V5M3 19h18"/><path d="m6 15 4-5 4 3 5-7"/></svg></span>信号</button><div class="next-ui-dropdown"><a href="Top.html?tab=simdmx">DMX通信列車</a><a href="Top.html?tab=ledcolormix">LED色混ぜ</a><a href="Top.html?tab=scroller">Scroller</a><a href="Top.html?tab=movinghead">Moving Head</a></div></div>
       <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button" aria-expanded="false"><span class="next-ui-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v4M6 16v-4h12v4"/></svg></span>Network</button><div class="next-ui-dropdown"><a href="Top.html?tab=netipaddress">IPアドレス</a><a href="Top.html?tab=netartnet">DMX on LAN</a><a href="Top.html?tab=netbroadcast">Broadcast</a><a href="Top.html?tab=netsacn">Multicast</a><a href="Top.html?tab=explain">結線</a></div></div>
+      <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button" aria-expanded="false"><span class="next-ui-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 3"/></svg></span>照明史</button><div class="next-ui-dropdown"><a href="History.html">舞台照明史 Timeline</a></div></div>
+      <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button" aria-expanded="false"><span class="next-ui-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 7 12-3v16L4 17z"/><ellipse cx="16" cy="12" rx="3" ry="8"/></svg></span>灯具</button><div class="next-ui-dropdown"><a href="ConvexLens.html">平凸レンズ</a></div></div>
+      <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button" aria-expanded="false"><span class="next-ui-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg></span>シュート</button><div class="next-ui-dropdown"><span class="pending">教材を準備中</span></div></div>
     </nav>
     <div class="next-ui-tools"><button class="next-ui-tool" type="button">▣ 学習ガイド</button><button class="next-ui-tool" type="button">▱ ブックマーク</button><button class="next-ui-tool" type="button">⚙ 設定</button><div class="next-ui-page-controls" aria-label="教材ページ移動"><button class="next-ui-page-button" type="button" onclick="location.href='SinglePhase3.html'">◀ 前</button><button class="next-ui-page-button" type="button" disabled>次 ▶</button></div><button class="next-ui-tool menu" type="button" aria-label="メニュー">☰</button></div>
   </div>
 </header>
-
 <main class="app">
-  <header class="topbar">
-    <div class="title wave-title"><div class="bolt">⚡</div><h1>電気って波なの？</h1><span>｜100V・200V・三相の違いを波で見てみよう</span></div>
-    <div class="topbar-mode-area">
-      <div class="wave-modes" role="tablist" aria-label="波形を切り替える">
-        <button class="wave-mode active" type="button" data-mode="single100" role="tab" aria-selected="true">単相100V</button>
-        <button class="wave-mode" type="button" data-mode="single3-100" role="tab" aria-selected="false">単相3線 100V</button>
-        <button class="wave-mode" type="button" data-mode="single3-200" role="tab" aria-selected="false">単相3線 200V</button>
-        <button class="wave-mode" type="button" data-mode="threephase" role="tab" aria-selected="false">三相3線</button>
-        <button class="wave-mode motor" type="button" data-mode="motor">三相モーター（動力）へ</button>
-      </div>
-    </div>
-    <div class="wave-actions"><button id="helpButton" type="button">ⓘ 見かた</button></div>
-  </header>
+<header class="topbar"><div class="title"><span class="bolt">⚡</span><h1>電気って波なの？</h1><span>電源の波から、調光のしくみへ</span></div><button id="helpButton" type="button">ⓘ 見かた</button></header>
+<section class="wave-intro" aria-label="最初に知っておこう"><p><strong>交流</strong>は、電圧の向きが繰り返し変わる電気。この図は、電線の形ではなく<strong>時間による電圧の変化</strong>です。</p><p><strong>Hz（ヘルツ）</strong>は1秒間の繰り返し回数。まず1つの波を見て、50Hz・60Hzの違いを確かめよう。</p></section>
+<nav class="wave-modes" aria-label="① 学ぶ波を選ぶ"><strong>① 波を選ぶ</strong><button class="wave-mode active" data-mode="single100" aria-pressed="true">単相100V</button><button class="wave-mode" data-mode="single3-100" aria-pressed="false">単相3線 100V</button><button class="wave-mode" data-mode="single3-200" aria-pressed="false">単相3線 200V</button><button class="wave-mode" data-mode="threephase" aria-pressed="false">三相3線</button><button class="wave-mode" data-mode="dimming" aria-pressed="false">位相制御で調光</button></nav>
+<section class="wave-stage" aria-label="波形シミュレーター">
+<section class="wave-graph-card" id="graphCard"><div class="wave-graph-head"><h2 id="modeHeading">まず1つの波を見る</h2><span id="waveStatus">100倍ゆっくり再生</span></div><div class="wave-legend" id="waveLegend"></div><svg id="waveSvg" class="wave-svg" viewBox="0 0 1000 400" role="img" aria-labelledby="modeHeading svgDescription"><desc id="svgDescription">縦軸はその瞬間の電圧、横軸は0から40ミリ秒。100Vの正弦波の最大値は約141V。</desc><g id="axes"></g><g id="traces"></g><g id="annotations"></g><g id="cursor"></g></svg><p id="waveDescription" class="wave-graph-footer"></p></section>
+<aside class="wave-side-card">
+<section class="control-group"><h3>② 周波数を選ぶ</h3><div class="hz-buttons" role="group" aria-label="周波数"><button data-hz="50" aria-pressed="true">50Hz</button><button data-hz="60" aria-pressed="false">60Hz</button><button id="compareHz" aria-pressed="false">50 / 60比較</button></div><p id="periodInfo">50Hz：1回の波は20ms</p></section>
+<section class="control-group cursor-controls"><h3>③ 止めて、位置を読む</h3><button id="waveControl" class="wave-control">⏸ 波を止める</button><label for="timeSlider">読む時刻 <output id="timeValue">0.00ms</output></label><input id="timeSlider" type="range" min="0" max="40" step="0.01" value="0" aria-label="読む時刻（ミリ秒）"><div class="position-buttons"><button data-position="0">0を通る</button><button data-position="90">山</button><button data-position="270">谷</button></div><p id="instantReadout" aria-live="off"></p></section>
+<section id="dimControls" class="control-group" hidden><h3>通し始める位置を変える</h3><label for="dimAngle">点弧角 <output id="dimAngleValue">90°</output></label><input type="range" id="dimAngle" min="0" max="180" step="1" value="90" aria-label="点弧角（度）"><p id="dimOutput"></p></section>
 
-  <section class="wave-simulator" aria-label="交流の波形シミュレーター">
-    <div class="wave-stage">
-      <section class="wave-graph-card" id="graphCard" aria-live="polite">
-        <div class="wave-graph-head"><h2 id="modeHeading">単相100Vとは？</h2><span class="wave-status" id="waveStatus">波が動いています</span></div>
-        <svg class="wave-svg" id="waveSvg" viewBox="0 0 1000 400" role="img" aria-labelledby="modeHeading waveDescription"></svg>
-        <div class="wave-graph-footer" id="waveDescription">時間と一緒に、プラスとマイナスを行ったり来たりするのが交流です。</div>
-      </section>
-      <aside class="wave-side-card">
-        <h3 id="sideHeading">まずは1つの波</h3>
-        <p id="sideLead">100Vの交流は、見えない電圧が時間と一緒に変化している様子です。</p>
-        <ul class="wave-points" id="sidePoints"></ul>
-        <button class="wave-control" id="waveControl" type="button">⏸ 波を止めて説明を見る</button>
-        <div class="wave-tip" id="waveTip">⚡ 操作TIP<br>波を止めると、その瞬間の山・谷・電圧差を確認できます。</div>
-      </aside>
-    </div>
-  </section>
-
-  <section class="lesson-bottom">
-    <section class="panel bottom-explain"><h3 class="bottom-title">▤ 解説</h3><div class="explain-list" id="explainList"></div></section>
-    <section class="panel teacher"><img class="teacher-character" src="assets/analog_teacher_pointing.webp" alt="照明教材の先生" loading="lazy" decoding="async"><div class="teacher-copy"><h3>先生のひとこと</h3><p class="teacher-speech" id="teacherSpeech"></p></div></section>
-    <section class="panel bottom-remember"><h3 class="bottom-title">♙ 覚えておこう</h3><div class="remember-list" id="rememberList"></div><div class="remember-tip">⚡ 現場TIP<br>同じ200Vでも、単相3線と三相3線では波の組み合わせが違います。</div></section>
-  </section>
-  <footer class="bottomnav"><a class="home" href="index.html">⌂ TOPへ</a><div class="brand">8bit Lighting Study　v3.0.1</div></footer>
+</aside>
+</section>
+<section class="lesson-bottom"><section class="panel bottom-explain"><h3>▤ 波の読みかた</h3><div id="explainList" class="explain-list"></div></section><section class="panel teacher"><img class="teacher-character" src="assets/analog_teacher_pointing.webp" alt="照明教材の先生" decoding="async"><div class="teacher-copy"><h3>先生のひとこと</h3><p id="teacherSpeech" class="teacher-speech"></p></div></section><section class="panel bottom-remember"><h3>♙ 覚えておこう</h3><div id="rememberList" class="remember-list"></div></section></section>
+<footer class="bottomnav">8bit Lighting Study　v3.0.1</footer>
 </main>
-
-<dialog class="help-dialog" id="helpDialog"><div class="help-head"><h2>波形ページの見かた</h2><button class="help-close" id="helpClose" type="button">閉じる</button></div><div class="help-body"><ol><li>上のボタンで、見たい電源の種類を選びます。</li><li>最初は波が動き、電圧が時間で変化することを見せます。</li><li>「波を止めて説明を見る」を押すと、その瞬間を固定して山・谷・電圧差を確認できます。</li><li>三相モーターは、三相3線ページが追加された時にここから開けます。</li></ol><div class="note">電気の波は、電気そのものが線の中を波打って進む図ではなく、電圧が時間で変化する様子を表しています。</div></div></dialog>
-
+<dialog id="helpDialog" class="help-dialog"><div class="help-head"><h2>波形の見かた</h2><button id="helpClose">閉じる</button></div><div class="help-body"><p>縦軸は電圧（V）、横軸は時間（ms）。1msは1秒の1000分の1です。波の山と谷で向きが逆になり、0を通る時に向きが切り替わります。</p><p>50Hzは1秒に50回、60Hzは60回。比較では同じ0〜40msに描きます。動く縦線は実際の時間の100分の1の速さで進みます。</p><p>電源の100Vは「実効値」。抵抗で同じ発熱を生む直流に置き換えた値で、山の高さではありません。正弦波では最大値＝実効値×√2。100Vの山は約141V、200Vの山は約283Vです。</p><p>角度は1回の波を360°として位置を表す補助表示です。下の角度目盛りは最初の1周期だけを示します。読み取り欄では周期内の角度を示します。</p><p>単相3線200VではL1-N・L2-Nの波と、その差L1-L2を表示。三相3線では200Vの線間電圧R-S・S-T・T-Rを表示し、存在しないN線を仮定しません。</p><p>調光は白熱灯などの抵抗負荷を想定した、理想的な前縁位相制御の例です。各半周期の途中から通し、次の0まで通します。点弧角や通す時間の割合は、明るさの％ではありません。LED機器の内部調光やDMXの数値をそのまま表す図でもありません。</p><p>理想的な正弦波の教材用モデルです。実機の接続・測定を指示するものではありません。</p><details><summary>参考資料</summary><ul><li><a href="https://www.tek.com/en/documents/primer/oscilloscope-basics" target="_blank" rel="noopener">Tektronix：周波数・周期・位相</a></li><li><a href="https://www.fluke.com/en-us/learn/blog/power-quality/power-quality-measurements-at-receptacle-branch-circuits" target="_blank" rel="noopener">Fluke：実効値と最大値</a></li><li><a href="https://productinfo.se.com/spacelogic_cbus_guides/spacelogic-c-bus-digital-dimmers_device-user-guide/English/SpaceLogic%20C-Bus%20Digital%20Dimmers_DUG_DD00556112.xml/$/dimmers_Phase-CutDimmingCPT_DUG_DD00556612" target="_blank" rel="noopener">Schneider Electric：位相制御</a></li></ul></details></div></dialog>
 <script>
-(() => {
-  const data = {
-    single100: {
-      heading: '単相100Vとは？', sideHeading: 'まずは1つの波',
-      lead: '100Vの交流は、見えない電圧が時間と一緒に変化している様子です。',
-      points: ['プラス側とマイナス側を交互に行き来する', '山と谷の間で電圧の向きが変わる', 'LとNの間で100Vを使う'],
-      footer: '時間と一緒に、プラスとマイナスを行ったり来たりするのが交流です。',
-      explain: ['単相100Vは、1つの波で電圧が変化します。', '山と谷の間で、電圧の向きが入れ替わります。', '力の強さにも、強い時と弱い時があります。'],
-      teacher: 'まずは、電気はずっと同じ強さではないと覚えよう。<br>プラスとマイナスを行ったり来たりする、この変化が<strong>交流</strong>です。',
-      remember: ['□ 単相100Vは1つの波', '□ 山と谷で向きが変わる', '□ これが交流の基本']
-    },
-    'single3-100': {
-      heading: '単相3線で100Vを取る', sideHeading: '中性線を基準にする',
-      lead: 'L1とL2は逆向きに動いていますが、Nを基準にすればどちらも100Vです。',
-      points: ['L1 − N で100V', 'L2 − N で100V', '100Vの回路を2系統取り出せる'],
-      footer: 'N（中性線）を基準に見ると、L1側もL2側も100Vです。',
-      explain: ['L1とL2は、Nをはさんで反対向きに変化します。', 'それぞれNとの間で100Vが取れます。', '照明の100V負荷を、L1側・L2側へ分けて使えます。'],
-      teacher: '<strong>L1-N</strong>も<strong>L2-N</strong>も100V。<br>「2つの100Vを取れる」が、単相3線の大事なところです。',
-      remember: ['□ L1-Nは100V', '□ L2-Nも100V', '□ Nが基準になる']
-    },
-    'single3-200': {
-      heading: '単相3線で200Vを取る', sideHeading: '山と谷の差を見る',
-      lead: 'L1が山の時、L2は谷。2つの差を使うと、電圧差は200Vになります。',
-      points: ['L1とL2は逆向きの100Vの波', 'L1 − L2 の電圧差は200V', '同じ100Vの波を、取り方で200Vにする'],
-      footer: '赤いL1と青いL2の距離が、L1-L2で使える200Vです。',
-      explain: ['L1とL2の波は、正反対に動いています。', '山と谷の差を取るので、L1-L2では200Vになります。', '「200V専用の山」が来るのではなく、2本の100Vの差を使っています。'],
-      teacher: 'ここが単相3線の見せ場です。<br><strong>L1が山、L2が谷</strong>なら、その差は200V。だから200Vの機器も使えるんだね。',
-      remember: ['□ L1-L2で200V', '□ 2つの波は逆向き', '□ 山と谷の差を使う']
-    },
-    threephase: {
-      heading: '三相3線とは？', sideHeading: '3つの波が順番に働く',
-      lead: 'R・S・Tの3つの波が120°ずれているため、力を受け渡すように使えます。',
-      points: ['R・S・Tは120°ずつずれている', 'どこかの相が次へ引き継ぐ', '力の変化が小さく、途切れにくい'],
-      footer: '3つの波が順番に働くので、力を出し続けやすいのが三相です。',
-      explain: ['三相3線は、120°ずれた3つの波を使います。', '1つが弱くなる時も、次の波が引き継ぎます。', 'そのため力の変化が小さく、モーターの動力に向いています。'],
-      teacher: '三相は、1つの波ががんばるのではなく、<strong>R → S → T</strong>が順番に支えるイメージ。<br>だから力が途切れにくく、動力に使われます。',
-      remember: ['□ R・S・Tは120°ずれ', '□ 順番に引き継ぐ', '□ 力が途切れにくい']
-    }
-  };
+window.addEventListener('DOMContentLoaded',()=>{
+'use strict';
+const M=window.WaveModel,$=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
+let mode='single100',hz=50,compare=false,running=!matchMedia('(prefers-reduced-motion: reduce)').matches,time=0,alpha=90,last=performance.now(),lastFrame=0;
+const content={
+ single100:{heading:'まず1つの波を見る',guide:'山・谷ボタンで止めてみよう。谷は「消えている」ではなく、電圧の向きが逆です。',explain:['100Vは実効値。山の値は約141V。','＋と−は向き。0を通る時に切り替わる。','msは時間：1ms＝1秒の1000分の1。'],teacher:'山と谷、どちらも電圧があります。<br>50 / 60比較で、同じ時間内の波の数を見てみよう。',remember:['50Hz：1秒に50回','60Hz：1秒に60回','1回の波＝1周期＝360°']},
+ 'single3-100':{heading:'単相3線：Nを基準に2つの100V',guide:'Nとの間の電圧を表示。L1とL2は半周期（180°）ずれ、山と谷が反対になります。',explain:['L1-N、L2-Nはそれぞれ実効値100V。','N＝中性線。100Vを見る時の基準。','それぞれの最大値は約141V。'],teacher:'同じ時刻の赤と青を見よう。<br>L1-Nが＋の山なら、L2-Nは−の谷になります。',remember:['100Vの波が2つ','ずれは半周期＝180°','0Vの線はNを基準にした表示']},
+ 'single3-200':{heading:'単相3線：L1とL2の差で200V',guide:'橙はL1-L2の電圧。読み取り欄は、同じ時刻で「赤−青」を計算しています。',explain:['赤・青：Nとの間は各100V（実効値）。','橙：赤−青＝200V（実効値）。','橙の山は約283V。200Vそのものではない。'],teacher:'赤が＋約141V、青が−約141Vなら、差は約283V。<br>この差の波の実効値が200Vです。',remember:['差は同じ時刻で比べる','200Vも山の値とは違う','端子間の電圧を使う']},
+ threephase:{heading:'三相3線：3つの線間電圧',guide:'R-S・S-T・T-Rの電圧を表示。波のずれ120°は、1周期の3分の1です。',explain:['3つの線間電圧は120°ずつずれる。','ここでは各線間200V（実効値）の例。','Nとの電圧ではなく、線と線の間を表示。'],teacher:'三相の3つの波は、同じ時刻でも位置が違います。<br>このずれがモーターの回転する磁界につながります。',remember:['120°＝1周期の3分の1','各波の山は約283V','線間電圧と相電圧を混同しない']},
+ dimming:{heading:'同じ100Vの波を、前縁位相制御で調光',guide:'白熱灯を想定した例。点弧角を遅らせるほど、通す区間が短くなります。明るさの％とは別です。',explain:['白の破線＝元の電源、橙＝灯体へ通す電圧。','各半周期の途中から、次の0まで通す。','点弧角＝0を通ってから通し始める角度。'],teacher:'山を低くするだけの操作ではありません。<br>点弧角を変え、元の波の「どこから通すか」を確かめよう。',remember:['前縁位相制御の例','電源のHzは変えない','LED内部調光・DMX値とは別']}
+};
+function el(name,attrs={},text){const e=document.createElementNS(NS,name);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));if(text!==undefined)e.textContent=text;return e;}
+function line(g,x1,y1,x2,y2,cls='grid'){g.append(el('line',{x1,y1,x2,y2,class:cls}));}
+function text(g,x,y,value,cls='axis-text',anchor='middle'){g.append(el('text',{x,y,class:cls,'text-anchor':anchor},value));}
+const X=ms=>90+ms/40*850;
+function series(){
+ if(compare)return [{name:'50Hz',cls:'single',rms:100,freq:50,fn:t=>M.sine(100,50,t)},{name:'60Hz',cls:'sixty',rms:100,freq:60,fn:t=>M.sine(100,60,t)}];
+ const basic={name:'L-N',cls:'single',rms:100,freq:hz,fn:t=>M.sine(100,hz,t)};
+ if(mode==='single100')return [basic];
+ if(mode==='dimming')return [{...basic,name:'元の電源',cls:'original'},{name:'灯体へ通す',cls:'diff',rms:M.dimRms(alpha),freq:hz,fn:t=>M.dimmed(hz,t,alpha)}];
+ if(mode==='threephase')return [{name:'R-S',cls:'l1',rms:200,freq:hz,fn:t=>M.sine(200,hz,t)},{name:'S-T',cls:'s',rms:200,freq:hz,fn:t=>M.sine(200,hz,t,-2*Math.PI/3)},{name:'T-R',cls:'l2',rms:200,freq:hz,fn:t=>M.sine(200,hz,t,2*Math.PI/3)}];
+ const arr=[{name:'L1-N',cls:'l1',rms:100,freq:hz,fn:t=>M.sine(100,hz,t)},{name:'L2-N',cls:'l2',rms:100,freq:hz,fn:t=>-M.sine(100,hz,t)}];
+ if(mode==='single3-200')arr.push({name:'L1-L2',cls:'diff',rms:200,freq:hz,fn:t=>2*M.sine(100,hz,t)});
+ return arr;
+}
+function maxV(){return (mode==='single3-200'||mode==='threephase')&&!compare?200*Math.SQRT2:100*Math.SQRT2;}
+function Y(v){return 180-v/maxV()*100;}
+function draw(){
+ const axes=$('axes'),traces=$('traces'),notes=$('annotations');axes.replaceChildren();traces.replaceChildren();notes.replaceChildren();
+ [80,130,180,230,280].forEach(y=>line(axes,90,y,940,y,y===180?'axis':'grid'));
+ line(axes,90,65,90,295,'axis');
+ text(axes,90,32,'その瞬間の電圧 [V]','axis-text','start');
+ [maxV(),0,-maxV()].forEach(v=>text(axes,78,Y(v)+8,(v>0?'+':'')+Math.round(v),'axis-text','end'));
+ [0,10,20,30,40].forEach(ms=>{line(axes,X(ms),65,X(ms),295);text(axes,X(ms),327,String(ms),'axis-text');});
+ text(axes,940,352,'時間 [ms]','axis-text','end');
+ const p=M.period(hz);
+ if(!compare){[0,90,180,270,360].forEach(a=>{const x=X(p*a/360);line(axes,x,360,x,367,'axis');text(axes,x,391,a+'°','angle-text');});text(axes,940,391,'最初の1周期の角度','angle-text','end');}
+ else text(axes,940,391,'同じ40ms：50Hzは2回、60Hzは2.4回','angle-text','end');
+ series().forEach(s=>{
+  let d='';for(let i=0;i<=1000;i++){const t=40*i/1000;d+=(i?'L':'M')+X(t).toFixed(2)+' '+Y(s.fn(t)).toFixed(2)+' ';}
+  traces.append(el('path',{d,class:'wave '+s.cls,'data-series':s.name}));
+ });
+ if((mode==='single100'||mode==='dimming')&&!compare){
+  const peak=X(p/4),zero=X(p/2),valley=X(p*3/4);
+  text(notes,peak,62,'山：＋141V','annotation');
+  text(notes,valley,309,'谷：−141V','annotation');
+  notes.append(el('circle',{cx:zero,cy:180,r:5,class:'zero-point'}));
+  text(notes,zero+12,212,'0：向きが切り替わる','annotation','start');
+ }
+ if(mode==='dimming'){
+  const start=alpha/180*p/2;
+  for(let h=0;h*p/2<40;h++){const from=h*p/2+start,to=Math.min(40,(h+1)*p/2);if(from<to){const r=el('rect',{x:X(from),y:70,width:X(to)-X(from),height:220,class:'conduction-zone'});traces.prepend(r);}}
+ }
+ $('svgDescription').textContent=compare?'50Hzと60Hzを同じ0〜40msで比較。50Hzは2周期、60Hzは2.4周期。':content[mode].heading+'。縦軸は瞬時電圧、横軸は0〜40ms。';
+ readCursor();
+}
+function list(id,values){$(id).replaceChildren(...values.map(v=>{const e=document.createElement('span');e.textContent=v;return e;}));}
+function render(){
+ const c=content[mode];
+ $('modeHeading').textContent=compare?'50Hzと60Hzを、同じ時間で比較':c.heading;
 
-  let mode = 'single100';
-  let running = true;
-  let phase = 0;
-  let lastTime = performance.now();
-  const $ = id => document.getElementById(id);
-  const svg = $('waveSvg');
-  const svgNS = 'http://www.w3.org/2000/svg';
+ list('explainList',c.explain);list('rememberList',c.remember);$('teacherSpeech').innerHTML=c.teacher;
+ $('dimControls').hidden=mode!=='dimming';document.querySelector('.wave-side-card').classList.toggle('dimming',mode==='dimming');
+ $('dimAngleValue').textContent=alpha+'°';
+ $('dimOutput').textContent='出力の実効値：'+M.dimRms(alpha).toFixed(1)+'V';
+ $('periodInfo').textContent=compare?'50Hz：20ms／60Hz：約16.67msで1回':hz+'Hz：1回の波は'+(hz===50?'20':'約16.67')+'ms';
+ $('waveDescription').textContent=mode==='dimming'?'理想的な抵抗負荷の前縁位相制御。点弧角と明るさの％は別です。':'電源の100V・200Vは実効値。波の山の値ではありません。';
+ $('waveControl').textContent=running?'⏸ 波を止める':'▶ ゆっくり再生';
+ $('waveStatus').textContent=running?'100倍ゆっくり再生':'停止中：時刻を動かして読む';
+ document.querySelectorAll('[data-mode]').forEach(b=>{const on=b.dataset.mode===mode;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on));});
+ document.querySelectorAll('[data-hz]').forEach(b=>b.setAttribute('aria-pressed',String(!compare&&Number(b.dataset.hz)===hz)));
+ $('compareHz').setAttribute('aria-pressed',String(compare));
+ $('waveLegend').replaceChildren(...series().map(s=>{const e=document.createElement('span');e.className='legend '+s.cls;e.textContent=s.name+(mode==='dimming'?'':' '+s.rms+'V（実効値）');return e;}));
+ draw();
+}
+function readCursor(){
+ const g=$('cursor');g.replaceChildren();line(g,X(time),65,X(time),295,'cursor-line');
+ series().forEach(s=>g.append(el('circle',{cx:X(time),cy:Y(s.fn(time)),r:5,class:'cursor-point '+s.cls})));
+ $('timeSlider').value=time.toFixed(2);$('timeValue').value=time.toFixed(2)+'ms'+(compare?'':' / '+M.angle(hz,time).toFixed(1)+'°');
+ const clean=v=>Math.abs(v)<0.05?0:v;
+ $('instantReadout').textContent=series().map(s=>s.name+' '+(clean(s.fn(time))>=0?'+':'')+clean(s.fn(time)).toFixed(1)+'V').join(' ／ ');
 
-  function pathFor({base, amp, offset = 0, start = 70, end = 930}) {
-    let d = '';
-    for (let x = start; x <= end; x += 5) {
-      const angle = ((x - start) / (end - start)) * Math.PI * 4 + phase + offset;
-      const y = base - Math.sin(angle) * amp;
-      d += `${x === start ? 'M' : 'L'}${x.toFixed(1)} ${y.toFixed(1)} `;
-    }
-    return d;
-  }
-
-  function tag(name, attrs, text) {
-    const el = document.createElementNS(svgNS, name);
-    Object.entries(attrs || {}).forEach(([key, value]) => el.setAttribute(key, value));
-    if (text) el.textContent = text;
-    return el;
-  }
-
-  function addLine(x1, y1, x2, y2, className) { svg.append(tag('line', {x1, y1, x2, y2, class: className})); }
-  function addText(x, y, text, className = 'label', anchor) { svg.append(tag('text', {x, y, class: className, ...(anchor ? {'text-anchor': anchor} : {})}, text)); }
-  function addPath(className, spec) { svg.append(tag('path', {d: pathFor(spec), class: `wave ${className}`})); }
-
-  function drawAxes({baseline = 200, title = '電圧 [V]', yLabels = ['+100', '0', '−100'], gridY = [80, 140, baseline, 260, 320], labelY = [80, baseline, 320]}) {
-    gridY.forEach(y => addLine(70, y, 930, y, y === baseline ? 'axis' : 'grid'));
-    addLine(70, 48, 70, 342, 'axis');
-    addLine(70, baseline, 940, baseline, 'axis');
-    addText(28, 57, title, 'small-label');
-    addText(61, labelY[0] + 5, yLabels[0], 'small-label', 'end');
-    addText(61, labelY[1] + 5, yLabels[1], 'small-label', 'end');
-    addText(61, labelY[2] + 5, yLabels[2], 'small-label', 'end');
-    ['0°', '90°', '180°', '270°', '360°'].forEach((label, i) => addText(70 + i * 215, 368, label, 'small-label', i === 0 ? 'start' : 'middle'));
-  }
-
-  function addPointer(spec, label, x = 500) {
-    const angle = ((x - 70) / 860) * Math.PI * 4 + phase + (spec.offset || 0);
-    const y = spec.base - Math.sin(angle) * spec.amp;
-    svg.append(tag('circle', {cx: x, cy: y, r: 6, class: 'pointer'}));
-    addLine(x, y, x, 48, 'annotation-line');
-    addText(x + 10, 67, label, 'annotation');
-  }
-
-  function drawWave() {
-    svg.replaceChildren();
-    if (mode === 'single100') {
-      drawAxes({baseline: 200});
-      const spec = {base: 200, amp: 120};
-      addPath('single', spec);
-      addText(88, 99, 'L − N ＝ 100V', 'label');
-      if (!running) { addPointer(spec, 'いまの電圧'); addText(744, 128, '山（＋側）', 'annotation'); addText(520, 304, '谷（−側）', 'annotation'); }
-    } else if (mode === 'single3-100') {
-      drawAxes({baseline: 200, yLabels:['+100', '0', '−100']});
-      const l1 = {base: 200, amp: 120};
-      const l2 = {base: 200, amp: 120, offset: Math.PI};
-      addPath('l1', l1); addPath('l2', l2);
-      addText(88, 92, 'L1 − N ＝ 100V', 'label');
-      addText(88, 119, 'L2 − N ＝ 100V', 'label');
-      addText(93, 175, 'N（基準）', 'small-label');
-      if (!running) { addPointer(l1, 'L1'); addPointer(l2, 'L2', 610); }
-    } else if (mode === 'single3-200') {
-      drawAxes({baseline: 200, yLabels:['+100', '0', '−100']});
-      const l1 = {base: 200, amp: 120};
-      const l2 = {base: 200, amp: 120, offset: Math.PI};
-      addPath('l1', l1); addPath('l2', l2);
-      addText(88, 92, 'L1', 'label'); addText(88, 320, 'L2', 'label');
-      addLine(888, 80, 888, 320, 'annotation-line'); addLine(874, 80, 902, 80, 'annotation-line'); addLine(874, 320, 902, 320, 'annotation-line');
-      addText(912, 204, '200V', 'annotation');
-      addText(520, 52, 'L1 − L2 の電圧差', 'annotation', 'middle');
-      if (!running) { addPointer(l1, 'L1は山'); addPointer(l2, 'L2は谷', 500); }
-    } else {
-      drawAxes({baseline:200, title:'電圧 [V]', yLabels:['+200', '0', '−200'], gridY:[100, 150, 200, 250, 300], labelY:[100, 200, 300]});
-      const r = {base:200, amp:100}; const s = {base:200, amp:100, offset:-Math.PI * 2 / 3}; const t = {base:200, amp:100, offset:Math.PI * 2 / 3};
-      addPath('r', r); addPath('s', s); addPath('t', t);
-      addText(90, 78, 'R', 'phase-r'); addText(126, 78, 'S', 'phase-s'); addText(162, 78, 'T', 'phase-t');
-      addText(74, 326, '3つの波を合わせた「力のイメージ」', 'small-label');
-      let d = '';
-      for (let x = 70; x <= 930; x += 5) {
-        const a = ((x - 70) / 860) * Math.PI * 4 + phase;
-        const power = (Math.sin(a) ** 2 + Math.sin(a - Math.PI * 2 / 3) ** 2 + Math.sin(a + Math.PI * 2 / 3) ** 2) / 3;
-        const y = 347 - power * 22;
-        d += `${x === 70 ? 'M' : 'L'}${x.toFixed(1)} ${y.toFixed(1)} `;
-      }
-      svg.append(tag('path', {d, class:'power'}));
-      if (!running) { addPointer(r, 'R'); addPointer(s, 'S', 610); addPointer(t, 'T', 720); }
-    }
-  }
-
-  function renderContent() {
-    const item = data[mode];
-    $('modeHeading').textContent = item.heading;
-    $('sideHeading').textContent = item.sideHeading;
-    $('sideLead').textContent = item.lead;
-    $('sidePoints').replaceChildren(...item.points.map(point => { const li = document.createElement('li'); li.textContent = point; return li; }));
-    $('waveDescription').textContent = item.footer;
-    $('explainList').replaceChildren(...item.explain.map(line => { const span = document.createElement('span'); span.textContent = line; return span; }));
-    $('teacherSpeech').innerHTML = item.teacher;
-    $('rememberList').replaceChildren(...item.remember.map(line => { const span = document.createElement('span'); span.textContent = line; return span; }));
-    $('waveTip').innerHTML = running ? '⚡ 操作TIP<br>波を止めると、その瞬間の山・谷・電圧差を確認できます。' : '⚡ 説明モード<br>固定した波を見ながら、注釈の位置を確かめてみよう。';
-    $('waveControl').textContent = running ? '⏸ 波を止めて説明を見る' : '▶ 波を動かす';
-    $('waveStatus').textContent = running ? '波が動いています' : '説明モード：停止中';
-    $('graphCard').classList.toggle('paused', !running);
-    document.querySelectorAll('[data-mode]').forEach(button => { const isActive = button.dataset.mode === mode; button.classList.toggle('active', isActive); button.setAttribute('aria-selected', String(isActive)); });
-  }
-
-  function setMode(nextMode) {
-    mode = nextMode;
-    running = true;
-    renderContent();
-    drawWave();
-  }
-
-  document.querySelectorAll('[data-mode]').forEach(button => button.addEventListener('click', () => {
-    if (button.dataset.mode === 'motor') {
-      $('sideHeading').textContent = '三相モーターは次のページで追加します';
-      $('sideLead').textContent = '三相3線ページを制作したら、ここからモーターのしくみへ進めます。';
-      $('sidePoints').replaceChildren(...['R・S・Tが順番に働く', '回転する磁界を作る', '動力として使われる'].map(point => { const li = document.createElement('li'); li.textContent = point; return li; }));
-      return;
-    }
-    setMode(button.dataset.mode);
-  }));
-  $('waveControl').addEventListener('click', () => { running = !running; renderContent(); drawWave(); });
-  $('helpButton').addEventListener('click', () => $('helpDialog').showModal());
-  $('helpClose').addEventListener('click', () => $('helpDialog').close());
-  $('helpDialog').addEventListener('click', event => { if (event.target === $('helpDialog')) $('helpDialog').close(); });
-  document.querySelectorAll('.next-ui-category-tab').forEach(button => button.addEventListener('click', event => { event.stopPropagation(); const menu = button.closest('.next-ui-category-menu'); document.querySelectorAll('.next-ui-category-menu').forEach(item => { if (item !== menu) item.classList.remove('open'); }); menu.classList.toggle('open'); button.setAttribute('aria-expanded', String(menu.classList.contains('open'))); }));
-  document.addEventListener('click', () => document.querySelectorAll('.next-ui-category-menu').forEach(menu => menu.classList.remove('open')));
-
-  function animate(now) {
-    if (running) phase += (now - lastTime) * 0.0022;
-    lastTime = now;
-    if (running) drawWave();
-    requestAnimationFrame(animate);
-  }
-
-  renderContent();
-  drawWave();
-  requestAnimationFrame(animate);
-})();
-</script>
-</body>
-</html>
+}
+document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.mode;compare=false;render();}));
+document.querySelectorAll('[data-hz]').forEach(b=>b.addEventListener('click',()=>{hz=Number(b.dataset.hz);compare=false;render();}));
+$('compareHz').addEventListener('click',()=>{mode='single100';compare=!compare;render();});
+$('waveControl').addEventListener('click',()=>{running=!running;last=performance.now();render();});
+$('timeSlider').addEventListener('input',e=>{running=false;time=Number(e.target.value);render();});
+document.querySelectorAll('[data-position]').forEach(b=>b.addEventListener('click',()=>{running=false;time=M.period(hz)*Number(b.dataset.position)/360;render();}));
+$('dimAngle').addEventListener('input',e=>{alpha=Number(e.target.value);render();});
+$('helpButton').onclick=()=>$('helpDialog').showModal();$('helpClose').onclick=()=>$('helpDialog').close();
+$('helpDialog').addEventListener('click',e=>{if(e.target===$('helpDialog'))$('helpDialog').close();});
+function closeMenus(){document.querySelectorAll('.next-ui-category-menu').forEach(m=>{m.classList.remove('open');m.querySelector('button').setAttribute('aria-expanded','false');});}
+document.querySelectorAll('.next-ui-category-tab').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();const m=b.closest('.next-ui-category-menu'),on=!m.classList.contains('open');closeMenus();m.classList.toggle('open',on);b.setAttribute('aria-expanded',String(on));}));
+document.addEventListener('click',closeMenus);document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenus();});
+function animate(now){const dt=Math.min(100,now-last);last=now;if(running){time=(time+dt/100)%40;if(now-lastFrame>=33){readCursor();lastFrame=now;}}requestAnimationFrame(animate);}
+render();requestAnimationFrame(animate);
+});
+</script></body></html>
