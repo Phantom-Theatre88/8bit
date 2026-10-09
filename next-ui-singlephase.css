@@ -109,10 +109,11 @@ body.singlephase-next-ui .next-ui-category-menu:nth-last-child(-n+2) .next-ui-dr
  body.singlephase-next-ui .bulb-symbol {display:none}
  body.singlephase-next-ui .step {margin-top:4px;padding-top:4px}
  body.singlephase-next-ui .fixture-title {margin:3px 0 2px}
- body.singlephase-next-ui .right {grid-template-rows:auto 100px auto auto auto;gap:4px}
- body.singlephase-next-ui .breaker-body {top:33px;height:51px}
+ body.singlephase-next-ui .right {grid-template-rows:auto 80px auto auto auto;gap:4px}
+ body.singlephase-next-ui .breaker-body {top:31px;height:43px}
  body.singlephase-next-ui .rating {margin-top:8px}
- body.singlephase-next-ui .handle {top:4px}
+ body.singlephase-next-ui .handle {top:1px}
+ body.singlephase-next-ui .terminals {display:none}
  body.singlephase-next-ui .meter {grid-template-rows:auto auto 24px auto}
  body.singlephase-next-ui .meter-track {height:20px;margin:2px auto}
  body.singlephase-next-ui .bottom-explain,body.singlephase-next-ui .bottom-remember {padding:6px 8px}
