@@ -69,6 +69,21 @@ body.analog-next-ui .bottomnav {background:transparent;font-size:12px}
  body.analog-next-ui .top-actions {justify-content:flex-start}
 }
 </style>
+<style id="analog-category-navigation">
+body.analog-next-ui .next-ui-category-tabs::before,body.analog-next-ui .next-ui-category-tabs::after {display:none}
+body.analog-next-ui .next-ui-header {background:#202934;border-bottom:1px solid #52606d;box-shadow:none}
+body.analog-next-ui .next-ui-header-top {align-items:center}
+body.analog-next-ui .next-ui-category-tabs {gap:4px;flex-wrap:wrap;padding:7px 0}
+body.analog-next-ui .next-ui-category-tab {min-width:76px!important;height:40px!important;margin:0!important;padding:0 9px!important;font-size:15px!important;border-radius:7px!important;background:#28333e;border:1px solid #52606d!important;color:#e1e7ed;box-shadow:none}
+body.analog-next-ui .next-ui-category-tab.active {background:#433324;color:#ffc15a;border-color:#d58c35!important}
+body.analog-next-ui .next-ui-category-icon {width:18px;height:18px;margin-right:5px}
+body.analog-next-ui .next-ui-tools {margin-left:auto;padding:7px 10px}
+body.analog-next-ui .next-ui-dropdown {background:#26313b;font-size:15px}
+@media(max-width:1100px){
+ body.analog-next-ui .next-ui-header-top {flex-wrap:wrap}
+ body.analog-next-ui .next-ui-category-tabs {order:3;width:100%;justify-content:center;border-top:1px solid #3e4a56}
+}
+</style>
 </head>
 <body class="analog-next-ui">
 <header class="next-ui-header" aria-label="8bit図鑑 共通ナビゲーション">
@@ -79,6 +94,9 @@ body.analog-next-ui .bottomnav {background:transparent;font-size:12px}
       <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button" aria-expanded="false"><span class="next-ui-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3v18M12 3v18M19 3v18"/><path d="M2.5 8h5M9.5 15h5M16.5 10h5"/></svg></span>調光</button><div class="next-ui-dropdown"><a href="Top.html?tab=sim8bit">8-bit 調光卓</a><a href="Top.html?tab=sim16bit">16-bit 調光卓</a></div></div>
       <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button" aria-expanded="false"><span class="next-ui-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 19V5M3 19h18"/><path d="m6 15 4-5 4 3 5-7"/></svg></span>信号</button><div class="next-ui-dropdown"><a href="Top.html?tab=simdmx">DMX通信列車</a><a href="Top.html?tab=ledcolormix">LED色混ぜ</a><a href="Top.html?tab=scroller">Scroller</a><a href="Top.html?tab=movinghead">Moving Head</a></div></div>
       <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button" aria-expanded="false"><span class="next-ui-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v4M6 16v-4h12v4"/></svg></span>Network</button><div class="next-ui-dropdown"><a href="Top.html?tab=netipaddress">IPアドレス</a><a href="Top.html?tab=netartnet">DMX on LAN</a><a href="Top.html?tab=netbroadcast">Broadcast</a><a href="Top.html?tab=netsacn">Multicast</a><a href="Top.html?tab=explain">結線</a></div></div>
+      <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button" aria-expanded="false"><span class="next-ui-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 3"/></svg></span>照明史</button><div class="next-ui-dropdown"><a href="History.html">舞台照明史 Timeline</a></div></div>
+      <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button" aria-expanded="false"><span class="next-ui-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 7 12-3v16L4 17z"/><ellipse cx="16" cy="12" rx="3" ry="8"/></svg></span>灯具</button><div class="next-ui-dropdown"><a href="ConvexLens.html">平凸レンズ</a></div></div>
+      <div class="next-ui-category-menu"><button class="next-ui-category-tab" type="button" aria-expanded="false"><span class="next-ui-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg></span>シュート</button><div class="next-ui-dropdown"><span class="pending">教材を準備中</span></div></div>
     </nav>
     <div class="next-ui-tools"><button class="next-ui-tool" type="button">▣ 学習ガイド</button><button class="next-ui-tool" type="button">▱ ブックマーク</button><button class="next-ui-tool" type="button">⚙ 設定</button><div class="next-ui-page-controls" aria-label="教材ページ移動"><button class="next-ui-page-button" type="button" disabled>◀ 前</button><button class="next-ui-page-button" type="button" onclick="location.href='SinglePhase3.html'">次 ▶</button></div><button class="next-ui-tool menu" type="button" aria-label="メニュー">☰</button></div>
   </div>
