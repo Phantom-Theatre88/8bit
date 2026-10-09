@@ -144,6 +144,7 @@ body.singlephase-next-ui .confirm-connection {background:#253b32;border-color:#7
 body.singlephase-next-ui .selected-box {border:0;padding:0;background:transparent;margin:0 0 4px}
 body.singlephase-next-ui .selected-box strong {margin:0;font-size:16px;line-height:20px}
 body.singlephase-next-ui .fixture-title {margin:3px 0 2px}
+body.singlephase-next-ui .bus-label {top:4px;font-size:22px;line-height:24px}
 body.singlephase-next-ui .neutral-note {position:absolute;top:33px;left:4%;right:4%;text-align:center;font-size:14px;line-height:18px;color:#e1e7ed}
 body.singlephase-next-ui .voltage-span {position:absolute;top:75px;height:17px;border:1px solid #ffd02f;border-top:0;text-align:center;color:#ffd02f;font-size:15px;line-height:18px}
 body.singlephase-next-ui .voltage-span span {position:relative;top:6px;background:#1b2430;padding:0 5px;font-weight:800}
@@ -164,5 +165,5 @@ body.singlephase-next-ui .empty {top:132px;font-size:15px;line-height:22px}
  body.singlephase-next-ui .bus {top:113px;bottom:20px}
  body.singlephase-next-ui .loads {top:115px;bottom:20px}
  body.singlephase-next-ui .empty {top:115px}
- body.singlephase-next-ui .load-card {line-height:20px;padding:0 4px}
+ body.singlephase-next-ui .load-card {line-height:18px;padding:0 4px}
 }
