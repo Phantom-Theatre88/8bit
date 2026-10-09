@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ja"><meta charset="utf-8"><title>Analog レイアウト検証</title>
+<style>body{margin:12px;font:16px system-ui;background:#171e26;color:#eef2f6}iframe{display:block;border:1px solid #52606d;margin:8px 0 24px}h2{font-size:18px}pre{white-space:pre-wrap}button{font:inherit}</style>
+<h1>Analog 画面サイズ別検証</h1><p>横画面は全体と各説明欄に隠れ・はみ出しがないこと、縦画面は横にはみ出さないことを確認。</p>
+<pre id="results">検証中</pre>
+<script>
+const sizes=[[1024,768],[1024,680],[1180,720],[1366,900],[768,1024],[820,1180]],results=[];
+sizes.forEach(([width,height])=>{
+ const title=document.createElement('h2');title.textContent=width+' × '+height;document.body.append(title);
+ const frame=document.createElement('iframe');frame.width=width;frame.height=height;frame.title=title.textContent;frame.src='../Analog.html?layout-test='+width+'x'+height;
+ frame.addEventListener('load',()=>requestAnimationFrame(()=>requestAnimationFrame(()=>{
+  const d=frame.contentDocument,w=frame.contentWindow;
+  const issues=[];
+  if(d.documentElement.scrollWidth>width+1)issues.push('horizontal overflow');
+  if(width>height){
+   if(d.documentElement.scrollHeight>height+1)issues.push('page vertical overflow');
+   d.querySelectorAll('.electric-intro,.layout>.panel,.lesson-bottom>.panel,.formula-stack,.speech,#teacherCurrent').forEach(e=>{
+    const r=e.getBoundingClientRect();
+    if(e.scrollHeight>e.clientHeight+2||r.bottom>height+1)issues.push((e.id||e.className)+' overflow');
+   });
+  }
+  results.push({width,height,pass:!issues.length,issues,scrollWidth:d.documentElement.scrollWidth,scrollHeight:d.documentElement.scrollHeight});
+  document.getElementById('results').textContent=JSON.stringify(results.sort((a,b)=>a.width-b.width||a.height-b.height),null,2);
+ })));
+ document.body.append(frame);
+});
+</script></html>
