@@ -3,6 +3,7 @@
 <button id="run">全サイズを確認</button><button id="landscape">1024×680</button><button id="portrait">768×1024</button><div id="results">検証準備中</div><iframe id="frame" width="1024" height="680" src="../Top.html?tab=sim8bit&v=20261010-rebuild1"></iframe>
 <script>
 const frame=document.getElementById('frame'),results=document.getElementById('results');
+frame.src='../Top.html?tab=sim8bit&v='+encodeURIComponent(new URLSearchParams(location.search).get('v')||'59ff250');
 const settle=()=>new Promise(r=>setTimeout(r,120));
 async function size(w,h){frame.width=w;frame.height=h;await settle();}
 function check(label){
