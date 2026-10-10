@@ -5331,9 +5331,10 @@
     </style>
 
     <link rel="stylesheet" href="next-ui-all-lessons.css">
+    <link rel="stylesheet" href="next-ui-sim8bit.css?v=20261010-rebuild1">
     <script src="next-ui-lesson-content.js"></script>
 
-    <script src="Module_Sim8Bit.js"></script>
+    <script src="Module_Sim8Bit.js?v=20261010-rebuild1"></script>
     <script src="Module_Sim16Bit.js"></script>
     <script src="Module_SimDmx.js"></script>
     <script src="Module_LEDColorMixing.js?v=cie-img-vivid1"></script>
@@ -5388,6 +5389,9 @@
                     <button type="button" data-lesson-key="explain" role="menuitem">結線 / 冗長化</button>
                 </div>
             </div>
+            <div class="next-ui-category-menu" data-category-menu="history"><button class="next-ui-category-tab" type="button" data-category="history" aria-expanded="false"><span class="next-ui-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 3"/></svg></span>照明史</button><div class="next-ui-dropdown" role="menu"><a href="History.html" role="menuitem">舞台照明史 Timeline</a></div></div>
+<div class="next-ui-category-menu" data-category-menu="fixture"><button class="next-ui-category-tab" type="button" data-category="fixture" aria-expanded="false"><span class="next-ui-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 7 12-3v16L4 17z"/><ellipse cx="16" cy="12" rx="3" ry="8"/></svg></span>灯具</button><div class="next-ui-dropdown" role="menu"><a href="ConvexLens.html" role="menuitem">平凸レンズ</a></div></div>
+<div class="next-ui-category-menu" data-category-menu="shoot"><button class="next-ui-category-tab" type="button" data-category="shoot" aria-expanded="false"><span class="next-ui-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg></span>シュート</button><div class="next-ui-dropdown" role="menu"><span class="pending">教材を準備中</span></div></div>
         </nav>
         <div class="next-ui-tools" aria-label="補助メニュー">
             <button class="next-ui-tool" type="button">▣ 学習ガイド</button>
@@ -5442,7 +5446,7 @@
 
 <script>
     const explanationData = {
-        'sim8bit': `<strong>【8-bit 調光卓：まず左のフェーダーを動かす】</strong><br>まず左のフェーダーを上下に動かします。フェーダーの位置が 0〜255 のDMX値に変わり、その値によって見た目の明るさが変わることを確認します。0 は消灯、255 は最大です。下の8桁表示は、今のDMX値を0/1の形で見たものです。8-bitでは、8個の0/1の組み合わせで0〜255を表します。<br><strong>【8-bit 調光卓：カーブを切り替える】</strong><br>下のカーブ切替では、同じDMX値でも明るさの変化が変わることを比べます。LINEAR は直線的な出力カーブ、JATET A は2.3乗特性、JATET B は2.7乗特性です。フェーダーの数値が、そのまま人間の目に感じる明るさになるわけではないことを知る入口として扱います。`,
+        'sim8bit': `<strong>【8-bit 調光卓：まず左のフェーダーを動かす】</strong><br>まず左のフェーダーを上下に動かします。フェーダーの位置が 0〜255 のDMX値に変わり、その値によって見た目の明るさが変わることを確認します。0 は消灯、255 は最大です。下の8桁表示は、今のDMX値を0/1の形で見たものです。8-bitでは、8個の0/1の組み合わせで0〜255を表します。<br><strong>【8-bit 調光卓：カーブを切り替える】</strong><br>下のカーブ切替では、同じDMX値でも明るさの変化が変わることを比べます。直線は直線的な出力カーブ。このページのカーブは、直線と立ち上がりのゆっくりな教材用の例です。フェーダーの数値が、そのまま人間の目に感じる明るさになるわけではないことを知る入口として扱います。`,
         'sim16bit': `<strong>【16-bit 調光卓：まずCoarseで大きく動かす】</strong><br>まずCoarseを動かして、大きな段の変化を確認します。Coarseは上位8bitで、16-bit値の大きな位置を決めます。次にFineを動かすと、その段の中をさらに細かく追い込めます。<br><strong>【16-bit 調光卓：上位8bitと下位8bitを見る】</strong><br>16bit Total は Coarse × 256 + Fine で求めます。16-bitでは、16個の0/1の組み合わせで0〜65,535を表します。Moving HeadのPAN/TILTなど、8-bitだけでは粗く見える位置制御を細かく扱うための入口です。`,
         'simdmx': `<strong>【DMX512：512chをくり返し送り続ける信号】</strong><br>DMX512は、1番から512番までのチャンネル値を順番に送り続ける信号です。値が変わっていなくても、同じ並びを約1秒間に42回くり返して送ります。受け取る機材は、自分に必要なチャンネル番号の値を読み取って動きます。`,
         'ledcolormix': `<strong>【LED色混ぜ：RGBで白は作れるのか】</strong><br>RGBを全部点けると白に近い色は作れます。ただし、その白がどんな場面でも自然に見えるとは限りません。人物の肌、衣裳、淡い色では、RGBだけだと不自然に見えることがあります。この教材では、RGB、White、Warm White、Cool White、Amber、Lime、Cyanなどのチャンネルをフェーダーで操作し、色地図上で現在の色の位置を確認しながら、LED灯具の色作りの考え方を学びます。`,
@@ -5716,7 +5720,7 @@
                     <header class="sim8-page-titlebar">
                         <div class="sim8-page-heading">
                             <h1 class="sim8-page-title">8-bit 調光卓</h1>
-                            <div class="sim8-page-sub">フェーダー位置、DMX値、出力カーブ、見た目の明るさをつなげて読む。</div>
+                            <div class="sim8-page-sub">フェーダーを動かして、数字と灯りの変化を見てみよう。</div>
                         </div>
                     </header>
                     <section class="sim8-page-main">${moduleHTML}</section>
@@ -5724,24 +5728,24 @@
                         <section class="sim8-bottom-card">
                             <h2 class="sim8-bottom-title">▤ 解説</h2>
                             <div class="sim8-explain-list">
-                                <div><b>1. フェーダー</b>を動かすと、位置が<span class="cyan">DMX値 0〜255</span>へ変換されます。</div>
-                                <div><b>2. 数値モニター</b>で、割合・DMX値・出力電圧を同時に見比べます。</div>
-                                <div><b>3. カーブ切替</b>で、同じDMX値でも見た目の変化が異なることを確認します。</div>
+                                <div><b>フェーダー</b>は、灯りを変えるつまみ。</div>
+                                <div><b>DMX値</b>は、送る指示の数字。<span class="cyan">0は消灯、255は最大。</span></div>
+                                <div><b>調光器</b>が指示を受け、灯体へ通す電気を変えます。</div>
                             </div>
                         </section>
                         <section class="sim8-bottom-card sim8-teacher-card">
-                            <img class="sim8-teacher-img" src="assets/analog_teacher_pointing.webp" alt="照明教材の先生" loading="lazy" decoding="async">
-                            <div class="sim8-teacher-copy"><h3>先生のひとこと</h3><div class="sim8-teacher-speech"><b>値を読むだけで終わらせないのがポイント。</b><br>8個の0/1で作れる組み合わせが256通りだから、DMX値は0〜255になります。さらに、同じ数値でもカーブが変わると灯りの立ち上がり方が変わります。フェーダー・数値・グラフ・灯りを一緒に見てみましょう。</div></div>
+                            <img class="sim8-teacher-img" src="assets/wave_teacher_transparent.svg" alt="照明教材の先生" loading="lazy" decoding="async">
+                            <div class="sim8-teacher-copy"><h3>先生のひとこと</h3><div class="sim8-teacher-speech" id="sim8-teacher-message">フェーダーを下げてみよう。<br>橙色の「通す部分」はどう変わるかな？</div></div>
                         </section>
                         <section class="sim8-bottom-card sim8-remember">
                             <h2 class="sim8-bottom-title">♙ 覚えておこう</h2>
-                            <div class="sim8-remember-item">□ 8-bit = 256段階</div>
-                            <div class="sim8-remember-item">□ DMX値 = 0〜255</div>
-                            <div class="sim8-remember-item">□ 数値と体感は同じではない</div>
-                            <div class="sim8-tip">⚡ 操作TIP<br>まずLINEARで確認し、次にJATET A / Bを比較。</div>
+                            <div class="sim8-remember-item">8-bitは、8個の0／1。</div>
+                            <div class="sim8-remember-item">0〜255の、256段階。</div>
+                            <div class="sim8-remember-item">DMXは指示。電源の電圧とは別。</div>
+                            
                         </section>
                     </section>
-                    <footer class="sim8-page-footer"><span>8bit Lighting Study　v3.0.1</span><span>フェーダー操作 / 表示切替 / カーブ比較</span></footer>
+                    <footer class="sim8-page-footer"><span>8bit Lighting Study　v3.0.1</span><span>① 操作 → ② 指示 → ③ 灯り</span></footer>
                 </div>
             `;
         }
