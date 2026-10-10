@@ -119,3 +119,20 @@ body .next-ui-category-tab { min-width:0!important; padding:0 7px!important; fon
  .next-ui-category-tabs { flex:1; overflow-x:auto; }
  .next-ui-tools { margin-left:auto; }
 }
+
+/* Allocate height to the diagram, with stable SVG text size. */
+.sim8-graph svg { height:0; flex:1 1 0; }
+.sim8-bits { margin:7px 0 4px; gap:4px; }
+.sim8-bit strong { padding:3px 0; font-size:22px; }
+.sim8-bit { gap:3px; }
+.sim8-sum { margin:2px 0; line-height:1.35; }
+.sim8-sum b { font-size:23px; }
+body:has(.sim8bit-active) { overflow:hidden; }
+body .next-ui-category-tab { font-size:16px!important; }
+@media (min-width:900px) {
+ body:has(.sim8bit-active) .master-console-container { flex:1 1 0!important; min-height:0!important; }
+ body:has(.sim8bit-active) .console-main-screen { flex:1 1 0!important; min-height:0!important; height:auto!important; aspect-ratio:auto!important; }
+}
+@media (orientation:portrait),(max-width:899px) {
+ body:has(.sim8bit-active) { overflow:auto; }
+}
