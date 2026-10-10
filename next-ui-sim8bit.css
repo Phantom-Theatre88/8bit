@@ -139,3 +139,10 @@ body .next-ui-category-tab { font-size:16px!important; }
 
 .sim8-remember { gap:3px; line-height:1.3; }
 .sim8-remember .sim8-bottom-title { margin-bottom:4px; }
+
+/* The legacy viewport variable can retain the previous iframe/window height. */
+html:has(.sim8bit-active) { height:100dvh; min-height:0; overflow:hidden; }
+@media (orientation:portrait),(max-width:899px) {
+ html:has(.sim8bit-active) { height:auto; min-height:100dvh; overflow:auto; }
+ body:has(.sim8bit-active) { height:auto!important; min-height:100dvh; }
+}
