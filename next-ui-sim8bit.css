@@ -146,3 +146,8 @@ html:has(.sim8bit-active) { height:100dvh; min-height:0; overflow:hidden; }
  html:has(.sim8bit-active) { height:auto; min-height:100dvh; overflow:auto; }
  body:has(.sim8bit-active) { height:auto!important; min-height:100dvh; }
 }
+
+@media (orientation:portrait),(max-width:899px) {
+ body:has(.sim8bit-active) { display:block; height:auto!important; overflow:visible; }
+ body:has(.sim8bit-active) .console-main-screen { display:block; flex:none!important; height:auto!important; }
+}
