@@ -1,0 +1,121 @@
+/* iPad landscape lesson; all detailed text remains at least 16px. */
+body:has(.sim8bit-active) { background:#1b232c; height:100dvh; }
+.sim8-common-page { --sim8-surface:#28323d; --sim8-line:#617080; }
+.module-page-root.sim8bit.sim8-common-page { background:#1b232c; grid-template-rows:54px minmax(0,1fr) 160px 22px; gap:8px; }
+.sim8-page-titlebar { padding:5px 12px; background:transparent; }
+.sim8-page-title { font-size:23px; }
+.sim8-page-sub { font-size:16px; margin-top:4px; color:#d0d9e3; }
+.sim8-page-main { padding:0; border:0; background:transparent; box-shadow:none; }
+.sim8-page-main > .sim8-workbench { display:grid; grid-template-columns:minmax(175px,21%) minmax(0,48%) minmax(0,31%); gap:8px!important; height:100%; }
+.sim8-zone { min-width:0; min-height:0; padding:10px; background:var(--sim8-surface); border:1px solid var(--sim8-line); border-radius:9px; }
+.sim8-workbench h2 { font-size:18px; line-height:1.3; margin:0; color:#f4f6f8; }
+.sim8-workbench h3 { font-size:16px; line-height:1.3; margin:0; color:#f4f6f8; }
+.sim8-note { font-size:16px; line-height:1.4; color:#d0dae5; margin:4px 0; }
+.sim8-input { display:flex; flex-direction:column; align-items:stretch; }
+.sim8-position { display:flex; justify-content:space-between; align-items:center; font-size:16px; margin-top:6px; }
+.sim8-position strong { color:#74e3f4; font-size:27px; font-variant-numeric:tabular-nums; min-width:72px; text-align:right; }
+.sim8-fader { flex:1; min-height:80px; display:flex; align-items:stretch; justify-content:center; gap:15px; padding:12px 0; }
+.sim8-scale { display:flex; flex-direction:column; justify-content:space-between; font-size:16px; color:#e1e8f0; text-align:right; }
+#sim8bit-fader { writing-mode:vertical-lr; direction:rtl; appearance:none; -webkit-appearance:none; width:50px; height:100%; margin:0; background:transparent; cursor:grab; touch-action:none; }
+#sim8bit-fader::-webkit-slider-runnable-track { width:6px; height:100%; border-radius:4px; background:#101820; box-shadow:inset 1px 0 3px #000; }
+#sim8bit-fader::-webkit-slider-thumb { appearance:none; -webkit-appearance:none; width:44px; height:36px; margin-left:-19px; border:2px solid #172028; border-radius:5px; background:linear-gradient(#e1e4e7,#727c84 44%,#ff7546 45%,#ff7546 52%,#b8c0c6 54%,#505b64); box-shadow:0 4px 8px #0008; }
+#sim8bit-fader::-moz-range-track { width:6px; background:#101820; }
+#sim8bit-fader::-moz-range-thumb { width:44px; height:36px; border:2px solid #172028; border-radius:5px; background:linear-gradient(#e1e4e7,#727c84 44%,#ff7546 45%,#ff7546 52%,#b8c0c6 54%,#505b64); }
+.sim8-step { display:flex; justify-content:center; gap:10px; }
+.sim8-workbench button { min-height:36px; font:inherit; font-size:16px; font-weight:700; border:1px solid #718193; border-radius:6px; background:#344150; color:#e5ecf3; cursor:pointer; touch-action:manipulation; padding:5px 9px; }
+.sim8-step button { width:52px; font-size:22px; }
+.sim8-workbench button[aria-pressed=true] { color:#fff0d7; border-color:#ffad43; background:#654628; box-shadow:inset 0 -2px #ffad43; }
+.sim8-workbench button:focus-visible,#sim8bit-fader:focus-visible { outline:3px solid #ffce71; outline-offset:2px; }
+.sim8-signal { display:flex; flex-direction:column; gap:6px; }
+.sim8-dmx-head { display:flex; justify-content:space-between; gap:6px; align-items:center; }
+.sim8-dmx-value { display:flex; align-items:baseline; gap:4px; white-space:nowrap; }
+.sim8-dmx-value strong { font-size:36px; font-variant-numeric:tabular-nums; color:#74e3f4; width:67px; text-align:right; }
+.sim8-dmx-value span { font-size:16px; color:#d0dae5; }
+.sim8-views,.sim8-curves { display:flex; gap:6px; }
+.sim8-views button,.sim8-curves button { flex:1; white-space:nowrap; padding-left:5px; padding-right:5px; }
+.sim8-graph { flex:1; min-height:150px; background:#202a35; border:1px solid #647485; border-radius:7px; padding:8px; overflow:hidden; display:flex; flex-direction:column; }
+.sim8-graph svg { width:100%; flex:1; min-height:0; display:block; }
+.sim8-legend { display:flex; justify-content:space-between; font-size:16px; margin-top:3px; }
+.sim8-legend span:first-child { color:#c8d4df; }
+.sim8-legend span:last-child { color:#ffbc59; }
+.sim8-curve-controls { display:flex; flex-direction:column; gap:4px; font-size:16px; color:#d0dae5; }
+.sim8-model-note { margin:0; font-size:16px; line-height:1.3; }
+.sim8-bits { display:grid; grid-template-columns:repeat(8,minmax(0,1fr)); gap:5px; margin:14px 0 8px; }
+.sim8-bit { display:flex; flex-direction:column; align-items:center; gap:6px; color:#b5c2d1; }
+.sim8-bit strong { display:block; width:100%; text-align:center; background:#263341; border:1px solid #8090a0; border-radius:5px; font-size:24px; padding:7px 0; }
+.sim8-bit span { font-size:16px; }
+.sim8-bit.on strong { background:#165267; color:#edfcff; border-color:#6ee0f6; }
+.sim8-sum { font-size:16px; line-height:1.5; margin:4px 0; color:#e4eaf1; text-align:center; }
+.sim8-sum b { font-size:25px; color:#74e3f4; }
+.sim8-light { display:flex; flex-direction:column; gap:4px; }
+.sim8-light .dark-room { flex:1; min-height:80px; width:100%; background:#17202a; border:1px solid #526376; border-radius:7px; display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative; }
+.sim8-light .bulb-image-container { width:160px!important; height:100%!important; max-height:320px; flex-shrink:0; }
+.sim8-light-state { font-size:18px; font-weight:700; color:#ffc26b; height:25px; text-align:center; }
+.sim8-page-bottom { grid-template-columns:minmax(0,34%) minmax(0,40%) minmax(0,26%); gap:8px; }
+.sim8-bottom-card { padding:9px 10px; background:#28323d; box-shadow:none; border-color:#617080; }
+.sim8-bottom-title,.sim8-teacher-copy h3 { font-size:18px; margin:0 0 7px; }
+.sim8-explain-list,.sim8-remember { font-size:16px; line-height:1.4; gap:6px; }
+.sim8-remember-item { padding:0; border:0; background:transparent; }
+.sim8-teacher-card { grid-template-columns:100px minmax(0,1fr); padding:5px 9px 0; }
+.sim8-teacher-img { width:100px; max-height:150px; }
+.sim8-teacher-speech { font-size:17px; line-height:1.5; padding:9px; flex:0 1 auto; }
+.sim8-page-footer { background:transparent; font-size:12px; padding:0; }
+@media (min-width:900px) and (max-height:720px) {
+ .module-page-root.sim8bit.sim8-common-page { grid-template-rows:50px minmax(0,1fr) 140px 18px; gap:6px; }
+ .sim8-zone { padding:8px; }
+ .sim8-workbench h2 { font-size:18px; }
+ .sim8-signal { gap:4px; }
+ .sim8-graph { min-height:132px; }
+ .sim8-note { margin:2px 0; }
+ .sim8-bottom-card { padding:6px 9px; }
+ .sim8-explain-list,.sim8-remember { gap:4px; }
+ .sim8-teacher-card { padding:3px 7px 0; }
+ .sim8-teacher-img { max-height:134px; }
+ .sim8-teacher-copy h3 { font-size:18px; }
+ .sim8-teacher-speech { font-size:17px; padding:7px; }
+}
+@media (orientation:portrait),(max-width:899px) {
+ body:has(.sim8bit-active) { height:auto; min-height:100dvh; overflow:auto; }
+ body:has(.sim8bit-active) .master-console-container { flex:none; height:auto; overflow:visible; }
+ body:has(.sim8bit-active) .console-main-screen { height:auto!important; overflow:visible; }
+ body:has(.sim8bit-active) #panel-sim8bit { height:auto; }
+ .module-page-root.sim8bit.sim8-common-page { height:auto; overflow:visible; grid-template-rows:auto auto auto 24px; }
+ .sim8-page-main { overflow:visible; }
+ .sim8-page-main > .sim8-workbench { grid-template-columns:minmax(175px,32%) minmax(0,68%); height:auto; }
+ .sim8-input,.sim8-signal { min-height:420px; }
+ .sim8-light { grid-column:1/-1; min-height:330px; }
+ .sim8-light .dark-room { min-height:220px; }
+ .sim8-light .bulb-image-container { height:220px!important; }
+ .sim8-page-bottom { grid-template-columns:1fr; }
+ .sim8-bottom-card { min-height:130px; overflow:visible; }
+ .sim8-teacher-img { height:150px; }
+ .sim8-page-titlebar { padding:10px; }
+}
+@media (max-width:550px) {
+ .sim8-page-main > .sim8-workbench { grid-template-columns:1fr; }
+ .sim8-light { grid-column:auto; }
+ .sim8-input { min-height:350px; }
+ .sim8-signal { min-height:440px; }
+}
+
+/* Actual links replace the old decorative Fixture/Shoot pseudo-tabs. */
+.next-ui-category-tabs::before,.next-ui-category-tabs::after { content:none!important; display:none!important; }
+body .next-ui-category-tab { min-width:0!important; padding:0 7px!important; font-size:16px; height:42px!important; margin:6px 0!important; border-radius:8px!important; background:#293440; }
+.next-ui-header { background:#232e39; box-shadow:none; }
+.next-ui-header-top { align-items:center; }
+.next-ui-category-tabs { gap:4px; }
+.next-ui-category-icon { width:18px; height:18px; margin-right:5px; }
+.next-ui-tools { padding:5px 8px; }
+.next-ui-page-button { min-width:62px; font-size:16px; }
+.next-ui-dropdown a,.next-ui-dropdown button,.next-ui-dropdown span { font-size:16px; }
+@media(max-width:1100px) {
+ body .next-ui-brand { width:156px!important; min-width:156px!important; flex-basis:156px!important; background-size:156px 52px!important; margin-right:5px!important; }
+ body .next-ui-category-tab { padding:0 6px!important; }
+ .next-ui-page-controls { gap:4px!important; }
+ .next-ui-tools { padding:5px; }
+}
+@media(orientation:portrait),(max-width:899px) {
+ .next-ui-header-top { flex-wrap:wrap; }
+ .next-ui-category-tabs { flex:1; overflow-x:auto; }
+ .next-ui-tools { margin-left:auto; }
+}
