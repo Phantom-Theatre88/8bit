@@ -1,0 +1,44 @@
+<!doctype html><meta charset="utf-8"><title>8-bit layout checks</title>
+<style>body{margin:10px;background:#151c24;color:#fff;font:16px sans-serif}button{font:inherit;margin:4px;padding:6px}iframe{display:block;border:1px solid #a0b1c4}#results{white-space:pre-wrap}</style>
+<button id="run">全サイズを確認</button><button id="landscape">1024×680</button><button id="portrait">768×1024</button><div id="results">検証準備中</div><iframe id="frame" width="1024" height="680" src="../Top.html?tab=sim8bit&v=20261010-rebuild1"></iframe>
+<script>
+const frame=document.getElementById('frame'),results=document.getElementById('results');
+const settle=()=>new Promise(r=>setTimeout(r,120));
+async function size(w,h){frame.width=w;frame.height=h;await settle();}
+function check(label){
+ const d=frame.contentDocument,w=frame.contentWindow;
+ const boxes=['.sim8-common-page','.sim8-workbench','.sim8-input','.sim8-signal','.sim8-light','.sim8-graph','.sim8-page-bottom','.sim8-teacher-speech'];
+ const bad=boxes.filter(s=>{const e=d.querySelector(s);return !e||e.scrollHeight>e.clientHeight+2||e.scrollWidth>e.clientWidth+2;});
+ const horizontal=d.documentElement.scrollWidth>w.innerWidth+2;
+ const landscape=w.innerWidth>w.innerHeight;
+ const overflow=landscape&&d.documentElement.scrollHeight>w.innerHeight+2;
+ const missingImage=[...d.querySelectorAll('#panel-sim8bit img')].some(e=>!e.complete||!e.naturalWidth);
+ const controls=[...d.querySelectorAll('.sim8-workbench button,.sim8-note,.sim8-explain-list,.sim8-remember,.sim8-teacher-speech')];
+ const tooSmall=controls.filter(e=>parseFloat(w.getComputedStyle(e).fontSize)<16).length;
+ return {label,pass:!bad.length&&!horizontal&&!overflow&&!missingImage&&!tooSmall,bad,horizontal,overflow,missingImage,tooSmall};
+}
+async function run(){
+ const rows=[];
+ for(const [width,height] of [[1024,680],[1024,768],[1180,720],[1366,900],[768,1024],[820,1180]]){
+  await size(width,height);
+  for(const view of ['wave','curve','digital']){
+   frame.contentDocument.querySelector('[data-sim8-view="'+view+'"]').click();await settle();
+   rows.push(check(width+'×'+height+' '+view));
+  }
+ }
+ const d=frame.contentDocument,input=d.querySelector('#sim8bit-fader');
+ for(const value of [0,1,127,191,254,255]){
+  input.value=value;input.dispatchEvent(new Event('input',{bubbles:true}));
+  const shown=Number(d.querySelector('#sim8bit-num-dmx').textContent);
+  const sum=[...d.querySelectorAll('.sim8-bit.on span')].reduce((a,e)=>a+Number(e.textContent),0);
+  rows.push({label:'DMX '+value,pass:shown===value&&sum===value});
+ }
+ input.value=191;input.dispatchEvent(new Event('input',{bubbles:true}));
+ d.querySelector('[data-sim8-view="wave"]').click();await size(1024,680);
+ window.testResults=rows;results.textContent=JSON.stringify(rows,null,2);
+}
+document.getElementById('run').onclick=run;
+document.getElementById('landscape').onclick=async()=>{await size(1024,680);results.textContent=JSON.stringify(check('landscape'));};
+document.getElementById('portrait').onclick=async()=>{await size(768,1024);results.textContent=JSON.stringify(check('portrait'));};
+frame.onload=()=>{results.textContent='準備完了';};
+</script>
