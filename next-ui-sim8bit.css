@@ -29,7 +29,8 @@ body:has(.sim8bit-active) { background:#1b232c; height:100dvh; }
 .sim8-signal { display:flex; flex-direction:column; gap:6px; }
 .sim8-dmx-head { display:flex; justify-content:space-between; gap:6px; align-items:center; }
 .sim8-dmx-value { display:flex; align-items:baseline; gap:4px; white-space:nowrap; }
-.sim8-dmx-value strong { font-size:36px; font-variant-numeric:tabular-nums; color:#74e3f4; width:67px; text-align:right; }
+.sim8-dmx-value strong { font-size:32px; font-variant-numeric:tabular-nums; color:#74e3f4; width:86px; text-align:right; }
+.sim8-dmx-head h2 { font-size:17px; }
 .sim8-dmx-value span { font-size:16px; color:#d0dae5; }
 .sim8-views,.sim8-curves { display:flex; gap:6px; }
 .sim8-views button,.sim8-curves button { flex:1; white-space:nowrap; padding-left:5px; padding-right:5px; }
