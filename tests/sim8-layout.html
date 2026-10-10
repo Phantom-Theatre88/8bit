@@ -18,7 +18,7 @@ function check(label){
  const tooSmall=controls.filter(e=>parseFloat(w.getComputedStyle(e).fontSize)<16).length;
  const svg=d.querySelector('.sim8-graph svg');const tinySvg=svg?[...svg.querySelectorAll('text')].some(e=>{const m=e.getScreenCTM();return Number(e.getAttribute('font-size'))*Math.sqrt(m.a*m.a+m.b*m.b)<15.8;}):false;
  const clippedText=[...d.querySelectorAll('.sim8-bottom-card')].some(card=>{const range=d.createRange();range.selectNodeContents(card);return [...range.getClientRects()].some(r=>r.height>0&&r.bottom>card.getBoundingClientRect().bottom+1);});
- return {label,pass:!bad.length&&!horizontal&&!overflow&&!missingImage&&!tooSmall&&!tinySvg&&!clippedText,bad,horizontal,overflow,missingImage,tooSmall,tinySvg,clippedText};
+ return {label,pass:!bad.length&&!horizontal&&!overflow&&!missingImage&&!tooSmall&&!tinySvg&&!clippedText,bad,horizontal,overflow,missingImage,tooSmall,tinySvg,clippedText,heights:{inner:w.innerHeight,doc:d.documentElement.scrollHeight,body:d.body.getBoundingClientRect().height,footer:d.querySelector('.sim8-page-footer').getBoundingClientRect().bottom}};
 }
 async function run(){
  const rows=[];
