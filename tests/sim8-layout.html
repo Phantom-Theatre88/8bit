@@ -37,6 +37,15 @@ async function run(){
   const sum=[...d.querySelectorAll('.sim8-bit.on span')].reduce((a,e)=>a+Number(e.textContent),0);
   rows.push({label:'DMX '+value,pass:shown===value&&sum===value});
  }
+ for(const value of [0,127,191,255]){
+  input.value=value;input.dispatchEvent(new Event('input',{bubbles:true}));
+  d.querySelector('[data-sim8-curve="linear"]').click();
+  d.querySelector('[data-sim8-view="wave"]').click();
+  const analog=Number(d.querySelector('#sim8bit-num-dmx').textContent);
+  const unit=d.querySelector('#sim8bit-value-unit').textContent;
+  d.querySelector('[data-sim8-view="digital"]').click();
+  rows.push({label:'Analog/digital comparison '+value,pass:Math.abs(analog-value/255*100)<.051&&unit==='V'&&Number(d.querySelector('#sim8bit-num-dmx').textContent)===value&&Number(input.value)===value});
+ }
  input.value=191;input.dispatchEvent(new Event('input',{bubbles:true}));
  d.querySelector('[data-sim8-view="wave"]').click();await size(1024,680);
  window.testResults=rows;results.textContent=JSON.stringify(rows,null,2);
