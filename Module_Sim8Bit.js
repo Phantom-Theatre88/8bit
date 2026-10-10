@@ -1,4 +1,4 @@
-// Beginner lesson: DMX command → example dimmer → incandescent lamp.
+// Compare analog output voltage/waveform with digital DMX/8-bit at one fader position.
 // Curves are illustrative power laws, not a claim of JATET compliance.
 const Module_Sim8Bit = {
     dmx8Bit: 191,
@@ -9,7 +9,7 @@ const Module_Sim8Bit = {
         <div class="sim8-workbench">
           <section class="sim8-input sim8-zone">
             <h2>① フェーダーを動かす</h2>
-            <p class="sim8-note">灯りへ送る指示を変えます。</p>
+            <p class="sim8-note">同じ位置で、2つの表示を比べよう。</p>
             <div class="sim8-position"><span>フェーダー位置</span><strong id="sim8bit-num-percent">75%</strong></div>
             <div class="sim8-fader">
               <div class="sim8-scale"><span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span></div>
@@ -18,9 +18,9 @@ const Module_Sim8Bit = {
             <div class="sim8-step"><button id="sim8bit-down" aria-label="DMX値を1下げる">−</button><button id="sim8bit-up" aria-label="DMX値を1上げる">＋</button></div>
           </section>
           <section class="sim8-signal sim8-zone">
-            <div class="sim8-dmx-head"><div><h2>② DMXの指示を見る</h2><p class="sim8-note">灯りへ送る指示：0〜255。</p></div><div class="sim8-dmx-value"><strong id="sim8bit-num-dmx">191</strong><span>DMX</span></div></div>
+            <div class="sim8-dmx-head"><div><h2>② アナログとデジタルを比べる</h2><p class="sim8-note" id="sim8bit-value-label">灯体へ出す電圧</p></div><div class="sim8-dmx-value"><strong id="sim8bit-num-dmx">86.5</strong><span id="sim8bit-value-unit">V</span></div></div>
             <div class="sim8-views" role="group" aria-label="見る図を選ぶ">
-              <button data-sim8-view="wave" aria-pressed="true">電気の波</button><button data-sim8-view="curve" aria-pressed="false">出力カーブ</button><button data-sim8-view="digital" aria-pressed="false">8-bitの中身</button>
+              <button data-sim8-view="wave" aria-pressed="true">アナログ</button><button data-sim8-view="digital" aria-pressed="false">デジタル</button><button data-sim8-view="curve" aria-pressed="false">電圧カーブ</button>
             </div>
             <div class="sim8-graph" id="sim8bit-upper-graph-box"></div>
             <div class="sim8-curve-controls"><div class="sim8-curves" role="group" aria-label="出力カーブ">
@@ -74,7 +74,7 @@ const Module_Sim8Bit = {
         return mode === 'jat-a' ? Math.pow(x, 2.3) : mode === 'jat-b' ? Math.pow(x, 2.7) : x;
     },
     // Resistive-load example: invert the sine-squared energy integral.
-    // Each curve maps DMX to normalized delivered power, not apparent brightness or volts.
+    // Curves describe normalized output voltage; waveform energy uses its square.
     getFiringAngle(power) {
         if (power <= 0) return Math.PI;
         if (power >= 1) return 0;
@@ -94,18 +94,21 @@ const Module_Sim8Bit = {
         if (!root) return;
         document.getElementById('sim8bit-fader').value = this.dmx8Bit;
         document.getElementById('sim8bit-num-percent').textContent = Math.round(this.dmx8Bit / 255 * 100) + '%';
-        document.getElementById('sim8bit-num-dmx').textContent = this.dmx8Bit;
         root.querySelectorAll('[data-sim8-view]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.sim8View === this.current8bitView)));
         root.querySelectorAll('[data-sim8-curve]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.sim8Curve === this.curveMode)));
         const factor = this.getCurveFactor(this.dmx8Bit, this.curveMode);
+        const digital = this.current8bitView === 'digital';
+        document.getElementById('sim8bit-num-dmx').textContent = digital ? this.dmx8Bit : (100 * factor).toFixed(1);
+        document.getElementById('sim8bit-value-unit').textContent = digital ? 'DMX' : 'V';
+        document.getElementById('sim8bit-value-label').textContent = digital ? '灯りへ送る数字の指示：0〜255' : '灯体へ出す電圧：0〜100V';
         this.updateBulb(factor, factor);
         document.getElementById('sim8bit-light-state').textContent = this.dmx8Bit === 0 ? '消灯' : this.dmx8Bit === 255 ? '最大の指示で点灯' : '点灯中';
         const teacher = document.getElementById('sim8-teacher-message');
         if (teacher) teacher.innerHTML = this.current8bitView === 'digital'
-          ? '1になっている桁の数字を足すと、<br>今のDMX値になるよ。'
+          ? 'こちらは電圧ではなく、数字の指示。<br>同じフェーダー位置でアナログと比べよう。'
           : this.current8bitView === 'curve'
           ? 'フェーダー位置をそのままにして、<br>カーブを変えるとどうなるかな？'
-          : this.dmx8Bit === 0 ? '少し上げてみよう。<br>橙色の「通す部分」が現れるよ。' : 'フェーダーを下げてみよう。<br>橙色の「通す部分」はどう変わるかな？';
+          : 'こちらは灯体へ出す電圧と波形。<br>デジタルに切り替えると、同じ位置をどう表すかな？';
         this.drawGraph();
     },
     drawGraph(size) {
@@ -132,12 +135,12 @@ const Module_Sim8Bit = {
             }
             svg += `<path d="M${x0} ${y0}V${y1}H${x1}" fill="none" stroke="#b3bfcb"/>
               <circle cx="${x0+this.dmx8Bit/255*(x1-x0)}" cy="${y1-factor*(y1-y0)}" r="7" fill="#ff4b55" stroke="#fff" stroke-width="2"/>`;
-            svg += text(x0,18,'調光器の出力') + text(x0,y1+22,'0') + text(x1,y1+22,'DMX値 255','end');
-            box.innerHTML = `<h3>指示と出力の関係</h3><svg viewBox="0 0 ${w} ${h}" role="img" aria-label="DMX値と調光器の出力の関係">${svg}</svg><p class="sim8-note">赤い点が今の位置。橙色が選んだカーブ。</p>`;
+            svg += text(x0,18,'出力電圧 100V') + text(x0,y1+22,'0%') + text(x1,y1+22,'フェーダー位置 100%','end');
+            box.innerHTML = `<h3>フェーダー位置と電圧</h3><svg viewBox="0 0 ${w} ${h}" role="img" aria-label="フェーダー位置と出力電圧の関係">${svg}</svg><p class="sim8-note">赤い点が今の位置。カーブは教材用の例。</p>`;
             if (!size) { const s=box.querySelector('svg'); if(s.clientHeight>0) this.drawGraph({w:s.clientWidth,h:s.clientHeight}); }
             return;
         }
-        const mid = (y0+y1)/2, amp = (y1-y0)/2 - 5, alpha = this.getFiringAngle(factor);
+        const mid = (y0+y1)/2, amp = (y1-y0)/2 - 5, alpha = this.getFiringAngle(factor * factor);
         const px = a => x0 + a/(2*Math.PI)*(x1-x0);
         const py = a => mid - Math.sin(a)*amp;
         const points = Array.from({length:241},(_,i) => `${px(i/240*2*Math.PI)},${py(i/240*2*Math.PI)}`).join(' ');
@@ -151,7 +154,7 @@ const Module_Sim8Bit = {
             if (factor > 0 && factor < 1) svg += `<circle cx="${px(start)}" cy="${py(start)}" r="7" fill="#ff4b55" stroke="#fff" stroke-width="2"/>`;
         }
         svg += text(8,mid+5,'0') + text(px(Math.PI/2),y0,'山','middle') + text(px(3*Math.PI/2),y1+2,'谷','middle') + text(x1,h-4,'時間 →','end');
-        box.innerHTML = `<h3>100V交流 → 調光器の出力波形</h3><div class="sim8-legend"><span>┄ 電源（100V）</span><span>━ 灯体へ通す部分</span></div><svg viewBox="0 0 ${w} ${h}" role="img" aria-label="山と谷を含む1周期の波。破線が元の電源、橙色が灯体へ通す部分。赤い点から通し始める。">${svg}</svg><p class="sim8-note">${factor <= 0 ? '0の指示：電気を通さず、消灯。' : factor >= 1 ? '255の指示：山も谷も、全部通す。' : '赤い点から、次の0まで通す。'}</p>`;
+        box.innerHTML = `<h3>アナログ：電圧と波形を見る</h3><div class="sim8-legend"><span>┄ 電源（100V）</span><span>━ 灯体へ通す部分</span></div><svg viewBox="0 0 ${w} ${h}" role="img" aria-label="山と谷を含む1周期の波。破線が元の電源、橙色が灯体へ通す部分。赤い点から通し始める。">${svg}</svg><p class="sim8-note">${factor <= 0 ? '0V：電気を通さず、消灯。' : factor >= 1 ? '100V：山も谷も、全部通す。' : '通す部分が変わると、出力電圧も変わる。'}</p>`;
         if (!size) { const s=box.querySelector('svg'); if(s.clientHeight>0) this.drawGraph({w:s.clientWidth,h:s.clientHeight}); }
     },
     updateBulb(factor, voltage) {
@@ -174,3 +177,4 @@ const Module_Sim8Bit = {
         }
     }
 };
+
