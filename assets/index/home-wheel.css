@@ -266,3 +266,51 @@ a.lesson-tile:focus-visible { outline: 2px solid var(--theme-accent); outline-of
 @media (prefers-reduced-motion: reduce) {
   .wheel-theme, .lesson-tile { transition: none !important; }
 }
+
+/* Visual correction v3: preserve LOCKed layout, show actual theme art, and keep glyphs crisp. */
+.home-wheel-panel { perspective:none; }
+.wheel-list { perspective:none; transform-style:flat; }
+.wheel-theme {
+  height:54px; margin-top:-27px;
+  background-image:linear-gradient(90deg,rgba(5,12,19,.88) 0%,rgba(5,12,19,.70) 38%,rgba(5,12,19,.13) 100%),var(--theme-image);
+  background-position:center,center;
+  transform:translate3d(0,var(--wheel-y,0px),0);
+  opacity:1;
+  will-change:auto;
+  box-shadow:0 3px 8px #0006;
+  -webkit-font-smoothing:antialiased;
+}
+.wheel-theme.is-selected {background-image:linear-gradient(90deg,rgba(5,12,19,.80) 0%,rgba(5,12,19,.46) 38%,rgba(5,12,19,.03) 100%),var(--theme-image);}
+.wheel-number {font-size:23px;flex-basis:37px;text-shadow:none;}
+.wheel-name {font-size:15px;line-height:1.2;text-shadow:none;}
+.wheel-english {font-size:9px;letter-spacing:.08em;}
+.wheel-theme:not(.is-selected) { filter:brightness(.88); }
+.wheel-theme:not(.is-selected):hover {filter:brightness(1.06);}
+.home-wheel-panel::after {background:linear-gradient(180deg,#08111ab0,transparent 13%,transparent 88%,#08111ab0);}
+.detail-hero {
+  background-image:linear-gradient(90deg,rgba(7,14,22,.93) 0%,rgba(7,14,22,.64) 31%,rgba(7,14,22,.05) 70%,rgba(7,14,22,0) 100%),var(--detail-image);
+  background-position:center,right center;
+}
+.detail-hero-copy {max-width:63%;text-shadow:none;}
+.detail-title {font-size:clamp(24px,2.25vw,33px);line-height:1.18;margin:5px 0 2px;}
+.detail-serial {font-size:11px;}
+.detail-english {font-size:10px;letter-spacing:.13em;}
+.detail-desc {font-size:12px;line-height:1.45;margin-top:10px;}
+.detail-intro {font-size:10px;line-height:1.4;margin-top:5px;}
+.lesson-tile-visual {
+  background-image:linear-gradient(135deg,rgba(7,13,19,.10),rgba(7,13,19,.02)),var(--tile-image);
+}
+.lesson-tile-tag {font-size:12px;text-shadow:none;background:#07121bb5;}
+.lesson-tile-name {font-size:12px;}
+.lesson-tiles {grid-template-columns:repeat(auto-fit,minmax(138px,1fr));}
+@media(max-width:1120px) {
+  .wheel-number {font-size:21px;flex-basis:33px;}
+  .wheel-name {font-size:14px;}
+  .detail-hero-copy {max-width:68%;}
+  .detail-title {font-size:clamp(23px,2.5vw,30px);}
+}
+@media(max-width:760px) {
+  .wheel-theme {height:50px;margin-top:-25px;}
+  .detail-hero-copy {max-width:78%;}
+  .detail-title {font-size:25px;}
+}
