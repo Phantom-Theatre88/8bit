@@ -338,3 +338,167 @@ a.lesson-tile:focus-visible { outline: 2px solid var(--theme-accent); outline-of
 .home-theme-detail[data-theme="history"] .lesson-tile-visual {background-image:linear-gradient(135deg,#09121a44,#09121a00),url("./category-history-theatre.webp")}
 .home-theme-detail[data-theme="fixture"] .lesson-tile-visual {background-image:linear-gradient(135deg,#09121a44,#09121a00),url("./category-fixture-lighting.webp")}
 .home-theme-detail[data-theme="future"] .lesson-tile-visual {background-image:linear-gradient(135deg,#09121a44,#09121a00),url("./category-shoot-focus.webp")}
+
+/* v5 — LOCKed SVG icon restoration and single full-panel artwork.
+   The selected theme's image fills the entire right 60% panel;
+   lesson links float as translucent glass controls over it. */
+.home-theme-detail {
+  position:relative;
+  isolation:isolate;
+  background-color:#08121d;
+}
+.home-theme-detail::before {
+  content:"";
+  position:absolute;
+  z-index:-2;
+  inset:0;
+  background-image:var(--detail-image);
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  pointer-events:none;
+}
+.home-theme-detail::after {
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:0;
+  background:linear-gradient(90deg,rgba(4,12,21,.92) 0%,rgba(4,12,21,.58) 44%,rgba(4,12,21,.23) 100%),
+             linear-gradient(180deg,rgba(5,12,20,.15) 0%,rgba(5,12,20,.12) 37%,rgba(5,12,20,.65) 100%);
+  pointer-events:none;
+}
+.home-theme-detail .detail-hero {
+  flex:0 0 43%;
+  background:transparent !important;
+  border-bottom:1px solid rgba(231,239,247,.23);
+  min-height:0;
+}
+.home-theme-detail .detail-hero::after {height:1px;opacity:.55}
+.home-theme-detail .detail-hero-copy {max-width:78%}
+.home-theme-detail .detail-lessons {
+  background:transparent;
+  padding:13px 16px 17px;
+}
+.home-theme-detail .detail-lessons-heading {
+  margin-bottom:12px;
+  font-size:12px;
+  letter-spacing:.04em;
+  text-shadow:0 2px 6px #000;
+}
+.home-theme-detail .lesson-tiles {
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+  padding:2px;
+}
+.home-theme-detail .lesson-tile {
+  min-height:68px;
+  flex-direction:row;
+  align-items:center;
+  padding:11px 12px;
+  gap:10px;
+  border:1px solid rgba(212,228,240,.38);
+  border-radius:9px;
+  background:rgba(6,17,28,.56);
+  -webkit-backdrop-filter:blur(9px);
+  backdrop-filter:blur(9px);
+  box-shadow:0 3px 12px #0004,inset 0 1px 0 #ffffff0e;
+}
+.home-theme-detail .lesson-tile-visual {display:none}
+.home-theme-detail .lesson-tile-body {
+  min-width:0;
+  flex:1;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 16px;
+  grid-template-rows:auto auto;
+  column-gap:8px;
+  padding:0;
+}
+.home-theme-detail .lesson-tile-name {
+  grid-column:1;
+  grid-row:1;
+  font-size:13px;
+  font-weight:800;
+  color:#fff;
+  line-height:1.35;
+}
+.home-theme-detail .lesson-tile-note {
+  grid-column:1;
+  grid-row:2;
+  margin-top:4px;
+  color:#d3dce6;
+  font-size:10px;
+  line-height:1.35;
+}
+.home-theme-detail .lesson-tile-bottom {
+  grid-column:2;
+  grid-row:1/3;
+  align-self:center;
+  justify-content:center;
+  margin:0;
+  color:var(--theme-accent);
+  font-size:19px;
+}
+.home-theme-detail a.lesson-tile:hover,
+.home-theme-detail a.lesson-tile:focus-visible {
+  background:rgba(15,32,47,.82);
+  border-color:var(--theme-accent);
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--theme-accent) 50%,transparent),0 4px 18px #0008;
+  transform:translateY(-1px);
+}
+.home-theme-detail .lesson-tile.is-pending {
+  opacity:.55;
+  border-style:dashed;
+  -webkit-backdrop-filter:blur(4px);
+  backdrop-filter:blur(4px);
+}
+.home-theme-detail .lesson-tile.is-pending .lesson-tile-bottom {color:#a6b5c4}
+.wheel-icon {
+  display:grid;
+  flex:0 0 23px;
+  width:23px;
+  height:23px;
+  place-items:center;
+  color:var(--theme-accent);
+  filter:drop-shadow(0 1px 2px #0009);
+}
+.wheel-icon svg,.detail-icon svg {
+  display:block;
+  width:100%;
+  height:100%;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.wheel-theme {gap:8px}
+.wheel-number {flex-basis:30px}
+.wheel-theme-copy {flex:1}
+.detail-icon {
+  display:inline-grid;
+  vertical-align:middle;
+  place-items:center;
+  width:30px;
+  height:30px;
+  margin:7px 10px 0 0;
+  color:var(--theme-accent);
+}
+.detail-title {display:inline-block;vertical-align:middle;margin-top:6px}
+@media(max-width:1120px) {
+  .home-theme-detail .lesson-tiles {gap:7px}
+  .home-theme-detail .lesson-tile {padding:9px}
+  .home-theme-detail .lesson-tile-name {font-size:12px}
+  .wheel-icon {flex-basis:20px;width:20px;height:20px}
+  .wheel-number {flex-basis:27px}
+  .home-theme-detail .detail-hero-copy {max-width:83%}
+}
+@media(max-width:760px) {
+  .home-theme-detail .detail-hero-copy {max-width:91%}
+  .home-theme-detail .lesson-tiles {grid-template-columns:repeat(2,minmax(0,1fr))}
+  .home-theme-detail .lesson-tile {min-height:64px}
+  .home-theme-detail .lesson-tile-name {font-size:11px}
+  .home-theme-detail .lesson-tile-note {font-size:9px}
+}
+@media(max-width:420px) {
+  .home-theme-detail .lesson-tiles {grid-template-columns:1fr}
+}
