@@ -1,0 +1,36 @@
+<!doctype html><meta charset="utf-8"><title>16-bit layout and interaction checks</title>
+<style>body{margin:10px;background:#18212a;color:white;font:16px sans-serif}button{font:inherit;padding:6px;margin:4px}iframe{display:block;border:1px solid #789}#results{white-space:pre-wrap}</style>
+<button id="run">全サイズ・連動を確認</button><button id="landscape">1024×680</button><button id="portrait">768×1024</button><div id="results">読込中</div><iframe id="frame" width="1024" height="680"></iframe>
+<script>
+const frame=document.getElementById('frame'),results=document.getElementById('results');
+frame.src='../Top.html?tab=sim16bit&v='+encodeURIComponent(new URLSearchParams(location.search).get('v')||'20261013-live1');
+const settle=()=>new Promise(r=>setTimeout(r,160));
+async function size(w,h){frame.width=w;frame.height=h;await settle();}
+function check(label){
+ const d=frame.contentDocument,w=frame.contentWindow;
+ const bad=[...d.querySelectorAll('.s16-page,.s16-workbench,.s16-zone,.s16-formula,.s16-binary,.s16-title')].filter(e=>e.scrollWidth>e.clientWidth+2||e.scrollHeight>e.clientHeight+2).map(e=>e.className);
+ const tiny=[...d.querySelectorAll('.s16-page button,.s16-page p,.s16-page h2,.s16-page h3,.s16-bits span,.s16-ruler-labels,.s16-scale')].filter(e=>parseFloat(w.getComputedStyle(e).fontSize)<16).length;
+ const image=[...d.querySelectorAll('.s16-page img:not(dialog img)')].some(e=>!e.complete||!e.naturalWidth);
+ const landscape=w.innerWidth>w.innerHeight;
+ const horizontal=d.documentElement.scrollWidth>w.innerWidth+2;
+ const vertical=landscape&&d.documentElement.scrollHeight>w.innerHeight+2;
+ const clipped=[...d.querySelectorAll('.s16-bottom .s16-zone')].some(e=>{const r=d.createRange();r.selectNodeContents(e);return [...r.getClientRects()].some(x=>x.height>0&&x.bottom>e.getBoundingClientRect().bottom+2);});
+ const footer=d.querySelector('.s16-footer').getBoundingClientRect().bottom;
+ const unreachable=!landscape&&footer>d.documentElement.scrollHeight+2;
+ return {label,pass:!bad.length&&!tiny&&!image&&!horizontal&&!vertical&&!clipped&&!unreachable,bad,tiny,image,horizontal,vertical,clipped,unreachable,footer,doc:d.documentElement.scrollHeight};
+}
+function input(id,value){const e=frame.contentDocument.querySelector('#s16-'+id);e.value=value;e.dispatchEvent(new Event('input',{bubbles:true}));}
+function state(){const d=frame.contentDocument;return {c:Number(d.querySelector('#s16-coarse-value').textContent),f:Number(d.querySelector('#s16-fine-value').textContent),total:Number(d.querySelector('#s16-total').textContent.replaceAll(',','')),bits:[...d.querySelectorAll('.s16-bits')].map(e=>e.textContent),pos:d.querySelector('.s16-center').style.getPropertyValue('--fine-pos')};}
+async function run(){const rows=[];
+ for(const [w,h]of [[1024,680],[1024,768],[1180,720],[1366,900],[768,1024],[820,1180]]){await size(w,h);rows.push(check(w+'×'+h));}
+ for(const total of [0,1,255,256,32768,32832,65534,65535]){input('master',total);const s=state();rows.push({label:'Value '+total,pass:s.total===total&&s.c===Math.floor(total/256)&&s.f===total%256&&parseInt(s.bits.join(''),2)===total});}
+ input('master',32832);input('coarse',191);let s=state();rows.push({label:'Coarse preserves Fine',pass:s.c===191&&s.f===64&&s.total===48960});
+ input('fine',128);s=state();rows.push({label:'Fine preserves Coarse and moves marker',pass:s.c===191&&s.f===128&&s.total===49024&&Math.abs(parseFloat(s.pos)-128/255*100)<.001});
+ for(const [val,delta,want]of [[0,-1,0],[65535,1,65535],[255,1,256],[256,-1,255]]){input('master',val);frame.contentWindow.eval('Module_Sim16Bit').adjustFaderValue('fine',delta);rows.push({label:'Boundary '+val+' '+delta,pass:state().total===want});}
+ input('master',32832);await size(1024,680);results.textContent=JSON.stringify(rows,null,2);
+}
+document.getElementById('run').onclick=run;
+document.getElementById('landscape').onclick=async()=>{await size(1024,680);results.textContent=JSON.stringify(check('landscape'));};
+document.getElementById('portrait').onclick=async()=>{await size(768,1024);results.textContent=JSON.stringify(check('portrait'));};
+frame.onload=()=>results.textContent='準備完了';
+</script>
