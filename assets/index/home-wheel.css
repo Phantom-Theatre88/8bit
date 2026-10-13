@@ -314,3 +314,27 @@ a.lesson-tile:focus-visible { outline: 2px solid var(--theme-accent); outline-of
   .detail-hero-copy {max-width:78%;}
   .detail-title {font-size:25px;}
 }
+
+/* v4: background URLs in inline custom properties resolve against the HTML document.
+   Resolve all artwork URLs against the stylesheet directory explicitly. */
+.home-theme-detail[data-theme="electric"] .detail-hero {background-image:linear-gradient(90deg,#07101ded 0%,#07101d90 33%,#07101d05 70%),url("./category-electric-c30a.webp")}
+.home-theme-detail[data-theme="dimming"] .detail-hero {background-image:linear-gradient(90deg,#07101ded 0%,#07101d90 33%,#07101d05 70%),url("./category-dimming-faders.webp")}
+.home-theme-detail[data-theme="signal"] .detail-hero {background-image:linear-gradient(90deg,#07101ded 0%,#07101d90 33%,#07101d05 70%),url("./category-signal-dmx-5pin.webp")}
+.home-theme-detail[data-theme="network"] .detail-hero {background-image:linear-gradient(90deg,#07101ded 0%,#07101d90 33%,#07101d05 70%),url("./category-network-rj45.webp")}
+.home-theme-detail[data-theme="history"] .detail-hero {background-image:linear-gradient(90deg,#07101ded 0%,#07101d90 33%,#07101d05 70%),url("./category-history-theatre.webp")}
+.home-theme-detail[data-theme="fixture"] .detail-hero {background-image:linear-gradient(90deg,#07101ded 0%,#07101d90 33%,#07101d05 70%),url("./category-fixture-lighting.webp")}
+.home-theme-detail[data-theme="future"] .detail-hero {background-image:linear-gradient(90deg,#07101ded 0%,#07101d90 33%,#07101d05 70%),url("./category-shoot-focus.webp")}
+.wheel-theme[data-theme="electric"] {background-image:linear-gradient(90deg,#07101ddd 0%,#07101d70 50%,#07101d08 100%),url("./category-electric-c30a.webp")}
+.wheel-theme[data-theme="dimming"] {background-image:linear-gradient(90deg,#07101ddd 0%,#07101d70 50%,#07101d08 100%),url("./category-dimming-faders.webp")}
+.wheel-theme[data-theme="signal"] {background-image:linear-gradient(90deg,#07101ddd 0%,#07101d70 50%,#07101d08 100%),url("./category-signal-dmx-5pin.webp")}
+.wheel-theme[data-theme="network"] {background-image:linear-gradient(90deg,#07101ddd 0%,#07101d70 50%,#07101d08 100%),url("./category-network-rj45.webp")}
+.wheel-theme[data-theme="history"] {background-image:linear-gradient(90deg,#07101ddd 0%,#07101d70 50%,#07101d08 100%),url("./category-history-theatre.webp")}
+.wheel-theme[data-theme="fixture"] {background-image:linear-gradient(90deg,#07101ddd 0%,#07101d70 50%,#07101d08 100%),url("./category-fixture-lighting.webp")}
+.wheel-theme[data-theme="future"] {background-image:linear-gradient(90deg,#07101ddd 0%,#07101d70 50%,#07101d08 100%),url("./category-shoot-focus.webp")}
+.home-theme-detail .lesson-tile-visual {background-image:linear-gradient(135deg,#09121a44,#09121a00),url("./category-electric-c30a.webp")}
+.home-theme-detail[data-theme="dimming"] .lesson-tile-visual {background-image:linear-gradient(135deg,#09121a44,#09121a00),url("./category-dimming-faders.webp")}
+.home-theme-detail[data-theme="signal"] .lesson-tile-visual {background-image:linear-gradient(135deg,#09121a44,#09121a00),url("./category-signal-dmx-5pin.webp")}
+.home-theme-detail[data-theme="network"] .lesson-tile-visual {background-image:linear-gradient(135deg,#09121a44,#09121a00),url("./category-network-rj45.webp")}
+.home-theme-detail[data-theme="history"] .lesson-tile-visual {background-image:linear-gradient(135deg,#09121a44,#09121a00),url("./category-history-theatre.webp")}
+.home-theme-detail[data-theme="fixture"] .lesson-tile-visual {background-image:linear-gradient(135deg,#09121a44,#09121a00),url("./category-fixture-lighting.webp")}
+.home-theme-detail[data-theme="future"] .lesson-tile-visual {background-image:linear-gradient(135deg,#09121a44,#09121a00),url("./category-shoot-focus.webp")}
