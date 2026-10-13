@@ -341,6 +341,8 @@ body {background:linear-gradient(180deg,#1c232b 0%,#141a21 100%)}
   .hero-visual::after {background:linear-gradient(180deg,#10171e 0%,transparent 25%)}
 }
   </style>
+  <link rel="stylesheet" href="assets/index/home-wheel.css?v=1">
+  <script src="assets/index/home-wheel.js?v=1" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -362,58 +364,79 @@ body {background:linear-gradient(180deg,#1c232b 0%,#141a21 100%)}
       <div class="hero-visual"><img src="assets/index/main-cover-dmx-5pin-lan.webp" alt="舞台照明の電気、調光、信号、ネットワークを表した教材イラスト" decoding="async" fetchpriority="high"></div>
     </section>
 
-    <div class="section-heading" id="lessons">
-      <h2><span style="color:#ff941b">▦</span> 学習テーマ一覧</h2>
-      <p>7つのテーマから、興味のある内容を選んで学習できます。</p>
-    </div>
-
-    <section class="category-grid" aria-label="教材一覧">
-      <article class="category-card electric">
-        <header class="category-head"><div class="category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13.5 2 5 13h6l-.5 9L19 10h-6z"/></svg></div><div><div class="category-kicker">ELECTRIC</div><div class="category-title">電気</div><div class="category-desc">電源・容量・相・電流を見える化する。</div></div></header>
-        <div class="lesson-list">
-          <a class="lesson-link" href="Analog.html"><span class="lesson-copy"><span class="lesson-name">V・W・Aの法則</span><span class="lesson-note">電力・電圧・電流の関係</span></span><span class="lesson-arrow">›</span></a>
-          <a class="lesson-link" href="SinglePhase3.html"><span class="lesson-copy"><span class="lesson-name">単相3線</span><span class="lesson-note">L1・N・L2と100V／200V</span></span><span class="lesson-arrow">›</span></a>
-          <a class="lesson-link" href="Waveforms.html"><span class="lesson-copy"><span class="lesson-name">電気って波なの？</span><span class="lesson-note">100V・200V・三相を波で見る</span></span><span class="lesson-arrow">›</span></a>
-          <span class="lesson-link pending"><span class="lesson-copy"><span class="lesson-name">三相3線</span><span class="lesson-note">次回実装予定</span></span><span class="lesson-arrow">未</span></span>
+    <!-- TOP theme selector: 330px hero above, 430–500px workspace below, 40:60 split. -->
+    <section class="home-workspace" id="lessons" aria-label="学習テーマ一覧">
+      <div class="home-wheel-panel" tabindex="0" aria-label="テーマホイール。上下スワイプ・マウスホイール・矢印キーで切り替え">
+        <div class="wheel-heading">THEME SELECTOR</div><div class="wheel-counter" aria-hidden="true">03 / 07</div>
+        <div class="wheel-list" aria-label="7つの学習テーマ">
+        <button class="wheel-theme" type="button" data-index="0" data-theme="electric" data-theme-name="電気" aria-label="電気を選択" aria-pressed="false" style="--theme-accent:#ffab39;--theme-image:url('assets/index/category-electric-c30a.webp');--offset:-2;--depth:2;--scale:0.87;--item-opacity:0.7;z-index:18"><span class="wheel-number">01</span><span class="wheel-theme-copy"><span class="wheel-name">電気</span><span class="wheel-english">ELECTRIC</span></span></button>
+        <button class="wheel-theme" type="button" data-index="1" data-theme="dimming" data-theme-name="調光" aria-label="調光を選択" aria-pressed="false" style="--theme-accent:#2ac7ff;--theme-image:url('assets/index/category-dimming-faders.webp');--offset:-1;--depth:1;--scale:0.935;--item-opacity:0.85;z-index:19"><span class="wheel-number">02</span><span class="wheel-theme-copy"><span class="wheel-name">調光</span><span class="wheel-english">DIMMING</span></span></button>
+        <button class="wheel-theme is-selected" type="button" data-index="2" data-theme="signal" data-theme-name="信号" aria-label="信号を選択" aria-pressed="true" style="--theme-accent:#f25baf;--theme-image:url('assets/index/category-signal-dmx-5pin.webp');--offset:0;--depth:0;--scale:1;--item-opacity:1;z-index:20"><span class="wheel-number">03</span><span class="wheel-theme-copy"><span class="wheel-name">信号</span><span class="wheel-english">SIGNAL</span></span></button>
+        <button class="wheel-theme" type="button" data-index="3" data-theme="network" data-theme-name="Network" aria-label="Networkを選択" aria-pressed="false" style="--theme-accent:#39d5f2;--theme-image:url('assets/index/category-network-rj45.webp');--offset:1;--depth:1;--scale:0.935;--item-opacity:0.85;z-index:19"><span class="wheel-number">04</span><span class="wheel-theme-copy"><span class="wheel-name">Network</span><span class="wheel-english">NETWORK</span></span></button>
+        <button class="wheel-theme" type="button" data-index="4" data-theme="history" data-theme-name="照明史" aria-label="照明史を選択" aria-pressed="false" style="--theme-accent:#e5a23d;--theme-image:url('assets/index/category-history-theatre.webp');--offset:2;--depth:2;--scale:0.87;--item-opacity:0.7;z-index:18"><span class="wheel-number">05</span><span class="wheel-theme-copy"><span class="wheel-name">照明史</span><span class="wheel-english">HISTORY</span></span></button>
+        <button class="wheel-theme" type="button" data-index="5" data-theme="fixture" data-theme-name="灯具" aria-label="灯具を選択" aria-pressed="false" style="--theme-accent:#f5862b;--theme-image:url('assets/index/category-fixture-lighting.webp');--offset:3;--depth:3;--scale:0.8049999999999999;--item-opacity:0.55;z-index:17"><span class="wheel-number">06</span><span class="wheel-theme-copy"><span class="wheel-name">灯具</span><span class="wheel-english">FIXTURE</span></span></button>
+        <button class="wheel-theme" type="button" data-index="6" data-theme="future" data-theme-name="シュート" aria-label="シュートを選択" aria-pressed="false" style="--theme-accent:#a3b5c9;--theme-image:url('assets/index/category-shoot-focus.webp');--offset:-3;--depth:3;--scale:0.8049999999999999;--item-opacity:0.55;z-index:17"><span class="wheel-number">07</span><span class="wheel-theme-copy"><span class="wheel-name">シュート</span><span class="wheel-english">FOCUS</span></span></button>
         </div>
-      </article>
-
-      <article class="category-card dimming">
-        <header class="category-head"><div class="category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3v18M12 3v18M19 3v18"/><path d="M2 8h6M9 15h6M16 10h6"/></svg></div><div><div class="category-kicker">DIMMING</div><div class="category-title">調光</div><div class="category-desc">フェーダーと分解性能を読み解く。</div></div></header>
-        <div class="lesson-list">
-          <a class="lesson-link" href="Top.html?tab=sim8bit"><span class="lesson-copy"><span class="lesson-name">8-bit 調光卓</span><span class="lesson-note">0〜255と見た目の明るさ</span></span><span class="lesson-arrow">›</span></a>
-          <a class="lesson-link" href="Top.html?tab=sim16bit"><span class="lesson-copy"><span class="lesson-name">16-bit 調光卓</span><span class="lesson-note">Coarse／Fineと65,536段階</span></span><span class="lesson-arrow">›</span></a>
-        </div>
-      </article>
-
-      <article class="category-card signal">
-        <header class="category-head"><div class="category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 12h4l3-7 5 14 3-7h5"/></svg></div><div><div class="category-kicker">SIGNAL</div><div class="category-title">信号</div><div class="category-desc">DMXと灯体制御の動きを見る。</div></div></header>
-        <div class="lesson-list">
-          <a class="lesson-link" href="Top.html?tab=simdmx"><span class="lesson-copy"><span class="lesson-name">DMX通信列車</span><span class="lesson-note">512chを順番に送り続ける</span></span><span class="lesson-arrow">›</span></a>
-          <a class="lesson-link" href="Top.html?tab=ledcolormix"><span class="lesson-copy"><span class="lesson-name">LED色混ぜ</span><span class="lesson-note">RGBと補助色チャンネル</span></span><span class="lesson-arrow">›</span></a>
-          <a class="lesson-link" href="Top.html?tab=scroller"><span class="lesson-copy"><span class="lesson-name">Scroller</span><span class="lesson-note">フィルム移動とキャリブレーション</span></span><span class="lesson-arrow">›</span></a>
-          <a class="lesson-link" href="Top.html?tab=movinghead"><span class="lesson-copy"><span class="lesson-name">Moving Head</span><span class="lesson-note">PAN／TILTと16-bit位置制御</span></span><span class="lesson-arrow">›</span></a>
-        </div>
-      </article>
-
-      <article class="category-card network">
-        <header class="category-head"><div class="category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="5" rx="1"/><rect x="2" y="17" width="6" height="5" rx="1"/><rect x="16" y="17" width="6" height="5" rx="1"/><path d="M12 7v5M5 17v-5h14v5"/></svg></div><div><div class="category-kicker">NETWORK</div><div class="category-title">Network</div><div class="category-desc">IPから配信方式・結線まで整理する。</div></div></header>
-        <div class="lesson-list">
-          <a class="lesson-link" href="Top.html?tab=netipaddress"><span class="lesson-copy"><span class="lesson-name">IPアドレス</span><span class="lesson-note">機器の住所とサブネット</span></span><span class="lesson-arrow">›</span></a>
-          <a class="lesson-link" href="Top.html?tab=netartnet"><span class="lesson-copy"><span class="lesson-name">DMX on LAN</span><span class="lesson-note">DMXをPacketとして運ぶ</span></span><span class="lesson-arrow">›</span></a>
-          <a class="lesson-link" href="Top.html?tab=netbroadcast"><span class="lesson-copy"><span class="lesson-name">Broadcast / Art-Net 1</span><span class="lesson-note">同じ範囲へ一斉送信</span></span><span class="lesson-arrow">›</span></a>
-          <a class="lesson-link" href="Top.html?tab=netsacn"><span class="lesson-copy"><span class="lesson-name">Multicast / sACN</span><span class="lesson-note">必要なNodeへ届ける</span></span><span class="lesson-arrow">›</span></a>
-          <a class="lesson-link" href="Top.html?tab=explain"><span class="lesson-copy"><span class="lesson-name">結線 / 冗長化</span><span class="lesson-note">Star／Ringと断線時の影響</span></span><span class="lesson-arrow">›</span></a>
-        </div>
-      </article>
+        <button class="wheel-control wheel-control-prev" type="button" aria-label="前のテーマ">⌃</button>
+        <button class="wheel-control wheel-control-next" type="button" aria-label="次のテーマ">⌄</button>
+        <div class="wheel-hint">SCROLL / SWIPE ↕</div><div class="wheel-status sr-only" aria-live="polite">選択中：信号</div>
+      </div>
+      <div class="home-detail-area" aria-label="選択したテーマの詳細">
+      <section class="home-theme-detail" id="theme-panel-electric" aria-label="電気の教材" style="--theme-accent:#ffab39;--detail-image:url('assets/index/category-electric-c30a.webp')" hidden>
+        <div class="detail-hero"><div class="detail-hero-copy"><div class="detail-serial">01 / 07</div><h2 class="detail-title">電気</h2><div class="detail-english">ELECTRIC</div><p class="detail-desc">電源・容量・相・電流を見える化する。</p><p class="detail-intro">電力・電圧・電流の関係から、舞台の電源方式まで。数値と波形を動かして学ぶ。</p></div></div>
+        <div class="detail-lessons"><h3 class="detail-lessons-heading">学習コンテンツ</h3><div class="detail-lessons-scroll" tabindex="0" aria-label="電気の教材一覧"><div class="lesson-tiles">
+              <a class="lesson-tile" href="Analog.html" style="--tile-image:url('assets/index/category-electric-c30a.webp')"><div class="lesson-tile-visual"><span class="lesson-tile-tag">V / W / A</span></div><div class="lesson-tile-body"><span class="lesson-tile-name">V・W・Aの法則</span><span class="lesson-tile-note">電力・電圧・電流の関係</span><span class="lesson-tile-bottom" aria-hidden="true">↗</span></div></a>
+              <a class="lesson-tile" href="SinglePhase3.html" style="--tile-image:url('assets/index/category-electric-c30a.webp')"><div class="lesson-tile-visual"><span class="lesson-tile-tag">100 / 200V</span></div><div class="lesson-tile-body"><span class="lesson-tile-name">単相3線</span><span class="lesson-tile-note">L1・N・L2と100V／200V</span><span class="lesson-tile-bottom" aria-hidden="true">↗</span></div></a>
+              <a class="lesson-tile" href="Waveforms.html" style="--tile-image:url('assets/index/category-electric-c30a.webp')"><div class="lesson-tile-visual"><span class="lesson-tile-tag">WAVE</span></div><div class="lesson-tile-body"><span class="lesson-tile-name">電気って波なの？</span><span class="lesson-tile-note">100V・200V・三相を波で見る</span><span class="lesson-tile-bottom" aria-hidden="true">↗</span></div></a>
+              <div class="lesson-tile is-pending" aria-disabled="true" style="--tile-image:url('assets/index/category-electric-c30a.webp')"><div class="lesson-tile-visual"><span class="lesson-tile-tag">3 PHASE</span></div><div class="lesson-tile-body"><span class="lesson-tile-name">三相3線</span><span class="lesson-tile-note">次回実装予定</span><span class="lesson-tile-bottom" aria-hidden="true">—</span></div></div>
+        </div></div></div>
+      </section>
+      <section class="home-theme-detail" id="theme-panel-dimming" aria-label="調光の教材" style="--theme-accent:#2ac7ff;--detail-image:url('assets/index/category-dimming-faders.webp')" hidden>
+        <div class="detail-hero"><div class="detail-hero-copy"><div class="detail-serial">02 / 07</div><h2 class="detail-title">調光</h2><div class="detail-english">DIMMING</div><p class="detail-desc">フェーダーと分解性能を読み解く。</p><p class="detail-intro">8-bitと16-bitの違いを、フェーダーと明るさの変化から体験する。</p></div></div>
+        <div class="detail-lessons"><h3 class="detail-lessons-heading">学習コンテンツ</h3><div class="detail-lessons-scroll" tabindex="0" aria-label="調光の教材一覧"><div class="lesson-tiles">
+              <a class="lesson-tile" href="Top.html?tab=sim8bit" style="--tile-image:url('assets/index/category-dimming-faders.webp')"><div class="lesson-tile-visual"><span class="lesson-tile-tag">8 BIT</span></div><div class="lesson-tile-body"><span class="lesson-tile-name">8-bit 調光卓</span><span class="lesson-tile-note">0〜255と見た目の明るさ</span><span class="lesson-tile-bottom" aria-hidden="true">↗</span></div></a>
+              <a class="lesson-tile" href="Top.html?tab=sim16bit" style="--tile-image:url('assets/index/category-dimming-faders.webp')"><div class="lesson-tile-visual"><span class="lesson-tile-tag">16 BIT</span></div><div class="lesson-tile-body"><span class="lesson-tile-name">16-bit 調光卓</span><span class="lesson-tile-note">Coarse／Fineと65,536段階</span><span class="lesson-tile-bottom" aria-hidden="true">↗</span></div></a>
+        </div></div></div>
+      </section>
+      <section class="home-theme-detail" id="theme-panel-signal" aria-label="信号の教材" style="--theme-accent:#f25baf;--detail-image:url('assets/index/category-signal-dmx-5pin.webp')">
+        <div class="detail-hero"><div class="detail-hero-copy"><div class="detail-serial">03 / 07</div><h2 class="detail-title">信号</h2><div class="detail-english">SIGNAL</div><p class="detail-desc">DMXと灯体制御の動きを見る。</p><p class="detail-intro">DMX通信からLEDの色混ぜ、スクローラー、ムービングライトの動きまで。</p></div></div>
+        <div class="detail-lessons"><h3 class="detail-lessons-heading">学習コンテンツ</h3><div class="detail-lessons-scroll" tabindex="0" aria-label="信号の教材一覧"><div class="lesson-tiles">
+              <a class="lesson-tile" href="Top.html?tab=simdmx" style="--tile-image:url('assets/index/category-signal-dmx-5pin.webp')"><div class="lesson-tile-visual"><span class="lesson-tile-tag">DMX 512</span></div><div class="lesson-tile-body"><span class="lesson-tile-name">DMX通信列車</span><span class="lesson-tile-note">512chを順番に送り続ける</span><span class="lesson-tile-bottom" aria-hidden="true">↗</span></div></a>
+              <a class="lesson-tile" href="Top.html?tab=ledcolormix" style="--tile-image:url('assets/index/category-signal-dmx-5pin.webp')"><div class="lesson-tile-visual"><span class="lesson-tile-tag">R G B</span></div><div class="lesson-tile-body"><span class="lesson-tile-name">LED色混ぜ</span><span class="lesson-tile-note">RGBと補助色チャンネル</span><span class="lesson-tile-bottom" aria-hidden="true">↗</span></div></a>
+              <a class="lesson-tile" href="Top.html?tab=scroller" style="--tile-image:url('assets/index/category-signal-dmx-5pin.webp')"><div class="lesson-tile-visual"><span class="lesson-tile-tag">SCROLLER</span></div><div class="lesson-tile-body"><span class="lesson-tile-name">Scroller</span><span class="lesson-tile-note">フィルム移動とキャリブレーション</span><span class="lesson-tile-bottom" aria-hidden="true">↗</span></div></a>
+              <a class="lesson-tile" href="Top.html?tab=movinghead" style="--tile-image:url('assets/index/category-fixture-lighting.webp')"><div class="lesson-tile-visual"><span class="lesson-tile-tag">PAN / TILT</span></div><div class="lesson-tile-body"><span class="lesson-tile-name">Moving Head</span><span class="lesson-tile-note">PAN／TILTと16-bit位置制御</span><span class="lesson-tile-bottom" aria-hidden="true">↗</span></div></a>
+        </div></div></div>
+      </section>
+      <section class="home-theme-detail" id="theme-panel-network" aria-label="Networkの教材" style="--theme-accent:#39d5f2;--detail-image:url('assets/index/category-network-rj45.webp')" hidden>
+        <div class="detail-hero"><div class="detail-hero-copy"><div class="detail-serial">04 / 07</div><h2 class="detail-title">Network</h2><div class="detail-english">NETWORK</div><p class="detail-desc">IPから配信方式・結線まで整理する。</p><p class="detail-intro">照明ネットワークのアドレス、パケット、送信方式と冗長化を学ぶ。</p></div></div>
+        <div class="detail-lessons"><h3 class="detail-lessons-heading">学習コンテンツ</h3><div class="detail-lessons-scroll" tabindex="0" aria-label="Networkの教材一覧"><div class="lesson-tiles">
+              <a class="lesson-tile" href="Top.html?tab=netipaddress" style="--tile-image:url('assets/index/../net/net_ip_01_address.webp')"><div class="lesson-tile-visual"><span class="lesson-tile-tag">IP</span></div><div class="lesson-tile-body"><span class="lesson-tile-name">IPアドレス</span><span class="lesson-tile-note">機器の住所とサブネット</span><span class="lesson-tile-bottom" aria-hidden="true">↗</span></div></a>
+              <a class="lesson-tile" href="Top.html?tab=netartnet" style="--tile-image:url('assets/index/../dmx_on_lan/dmxlan_02_packetize_v01.webp')"><div class="lesson-tile-visual"><span class="lesson-tile-tag">DMX / LAN</span></div><div class="lesson-tile-body"><span class="lesson-tile-name">DMX on LAN</span><span class="lesson-tile-note">DMXをPacketとして運ぶ</span><span class="lesson-tile-bottom" aria-hidden="true">↗</span></div></a>
+              <a class="lesson-tile" href="Top.html?tab=netbroadcast" style="--tile-image:url('assets/index/../network/bc_01_send_v01.webp')"><div class="lesson-tile-visual"><span class="lesson-tile-tag">BROADCAST</span></div><div class="lesson-tile-body"><span class="lesson-tile-name">Broadcast / Art-Net 1</span><span class="lesson-tile-note">同じ範囲へ一斉送信</span><span class="lesson-tile-bottom" aria-hidden="true">↗</span></div></a>
+              <a class="lesson-tile" href="Top.html?tab=netsacn" style="--tile-image:url('assets/index/../sACN/sacn_01_publish_v01.webp')"><div class="lesson-tile-visual"><span class="lesson-tile-tag">sACN</span></div><div class="lesson-tile-body"><span class="lesson-tile-name">Multicast / sACN</span><span class="lesson-tile-note">必要なNodeへ届ける</span><span class="lesson-tile-bottom" aria-hidden="true">↗</span></div></a>
+              <a class="lesson-tile" href="Top.html?tab=explain" style="--tile-image:url('assets/index/category-network-rj45.webp')"><div class="lesson-tile-visual"><span class="lesson-tile-tag">STAR / RING</span></div><div class="lesson-tile-body"><span class="lesson-tile-name">結線 / 冗長化</span><span class="lesson-tile-note">Star／Ringと断線時の影響</span><span class="lesson-tile-bottom" aria-hidden="true">↗</span></div></a>
+        </div></div></div>
+      </section>
+      <section class="home-theme-detail" id="theme-panel-history" aria-label="照明史の教材" style="--theme-accent:#e5a23d;--detail-image:url('assets/index/category-history-theatre.webp')" hidden>
+        <div class="detail-hero"><div class="detail-hero-copy"><div class="detail-serial">05 / 07</div><h2 class="detail-title">照明史</h2><div class="detail-english">HISTORY</div><p class="detail-desc">劇場・光源・色・制御・操作の変化をたどる。</p><p class="detail-intro">劇場・光源・制御技術の歴史をタイムラインでたどる。</p></div></div>
+        <div class="detail-lessons"><h3 class="detail-lessons-heading">学習コンテンツ</h3><div class="detail-lessons-scroll" tabindex="0" aria-label="照明史の教材一覧"><div class="lesson-tiles">
+              <a class="lesson-tile" href="History.html" style="--tile-image:url('assets/index/category-history-theatre.webp')"><div class="lesson-tile-visual"><span class="lesson-tile-tag">TIMELINE</span></div><div class="lesson-tile-body"><span class="lesson-tile-name">舞台照明史 Timeline</span><span class="lesson-tile-note">横＝時間／縦＝同時代を比較。</span><span class="lesson-tile-bottom" aria-hidden="true">↗</span></div></a>
+        </div></div></div>
+      </section>
+      <section class="home-theme-detail" id="theme-panel-fixture" aria-label="灯具の教材" style="--theme-accent:#f5862b;--detail-image:url('assets/index/category-fixture-lighting.webp')" hidden>
+        <div class="detail-hero"><div class="detail-hero-copy"><div class="detail-serial">06 / 07</div><h2 class="detail-title">灯具</h2><div class="detail-english">FIXTURE</div><p class="detail-desc">灯体・光学・用途を学ぶ。</p><p class="detail-intro">レンズと光の広がり方を、操作しながら確かめる。</p></div></div>
+        <div class="detail-lessons"><h3 class="detail-lessons-heading">学習コンテンツ</h3><div class="detail-lessons-scroll" tabindex="0" aria-label="灯具の教材一覧"><div class="lesson-tiles">
+              <a class="lesson-tile" href="ConvexLens.html" style="--tile-image:url('assets/index/category-fixture-lighting.webp')"><div class="lesson-tile-visual"><span class="lesson-tile-tag">SPOT / FLOOD</span></div><div class="lesson-tile-body"><span class="lesson-tile-name">平凸レンズ</span><span class="lesson-tile-note">Spot〜Floodを体験する</span><span class="lesson-tile-bottom" aria-hidden="true">↗</span></div></a>
+        </div></div></div>
+      </section>
+      <section class="home-theme-detail" id="theme-panel-future" aria-label="シュートの教材" style="--theme-accent:#a3b5c9;--detail-image:url('assets/index/category-shoot-focus.webp')" hidden>
+        <div class="detail-hero"><div class="detail-hero-copy"><div class="detail-serial">07 / 07</div><h2 class="detail-title">シュート</h2><div class="detail-english">FOCUS</div><p class="detail-desc">光を作る実践へ。</p><p class="detail-intro">シュートの学習教材を準備中。</p></div></div>
+        <div class="detail-lessons"><h3 class="detail-lessons-heading">学習コンテンツ</h3><div class="detail-lessons-scroll" tabindex="0" aria-label="シュートの教材一覧"><div class="lesson-tiles">
+              <div class="lesson-tile is-pending" aria-disabled="true" style="--tile-image:url('assets/index/category-shoot-focus.webp')"><div class="lesson-tile-visual"><span class="lesson-tile-tag">COMING SOON</span></div><div class="lesson-tile-body"><span class="lesson-tile-name">シュート</span><span class="lesson-tile-note">教材準備中</span><span class="lesson-tile-bottom" aria-hidden="true">—</span></div></div>
+        </div></div></div>
+      </section>
+      </div>
     </section>
-
-    <section class="future-row" aria-label="実用・歴史カテゴリ">
-<article class="category-card history"><header class="category-head"><div class="category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 3"/></svg></div><div><div class="category-kicker">HISTORY</div><div class="category-title">照明史</div><div class="category-desc">劇場・光源・色・制御・操作の変化をたどる。</div></div></header><div class="lesson-list"><a class="lesson-link" href="History.html"><span class="lesson-copy"><span class="lesson-name">舞台照明史 Timeline</span><span class="lesson-note">横＝時間／縦＝同時代を比較。</span></span><span class="lesson-arrow">›</span></a></div></article>
-<article class="category-card fixture"><header class="category-head"><div class="category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 7 12-3v16L4 17z"/><ellipse cx="16" cy="12" rx="3" ry="8"/><path d="M6 17v4h8v-3"/></svg></div><div><div class="category-kicker">FIXTURE</div><div class="category-title">灯具</div><div class="category-desc">灯体・光学・用途を学ぶ。</div></div></header><div class="lesson-list"><a class="lesson-link" href="ConvexLens.html"><span class="lesson-copy"><span class="lesson-name">平凸レンズ</span><span class="lesson-note">Spot〜Floodを体験する</span></span><span class="lesson-arrow">›</span></a></div></article>
-<article class="category-card future"><header class="category-head"><div class="category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg></div><div><div class="category-kicker">FOCUS</div><div class="category-title">シュート</div><div class="category-desc">光を作る実践へ。</div></div></header><div class="future-body">COMING SOON <span class="pending-label">準備中</span></div></article>
-</section>
-
 
     <div id="about" class="sr-only">舞台照明を触って理解するインタラクティブ教材。各テーマの教材ボタンから学習できます。</div>
     <footer class="site-footer"><span>StageLight　v3.0.1</span><span>Interactive Stage Lighting Learning</span></footer>
