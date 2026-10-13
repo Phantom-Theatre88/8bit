@@ -94,6 +94,7 @@ body:has(.sim16bit-active) .console-main-screen{flex:1 1 0!important;min-height:
 #s16-help-dialog p{margin:8px 0;font-size:16px;}
 #s16-help-dialog>img{display:block;width:100%;height:calc(100% - 100px);object-fit:contain;min-height:240px;}
 @media(min-height:760px) and (min-width:900px){.s16-page{grid-template-rows:50px minmax(0,1fr) 154px 20px;gap:8px;}.s16-zone{padding:10px;}.s16-teacher{padding:4px 8px 0;}.s16-teacher>img{max-height:148px;}}
+@media(max-height:720px) and (min-width:900px){.s16-formula,.s16-binary{padding:3px;}.s16-zoom-link{height:8px;}}
 @media(orientation:portrait),(max-width:899px){
  html:has(.sim16bit-active),body:has(.sim16bit-active){height:auto!important;min-height:100dvh;overflow:auto;}
  body:has(.sim16bit-active){display:block;overflow:visible;}
