@@ -44,11 +44,14 @@
   }
 
   function renderWheel() {
+    const viewportWidth = window.innerWidth;
+    const step = viewportWidth <= 760 ? 45 : Math.max(48, Math.min(62, viewportWidth * .0455));
     buttons.forEach((button, index) => {
       const offset = signedOffset(index);
       const distance = Math.abs(offset);
-      button.style.setProperty("--offset", String(offset));
-      button.style.setProperty("--depth", String(distance));
+      button.style.setProperty("--wheel-y", (offset * step) + "px");
+      button.style.setProperty("--wheel-z", (-distance * 34) + "px");
+      button.style.setProperty("--wheel-rotate", (-offset * 10) + "deg");
       button.style.setProperty("--scale", String(1 - distance * .065));
       button.style.setProperty("--item-opacity", String(1 - distance * .15));
       button.style.zIndex = String(20 - distance);
@@ -132,6 +135,8 @@
       select(total - 1);
     }
   });
+
+  window.addEventListener("resize", renderWheel, { passive: true });
 
   // Keep the initial render correct before any hover or swipe.
   renderWheel();
