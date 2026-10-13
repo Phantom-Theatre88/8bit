@@ -502,3 +502,20 @@ a.lesson-tile:focus-visible { outline: 2px solid var(--theme-accent); outline-of
 @media(max-width:420px) {
   .home-theme-detail .lesson-tiles {grid-template-columns:1fr}
 }
+
+/* v6 root-cause correction: background must be painted on the entire
+   detail panel itself, not on negative-z pseudo elements hidden by the
+   panel's own background. CSS-file-relative URLs are unambiguous. */
+.home-theme-detail::before,.home-theme-detail::after {content:none!important}
+.home-theme-detail {
+  background-position:center center;
+  background-repeat:no-repeat;
+  background-size:cover;
+}
+.home-theme-detail[data-theme="electric"] {background-image:linear-gradient(90deg,rgba(4,12,21,.91) 0%,rgba(4,12,21,.58) 40%,rgba(4,12,21,.15) 100%),linear-gradient(180deg,rgba(5,12,20,.10) 0%,rgba(5,12,20,.07) 36%,rgba(5,12,20,.54) 100%),url("./category-electric-c30a.webp")}
+.home-theme-detail[data-theme="dimming"] {background-image:linear-gradient(90deg,rgba(4,12,21,.91) 0%,rgba(4,12,21,.58) 40%,rgba(4,12,21,.15) 100%),linear-gradient(180deg,rgba(5,12,20,.10) 0%,rgba(5,12,20,.07) 36%,rgba(5,12,20,.54) 100%),url("./category-dimming-faders.webp")}
+.home-theme-detail[data-theme="signal"] {background-image:linear-gradient(90deg,rgba(4,12,21,.91) 0%,rgba(4,12,21,.58) 40%,rgba(4,12,21,.15) 100%),linear-gradient(180deg,rgba(5,12,20,.10) 0%,rgba(5,12,20,.07) 36%,rgba(5,12,20,.54) 100%),url("./category-signal-dmx-5pin.webp")}
+.home-theme-detail[data-theme="network"] {background-image:linear-gradient(90deg,rgba(4,12,21,.91) 0%,rgba(4,12,21,.58) 40%,rgba(4,12,21,.15) 100%),linear-gradient(180deg,rgba(5,12,20,.10) 0%,rgba(5,12,20,.07) 36%,rgba(5,12,20,.54) 100%),url("./category-network-rj45.webp")}
+.home-theme-detail[data-theme="history"] {background-image:linear-gradient(90deg,rgba(4,12,21,.91) 0%,rgba(4,12,21,.58) 40%,rgba(4,12,21,.15) 100%),linear-gradient(180deg,rgba(5,12,20,.10) 0%,rgba(5,12,20,.07) 36%,rgba(5,12,20,.54) 100%),url("./category-history-theatre.webp")}
+.home-theme-detail[data-theme="fixture"] {background-image:linear-gradient(90deg,rgba(4,12,21,.91) 0%,rgba(4,12,21,.58) 40%,rgba(4,12,21,.15) 100%),linear-gradient(180deg,rgba(5,12,20,.10) 0%,rgba(5,12,20,.07) 36%,rgba(5,12,20,.54) 100%),url("./category-fixture-lighting.webp")}
+.home-theme-detail[data-theme="future"] {background-image:linear-gradient(90deg,rgba(4,12,21,.91) 0%,rgba(4,12,21,.58) 40%,rgba(4,12,21,.15) 100%),linear-gradient(180deg,rgba(5,12,20,.10) 0%,rgba(5,12,20,.07) 36%,rgba(5,12,20,.54) 100%),url("./category-shoot-focus.webp")}
