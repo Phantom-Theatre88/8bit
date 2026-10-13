@@ -1,248 +1,83 @@
+// Coarse/Fine live lesson: two DMX bytes combine into one 16-bit value.
 const Module_Sim16Bit = {
-    // --- 内部状態管理 ---
-    dmx16Bit: 48896,
-    curveMode: 'linear',
-    MAX_BOTTOM: 252,
-    draggingFaderId: null,
-    startY: 0,
-    startBottom: 0,
-
-    // --- HTMLテンプレート（Coarseの青線、Fineの緑線を完全復元） ---
+    dmx16Bit: 32832,
     getHTML() {
-        const createFaderHTML = (id, label, knobClass, lineStyle = '') => `
-            <div class="fader-cell-wrap" style="display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 100%; flex: 1;">
-                <button class="step-btn" id="sim16bit-btn-up-${id}" style="width: 42px; height: 35px; background: #252525; border: 2px solid #444; border-radius: 6px; color: #e0e0e0; font-size: 14px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 5px rgba(0,0,0,0.3); -webkit-tap-highlight-color: transparent;">▲</button>
-                <div class="fader-area" id="sim16bit-boundary-${id}" data-fader="${id}" style="height: 340px; width: 50px; position: relative; touch-action: none;">
-                    <div class="fader-scale" style="position: absolute; left: -2px; height: 300px; top: 20px; display: flex; flex-direction: column; justify-content: space-between; font-size: 11px; font-weight: bold; color: #505050; z-index: 0;">
-                        <div>${id==='fine'||id==='coarse'?'255':'100'}</div>
-                        <div>${id==='fine'||id==='coarse'?'192':'75'}</div>
-                        <div>${id==='fine'||id==='coarse'?'128':'50'}</div>
-                        <div>${id==='fine'||id==='coarse'?'64':'25'}</div>
-                        <div>0</div>
-                    </div>
-                    <div class="fader-track-container" data-fader="${id}" style="position: absolute; right: 0px; width: 34px; height: 300px; top: 20px;">
-                        <div class="fader-track" style="position: absolute; left: 15px; width: 4px; height: 100%; background: #000; border: 1px solid #2a2a2a; border-radius: 2px;"></div>
-                        <div class="fader-knob ${knobClass}" id="sim16bit-knob-${id}" style="position: absolute; left: 0; width: 34px; height: 48px; background: #d5d5d5; border: 3px solid #444; border-radius: 4px; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 2; bottom: 0px;">
-                            <div style="width: 100%; height: 3px; ${lineStyle}"></div>
-                        </div>
-                    </div>
-                </div>
-                <button class="step-btn" id="sim16bit-btn-down-${id}" style="width: 42px; height: 35px; background: #252525; border: 2px solid #444; border-radius: 6px; color: #e0e0e0; font-size: 14px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 5px rgba(0,0,0,0.3); -webkit-tap-highlight-color: transparent;">▼</button>
-                <div class="fader-label" id="sim16bit-label-${id}" style="font-size: 10px; font-weight: bold; color: #555; text-align: center; white-space: nowrap;">${label}</div>
-            </div>`;
-
-        return `
-            <div style="display: flex; width: 100%; height: 100%; gap: 20px;">
-                <div class="col fader-col" style="width: 22%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-between; background: #0f0f0f; border-radius: 10px; padding: 10px 5px; border: 1px solid #222;">
-                    <div class="fader-bank" style="display: flex; width: 100%; height: 100%; justify-content: center; gap: 5px;">
-                        ${createFaderHTML('master', 'Master', '', 'background: #ff3d00;')}
-                        ${createFaderHTML('coarse', 'Coarse', 'coarse-knob', 'background: #00e5ff;')}
-                        ${createFaderHTML('fine', 'Fine', 'fine-knob', 'background: #00e676;')}
-                    </div>
-                </div>
-
-                <div class="col center-col" style="width: 52%; display: flex; flex-direction: column; gap: 12px;">
-                    <div class="section-title" style="font-size: 11px; font-weight: bold; color: #888; letter-spacing: 2px; text-align: center; margin-bottom: 3px;">数値モニター</div>
-                    <div class="digital-row" style="display: flex; gap: 8px;">
-                        <div class="led-panel" style="background: #090d10; border: 2px solid #3d4b55; border-radius: 6px; padding: 8px 3px; flex: 1; text-align: center;">
-                            <div class="led-label" style="font-size: 11px; color: #9fb2bf; margin-bottom: 2px; font-weight: bold;">明るさの割合</div>
-                            <div class="led-num" id="sim16bit-num-percent" style="font-size: 22px; font-weight: 700; color: #00e5ff; text-shadow: 0 0 8px rgba(0,229,255,0.5);">75%</div>
-                        </div>
-                        <div class="led-panel" style="background: #090d10; border: 2px solid #3d4b55; border-radius: 6px; padding: 8px 3px; flex: 1; text-align: center;">
-                            <div class="led-label" style="font-size: 11px; color: #9fb2bf; margin-bottom: 2px; font-weight: bold;">16-bit合計値</div>
-                            <div class="led-num" id="sim16bit-num-dmx" style="font-size: 20px; line-height: 26px; font-weight: 700; color: #66e8ff; text-shadow: 0 0 8px rgba(0,229,255,0.45);">0</div>
-                        </div>
-                        <div class="led-panel" style="background: #050505; border: 2px solid #ff3d00; border-radius: 6px; padding: 8px 3px; flex: 1; text-align: center;">
-                            <div class="led-label" style="font-size: 11px; color: #ff6d00; margin-bottom: 2px; font-weight: bold;">出力電圧</div>
-                            <div class="led-num" id="sim16bit-num-voltage" style="font-size: 22px; font-weight: 700; color: #ff3d00; text-shadow: 0 0 8px rgba(255,61,0,0.6);">75.0 V</div>
-                        </div>
-                    </div>
-
-                    <div class="panel-box" id="sim16bit-upper-graph-box" style="background: #0c0c0c; border: 2px solid #444; border-radius: 8px; padding: 8px; flex-grow: 1; display: flex; flex-direction: column; overflow: hidden; position: relative;">
-                        <button type="button" onclick="document.getElementById('sim16bit-zoom-overlay').style.display='flex'" style="position: absolute; top: 8px; right: 8px; z-index: 3; background: rgba(0,0,0,0.72); color: #d9fbff; border: 1px solid #2ad4ff; border-radius: 999px; padding: 5px 10px; font-size: 11px; font-weight: 700; cursor: zoom-in; box-shadow: 0 0 8px rgba(42,212,255,0.28);">🔍 拡大</button>
-                        <img src="assets/16bit_coarse_fine_infographic.webp" alt="16-bit Coarse Fine explanation" style="width: 100%; height: 100%; object-fit: contain; display: block;">
-                        <div id="sim16bit-zoom-overlay" onclick="this.style.display='none'" style="display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.86); align-items: center; justify-content: center; padding: 28px;">
-                            <button type="button" onclick="document.getElementById('sim16bit-zoom-overlay').style.display='none'; event.stopPropagation();" style="position: fixed; top: 18px; right: 22px; z-index: 10000; background: rgba(0,0,0,0.8); color: #ffffff; border: 1px solid #777; border-radius: 999px; width: 34px; height: 34px; font-size: 18px; cursor: pointer;">×</button>
-                            <img src="assets/16bit_coarse_fine_infographic.webp" alt="16-bit Coarse Fine explanation enlarged" onclick="event.stopPropagation()" style="max-width: 94vw; max-height: 88vh; object-fit: contain; border-radius: 12px; box-shadow: 0 0 28px rgba(42,212,255,0.35);">
-                        </div>
-                    </div>
-
-                    <div class="panel-box" style="background: #0c0c0c; border: 2px solid #444; border-radius: 8px; padding: 10px; flex-grow: 0; display: flex; flex-direction: column; overflow: hidden;">
-                        <div class="led-label" style="text-align: center; font-size: 10px; color: #666; margin-bottom: 2px; font-weight: bold;">16-bitの中身：上位8bit + 下位8bit</div>
-                        <div class="matrix-grid" id="sim16bit-binary-matrix-grid" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px; margin-top: 6px;"></div>
-                    </div>
-                </div>
-
-                <div class="col bulb-col" style="width: 26%; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;">
-                    <div class="section-title" style="font-size: 11px; font-weight: bold; color: #888; letter-spacing: 2px; text-align: center; margin-bottom: 3px;">見た目の明るさ</div>
-                    <div class="dark-room" style="width: 100%; height: 100%; background: #030303; border: 2px solid #444; border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: visible; position: relative;">
-                        <div class="ambient-glow" id="sim16bit-ambient-glow" style="position: absolute; top: -5%; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(255,143,0,0.38) 0%, rgba(255,87,34,0.08) 50%, rgba(0,0,0,0) 70%); mix-blend-mode: screen; pointer-events: none; opacity: 0; transform: scale(0.3); transition: opacity 0.05s ease, transform 0.05s ease; z-index: 0;"></div>
-                        <div class="bulb-image-container" style="position: relative; width: 185px; height: 305px; display: flex; align-items: center; justify-content: center;">
-                            <img src="assets/Light.webp" class="large-bulb-img" alt="Bulb Base" style="width: 100%; height: 100%; object-fit: contain; z-index: 1; pointer-events: none; opacity: 0.85;">
-                            <div class="internal-gas-glow" id="sim16bit-gas-glow" style="position: absolute; top: 6%; left: 5%; width: 90%; height: 55%; border-radius: 50%; background: radial-gradient(circle, rgba(255,213,79,0.9) 0%, rgba(255,109,0,0.3) 55%, rgba(0,0,0,0) 75%); z-index: 2; mix-blend-mode: screen; pointer-events: none; opacity: 0; transition: opacity 0.05s ease;"></div>
-                            <div class="filament-glow-layer" id="sim16bit-filament-glow" style="position: absolute; top: 25%; left: 36%; width: 28%; height: 12%; z-index: 3; mix-blend-mode: screen; pointer-events: none; opacity: 0; border-radius: 40% 40% 50% 50%; box-shadow: 0 0 0px rgba(0,0,0,0); transition: opacity 0.05s ease, background-color 0.05s ease, box-shadow 0.05s ease;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>`;
+        const fader = (id, title, description, value) => `<section class="s16-fader-card ${id}">
+          <h3>${title}</h3><p>${description}</p><output id="s16-${id}-value">${value}</output>
+          <div class="s16-fader-row"><div class="s16-scale"><span>255</span><span>192</span><span>128</span><span>64</span><span>0</span></div>
+          <input class="s16-vertical" id="s16-${id}" type="range" min="0" max="255" step="1" value="${value}" aria-label="${title}：${description}" orient="vertical">
+          <div class="s16-step"><button data-s16-step="${id}:1" aria-label="${title}を1上げる">＋</button><button data-s16-step="${id}:-1" aria-label="${title}を1下げる">−</button></div></div></section>`;
+        return `<div class="s16-page">
+          <header class="s16-title"><h1>16-bit 調光卓</h1><p>大きく動かすCoarseと、細かく合わせるFine。</p><button id="s16-help-open">ⓘ 詳細説明</button></header>
+          <main class="s16-workbench">
+            <section class="s16-zone s16-input"><h2>① 大きく・細かく動かす</h2>
+              <div class="s16-faders">${fader('coarse','Coarse','大きく調整',128)}${fader('fine','Fine','細かく調整',64)}</div>
+              <div class="s16-master"><label for="s16-master">全体操作（Master）</label><output id="s16-percent">50.10%</output><input id="s16-master" type="range" min="0" max="65535" step="1" value="32832" aria-label="全体操作（Master）"><div class="s16-master-scale"><span>0%</span><span>100%</span></div></div>
+            </section>
+            <section class="s16-zone s16-center"><h2>② 1段の中を拡大して見る</h2>
+              <div class="s16-overview"><h3><span class="s16-blue">Coarse</span>：大きな位置（256段階）</h3><div class="s16-ruler-labels"><span>0</span><span id="s16-selected">128</span><span>255</span></div><div class="s16-coarse-ruler" role="img" aria-label="Coarseの現在の段"><span id="s16-coarse-marker"></span></div></div>
+              <div class="s16-zoom-link" aria-hidden="true"></div>
+              <div class="s16-detail"><h3><span class="s16-green">Fine</span>：この1段を256段階に分ける</h3><div class="s16-fine-ruler" role="img" aria-label="選んだ1段の中のFine位置"><span id="s16-fine-marker"><b>今ここ</b><i></i></span></div><div class="s16-ruler-labels"><span>0</span><span>64</span><span>128</span><span>192</span><span>255</span></div></div>
+              <div class="s16-formula"><span>16-bitの計算</span><div><b class="s16-blue" id="s16-calc-coarse">128</b> × 256 ＋ <b class="s16-green" id="s16-calc-fine">64</b> ＝ <strong id="s16-total">32,832</strong></div></div>
+              <div class="s16-binary"><h3>2進数で見る（それぞれ8-bit）</h3><div class="s16-bytes"><div class="coarse"><div id="s16-coarse-bits" class="s16-bits"></div><p>Coarse（上位8-bit）</p></div><div class="fine"><div id="s16-fine-bits" class="s16-bits"></div><p>Fine（下位8-bit）</p></div></div></div>
+            </section>
+            <section class="s16-zone s16-light"><h2>③ 灯りを見る</h2><div class="s16-dark-room"><div id="sim16bit-ambient-glow" class="s16-ambient"></div><div class="s16-bulb"><img src="assets/Light.webp" alt="白熱電球"><div id="sim16bit-gas-glow" class="s16-gas"></div><div id="sim16bit-filament-glow" class="s16-filament"></div></div></div><div class="s16-readout"><span>16-bit値</span><strong id="s16-lamp-total">32,832</strong><span id="s16-light-state">点灯中</span></div><p class="s16-note">灯りは見た目のイメージ。</p></section>
+          </main>
+          <section class="s16-bottom"><section class="s16-zone"><h2>▤ 解説</h2><p><span class="s16-blue">Coarse</span>で、大きな位置を決める。</p><p><span class="s16-green">Fine</span>で、その中を細かく合わせる。</p></section>
+            <section class="s16-zone s16-teacher"><img src="assets/wave_teacher_transparent.svg" alt="照明教材の先生"><div><h2>先生のひとこと</h2><p id="s16-teacher-message">Coarseを固定して、<br>Fineだけ動かしてみよう。</p></div></section>
+            <section class="s16-zone"><h2>覚えておこう</h2><p>8-bit：<b>256段階</b><br>16-bit：<b>65,536段階</b></p><p>DMXの2つの値を組み合わせる。</p></section></section>
+          <footer class="s16-footer"><span>8bit Lighting Study</span><span>Coarse ／ Fine ／ 全体操作</span></footer>
+          <dialog id="s16-help-dialog" aria-labelledby="s16-help-title"><div class="s16-help-heading"><h2 id="s16-help-title">16-bitの詳細説明</h2><button id="s16-help-close" aria-label="詳細説明を閉じる">閉じる ×</button></div><p>大きく／細かく調整するしくみの説明図です。図の数値と距離の単位はたとえで、操作中の現在値ではありません。</p><img src="assets/16bit_coarse_fine_infographic.webp" alt="Master、Coarse、Fineの関係と上位・下位8-bitを説明するイラスト"></dialog>
+        </div>`;
     },
-
     init() {
-        const matrixGrid = document.getElementById('sim16bit-binary-matrix-grid');
-        matrixGrid.innerHTML = Array.from({length: 16}, (_, i) => `
-            <div class="matrix-cell" id="sim16bit-cell-${15-i}" style="flex: 1; min-width: 18px; height: 30px; background: #151515; border: 2px solid #444; border-radius: 4px; font-size: 12px; line-height: 26px; text-align: center; color: #444; transition: all 0.05s ease;">0</div>
-        `).join('');
-        this.bindEvents(['master', 'coarse', 'fine']);
-        this.syncPositionsFromValues();
+        this.destroy();
+        const root=document.querySelector('.s16-page'); if(!root)return;
+        this.abort=new AbortController(); const opts={signal:this.abort.signal};
+        for(const id of ['master','coarse','fine'])root.querySelector('#s16-'+id).addEventListener('input',e=>this.setValue(id,Number(e.target.value)),opts);
+        root.querySelectorAll('[data-s16-step]').forEach(b=>b.addEventListener('click',()=>{const [id,delta]=b.dataset.s16Step.split(':');this.adjustFaderValue(id,Number(delta));},opts));
+        const dialog=root.querySelector('#s16-help-dialog');
+        root.querySelector('#s16-help-open').addEventListener('click',()=>dialog.showModal(),opts);
+        root.querySelector('#s16-help-close').addEventListener('click',()=>dialog.close(),opts);
+        dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}},opts);
         this.updateSystem();
     },
-
-    bindEvents(ids) {
-        ids.forEach(id => {
-            const knob = document.getElementById(`sim16bit-knob-${id}`);
-            const boundary = document.getElementById(`sim16bit-boundary-${id}`);
-            const btnUp = document.getElementById(`sim16bit-btn-up-${id}`);
-            const btnDown = document.getElementById(`sim16bit-btn-down-${id}`);
-
-            const startHandler = (e) => {
-                this.draggingFaderId = id;
-                this.startY = e.touches ? e.touches[0].clientY : e.clientY;
-                this.startBottom = parseInt(knob.style.bottom) || 0;
-                e.preventDefault();
-                const label = document.getElementById(`sim16bit-label-${id}`);
-                if(label) label.style.color = '#aaa';
-            };
-
-            knob.addEventListener('mousedown', startHandler);
-            knob.addEventListener('touchstart', startHandler, { passive: false });
-
-            const jumpHandler = (e) => {
-                if (e.target === knob) return;
-                const rect = boundary.getBoundingClientRect();
-                const clickY = e.touches ? e.touches[0].clientY : e.clientY;
-                const relY = clickY - rect.top - 20;
-                let targetBottom = this.MAX_BOTTOM - relY + 24;
-                if (targetBottom < 0) targetBottom = 0;
-                if (targetBottom > this.MAX_BOTTOM) targetBottom = this.MAX_BOTTOM;
-                knob.style.bottom = targetBottom + 'px';
-                this.calculateValueFromPosition(id, targetBottom);
-                startHandler(e);
-            };
-
-            boundary.addEventListener('mousedown', jumpHandler);
-            boundary.addEventListener('touchstart', jumpHandler, { passive: false });
-
-            btnUp.addEventListener('click', () => this.adjustFaderValue(id, 1));
-            btnDown.addEventListener('click', () => this.adjustFaderValue(id, -1));
-        });
-
-        this._moveHandler = (e) => this.handleGlobalMove(e);
-        this._endHandler = () => this.handleGlobalEnd();
-        window.addEventListener('mousemove', this._moveHandler, { passive: false });
-        window.addEventListener('touchmove', this._moveHandler, { passive: false });
-        window.addEventListener('mouseup', this._endHandler);
-        window.addEventListener('touchend', this._endHandler);
-    },
-
-    destroy() {
-        window.removeEventListener('mousemove', this._moveHandler);
-        window.removeEventListener('touchmove', this._moveHandler);
-        window.removeEventListener('mouseup', this._endHandler);
-        window.removeEventListener('touchend', this._endHandler);
-    },
-
-    handleGlobalMove(e) {
-        if (!this.draggingFaderId) return;
-        e.preventDefault();
-        const knob = document.getElementById(`sim16bit-knob-${this.draggingFaderId}`);
-        const currentY = e.touches ? e.touches[0].clientY : e.clientY;
-        const deltaY = this.startY - currentY;
-        let targetBottom = this.startBottom + deltaY;
-        if (targetBottom < 0) targetBottom = 0;
-        if (targetBottom > this.MAX_BOTTOM) targetBottom = this.MAX_BOTTOM;
-        knob.style.bottom = targetBottom + 'px';
-        this.calculateValueFromPosition(this.draggingFaderId, targetBottom);
-    },
-
-    handleGlobalEnd() {
-        if (!this.draggingFaderId) return;
-        const label = document.getElementById('sim16bit-label-' + this.draggingFaderId);
-        if(label) label.style.color = '#555';
-        this.draggingFaderId = null;
-    },
-
-    calculateValueFromPosition(id, position) {
-        const ratio = position / this.MAX_BOTTOM;
-        if (id === 'master') { this.dmx16Bit = Math.round(ratio * 65535); } 
-        else if (id === 'coarse') { this.dmx16Bit = (Math.round(ratio * 255) * 256) + (this.dmx16Bit % 256); } 
-        else if (id === 'fine') { this.dmx16Bit = (Math.floor(this.dmx16Bit / 256) * 256) + Math.round(ratio * 255); }
-        this.syncPositionsFromValues(id);
+    destroy(){this.abort?.abort();document.querySelector('#s16-help-dialog')?.close();},
+    setValue(id,value){
+        const v=Math.round(Number(value));if(!Number.isFinite(v))return;
+        if(id==='master')this.dmx16Bit=Math.max(0,Math.min(65535,v));
+        else if(id==='coarse')this.dmx16Bit=Math.max(0,Math.min(255,v))*256+(this.dmx16Bit%256);
+        else if(id==='fine')this.dmx16Bit=Math.floor(this.dmx16Bit/256)*256+Math.max(0,Math.min(255,v));
         this.updateSystem();
     },
-
-    syncPositionsFromValues(excludeId = null) {
-        const cVal = Math.floor(this.dmx16Bit / 256);
-        const fVal = this.dmx16Bit % 256;
-        if (excludeId !== 'master') document.getElementById('sim16bit-knob-master').style.bottom = Math.round((this.dmx16Bit / 65535) * this.MAX_BOTTOM) + 'px';
-        if (excludeId !== 'coarse') document.getElementById('sim16bit-knob-coarse').style.bottom = Math.round((cVal / 255) * this.MAX_BOTTOM) + 'px';
-        if (excludeId !== 'fine') document.getElementById('sim16bit-knob-fine').style.bottom = Math.round((fVal / 255) * this.MAX_BOTTOM) + 'px';
+    adjustFaderValue(id,delta){
+        if(id==='coarse')this.setValue(id,Math.floor(this.dmx16Bit/256)+delta);
+        else this.setValue('master',this.dmx16Bit+delta);
     },
-
-    adjustFaderValue(id, delta) {
-        if (id === 'master') { this.dmx16Bit = Math.max(0, Math.min(65535, this.dmx16Bit + delta)); } 
-        else if (id === 'coarse') { let c = Math.max(0, Math.min(255, Math.floor(this.dmx16Bit / 256) + delta)); this.dmx16Bit = (c * 256) + (this.dmx16Bit % 256); } 
-        else if (id === 'fine') {
-            let f = (this.dmx16Bit % 256) + delta; let c = Math.floor(this.dmx16Bit / 256);
-            if (f > 255) { f = 0; c = Math.min(255, c + 1); } if (f < 0) { f = 255; c = Math.max(0, c - 1); }
-            this.dmx16Bit = (c * 256) + f;
-        }
-        this.syncPositionsFromValues();
-        this.updateSystem();
+    resizeCanvas(){},
+    updateSystem(){
+        const root=document.querySelector('.s16-page');if(!root)return;
+        const c=Math.floor(this.dmx16Bit/256),f=this.dmx16Bit%256,total=this.dmx16Bit.toLocaleString('en-US');
+        const set=(id,value)=>root.querySelector('#'+id).textContent=value;
+        for(const [id,v]of [['master',this.dmx16Bit],['coarse',c],['fine',f]])root.querySelector('#s16-'+id).value=v;
+        set('s16-coarse-value',c);set('s16-fine-value',f);set('s16-percent',(this.dmx16Bit/65535*100).toFixed(2)+'%');
+        set('s16-selected',c);set('s16-calc-coarse',c);set('s16-calc-fine',f);set('s16-total',total);set('s16-lamp-total',total);
+        root.querySelector('.s16-center').style.setProperty('--coarse-pos',((c+.5)/256*100)+'%');
+        root.querySelector('.s16-center').style.setProperty('--fine-pos',(f/255*100)+'%');
+        root.querySelector('#s16-fine-marker b').style.transform=f<24?'translateX(0)':f>231?'translateX(-100%)':'translateX(-50%)';
+        root.querySelector('.s16-coarse-ruler').setAttribute('aria-label',`Coarse：256段階のうち${c}の段`);
+        root.querySelector('.s16-fine-ruler').setAttribute('aria-label',`Coarse ${c}の段の中のFine ${f}`);
+        for(const [id,value]of [['coarse',c],['fine',f]])root.querySelector('#s16-'+id+'-bits').innerHTML=value.toString(2).padStart(8,'0').split('').map(bit=>`<span class="${bit==='1'?'on':''}">${bit}</span>`).join('');
+        root.querySelectorAll('[data-s16-step]').forEach(b=>{const[id,ds]=b.dataset.s16Step.split(':'),delta=Number(ds);b.disabled=id==='coarse'?(delta<0?c===0:c===255):(delta<0?this.dmx16Bit===0:this.dmx16Bit===65535);});
+        set('s16-light-state',this.dmx16Bit===0?'消灯':this.dmx16Bit===65535?'最大の指示':'点灯中');
+        this.updateBulb(this.dmx16Bit/65535,this.dmx16Bit/65535);
     },
-
-    updateSystem() {
-        document.getElementById('sim16bit-num-dmx').textContent = this.dmx16Bit;
-        let ratio = ((this.dmx16Bit / 65535) * 100).toFixed(2);
-        document.getElementById('sim16bit-num-percent').textContent = ratio + '%';
-        let factor = this.dmx16Bit / 65535;
-        let voltage = factor * 100;
-
-        for (let i = 0; i < 16; i++) {
-            const cell = document.getElementById('sim16bit-cell-' + i);
-            const isSet = (this.dmx16Bit >> i) & 1;
-            if (cell) {
-                cell.textContent = isSet ? '1' : '0';
-                if (isSet) {
-                    const isHighByte = i >= 8;
-                    cell.style.background = isHighByte ? '#123946' : '#123b2a';
-                    cell.style.color = isHighByte ? '#d9fbff' : '#d8ffe8';
-                    cell.style.borderColor = isHighByte ? '#2ad4ff' : '#00e676';
-                    cell.style.boxShadow = isHighByte ? '0 0 6px rgba(42,212,255,0.35)' : '0 0 6px rgba(0,230,118,0.35)';
-                } 
-                else { cell.style.background = '#151515'; cell.style.color = '#444'; cell.style.borderColor = '#444'; cell.style.boxShadow = 'none'; }
-            }
-        }
-        document.getElementById('sim16bit-num-voltage').textContent = voltage.toFixed(2) + ' V';
-        this.updateBulb(factor, voltage);
-    },
-
-    updateBulb(factor, voltage) {
-        const filamentGlow = document.getElementById('sim16bit-filament-glow');
-        const gasGlow = document.getElementById('sim16bit-gas-glow');
-        const ambientGlow = document.getElementById('sim16bit-ambient-glow');
-        if (voltage === 0) {
-            filamentGlow.style.opacity = 0; gasGlow.style.opacity = 0; ambientGlow.style.opacity = 0;
-        } else {
-            let r = 255, g = 0, b = 0, shadowColor = '';
-            if (factor < 0.2) { g = Math.floor(factor * 5 * 100); shadowColor = `rgba(255, 30, 0, ${0.4 + factor * 2})`; } 
-            else if (factor < 0.6) { g = Math.floor(100 + ((factor - 0.2) / 0.4) * 100); b = Math.floor(((factor - 0.2) / 0.4) * 50); shadowColor = `rgba(255, 143, 0, ${0.6 + factor})`; } 
-            else { g = Math.floor(200 + ((factor - 0.6) / 0.4) * 45); b = Math.floor(50 + ((factor - 0.6) / 0.4) * 110); shadowColor = `rgba(255, 235, 59, 1)`; }
-            filamentGlow.style.opacity = (0.25 + factor * 0.75).toString();
-            filamentGlow.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-            filamentGlow.style.boxShadow = `0 0 ${8 + factor * 28}px ${shadowColor}, 0 0 ${3 + factor * 12}px #fff`;
-            gasGlow.style.opacity = Math.min(factor * 1.1, 1.0).toString();
-            ambientGlow.style.opacity = factor.toString();
-            ambientGlow.style.transform = `scale(${0.3 + (factor * 0.9)})`;
-        }
+    updateBulb(factor){
+        const root=document.querySelector('.s16-page');
+        const gas=root.querySelector('#sim16bit-gas-glow'),filament=root.querySelector('#sim16bit-filament-glow'),ambient=root.querySelector('#sim16bit-ambient-glow');
+        gas.style.opacity=String(factor);ambient.style.opacity=String(factor);
+        filament.style.opacity=factor===0?'0':String(.15+.85*factor);
+        const color=`rgb(255,${Math.round(40+205*factor)},${Math.round(110*factor)})`;
+        filament.style.background=color;filament.style.boxShadow=`0 0 ${8+factor*28}px ${color}`;
     }
 };
