@@ -105,7 +105,7 @@ const Module_Sim8Bit = {
         document.getElementById('sim8bit-light-state').textContent = this.dmx8Bit === 0 ? '消灯' : this.dmx8Bit === 255 ? '最大の指示で点灯' : '点灯中';
         const teacher = document.getElementById('sim8-teacher-message');
         if (teacher) teacher.innerHTML = this.current8bitView === 'digital'
-          ? 'こちらは電圧ではなく、数字の指示。<br>同じフェーダー位置でアナログと比べよう。'
+          ? 'DMXは電圧ではなく、数字の指示。<br>同じ位置で、アナログと比べよう。'
           : this.current8bitView === 'curve'
           ? 'フェーダー位置をそのままにして、<br>カーブを変えるとどうなるかな？'
           : 'こちらは灯体へ出す電圧と波形。<br>デジタルに切り替えると、同じ位置をどう表すかな？';
