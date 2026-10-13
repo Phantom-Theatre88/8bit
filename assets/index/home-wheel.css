@@ -104,7 +104,7 @@
   background-size: cover;
   box-shadow: inset 0 0 16px #0009, 0 4px 8px #0007;
   opacity: var(--item-opacity);
-  transform: translate3d(0, calc(var(--offset) * var(--wheel-step)), calc(var(--depth) * -34px)) rotateX(calc(var(--offset) * -10deg)) scale(var(--scale));
+  transform: translate3d(0, var(--wheel-y, 0px), var(--wheel-z, 0px)) rotateX(var(--wheel-rotate, 0deg)) scale(var(--scale));
   transition: transform .27s cubic-bezier(.2,.8,.2,1), opacity .24s, border-color .2s, box-shadow .2s;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
