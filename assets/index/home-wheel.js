@@ -16,7 +16,6 @@
 
   const total = buttons.length;
   let selected = 2; // Initial reference design: 03 SIGNAL
-  let visible = selected;
   let touchStart = null;
   let ignoreClickUntil = 0;
   let wheelAccumulated = 0;
@@ -34,12 +33,12 @@
 
   function showDetail(index) {
     const nextVisible = wrap(index);
-    if (nextVisible === visible && !panels[nextVisible].hidden) return;
-    visible = nextVisible;
+    if (nextVisible !== selected) return;
+    if (!panels[nextVisible].hidden && panels.every((p, i) => p.hidden === (i !== selected))) return;
     panels.forEach((panel, i) => {
-      panel.hidden = i !== visible;
+      panel.hidden = i !== selected;
     });
-    const scroller = panels[visible].querySelector(".detail-lessons-scroll");
+    const scroller = panels[selected].querySelector(".detail-lessons-scroll");
     if (scroller) scroller.scrollTop = 0;
   }
 
@@ -73,21 +72,8 @@
       if (Date.now() < ignoreClickUntil) return;
       select(index);
     });
-    button.addEventListener("pointerenter", event => {
-      if (event.pointerType === "mouse") showDetail(index);
-    });
-    button.addEventListener("focus", () => {
-      // Keyboard focus previews the theme, without moving the wheel.
-      showDetail(index);
-    });
   });
 
-  wheel.addEventListener("pointerleave", event => {
-    if (event.pointerType === "mouse") showDetail(selected);
-  });
-  wheel.addEventListener("focusout", event => {
-    if (!wheel.contains(event.relatedTarget)) showDetail(selected);
-  });
 
   prev?.addEventListener("click", () => select(selected - 1));
   next?.addEventListener("click", () => select(selected + 1));
