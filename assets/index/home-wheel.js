@@ -45,7 +45,7 @@
 
   function renderWheel() {
     const viewportWidth = window.innerWidth;
-    const step = viewportWidth <= 760 ? 45 : Math.max(48, Math.min(62, viewportWidth * .0455));
+    const step = viewportWidth <= 760 ? 45 : Math.max(48, Math.min(57, viewportWidth * .041));
     buttons.forEach((button, index) => {
       const offset = signedOffset(index);
       const distance = Math.abs(offset);
