@@ -5335,7 +5335,8 @@
     <script src="next-ui-lesson-content.js"></script>
 
     <script src="Module_Sim8Bit.js?v=20261013-compare3"></script>
-    <script src="Module_Sim16Bit.js"></script>
+    <script src="Module_Sim16Bit.js?v=20261013-live1"></script>
+    <link rel="stylesheet" href="next-ui-sim16bit.css?v=20261013-live1">
     <script src="Module_SimDmx.js"></script>
     <script src="Module_LEDColorMixing.js?v=cie-img-vivid1"></script>
     <script src="Module_NetIpAddress.js?v=network-layout-v0-4-ip"></script>
@@ -5781,7 +5782,8 @@
                 if (key === 'netartnet' || key === 'netbroadcast' || key === 'netsacn') {
                     moduleHTML = getNetworkLessonHTML(key, moduleHTML);
                 } else if (key === 'sim16bit') {
-                    moduleHTML = `<div id="sim16bit-root">${moduleHTML}</div>`;
+                    panel.innerHTML = moduleHTML;
+                    return;
                 }
                 panel.innerHTML = window.NextUiLessonShell.render(key, moduleHTML);
             }
