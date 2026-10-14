@@ -437,3 +437,54 @@ body > .next-ui-console-header {
   .next-ui-console-header .next-ui-header-top {overflow-x:auto !important}
   .next-ui-console-header .next-ui-header-top .next-ui-category-tabs {flex:0 0 auto !important}
 }
+
+/* STEP6 definitive geometry: identical to the approved Dimming header.
+   Use fixed page-independent viewport anchoring; ignore body paddings and
+   page-specific header width/margin rules. */
+html:has(body > .next-ui-console-header),
+html:has(body > .next-ui-console-header) > body {
+  margin:0 !important;
+  padding:0 !important;
+}
+body > .next-ui-console-header.next-ui-header {
+  box-sizing:border-box !important;
+  position:relative !important;
+  top:0 !important;
+  left:0 !important;
+  right:auto !important;
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  height:60px !important;
+  min-height:60px !important;
+  max-height:60px !important;
+  margin:0 !important;
+  padding:0 !important;
+  border-radius:0 !important;
+  transform:none !important;
+  flex:0 0 60px !important;
+}
+body > .next-ui-console-header.next-ui-header .next-ui-header-top {
+  width:100% !important;
+  min-width:0 !important;
+  height:60px !important;
+  min-height:60px !important;
+  max-height:60px !important;
+  flex-wrap:nowrap !important;
+}
+body > .next-ui-console-header.next-ui-header .next-ui-category-tabs {
+  flex-wrap:nowrap !important;
+  margin-top:0 !important;
+  margin-bottom:0 !important;
+  padding-top:0 !important;
+  padding-bottom:0 !important;
+  border-top:0 !important;
+  order:0 !important;
+}
+body > .next-ui-console-header.next-ui-header .next-ui-category-menu {
+  flex-shrink:0 !important;
+}
+body > .next-ui-console-header.next-ui-header .next-ui-tools {
+  flex-wrap:nowrap !important;
+  order:0 !important;
+}
