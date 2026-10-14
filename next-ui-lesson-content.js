@@ -163,7 +163,7 @@
           <section class="common-bottom-card common-teacher-card"><img class="common-teacher-img" src="assets/analog_teacher_pointing.webp" alt="照明教材の先生"><div class="common-teacher-copy"><h3>先生のひとこと</h3><div class="common-teacher-speech"${teacherSpeechId}>${lesson.teacher}</div></div></section>
           <section class="common-bottom-card common-remember-card"><h2 class="common-bottom-title">♙ 覚えておこう</h2><div class="common-remember-list">${remember}</div><div class="common-tip">⚡ 操作TIP<br>${lesson.tip}</div></section>
         </section>
-        <footer class="common-page-footer"><span>8bit Lighting Study　v3.0.1</span><span>${lesson.footer}</span></footer>
+        <footer class="common-page-footer"><span>8bit Lighting Theatre　v3.0.1</span><span>${lesson.footer}</span></footer>
       </div>`;
   }
 
