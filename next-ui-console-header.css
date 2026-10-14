@@ -300,3 +300,55 @@
   .next-ui-console-header .next-ui-header-top {overflow-x:auto !important;scrollbar-width:thin}
   .next-ui-console-header .next-ui-category-tabs {flex:0 0 auto !important}
 }
+
+/* STEP6/7: match the approved Dimming (Top.html) header footprint everywhere.
+   Top.html's negative outer margin was unique; use the same 60px bar without
+   changing its surrounding lesson layout.  Scoped !important overrides prevent
+   legacy page-shell and inline media queries from changing the bar geometry. */
+.next-ui-console-header {
+  box-sizing:border-box !important;
+  flex:0 0 60px !important;
+  flex-shrink:0 !important;
+  height:60px !important;
+  min-height:60px !important;
+  max-height:60px !important;
+  padding:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  overflow:visible !important;
+}
+.next-ui-console-header .next-ui-header-top {
+  box-sizing:border-box !important;
+  flex:0 0 60px !important;
+  height:60px !important;
+  min-height:60px !important;
+  max-height:60px !important;
+  padding:0 !important;
+  margin:0 !important;
+}
+.next-ui-console-header .next-ui-header-top .next-ui-brand {
+  box-sizing:border-box !important;
+  height:60px !important;
+  min-height:60px !important;
+  max-height:60px !important;
+  align-self:center !important;
+}
+.next-ui-console-header .next-ui-header-top .next-ui-category-tabs,
+.next-ui-console-header .next-ui-header-top .next-ui-tools {
+  box-sizing:border-box !important;
+  height:60px !important;
+  min-height:60px !important;
+  max-height:60px !important;
+  align-self:center !important;
+}
+.next-ui-console-header .next-ui-header-top .next-ui-category-menu {
+  box-sizing:border-box !important;
+  height:50px !important;
+  min-height:50px !important;
+  max-height:50px !important;
+  align-self:center !important;
+}
+.next-ui-console-header .next-ui-header-top .next-ui-tools {
+  padding-top:0 !important;
+  padding-bottom:0 !important;
+}
