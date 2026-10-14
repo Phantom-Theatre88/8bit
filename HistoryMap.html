@@ -210,17 +210,11 @@ button,a{font:inherit}
   .map-foot{flex-direction:column;align-items:flex-start}
 }
 </style>
-<link rel="stylesheet" href="next-ui-console-header.css?v=step6-unified-v4">
+<link rel="stylesheet" href="next-ui-console-header.css?v=shared-dom-v1">
 </head>
 <body>
-<header class="next-ui-header" aria-label="8bit図鑑 共通ナビゲーション">
-  <div class="next-ui-header-top">
-    <a class="next-ui-brand" href="index.html" aria-label="8bit Lighting Theatre トップへ"><img src="assets/index/8bit-lighting-theatre-logo-c.svg" alt="8bit Lighting Theatre" width="530" height="239" decoding="async"></a>
-    <nav class="next-ui-category-tabs" aria-label="教材の大分類"></nav>
-    <div class="next-ui-tools"><div class="next-ui-page-controls"><button class="next-ui-page-button" type="button" onclick="location.href='index.html'">⌂ TOP</button></div></div>
-  </div>
-</header>
-<script src="next-ui-console-header.js?v=step5-shared-v2"></script>
+<div id="shared-console-header-root"></div>
+<script src="next-ui-console-header.js?v=shared-dom-v1"></script>
 
 <main class="map-app">
   <section class="map-head">
