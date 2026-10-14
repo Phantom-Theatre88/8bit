@@ -62,3 +62,9 @@ TOPページ・共通メニュー・教材ページが一つの8bit Lighting The
 ## STEP5 UI磨き込み（2026-10-14）
 - ユーザー承認の4点を共通CSSに実装（`1ca3ddb`）：選択テーマの薄い発光背景・下端ライン、メニュー間隔、ロゴとの縦セパレーター、前後移動ボタンの形状統一。
 - ヘッダー高さ、7テーマの構成、教材リンク、選択処理は維持。公開Safari表示確認後にLOCK判断。
+
+## STEP5 全教材ページ共通化（2026-10-14）
+- 正本は `next-ui-console-header.js`（ロゴ・7テーマ・アイコン・教材リンクを一元生成）および `next-ui-console-header.css`（角型44pxスイッチ・文字14px・アイコン22px・選択発光）。
+- 既存の `next-ui-typography.css` 末尾に重複していたSTEP5のスタイルを削除。各ページ固有の教材本体と既存の前後移動ロジックは維持。
+- 適用先：`Top.html`、`Analog.html`、`SinglePhase3.html`、`Waveforms.html`、`History.html`、`HistoryMap.html`、`ConvexLens.html`、`PersonLighting.html`（計8ページ）。トップ入口の `index.html` は別デザインのため対象外。legacy-ui / next-ui の旧版・testsも対象外。
+- ソース確認：8ページすべて共通CSSと共通JSの参照あり、共通JSには7テーマ定義あり。**GitHub Pages公開反映・Safari実表示・iPad操作は未確認。STEP5の完了宣言／LOCKはユーザー確認後**。
