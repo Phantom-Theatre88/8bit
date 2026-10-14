@@ -187,3 +187,16 @@ body.singlephase-next-ui .empty {top:132px;font-size:15px;line-height:22px}
    min-width:0!important;padding:0 0 7px!important;
  }
 }
+
+/* iPad landscape: reserve meaningful height for the teacher instead of 112px. */
+@media (orientation:landscape) and (min-width:960px) and (min-height:640px) {
+ body.singlephase-next-ui .app {
+   grid-template-rows:32px 76px minmax(0,1fr) clamp(180px,21dvh,210px) 18px!important;
+ }
+ body.singlephase-next-ui .lesson-bottom > .teacher > .teacher-character {
+   width:100%!important;height:100%!important;max-height:100%!important;
+ }
+ body.singlephase-next-ui .lesson-bottom > .teacher .teacher-speech {
+   font-size:16px!important;line-height:23px!important;padding:9px!important;
+ }
+}
