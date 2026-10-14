@@ -7,7 +7,7 @@
   const file = location.pathname.split('/').pop() || 'Top.html';
   const categoryForPage = {
     'Analog.html':'electric','SinglePhase3.html':'electric','Waveforms.html':'electric',
-    'History.html':'history','ConvexLens.html':'fixture'
+    'History.html':'history','HistoryMap.html':'history','ConvexLens.html':'fixture'
   };
   const activeCategory = isTop ? 'dimming' : (categoryForPage[file] || '');
   const brand = header.querySelector('.next-ui-brand');
