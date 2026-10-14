@@ -352,3 +352,22 @@
   padding-top:0 !important;
   padding-bottom:0 !important;
 }
+
+/* STEP6 alignment: all lessons anchor the 60px header to the viewport's top edge.
+   Previously Top.html used body padding + negative header margins, while
+   other lessons used different body paddings; this caused vertical jumps. */
+html:has(> body > .next-ui-console-header),
+html:has(> body > .next-ui-console-header) > body {
+  margin-top:0 !important;
+  padding-top:0 !important;
+}
+body > .next-ui-console-header {
+  position:relative !important;
+  top:auto !important;
+  left:auto !important;
+  right:auto !important;
+  width:100% !important;
+  max-width:100% !important;
+  margin:0 !important;
+  transform:none !important;
+}
