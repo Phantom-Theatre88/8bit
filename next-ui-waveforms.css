@@ -241,3 +241,41 @@ body.wave-next-ui #pointMeaning{height:auto;margin:0;padding:2px 9px;font-size:1
    margin-top:5px!important;
  }
 }
+
+
+/* Waveform bottom row v4: prioritize fitting the full Hz explanation, without clipping.
+   Larger text panel and controlled copy rhythm; do not alter shared header. */
+@media (orientation:landscape) and (min-width:960px) and (min-height:640px) {
+ body.wave-next-ui .lesson-bottom {
+   grid-template-columns:minmax(0,29fr) minmax(0,39fr) minmax(0,32fr)!important;
+ }
+ body.wave-next-ui .lesson-bottom > .equipment {
+   padding:8px 10px!important;
+   overflow:visible!important;
+   min-height:0!important;
+ }
+ body.wave-next-ui .lesson-bottom > .equipment h3 {
+   font-size:16px!important;
+   line-height:21px!important;
+   margin:0 0 5px!important;
+ }
+ body.wave-next-ui .lesson-bottom > .equipment p {
+   font-size:15px!important;
+   line-height:20px!important;
+   margin:0 0 5px!important;
+   overflow-wrap:normal!important;
+ }
+ body.wave-next-ui .lesson-bottom > .equipment p.equipment-check {
+   font-size:15px!important;
+   line-height:20px!important;
+   margin:4px 0 0!important;
+ }
+ body.wave-next-ui .lesson-bottom > .teacher {
+   grid-template-columns:clamp(110px,10vw,140px) minmax(0,1fr)!important;
+   gap:6px!important;
+ }
+ body.wave-next-ui .lesson-bottom > .teacher .teacher-speech {
+   font-size:16px!important;
+   line-height:22px!important;
+ }
+}
