@@ -68,3 +68,10 @@ TOPページ・共通メニュー・教材ページが一つの8bit Lighting The
 - 既存の `next-ui-typography.css` 末尾に重複していたSTEP5のスタイルを削除。各ページ固有の教材本体と既存の前後移動ロジックは維持。
 - 適用先：`Top.html`、`Analog.html`、`SinglePhase3.html`、`Waveforms.html`、`History.html`、`HistoryMap.html`、`ConvexLens.html`、`PersonLighting.html`（計8ページ）。トップ入口の `index.html` は別デザインのため対象外。legacy-ui / next-ui の旧版・testsも対象外。
 - ソース確認：8ページすべて共通CSSと共通JSの参照あり、共通JSには7テーマ定義あり。**GitHub Pages公開反映・Safari実表示・iPad操作は未確認。STEP5の完了宣言／LOCKはユーザー確認後**。
+
+## 共通ヘッダー／教材表示エリア分離方針 LOCK（2026-10-14）
+- ユーザー指示「上部ヘッダーは全ページ共通の同じものを使って。下部のエリアを表示部として、各ページ独自のCSSにする」を正式LOCK。
+- 調光ページで承認済みのヘッダーを基準に、画面左端・ロゴ・7テーマボタン・前後操作の寸法と位置を全教材で共通化する。
+- 共通ヘッダーのHTMLを各ページへコピーせず、`next-ui-console-header.js` が `#shared-console-header-root` に同一DOMを生成する。テーマ選択・前後移動の行先のみページ依存とする。
+- `next-ui-console-header.css` がヘッダーを管理。教材表示領域は各ページ独自のHTML/CSS/JSとする。教材CSSのヘッダー干渉は段階的に撤去し、教材機能と採用済みデザインは維持。
+- 実装開始コミット：共通DOM `9ea0859f`、8教材ページにプレースホルダーを適用。**Safariでの全ページ表示・位置一致・メニュー開閉・前後移動は未確認。ユーザーの実機承認まで完了LOCKしない。**
