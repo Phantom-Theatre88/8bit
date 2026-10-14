@@ -5423,27 +5423,12 @@
     <script src="Module_MovingHead.js"></script>
     <script src="Module_Scroller.js"></script>
 
-<link rel="stylesheet" href="next-ui-console-header.css?v=step6-unified-v4">
+<link rel="stylesheet" href="next-ui-console-header.css?v=shared-dom-v1">
 </head>
 <body>
 
-<header class="next-ui-header" aria-label="8bit図鑑 共通ナビゲーション">
-    <div class="next-ui-header-top">
-        <a class="next-ui-brand" href="index.html" aria-label="8bit Lighting Theatre トップへ"><img src="assets/index/8bit-lighting-theatre-logo-c.svg" alt="8bit Lighting Theatre" width="530" height="239" decoding="async"></a>
-        <nav class="next-ui-category-tabs" aria-label="教材の大分類"></nav>
-        <div class="next-ui-tools" aria-label="補助メニュー">
-            <button class="next-ui-tool" type="button">▣ 学習ガイド</button>
-            <button class="next-ui-tool" type="button">▱ ブックマーク</button>
-            <button class="next-ui-tool" type="button">⚙ 設定</button>
-            <div class="next-ui-page-controls" aria-label="教材ページ移動">
-                <button class="next-ui-page-button" id="next-ui-prev" type="button">◀ 前</button>
-                <button class="next-ui-page-button" id="next-ui-next" type="button">次 ▶</button>
-            </div>
-            <button class="next-ui-tool menu" type="button" aria-label="メニュー">☰</button>
-        </div>
-    </div>
-</header>
-<script src="next-ui-console-header.js?v=step5-shared-v2"></script>
+<div id="shared-console-header-root"></div>
+<script src="next-ui-console-header.js?v=shared-dom-v1"></script>
 
 <div class="main-tab-container next-ui-module-tabs" id="next-ui-module-tabs" aria-hidden="true">
     <button class="main-tab-btn tab-dimmer active" id="main-tab-sim8bit">8-bit 調光卓</button>
