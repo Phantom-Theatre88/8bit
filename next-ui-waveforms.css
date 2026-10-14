@@ -199,3 +199,23 @@ body.wave-next-ui #pointMeaning{height:auto;margin:0;padding:2px 9px;font-size:1
  body.wave-next-ui #instantReadout{grid-auto-rows:24px;line-height:24px;min-height:48px}
  body.wave-next-ui .control-group{padding:3px}
 }
+
+/* LOCK: electric lesson bottom-panel proportions match approved Analog layout. */
+@media (orientation:landscape) and (min-width:960px) and (min-height:640px) {
+ body.wave-next-ui .lesson-bottom {
+   grid-template-columns:minmax(0,32fr) minmax(0,24fr) minmax(0,44fr)!important;
+ }
+ body.wave-next-ui .lesson-bottom > .teacher {
+   grid-template-columns:clamp(145px,14vw,185px) minmax(0,1fr)!important;
+   gap:6px!important;padding:7px 9px 0!important;
+   align-items:stretch!important;overflow:hidden!important;
+ }
+ body.wave-next-ui .lesson-bottom > .teacher > .teacher-character {
+   display:block!important;width:100%!important;height:100%!important;
+   max-height:100%!important;min-height:0!important;object-fit:contain!important;
+   object-position:center bottom!important;align-self:stretch!important;
+ }
+ body.wave-next-ui .lesson-bottom > .teacher > .teacher-copy {
+   min-width:0!important;padding:0 0 7px!important;
+ }
+}
