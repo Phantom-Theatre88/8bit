@@ -27,17 +27,11 @@ body.person-lighting-next-ui .app{width:100%;min-height:0;flex:1 1 auto;padding:
 @media(max-height:860px){body.person-lighting-next-ui .app{padding:7px 12px 0;grid-template-rows:54px minmax(0,1fr) 184px 26px;gap:6px}.fader-area{min-height:96px}.teacher-character{width:112px}.teacher-panel{grid-template-columns:112px 1fr}.teacher-speech{padding:8px 10px}}
 @media(max-width:1050px){.next-ui-brand{width:108px;font-size:19px;padding-left:12px}.next-ui-category-tab{min-width:88px;padding:0 9px}.next-ui-tools .next-ui-tool:not(.menu){display:none}.status{display:none}.title span{display:none}.main-grid,.bottom-grid{grid-template-columns:1fr}.preview-panel{display:none}.teacher-panel{min-height:185px}.fader-bank{overflow-x:auto;grid-template-columns:repeat(10,74px)}}
 </style>
-<link rel="stylesheet" href="next-ui-console-header.css?v=step6-unified-v4">
+<link rel="stylesheet" href="next-ui-console-header.css?v=shared-dom-v1">
 </head>
 <body class="person-lighting-next-ui">
-<header class="next-ui-header" aria-label="8bit図鑑 共通ナビゲーション">
-  <div class="next-ui-header-top">
-    <a class="next-ui-brand" href="index.html" aria-label="8bit Lighting Theatre トップへ"><img src="assets/index/8bit-lighting-theatre-logo-c.svg" alt="8bit Lighting Theatre" width="530" height="239" decoding="async"></a>
-    <nav class="next-ui-category-tabs" aria-label="教材の大分類"></nav>
-    <div class="next-ui-tools"><button class="next-ui-tool" type="button">▣ 学習ガイド</button><button class="next-ui-tool" type="button">▱ ブックマーク</button><button class="next-ui-tool" type="button">⚙ 設定</button><div class="next-ui-page-controls"><button class="next-ui-page-button" type="button" onclick="location.href='index.html'">◀ 前</button><button class="next-ui-page-button" type="button" disabled>次 ▶</button></div><button class="next-ui-tool menu" type="button" aria-label="メニュー">☰</button></div>
-  </div>
-</header>
-<script src="next-ui-console-header.js?v=step5-shared-v2"></script>
+<div id="shared-console-header-root"></div>
+<script src="next-ui-console-header.js?v=shared-dom-v1"></script>
 <main class="app">
   <header class="topbar">
     <div class="title"><div class="title-icon">◉</div><h1>人物の見え方シミュレーター</h1><span>｜灯具の位置と強さで、人の見え方がどう変わるか</span></div>
