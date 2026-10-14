@@ -185,6 +185,33 @@ body.analog-next-ui .next-ui-category-menu:nth-last-child(-n+2) .next-ui-dropdow
  body.analog-next-ui .next-ui-header-top {flex-wrap:wrap}
  body.analog-next-ui .next-ui-category-tabs {order:3;width:100%;justify-content:center;border-top:1px solid #3e4a56}
 }
+
+/* Electric lesson bottom-row rebalance v3. Kept at END of all lesson styles
+   so earlier responsive !important rules cannot override it. */
+@media (orientation:landscape) and (min-width:960px) and (min-height:640px) {
+ body.analog-next-ui .lesson-bottom {
+   grid-template-columns:minmax(0,32fr) minmax(0,44fr) minmax(0,24fr)!important;
+ }
+ body.analog-next-ui .lesson-bottom > .teacher {
+   grid-template-columns:clamp(145px,14vw,185px) minmax(0,1fr)!important;
+   gap:6px!important;
+   padding:7px 9px 0!important;
+   overflow:hidden!important;
+ }
+ body.analog-next-ui .lesson-bottom > .teacher > .teacher-character {
+   display:block!important;
+   width:100%!important;
+   height:100%!important;
+   max-height:100%!important;
+   min-height:0!important;
+   object-fit:contain!important;
+   object-position:center bottom!important;
+   align-self:stretch!important;
+ }
+ body.analog-next-ui .lesson-bottom > .teacher > .teacher-intro-wrap {
+   padding:0 0 7px!important;
+ }
+}
 </style>
 <link rel="stylesheet" href="next-ui-console-header.css?v=shared-dom-v1">
 </head>
