@@ -75,3 +75,10 @@ TOPページ・共通メニュー・教材ページが一つの8bit Lighting The
 - 共通ヘッダーのHTMLを各ページへコピーせず、`next-ui-console-header.js` が `#shared-console-header-root` に同一DOMを生成する。テーマ選択・前後移動の行先のみページ依存とする。
 - `next-ui-console-header.css` がヘッダーを管理。教材表示領域は各ページ独自のHTML/CSS/JSとする。教材CSSのヘッダー干渉は段階的に撤去し、教材機能と採用済みデザインは維持。
 - 実装開始コミット：共通DOM `9ea0859f`、8教材ページにプレースホルダーを適用。**Safariでの全ページ表示・位置一致・メニュー開閉・前後移動は未確認。ユーザーの実機承認まで完了LOCKしない。**
+
+## 先生画像の標準化方針 LOCK（2026-10-14）
+- 全教材で使用する先生キャラクターの標準素材を `assets/wave_teacher_transparent.svg` とする（既存の透明背景・指差しポーズ）。
+- `assets/analog_teacher_pointing.webp` は背景が不透明な旧素材のため、教材ページからの参照を置き換える。
+- 2026-10-14時点：Analog / SinglePhase3 / History / ConvexLens / PersonLighting の5ページを差し替え。Top / Waveforms は既に標準素材。HistoryMap は先生画像の表示なし（勝手に追加しない）。
+- 別ポーズの制作・採用は今後検討。今回は追加しない。
+- ページごとの表示サイズや吹き出しとのバランスは別途実機確認。画像統一だけで表示寸法の最終LOCKとはしない。
