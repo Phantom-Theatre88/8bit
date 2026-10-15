@@ -156,14 +156,15 @@ const Module_SimDmx = {
     bitWave(value,full){
       const bits=full?[0,...Array.from({length:8},(_,i)=>(value>>i)&1),1,1]:Array.from({length:8},(_,i)=>(value>>i)&1);
       const x0=full?10:2,step=full?48:9.5,high=full?29:7,low=full?78:24;
-      let d='M'+x0+' '+(full?high:low);
+      let d='M'+x0+' '+(bits[0]?high:low);
       bits.forEach((bit,i)=>{const x=x0+i*step,y=bit?high:low;d+=' H'+x+' V'+y+' H'+(x+step)});
       return d;
     },
     updateWaves(){
       document.querySelectorAll('#simdmx-train-wagon-line .sd-car[data-ch]').forEach(car=>{
         const i=Number(car.dataset.ch),val=this.dmxChannels[i-1],svg=car.querySelector('svg'),color=this.chColors[i-1];
-        svg.innerHTML=`<path d="${this.bitWave(val,false)}" fill="none" stroke="${color}" stroke-width="2.3" stroke-linejoin="miter"/>`;
+        const grid=Array.from({length:9},(_,j)=>`<line x1="${2+j*9.5}" y1="3" x2="${2+j*9.5}" y2="28" stroke="#91a7b5" stroke-opacity=".27" stroke-width=".65" ${j===0||j===8?'':'stroke-dasharray="2 2"'}/>`).join('');
+        svg.innerHTML=`${grid}<path d="${this.bitWave(val,false)}" fill="none" stroke="${color}" stroke-width="2.3" stroke-linejoin="miter"/>`;
         car.classList.toggle('sd-selected',i===this.selectedChannel);
         car.querySelector('.sd-value').textContent=val+' / '+val.toString(2).padStart(8,'0');
       });
@@ -171,7 +172,8 @@ const Module_SimDmx = {
       if(svg){
         const bits=[0,...Array.from({length:8},(_,b)=>(val>>b)&1),1,1];
         let labels=bits.map((b,j)=>`<text x="${34+j*48}" y="103" text-anchor="middle" fill="${j===0?'#ff799d':j>=9?'#b99dff':'#ffce76'}" font-size="14">${b}</text>`).join('');
-        svg.innerHTML=`<rect x="10" y="9" width="48" height="77" fill="#e8386420"/><rect x="58" y="9" width="384" height="77" fill="#f4a62612"/><rect x="442" y="9" width="96" height="77" fill="#8777ff24"/><path d="${this.bitWave(val,true)}" fill="none" stroke="#ffc04d" stroke-width="3"/>${labels}`;
+        const grid=Array.from({length:12},(_,j)=>`<line x1="${10+j*48}" y1="9" x2="${10+j*48}" y2="86" stroke="#a3c5dc" stroke-opacity=".35" stroke-width="1" ${j===0||j===11?'':'stroke-dasharray="3 4"'}/>`).join('');
+        svg.innerHTML=`<rect x="10" y="9" width="48" height="77" fill="#e8386420"/><rect x="58" y="9" width="384" height="77" fill="#f4a62612"/><rect x="442" y="9" width="96" height="77" fill="#8777ff24"/>${grid}<path d="${this.bitWave(val,true)}" fill="none" stroke="#ffc04d" stroke-width="3"/>${labels}`;
       }
       document.getElementById('simdmx-wave-label').textContent='CH'+this.selectedChannel+' / '+val+' ('+val.toString(2).padStart(8,'0')+'₂)';
       document.getElementById('simdmx-selected-ch').textContent=this.selectedChannel;
