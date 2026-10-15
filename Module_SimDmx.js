@@ -23,91 +23,116 @@ const Module_SimDmx = {
     // --- HTMLテンプレート（ミニフェーダーの各識別ラインを完全復元） ---
     getHTML() {
         let fadersHTML = '';
-        const createMiniFaderHTML = (id, label, color) => `
-            <div class="fader-cell-wrap" style="display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 180px; flex: 1;">
-                <button class="step-btn" id="simdmx-btn-up-${id}" style="width: 30px; height: 24px; background: #252525; border: 2px solid #444; border-radius: 6px; color: #e0e0e0; font-size: 10px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center;">▲</button>
-                <div class="fader-area" id="simdmx-boundary-${id}" data-fader="${id}" style="height: 115px; width: 34px; position: relative; touch-action: none;">
-                    <div class="fader-track-container" data-fader="${id}" style="position: absolute; right: 0; left: 0; margin: auto; width: 24px; height: 105px; top: 5px;">
-                        <div class="fader-track" style="position: absolute; left: 9.5px; width: 5px; height: 100%; border: 1px solid #2a2a2a; border-radius: 2px; background:${color}33;"></div>
-                        <div class="fader-knob" id="simdmx-knob-${id}" style="position: absolute; left: -1px; width: 26px; height: 28px; border: 2px solid #444; border-radius: 4px; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 2; bottom: 0px; border-color:${color};">
-                            <div style="width: 100%; height: 3px; background:${id==='dmx1'?'#ff3d00':color};"></div>
-                        </div>
-                    </div>
+        for(let c=1;c<=10;c++){
+            const color=this.chColors[c-1],id='dmx'+c;
+            fadersHTML += `<div class="fader-cell-wrap" style="display:flex;flex:1;flex-direction:column;align-items:center;justify-content:space-between;gap:2px;min-width:0">
+              <div id="simdmx-label-${id}" style="font-size:11px;color:${color};font-weight:800">CH${c}</div>
+              <button id="simdmx-btn-up-${id}" class="step-btn" style="color:${color};background:#192532;border:1px solid #445;cursor:pointer">▲</button>
+              <div id="simdmx-boundary-${id}" class="fader-area" data-fader="${id}" style="height:115px;width:34px;position:relative;touch-action:none">
+                <div class="fader-track-container" style="position:absolute;left:5px;top:5px;width:24px;height:105px">
+                  <div style="position:absolute;left:10px;width:4px;height:100%;background:${color}55"></div>
+                  <div id="simdmx-knob-${id}" class="fader-knob" style="position:absolute;left:0;width:24px;height:28px;bottom:0;border:2px solid ${color};background:#344254;border-radius:5px;z-index:2;cursor:grab"></div>
                 </div>
-                <button class="step-btn" id="simdmx-btn-down-${id}" style="width: 30px; height: 24px; background: #252525; border: 2px solid #444; border-radius: 6px; color: #e0e0e0; font-size: 10px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center;">▼</button>
-                <div class="fader-label" id="simdmx-label-${id}" style="font-size: 10px; font-weight: bold; color:${color}aa; text-align: center; white-space: nowrap;">${label}</div>
+              </div>
+              <button id="simdmx-btn-down-${id}" class="step-btn" style="color:${color};background:#192532;border:1px solid #445;cursor:pointer">▼</button>
+              <output id="simdmx-fader-value-${c}" style="font-size:12px;color:#fff">0</output>
             </div>`;
-
-        for(let c=1; c<=10; c++) { fadersHTML += createMiniFaderHTML(`dmx${c}`, `CH${c}`, this.chColors[c-1]); }
-        fadersHTML += `
-            <div class="fader-cell-wrap" style="display: flex; flex-direction: column; align-items: center; justify-content: center; opacity:0.15; flex:1; height:160px;">
-                <div style="font-size:18px; font-weight:bold; letter-spacing:1px; transform:rotate(90deg); margin-bottom:15px;">...</div>
-                <div class="fader-label" style="font-size:11px; font-weight:600; color:#777;">CH11-512</div>
-            </div>`;
-
-        return `
-            <div style="display: flex; width: 100%; height: 100%; gap: 20px;">
-                <div class="col center-col" style="width: 62%; display: flex; flex-direction: column; gap: 8px;">
-                    <div class="section-title" style="font-size: 11px; font-weight: bold; color: #888; letter-spacing: 2px; text-align: center; margin-bottom: 3px;">DMX512 PACKET STREAM / MULTI-CHANNEL CONSOLE</div>
-                    <div class="oscilloscope-screen" style="background: #000; border: 2px solid #333; border-radius: 6px; height: 95px; width: 100%; position: relative;">
-                        <canvas id="simdmx-osc-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
-                    </div>
-                    <div class="train-track-area" style="background: #0c0c0c; border: 2px solid #444; border-radius: 6px; height: 95px; display: flex; align-items: center; position: relative; overflow: hidden; padding: 0;">
-                        <div class="train-track-line" style="position: absolute; left: 0; width: 100%; height: 4px; background: #555; border-top: 1px solid #777; border-bottom: 1px solid #333; bottom: 22px; z-index: 1;"></div>
-                        <div class="train-container" id="simdmx-train-wagon-line" style="display: flex; position: absolute; bottom: 25px; left: 0; z-index: 2; will-change: transform;"></div>
-                    </div>
-                    <div class="speed-control-row" style="display: flex; align-items: center; justify-content: space-between; background: #111; padding: 4px 10px; border-radius: 5px; border: 1px solid #222;">
-                        <div class="speed-label-text" style="font-size: 12px; color: #ffd180; font-weight: 600;">表示スピード（実際のDMXは約42Hz）</div>
-                        <div class="speed-slider-wrap" style="display: flex; align-items: center; gap: 10px; flex-grow: 1; margin-left: 20px;">
-                            <span id="simdmx-speed-display-text" style="font-size: 11px; color: #ff6f00; font-weight: bold; width: 80px;">スロー</span>
-                            <input type="range" id="simdmx-speed-range-slider" class="speed-slider" min="0" max="100" value="20" style="flex-grow: 1; -webkit-appearance: none; background: #333; height: 6px; border-radius: 3px; outline: none;">
-                        </div>
-                    </div>
-                    <div class="dmx-fader-row-box" id="simdmx-multi-fader-container" style="background: #0a0a0a; border: 2px solid #444; border-radius: 8px; padding: 8px 5px; display: flex; justify-content: space-between;">
-                        ${fadersHTML}
-                    </div>
-                    <div class="dmx-explain-box" style="background: #111; border: 1px solid #333; border-radius: 6px; padding: 9px 12px; font-size: 12px; color: #c8c8c8; line-height: 1.55em; text-align: justify;">
-                        <strong style="color: #66e8ff; font-size: 13px; font-weight: 700;">【見る順番】</strong><br>上の波形で、DMX値がチャンネル順に流れる様子を見ます。フェーダーを動かすと、値と波形が変わります。表示スピードは見やすくするための調整で、実際のDMXは約42Hzです。
-                    </div>
-                </div>
-
-                <div class="col bulb-col" style="width: 38%; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;">
-                    <div class="section-title" style="font-size: 11px; font-weight: bold; color: #888; letter-spacing: 2px; text-align: center; margin-bottom: 3px;">OUTPUT LUMINANCE</div>
-                    <div class="dark-room" style="width: 100%; height: 100%; background: #030303; border: 2px solid #444; border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: visible; position: relative;">
-                        <div class="ambient-glow" id="simdmx-ambient-glow" style="position: absolute; top: -5%; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(255,143,0,0.38) 0%, rgba(255,87,34,0.08) 50%, rgba(0,0,0,0) 70%); mix-blend-mode: screen; pointer-events: none; opacity: 0; transform: scale(0.3); transition: opacity 0.05s ease, transform 0.05s ease; z-index: 0;"></div>
-                        <div class="bulb-image-container" style="position: relative; width: 220px; height: 360px; display: flex; align-items: center; justify-content: center;">
-                            <img src="assets/Light.webp" class="large-bulb-img" alt="Bulb Base" style="width: 100%; height: 100%; object-fit: contain; z-index: 1; pointer-events: none; opacity: 0.85;">
-                            <div class="internal-gas-glow" id="simdmx-gas-glow" style="position: absolute; top: 6%; left: 5%; width: 90%; height: 55%; border-radius: 50%; background: radial-gradient(circle, rgba(255,213,79,0.9) 0%, rgba(255,109,0,0.3) 55%, rgba(0,0,0,0) 75%); z-index: 2; mix-blend-mode: screen; pointer-events: none; opacity: 0; transition: opacity 0.05s ease;"></div>
-                            <div class="filament-glow-layer" id="simdmx-filament-glow" style="position: absolute; top: 25%; left: 36%; width: 28%; height: 12%; z-index: 3; mix-blend-mode: screen; pointer-events: none; opacity: 0; border-radius: 40% 40% 50% 50%; box-shadow: 0 0 0px rgba(0,0,0,0); transition: opacity 0.05s ease, background-color 0.05s ease, box-shadow 0.05s ease;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>`;
+        }
+        return `<style>
+.simdmx-v2{height:100%;min-height:0;display:grid;grid-template-rows:minmax(138px,1.05fr) minmax(138px,1fr) minmax(185px,1.25fr);gap:8px;color:#e8edf5;font-family:inherit}
+.simdmx-v2 *{box-sizing:border-box}
+.simdmx-v2 .sd-panel{background:linear-gradient(180deg,#121d2a,#080f17);border:1px solid #27546d;border-radius:9px;min-height:0;overflow:hidden}
+.simdmx-v2 .sd-title{font-size:14px;font-weight:800;letter-spacing:.02em;color:#f5f7ff}
+.simdmx-v2 .sd-teacher{display:grid;grid-template-columns:minmax(80px,14%) minmax(170px,27%) minmax(0,1fr);align-items:center;gap:12px;padding:10px 14px;border-color:#bf338f}
+.simdmx-v2 .sd-teacher img{max-width:100%;max-height:100%;height:100%;object-fit:contain;align-self:end}
+.simdmx-v2 .sd-teacher-copy{font-size:12px;line-height:1.5;color:#f3e8c9;overflow:auto;max-height:100%}
+.simdmx-v2 .sd-teacher-copy strong{display:block;color:#ffdd91;font-size:14px;margin-bottom:5px}
+.simdmx-v2 .sd-wave-panel{height:100%;min-width:0;display:flex;flex-direction:column;gap:5px}
+.simdmx-v2 .sd-wave-head{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px}
+.simdmx-v2 .sd-wave{width:100%;flex:1;min-height:50px;background:#050b13;border:1px solid #354d63;border-radius:6px}
+.simdmx-v2 .sd-wave-caption{font-size:11px;color:#b7c9dc;display:flex;justify-content:space-between;gap:8px}
+.simdmx-v2 .sd-train{display:flex;flex-direction:column;padding:8px 12px;gap:5px}
+.simdmx-v2 .sd-train-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.simdmx-v2 .sd-train-head .sd-note{font-size:11px;color:#a7bfd2}
+.simdmx-v2 .sd-go{margin-left:auto;background:#086ba6;border:1px solid #33c7ff;color:white;border-radius:7px;font-weight:800;padding:7px 18px;cursor:pointer}
+.simdmx-v2 .sd-track{flex:1;min-height:92px;position:relative;overflow:hidden;background:linear-gradient(180deg,#060c12,#0c1420);border:1px solid #344653;border-radius:6px}
+.simdmx-v2 .sd-rails{position:absolute;bottom:9px;height:6px;width:100%;background:repeating-linear-gradient(90deg,#59626a 0 14px,#242a32 14px 23px);border-top:2px solid #92979c}
+.simdmx-v2 .sd-consist{display:flex;align-items:flex-end;gap:4px;position:absolute;bottom:16px;left:12px;will-change:transform;white-space:nowrap}
+.simdmx-v2 .sd-engine{width:185px;height:73px;position:relative;flex:none;display:flex;align-items:center;gap:5px;padding:7px 10px 7px 5px;border-bottom:5px solid #5a626c}
+.simdmx-v2 .sd-engine-art{font-size:53px;line-height:1;filter:drop-shadow(0 0 8px #e08a32)}
+.simdmx-v2 .sd-engine-note{font-size:10px;color:#ffdfae;line-height:1.25;background:#111b28df;border:1px solid #b67b37;padding:4px;border-radius:5px}
+.simdmx-v2 .sd-car{height:69px;min-width:88px;border:2px solid var(--car);background:#0d1b2b;border-radius:7px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;position:relative;flex:none}
+.simdmx-v2 .sd-car::before{content:'';position:absolute;left:-6px;top:32px;width:5px;height:6px;background:#a9aeb6}
+.simdmx-v2 .sd-car .sd-ch{font-size:10px;color:var(--car);font-weight:800}
+.simdmx-v2 .sd-car svg{width:76px;height:26px}
+.simdmx-v2 .sd-car .sd-value{font-size:11px;font-weight:800;color:#fff}
+.simdmx-v2 .sd-car.sd-selected{box-shadow:0 0 0 2px #fff4,0 0 12px var(--car)}
+.simdmx-v2 .sd-caboose{width:132px;height:69px;border:2px solid #bc5d51;border-radius:8px;background:#381d21;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;font-size:11px;flex:none}
+.simdmx-v2 .sd-caboose span{font-size:9px;color:#e4bcb8}
+.simdmx-v2 .sd-bottom{display:grid;grid-template-columns:minmax(0,2fr) minmax(200px,.8fr);gap:8px;min-height:0}
+.simdmx-v2 .sd-faders{padding:8px 10px;display:flex;flex-direction:column;gap:6px}
+.simdmx-v2 .sd-fader-row{display:flex;gap:2px;justify-content:space-around;flex:1;min-height:0}
+.simdmx-v2 .fader-cell-wrap{min-width:0}
+.simdmx-v2 .sd-bulb{padding:8px;position:relative;display:flex;flex-direction:column}
+.simdmx-v2 .sd-bulb-content{position:relative;flex:1;min-height:0;display:flex;align-items:center;justify-content:space-around}
+.simdmx-v2 .sd-bulb-value{font-size:13px;color:#ffcf80;position:relative;z-index:4}
+.simdmx-v2 .sd-bulb-value b{font-size:26px;display:block}
+.simdmx-v2 .bulb-image-container{position:relative;height:100%;max-width:48%;display:flex;align-items:center;justify-content:center}
+.simdmx-v2 .large-bulb-img{width:100%;height:100%;object-fit:contain;position:relative;z-index:1}
+.simdmx-v2 .ambient-glow{position:absolute;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,#ff980055,transparent 70%);pointer-events:none;opacity:0}
+.simdmx-v2 .internal-gas-glow{position:absolute;top:7%;left:12%;width:76%;height:55%;border-radius:50%;background:radial-gradient(circle,#ffde66aa,transparent 72%);mix-blend-mode:screen;z-index:2;opacity:0;pointer-events:none}
+.simdmx-v2 .filament-glow-layer{position:absolute;top:25%;left:36%;width:28%;height:12%;border-radius:50%;z-index:3;mix-blend-mode:screen;opacity:0;pointer-events:none}
+.simdmx-v2 .sd-overlay{position:absolute;z-index:12;top:22%;left:50%;transform:translateX(-50%);max-width:390px;width:calc(100% - 24px);background:#0b1b2bf5;border:2px solid #25baf0;border-radius:10px;box-shadow:0 10px 35px #000b;padding:18px;text-align:center;font-size:13px;line-height:1.6}
+.simdmx-v2 .sd-overlay button{margin-top:10px;background:#127cae;color:#fff;border:1px solid #51d3ff;border-radius:6px;padding:7px 15px;cursor:pointer}
+@media(max-width:850px){.simdmx-v2 .sd-teacher{grid-template-columns:70px minmax(130px,35%) minmax(0,1fr);gap:6px;padding:7px}.simdmx-v2 .sd-teacher-copy{font-size:10px}.simdmx-v2 .sd-title{font-size:12px}.simdmx-v2 .sd-bottom{grid-template-columns:minmax(0,2fr) minmax(160px,.8fr)}}
+</style>
+        <div class="simdmx-v2" id="simdmx-v2">
+          <section class="sd-panel sd-teacher">
+            <img src="assets/wave_teacher_transparent.svg" alt="先生">
+            <div class="sd-teacher-copy"><strong>先生の解説</strong>前の8bit教材で学んだデータが、客車の中に乗っているよ。<br>客車の入口はスタート1bit、後ろの連結器はストップ2bit。<b>1＋8＋2＝11bit</b>で送られるんだ。<br><a href="Top.html?tab=sim8bit" style="color:#71dfff">前の8bit教材を見る ↗</a><br><button id="simdmx-details" style="margin-top:5px;background:#18374d;color:#dff;border:1px solid #367e9b;border-radius:4px;cursor:pointer">機関車と車掌車の詳しい説明</button></div>
+            <div class="sd-wave-panel">
+              <div class="sd-wave-head"><b>選択CHの信号を拡大（11bit）</b><span id="simdmx-wave-label">CH1 / 191</span></div>
+              <svg id="simdmx-detail-wave" class="sd-wave" viewBox="0 0 560 112" preserveAspectRatio="none" aria-label="スタートビット、8データビット、2ストップビットの波形"></svg>
+              <div class="sd-wave-caption"><span>入口：Start 1bit（LOW）</span><span>客車：Data 8bit（LSBから送信）</span><span>連結器：Stop 2bit（HIGH）</span></div>
+            </div>
+          </section>
+          <section class="sd-panel sd-train">
+            <div class="sd-train-head"><span class="sd-title">🚂 DMX通信列車</span><span class="sd-note">機関車 → 客車（最大512CH） → 車掌車｜発車すると右から左へ</span><button class="sd-go" id="simdmx-depart">▶ 次へ（発車）</button></div>
+            <div class="sd-track"><div class="sd-rails"></div><div id="simdmx-train-wagon-line" class="sd-consist"></div><div id="simdmx-speed-overlay" class="sd-overlay" hidden><b>この列車は、どれくらいの速さで走る？</b><br>DMX512ではデータを繰り返し送っているよ。通信の速さと更新頻度の違いは次のページで学ぼう。<br><button id="simdmx-speed-continue">次のページへ →</button></div></div>
+          </section>
+          <section class="sd-bottom">
+            <div class="sd-panel sd-faders"><div class="sd-title">フェーダーを動かして、客車の8bit波形を変えてみよう</div><div id="simdmx-multi-fader-container" class="sd-fader-row">${fadersHTML}</div></div>
+            <div class="sd-panel sd-bulb"><div class="sd-title">受信側：裸電球</div><div class="sd-bulb-content">
+              <div class="sd-bulb-value">CH<span id="simdmx-selected-ch">1</span><b id="simdmx-selected-value">191</b><span id="simdmx-selected-percent">約75%</span></div>
+              <div class="bulb-image-container"><div id="simdmx-ambient-glow" class="ambient-glow"></div><img src="assets/Light.webp" class="large-bulb-img" alt="裸電球"><div id="simdmx-gas-glow" class="internal-gas-glow"></div><div id="simdmx-filament-glow" class="filament-glow-layer"></div></div>
+            </div></div>
+          </section>
+        </div>`;
     },
 
     init() {
-        this.canvas = document.getElementById('simdmx-osc-canvas');
-        this.ctx = this.canvas.getContext('2d');
+        this.running=false;this.trainPosition=0;this.speedFactor=1;this.selectedChannel=1;
         this.buildTrainWagons();
-        this.resizeCanvas();
-        let dmxIds = Array.from({length:10}, (_, i) => `dmx${i+1}`);
-        this.bindFaderEvents(dmxIds);
-        this.syncPositionsFromValues();
-        this.updateSystem();
-
-        document.getElementById('simdmx-speed-range-slider').addEventListener('input', (e) => {
-            let val = parseInt(e.target.value);
-            if (val === 0) { this.speedFactor = 0; document.getElementById('simdmx-speed-display-text').textContent = "一時停止"; } 
-            else if (val < 85) { this.speedFactor = (val / 85) * 0.18; document.getElementById('simdmx-speed-display-text').textContent = `スロー (${val})`; } 
-            else { this.speedFactor = 1.0; document.getElementById('simdmx-speed-display-text').textContent = "42 Hz"; }
+        this.bindFaderEvents(Array.from({length:10},(_,i)=>'dmx'+(i+1)));
+        this.syncPositionsFromValues();this.updateSystem();
+        document.getElementById('simdmx-depart')?.addEventListener('click',()=>this.depart());
+        document.getElementById('simdmx-details')?.addEventListener('click',()=>{
+          alert('機関車：BREAK → MAB → START CODE（通常0）。START CODEもスタート1bit・データ8bit・ストップ2bitの11bitスロットです。\n客車：各CHの入口がスタート1bit、内部が8bit、後部連結器がストップ2bit。\n車掌車：次のBREAKまでのMARK区間（MBB）の比喩。END CODEはありません。MBBの長さは0の場合もあります。');
         });
-
-        this.lastTime = performance.now();
-        const loop = (timestamp) => {
-            this.animationLoop(timestamp);
-            this.animationFrameId = requestAnimationFrame(loop);
-        };
-        this.animationFrameId = requestAnimationFrame(loop);
+        document.getElementById('simdmx-speed-continue')?.addEventListener('click',()=>{
+          // 速度教材がまだ独立していないため、既存の別テーマへ誤誘導しない。
+          alert('次の「DMX通信速度」教材は準備中です。250kbit/sと、512スロット時の最大約44Hzを区別して学びます。');
+        });
+        this.lastTime=performance.now();
+        const loop=t=>{this.animationLoop(t);this.animationFrameId=requestAnimationFrame(loop)};
+        this.animationFrameId=requestAnimationFrame(loop);
+    },
+    depart(){
+      if(this.running)return;
+      this.running=true;
+      const btn=document.getElementById('simdmx-depart');if(btn){btn.textContent='走行中';btn.disabled=true}
+      const overlay=document.getElementById('simdmx-speed-overlay');
+      if(overlay){overlay.hidden=false;overlay.style.display='block'}
     },
 
     destroy() {
@@ -119,34 +144,39 @@ const Module_SimDmx = {
     },
 
     buildTrainWagons() {
-        let singleHTML = `
-            <div class="car start-code-car" style="width: 80px; height: 48px; border: 2px solid #ffb300; border-radius: 6px 6px 2px 2px; margin-right: 4px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; position: relative; box-shadow: inset 0 4px 6px rgba(255,255,255,0.1); background: repeating-linear-gradient(45deg, #1e1e1e, #1e1e1e 8px, #ffb300 8px, #ffb300 16px);">
-                <div class="car-num-tag" style="font-size: 9px; position: absolute; top: 2px; left: 4px; color: #ffb300;">CH0</div>
-                <div class="car-pct" style="font-size: 12px; font-weight: 700; margin-top: 4px; color: #ffb300;">START</div>
-            </div>`;
-
-        for(let i=1; i<=10; i++) {
-            let col = this.chColors[i-1];
-            singleHTML += `
-                <div class="car" style="width: 80px; height: 48px; border: 2px solid ${col}; background:${col}15; border-radius: 6px 6px 2px 2px; margin-right: 4px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; position: relative; box-shadow: inset 0 4px 6px rgba(255,255,255,0.1);">
-                    <div class="car-num-tag" style="font-size: 9px; position: absolute; top: 2px; left: 4px; color:${col}cc">CH${i}</div>
-                    <div class="car-pct simdmx-pct-ch${i}" style="font-size: 13px; font-weight: 700; margin-top: 4px; color:${col};">0%</div>
-                    <div class="car-bin simdmx-bin-ch${i}" style="font-size: 9px; font-family: monospace; font-weight: 500; color: #e6e6e6; background: rgba(0,0,0,0.72); padding: 1px 4px; border-radius: 3px; margin-top: 2px; letter-spacing: -0.25px;">00000000</div>
-                </div>`;
+        const line=document.getElementById('simdmx-train-wagon-line');
+        if(!line)return;
+        let html='<div class="sd-engine"><span class="sd-engine-art" aria-label="蒸気機関車">🚂</span><span class="sd-engine-note"><b>START CODE：通常0</b><br>BREAK → MAB<br>→ START CODE</span></div>';
+        for(let i=1;i<=10;i++){
+          html+=`<div class="sd-car" data-ch="${i}" style="--car:${this.chColors[i-1]}"><span class="sd-ch">CH${i}</span><svg class="sd-car-wave" viewBox="0 0 80 30" aria-label="CH${i}の8bitデータ波形"></svg><span class="sd-value simdmx-pct-ch${i}">0</span></div>`;
         }
-        for(let i=11; i<=15; i++) {
-            singleHTML += `
-                <div class="car gray-car" style="width: 80px; height: 48px; background: #151515; border: 2px solid #333; border-radius: 6px 6px 2px 2px; margin-right: 4px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #444; position: relative; box-shadow: inset 0 4px 6px rgba(255,255,255,0.1);">
-                    <div class="car-num-tag" style="font-size: 9px; position: absolute; top: 2px; left: 4px; color: #444;">CH${i}</div>
-                    <div class="car-pct" style="font-size: 12px; font-weight: 700; margin-top: 4px; color: #555;">- -</div>
-                </div>`;
-        }
-        singleHTML += `
-            <div class="car gray-car" style="width:${this.LAST_CAR_W}px; height: 48px; border: 2px dashed #333; background:transparent; margin-right:0; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #444; position: relative;">
-                <div style="font-size:14px; font-weight:bold; color:#333;">... CH512</div>
-            </div>`;
-            
-        document.getElementById('simdmx-train-wagon-line').innerHTML = singleHTML + singleHTML;
+        html+='<div class="sd-car" style="--car:#87919d"><span class="sd-ch">… CH11〜511 …</span></div><div class="sd-car" style="--car:#6cbdff"><span class="sd-ch">CH512</span><span class="sd-value">8bit</span></div><div class="sd-caboose"><b>🚃 車掌車</b><b>MBB</b><span>次のBREAKまでのMARK</span></div>';
+        line.innerHTML=html;
+    },
+    bitWave(value,full){
+      const bits=full?[0,...Array.from({length:8},(_,i)=>(value>>i)&1),1,1]:Array.from({length:8},(_,i)=>(value>>i)&1);
+      const x0=full?10:2,step=full?48:9.5,high=full?29:7,low=full?78:24;
+      let d='M'+x0+' '+(full?high:low);
+      bits.forEach((bit,i)=>{const x=x0+i*step,y=bit?high:low;d+=' H'+x+' V'+y+' H'+(x+step)});
+      return d;
+    },
+    updateWaves(){
+      document.querySelectorAll('#simdmx-train-wagon-line .sd-car[data-ch]').forEach(car=>{
+        const i=Number(car.dataset.ch),val=this.dmxChannels[i-1],svg=car.querySelector('svg'),color=this.chColors[i-1];
+        svg.innerHTML=`<path d="${this.bitWave(val,false)}" fill="none" stroke="${color}" stroke-width="2.3" stroke-linejoin="miter"/>`;
+        car.classList.toggle('sd-selected',i===this.selectedChannel);
+        car.querySelector('.sd-value').textContent=val+' / '+val.toString(2).padStart(8,'0');
+      });
+      const i=this.selectedChannel-1,val=this.dmxChannels[i],svg=document.getElementById('simdmx-detail-wave');
+      if(svg){
+        const bits=[0,...Array.from({length:8},(_,b)=>(val>>b)&1),1,1];
+        let labels=bits.map((b,j)=>`<text x="${34+j*48}" y="103" text-anchor="middle" fill="${j===0?'#ff799d':j>=9?'#b99dff':'#ffce76'}" font-size="14">${b}</text>`).join('');
+        svg.innerHTML=`<rect x="10" y="9" width="48" height="77" fill="#e8386420"/><rect x="58" y="9" width="384" height="77" fill="#f4a62612"/><rect x="442" y="9" width="96" height="77" fill="#8777ff24"/><path d="${this.bitWave(val,true)}" fill="none" stroke="#ffc04d" stroke-width="3"/>${labels}`;
+      }
+      document.getElementById('simdmx-wave-label').textContent='CH'+this.selectedChannel+' / '+val+' ('+val.toString(2).padStart(8,'0')+'₂)';
+      document.getElementById('simdmx-selected-ch').textContent=this.selectedChannel;
+      document.getElementById('simdmx-selected-value').textContent=val;
+      document.getElementById('simdmx-selected-percent').textContent='約'+Math.round(val/255*100)+'%';
     },
 
     resizeCanvas() {
@@ -227,7 +257,7 @@ const Module_SimDmx = {
     calculateValueFromPosition(id, position) {
         const ratio = position / this.MAX_BOTTOM_DMX;
         let chIndex = parseInt(id.replace('dmx', '')) - 1;
-        this.dmxChannels[chIndex] = Math.round(ratio * 255);
+        this.dmxChannels[chIndex] = Math.round(ratio * 255); this.selectedChannel=chIndex+1;
         this.updateSystem();
     },
 
@@ -243,24 +273,19 @@ const Module_SimDmx = {
 
     adjustFaderValue(id, delta) {
         let chIndex = parseInt(id.replace('dmx', '')) - 1;
-        this.dmxChannels[chIndex] = Math.max(0, Math.min(255, this.dmxChannels[chIndex] + delta));
+        this.dmxChannels[chIndex] = Math.max(0, Math.min(255, this.dmxChannels[chIndex] + delta)); this.selectedChannel=chIndex+1;
         this.syncPositionsFromValues();
         this.updateSystem();
     },
 
     updateSystem() {
-        let ch1Val = this.dmxChannels[0];
-        let factor = ch1Val / 255;
-        let voltage = factor * 100;
-        const trainLine = document.getElementById('simdmx-train-wagon-line');
-        for(let c=1; c<=10; c++) {
-            let val = this.dmxChannels[c-1];
-            let pcts = trainLine.querySelectorAll(`.simdmx-pct-ch${c}`);
-            let bins = trainLine.querySelectorAll(`.simdmx-bin-ch${c}`);
-            pcts.forEach(el => el.textContent = Math.round((val/255)*100) + '%');
-            bins.forEach(el => el.textContent = val.toString(2).padStart(8, '0'));
+        for(let c=1;c<=10;c++){
+          const out=document.getElementById('simdmx-fader-value-'+c);
+          if(out)out.textContent=this.dmxChannels[c-1];
         }
-        this.updateBulb(factor, voltage);
+        this.updateWaves();
+        const factor=this.dmxChannels[this.selectedChannel-1]/255;
+        this.updateBulb(factor,factor*100);
     },
 
     updateBulb(factor, voltage) {
@@ -273,7 +298,7 @@ const Module_SimDmx = {
             let r = 255, g = 0, b = 0, shadowColor = '';
             if (factor < 0.2) { g = Math.floor(factor * 5 * 100); shadowColor = `rgba(255, 30, 0, ${0.4 + factor * 2})`; } 
             else if (factor < 0.6) { g = Math.floor(100 + ((factor - 0.2) / 0.4) * 100); b = Math.floor(((factor - 0.2) / 0.4) * 50); shadowColor = `rgba(255, 143, 0, ${0.6 + factor})`; } 
-            else { g = Math.floor(200 + ((factor - 0.6) / 0.4) * 45); b = Math.floor(50 + ((factor - 0.6) / 0.4) * 110); shadowColor = `rgba(255, 235,  yellow 59, 1)`; }
+            else { g = Math.floor(200 + ((factor - 0.6) / 0.4) * 45); b = Math.floor(50 + ((factor - 0.6) / 0.4) * 110); shadowColor = `rgba(255, 235, 59, 1)`; }
             filamentGlow.style.opacity = (0.25 + factor * 0.75).toString();
             filamentGlow.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
             filamentGlow.style.boxShadow = `0 0 ${8 + factor * 28}px ${shadowColor}, 0 0 ${3 + factor * 12}px #fff`;
@@ -284,54 +309,16 @@ const Module_SimDmx = {
     },
 
     animationLoop(timestamp) {
-        if (!this.lastTime) this.lastTime = timestamp;
-        let delta = (timestamp - this.lastTime) / 1000;
-        this.lastTime = timestamp;
-        let baseSpeed = 900; 
-        this.trainPosition -= baseSpeed * this.speedFactor * delta;
-        if (this.trainPosition < -this.loopWidth) { this.trainPosition = this.trainPosition % this.loopWidth; }
-        const trainLine = document.getElementById('simdmx-train-wagon-line');
-        if (trainLine) trainLine.style.transform = `translateX(${this.trainPosition}px)`;
-        this.drawOscilloscopeAbsolute();
-    },
-
-    drawOscilloscopeAbsolute() {
-        if (!this.canvas) return;
-        let w = this.canvas.clientWidth; let h = this.canvas.clientHeight;
-        this.canvas.width = w * window.devicePixelRatio; this.canvas.height = h * window.devicePixelRatio;
-        this.ctx.resetTransform(); this.ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-        this.ctx.clearRect(0, 0, w, h);
-        this.ctx.strokeStyle = '#112211'; this.ctx.lineWidth = 1;
-        let gridOffsetX = (this.trainPosition % 40);
-        for(let x = gridOffsetX - 40; x < w + 40; x += 40) { this.ctx.beginPath(); this.ctx.moveTo(x, 0); this.ctx.lineTo(x, h); this.ctx.stroke(); }
-        for(let y = 0; y < h; y += 20) { this.ctx.beginPath(); this.ctx.moveTo(0, y); this.ctx.lineTo(w, y); this.ctx.stroke(); }
-        this.ctx.lineWidth = 2.5; let lastY = h - 25;
-        for (let x = 0; x < w; x++) {
-            let trainLocalX = x - this.trainPosition;
-            trainLocalX = ((trainLocalX % this.loopWidth) + this.loopWidth) % this.loopWidth;
-            let carIdx = Math.floor(trainLocalX / this.CAR_TOTAL_W);
-            let carInternalX = trainLocalX % this.CAR_TOTAL_W;
-            let val = 0; let carColor = '#111';
-            if (carIdx === 0) { val = 0; carColor = '#ffb300'; } 
-            else if (carIdx >= 1 && carIdx <= 10) { val = this.dmxChannels[carIdx - 1]; carColor = this.chColors[carIdx - 1]; } 
-            else if (carIdx >= 11 && carIdx <= 15) { val = 0; carColor = '#333'; } 
-            else if (carIdx === 16) { val = 0; carColor = '#444'; if (carInternalX >= this.LAST_CAR_W) carColor = '#111'; }
-            if (carIdx < 16 && carInternalX >= this.CAR_BODY_W) { val = 0; carColor = '#111'; }
-            let targetY = h - 25;
-            if (carColor !== '#111' && carIdx >= 1 && carIdx <= 10) {
-                let bitIndex = 7 - Math.floor(carInternalX / 10);
-                if (bitIndex >= 0 && bitIndex <= 7) { let bit = (val >> bitIndex) & 1; targetY = (bit === 1) ? 25 : h - 25; }
-            }
-            if (x === 0) {
-                this.ctx.beginPath(); this.ctx.strokeStyle = carColor; this.ctx.moveTo(x, targetY);
-                this.ctx.shadowBlur = (carColor !== '#333' && carColor !== '#111') ? 8 : 0; this.ctx.shadowColor = carColor;
-            } else if (this.ctx.strokeStyle !== carColor || lastY !== targetY) {
-                this.ctx.lineTo(x, lastY); this.ctx.lineTo(x, targetY); this.ctx.stroke();
-                this.ctx.beginPath(); this.ctx.strokeStyle = carColor; this.ctx.moveTo(x, targetY);
-                this.ctx.shadowBlur = (carColor !== '#333' && carColor !== '#111') ? 8 : 0; this.ctx.shadowColor = carColor;
-            } else { this.ctx.lineTo(x, targetY); }
-            lastY = targetY;
-        }
-        this.ctx.stroke(); this.ctx.shadowBlur = 0;
+        if(!this.lastTime)this.lastTime=timestamp;
+        const delta=Math.min(.05,(timestamp-this.lastTime)/1000);this.lastTime=timestamp;
+        if(!this.running)return;
+        const line=document.getElementById('simdmx-train-wagon-line');
+        const track=document.querySelector('.simdmx-v2 .sd-track');
+        if(!line||!track)return;
+        // 約44Hzはフレーム更新頻度の理論値。CSS上の移動速度とは異なる。
+        this.trainPosition-=210*delta;
+        const width=line.scrollWidth;
+        if(this.trainPosition < -width)this.trainPosition=track.clientWidth;
+        line.style.transform='translateX('+this.trainPosition+'px)';
     }
 };
