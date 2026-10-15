@@ -26,7 +26,7 @@ const Module_SimDmx = {
         for(let c=1;c<=10;c++){
             const color=this.chColors[c-1],id='dmx'+c;
             fadersHTML += `<div class="fader-cell-wrap" style="display:flex;flex:1;flex-direction:column;align-items:center;justify-content:space-between;gap:2px;min-width:0">
-              <div id="simdmx-label-${id}" style="font-size:11px;color:${color};font-weight:800">CH${c}</div>
+              <div id="simdmx-label-${id}" style="font-size:13px;color:${color};font-weight:800">CH${c}</div>
               <button id="simdmx-btn-up-${id}" class="step-btn" style="color:${color};background:#192532;border:1px solid #445;cursor:pointer">▲</button>
               <div id="simdmx-boundary-${id}" class="fader-area" data-fader="${id}" style="height:115px;width:34px;position:relative;touch-action:none">
                 <div class="fader-track-container" style="position:absolute;left:5px;top:5px;width:24px;height:105px">
@@ -35,37 +35,37 @@ const Module_SimDmx = {
                 </div>
               </div>
               <button id="simdmx-btn-down-${id}" class="step-btn" style="color:${color};background:#192532;border:1px solid #445;cursor:pointer">▼</button>
-              <output id="simdmx-fader-value-${c}" style="font-size:12px;color:#fff">0</output>
+              <output id="simdmx-fader-value-${c}" style="font-size:15px;color:#fff;font-weight:700;font-variant-numeric:tabular-nums">0</output>
             </div>`;
         }
         return `<style>
-.simdmx-v2{height:100%;min-height:0;display:grid;grid-template-rows:minmax(138px,1.05fr) minmax(138px,1fr) minmax(185px,1.25fr);gap:8px;color:#e8edf5;font-family:inherit}
+.simdmx-v2{height:100%;min-height:0;display:grid;grid-template-rows:minmax(138px,1.05fr) minmax(122px,.83fr) minmax(185px,1.42fr);gap:8px;color:#e8edf5;font-family:inherit}
 .simdmx-v2 *{box-sizing:border-box}
 .simdmx-v2 .sd-panel{background:linear-gradient(180deg,#121d2a,#080f17);border:1px solid #27546d;border-radius:9px;min-height:0;overflow:hidden}
-.simdmx-v2 .sd-title{font-size:14px;font-weight:800;letter-spacing:.02em;color:#f5f7ff}
+.simdmx-v2 .sd-title{font-size:16px;font-weight:800;letter-spacing:.02em;color:#f5f7ff}
 .simdmx-v2 .sd-teacher{display:grid;grid-template-columns:minmax(80px,14%) minmax(170px,27%) minmax(0,1fr);align-items:center;gap:12px;padding:10px 14px;border-color:#bf338f}
 .simdmx-v2 .sd-teacher img{max-width:100%;max-height:100%;height:100%;object-fit:contain;align-self:end}
-.simdmx-v2 .sd-teacher-copy{font-size:12px;line-height:1.5;color:#f3e8c9;overflow:auto;max-height:100%}
-.simdmx-v2 .sd-teacher-copy strong{display:block;color:#ffdd91;font-size:14px;margin-bottom:5px}
+.simdmx-v2 .sd-teacher-copy{font-size:14px;line-height:1.5;color:#f3e8c9;overflow:auto;max-height:100%}
+.simdmx-v2 .sd-teacher-copy strong{display:block;color:#ffdd91;font-size:16px;margin-bottom:5px}
 .simdmx-v2 .sd-wave-panel{height:100%;min-width:0;display:flex;flex-direction:column;gap:5px}
-.simdmx-v2 .sd-wave-head{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px}
+.simdmx-v2 .sd-wave-head{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:14px}
 .simdmx-v2 .sd-wave{width:100%;flex:1;min-height:50px;background:#050b13;border:1px solid #354d63;border-radius:6px}
-.simdmx-v2 .sd-wave-caption{font-size:11px;color:#b7c9dc;display:flex;justify-content:space-between;gap:8px}
+.simdmx-v2 .sd-wave-caption{font-size:12px;color:#b7c9dc;display:flex;justify-content:space-between;gap:8px}
 .simdmx-v2 .sd-train{display:flex;flex-direction:column;padding:8px 12px;gap:5px}
 .simdmx-v2 .sd-train-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.simdmx-v2 .sd-train-head .sd-note{font-size:11px;color:#a7bfd2}
+.simdmx-v2 .sd-train-head .sd-note{font-size:12px;color:#a7bfd2}
 .simdmx-v2 .sd-go{margin-left:auto;background:#086ba6;border:1px solid #33c7ff;color:white;border-radius:7px;font-weight:800;padding:7px 18px;cursor:pointer}
 .simdmx-v2 .sd-track{flex:1;min-height:92px;position:relative;overflow:hidden;background:linear-gradient(180deg,#060c12,#0c1420);border:1px solid #344653;border-radius:6px}
-.simdmx-v2 .sd-rails{position:absolute;bottom:9px;height:6px;width:100%;background:repeating-linear-gradient(90deg,#59626a 0 14px,#242a32 14px 23px);border-top:2px solid #92979c}
-.simdmx-v2 .sd-consist{display:flex;align-items:flex-end;gap:4px;position:absolute;bottom:16px;left:12px;will-change:transform;white-space:nowrap}
+.simdmx-v2 .sd-rails{position:absolute;bottom:2px;height:6px;width:100%;background:repeating-linear-gradient(90deg,#59626a 0 14px,#242a32 14px 23px);border-top:2px solid #92979c}
+.simdmx-v2 .sd-consist{display:flex;align-items:flex-end;gap:4px;position:absolute;bottom:9px;left:12px;will-change:transform;white-space:nowrap}
 .simdmx-v2 .sd-engine{width:185px;height:73px;position:relative;flex:none;display:flex;align-items:center;gap:5px;padding:7px 10px 7px 5px;border-bottom:5px solid #5a626c}
 .simdmx-v2 .sd-engine-art{font-size:53px;line-height:1;filter:drop-shadow(0 0 8px #e08a32)}
 .simdmx-v2 .sd-engine-note{font-size:10px;color:#ffdfae;line-height:1.25;background:#111b28df;border:1px solid #b67b37;padding:4px;border-radius:5px}
-.simdmx-v2 .sd-car{height:69px;min-width:88px;border:2px solid var(--car);background:#0d1b2b;border-radius:7px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;position:relative;flex:none}
+.simdmx-v2 .sd-car{height:82px;min-width:102px;border:2px solid var(--car);background:#0d1b2b;border-radius:7px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;position:relative;flex:none}
 .simdmx-v2 .sd-car::before{content:'';position:absolute;left:-6px;top:32px;width:5px;height:6px;background:#a9aeb6}
-.simdmx-v2 .sd-car .sd-ch{font-size:10px;color:var(--car);font-weight:800}
-.simdmx-v2 .sd-car svg{width:76px;height:26px}
-.simdmx-v2 .sd-car .sd-value{font-size:11px;font-weight:800;color:#fff}
+.simdmx-v2 .sd-car .sd-ch{font-size:12px;color:var(--car);font-weight:800}
+.simdmx-v2 .sd-car svg{width:94px;height:34px;display:block}
+.simdmx-v2 .sd-car .sd-value{font-size:15px;letter-spacing:.025em;font-weight:800;color:#fff;font-variant-numeric:tabular-nums}
 .simdmx-v2 .sd-car.sd-selected{box-shadow:0 0 0 2px #fff4,0 0 12px var(--car)}
 .simdmx-v2 .sd-caboose{width:132px;height:69px;border:2px solid #bc5d51;border-radius:8px;background:#381d21;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;font-size:11px;flex:none}
 .simdmx-v2 .sd-caboose span{font-size:9px;color:#e4bcb8}
@@ -74,22 +74,22 @@ const Module_SimDmx = {
 .simdmx-v2 .sd-fader-row{display:flex;gap:2px;justify-content:space-around;flex:1;min-height:0}
 .simdmx-v2 .fader-cell-wrap{min-width:0}
 .simdmx-v2 .sd-bulb{padding:8px;position:relative;display:flex;flex-direction:column}
-.simdmx-v2 .sd-bulb-content{position:relative;flex:1;min-height:0;display:flex;align-items:center;justify-content:space-around}
-.simdmx-v2 .sd-bulb-value{font-size:13px;color:#ffcf80;position:relative;z-index:4}
-.simdmx-v2 .sd-bulb-value b{font-size:26px;display:block}
-.simdmx-v2 .bulb-image-container{position:relative;height:100%;max-width:48%;display:flex;align-items:center;justify-content:center}
+.simdmx-v2 .sd-bulb-content{position:relative;flex:1;min-height:0;display:grid;grid-template-columns:minmax(88px,40%) minmax(0,60%);align-items:center;gap:4px}
+.simdmx-v2 .sd-bulb-value{font-size:15px;color:#ffcf80;position:relative;z-index:4;min-width:0;font-variant-numeric:tabular-nums}
+.simdmx-v2 .sd-bulb-value b{font-size:30px;display:block;font-variant-numeric:tabular-nums}
+.simdmx-v2 .bulb-image-container{position:relative;height:100%;width:100%;min-width:0;display:flex;align-items:center;justify-content:center}
 .simdmx-v2 .large-bulb-img{width:100%;height:100%;object-fit:contain;position:relative;z-index:1}
 .simdmx-v2 .ambient-glow{position:absolute;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,#ff980055,transparent 70%);pointer-events:none;opacity:0}
 .simdmx-v2 .internal-gas-glow{position:absolute;top:7%;left:12%;width:76%;height:55%;border-radius:50%;background:radial-gradient(circle,#ffde66aa,transparent 72%);mix-blend-mode:screen;z-index:2;opacity:0;pointer-events:none}
 .simdmx-v2 .filament-glow-layer{position:absolute;top:25%;left:36%;width:28%;height:12%;border-radius:50%;z-index:3;mix-blend-mode:screen;opacity:0;pointer-events:none}
 .simdmx-v2 .sd-overlay{position:absolute;z-index:12;top:22%;left:50%;transform:translateX(-50%);max-width:390px;width:calc(100% - 24px);background:#0b1b2bf5;border:2px solid #25baf0;border-radius:10px;box-shadow:0 10px 35px #000b;padding:18px;text-align:center;font-size:13px;line-height:1.6}
 .simdmx-v2 .sd-overlay button{margin-top:10px;background:#127cae;color:#fff;border:1px solid #51d3ff;border-radius:6px;padding:7px 15px;cursor:pointer}
-@media(max-width:850px){.simdmx-v2 .sd-teacher{grid-template-columns:70px minmax(130px,35%) minmax(0,1fr);gap:6px;padding:7px}.simdmx-v2 .sd-teacher-copy{font-size:10px}.simdmx-v2 .sd-title{font-size:12px}.simdmx-v2 .sd-bottom{grid-template-columns:minmax(0,2fr) minmax(160px,.8fr)}}
+@media(max-width:850px){.simdmx-v2 .sd-teacher{grid-template-columns:70px minmax(130px,35%) minmax(0,1fr);gap:6px;padding:7px}.simdmx-v2 .sd-teacher-copy{font-size:12px}.simdmx-v2 .sd-title{font-size:14px}.simdmx-v2 .sd-bottom{grid-template-columns:minmax(0,2fr) minmax(160px,.8fr)}}
 </style>
         <div class="simdmx-v2" id="simdmx-v2">
           <section class="sd-panel sd-teacher">
             <img src="assets/wave_teacher_transparent.svg" alt="先生">
-            <div class="sd-teacher-copy"><strong>先生の解説</strong>前の8bit教材で学んだデータが、客車の中に乗っているよ。<br>客車の入口はスタート1bit、後ろの連結器はストップ2bit。<b>1＋8＋2＝11bit</b>で送られるんだ。<br><a href="Top.html?tab=sim8bit" style="color:#71dfff">前の8bit教材を見る ↗</a><br><button id="simdmx-details" style="margin-top:5px;background:#18374d;color:#dff;border:1px solid #367e9b;border-radius:4px;cursor:pointer">機関車と車掌車の詳しい説明</button></div>
+            <div class="sd-teacher-copy"><strong>先生の解説</strong>客車の中は8bitのデータ。前にスタート1bit、後ろにストップ2bitが付いて、<b>1チャンネルのスロットは合計11bit</b>になるよ。<br><a href="Top.html?tab=sim8bit" style="color:#71dfff">前の8bit教材を見る ↗</a><br><button id="simdmx-details" style="margin-top:5px;background:#18374d;color:#dff;border:1px solid #367e9b;border-radius:4px;cursor:pointer">機関車と車掌車の詳しい説明</button></div>
             <div class="sd-wave-panel">
               <div class="sd-wave-head"><b>選択CHの信号を拡大（11bit）</b><span id="simdmx-wave-label">CH1 / 191</span></div>
               <svg id="simdmx-detail-wave" class="sd-wave" viewBox="0 0 560 112" preserveAspectRatio="none" aria-label="スタートビット、8データビット、2ストップビットの波形"></svg>
@@ -103,7 +103,7 @@ const Module_SimDmx = {
           <section class="sd-bottom">
             <div class="sd-panel sd-faders"><div class="sd-title">フェーダーを動かして、客車の8bit波形を変えてみよう</div><div id="simdmx-multi-fader-container" class="sd-fader-row">${fadersHTML}</div></div>
             <div class="sd-panel sd-bulb"><div class="sd-title">受信側：裸電球</div><div class="sd-bulb-content">
-              <div class="sd-bulb-value">CH<span id="simdmx-selected-ch">1</span><b id="simdmx-selected-value">191</b><span id="simdmx-selected-percent">約75%</span></div>
+              <div class="sd-bulb-value">CH<span id="simdmx-selected-ch">1</span><div style="font-size:11px;color:#c3d2de">DMX値（0〜255）</div><b id="simdmx-selected-value">191</b><span id="simdmx-selected-percent">約75%</span></div>
               <div class="bulb-image-container"><div id="simdmx-ambient-glow" class="ambient-glow"></div><img src="assets/Light.webp" class="large-bulb-img" alt="裸電球"><div id="simdmx-gas-glow" class="internal-gas-glow"></div><div id="simdmx-filament-glow" class="filament-glow-layer"></div></div>
             </div></div>
           </section>
@@ -148,14 +148,14 @@ const Module_SimDmx = {
         if(!line)return;
         let html='<div class="sd-engine"><span class="sd-engine-art" aria-label="蒸気機関車">🚂</span><span class="sd-engine-note"><b>START CODE：通常0</b><br>BREAK → MAB<br>→ START CODE</span></div>';
         for(let i=1;i<=10;i++){
-          html+=`<div class="sd-car" data-ch="${i}" style="--car:${this.chColors[i-1]}"><span class="sd-ch">CH${i}</span><svg class="sd-car-wave" viewBox="0 0 80 30" aria-label="CH${i}の8bitデータ波形"></svg><span class="sd-value simdmx-pct-ch${i}">0</span></div>`;
+          html+=`<div class="sd-car" data-ch="${i}" style="--car:${this.chColors[i-1]}"><span class="sd-ch">CH${i}</span><svg class="sd-car-wave" viewBox="0 0 96 34" aria-label="CH${i}の8bitデータ波形"></svg><span class="sd-value simdmx-pct-ch${i}">00000000</span></div>`;
         }
         html+='<div class="sd-car" style="--car:#87919d"><span class="sd-ch">… CH11〜511 …</span></div><div class="sd-car" style="--car:#6cbdff"><span class="sd-ch">CH512</span><span class="sd-value">8bit</span></div><div class="sd-caboose"><b>🚃 車掌車</b><b>MBB</b><span>次のBREAKまでのMARK</span></div>';
         line.innerHTML=html;
     },
     bitWave(value,full){
       const bits=full?[0,...Array.from({length:8},(_,i)=>(value>>i)&1),1,1]:Array.from({length:8},(_,i)=>(value>>i)&1);
-      const x0=full?10:2,step=full?48:9.5,high=full?29:7,low=full?78:24;
+      const x0=full?10:4,step=full?48:11,high=full?29:7,low=full?78:28;
       let d='M'+x0+' '+(bits[0]?high:low);
       bits.forEach((bit,i)=>{const x=x0+i*step,y=bit?high:low;d+=' H'+x+' V'+y+' H'+(x+step)});
       return d;
@@ -163,16 +163,16 @@ const Module_SimDmx = {
     updateWaves(){
       document.querySelectorAll('#simdmx-train-wagon-line .sd-car[data-ch]').forEach(car=>{
         const i=Number(car.dataset.ch),val=this.dmxChannels[i-1],svg=car.querySelector('svg'),color=this.chColors[i-1];
-        const grid=Array.from({length:9},(_,j)=>`<line x1="${2+j*9.5}" y1="3" x2="${2+j*9.5}" y2="28" stroke="#91a7b5" stroke-opacity=".27" stroke-width=".65" ${j===0||j===8?'':'stroke-dasharray="2 2"'}/>`).join('');
+        const grid=Array.from({length:9},(_,j)=>`<line x1="${4+j*11}" y1="2" x2="${4+j*11}" y2="32" stroke="#9acde4" stroke-opacity=".76" stroke-width="1" ${j===0||j===8?'':'stroke-dasharray="2 2"'}/>`).join('');
         svg.innerHTML=`${grid}<path d="${this.bitWave(val,false)}" fill="none" stroke="${color}" stroke-width="2.3" stroke-linejoin="miter"/>`;
         car.classList.toggle('sd-selected',i===this.selectedChannel);
-        car.querySelector('.sd-value').textContent=val+' / '+val.toString(2).padStart(8,'0');
+        car.querySelector('.sd-value').textContent=val.toString(2).padStart(8,'0');
       });
       const i=this.selectedChannel-1,val=this.dmxChannels[i],svg=document.getElementById('simdmx-detail-wave');
       if(svg){
         const bits=[0,...Array.from({length:8},(_,b)=>(val>>b)&1),1,1];
         let labels=bits.map((b,j)=>`<text x="${34+j*48}" y="103" text-anchor="middle" fill="${j===0?'#ff799d':j>=9?'#b99dff':'#ffce76'}" font-size="14">${b}</text>`).join('');
-        const grid=Array.from({length:12},(_,j)=>`<line x1="${10+j*48}" y1="9" x2="${10+j*48}" y2="86" stroke="#a3c5dc" stroke-opacity=".35" stroke-width="1" ${j===0||j===11?'':'stroke-dasharray="3 4"'}/>`).join('');
+        const grid=Array.from({length:12},(_,j)=>`<line x1="${10+j*48}" y1="9" x2="${10+j*48}" y2="86" stroke="#a3c5dc" stroke-opacity=".7" stroke-width="1.2" ${j===0||j===11?'':'stroke-dasharray="3 4"'}/>`).join('');
         svg.innerHTML=`<rect x="10" y="9" width="48" height="77" fill="#e8386420"/><rect x="58" y="9" width="384" height="77" fill="#f4a62612"/><rect x="442" y="9" width="96" height="77" fill="#8777ff24"/>${grid}<path d="${this.bitWave(val,true)}" fill="none" stroke="#ffc04d" stroke-width="3"/>${labels}`;
       }
       document.getElementById('simdmx-wave-label').textContent='CH'+this.selectedChannel+' / '+val+' ('+val.toString(2).padStart(8,'0')+'₂)';
