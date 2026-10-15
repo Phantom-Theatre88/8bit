@@ -5412,7 +5412,7 @@
     <script src="Module_Sim8Bit.js?v=20261013-compare3"></script>
     <script src="Module_Sim16Bit.js?v=20261013-live1"></script>
     <link rel="stylesheet" href="next-ui-sim16bit.css?v=20261013-live2">
-    <script src="Module_SimDmx.js?v=dmx-lesson-lock-20261015a"></script>
+    <script src="Module_SimDmx.js?v=dmx-lesson-lock-20261015b"></script>
     <script src="Module_LEDColorMixing.js?v=cie-img-vivid1"></script>
     <script src="Module_NetIpAddress.js?v=network-layout-v0-4-ip"></script>
     <script src="Module_NetArtNet.js?v=network-layout-v0-3-1"></script>
@@ -5424,6 +5424,12 @@
     <script src="Module_Scroller.js"></script>
 
 <link rel="stylesheet" href="next-ui-console-header.css?v=shared-dom-v1">
+<style id="simdmx-three-row-lock">
+.master-console-container.simdmx-active .console-help-display { display:none !important; }
+.master-console-container.simdmx-active .console-main-screen { flex:1 1 0 !important;min-height:0 !important; }
+#panel-simdmx {height:100%;min-height:0;overflow:hidden}
+#panel-simdmx > .simdmx-v2 {height:100%}
+</style>
 </head>
 <body>
 
@@ -5628,8 +5634,8 @@
             sub: "左のフェーダーを動かし、DMX値と見た目の明るさの変化を確認する。"
         },
         simdmx: {
-            title: "DMX通信列車｜512chを約42Hzで送り続ける信号",
-            sub: "値が変わらなくても、DMXは定期的に全チャンネルを送り続ける。"
+            title: "DMX通信列車｜8bitデータと11bitスロットの構造",
+            sub: "フェーダーで客車の8bit波形を変え、スタートビットとストップビットを確認する。"
         },
         explain: {
             title: "結線 / 冗長化｜Star構成とRing構成の違いを比べる",
@@ -5804,7 +5810,8 @@
                 let moduleHTML = modules[key].getHTML();
                 if (key === 'netartnet' || key === 'netbroadcast' || key === 'netsacn') {
                     moduleHTML = getNetworkLessonHTML(key, moduleHTML);
-                } else if (key === 'sim16bit') {
+                } else if (key === 'sim16bit' || key === 'simdmx') {
+                    // DMX has its own three rows and one teacher; do not add generic shell.
                     panel.innerHTML = moduleHTML;
                     return;
                 }
