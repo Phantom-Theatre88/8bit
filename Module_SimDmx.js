@@ -121,7 +121,7 @@ const Module_SimDmx = {
         });
         document.getElementById('simdmx-speed-continue')?.addEventListener('click',()=>{
           // 速度教材がまだ独立していないため、既存の別テーマへ誤誘導しない。
-          alert('次の「DMX通信速度」教材は準備中です。250kbit/sと、512スロット時の最大約44Hzを区別して学びます。');
+          window.location.href='DmxSpeed.html';
         });
         this.lastTime=performance.now();
         const loop=t=>{this.animationLoop(t);this.animationFrameId=requestAnimationFrame(loop)};
