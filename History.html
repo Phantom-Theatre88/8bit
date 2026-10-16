@@ -376,27 +376,26 @@ button{font:inherit}
 }
 @media(prefers-reduced-motion:reduce){.history-card{transition:none}}
 
-/* 古代18枚の密度を確かめるための仮配置。既存データ・画像は変更しない。 */
-.history-field{overscroll-behavior:contain}
+/* 仮カードを自由配置。元の2カードの配置とスタイルは変更しない。 */
 .card-field:has(.history-card.preview){
-  display:grid;grid-template-columns:repeat(4,minmax(205px,1fr));
-  grid-template-rows:none;align-content:start;gap:12px;padding:4px 4px 18px;
+  grid-template-rows:repeat(24,minmax(50px,1fr));
+  min-height:1250px;
+  align-content:start;
 }
-.card-field:has(.history-card.preview) .history-card,
-.card-field:has(.history-card.preview) .history-card.large,
-.card-field:has(.history-card.preview) .history-card[data-id="greekTheatre"]{
-  grid-column:auto;grid-row:auto;transform:none;min-height:138px;
+.history-card.preview{
+  grid-column:var(--preview-col);
+  grid-row:var(--preview-row);
+  grid-template-columns:minmax(0,1fr);
+  border-style:dashed;
 }
-.history-card.preview{grid-template-columns:1fr;border-style:dashed;min-height:138px}
-.history-card.preview::after{content:"仮置き";position:absolute;right:8px;top:7px;font-size:10px;color:#eac890}
-.history-card.preview h3{font-size:19px}
-.history-card.preview p{font-size:13px;line-height:1.3}
+.history-card.preview::after{content:"仮置き";position:absolute;right:8px;top:6px;font-size:10px;color:#eac890}
+.history-card.preview h3{font-size:18px}
+.history-card.preview p{font-size:12px;line-height:1.35}
 .history-card.preview .card-meta{font-size:11px}
-.card-field:has(.history-card.preview) .history-card.large h3{font-size:22px}
-.card-field:has(.history-card.preview) .history-card[data-id="greekTheatre"] h3{font-size:22px}
-@media(max-width:1150px){.card-field:has(.history-card.preview){grid-template-columns:repeat(3,minmax(190px,1fr))}}
-@media(max-width:760px){.card-field:has(.history-card.preview){grid-template-columns:repeat(2,minmax(155px,1fr))}.history-card.preview{min-height:128px}}
-
+@media(max-width:760px){
+  .card-field:has(.history-card.preview){display:flex;flex-direction:column;min-height:0}
+  .history-card.preview{min-height:120px;width:100%}
+}
 </style>
 <link rel="stylesheet" href="next-ui-console-header.css?v=shared-dom-v1">
 </head>
@@ -579,12 +578,23 @@ function renderField(){
     return;
   }
 
+  const previewSlots=[
+    [1,4,6,8],[5,7,7,9],[8,11,6,8],[2,5,9,11],[6,9,10,12],[10,13,9,11],
+    [1,4,12,14],[5,8,13,15],[9,12,12,14],[2,5,16,18],[6,9,16,18],[10,13,15,17],
+    [1,4,19,21],[5,8,19,21],[9,12,18,20],[2,5,22,24],[6,9,22,24],[10,13,21,23]
+  ];
+  let previewSlotIndex=0;
   list.forEach(([id,item])=>{
     const b=document.createElement("button");
     b.type="button";
     b.className="history-card "+item.size+(id===selectedId?" active":"");
     b.dataset.id=id;
     b.dataset.category=item.category;
+    if(item.size==="preview"){
+      const slot=previewSlots[previewSlotIndex++];
+      b.style.setProperty("--preview-col",slot[0]+" / "+slot[1]);
+      b.style.setProperty("--preview-row",slot[2]+" / "+slot[3]);
+    }
     b.innerHTML=
       '<div class="card-copy">'+
         '<div class="card-meta"><span class="card-visual" aria-hidden="true">'+item.icon+'</span><span class="card-tag">'+item.categoryLabel+'</span></div>'+
