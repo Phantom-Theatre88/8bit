@@ -174,5 +174,5 @@ const Module_Scroller = (() => {
 
   window.addEventListener('resize',()=>{if(document.getElementById('panel-scroller')?.classList.contains('active'))render()});
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',inject);else inject();
-  return {inject,render,init:render,destroy(){S.dragging=false}};
+  return {inject,render,init:inject,destroy(){S.dragging=false}};
 })();
