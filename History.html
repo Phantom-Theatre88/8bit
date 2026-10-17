@@ -195,6 +195,15 @@ button{font:inherit}
 .history-card.medium{grid-column:span 3;grid-row:span 2}
 .history-card.small{grid-column:span 3;grid-row:span 1}
 
+
+/* B案表示修正：暗化を解除し、左ビジュアルをカード幅いっぱいに */
+.history-card[data-id="themeLighting"]{grid-template-columns:minmax(0,58%) minmax(0,42%);gap:8px;padding:10px;align-items:stretch}
+.history-card[data-id="themeLighting"] .theme-b-copy{position:relative;justify-content:flex-end;min-height:175px;padding-top:15px}
+.history-card[data-id="themeLighting"] .theme-b-art{height:135px;width:100%;object-fit:contain;object-position:center;mix-blend-mode:normal;filter:brightness(2.5) contrast(1.15);position:absolute;top:11px;left:0}
+.history-card[data-id="themeLighting"] .theme-b-copy>div{position:relative;z-index:1;background:linear-gradient(transparent,#151719 30%);padding-top:7px}
+.history-card[data-id="themeLighting"] .theme-b-label{position:absolute;top:0;left:0;z-index:2}
+.history-card[data-id="themeLighting"] .theme-b-era{min-height:175px}
+
 /* B案: 既存タイムライン上の光源・照明テーマカード（古代編のみ） */
 .history-card[data-id="themeLighting"]{grid-column:8 / span 4;grid-row:1 / span 2;transform:none;grid-template-columns:54% minmax(0,46%);gap:7px;padding:10px;min-height:155px}
 .history-card[data-id="themeLighting"] .theme-b-copy{min-width:0;display:flex;flex-direction:column;justify-content:space-between}
