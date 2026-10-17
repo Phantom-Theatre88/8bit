@@ -5441,6 +5441,7 @@
     <button class="main-tab-btn tab-dimmer" id="main-tab-sim16bit">16-bit 調光卓</button>
     <button class="main-tab-btn tab-dimmer" id="main-tab-simdmx">DMX通信列車</button>
     <button class="main-tab-btn tab-led" id="main-tab-ledcolormix">LED色混ぜ</button>
+    <button class="main-tab-btn tab-dimmer" id="main-tab-scroller">Scroller</button>
     <button class="main-tab-btn tab-dimmer" id="main-tab-movinghead">Moving Head</button>
     <button class="main-tab-btn tab-network" id="main-tab-netipaddress">IPアドレス</button>
     <button class="main-tab-btn tab-network" id="main-tab-netartnet">DMX on LAN</button>
@@ -5455,6 +5456,7 @@
         <div id="panel-sim16bit" class="stage-view-panel fade-type"></div>
         <div id="panel-simdmx" class="stage-view-panel fade-type"></div>
         <div id="panel-ledcolormix" class="stage-view-panel fade-type"></div>
+        <div id="panel-scroller" class="stage-view-panel fade-type"></div>
         <div id="panel-movinghead" class="stage-view-panel fade-type"></div>
 
         <div id="network-carousel-window" class="network-carousel-window">
@@ -5480,6 +5482,7 @@
         'sim16bit': `<strong>【16-bit 調光卓：まずCoarseで大きく動かす】</strong><br>まずCoarseを動かして、大きな段の変化を確認します。Coarseは上位8bitで、16-bit値の大きな位置を決めます。次にFineを動かすと、その段の中をさらに細かく追い込めます。<br><strong>【16-bit 調光卓：上位8bitと下位8bitを見る】</strong><br>16bit Total は Coarse × 256 + Fine で求めます。16-bitでは、16個の0/1の組み合わせで0〜65,535を表します。Moving HeadのPAN/TILTなど、8-bitだけでは粗く見える位置制御を細かく扱うための入口です。`,
         'simdmx': `<strong>【DMX512：512chをくり返し送り続ける信号】</strong><br>DMX512は、1番から512番までのチャンネル値を順番に送り続ける信号です。値が変わっていなくても、同じ並びを約1秒間に42回くり返して送ります。受け取る機材は、自分に必要なチャンネル番号の値を読み取って動きます。`,
         'ledcolormix': `<strong>【LED色混ぜ：RGBで白は作れるのか】</strong><br>RGBを全部点けると白に近い色は作れます。ただし、その白がどんな場面でも自然に見えるとは限りません。人物の肌、衣裳、淡い色では、RGBだけだと不自然に見えることがあります。この教材では、RGB、White、Warm White、Cool White、Amber、Lime、Cyanなどのチャンネルをフェーダーで操作し、色地図上で現在の色の位置を確認しながら、LED灯具の色作りの考え方を学びます。`,
+        'scroller': `<strong>【Scroller：同じ8-bitでも色数でフィルム長が変わる】</strong><br>2色と24色で1色ぶんの物理幅は同じです。STARTシールも同じ位置から始まります。24色は色数が多いぶんフィルム全体が長くなり、ENDシールだけ遠くなります。<br><strong>【Calibration：電源投入でSTART / ENDを探す】</strong><br>POWERを入れると自動で横移動を開始し、透過センサーがSTARTシール、続いてENDシールを検出します。`,
         'movinghead': `<strong>【Moving Head：PAN/TILT、キャリブレーション、16-bit位置制御】</strong><br>ムービングヘッドのPAN/TILT可動域、電源投入時のキャリブレーション、Start/End検出、キャリブレーションエラー、そして8-bitと16-bitの位置分解性能差を学ぶ教材です。16-bit比較では、8-bitでは狙った位置に止まりにくいこと、Fine値によって狙った位置へ細かく近づけられることを、ゴースト表示で確認できます。`,
         'netipaddress': `<strong>【IPアドレス：ネットワーク上の住所を合わせる】</strong><br>照明卓、Node、PCなどは、IPアドレスを使って相手を見つけます。この教材では、IPアドレスを「機器ごとの住所」として捉え、同じネットワーク、サブネットマスク、IP重複の基本を右側のシミュレーターで確認します。まずはCHALLENGEに従って数字を変え、OK / NG / ERROR がどう変わるかを見ます。`,
         'netartnet': `<strong>【Art-Net：DMXをEthernetで運ぶ考え方】</strong><br>DMX512は1系統あたり最大512chを送る信号です。劇場やイベント現場で複数のUniverseを扱う場合、DMXケーブルを何本も引く代わりに、Art-NetではDMXの値をEthernet上のUDPパケットとして送ります。これにより、1本のLAN幹線で複数Universeを扱えるようになります。ただし、運用方式によってBroadcast / Unicastなどの通信範囲が関係するため、ネットワーク規模に合わせた設計が必要です。`,
@@ -5493,6 +5496,7 @@
         'sim16bit': Module_Sim16Bit,
         'simdmx': Module_SimDmx,
         'ledcolormix': Module_LEDColorMixing,
+        'scroller': Module_Scroller,
         'movinghead': Module_MovingHead,
         'netipaddress': Module_NetIpAddress,
         'netartnet': Module_NetArtNet,
@@ -5935,6 +5939,7 @@
         masterContainer.classList.toggle('common-lesson-active', activeModuleKey !== 'sim8bit');
         masterContainer.classList.toggle('movinghead-active', activeModuleKey === 'movinghead');
         masterContainer.classList.toggle('scroller-active', activeModuleKey === 'scroller');
+        masterContainer.classList.toggle('scroller-active', activeModuleKey === 'scroller');
         masterContainer.classList.toggle('sim8bit-active', activeModuleKey === 'sim8bit');
         masterContainer.classList.toggle('sim16bit-active', activeModuleKey === 'sim16bit');
         masterContainer.classList.toggle('simdmx-active', activeModuleKey === 'simdmx');
@@ -5951,6 +5956,7 @@
     }
     document.getElementById('help-text-target').innerHTML = explanationData[activeModuleKey];
 
+    Module_Scroller.inject();
     const tabs = document.querySelectorAll('.main-tab-btn');
     const fadePanels = document.querySelectorAll('.stage-view-panel.fade-type');
     const netWindow = document.getElementById('network-carousel-window');
@@ -5975,7 +5981,7 @@
             fadePanels.forEach(p => p.classList.remove('active'));
             netWindow.classList.remove('active');
 
-            if (targetKey === 'sim8bit' || targetKey === 'sim16bit' || targetKey === 'simdmx' || targetKey === 'ledcolormix' || targetKey === 'movinghead' || targetKey === 'explain') {
+            if (targetKey === 'sim8bit' || targetKey === 'sim16bit' || targetKey === 'simdmx' || targetKey === 'ledcolormix' || targetKey === 'scroller' || targetKey === 'movinghead' || targetKey === 'explain') {
                 document.getElementById(`panel-${targetKey}`).classList.add('active');
             } 
             else {
@@ -6142,10 +6148,6 @@
     window.addEventListener('DOMContentLoaded', () => {
       const scrollerRoot = document.querySelector('#panel-scroller > .scr-root');
       if (scrollerRoot) window.NextUiLessonShell.wrapElement('scroller', scrollerRoot);
-      document.getElementById('main-tab-scroller')?.addEventListener('click', () => {
-        document.querySelector('.master-console-container')?.classList.add('common-lesson-active');
-        requestAnimationFrame(() => window.nextUiSyncHeader('scroller'));
-      });
       window.nextUiSyncHeader(activeModuleKey);
 
       document.querySelectorAll('.next-ui-category-tab').forEach(button => {
