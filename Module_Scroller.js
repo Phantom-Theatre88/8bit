@@ -102,20 +102,16 @@ const Module_Scroller = (() => {
 
   function inject(){
     insertStyle();
-    const movingTab=document.getElementById('main-tab-movinghead');
-    const movingPanel=document.getElementById('panel-movinghead');
-    if(!movingTab||!movingPanel||document.getElementById('main-tab-scroller')) return;
-    const tab=document.createElement('button'); tab.className='main-tab-btn'; tab.id='main-tab-scroller'; tab.textContent='Scroller'; movingTab.parentNode.insertBefore(tab,movingTab);
-    const panel=document.createElement('div'); panel.id='panel-scroller'; panel.className='stage-view-panel fade-type'; panel.innerHTML=html(); movingPanel.parentNode.insertBefore(panel,movingPanel);
-    if(typeof modules!=='undefined') modules.scroller=Module_Scroller;
-    if(typeof explanationData!=='undefined') explanationData.scroller='<strong>【Scroller：同じ8-bitでも色数でフィルム長が変わる】</strong><br>2色と24色で1色ぶんの物理幅は同じです。STARTシールも同じ位置から始まります。24色は色数が多いぶんフィルム全体が長くなり、ENDシールだけ遠くなります。<br><strong>【Calibration：電源投入でSTART / ENDを探す】</strong><br>POWERを入れると自動で横移動を開始し、透過センサーがSTARTシール、続いてENDシールを検出します。';
-    bind(tab,panel); render();
-    document.addEventListener('pointerdown',e=>{if(e.target.closest('.main-tab-btn')&&e.target.id!=='main-tab-scroller')deactivate(panel)},true);
-    const params=new URLSearchParams(location.search);const q=(params.get('tab')||'').toLowerCase();if(q==='scroller'||q==='scroll')requestAnimationFrame(()=>tab.click());
+    const panel=document.getElementById('panel-scroller');
+    if(!panel) return;
+    if(!panel.querySelector('.scr-root')) {
+      panel.innerHTML=html();
+      bindControls();
+    }
+    render();
   }
 
-  function bind(tab,panel){
-    tab.addEventListener('click',()=>activate(tab,panel));
+  function bindControls(){
     const track=document.getElementById('scr-track');
     const setFrom=e=>{if(S.calibrating)return;const p=e.touches?e.touches[0]:e;const r=track.getBoundingClientRect();const ratio=1-Math.max(0,Math.min(1,(p.clientY-r.top)/r.height));S.dmx=Math.round(ratio*255);render()};
     track.addEventListener('pointerdown',e=>{S.dragging=true;track.setPointerCapture?.(e.pointerId);setFrom(e)});track.addEventListener('pointermove',e=>{if(S.dragging)setFrom(e)});track.addEventListener('pointerup',()=>S.dragging=false);track.addEventListener('pointercancel',()=>S.dragging=false);
@@ -123,16 +119,6 @@ const Module_Scroller = (() => {
     document.getElementById('scr-down').onclick=()=>{if(!S.calibrating){S.dmx=Math.max(0,S.dmx-1);render()}};
     document.getElementById('scr-power').onclick=togglePower;
   }
-
-  function activate(tab,panel){
-    if(typeof activeModuleKey!=='undefined'&&activeModuleKey==='scroller')return;
-    if(typeof modules!=='undefined'&&typeof activeModuleKey!=='undefined'&&modules[activeModuleKey]?.destroy)modules[activeModuleKey].destroy();
-    document.querySelectorAll('.main-tab-btn').forEach(t=>t.classList.remove('active'));tab.classList.add('active');document.querySelectorAll('.stage-view-panel.fade-type').forEach(p=>p.classList.remove('active'));panel.classList.add('active');document.getElementById('network-carousel-window')?.classList.remove('active');
-    const mc=document.querySelector('.master-console-container');mc?.classList.remove('movinghead-active','sim8bit-active','sim16bit-active','simdmx-active','ledmix-active','network-active','ipaddress-active','network-layout-active');mc?.classList.add('scroller-active');
-    if(typeof activeModuleKey!=='undefined')activeModuleKey='scroller';const help=document.getElementById('help-text-target');if(help)help.innerHTML=explanationData?.scroller||'Scroller';render();
-  }
-  function deactivate(panel){panel.classList.remove('active');document.querySelector('.master-console-container')?.classList.remove('scroller-active')}
-
   function togglePower(){
     if(S.calibrating)return;
     if(S.power){clearTimeout(S.animTimer);S.power=false;S.ready=false;S.phase='POWER OFF';S.calStep=0;S.calPos='normal';S.detectedStart=false;S.detectedEnd=false;render();return}
