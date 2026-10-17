@@ -447,6 +447,51 @@ button{font:inherit}
 @media(max-width:1050px){.stage-top{grid-template-columns:minmax(180px,1fr) minmax(0,2.5fr);gap:8px}.era-layer{top:96px;grid-template-columns:220px minmax(0,1fr)}.period-btn,.period-arrow{height:56px}.period-name{font-size:12px}.period-range{font-size:10px}.period-track{grid-template-columns:repeat(5,minmax(0,1fr));overflow:hidden}.detail-layout{grid-template-columns:140px minmax(0,1fr)}.detail-panel,.history-app.detail-open .detail-panel{grid-template-columns:minmax(0,1fr) 210px}.teacher-pane{grid-template-columns:1fr 75px}.teacher-pane img{width:75px;height:125px}}
 @media(max-height:860px) and (min-width:761px){.history-app,.history-app.detail-open{grid-template-rows:minmax(0,1fr) clamp(225px,29vh,255px) 24px;gap:6px}.era-layer{top:91px}.stage-top{padding-top:8px}.detail-section{margin-top:6px;padding-top:5px}.detail-main{padding:8px 10px}.detail-hero img{max-height:100%}}
 
+
+/* STEP1 v2: timeline belongs to the right card region; Wheel occupies full left height */
+.history-stage{isolation:isolate}
+.stage-top{position:absolute;z-index:4;top:0;left:calc(clamp(220px,18vw,240px) + 24px);right:12px;height:84px;padding:9px 10px;display:flex;align-items:center;gap:12px;background:linear-gradient(180deg,#0b1015e8,#0b1015bd);border-bottom:1px solid #353c43}
+.stage-title{flex:0 0 148px}
+.stage-title h1{font-size:12px}
+.stage-title p{font-size:9px;letter-spacing:.02em}
+.period-rail{flex:1;min-width:0;grid-template-columns:34px minmax(0,1fr) 34px;gap:5px}
+.period-arrow,.period-btn{height:55px}
+.period-btn{padding:3px 2px}
+.period-name{font-size:13px}
+.period-range{font-size:10px}
+.era-layer{top:10px;bottom:10px;left:12px;right:12px}
+.history-wheel{grid-column:1;grid-row:1}
+.history-field{padding:94px 10px 20px;grid-column:2;grid-row:1}
+.history-stage::after{left:calc(clamp(220px,18vw,240px) + 24px)}
+.history-stage::before{left:calc(clamp(220px,18vw,240px) + 24px)}
+.detail-panel{grid-template-columns:minmax(0,1fr) clamp(210px,20vw,260px)}
+.detail-main{overflow:auto}
+.detail-hero img{height:100%;min-height:0}
+.detail-hero:has(img[hidden]){display:none}
+.detail-layout:has(img[hidden]){grid-template-columns:minmax(0,1fr)}
+.history-card.large{grid-column:2 / span 5;grid-row:3 / span 3}
+.history-card[data-id="greekTheatre"]{grid-column:7 / span 5;grid-row:3 / span 3}
+.card-field:not(:has(.history-card.preview)){min-height:100%;grid-template-rows:repeat(6,minmax(45px,1fr))}
+.history-card h3{font-size:clamp(17px,1.8vw,23px)}
+.history-card p{font-size:clamp(11px,1.15vw,14px)}
+.history-wheel-item{height:48px;margin-top:-24px}
+@media(max-width:1050px){
+ .stage-top{left:244px;right:8px;height:80px;display:flex;gap:7px}
+ .stage-title{flex:0 0 105px}
+ .stage-title h1{font-size:10px}
+ .stage-title p{font-size:8px}
+ .period-btn,.period-arrow{height:50px}
+ .period-name{font-size:11px}
+ .period-range{font-size:9px}
+ .history-stage::after,.history-stage::before{left:244px}
+ .history-field{padding-top:90px}
+}
+@media(max-height:860px) and (min-width:761px){
+ .stage-top{height:72px}
+ .history-field{padding-top:80px}
+ .history-wheel-item{height:46px;margin-top:-23px}
+}
+
 </style>
 <link rel="stylesheet" href="next-ui-console-header.css?v=shared-dom-v1">
 </head>
@@ -594,6 +639,9 @@ ancientPreviewCards.forEach((x)=>{
 });
 
 
+let currentPeriod=0;
+let selectedId=null;
+const $=id=>document.getElementById(id);
 const historyThemes=[
  ["用語","字"],["人物・職業","人"],["機構・技術","⚙"],["光源・照明","☀"],["劇場建築・空間","▥"],["劇場・遺跡","⌂"],["作品・上演","🎭"],["社会・制度","§"],["文化・思想","✦"]
 ];
@@ -653,9 +701,7 @@ $("openFloat").addEventListener("click",()=>{const d=items[selectedId];if(!d)ret
 $("closeFloat").addEventListener("click",()=>$("historyFloat").hidden=true);
 $("historyFloat").addEventListener("click",e=>{if(e.target.id==="historyFloat")e.currentTarget.hidden=true});
 
-let currentPeriod=0;
-let selectedId=null;
-const $=id=>document.getElementById(id);
+
 
 function renderPeriodNav(){
   const host=$("periodTrack");
