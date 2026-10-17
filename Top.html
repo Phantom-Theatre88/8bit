@@ -5441,6 +5441,7 @@
     <button class="main-tab-btn tab-dimmer" id="main-tab-sim16bit">16-bit 調光卓</button>
     <button class="main-tab-btn tab-dimmer" id="main-tab-simdmx">DMX通信列車</button>
     <button class="main-tab-btn tab-led" id="main-tab-ledcolormix">LED色混ぜ</button>
+    <button class="main-tab-btn tab-dimmer" id="main-tab-scroller">Scroller</button>
     <button class="main-tab-btn tab-dimmer" id="main-tab-movinghead">Moving Head</button>
     <button class="main-tab-btn tab-network" id="main-tab-netipaddress">IPアドレス</button>
     <button class="main-tab-btn tab-network" id="main-tab-netartnet">DMX on LAN</button>
@@ -5455,6 +5456,7 @@
         <div id="panel-sim16bit" class="stage-view-panel fade-type"></div>
         <div id="panel-simdmx" class="stage-view-panel fade-type"></div>
         <div id="panel-ledcolormix" class="stage-view-panel fade-type"></div>
+        <div id="panel-scroller" class="stage-view-panel fade-type"></div>
         <div id="panel-movinghead" class="stage-view-panel fade-type"></div>
 
         <div id="network-carousel-window" class="network-carousel-window">
@@ -5934,6 +5936,7 @@
         if (!masterContainer) return;
         masterContainer.classList.toggle('common-lesson-active', activeModuleKey !== 'sim8bit');
         masterContainer.classList.toggle('movinghead-active', activeModuleKey === 'movinghead');
+        masterContainer.classList.toggle('scroller-active', activeModuleKey === 'scroller');
         masterContainer.classList.toggle('sim8bit-active', activeModuleKey === 'sim8bit');
         masterContainer.classList.toggle('sim16bit-active', activeModuleKey === 'sim16bit');
         masterContainer.classList.toggle('simdmx-active', activeModuleKey === 'simdmx');
@@ -5974,7 +5977,7 @@
             fadePanels.forEach(p => p.classList.remove('active'));
             netWindow.classList.remove('active');
 
-            if (targetKey === 'sim8bit' || targetKey === 'sim16bit' || targetKey === 'simdmx' || targetKey === 'ledcolormix' || targetKey === 'movinghead' || targetKey === 'explain') {
+            if (targetKey === 'sim8bit' || targetKey === 'sim16bit' || targetKey === 'simdmx' || targetKey === 'ledcolormix' || targetKey === 'scroller' || targetKey === 'movinghead' || targetKey === 'explain') {
                 document.getElementById(`panel-${targetKey}`).classList.add('active');
             } 
             else {
