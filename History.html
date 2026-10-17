@@ -194,6 +194,16 @@ button{font:inherit}
 .history-card[data-id="greekTheatre"]{grid-column:7 / span 4;grid-row:3 / span 2;transform:translateY(10px)}
 .history-card.medium{grid-column:span 3;grid-row:span 2}
 .history-card.small{grid-column:span 3;grid-row:span 1}
+
+/* B案: 既存タイムライン上の光源・照明テーマカード（古代編のみ） */
+.history-card[data-id="themeLighting"]{grid-column:8 / span 4;grid-row:1 / span 2;transform:none;grid-template-columns:54% minmax(0,46%);gap:7px;padding:10px;min-height:155px}
+.history-card[data-id="themeLighting"] .theme-b-copy{min-width:0;display:flex;flex-direction:column;justify-content:space-between}
+.history-card[data-id="themeLighting"] .theme-b-art{width:100%;height:86px;object-fit:contain;object-position:center;display:block;mix-blend-mode:multiply}
+.history-card[data-id="themeLighting"] .theme-b-title{font-size:19px;margin:3px 0;line-height:1.2}
+.history-card[data-id="themeLighting"] .theme-b-desc{font-size:12px;line-height:1.3;color:#c0c6cb}
+.history-card[data-id="themeLighting"] .theme-b-era{width:100%;height:100%;min-height:0;object-fit:cover;border-radius:9px;border:1px solid rgba(255,255,255,.14)}
+.history-card[data-id="themeLighting"] .theme-b-label{font-size:10px;color:#e4bb78;font-weight:700}
+
 .card-copy{min-width:0;align-self:center}
 .card-visual{
   width:28px;height:28px;border-radius:50%;
@@ -481,6 +491,18 @@ const periods=[
 ];
 
 const items={
+  themeLighting:{
+    period:"ancient",title:"光源・照明",displayTitle:"光源・照明｜古代編のテーマ",
+    date:"古代",region:"古代ギリシャ・ローマ",category:"source",categoryLabel:"テーマ / 光源・照明",
+    size:"theme-b",icon:"☀",image:"assets/history/theme_light_B.webp",
+    imageAlt:"照明器具を組み合わせたLOCK済みテーマビジュアル",
+    eraImage:"assets/history/sun_ai_reference.webp",
+    teaser:"舞台を照らした光の歴史をたどる。",
+    summary:"古代編の光源・照明テーマ。まずは野外劇場で用いられた太陽光・天空光からたどる。",
+    body:"このテーマカードは9テーマ構成のB案表示検証です。左に全時代共通の照明ビジュアル、右に古代編の太陽光キー画像を表示しています。照明の歴史的説明は個別の太陽光カードを参照してください。",
+    teacher:"左のビジュアルは全時代共通、右の太陽光は古代編のキー画像だよ。",
+    source:"テーマ表示検証用（歴史的事実の根拠は太陽光カードに記載）"
+  },
   sun:{
     period:"ancient",
     title:"太陽光",
@@ -595,7 +617,13 @@ function renderField(){
       b.style.setProperty("--preview-col",slot[0]+" / "+slot[1]);
       b.style.setProperty("--preview-row",slot[2]+" / "+slot[3]);
     }
-    b.innerHTML=
+    if(id==="themeLighting"){
+      b.innerHTML='<div class="theme-b-copy">'+
+        '<span class="theme-b-label">04 / 光源・照明</span>'+
+        '<img class="theme-b-art" src="'+item.image+'" alt="'+item.imageAlt+'" loading="eager">'+
+        '<div><h3 class="theme-b-title">光源・照明</h3><p class="theme-b-desc">'+item.teaser+'</p></div>'+
+        '</div><img class="theme-b-era" src="'+item.eraImage+'" alt="古代編：太陽光" loading="eager">';
+    }else b.innerHTML=
       '<div class="card-copy">'+
         '<div class="card-meta"><span class="card-visual" aria-hidden="true">'+item.icon+'</span><span class="card-tag">'+item.categoryLabel+'</span></div>'+
         '<h3>'+item.title+'</h3>'+
