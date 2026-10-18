@@ -905,12 +905,7 @@ document.querySelector(".history-stage").addEventListener("click",e=>{
 });
 
 
-$("historyField").addEventListener("touchend",e=>{
-  if(touchX===null)return;
-  const dx=e.changedTouches[0].clientX-touchX;
-  touchX=null;
-  if(Math.abs(dx)>70)setPeriod(currentPeriod+(dx<0?1:-1));
-},{passive:true});
+/* Time changes only through upper time ruler. */
 
 
 document.querySelectorAll(".next-ui-category-tab").forEach(button=>button.addEventListener("click",e=>{
