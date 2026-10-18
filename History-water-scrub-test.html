@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>照明史｜水面浮遊・時間スクラブ試験</title>
+<title>照明史｜水面浮遊・時間スクラブ試験 v2</title>
 <link rel="stylesheet" href="next-ui-typography.css">
 <link rel="stylesheet" href="next-ui-page-shell.css">
 <style>
@@ -534,6 +534,14 @@ will-change:transform,opacity;overflow:hidden!important;pointer-events:var(--orb
 .orbit-label{max-width:60%;font-size:11px}
 
 .period-rail{touch-action:pan-y;user-select:none;cursor:grab}.period-rail.scrubbing{cursor:grabbing}.period-track{transform:translateX(var(--time-shift,0px));transition:transform .2s}.period-rail.scrubbing .period-track{transition:none}.card-field{touch-action:none;cursor:grab}.card-field.water-touch{cursor:grabbing}.history-card{touch-action:none}
+
+/* v2: genuine horizontally scrollable time ruler */
+.period-track{display:flex!important;overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:none;scroll-behavior:auto;touch-action:pan-x;overscroll-behavior-x:contain;cursor:grab}
+.period-track::-webkit-scrollbar{display:none}
+.period-track::before,.period-track::after{content:"";display:block;flex:0 0 calc(50% - 90px)}
+.period-btn{flex:0 0 180px!important;min-width:180px!important}
+.period-rail.scrubbing .period-track{cursor:grabbing}
+.card-field{touch-action:none!important}
 </style>
 <link rel="stylesheet" href="next-ui-console-header.css?v=shared-dom-v1">
 </head>
@@ -746,18 +754,22 @@ $("historyFloat").addEventListener("click",e=>{if(e.target.id==="historyFloat")e
 
 
 function renderPeriodNav(){
-  const host=$("periodTrack");
+ const host=$("periodTrack");
+ if(host.querySelectorAll(".period-btn").length!==periods.length){
   host.innerHTML="";
   periods.forEach((p,i)=>{
-    const b=document.createElement("button");
-    b.type="button";
-    b.className="period-btn"+(i===currentPeriod?" active":"");
-    b.innerHTML='<span class="period-range">'+p.range+'</span><span class="period-name">'+p.label+'</span>';
-    b.setAttribute("aria-label",p.label+" "+p.range);
-    if(i===currentPeriod)b.setAttribute("aria-current","true");
-    b.addEventListener("click",()=>setPeriod(i));
-    host.appendChild(b);
+   const b=document.createElement("button");b.type="button";b.className="period-btn";
+   b.innerHTML='<span class="period-range">'+p.range+'</span><span class="period-name">'+p.label+'</span>';
+   b.setAttribute("aria-label",p.label+" "+p.range);
+   b.addEventListener("click",()=>{if(performance.now()>blockTimeClick)setPeriod(i)});
+   host.appendChild(b);
   });
+  requestAnimationFrame(()=>{if(!timePointer)host.scrollLeft=currentPeriod*180});
+ }
+ [...host.querySelectorAll(".period-btn")].forEach((b,i)=>{
+  b.classList.toggle("active",i===currentPeriod);
+  if(i===currentPeriod)b.setAttribute("aria-current","true");else b.removeAttribute("aria-current");
+ });
 }
 
 function renderField(){
@@ -934,8 +946,8 @@ function orbitPaint(now){
  const field=$("cardField"),w=field.clientWidth,h=field.clientHeight;
  if(!w||!h||!orbitCards.length)return;
  const dt=Math.min(.06,Math.max(0,(now-water.last)/1000));water.last=now;
- if(!water.pointer){water.vx*=Math.exp(-dt*2.1);water.vy*=Math.exp(-dt*2.1)}
- water.x=(water.x+water.vx*dt)*Math.exp(-dt*.45);water.y=(water.y+water.vy*dt)*Math.exp(-dt*.45);
+ if(!water.pointer){water.vx*=Math.exp(-dt*1.3);water.vy*=Math.exp(-dt*2.1)}
+ water.x=(water.x+water.vx*dt)*Math.exp(-dt*.22);water.y=(water.y+water.vy*dt)*Math.exp(-dt*.45);
  const t=orbitPaused?orbitFrozenTime:(now-orbitStarted)/1000;
  const cw=orbitCards[0].offsetWidth||400,ch=orbitCards[0].offsetHeight||175;
  const scaleBase=Math.min(1,Math.max(.72,(w-22)/(cw*2.12)));
@@ -949,10 +961,10 @@ function orbitPaint(now){
   const baseX=Math.min(maxX,point[0]*w);
   const baseY=Math.min(maxY,point[1]*h);
   const phase=i*2.399;
-  const swayX=orbitPaused?0:Math.sin(t/(7+i%4)+phase)*(front?8:6);
-  const swayY=orbitPaused?0:Math.cos(t/(9+i%5)+phase)*(front?7:5);
-  const x=Math.max(0,Math.min(maxX,baseX+swayX+water.x*(front?1:.46)))-(cw*(1-scale))/2;
-  const y=Math.max(0,Math.min(maxY,baseY+swayY+water.y*(front?1:.46)))-(ch*(1-scale))/2;
+  const swayX=orbitPaused?0:Math.sin(t/(7+i%4)+phase)*(front?19:15);
+  const swayY=orbitPaused?0:Math.cos(t/(9+i%5)+phase)*(front?17:13);
+  const x=Math.max(-cw*.20,Math.min(maxX+cw*.20,baseX+swayX+water.x*(front?1:.65)))-(cw*(1-scale))/2;
+  const y=Math.max(-ch*.20,Math.min(maxY+ch*.20,baseY+swayY+water.y*(front?1:.65)))-(ch*(1-scale))/2;
   el.style.setProperty("--orbit-x",x+"px");
   el.style.setProperty("--orbit-y",y+"px");
   el.style.setProperty("--orbit-scale",scale);
@@ -997,8 +1009,8 @@ waterField.addEventListener("pointerdown",e=>{
 waterField.addEventListener("pointermove",e=>{
  const p=water.pointer;if(!p||p.id!==e.pointerId)return;
  const dx=e.clientX-p.x,dy=e.clientY-p.y,dt=Math.max(.016,(performance.now()-p.t)/1000);
- p.dist+=Math.hypot(dx,dy);water.vx=Math.max(-650,Math.min(650,dx/dt*.65));water.vy=Math.max(-650,Math.min(650,dy/dt*.65));
- water.x+=dx*.45;water.y+=dy*.45;p.x=e.clientX;p.y=e.clientY;p.t=performance.now();
+ p.dist+=Math.hypot(dx,dy);water.vx=Math.max(-650,Math.min(650,dx/dt*.85));water.vy=Math.max(-650,Math.min(650,dy/dt*.85));
+ water.x+=dx*1.05;water.y+=dy*1.05;p.x=e.clientX;p.y=e.clientY;p.t=performance.now();
 });
 function waterEnd(e){if(!water.pointer||water.pointer.id!==e.pointerId)return;
  if(water.pointer.dist>12)ignoreClickUntil=performance.now()+350;
@@ -1007,27 +1019,33 @@ function waterEnd(e){if(!water.pointer||water.pointer.id!==e.pointerId)return;
 waterField.addEventListener("pointerup",waterEnd);waterField.addEventListener("pointercancel",waterEnd);
 waterField.addEventListener("click",e=>{if(performance.now()<ignoreClickUntil){e.preventDefault();e.stopPropagation()}},true);
 
-/* Drag time ruler horizontally; the selected era follows the ruler. */
+/* Scrollable ruler: actual horizontal displacement, not cosmetic transform. */
 const timeRail=document.querySelector(".period-rail"),timeTrack=$("periodTrack");let timePointer=null,blockTimeClick=0;
 timeRail.addEventListener("pointerdown",e=>{
  if(e.target.closest(".period-arrow")||(e.pointerType==="mouse"&&e.button!==0))return;
- timePointer={id:e.pointerId,x:e.clientX,index:currentPeriod,moved:false};
+ timePointer={id:e.pointerId,x:e.clientX,scroll:timeTrack.scrollLeft,moved:false};
  timeRail.setPointerCapture(e.pointerId);timeRail.classList.add("scrubbing");
 });
 timeRail.addEventListener("pointermove",e=>{
  if(!timePointer||timePointer.id!==e.pointerId)return;
- const dx=e.clientX-timePointer.x,step=Math.max(95,Math.min(180,timeRail.clientWidth/4.5));
- if(Math.abs(dx)>7)timePointer.moved=true;
- const target=Math.max(0,Math.min(periods.length-1,Math.round(timePointer.index-dx/step)));
- timeTrack.style.setProperty("--time-shift",Math.max(-step*.4,Math.min(step*.4,dx+(target-timePointer.index)*step))+"px");
- if(target!==currentPeriod)setPeriod(target);
+ const dx=e.clientX-timePointer.x;
+ if(Math.abs(dx)>5)timePointer.moved=true;
+ timeTrack.scrollLeft=timePointer.scroll-dx;
+ const next=Math.max(0,Math.min(periods.length-1,Math.round(timeTrack.scrollLeft/180)));
+ if(next!==currentPeriod)setPeriod(next);
 });
-function timeEnd(e){if(!timePointer||timePointer.id!==e.pointerId)return;
- if(timePointer.moved)blockTimeClick=performance.now()+350;
- timePointer=null;timeRail.classList.remove("scrubbing");timeTrack.style.setProperty("--time-shift","0px");
+function timeEnd(e){
+ if(!timePointer||timePointer.id!==e.pointerId)return;
+ if(timePointer.moved)blockTimeClick=performance.now()+450;
+ timePointer=null;timeRail.classList.remove("scrubbing");
 }
 timeRail.addEventListener("pointerup",timeEnd);timeRail.addEventListener("pointercancel",timeEnd);
 timeRail.addEventListener("click",e=>{if(performance.now()<blockTimeClick){e.preventDefault();e.stopPropagation()}},true);
+timeTrack.addEventListener("scroll",()=>{
+ if(timePointer)return;
+ const next=Math.max(0,Math.min(periods.length-1,Math.round(timeTrack.scrollLeft/180)));
+ if(next!==currentPeriod)setPeriod(next);
+},{passive:true});
 
 renderPeriodNav();
 renderWheel();
