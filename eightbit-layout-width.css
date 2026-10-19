@@ -1,0 +1,8 @@
+/* Shared outer width for all 8bit lesson pages. */
+:root { --eightbit-page-max-width:1480px; }
+html {width:100%;min-width:0}
+body.eightbit-unified-width {box-sizing:border-box;width:100%!important;max-width:var(--eightbit-page-max-width)!important;min-width:0;margin-left:auto!important;margin-right:auto!important}
+body.eightbit-unified-width > .app,body.eightbit-unified-width > .map-app,body.eightbit-unified-width > .master-console-container {box-sizing:border-box;width:100%!important;max-width:100%!important;min-width:0;margin-left:auto;margin-right:auto}
+body.eightbit-unified-width .master-console-container {max-width:100%!important}
+body.eightbit-unified-width.eightbit-console {padding-left:0!important;padding-right:0!important}
+body.eightbit-unified-width.eightbit-console > .next-ui-header,body.eightbit-unified-width.eightbit-console > #shared-console-header-root {width:100%!important;max-width:100%!important;margin-left:0!important;margin-right:0!important}
