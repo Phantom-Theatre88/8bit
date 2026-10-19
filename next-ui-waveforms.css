@@ -1,10 +1,10 @@
 /* Landscape-first AC teaching UI. */
 *{box-sizing:border-box}
-body.wave-next-ui{--bg:#171e26;--muted:#ccd3dc;margin:0;padding:0;display:flex;flex-direction:column;height:100dvh;overflow:hidden;background:#171e26;color:#f0f3f7;font:16px "Hiragino Sans","Yu Gothic",Meiryo,system-ui,sans-serif}
+body.wave-next-ui{--bg:#171e26;--muted:#ccd3dc;display:flex;flex-direction:column;background:#171e26;color:#f0f3f7;font:16px "Hiragino Sans","Yu Gothic",Meiryo,system-ui,sans-serif}
 body.wave-next-ui button{font:inherit;cursor:pointer;border:1px solid #627488;border-radius:6px;background:#283540;color:#eef2f6}
 body.wave-next-ui button[aria-pressed="true"],body.wave-next-ui .wave-mode.active{border-color:#f7ac4e;background:#493725;color:#ffcf83}
 body.wave-next-ui button:focus-visible,body.wave-next-ui a:focus-visible,body.wave-next-ui input:focus-visible{outline:2px solid #ffda8c;outline-offset:2px}
-body.wave-next-ui .app{width:100%;flex:1 1 0;min-height:0;margin:auto;padding:8px 12px 0;display:grid;grid-template-rows:36px 64px 44px minmax(0,1fr) 144px 18px;gap:6px}
+body.wave-next-ui .app{display:grid}
 body.wave-next-ui .topbar{display:flex;align-items:center;justify-content:space-between;border-left:3px solid #ff9d00;padding:0 10px;min-height:0}
 body.wave-next-ui .title{display:flex;gap:10px;align-items:center;min-width:0}
 body.wave-next-ui .title h1{font-size:22px;line-height:28px;margin:0;white-space:nowrap}
@@ -96,7 +96,7 @@ body.wave-next-ui .next-ui-category-menu:nth-last-child(-n+2) .next-ui-dropdown{
 @media (orientation:landscape) and (min-width:960px) and (max-height:820px){
  body.wave-next-ui .next-ui-header-top{min-height:52px!important}
  body.wave-next-ui .next-ui-brand{width:156px!important;min-width:156px!important;flex-basis:156px!important;height:52px!important;min-height:52px!important;background-size:156px 52px!important}
- body.wave-next-ui .app{max-height:none;grid-template-rows:32px 56px 40px minmax(0,1fr) 112px 18px;gap:5px;padding:6px 10px 0}
+ body.wave-next-ui .app{}
  body.wave-next-ui .wave-intro{padding:6px 8px}
  body.wave-next-ui .wave-intro p{line-height:21px}
  body.wave-next-ui .wave-mode{min-height:32px;padding:0 7px}
@@ -113,8 +113,8 @@ body.wave-next-ui .next-ui-category-menu:nth-last-child(-n+2) .next-ui-dropdown{
  body.wave-next-ui .dimming #dimOutput{margin-top:0}
 }
 @media (orientation:portrait),(max-width:959px),(max-height:639px){
- body.wave-next-ui{height:auto;min-height:100dvh;overflow:auto}
- body.wave-next-ui .app{flex:none;max-height:none;grid-template-rows:auto auto auto auto auto 20px;padding:10px;gap:10px}
+ body.wave-next-ui{}
+ body.wave-next-ui .app{}
  body.wave-next-ui .title{flex-wrap:wrap}
  body.wave-next-ui .topbar{flex-wrap:wrap;gap:8px}
  body.wave-next-ui .wave-modes{flex-wrap:wrap}
@@ -128,7 +128,7 @@ body.wave-next-ui .next-ui-category-menu:nth-last-child(-n+2) .next-ui-dropdown{
  body.wave-next-ui .next-ui-category-tabs{order:3;width:100%;justify-content:center;border-top:1px solid #3e4a56}
 }
 /* Basic AC lesson: one wave first, frequency comparison on request. */
-body.wave-next-ui .app{grid-template-rows:36px 64px minmax(0,1fr) 190px 18px}
+body.wave-next-ui .app{}
 body.wave-next-ui .lesson-bottom{grid-template-columns:minmax(0,32fr) minmax(0,37fr) minmax(0,31fr)}
 body.wave-next-ui .equipment p{font-size:15px;line-height:21px;margin:0 0 5px}
 body.wave-next-ui .equipment h3{color:#ffd078}
@@ -142,12 +142,12 @@ body.wave-next-ui #periodInfo{min-height:20px;white-space:nowrap}
 body.wave-next-ui .cursor-controls h3 label{font-size:16px;line-height:21px}
 body.wave-next-ui .wave-graph-footer{font-size:14px}
 @media (orientation:landscape) and (min-width:960px) and (max-height:820px){
- body.wave-next-ui .app{grid-template-rows:32px 56px minmax(0,1fr) 180px 18px}
+ body.wave-next-ui .app{}
  body.wave-next-ui .teacher-character{width:40px;height:94px}
  body.wave-next-ui .teacher{grid-template-columns:40px minmax(0,1fr);gap:5px}
 }
 @media (orientation:portrait),(max-width:959px),(max-height:639px){
- body.wave-next-ui .app{grid-template-rows:auto auto auto auto 20px}
+ body.wave-next-ui .app{}
  body.wave-next-ui .lesson-bottom{grid-template-columns:1fr}
  body.wave-next-ui .teacher{grid-template-columns:68px minmax(0,1fr)}
  body.wave-next-ui .teacher-character{width:68px}
@@ -155,7 +155,7 @@ body.wave-next-ui .wave-graph-footer{font-size:14px}
 }
 
 /* Readable teaching copy and a full-size transparent guide. */
-body.wave-next-ui .app{grid-template-rows:36px 70px minmax(0,1fr) 230px 18px}
+body.wave-next-ui .app{}
 body.wave-next-ui .wave-intro p{font-size:17px;line-height:25px}
 body.wave-next-ui .wave-stage{grid-template-columns:minmax(0,1fr) 320px}
 body.wave-next-ui .wave-graph-head h2{font-size:19px;line-height:25px}
@@ -176,7 +176,7 @@ body.wave-next-ui .teacher-speech{position:relative;font-size:18px;line-height:2
 body.wave-next-ui .teacher-speech::before{content:"";position:absolute;left:-10px;top:26px;border-width:8px 10px 8px 0;border-style:solid;border-color:transparent #f2e4b2 transparent transparent}
 body.wave-next-ui .next-learning{font-size:16px;line-height:24px}
 @media (orientation:landscape) and (min-width:960px) and (max-height:820px){
- body.wave-next-ui .app{grid-template-rows:32px 64px minmax(0,1fr) 224px 18px}
+ body.wave-next-ui .app{}
  body.wave-next-ui .wave-intro p{font-size:16px;line-height:24px}
  body.wave-next-ui .explain-list,body.wave-next-ui .equipment p{font-size:16px;line-height:24px}
  body.wave-next-ui .teacher{grid-template-columns:100px minmax(0,1fr);gap:8px}
@@ -184,7 +184,7 @@ body.wave-next-ui .next-learning{font-size:16px;line-height:24px}
  body.wave-next-ui .teacher-speech{font-size:17px;line-height:25px}
 }
 @media (orientation:portrait),(max-width:959px),(max-height:639px){
- body.wave-next-ui .app{grid-template-rows:auto auto auto auto 20px}
+ body.wave-next-ui .app{}
  body.wave-next-ui .wave-stage,body.wave-next-ui .lesson-bottom{grid-template-columns:1fr}
  body.wave-next-ui .wave-graph-card{height:440px;grid-template-rows:auto auto minmax(0,1fr) auto}
  body.wave-next-ui .teacher{grid-template-columns:120px minmax(0,1fr)}
@@ -194,7 +194,7 @@ body.wave-next-ui .next-learning{font-size:16px;line-height:24px}
 body.wave-next-ui .wave-graph-head .wave-control{width:160px;height:30px;margin:0;flex-shrink:0;font-size:16px}
 body.wave-next-ui #pointMeaning{height:auto;margin:0;padding:2px 9px;font-size:16px;line-height:24px}
 @media (orientation:landscape) and (min-width:960px) and (max-height:820px){
- body.wave-next-ui .app{grid-template-rows:32px 60px minmax(0,1fr) 224px 18px}
+ body.wave-next-ui .app{}
  body.wave-next-ui .wave-side-card{padding:4px;gap:3px}
  body.wave-next-ui #instantReadout{grid-auto-rows:24px;line-height:24px;min-height:48px}
  body.wave-next-ui .control-group{padding:3px}
