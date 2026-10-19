@@ -1,10 +1,10 @@
 /* Landscape-first AC teaching UI. */
 *{box-sizing:border-box}
-body.wave-next-ui{--bg:#171e26;--muted:#ccd3dc;display:flex;flex-direction:column;background:#171e26;color:#f0f3f7;font:16px "Hiragino Sans","Yu Gothic",Meiryo,system-ui,sans-serif}
+body.wave-next-ui{--bg:#171e26;--muted:#ccd3dc;background:#171e26;color:#f0f3f7;font:16px "Hiragino Sans","Yu Gothic",Meiryo,system-ui,sans-serif}
 body.wave-next-ui button{font:inherit;cursor:pointer;border:1px solid #627488;border-radius:6px;background:#283540;color:#eef2f6}
 body.wave-next-ui button[aria-pressed="true"],body.wave-next-ui .wave-mode.active{border-color:#f7ac4e;background:#493725;color:#ffcf83}
 body.wave-next-ui button:focus-visible,body.wave-next-ui a:focus-visible,body.wave-next-ui input:focus-visible{outline:2px solid #ffda8c;outline-offset:2px}
-body.wave-next-ui .app{display:grid}
+body.wave-next-ui .app{}
 body.wave-next-ui .topbar{display:flex;align-items:center;justify-content:space-between;border-left:3px solid #ff9d00;padding:0 10px;min-height:0}
 body.wave-next-ui .title{display:flex;gap:10px;align-items:center;min-width:0}
 body.wave-next-ui .title h1{font-size:22px;line-height:28px;margin:0;white-space:nowrap}
