@@ -129,7 +129,7 @@
 .next-ui-page-button:disabled { opacity:.35; cursor:default; }
 .next-ui-tools .next-ui-page-controls { margin-left:6px; padding-left:10px; gap:6px; border-left:1px solid #353d44; }
 
-body.analog-next-ui { display:flex; flex-direction:column; background:#07090b; }
+body.analog-next-ui { background:#07090b; }
 body.analog-next-ui .app { }
 body.analog-next-ui .topbar { border:0; border-radius:0; border-left:3px solid #ff6f00; padding:8px 14px; background:linear-gradient(90deg,rgba(255,111,0,.055),transparent 50%); }
 body.analog-next-ui .title h1 { font-size:clamp(20px,1.65vw,27px); }
