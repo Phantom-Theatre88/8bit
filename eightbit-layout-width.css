@@ -1,8 +1,63 @@
-/* Shared outer width for all 8bit lesson pages. */
-:root { --eightbit-page-max-width:1480px; }
-html {width:100%;min-width:0}
-body.eightbit-unified-width {box-sizing:border-box;width:100%!important;max-width:var(--eightbit-page-max-width)!important;min-width:0;margin-left:auto!important;margin-right:auto!important}
-body.eightbit-unified-width > .app,body.eightbit-unified-width > .map-app,body.eightbit-unified-width > .master-console-container {box-sizing:border-box;width:100%!important;max-width:100%!important;min-width:0;margin-left:auto;margin-right:auto}
-body.eightbit-unified-width .master-console-container {max-width:100%!important}
-body.eightbit-unified-width.eightbit-console {padding-left:0!important;padding-right:0!important}
-body.eightbit-unified-width.eightbit-console > .next-ui-header,body.eightbit-unified-width.eightbit-console > #shared-console-header-root {width:100%!important;max-width:100%!important;margin-left:0!important;margin-right:0!important}
+/* 8bit shared viewport and page canvas.
+   Only the outer frame is shared; internal simulators retain their own layouts. */
+:root { --eightbit-page-max-width:1480px; --eightbit-viewport-height:100dvh; --eightbit-footer-height:30px; }
+html { width:100%; min-width:0; height:100%; }
+body.eightbit-unified-width {
+  box-sizing:border-box;
+  width:100%!important;
+  max-width:var(--eightbit-page-max-width)!important;
+  height:var(--eightbit-viewport-height)!important;
+  min-height:0!important;
+  max-height:var(--eightbit-viewport-height)!important;
+  margin:0 auto!important;
+  padding:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  overflow:hidden!important;
+}
+body.eightbit-unified-width > #shared-console-header-root,
+body.eightbit-unified-width > .next-ui-console-header,
+body.eightbit-unified-width > .next-ui-header {
+  flex:0 0 auto!important;
+  width:100%!important;
+  max-width:100%!important;
+  margin:0!important;
+}
+body.eightbit-unified-width > .app,
+body.eightbit-unified-width > .map-app,
+body.eightbit-unified-width > .master-console-container {
+  box-sizing:border-box;
+  flex:1 1 0!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  min-height:0!important;
+  height:auto!important;
+  max-height:none!important;
+  margin:0 auto!important;
+}
+body.eightbit-unified-width .master-console-container {max-width:100%!important;}
+body.eightbit-unified-width .eightbit-lesson-footer {
+  box-sizing:border-box;
+  flex:0 0 var(--eightbit-footer-height)!important;
+  height:var(--eightbit-footer-height)!important;
+  min-height:var(--eightbit-footer-height)!important;
+  max-height:var(--eightbit-footer-height)!important;
+}
+body.eightbit-unified-width > .eightbit-lesson-footer {width:100%;}
+/* Homepage is a scrollable document within the same-sized viewport. */
+body.eightbit-unified-width > .site-header {flex:0 0 auto;}
+body.eightbit-unified-width > .page-shell {
+  box-sizing:border-box;
+  flex:1 1 0;
+  min-height:0;
+  width:100%!important;
+  max-width:100%!important;
+  overflow:auto;
+  padding-left:20px;
+  padding-right:20px;
+}
+/* The map once subtracted a fixed 60px from viewport height. */
+body.eightbit-unified-width > .map-app {overflow:hidden;}
+/* Keep the header inserted by the shared header script inside the canvas. */
+body.eightbit-unified-width.eightbit-console > .master-console-container {margin:0 auto!important;}
