@@ -131,3 +131,11 @@ body.eightbit-console .sim8-page-bottom{padding:0!important;gap:8px!important}
 body.eightbit-unified-width > .app {display:grid}
 body.eightbit-unified-width > .master-console-container {display:flex;flex-direction:column}
 body.eightbit-unified-width > .map-app {display:grid}
+
+/* Responsive reflow remains a common-shell responsibility, not a lesson override. */
+@media (orientation:portrait), (max-width:959px) {
+ body.eightbit-unified-width {height:auto!important;min-height:100dvh!important;max-height:none!important;overflow:auto!important;}
+ body.eightbit-unified-width > .app,body.eightbit-unified-width > .map-app,
+ body.eightbit-unified-width > .master-console-container {flex:none!important;height:auto!important;max-height:none!important;overflow:visible;}
+ body.eightbit-unified-width > .page-shell {flex:none;overflow:visible;}
+}
