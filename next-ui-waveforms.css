@@ -4,7 +4,7 @@ body.wave-next-ui{--bg:#171e26;--muted:#ccd3dc;margin:0;padding:0;display:flex;f
 body.wave-next-ui button{font:inherit;cursor:pointer;border:1px solid #627488;border-radius:6px;background:#283540;color:#eef2f6}
 body.wave-next-ui button[aria-pressed="true"],body.wave-next-ui .wave-mode.active{border-color:#f7ac4e;background:#493725;color:#ffcf83}
 body.wave-next-ui button:focus-visible,body.wave-next-ui a:focus-visible,body.wave-next-ui input:focus-visible{outline:2px solid #ffda8c;outline-offset:2px}
-body.wave-next-ui .app{width:100%;max-width:1500px;max-height:850px;flex:1 1 0;min-height:0;margin:auto;padding:8px 12px 0;display:grid;grid-template-rows:36px 64px 44px minmax(0,1fr) 144px 18px;gap:6px}
+body.wave-next-ui .app{width:100%;flex:1 1 0;min-height:0;margin:auto;padding:8px 12px 0;display:grid;grid-template-rows:36px 64px 44px minmax(0,1fr) 144px 18px;gap:6px}
 body.wave-next-ui .topbar{display:flex;align-items:center;justify-content:space-between;border-left:3px solid #ff9d00;padding:0 10px;min-height:0}
 body.wave-next-ui .title{display:flex;gap:10px;align-items:center;min-width:0}
 body.wave-next-ui .title h1{font-size:22px;line-height:28px;margin:0;white-space:nowrap}
