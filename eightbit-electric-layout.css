@@ -20,3 +20,14 @@
 /* The timeline and map need their own interactive visualization layouts,
    but share the same page frame, external margins and footer geometry. */
 body.eightbit-unified-width > .map-app{padding:8px 12px!important}
+
+/* Match the 8-bit console content and title geometry to the Electric reference. */
+@media (orientation:landscape) and (min-width:960px) and (min-height:650px){
+body.eightbit-console > .master-console-container{box-sizing:border-box!important;padding:8px 12px 0!important;margin:0!important;width:100%!important}
+body.eightbit-console .sim8-page-titlebar{height:42px!important;box-sizing:border-box!important;display:flex!important;align-items:center!important;padding:0 12px!important}
+body.eightbit-console .sim8-page-heading{display:flex!important;align-items:center!important;gap:18px!important;min-width:0!important}
+body.eightbit-console .sim8-page-title{margin:0!important;white-space:nowrap!important;font-size:21px!important}
+body.eightbit-console .sim8-page-sub{margin:0!important;min-width:0!important;white-space:nowrap!important;overflow:hidden;text-overflow:ellipsis;font-size:15px!important}
+body.eightbit-console .sim8-page-main{padding:0!important}
+body.eightbit-console .sim8-page-bottom{padding:0!important;gap:8px!important}
+}
