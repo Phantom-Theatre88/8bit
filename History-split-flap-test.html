@@ -33,10 +33,28 @@ function renderThemes(dt){if(!themeDrag){themePos+=(themeTarget-themePos)*(1-Mat
  el.style.opacity=String(clamp(1-Math.max(0,ad-2.3)*.65,0,1));el.style.visibility=(ad>2.65||Math.abs(y)>height*.62)?"hidden":"visible";
  el.style.zIndex=String(100-Math.round(ad*10));el.classList.toggle("active",i===theme)});
 }
-themeBox.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse"&&e.button!==0)return;themeDrag={id:e.pointerId,start:e.clientY,y:e.clientY,base:themePos,time:performance.now(),lastY:e.clientY,lastT:performance.now(),velocity:0};themeBox.setPointerCapture(e.pointerId);themeBox.classList.add("dragging")});
-themeBox.addEventListener("pointermove",e=>{if(!themeDrag||themeDrag.id!==e.pointerId)return;const now=performance.now(),dy=e.clientY-themeDrag.start,step=Math.min(67,Math.max(42,themeBox.clientHeight/6.7));themePos=clamp(themeDrag.base-dy/step,0,names.length-1);themeTarget=themePos;const dt=Math.max(12,now-themeDrag.lastT);themeDrag.velocity=clamp(-(e.clientY-themeDrag.lastY)/dt*160/step,-2.3,2.3);themeDrag.lastY=e.clientY;themeDrag.lastT=now;if(Math.abs(dy)>6)themeMovedAt=now});
-function endTheme(e){if(!themeDrag||e.pointerId!==themeDrag.id)return;const moved=Math.abs(e.clientY-themeDrag.start)>6;if(moved){const projected=themePos+themeDrag.velocity*.25;setTheme(clamp(Math.round(projected),0,names.length-1));themeMovedAt=performance.now()}themeDrag=null;themeBox.classList.remove("dragging")}
-themeBox.addEventListener("pointerup",endTheme);themeBox.addEventListener("pointercancel",endTheme);
+const themeStep=()=>Math.min(105,Math.max(64,themeBox.clientHeight/5.9));
+themeBox.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse"&&e.button!==0)return;const now=performance.now();themeDrag={id:e.pointerId,start:e.clientY,base:themePos,time:now,lastY:e.clientY,lastT:now,velocity:0,moved:false};themeBox.setPointerCapture(e.pointerId);themeBox.classList.add("dragging")});
+themeBox.addEventListener("pointermove",e=>{if(!themeDrag||themeDrag.id!==e.pointerId)return;const now=performance.now(),dy=e.clientY-themeDrag.start,step=themeStep();
+ themePos=clamp(themeDrag.base-dy/step,0,names.length-1);themeTarget=themePos;
+ const elapsed=Math.max(1,now-themeDrag.lastT),instant=-(e.clientY-themeDrag.lastY)/step/elapsed*1000;
+ if(now-themeDrag.lastT<120)themeDrag.velocity=themeDrag.velocity*.45+clamp(instant,-18,18)*.55;
+ themeDrag.lastY=e.clientY;themeDrag.lastT=now;
+ if(Math.abs(dy)>5){themeDrag.moved=true;themeMovedAt=now}
+});
+function endTheme(e){if(!themeDrag||e.pointerId!==themeDrag.id)return;
+ const d=themeDrag,now=performance.now(),delta=e.clientY-d.start,elapsed=Math.max(1,now-d.time),step=themeStep();
+ const current=clamp(d.base-delta/step,0,names.length-1);
+ const recent=(now-d.lastT<100)?d.velocity:0;
+ const overall=-(delta/step)/(elapsed/1000);
+ const flick=Math.abs(delta)>12&&elapsed<360;
+ const v=flick?clamp(recent*.55+overall*.45,-14,14):0;
+ const projected=clamp(current+v*.18,0,names.length-1);
+ if(d.moved||Math.abs(delta)>5){themePos=current;setTheme(Math.round(projected));themeMovedAt=now}
+ themeDrag=null;themeBox.classList.remove("dragging");
+ if(themeBox.hasPointerCapture(e.pointerId))themeBox.releasePointerCapture(e.pointerId);
+}
+themeBox.addEventListener("pointerup",endTheme);themeBox.addEventListener("pointercancel",e=>{if(!themeDrag||e.pointerId!==themeDrag.id)return;setTheme(Math.round(themePos));themeDrag=null;themeBox.classList.remove("dragging")});
 themeBox.addEventListener("wheel",e=>{e.preventDefault();const now=performance.now();if(now-themeWheelLock<105)return;themeWheelLock=now;setTheme(clamp(themeTarget+(e.deltaY>0?1:-1),0,names.length-1))},{passive:false});
 for(let i=0;i<N;i++){const c=document.createElement("button");c.type="button";c.className="card";c.innerHTML='<div class="pic">'+emoji[i]+'</div><strong>'+labels[i]+'</strong><small>要点：'+labels[i]+'の歴史を探る</small>';stage.appendChild(c);cards.push(c);c.addEventListener("click",()=>{if(performance.now()-lastMoved<250)return;const k=Math.round((rotation-i)/N);target=i+k*N;title.textContent=labels[i];desc.textContent="「"+labels[i]+"」を選択。ここから下部学習パネルで歴史的背景を読み、詳細カードへ進む構造を想定しています。";})}function frame(t){const dt=Math.min(.05,(t-last)/1000);last=t;if(!drag){const diff=target-rotation;rotation+=diff*(1-Math.exp(-dt*11));if(Math.abs(diff)<.0001)rotation=target}renderThemes(dt);const w=stage.clientWidth,h=stage.clientHeight;const rx=Math.max(65,Math.min(w*.37,380)),ry=Math.max(24,Math.min(h*.22,135));let front=0,dist=Infinity;cards.forEach((c,i)=>{const a=(i-rotation)*Math.PI*2/N;const depth=Math.cos(a),x=Math.sin(a)*rx,y=Math.cos(a)*ry;const scale=.72+.28*(depth+1)/2;const opa=.72+.28*(depth+1)/2;c.style.transform='translate3d('+x.toFixed(2)+'px,'+y.toFixed(2)+'px,0) scale('+scale.toFixed(3)+')';c.style.zIndex=String(Math.round((depth+1)*1000)+10);c.style.opacity=opa.toFixed(3);const d=Math.abs(Math.atan2(Math.sin(a),Math.cos(a)));if(d<dist){dist=d;front=i}});cards.forEach((c,i)=>c.classList.toggle("focus",i===front));counter.textContent=(front+1)+" / "+N;requestAnimationFrame(frame)}function move(dir){target=Math.round(target)+dir}document.getElementById("prev").onclick=()=>move(-1);document.getElementById("next").onclick=()=>move(1);stage.addEventListener("pointerdown",e=>{if(e.target.closest(".arrow"))return;if(e.pointerType==="mouse"&&e.button!==0)return;drag={id:e.pointerId,x:e.clientX,start:e.clientX,rot:rotation};stage.setPointerCapture(e.pointerId)});stage.addEventListener("pointermove",e=>{if(!drag||drag.id!==e.pointerId)return;const dx=e.clientX-drag.x;rotation=drag.rot-dx/Math.max(55,stage.clientWidth*.09);target=rotation;if(Math.abs(e.clientX-drag.start)>7)lastMoved=performance.now()});function end(e){if(!drag||drag.id!==e.pointerId)return;target=Math.round(rotation);drag=null}stage.addEventListener("pointerup",end);stage.addEventListener("pointercancel",end);setTheme(3);requestAnimationFrame(frame)})();
 </script></body></html>
