@@ -126,3 +126,8 @@ body.eightbit-console .sim8-page-bottom{padding:0!important;gap:8px!important}
 .eightbit-lesson-footer > * { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .eightbit-lesson-footer a { color: inherit; text-decoration: none; }
 
+
+/* Canonical outer shell display roles */
+body.eightbit-unified-width > .app {display:grid}
+body.eightbit-unified-width > .master-console-container {display:flex;flex-direction:column}
+body.eightbit-unified-width > .map-app {display:grid}
