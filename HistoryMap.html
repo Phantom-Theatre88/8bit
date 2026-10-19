@@ -174,10 +174,7 @@ button,a{font:inherit}
   width:15px;height:15px;border-radius:50%;
   border:2px solid #e9edf0;background:#5f84ad;box-shadow:0 0 0 2px rgba(0,0,0,.24)
 }
-.map-foot{
-  display:flex;justify-content:space-between;gap:12px;align-items:center;
-  color:#aab1b7;font-size:12px;line-height:1.45;padding:0 3px;
-}
+
 .map-foot a{color:#d7c39e}
 .leaflet-interactive{transition:fill-opacity .22s ease,stroke-opacity .22s ease}
 .leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#151719;color:#eef1f2}
@@ -207,11 +204,12 @@ button,a{font:inherit}
   .map-overlay{left:10px;right:10px;top:10px;width:auto}
   .theatre-list-toggle{right:10px;top:10px}
   .theatre-list-panel{right:10px;top:10px;bottom:10px;width:min(360px,82vw)}
-  .map-foot{flex-direction:column;align-items:flex-start}
+  
 }
 </style>
 <link rel="stylesheet" href="next-ui-console-header.css?v=shared-dom-v1">
-<link rel="stylesheet" href="eightbit-layout-width.css?v=1">
+<link rel="stylesheet" href="eightbit-layout-width.css?v=2">
+<link rel="stylesheet" href="eightbit-lesson-footer.css?v=2">
 </head>
 <body class="eightbit-unified-width">
 <div id="shared-console-header-root"></div>
@@ -277,7 +275,7 @@ button,a{font:inherit}
     </aside>
   </section>
 
-  <footer class="map-foot">
+  <footer class="eightbit-lesson-footer map-foot">
     <span>地図データ © OpenStreetMap contributors｜表示：Leaflet</span>
     <span>位置確認：各国文化機関 / UNESCO / DIAZOMA / 発掘機関等。正本は <code>docs/ancient_greek_theatres_master.md</code>。</span>
   </footer>
