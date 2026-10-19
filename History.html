@@ -1,496 +1,34 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>照明史｜8bit Lighting Theatre</title>
-<link rel="stylesheet" href="next-ui-typography.css">
-<link rel="stylesheet" href="next-ui-page-shell.css">
-<style>
-:root{
-  --history-bg:#0c0d0e;
-  --history-panel:#151719;
-  --history-panel-2:#1b1d20;
-  --history-line:#34383d;
-  --history-text:#f2f3f4;
-  --history-muted:#aab0b6;
-  --history-accent:#ff9a2f;
-  --history-gold:#d7b06a;
-  --history-source:#d79843;
-  --history-theatre:#5f84ad;
-  --history-culture:#8f6658;
-}
-*{box-sizing:border-box}
-html,body{margin:0;height:100%;background:var(--history-bg)}
-body{font-family:"Hiragino Sans","Yu Gothic",Meiryo,system-ui,-apple-system,sans-serif;color:var(--history-text);overflow:hidden}
-button{font:inherit}
-.history-app{font-size:12px}
-.history-app{
-  height:calc(100dvh - 60px);
-  min-height:0;
-  display:grid;
-  grid-template-rows:minmax(0,1fr) 0 28px;
-  gap:8px;
-  padding:10px 16px 0;
-  background:
-    radial-gradient(circle at 18% 8%,rgba(255,154,47,.06),transparent 24%),
-    linear-gradient(180deg,#111315 0%,#090a0b 100%);
-}
-.history-stage{
-  min-height:0;
-  position:relative;
-  overflow:hidden;
-  border:1px solid #2f3338;
-  border-radius:14px;
-  background:
-    radial-gradient(circle at 24% 28%,rgba(215,176,106,.09),transparent 20%),
-    radial-gradient(circle at 78% 62%,rgba(95,132,173,.08),transparent 24%),
-    linear-gradient(180deg,#17191b 0%,#101214 100%);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
-}
-.history-stage::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-  background-image:
-    linear-gradient(180deg,rgba(8,10,12,.28),rgba(8,10,12,.56)),
-    linear-gradient(90deg,rgba(10,12,14,.42),rgba(10,12,14,.16) 52%,rgba(10,12,14,.42)),
-    var(--era-image,none);
-  background-size:cover;
-  background-position:center;
-  opacity:.88;
-  transition:opacity .22s ease;
-}
-.history-stage::before{
-  content:"";
-  position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.18;
-  background:
-    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
-  background-size:44px 44px;
-}
-.stage-top{
-  position:relative;z-index:2;
-  display:grid;
-  grid-template-columns:minmax(260px,1fr) minmax(520px,1.7fr);
-  gap:18px;
-  align-items:end;
-  padding:18px 20px 10px;
-}
-.stage-title h1{
-  margin:0;
-  color:#b9c0c5;
-  font-size:14px;
-  font-weight:800;
-  letter-spacing:.08em;
-  line-height:1.2;
-}
-.stage-title p{margin:5px 0 0;color:#7f8990;font-size:12px;font-weight:800;letter-spacing:.12em}
-.period-rail{
-  display:grid;
-  grid-template-columns:42px minmax(0,1fr) 42px;
-  align-items:center;
-  gap:8px;
-}
-.period-arrow{
-  height:62px;border:1px solid #3a4046;border-radius:9px;
-  background:#111417;color:#dfe3e6;font-size:21px;font-weight:900;cursor:pointer;
-}
-.period-track{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  min-width:0;
-  border:1px solid #3a4046;
-  border-radius:10px;
-  overflow:hidden;
-  background:#0f1214;
-}
-.period-btn{
-  min-width:0;height:62px;position:relative;display:grid;grid-template-rows:1fr 1fr;
-  align-items:center;padding:5px 4px 4px;border:0;border-right:1px solid #2f3438;
-  background:transparent;color:#8f989f;font-weight:900;cursor:pointer;
-}
-.period-btn::before{
-  content:"";position:absolute;left:0;right:0;top:30px;height:2px;
-  background:#4b5157;
-}
-.period-btn:first-child::before{left:50%}
-.period-btn:last-child::before{right:50%}
-.period-btn::after{
-  content:"";position:absolute;left:50%;top:25px;width:10px;height:10px;
-  transform:translateX(-50%);border:2px solid #8b949b;border-radius:50%;
-  background:#0f1214;box-shadow:0 0 0 3px #0f1214;
-}
-.period-range,.period-name{position:relative;z-index:1;white-space:nowrap}
-.period-range{align-self:start;color:#7f8990;font-size:12px;line-height:1.1}
-.period-name{align-self:end;color:#aeb5ba;font-size:15px;line-height:1.1}
-.period-btn.active::before{background:linear-gradient(90deg,#876b43,#e2bb78)}
-.period-btn.active::after{border-color:#f2cb86;background:var(--history-accent);box-shadow:0 0 0 3px #2b251c,0 0 14px rgba(255,154,47,.5)}
-.period-btn.active .period-range{color:#5e4a2d}
-.period-btn.active .period-name{color:#16130f}
-.period-btn:last-child{border-right:0}
-.period-btn.active{
-  color:#111;
-  background:linear-gradient(180deg,#f5e8d1,#dcb879);
-  box-shadow:inset 0 -3px 0 var(--history-accent);
-}
-.period-btn:not(.active):hover{background:#181c1f;color:#fff}
-.era-layer{
-  position:absolute;z-index:2;left:20px;right:20px;top:108px;bottom:20px;
-}
-.era-copy{
-  position:absolute;left:6px;top:6px;max-width:620px;pointer-events:none;
-}
-.era-kicker,.era-title{display:none}
-.era-summary{
-  margin:0;color:#8f989f;font-size:14px;line-height:1.45;
-}
-.history-field{
-  position:absolute;inset:0;
-  overflow:auto;
-  -webkit-overflow-scrolling:touch;
-  padding:56px 18px 18px;
-}
-.card-field{
-  min-height:100%;
-  display:grid;
-  grid-template-columns:repeat(12,minmax(0,1fr));
-  grid-template-rows:repeat(6,minmax(48px,1fr));
-  gap:12px;
-  align-content:center;
-}
-.history-card{
-  --cat:var(--history-source);
-  position:relative;overflow:hidden;
-  display:grid;
-  grid-template-columns:minmax(0,1fr) 42%;
-  gap:10px;
-  border:1px solid color-mix(in srgb,var(--cat) 42%,#3a3f44);
-  border-radius:14px;
-  background:
-    radial-gradient(circle at 90% 10%,color-mix(in srgb,var(--cat) 14%,transparent),transparent 36%),
-    linear-gradient(180deg,rgba(31,34,37,.97),rgba(19,22,24,.97));
-  color:#f3f4f5;
-  padding:12px 13px 11px;
-  text-align:left;
-  cursor:pointer;
-  box-shadow:0 16px 34px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.03);
-  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
-}
-.history-card::before{
-  content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--cat);
-}
-.history-card:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--cat) 70%,white)}
-.history-card.active{
-  border-color:var(--history-accent);
-  box-shadow:0 18px 40px rgba(0,0,0,.4),0 0 0 2px rgba(255,154,47,.16);
-}
-.history-card[data-category="source"]{--cat:var(--history-source)}
-.history-card[data-category="theatre"]{--cat:var(--history-theatre)}
-.history-card[data-category="culture"]{--cat:var(--history-culture)}
-.history-card.large{grid-column:2 / span 4;grid-row:3 / span 2;transform:translateY(-4px)}
-.history-card[data-id="greekTheatre"]{grid-column:7 / span 4;grid-row:3 / span 2;transform:translateY(10px)}
-.history-card.medium{grid-column:span 3;grid-row:span 2}
-.history-card.small{grid-column:span 3;grid-row:span 1}
-
-
-/* B案：左側に照明ビジュアル、右側に古代キー画像。通常フローで重なり防止 */
-.history-card[data-id="themeLighting"]{grid-column:8 / span 4;grid-row:1 / span 2;transform:none;display:grid;grid-template-columns:minmax(0,55%) minmax(0,45%);gap:8px;padding:11px;min-height:155px;align-items:stretch}
-.history-card[data-id="themeLighting"] .theme-b-copy{min-width:0;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;position:relative}
-.history-card[data-id="themeLighting"] .theme-b-art{position:static;display:block;flex:1 1 auto;min-height:0;width:100%;height:105px;max-height:125px;object-fit:contain;object-position:center;mix-blend-mode:normal;filter:none;background:#f5f5f5;border-radius:5px}
-.history-card[data-id="themeLighting"] .theme-b-label{position:static;display:block;font-size:10px;color:#e4bb78;font-weight:700}
-.history-card[data-id="themeLighting"] .theme-b-copy>div{position:static;background:none;padding:0}
-.history-card[data-id="themeLighting"] .theme-b-title{font-size:18px;margin:2px 0;line-height:1.2}
-.history-card[data-id="themeLighting"] .theme-b-desc{font-size:11px;line-height:1.25;color:#c0c6cb}
-.history-card[data-id="themeLighting"] .theme-b-era{width:100%;height:100%;min-height:0;object-fit:cover;border-radius:9px;border:1px solid rgba(255,255,255,.14)}
-.card-copy{min-width:0;align-self:center}
-.card-visual{
-  width:28px;height:28px;border-radius:50%;
-  display:inline-grid;place-items:center;
-  margin:0 6px 0 0;
-  border:1px solid color-mix(in srgb,var(--cat) 45%,#555);
-  background:color-mix(in srgb,var(--cat) 12%,#111);
-  color:#ffd48d;
-  font-size:15px;
-  box-shadow:0 0 24px color-mix(in srgb,var(--cat) 18%,transparent);
-}
-.card-image{
-  width:100%;height:100%;min-height:96px;
-  object-fit:cover;
-  border-radius:10px;
-  opacity:.92;
-  border:1px solid rgba(255,255,255,.08);
-  box-shadow:inset 0 0 18px rgba(0,0,0,.4);
-}
-.card-meta{
-  display:flex;gap:6px;align-items:center;flex-wrap:wrap;
-  color:#aab1b7;font-size:13px;font-weight:800;
-}
-.card-tag{
-  padding:3px 7px;border-radius:999px;
-  background:color-mix(in srgb,var(--cat) 12%,#171a1d);
-  border:1px solid color-mix(in srgb,var(--cat) 30%,#333);
-  color:#dfe4e7;
-}
-.history-card h3{
-  margin:6px 0 4px;
-  font-family:Georgia,"Yu Mincho","Hiragino Mincho ProN",serif;
-  font-size:24px;line-height:1.15;
-}
-.history-card p{margin:0;color:#c0c6cb;font-size:15px;line-height:1.45}
-.empty-era{
-  grid-column:3 / span 8;grid-row:3 / span 2;
-  align-self:center;text-align:center;
-  border:1px dashed #3d4348;border-radius:14px;
-  padding:28px;background:rgba(16,18,20,.72);color:#8f989f;
-}
-.empty-era strong{display:block;margin-bottom:6px;color:#d8dde1;font-size:18px}
-.background-credit{
-  position:absolute;
-  right:16px;
-  bottom:10px;
-  z-index:3;
-  padding:4px 7px;
-  border-radius:6px;
-  background:rgba(8,10,12,.58);
-  color:#d4d8db;
-  font-size:12px;
-  line-height:1.3;
-  text-decoration:none;
-  opacity:.72;
-}
-.background-credit:hover{opacity:1}
-
-.detail-panel{
-  min-height:0;
-  display:none;
-  grid-template-columns:minmax(0,1fr) 320px;
-  overflow:hidden;
-  border:1px solid #30353a;
-  border-radius:12px;
-  background:#121416;
-}
-.history-app.detail-open{
-  grid-template-rows:minmax(0,1fr) clamp(290px,31vh,330px) 28px;
-}
-.history-app.detail-open .detail-panel{
-  display:grid;
-}
-
-.detail-main{
-  min-height:0;overflow-y:auto;overflow-x:hidden;
-  padding:14px 16px 20px;
-  -webkit-overflow-scrolling:touch;
-}
-.detail-layout{
-  min-height:100%;
-  display:grid;
-  grid-template-columns:230px minmax(0,1fr);
-  gap:18px;
-  align-items:stretch;
-}
-.detail-hero{
-  min-height:0;
-  display:flex;
-}
-.detail-hero img{
-  width:100%;
-  height:100%;
-  min-height:220px;
-  object-fit:cover;
-  border-radius:10px;
-  border:1px solid #3b4248;
-  box-shadow:0 10px 26px rgba(0,0,0,.28);
-}
-.detail-content{width:100%;min-width:0}
-.detail-kicker{color:#d9a45c;font-size:13px;font-weight:900;letter-spacing:.05em}
-.detail-title{
-  margin:4px 0 6px;
-  font-family:Georgia,"Yu Mincho","Hiragino Mincho ProN",serif;
-  font-size:30px;color:#f5f0e9;
-}
-.detail-summary{margin:0;color:#c4c9cd;font-size:17px;line-height:1.58}
-.detail-section{margin-top:12px;padding-top:10px;border-top:1px solid #30353a}
-.detail-section h3{margin:0 0 5px;color:#e0b06d;font-size:14px}
-.detail-section p{margin:0;color:#afb6bc;font-size:17px;line-height:1.62}
-.source-note{margin-top:9px;color:#7f888f;font-size:12px;line-height:1.45}
-.detail-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.detail-link{
-  display:inline-flex;align-items:center;gap:7px;
-  text-decoration:none;color:#17120a;
-  background:linear-gradient(180deg,#f5e8d1,#dcb879);
-  border:1px solid #e4c892;border-radius:9px;
-  padding:9px 12px;font-size:14px;font-weight:900
-}
-.teacher-pane{
-  min-height:0;height:100%;
-  display:grid;
-  grid-template-columns:minmax(0,1fr) 104px;
-  grid-template-rows:auto 1fr;
-  gap:8px 10px;
-  padding:14px 10px 10px 14px;
-  overflow:hidden;
-  border-left:1px solid #30353a;
-  background:linear-gradient(180deg,#1b1a17,#131417);
-}
-.teacher-pane h3{
-  grid-column:1/-1;margin:0;
-  color:#f0bd67;
-  font-family:Georgia,"Yu Mincho","Hiragino Mincho ProN",serif;
-  font-size:20px;
-}
-.teacher-speech{
-  align-self:start;
-  padding:9px 10px;
-  border-radius:8px;
-  background:#f0dfaa;
-  color:#1f1d19;
-  font-size:16px;line-height:1.55;font-weight:700;
-}
-.teacher-pane img{
-  grid-column:2;grid-row:2;
-  align-self:end;justify-self:end;
-  width:100px;height:150px;
-  object-fit:contain;object-position:right bottom;
-}
-.footer{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 7px;color:#737c83;font-size:12px;
-}
-.footer a{color:#aeb5ba;text-decoration:none}
-@media(max-width:1050px){
-  .history-app{padding-left:8px;padding-right:8px}
-  .stage-top{grid-template-columns:1fr;gap:10px;align-items:start}
-  .period-track{grid-template-columns:repeat(5,minmax(88px,1fr));overflow-x:auto}
-  .era-layer{top:154px}
-  .detail-panel{grid-template-columns:minmax(0,1fr) 285px}
-  .detail-layout{grid-template-columns:190px minmax(0,1fr)}
-  .history-card.large{grid-column:2 / span 5}
-  .history-card[data-id="greekTheatre"]{grid-column:7 / span 5}
-}
-@media(max-width:760px){
-  body{overflow:auto}
-  .history-app{height:auto;min-height:calc(100dvh - 60px);grid-template-rows:auto auto auto}
-  .history-stage{min-height:620px}
-  .stage-top{grid-template-columns:1fr}
-  .era-layer{position:relative;left:auto;right:auto;top:auto;bottom:auto;min-height:500px}
-  .history-field{padding-top:130px}
-  .card-field{grid-template-columns:1fr;grid-template-rows:auto}
-  .history-card.large,.history-card.medium,.history-card.small{grid-column:1;grid-row:auto;transform:none}
-  .history-card[data-id="greekTheatre"]{grid-column:1;grid-row:auto;transform:none}
-  .detail-panel{grid-template-columns:1fr}
-  .detail-layout{grid-template-columns:1fr}
-  .detail-hero{max-height:220px}
-  .teacher-pane{grid-template-columns:1fr 86px;min-height:180px}
-}
-@media(prefers-reduced-motion:reduce){.history-card{transition:none}}
-
-/* 仮カードを自由配置。元の2カードの配置とスタイルは変更しない。 */
-.card-field:has(.history-card.preview){
-  grid-template-rows:repeat(24,minmax(50px,1fr));
-  min-height:1250px;
-  align-content:start;
-}
-.history-card.preview{
-  grid-column:var(--preview-col);
-  grid-row:var(--preview-row);
-  grid-template-columns:minmax(0,1fr);
-  border-style:dashed;
-}
-.history-card.preview::after{content:"仮置き";position:absolute;right:8px;top:6px;font-size:10px;color:#eac890}
-.history-card.preview h3{font-size:18px}
-.history-card.preview p{font-size:12px;line-height:1.35}
-.history-card.preview .card-meta{font-size:11px}
-@media(max-width:760px){
-  .card-field:has(.history-card.preview){display:flex;flex-direction:column;min-height:0}
-  .history-card.preview{min-height:120px;width:100%}
-}
-</style>
-<link rel="stylesheet" href="next-ui-console-header.css?v=shared-dom-v1">
-</head>
-<body>
-<div id="shared-console-header-root"></div>
-<script src="next-ui-console-header.js?v=shared-dom-v1"></script>
-
-<main class="history-app" id="historyApp">
-  <section class="history-stage" aria-label="照明史エクスプローラー">
-    <div class="stage-top">
-      <div class="stage-title">
-        <h1>舞台照明史 / HISTORY</h1>
-        <p>PAST　──────→　PRESENT</p>
-      </div>
-
-      <div class="period-rail" aria-label="時代を選ぶ">
-        <button class="period-arrow" id="prevPeriod" type="button" aria-label="前の時代">‹</button>
-        <div class="period-track" id="periodTrack"></div>
-        <button class="period-arrow" id="nextPeriod" type="button" aria-label="次の時代">›</button>
-      </div>
-    </div>
-
-    <div class="era-layer">
-      <div class="era-copy">
-        <p class="era-summary" id="eraSummary">自然光そのものが、舞台の明るさと時間の変化を決めていた。</p>
-      </div>
-
-      <div class="history-field" id="historyField">
-        <div class="card-field" id="cardField"></div>
-      </div>
-    </div>
-    <a class="background-credit" id="backgroundCredit" href="#" target="_blank" rel="noopener noreferrer" hidden></a>
-  </section>
-
-  <section class="detail-panel">
-    <div class="detail-main">
-      <div class="detail-layout">
-        <div class="detail-hero">
-          <img id="detailImage" src="" alt="" decoding="async">
-        </div>
-        <div class="detail-content">
-          <div class="detail-kicker" id="detailKicker">光源 / 劇場・舞台環境｜紀元前5世紀頃｜古代ギリシャ</div>
-          <h2 class="detail-title" id="detailTitle">太陽光｜最初の舞台照明</h2>
-          <p class="detail-summary" id="detailSummary">古代ギリシャの野外劇場では、太陽・天空光など自然環境そのものが舞台の光を決めていた。</p>
-
-          <div class="detail-section">
-            <h3>解説</h3>
-            <p id="detailBody">紀元前5世紀頃の古代ギリシャ劇場では、上演は屋外で行われ、舞台の光は太陽と天空光に依存していた。照明装置を操作する以前の段階では、時間帯や天候そのものが舞台の見え方を変える条件だった。</p>
-          </div>
-          <div class="source-note" id="sourceNote">基礎資料：国立科学博物館 2024「舞台照明用調光装置の系統化調査」</div>
-          <div class="detail-actions" id="detailActions"></div>
-        </div>
-      </div>
-    </div>
-
-    <aside class="teacher-pane">
-      <h3>先生のひとこと</h3>
-      <div class="teacher-speech" id="teacherSpeech">悲劇などは上演順によって夕方になり、最後は日没の頃まで上演された、という話もあるよ。自然光そのものが舞台の変化になっていたんだね。</div>
-      <img src="assets/wave_teacher_transparent.svg?v=teacher-standard-20261014" alt="照明教材の先生" loading="lazy" decoding="async">
-    </aside>
-  </section>
-
-  <footer class="footer">
-    <a href="index.html">⌂ 教材トップ</a>
-    <span>History v2｜時間軸から時代を選び、カードで詳しく見る</span>
-  </footer>
-</main>
-
-<script>
-const periods=[
-  {
-    id:"ancient",label:"古代",range:"紀元前5世紀頃〜5世紀",title:"古代",
-    summary:"自然光そのものが、舞台の明るさと時間の変化を決めていた。",
-    background:"https://upload.wikimedia.org/wikipedia/commons/0/0a/Sunset_in_Epidaurus_theatre.jpg",
-    backgroundPosition:"center 42%",
-    credit:"背景写真：Sunset in Epidaurus theatre / Belua1234 / CC BY-SA 4.0",
-    creditUrl:"https://commons.wikimedia.org/wiki/File:Sunset_in_Epidaurus_theatre.jpg"
-  },
-  {id:"medieval",label:"中世",range:"5〜15世紀",title:"中世",summary:"上演の場所が教会・街路・広場へ広がり、光の条件も場所ごとに変化する。"},
-  {id:"early",label:"近世",range:"15〜18世紀",title:"近世",summary:"劇場空間と人工光が結びつき、光を演出として扱う発想が強くなる。"},
-  {id:"modern",label:"近代",range:"19〜20世紀前半",title:"近代",summary:"ガスと電気、近代劇場、調光装置が舞台照明をシステムへ変えていく。"},
-  {id:"present",label:"現代",range:"20世紀後半〜現在",title:"現代",summary:"デジタル制御・規格・Networkが、照明を大規模な情報システムへ変えていく。"}
-];
-
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>照明史｜8bit Lighting Theatre</title><link rel="stylesheet" href="next-ui-typography.css"><link rel="stylesheet" href="next-ui-page-shell.css"><link rel="stylesheet" href="next-ui-console-header.css?v=shared-dom-v1"><style>
+*{box-sizing:border-box}html,body{margin:0;height:100%;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",sans-serif;background:#0a1019;color:#f0f2f6}body{display:flex;flex-direction:column;overflow:hidden}header{height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:#182331;border-bottom:1px solid #35465a}header b{font-size:17px}header span{font-size:12px;color:#a9bdce}.main{display:flex;flex:1;min-height:0}.themes{width:250px;flex-shrink:0;background:#111d2b;border-right:1px solid #34465a;position:relative;overflow:hidden;touch-action:none;user-select:none;perspective:550px;cursor:grab}.themes.dragging{cursor:grabbing}.themes:before,.themes:after{content:'';position:absolute;left:0;right:0;height:20%;z-index:20;pointer-events:none}.themes:before{top:0;background:linear-gradient(#111d2b,transparent)}.themes:after{bottom:0;background:linear-gradient(transparent,#111d2b)}.theme{position:absolute;left:50%;top:50%;width:226px;height:58px;margin-left:-113px;margin-top:-29px;margin-top:-24px;display:flex;align-items:center;justify-content:center;text-align:center;border:1px solid #3d5368;border-radius:8px;color:#b6c7d7;font-size:13px;background:#26374a;backface-visibility:hidden;will-change:transform,opacity;cursor:pointer;transform-origin:center}.theme.active{background:#654a2f;border:2px solid #efbd78;color:#fff;font-weight:700;font-size:17px;box-shadow:0 8px 26px #0009;height:106px;margin-top:-53px;padding:10px 12px;line-height:1.4;white-space:normal}.stage{position:relative;flex:1;min-width:0;overflow:hidden;touch-action:pan-y;user-select:none;background:radial-gradient(ellipse at 50% 44%,#2c4255,#172739 56%,#0d1825)}.stage:after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 70px #070e19b0}.stage-label{position:absolute;left:20px;top:15px;font-size:13px;color:#a8bacc;z-index:1000}.counter{position:absolute;right:20px;top:15px;font-size:13px;color:#eac58b;z-index:1000}.ring{position:absolute;left:50%;top:50%;width:min(70vw,670px);height:min(32vw,240px);border:1px dashed #7e9cb666;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none}.card{position:absolute;top:50%;left:50%;width:178px;height:250px;margin:-125px 0 0 -89px;border-radius:10px;border:1px solid #a5b4c5;background:#243448;box-shadow:0 14px 32px #000a;overflow:hidden;padding:0;color:white;cursor:pointer;transform-origin:center;will-change:transform,opacity;transition:box-shadow .15s,border-color .15s}.card.focus{border:3px solid #f1c47d;box-shadow:0 0 24px #e9bd7780,0 16px 32px #000c}.pic{height:73%;display:flex;align-items:center;justify-content:center;font-size:54px;background:linear-gradient(145deg,#516a7d,#2b4156)}.card strong{position:absolute;top:0;left:0;right:0;z-index:2;display:block;font-size:16px;padding:9px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left;background:linear-gradient(90deg,#101d2af2,#101d2ab8);border-bottom:1px solid #ffffff33}.card small{position:absolute;bottom:0;left:0;right:0;display:block;color:#dce8f2;padding:9px 10px;font-size:12px;line-height:1.4;background:#1b2a3b;text-align:left;min-height:27%}.arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:1100;background:#1a2b3cbf;border:1px solid #7c91a4;border-radius:50%;width:43px;height:43px;color:#fff;font-size:24px;cursor:pointer}.prev{left:12px}.next{right:12px}.panel{height:var(--panel-height, 27%);min-height:120px;max-height:48%;flex-shrink:0;overflow:auto;border-top:1px solid #52647a;background:#182534;padding:16px 22px}.panel h2{margin:0 0 8px;font-size:20px;color:#f2c77f}.panel p{margin:0;font-size:14px;line-height:1.7;color:#d2dce6}.note{font-size:11px;color:#94a7b8;margin-top:7px}@media(min-width:721px) and (max-width:1050px){.themes{width:250px}.theme{width:226px;margin-left:-113px}}@media(max-width:720px){header{height:46px}header b{font-size:13px}header span{font-size:10px}.themes{width:92px}.theme{width:86px;height:48px;margin-left:-43px;margin-top:-24px;font-size:10px}.theme.active{font-size:12px;height:88px;margin-top:-44px;padding:7px 4px}.card{width:124px;height:175px;margin:-87.5px 0 0 -62px}.pic{height:73%;font-size:38px}.card strong{font-size:13px;padding:7px 6px}.card small{font-size:10px;padding:7px 6px}.panel{min-height:116px;padding:10px 13px}.panel h2{font-size:16px}.panel p{font-size:12px}.arrow{width:32px;height:32px;font-size:18px}.stage-label{font-size:10px;left:8px}.counter{font-size:10px;right:8px}}
+ .ratio-controls{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.ratio-controls button{background:#273a4d;border:1px solid #6d8296;color:#e8eef4;border-radius:6px;padding:5px 8px;font-size:12px;cursor:pointer}.ratio-controls button[aria-pressed=true]{background:#9a6b3e;border-color:#f0c37c;color:white}.ratio-controls span{font-size:11px;color:#c4d1dc}@media(max-width:720px){.ratio-controls button{padding:4px 6px;font-size:10px}.ratio-controls span{display:none}}  .themes{background:linear-gradient(90deg,#09121d,#23364a 8%,#152437 92%,#08111c);border-right:2px solid #60768a}.theme{border-radius:4px;background:linear-gradient(#354a60 0 48%,#0a1724 49% 51%,#27394e 52%);border:1px solid #7e91a4;box-shadow:0 3px 8px #0008;transform-style:preserve-3d}.theme:after{content:'';position:absolute;top:50%;left:0;right:0;height:2px;background:#060c14;box-shadow:0 1px 1px #a7b3be55;pointer-events:none}.theme.active{background:linear-gradient(#927049 0 48%,#23180f 49% 51%,#745532 52%)}.theme.flipping{animation:flap .32s ease-in-out}@keyframes flap{0%{filter:brightness(1);transform:rotateX(0deg)}42%{filter:brightness(.6);transform:rotateX(-65deg)}65%{filter:brightness(.85);transform:rotateX(18deg)}100%{filter:brightness(1);transform:rotateX(0deg)}}@media(max-width:720px){.themes{width:92px}.theme{width:86px}} 
+/* LOCK: selected split flap uses one photo-like surface; title above hinge */
+.theme{overflow:hidden;isolation:isolate}
+.theme .theme-art{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .18s;background:linear-gradient(140deg,#57788b 0%,#2b4758 48%,#172c3b 100%)}
+.theme .theme-art:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#06131b88 0%,transparent 40%,#07131cb8 100%)}
+.theme .theme-symbol{position:absolute;left:0;right:0;top:55%;font-size:38px;transform:translateY(-20%);opacity:0;pointer-events:none;text-shadow:0 2px 8px #000}
+.theme .theme-name{position:relative;z-index:4;display:block;font-weight:700}
+.theme.active .theme-art,.theme.active .theme-symbol{opacity:1}
+.theme.active{display:flex;align-items:flex-start;justify-content:center;padding-top:13px}
+.theme.active .theme-name{width:100%;text-align:center;padding:2px 3px 6px;background:#06172399;border-radius:3px}
+.theme:after{z-index:3}
+.theme.active:after{top:50%}
+.theme .flap-top{position:absolute;top:0;left:0;right:0;height:50%;z-index:7;pointer-events:none;transform-origin:bottom center;opacity:0;backface-visibility:hidden;background:linear-gradient(#9c7951,#61452c);border-bottom:2px solid #17130f}
+.theme .flap-bottom{position:absolute;top:50%;left:0;right:0;height:50%;z-index:6;pointer-events:none;transform-origin:top center;opacity:0;background:linear-gradient(#765334,#3d2b20);border-top:2px solid #17130f}
+.theme.active.flipping{animation:none}
+.theme.active.flipping .flap-top{animation:splitTop .29s ease-in forwards}
+.theme.active.flipping .flap-bottom{animation:splitBottom .29s .22s ease-out forwards}
+@keyframes splitTop{0%{opacity:1;transform:rotateX(0)}98%{opacity:1;transform:rotateX(-88deg)}100%{opacity:0;transform:rotateX(-90deg)}}
+@keyframes splitBottom{0%{opacity:1;transform:rotateX(90deg)}99%{opacity:1;transform:rotateX(0)}100%{opacity:0;transform:rotateX(0)}}
+@media(max-width:720px){.theme .theme-symbol{font-size:23px}.theme.active{padding-top:8px}.theme.active .theme-name{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.theme.active.flipping .flap-top,.theme.active.flipping .flap-bottom{animation:none}}
+.era-bar{height:76px;flex:none;display:flex;align-items:center;gap:8px;padding:8px 18px;background:linear-gradient(#1e3042,#111e2c);border-bottom:1px solid #52657a;touch-action:pan-y;user-select:none}.era-label{font-size:12px;color:#c4d3df;white-space:nowrap}.era-track{flex:1;min-width:0;display:flex;gap:5px;height:100%;align-items:center;touch-action:pan-y}.era-btn{flex:1;min-width:0;height:48px;border:1px solid #62768b;background:#263a4d;color:#c9d5e1;border-radius:7px;font-size:15px;cursor:pointer;transition:background .14s,transform .14s}.era-btn.selected{background:#91683d;border:2px solid #f1c47d;color:white;font-weight:700;transform:translateY(-2px)}.era-hint{font-size:11px;color:#94aabd;white-space:nowrap}@media(max-width:720px){.era-bar{height:59px;padding:5px 7px;gap:4px}.era-label,.era-hint{display:none}.era-track{gap:3px}.era-btn{height:43px;font-size:12px}} .era-track{position:relative;height:62px;cursor:ew-resize;touch-action:none;overflow:visible;display:block}.era-rail{position:absolute;left:7%;right:7%;top:26px;height:8px;border-radius:8px;background:linear-gradient(#07111c,#3c5368);box-shadow:inset 0 2px 5px #000b,0 1px 0 #8498a666}.era-marks{position:absolute;left:7%;right:7%;inset-block:0;display:flex;justify-content:space-between;align-items:stretch}.era-mark{position:relative;width:0;display:flex;align-items:flex-end;justify-content:center;padding-bottom:0;font-size:13px;color:#9eafc0;white-space:nowrap;pointer-events:none}.era-mark:before{content:'';position:absolute;top:19px;left:-1px;width:2px;height:21px;background:#90a4b6}.era-mark.current{color:#f5cc88;font-weight:bold}.era-thumb{position:absolute;left:7%;top:5px;width:44px;height:39px;border-radius:6px;transform:translateX(-50%);background:linear-gradient(#e4bd7d,#92693c);border:2px solid #ffdfaa;box-shadow:0 4px 12px #000c;display:flex;align-items:center;justify-content:center;color:#18202b;pointer-events:none;will-change:left}.era-grip{font-size:20px;font-weight:900;letter-spacing:-3px}.era-track:focus-visible{outline:2px solid #f1c47d;outline-offset:3px}@media(max-width:720px){.era-track{height:48px}.era-rail{top:18px}.era-mark{font-size:11px;padding-bottom:0}.era-mark:before{top:12px;height:18px}.era-thumb{top:0;width:32px;height:32px}.era-grip{font-size:15px}} .year-readout{min-width:120px;text-align:center;font-weight:800;color:#ffcf84;font-size:18px;font-variant-numeric:tabular-nums}.era-track{touch-action:none}.era-mark{font-variant-numeric:tabular-nums;font-size:11px}.era-bar{height:84px}.era-thumb{width:40px;height:46px;top:0;background:linear-gradient(90deg,#555b64,#e2e6e9 20%,#929ba5 46%,#4b515c 52%,#e2e6e9 82%,#666d78);border:1px solid #d5dce2;box-shadow:0 4px 12px #000d}.era-grip{color:#222;font-size:19px}.era-rail{top:29px}.era-mark:before{top:22px}.era-mark{padding-bottom:0}@media(max-width:720px){.era-bar{height:65px}.year-readout{font-size:12px;min-width:78px}.era-rail{top:22px}.era-thumb{height:35px;width:28px}.era-mark{font-size:9px}.era-mark:before{top:16px}} .era-mark{pointer-events:none}.era-track{touch-action:none!important}.era-thumb{transition:none!important}.era-bar{position:relative;z-index:2000}.card{transition:opacity .12s ease,box-shadow .15s,border-color .15s}.stage .counter{max-width:65%;text-align:right}.card .pic img{width:100%;height:100%;object-fit:cover;display:block}.selected-picture img{height:78px;max-width:160px;object-fit:cover;border-radius:8px}.selected-picture{float:right;margin:0 0 8px 12px}.selected-link a{color:#f2c789}.panel{overflow:auto} .panel{height:38%;min-height:0;max-height:none;overflow-y:auto}.panel h2{font-size:clamp(20px,2vw,28px);line-height:1.35}.panel p{font-size:clamp(14px,1.15vw,17px);line-height:1.7}.card strong{font-size:clamp(15px,1.3vw,19px);white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.card small{font-size:clamp(11px,1vw,14px);line-height:1.35;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.detail-grid{display:grid;grid-template-columns:minmax(120px,18%) minmax(0,1fr) minmax(170px,22%);gap:18px;margin-top:12px;align-items:start}.detail-copy h3,.teacher-pane h3{margin:8px 0 4px;font-size:14px;color:#f2c77f}.detail-copy p,.teacher-pane p{margin:0 0 8px}.detail-kicker,.source-note{font-size:12px;color:#9fb0c1;line-height:1.6}.selected-picture{float:none;margin:0}.selected-picture img{height:auto;width:100%;max-width:100%;max-height:190px;object-fit:contain}.teacher-pane{position:relative;padding:10px;border-left:1px solid #52647a}.teacher-pane img{width:72px;max-height:110px;object-fit:contain;float:right}.theme .theme-art{background-size:cover;background-position:center}.home-link{color:#e9c48c;text-decoration:none;font-size:13px}@media(max-width:720px){.detail-grid{grid-template-columns:80px minmax(0,1fr);gap:8px}.teacher-pane{grid-column:1/-1;border-left:0;border-top:1px solid #52647a}.panel h2{font-size:19px}.panel p{font-size:13px}.card strong{font-size:13px}.card small{font-size:10px}} </style></head><body><div id="shared-console-header-root"></div><script src="next-ui-console-header.js?v=shared-dom-v1"></script><header><b>舞台照明史 / HISTORY</b><a href="index.html" class="home-link">⌂ 教材トップ</a></header><nav class="era-bar" aria-label="時代選択"><span class="era-label">TIME FADER</span><output id="yearReadout" class="year-readout">紀元前500年</output><div class="era-track" id="eraTrack" role="slider" tabindex="0" aria-label="時代スライダー" aria-valuemin="-799" aria-valuemax="2026" aria-valuenow="-499" aria-valuetext="紀元前500年"><div class="era-rail"></div><div class="era-marks" id="eraMarks"></div><div class="era-thumb" id="eraThumb" aria-hidden="true"><span class="era-grip">Ⅱ</span></div></div><span class="era-hint">過去 ◀　▶ 未来</span></nav><div class="main"><aside class="themes" id="themes"></aside><main class="stage" id="stage"><div class="stage-label">← 左右スワイプで円陣を回転 →</div><div class="counter" id="counter"></div><div class="ring"></div><button class="arrow prev" id="prev" aria-label="前のカード">‹</button><button class="arrow next" id="next" aria-label="次のカード">›</button></main></div><section class="panel"><h2 id="detailTitle">カードを選択</h2><p id="detailText">左右にスワイプして円陣を回転。奥のカードを直接タップすると、すぐ正面に移動します。</p><div class="detail-grid"><div id="selectedPicture" class="selected-picture"></div><div class="detail-copy"><div id="detailKicker" class="detail-kicker"></div><h3>要約</h3><p id="detailSummary"></p><h3>解説</h3><p id="detailBody"></p><div id="sourceNote" class="source-note"></div><div id="selectedLink" class="selected-link"></div></div><aside class="teacher-pane"><h3>先生のひとこと</h3><p id="teacherSpeech"></p><img src="assets/wave_teacher_transparent.svg?v=teacher-standard-20261014" alt="照明教材の先生" loading="lazy"></aside></div><div class="note">※ カード表示期間は暫定値。古代編の仮カードは史実未確定で、出典の原文照合が必要です。</div></section><script>
+(()=>{"use strict";const names=["用語","人物・職業","機構・技術","光源・照明","劇場建築","劇場・遺跡","作品・上演","社会・制度","文化・思想"],labels=["太陽光","松明","かがり火","蝋燭","油灯","劇場","舞台装置","仮面","祭礼","上演","建築","照明"],emoji=["☀️","🔥","🔥","🕯️","🏺","🏛️","⚙️","🎭","🎪","🎟️","🏗️","💡"];const stage=document.getElementById("stage"),themeBox=document.getElementById("themes"),counter=document.getElementById("counter"),title=document.getElementById("detailTitle"),desc=document.getElementById("detailText");let theme=3,rotation=0,target=0,drag=null,last=performance.now(),lastMoved=0;document.documentElement.style.setProperty('--panel-height','38%');const cards=[];let themePos=3,themeTarget=3,themeDrag=null,themeMovedAt=0,themeWheelLock=0;
+const YEAR_MIN=-799,YEAR_MAX=2026;let year=-499;const eraTrack=document.getElementById("eraTrack"),eraMarks=document.getElementById("eraMarks"),eraThumb=document.getElementById("eraThumb"),yearReadout=document.getElementById("yearReadout");
+const yearLabel=y=>y<=0?"紀元前"+(1-y)+"年":"西暦"+y+"年";
+[-799,-499,1,500,1000,1500,2000,2026].forEach(y=>{const mark=document.createElement("span");mark.className="era-mark";mark.textContent=y===2026?"現在":y===1?"西暦1年":yearLabel(y).replace("紀元前","前").replace("西暦","");mark.style.position="absolute";mark.style.left=((y-YEAR_MIN)/(YEAR_MAX-YEAR_MIN)*100)+"%";eraMarks.appendChild(mark)});
+function renderEra(){eraThumb.style.left=(7+(year-YEAR_MIN)/(YEAR_MAX-YEAR_MIN)*86)+"%";yearReadout.textContent=yearLabel(year);eraTrack.setAttribute("aria-valuenow",String(year));eraTrack.setAttribute("aria-valuetext",yearLabel(year))}
+function setYear(value){const previous=year;const next=Math.max(YEAR_MIN,Math.min(YEAR_MAX,Math.round(value)));if(next!==year){slideDirection=next>=previous?1:-1;year=next;updateContext()}renderEra()}
+// Test fixtures only: fabricated dates and labels, NOT historical evidence.
 const items={
   themeLighting:{
     period:"ancient",title:"光源・照明",displayTitle:"光源・照明｜古代編のテーマ",
@@ -551,179 +89,80 @@ ancientPreviewCards.forEach((x)=>{
   items[x.id]={period:"ancient",title:x.title,displayTitle:x.title+"｜仮カード",date:x.date,region:"古代ギリシャ・ローマ",category:x.id==="delphi"||x.id==="delos"?"theatre":"culture",categoryLabel:x.categoryLabel,size:"preview",icon:x.icon,teaser:x.teaser,summary:x.teaser,body:"【仮配置・未確定】"+x.teaser+" 詳細本文・図版は原文照合後に制作する。",teacher:"このカードは配置と分類を確認するための仮カードだよ。",source:"資料候補："+x.source+"｜採用前に原文確認が必要"};
 });
 
-let currentPeriod=0;
-let selectedId=null;
-const $=id=>document.getElementById(id);
-
-function renderPeriodNav(){
-  const host=$("periodTrack");
-  host.innerHTML="";
-  periods.forEach((p,i)=>{
-    const b=document.createElement("button");
-    b.type="button";
-    b.className="period-btn"+(i===currentPeriod?" active":"");
-    b.innerHTML='<span class="period-range">'+p.range+'</span><span class="period-name">'+p.label+'</span>';
-    b.setAttribute("aria-label",p.label+" "+p.range);
-    if(i===currentPeriod)b.setAttribute("aria-current","true");
-    b.addEventListener("click",()=>setPeriod(i));
-    host.appendChild(b);
-  });
+const fixtureMeta={
+ themeLighting:{theme:3,start:-499,end:-350},sun:{theme:3,start:-499,end:-350},greekTheatre:{theme:5,start:-499,end:-300},
+ theatron:{theme:4,start:-499,end:-250},orchestra:{theme:4,start:-499,end:-250},skene:{theme:4,start:-499,end:-200},proskenion:{theme:4,start:-300,end:-100},parodos:{theme:4,start:-499,end:-100},prohedria:{theme:7,start:-499,end:-100},
+ chorus:{theme:1,start:-499,end:-250},comicActors:{theme:1,start:-399,end:-250},masks:{theme:6,start:-399,end:-250},costumes:{theme:6,start:-399,end:-250},dionysos:{theme:8,start:-499,end:-100},festivals:{theme:7,start:-499,end:-100},patrons:{theme:7,start:-350,end:-100},romanChange:{theme:4,start:-100,end:350},paintedPanels:{theme:2,start:-300,end:-100},heightDifference:{theme:4,start:-499,end:-100},delphi:{theme:5,start:-399,end:100},delos:{theme:5,start:-299,end:100}
+};
+// Date windows above are ONLY display-testing estimates; original item.date/source retained.
+const fixtures=Object.entries(items).map(([id,d])=>{const m=fixtureMeta[id];return {id,data:d,theme:m.theme,start:m.start,end:m.end}});
+let visibleKey="",lastSelected=null;const cardByKey=new Map();let slideDirection=1;
+function updateCards(){
+ const found=fixtures.filter(f=>f.theme===theme&&f.start<=year&&year<=f.end);
+ const key=found.map(f=>f.id).join("|");if(key===visibleKey)return;
+ visibleKey=key;lastSelected=null;
+ const now=performance.now(),nextKeys=new Set(found.map(f=>f.id));
+ // Retiring cards slide into the rear of the ring instead of vanishing on the cut.
+ for(const [key,c] of cardByKey){if(nextKeys.has(key))continue;
+  cardByKey.delete(key);
+  const ghost=c.cloneNode(true),x=parseFloat(c.dataset.x||0),y=parseFloat(c.dataset.y||0),scale=parseFloat(c.dataset.scale||1);
+  ghost.classList.remove("focus");ghost.style.pointerEvents="none";ghost.style.zIndex="5";stage.appendChild(ghost);
+  ghost.style.transform="translate3d("+x+"px,"+y+"px,0) scale("+scale+")";
+  ghost.animate([{transform:"translate3d("+x+"px,"+y+"px,0) scale("+scale+")",opacity:parseFloat(c.style.opacity||1)},{transform:"translate3d("+(x+slideDirection*95)+"px,"+(y-52)+"px,0) scale("+(scale*.6)+")",opacity:0}],{duration:380,easing:"ease-in",fill:"forwards"}).finished.then(()=>ghost.remove()).catch(()=>ghost.remove());
+  c.remove();
+ }
+ cards.length=0;
+ found.forEach(f=>{let c=cardByKey.get(f.id);if(!c){
+   c=document.createElement("button");c.type="button";c.className="card";
+   c.innerHTML='<div class="pic">'+(f.data.image?'<img src="'+f.data.image+'" alt="" loading="lazy" decoding="async">':(f.data.icon||'📜'))+'</div><strong>'+f.data.title+'</strong><small>'+f.data.teaser+'</small>';
+   c.dataset.born=String(now);stage.appendChild(c);cardByKey.set(f.id,c);
+   c.addEventListener("click",()=>{if(performance.now()-lastMoved<250)return;const i=cards.indexOf(c);if(i<0)return;const count=cards.length;const k=Math.round((rotation-i)/count);target=i+k*count;lastSelected=f[0];title.textContent=f[0];desc.textContent="動作確認用の架空カードです。年代："+yearLabel(f[3])+"〜"+yearLabel(f[4])+"。実際の史実データではありません。"});
+  }cards.push(c)});
+ // Preserve the existing ring angle; do not reset to zero on every year boundary.
+ if(cards.length){rotation=((rotation%cards.length)+cards.length)%cards.length;target=rotation}else{rotation=0;target=0}
 }
-
-function renderField(){
-  const p=periods[currentPeriod];
-  $("eraSummary").textContent=p.summary;
-
-  const stage=document.querySelector(".history-stage");
-  const credit=$("backgroundCredit");
-  if(p.background){
-    stage.style.setProperty("--era-image",'url("'+p.background+'")');
-    stage.style.backgroundPosition=p.backgroundPosition||"center";
-    credit.textContent=p.credit||"";
-    credit.href=p.creditUrl||"#";
-    credit.hidden=!p.credit;
-  }else{
-    stage.style.setProperty("--era-image","none");
-    credit.hidden=true;
-    credit.textContent="";
-    credit.removeAttribute("href");
-  }
-
-  const grid=$("cardField");
-  grid.innerHTML="";
-  const list=Object.entries(items).filter(([,item])=>item.period===p.id);
-
-  if(!list.length){
-    const empty=document.createElement("div");
-    empty.className="empty-era";
-    empty.innerHTML="<strong>この時代はこれから追加</strong>表示項目を1つずつファクトチェックして作り込みます。";
-    grid.appendChild(empty);
-    return;
-  }
-
-  const previewSlots=[
-    [1,4,6,8],[5,7,7,9],[8,11,6,8],[2,5,9,11],[6,9,10,12],[10,13,9,11],
-    [1,4,12,14],[5,8,13,15],[9,12,12,14],[2,5,16,18],[6,9,16,18],[10,13,15,17],
-    [1,4,19,21],[5,8,19,21],[9,12,18,20],[2,5,22,24],[6,9,22,24],[10,13,21,23]
-  ];
-  let previewSlotIndex=0;
-  list.forEach(([id,item])=>{
-    const b=document.createElement("button");
-    b.type="button";
-    b.className="history-card "+item.size+(id===selectedId?" active":"");
-    b.dataset.id=id;
-    b.dataset.category=item.category;
-    if(item.size==="preview"){
-      const slot=previewSlots[previewSlotIndex++];
-      b.style.setProperty("--preview-col",slot[0]+" / "+slot[1]);
-      b.style.setProperty("--preview-row",slot[2]+" / "+slot[3]);
-    }
-    if(id==="themeLighting"){
-      b.innerHTML='<div class="theme-b-copy">'+
-        '<span class="theme-b-label">04 / 光源・照明</span>'+
-        '<img class="theme-b-art" src="'+item.image+'" alt="'+item.imageAlt+'" loading="eager">'+
-        '<div><h3 class="theme-b-title">光源・照明</h3><p class="theme-b-desc">'+item.teaser+'</p></div>'+
-        '</div><img class="theme-b-era" src="'+item.eraImage+'" alt="古代編：太陽光" loading="eager">';
-    }else b.innerHTML=
-      '<div class="card-copy">'+
-        '<div class="card-meta"><span class="card-visual" aria-hidden="true">'+item.icon+'</span><span class="card-tag">'+item.categoryLabel+'</span></div>'+
-        '<h3>'+item.title+'</h3>'+
-        '<div class="card-meta">'+(item.showDateInCard===false?'':'<span>'+item.date+'</span>')+'<span>'+item.region+'</span></div>'+
-        '<p>'+item.teaser+'</p>'+
-      '</div>'+
-      (item.image?'<img class="card-image" src="'+item.image+'" alt="" loading="lazy" decoding="async">':'');
-    b.addEventListener("click",()=>selectItem(id));
-    grid.appendChild(b);
-  });
+function showDetail(d){title.textContent=d.displayTitle||d.title;desc.textContent=d.summary;const pic=document.getElementById("selectedPicture");if(pic){pic.innerHTML=d.image?'<img src="'+d.image+'" alt="" loading="lazy">':"";}document.getElementById("detailKicker").textContent=d.categoryLabel+"｜"+d.date+"｜"+d.region;document.getElementById("detailSummary").textContent=d.summary;document.getElementById("detailBody").textContent=d.body;document.getElementById("sourceNote").textContent=d.source;document.getElementById("teacherSpeech").textContent=d.teacher;const link=document.getElementById("selectedLink");if(link){link.innerHTML=d.detailLink?'<a href="'+d.detailLink+'">'+(d.detailLinkLabel||"関連ページへ")+'</a>':"";}}
+function updateContext(){document.querySelector(".stage-label").textContent=yearLabel(year)+" ／ "+names[theme]+"　← 左右スワイプでカードを回転 →";title.textContent=yearLabel(year)+" × "+names[theme];desc.textContent="既存の照明史資料を表示しています。年代の抽出範囲は検証用の仮設定です。";updateCards()}
+function yearFromPointer(e){const r=eraTrack.getBoundingClientRect(),x=(e.clientX-r.left)/r.width;return YEAR_MIN+Math.max(0,Math.min(1,(x-.07)/.86))*(YEAR_MAX-YEAR_MIN)}
+let eraDragging=null;
+eraTrack.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse"&&e.button!==0)return;eraDragging=e.pointerId;eraTrack.setPointerCapture(e.pointerId);setYear(yearFromPointer(e))});
+eraTrack.addEventListener("pointermove",e=>{if(eraDragging!==e.pointerId)return;setYear(yearFromPointer(e))});
+function endEra(e){if(eraDragging!==e.pointerId)return;eraDragging=null;if(eraTrack.hasPointerCapture(e.pointerId))eraTrack.releasePointerCapture(e.pointerId)}
+eraTrack.addEventListener("pointerup",endEra);eraTrack.addEventListener("pointercancel",endEra);
+eraTrack.addEventListener("keydown",e=>{if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();setYear(year+(e.key==="ArrowRight"?10:-10))}if(e.key==="Home"){e.preventDefault();setYear(YEAR_MIN)}if(e.key==="End"){e.preventDefault();setYear(YEAR_MAX)}});
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function setTheme(t,animate=true){const old=theme;const next=((Math.round(t)%names.length)+names.length)%names.length;theme=next;themeTarget=next;if(animate&&next!==old&&themeBox.children.length===names.length){const el=themeBox.children[next];if(el){el.classList.remove('flipping');void el.offsetWidth;el.classList.add('flipping');setTimeout(()=>el.classList.remove('flipping'),580)}}title.textContent=names[theme]+"｜インデックス";updateContext();}
+names.forEach((n,i)=>{const b=document.createElement("button");b.type="button";b.className="theme";b.innerHTML='<span class="theme-art"></span><span class="theme-symbol" aria-hidden="true">'+["📖","🎭","⚙️","☀️","🏛️","🏟️","🎟️","⚖️","💭"][i]+'</span><span class="theme-name">'+n+'</span><span class="flap-top"></span><span class="flap-bottom"></span>';b.addEventListener("click",()=>{if(performance.now()-themeMovedAt<280)return;setTheme(i)});if(i===3){b.querySelector(".theme-art").style.backgroundImage='linear-gradient(#07131b55,#07131b88),url("assets/history/theme_light_B.webp")';b.querySelector(".theme-art").style.backgroundSize="cover";b.querySelector(".theme-art").style.backgroundPosition="center"}themeBox.appendChild(b)});
+function renderThemes(dt){if(!themeDrag){themePos+=(themeTarget-themePos)*(1-Math.exp(-dt*15));if(Math.abs(themeTarget-themePos)<.001)themePos=themeTarget}
+ const step=Math.min(105,Math.max(64,themeBox.clientHeight/5.9));const height=themeBox.clientHeight;
+ [...themeBox.children].forEach((el,i)=>{const d=i-themePos,ad=Math.abs(d),y=d*step;
+ el.style.transform="translate3d(0,"+y.toFixed(2)+"px,0) rotateX("+(clamp(-d*6,-12,12)).toFixed(2)+"deg)";
+ el.style.opacity=String(clamp(1-Math.max(0,ad-2.3)*.65,0,1));el.style.visibility=(ad>2.65||Math.abs(y)>height*.62)?"hidden":"visible";
+ el.style.zIndex=String(100-Math.round(ad*10));el.classList.toggle("active",i===theme)});
 }
-
-function selectItem(id){
-  const d=items[id];
-  if(!d)return;
-  selectedId=id;
-  $("historyApp").classList.add("detail-open");
-  document.querySelectorAll(".history-card").forEach(card=>card.classList.toggle("active",card.dataset.id===id));
-  $("detailKicker").textContent=d.categoryLabel+"｜"+d.date+"｜"+d.region;
-  const detailImage=$("detailImage");
-  if(d.image){
-    detailImage.src=d.image;
-    detailImage.alt=d.imageAlt||d.title;
-    detailImage.hidden=false;
-  }else{
-    detailImage.removeAttribute("src");
-    detailImage.alt="";
-    detailImage.hidden=true;
-  }
-  $("detailTitle").textContent=d.displayTitle;
-  $("detailSummary").textContent=d.summary;
-  $("detailBody").textContent=d.body;
-  $("teacherSpeech").textContent=d.teacher;
-  $("sourceNote").textContent=d.source;
-  const actions=$("detailActions");
-  actions.innerHTML="";
-  if(d.detailLink){
-    const a=document.createElement("a");
-    a.className="detail-link";
-    a.href=d.detailLink;
-    a.textContent=d.detailLinkLabel||"関連ページを見る";
-    actions.appendChild(a);
-  }
-}
-
-function closeDetail(){
-  selectedId=null;
-  $("detailActions").innerHTML="";
-  $("historyApp").classList.remove("detail-open");
-  document.querySelectorAll(".history-card").forEach(card=>card.classList.remove("active"));
-}
-
-function setPeriod(index){
-  currentPeriod=Math.max(0,Math.min(periods.length-1,index));
-  closeDetail();
-  renderPeriodNav();
-  renderField();
-}
-
-$("prevPeriod").addEventListener("click",()=>setPeriod(currentPeriod-1));
-$("nextPeriod").addEventListener("click",()=>setPeriod(currentPeriod+1));
-
-document.querySelector(".history-stage").addEventListener("click",e=>{
-  if(e.target.closest(".history-card")) return;
-  if(e.target.closest(".period-rail")) return;
-  closeDetail();
+const themeStep=()=>Math.min(105,Math.max(64,themeBox.clientHeight/5.9));
+themeBox.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse"&&e.button!==0)return;const now=performance.now();themeDrag={id:e.pointerId,start:e.clientY,base:themePos,time:now,lastY:e.clientY,lastT:now,velocity:0,moved:false};themeBox.setPointerCapture(e.pointerId);themeBox.classList.add("dragging")});
+themeBox.addEventListener("pointermove",e=>{if(!themeDrag||themeDrag.id!==e.pointerId)return;const now=performance.now(),dy=e.clientY-themeDrag.start,step=themeStep();
+ themePos=clamp(themeDrag.base-dy/step,0,names.length-1);themeTarget=themePos;
+ const liveIndex=clamp(Math.round(themePos),0,names.length-1);if(liveIndex!==theme)setTheme(liveIndex,true);
+ const elapsed=Math.max(1,now-themeDrag.lastT),instant=-(e.clientY-themeDrag.lastY)/step/elapsed*1000;
+ if(now-themeDrag.lastT<120)themeDrag.velocity=themeDrag.velocity*.45+clamp(instant,-18,18)*.55;
+ themeDrag.lastY=e.clientY;themeDrag.lastT=now;
+ if(Math.abs(dy)>5){themeDrag.moved=true;themeMovedAt=now}
 });
-
-let touchX=null;
-$("historyField").addEventListener("touchstart",e=>{touchX=e.changedTouches[0].clientX},{passive:true});
-$("historyField").addEventListener("touchend",e=>{
-  if(touchX===null)return;
-  const dx=e.changedTouches[0].clientX-touchX;
-  touchX=null;
-  if(Math.abs(dx)>70)setPeriod(currentPeriod+(dx<0?1:-1));
-},{passive:true});
-
-
-document.querySelectorAll(".next-ui-category-tab").forEach(button=>button.addEventListener("click",e=>{
-  e.stopPropagation();
-  const menu=button.closest(".next-ui-category-menu");
-  document.querySelectorAll(".next-ui-category-menu").forEach(x=>{if(x!==menu)x.classList.remove("open")});
-  menu.classList.toggle("open");
-}));
-document.addEventListener("click",()=>document.querySelectorAll(".next-ui-category-menu").forEach(x=>x.classList.remove("open")));
-
-renderPeriodNav();
-renderField();
-
-const initialItem=new URLSearchParams(location.search).get("item");
-if(initialItem && items[initialItem]){
-  const periodIndex=periods.findIndex(p=>p.id===items[initialItem].period);
-  if(periodIndex>=0 && periodIndex!==currentPeriod){
-    currentPeriod=periodIndex;
-    renderPeriodNav();
-    renderField();
-  }
-  selectItem(initialItem);
+function endTheme(e){if(!themeDrag||e.pointerId!==themeDrag.id)return;
+ const d=themeDrag,now=performance.now(),delta=e.clientY-d.start,elapsed=Math.max(1,now-d.time),step=themeStep();
+ const current=clamp(d.base-delta/step,0,names.length-1);
+ const recent=(now-d.lastT<100)?d.velocity:0;
+ const overall=-(delta/step)/(elapsed/1000);
+ const flick=Math.abs(delta)>12&&elapsed<360;
+ const v=flick?clamp(recent*.55+overall*.45,-14,14):0;
+ const projected=clamp(current+v*.18,0,names.length-1);
+ if(d.moved||Math.abs(delta)>5){themePos=current;setTheme(Math.round(projected),false);themeMovedAt=now}
+ themeDrag=null;themeBox.classList.remove("dragging");
+ if(themeBox.hasPointerCapture(e.pointerId))themeBox.releasePointerCapture(e.pointerId);
 }
-</script>
-</body>
-</html>
+themeBox.addEventListener("pointerup",endTheme);themeBox.addEventListener("pointercancel",e=>{if(!themeDrag||e.pointerId!==themeDrag.id)return;setTheme(Math.round(themePos),false);themeDrag=null;themeBox.classList.remove("dragging")});
+themeBox.addEventListener("wheel",e=>{e.preventDefault();const now=performance.now();if(now-themeWheelLock<105)return;themeWheelLock=now;setTheme(clamp(themeTarget+(e.deltaY>0?1:-1),0,names.length-1))},{passive:false});
+function frame(t){const dt=Math.min(.05,(t-last)/1000);last=t;if(!drag){const diff=target-rotation;rotation+=diff*(1-Math.exp(-dt*11));if(Math.abs(diff)<.0001)rotation=target}renderThemes(dt);const w=stage.clientWidth,h=stage.clientHeight;const rx=Math.max(65,Math.min(w*.37,380)),ry=Math.max(24,Math.min(h*.22,135));let front=0,dist=Infinity;cards.forEach((c,i)=>{const a=(i-rotation)*Math.PI*2/Math.max(1,cards.length);const depth=Math.cos(a),x=Math.sin(a)*rx,y=Math.cos(a)*ry;const scale=.72+.28*(depth+1)/2;const opa=.72+.28*(depth+1)/2;const elapsed=t-Number(c.dataset.born||0),p=Math.max(0,Math.min(1,elapsed/420)),ease=1-Math.pow(1-p,3);const enterX=slideDirection*(1-ease)*110,enterY=-(1-ease)*48,enterScale=scale*(.72+.28*ease);c.style.transform='translate3d('+(x+enterX).toFixed(2)+'px,'+(y+enterY).toFixed(2)+'px,0) scale('+enterScale.toFixed(3)+')';c.dataset.x=String(x);c.dataset.y=String(y);c.dataset.scale=String(scale);c.style.zIndex=String(Math.round((depth+1)*1000)+10);c.style.opacity=(opa*ease).toFixed(3);const d=Math.abs(Math.atan2(Math.sin(a),Math.cos(a)));if(d<dist){dist=d;front=i}});cards.forEach((c,i)=>c.classList.toggle("focus",i===front));counter.textContent=cards.length?(front+1)+" / "+cards.length:"0 / 0（該当なし）";requestAnimationFrame(frame)}function move(dir){if(cards.length)target=Math.round(target)+dir}document.getElementById("prev").onclick=()=>move(-1);document.getElementById("next").onclick=()=>move(1);stage.addEventListener("pointerdown",e=>{if(e.target.closest(".arrow"))return;if(e.pointerType==="mouse"&&e.button!==0)return;drag={id:e.pointerId,x:e.clientX,start:e.clientX,rot:rotation};stage.setPointerCapture(e.pointerId)});stage.addEventListener("pointermove",e=>{if(!drag||drag.id!==e.pointerId)return;const dx=e.clientX-drag.x;rotation=drag.rot-dx/Math.max(55,stage.clientWidth*.09);target=rotation;if(Math.abs(e.clientX-drag.start)>7)lastMoved=performance.now()});function end(e){if(!drag||drag.id!==e.pointerId)return;target=Math.round(rotation);drag=null}stage.addEventListener("pointerup",end);stage.addEventListener("pointercancel",end);setTheme(3);setYear(-499);updateContext();requestAnimationFrame(frame)})();
+</script></body></html>
