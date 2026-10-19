@@ -1,6 +1,6 @@
 /* Landscape-first: readable beginner lesson, with portrait reflow. */
-body.singlephase-next-ui {--bg:#171e26;--muted:#ccd3dc;--line:#495663;display:flex;flex-direction:column;background:#171e26;font-size:16px}
-body.singlephase-next-ui .app {display:grid}
+body.singlephase-next-ui {--bg:#171e26;--muted:#ccd3dc;--line:#495663;background:#171e26;font-size:16px}
+body.singlephase-next-ui .app {}
 body.singlephase-next-ui .topbar {min-height:0;border:0;border-left:3px solid #ff9d00;border-radius:0;padding:0 10px;background:transparent}
 body.singlephase-next-ui .title h1 {font-size:22px}
 body.singlephase-next-ui .title span {font-size:15px}
