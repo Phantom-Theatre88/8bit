@@ -26,7 +26,7 @@ const Module_Sim16Bit = {
           <section class="s16-bottom"><section class="s16-zone"><h2>▤ 解説</h2><p><span class="s16-blue">Coarse</span>で、大きな位置を決める。</p><p><span class="s16-green">Fine</span>で、その中を細かく合わせる。</p></section>
             <section class="s16-zone s16-teacher"><img src="assets/wave_teacher_transparent.svg" alt="照明教材の先生"><div><h2>先生のひとこと</h2><p id="s16-teacher-message">Coarseを固定して、<br>Fineだけ動かしてみよう。</p></div></section>
             <section class="s16-zone"><h2>覚えておこう</h2><p>8-bit：<b>256段階</b><br>16-bit：<b>65,536段階</b></p><p>DMXの2つの値を組み合わせる。</p></section></section>
-          <footer class="s16-footer"><span>8bit Lighting Study</span><span>Coarse ／ Fine ／ 全体操作</span></footer>
+          
           <dialog id="s16-help-dialog" aria-labelledby="s16-help-title"><div class="s16-help-heading"><h2 id="s16-help-title">16-bitの詳細説明</h2><button id="s16-help-close" aria-label="詳細説明を閉じる">閉じる ×</button></div><p>大きく／細かく調整するしくみの説明図です。図の数値と距離の単位はたとえで、操作中の現在値ではありません。</p><img src="assets/16bit_coarse_fine_infographic.webp" alt="Master、Coarse、Fineの関係と上位・下位8-bitを説明するイラスト"></dialog>
         </div>`;
     },
