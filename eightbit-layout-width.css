@@ -1,3 +1,6 @@
+/* 8bit: single source of truth for OUTER canvas, lesson geometry, footer.
+   Page CSS must only own the content within these fixed slots.
+   Derived from Electric V-W-A layout. */
 /* 8bit shared viewport and page canvas.
    Only the outer frame is shared; internal simulators retain their own layouts. */
 :root { --eightbit-page-max-width:1480px; --eightbit-viewport-height:100dvh; --eightbit-footer-height:30px; }
@@ -61,3 +64,65 @@ body.eightbit-unified-width > .page-shell {
 body.eightbit-unified-width > .map-app {overflow:hidden;}
 /* Keep the header inserted by the shared header script inside the canvas. */
 body.eightbit-unified-width.eightbit-console > .master-console-container {margin:0 auto!important;}
+
+/* Standard educational content geometry */
+/* Unified educational composition, based on the approved Electric / V-W-A page.
+   Applies to landscape lesson views; page-specific interactive content remains independent.
+   Shared: 12px inset, 8px gaps, 42px title, 220px explanatory row. */
+:root{--eightbit-lesson-inset:12px;--eightbit-lesson-gap:8px;--eightbit-lesson-title:42px;--eightbit-lesson-explain:220px}
+@media (orientation:landscape) and (min-width:960px){
+ body.eightbit-unified-width > .app{padding:8px var(--eightbit-lesson-inset) 0!important;gap:var(--eightbit-lesson-gap)!important;max-height:none!important}
+ body.analog-next-ui > .app{grid-template-rows:42px 124px minmax(0,1fr) 220px 30px!important}
+ body.singlephase-next-ui > .app{grid-template-rows:42px 88px minmax(0,1fr) 220px 30px!important}
+ body.wave-next-ui > .app{grid-template-rows:42px 70px minmax(0,1fr) 220px 30px!important}
+ body.lens-next-ui > .app,
+ body.person-lighting-next-ui > .app{grid-template-rows:42px minmax(0,1fr) 220px 30px!important}
+ body.person-lighting-next-ui > .app > .bottom-grid{min-height:0!important;gap:8px!important}
+ body.eightbit-unified-width > .app > .lesson-bottom{min-height:0!important;gap:8px!important;padding-top:0!important}
+ body.eightbit-unified-width > .app > .topbar{min-height:0!important;height:100%!important}
+ body.eightbit-console .master-console-container{padding:8px 12px 0!important;border-width:0!important;border-radius:0!important;box-shadow:none!important;gap:8px!important}
+ body.eightbit-console .module-page-root.sim8bit.sim8-common-page{grid-template-rows:42px minmax(0,1fr) 220px!important;gap:8px!important}
+ body.eightbit-console .s16-page{grid-template-rows:42px minmax(0,1fr) 220px!important;gap:8px!important}
+ body.eightbit-console .sim8-page-titlebar{min-height:0!important}
+}
+/* The timeline and map need their own interactive visualization layouts,
+   but share the same page frame, external margins and footer geometry. */
+body.eightbit-unified-width > .map-app{padding:8px 12px!important}
+
+/* Match the 8-bit console content and title geometry to the Electric reference. */
+@media (orientation:landscape) and (min-width:960px){
+body.eightbit-console > .master-console-container{box-sizing:border-box!important;padding:8px 12px 0!important;margin:0!important;width:100%!important}
+body.eightbit-console .sim8-page-titlebar{height:42px!important;box-sizing:border-box!important;display:flex!important;align-items:center!important;padding:0 12px!important}
+body.eightbit-console .sim8-page-heading{display:flex!important;align-items:center!important;gap:18px!important;min-width:0!important}
+body.eightbit-console .sim8-page-title{margin:0!important;white-space:nowrap!important;font-size:21px!important}
+body.eightbit-console .sim8-page-sub{margin:0!important;min-width:0!important;white-space:nowrap!important;overflow:hidden;text-overflow:ellipsis;font-size:15px!important}
+body.eightbit-console .sim8-page-main{padding:0!important}
+body.eightbit-console .sim8-page-bottom{padding:0!important;gap:8px!important}
+}
+/* Unified footer */
+/* 8bit lesson shared footer — one visual contract for standalone lessons. */
+.eightbit-lesson-footer {
+  box-sizing: border-box;
+  flex: 0 0 30px;
+  height: 30px;
+  min-height: 30px;
+  max-height: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  overflow: hidden;
+  margin: 0;
+  padding: 0 12px;
+  border: 0;
+  border-top: 1px solid #303840;
+  border-radius: 0;
+  background: #080b0e;
+  color: #aab5bd;
+  font: 10px/1.2 "Hiragino Sans", "Yu Gothic", Meiryo, system-ui, sans-serif;
+  white-space: nowrap;
+}
+.eightbit-lesson-footer > * { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.eightbit-lesson-footer a { color: inherit; text-decoration: none; }
+
