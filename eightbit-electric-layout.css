@@ -1,0 +1,21 @@
+/* Unified educational composition, based on the approved Electric / V-W-A page.
+   Applies to landscape lesson views; page-specific interactive content remains independent.
+   Shared: 12px inset, 8px gaps, 42px title, 220px explanatory row. */
+:root{--eightbit-lesson-inset:12px;--eightbit-lesson-gap:8px;--eightbit-lesson-title:42px;--eightbit-lesson-explain:220px}
+@media (orientation:landscape) and (min-width:960px) and (min-height:650px){
+ body.eightbit-unified-width > .app{padding:8px var(--eightbit-lesson-inset) 0!important;gap:var(--eightbit-lesson-gap)!important;max-height:none!important}
+ body.analog-next-ui > .app{grid-template-rows:42px 124px minmax(0,1fr) 220px!important}
+ body.singlephase-next-ui > .app{grid-template-rows:42px 88px minmax(0,1fr) 220px!important}
+ body.wave-next-ui > .app{grid-template-rows:42px 70px minmax(0,1fr) 220px!important}
+ body.lens-next-ui > .app,
+ body.person-lighting-next-ui > .app{grid-template-rows:42px minmax(0,1fr) 220px!important}
+ body.eightbit-unified-width > .app > .lesson-bottom{min-height:0!important;gap:8px!important;padding-top:0!important}
+ body.eightbit-unified-width > .app > .topbar{min-height:0!important;height:100%!important}
+ body.eightbit-console .master-console-container{padding:8px 12px 0!important;border-width:0!important;border-radius:0!important;box-shadow:none!important;gap:8px!important}
+ body.eightbit-console .module-page-root.sim8bit.sim8-common-page{grid-template-rows:42px minmax(0,1fr) 220px!important;gap:8px!important}
+ body.eightbit-console .s16-page{grid-template-rows:42px minmax(0,1fr) 220px!important;gap:8px!important}
+ body.eightbit-console .sim8-page-titlebar{min-height:0!important}
+}
+/* The timeline and map need their own interactive visualization layouts,
+   but share the same page frame, external margins and footer geometry. */
+body.eightbit-unified-width > .map-app{padding:8px 12px!important}
