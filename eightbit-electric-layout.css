@@ -2,7 +2,7 @@
    Applies to landscape lesson views; page-specific interactive content remains independent.
    Shared: 12px inset, 8px gaps, 42px title, 220px explanatory row. */
 :root{--eightbit-lesson-inset:12px;--eightbit-lesson-gap:8px;--eightbit-lesson-title:42px;--eightbit-lesson-explain:220px}
-@media (orientation:landscape) and (min-width:960px) and (min-height:650px){
+@media (orientation:landscape) and (min-width:960px){
  body.eightbit-unified-width > .app{padding:8px var(--eightbit-lesson-inset) 0!important;gap:var(--eightbit-lesson-gap)!important;max-height:none!important}
  body.analog-next-ui > .app{grid-template-rows:42px 124px minmax(0,1fr) 220px 30px!important}
  body.singlephase-next-ui > .app{grid-template-rows:42px 88px minmax(0,1fr) 220px 30px!important}
@@ -22,7 +22,7 @@
 body.eightbit-unified-width > .map-app{padding:8px 12px!important}
 
 /* Match the 8-bit console content and title geometry to the Electric reference. */
-@media (orientation:landscape) and (min-width:960px) and (min-height:650px){
+@media (orientation:landscape) and (min-width:960px){
 body.eightbit-console > .master-console-container{box-sizing:border-box!important;padding:8px 12px 0!important;margin:0!important;width:100%!important}
 body.eightbit-console .sim8-page-titlebar{height:42px!important;box-sizing:border-box!important;display:flex!important;align-items:center!important;padding:0 12px!important}
 body.eightbit-console .sim8-page-heading{display:flex!important;align-items:center!important;gap:18px!important;min-width:0!important}
