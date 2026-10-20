@@ -155,8 +155,6 @@ body.analog-next-ui .teacher-card.current { grid-column:2; min-height:0; margin-
 body.analog-next-ui .bottom-remember { display:flex; flex-direction:column; gap:7px; }
 body.analog-next-ui .remember-list { display:grid; gap:5px; font-size:var(--lesson-support-font-size,12px); color:#d7dce0; }
 body.analog-next-ui .remember-tip { margin-top:auto; padding:8px; border:1px solid #3e464e; border-left:2px solid #ff9d00; border-radius:6px; background:#111519; color:#ffc247; font-size:10px; line-height:1.45; }
-body.analog-next-ui .bottomnav { justify-content:flex-start; border:0; border-radius:0; padding:0 10px; background:#080a0d; }
-body.analog-next-ui .bottomnav .home { display:none; }
 
 @media (max-height:860px) {
   .next-ui-header-top { min-height:48px; }
