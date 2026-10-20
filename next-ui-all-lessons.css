@@ -583,16 +583,6 @@ body.network-sim-overlay-open { overflow: hidden; }
   line-height: 1.45;
 }
 
-.common-page-footer {
-  padding: 0 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: #8f979e;
-  font-size: 10px;
-  background: #080a0d;
-}
-
 @media (max-height: 820px) {
   .common-lesson-page {
     grid-template-rows: 50px minmax(0, 1fr) 166px 24px;
