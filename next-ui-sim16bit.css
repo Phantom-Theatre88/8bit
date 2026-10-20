@@ -121,13 +121,13 @@ body.eightbit-console #panel-sim16bit.stage-view-panel.active {
 }
 body.eightbit-console #panel-sim16bit .s16-page {
   height:100%; min-height:0; width:100%; overflow-x:hidden; overflow-y:auto;
-  grid-template-rows:42px minmax(430px,1fr) minmax(150px,auto);
+  grid-template-rows:42px minmax(430px,1fr) minmax(150px,auto)!important;
   align-content:stretch;
 }
 body.eightbit-console #panel-sim16bit .s16-workbench {min-height:430px;overflow:visible}
 body.eightbit-console #panel-sim16bit .s16-bottom {min-height:150px;overflow:visible}
 @media (orientation:landscape) and (min-width:960px) and (min-height:830px) {
-  body.eightbit-console #panel-sim16bit .s16-page {grid-template-rows:42px minmax(0,1fr) minmax(0,195px);overflow:hidden}
+  body.eightbit-console #panel-sim16bit .s16-page {grid-template-rows:42px minmax(0,1fr) minmax(0,195px)!important;overflow:hidden}
   body.eightbit-console #panel-sim16bit .s16-workbench {min-height:0;overflow:hidden}
   body.eightbit-console #panel-sim16bit .s16-bottom {min-height:0;overflow:hidden}
 }
