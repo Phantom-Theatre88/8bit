@@ -105,3 +105,45 @@ body.eightbit-unified-width > .map-app {display:grid}
  body.eightbit-unified-width > .master-console-container {flex:none!important;height:auto!important;max-height:none!important;overflow:visible;}
  body.eightbit-unified-width > .page-shell {flex:none;overflow:visible;}
 }
+
+/* Typography contract (reference: approved Electric / Analog lesson).
+   Apply to semantic lesson text; numeric displays, axes, and controls retain
+   module-owned sizes. */
+:root {
+ --eightbit-type-page-title:20px;
+ --eightbit-type-panel-heading:18px;
+ --eightbit-type-body:17px;
+ --eightbit-type-support:16px;
+ --eightbit-type-page-subtitle:15px;
+}
+body.analog-next-ui .title h1,
+body.singlephase-next-ui .title h1,
+body.wave-next-ui .title h1,
+body.lens-next-ui .title h1,
+body.person-lighting-next-ui .title h1,
+body.eightbit-console .sim8-page-title,
+body.eightbit-console .s16-title h1 {font-size:var(--eightbit-type-page-title)!important;}
+body.analog-next-ui .title span,
+body.singlephase-next-ui .title span,
+body.wave-next-ui .title span,
+body.eightbit-console .sim8-page-sub,
+body.eightbit-console .s16-title p {font-size:var(--eightbit-type-page-subtitle)!important;}
+body.analog-next-ui .bottom-title,
+body.analog-next-ui .teacher-intro-wrap h3,
+body.singlephase-next-ui .bottom-title,
+body.wave-next-ui .bottom-title,
+body.eightbit-console .sim8-bottom-title,
+body.eightbit-console .s16-bottom h2 {font-size:var(--eightbit-type-panel-heading)!important;}
+body.analog-next-ui .bottom-explain .teacher-card.current,
+body.singlephase-next-ui .lesson-bottom .teacher-speech,
+body.wave-next-ui .lesson-bottom .teacher-speech,
+body.eightbit-console .s16-teacher p,
+body.eightbit-console .s16-bottom > .s16-zone:first-child p {
+ font-size:var(--eightbit-type-body)!important;
+}
+body.analog-next-ui .remember-list,
+body.singlephase-next-ui .remember-list,
+body.wave-next-ui .remember-list,
+body.eightbit-console .s16-bottom > .s16-zone:last-child p {
+ font-size:var(--eightbit-type-support)!important;
+}
