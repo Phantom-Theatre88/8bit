@@ -73,8 +73,6 @@ body.singlephase-next-ui .teacher-speech .l1 {color:#b52b24}
 body.singlephase-next-ui .teacher-speech .l2 {color:#176abd}
 body.singlephase-next-ui .teacher-speech .n {color:#21721a}
 body.singlephase-next-ui .remember-tip {font-size:14px;line-height:20px;color:#ffc15a;margin-top:5px}
-body.singlephase-next-ui .bottomnav {min-height:0;padding:0 4px;border:0;background:transparent;font-size:12px}
-body.singlephase-next-ui .bottomnav .home {display:none}
 body.singlephase-next-ui button:focus-visible,body.singlephase-next-ui a:focus-visible {outline:2px solid #ffe48b;outline-offset:2px}
 
 body.singlephase-next-ui .next-ui-category-tabs::before,body.singlephase-next-ui .next-ui-category-tabs::after {display:none}
