@@ -75,7 +75,6 @@ body.wave-next-ui .teacher-character{width:68px;height:116px;object-fit:contain;
 body.wave-next-ui .teacher-copy{min-width:0;padding-bottom:8px}
 body.wave-next-ui .teacher-copy h3{color:#ffd078}
 body.wave-next-ui .teacher-speech{font-size:15px;line-height:21px;margin:0;padding:7px;background:#f2e4b2;color:#171717;border-radius:8px;font-weight:700}
-body.wave-next-ui .bottomnav{padding:0 4px;color:#b9c2cc;font-size:12px;line-height:18px}
 body.wave-next-ui .help-dialog{width:min(650px,calc(100% - 30px));max-height:85dvh;border:1px solid #718497;border-radius:10px;background:#26313b;color:#edf2f7;padding:14px}
 body.wave-next-ui .help-dialog::backdrop{background:#0009}
 body.wave-next-ui .help-head{display:flex;justify-content:space-between;align-items:center}
