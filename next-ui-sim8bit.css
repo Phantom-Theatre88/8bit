@@ -60,7 +60,6 @@ body:has(.sim8bit-active) { background:#1b232c; }
 .sim8-teacher-card { grid-template-columns:100px minmax(0,1fr); padding:5px 9px 0; }
 .sim8-teacher-img { width:100px; max-height:150px; }
 .sim8-teacher-speech { font-size:17px; line-height:1.5; padding:9px; flex:0 1 auto; }
-.sim8-page-footer { background:transparent; font-size:12px; padding:0; }
 @media (min-width:900px) and (max-height:720px) {
  .module-page-root.sim8bit.sim8-common-page { }
  .sim8-zone { padding:8px; }
