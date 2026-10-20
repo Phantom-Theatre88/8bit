@@ -3,7 +3,7 @@
    Derived from Electric V-W-A layout. */
 /* 8bit shared viewport and page canvas.
    Only the outer frame is shared; internal simulators retain their own layouts. */
-:root { --eightbit-page-max-width:1480px; --eightbit-viewport-height:100dvh; --eightbit-footer-height:30px; }
+:root { --eightbit-page-max-width:1480px; --eightbit-viewport-height:100dvh; }
 html { width:100%; min-width:0; height:100%; }
 body.eightbit-unified-width {
   box-sizing:border-box;
@@ -40,14 +40,8 @@ body.eightbit-unified-width > .master-console-container {
   margin:0 auto!important;
 }
 body.eightbit-unified-width .master-console-container {max-width:100%!important;}
-body.eightbit-unified-width .eightbit-lesson-footer {
-  box-sizing:border-box;
-  flex:0 0 var(--eightbit-footer-height)!important;
-  height:var(--eightbit-footer-height)!important;
-  min-height:var(--eightbit-footer-height)!important;
-  max-height:var(--eightbit-footer-height)!important;
-}
-body.eightbit-unified-width > .eightbit-lesson-footer {width:100%;}
+
+
 /* Homepage is a scrollable document within the same-sized viewport. */
 body.eightbit-unified-width > .site-header {flex:0 0 auto;}
 body.eightbit-unified-width > .page-shell {
@@ -72,11 +66,11 @@ body.eightbit-unified-width.eightbit-console > .master-console-container {margin
 :root{--eightbit-lesson-inset:12px;--eightbit-lesson-gap:8px;--eightbit-lesson-title:42px;--eightbit-lesson-explain:220px}
 @media (orientation:landscape) and (min-width:960px){
  body.eightbit-unified-width > .app{padding:8px var(--eightbit-lesson-inset) 0!important;gap:var(--eightbit-lesson-gap)!important;max-height:none!important}
- body.analog-next-ui > .app{grid-template-rows:42px 124px minmax(0,1fr) 220px 30px!important}
- body.singlephase-next-ui > .app{grid-template-rows:42px 88px minmax(0,1fr) 220px 30px!important}
- body.wave-next-ui > .app{grid-template-rows:42px 70px minmax(0,1fr) 220px 30px!important}
+ body.analog-next-ui > .app{grid-template-rows:42px 124px minmax(0,1fr) 220px!important}
+ body.singlephase-next-ui > .app{grid-template-rows:42px 88px minmax(0,1fr) 220px!important}
+ body.wave-next-ui > .app{grid-template-rows:42px 70px minmax(0,1fr) 220px!important}
  body.lens-next-ui > .app,
- body.person-lighting-next-ui > .app{grid-template-rows:42px minmax(0,1fr) 220px 30px!important}
+ body.person-lighting-next-ui > .app{grid-template-rows:42px minmax(0,1fr) 220px!important}
  body.person-lighting-next-ui > .app > .bottom-grid{min-height:0!important;gap:8px!important}
  body.eightbit-unified-width > .app > .lesson-bottom{min-height:0!important;gap:8px!important;padding-top:0!important}
  body.eightbit-unified-width > .app > .topbar{min-height:0!important;height:100%!important}
@@ -99,34 +93,6 @@ body.eightbit-console .sim8-page-sub{margin:0!important;min-width:0!important;wh
 body.eightbit-console .sim8-page-main{padding:0!important}
 body.eightbit-console .sim8-page-bottom{padding:0!important;gap:8px!important}
 }
-/* Unified footer */
-/* 8bit lesson shared footer — one visual contract for standalone lessons. */
-.eightbit-lesson-footer {
-  box-sizing: border-box;
-  flex: 0 0 30px;
-  height: 30px;
-  min-height: 30px;
-  max-height: 30px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  overflow: hidden;
-  margin: 0;
-  padding: 0 12px;
-  border: 0;
-  border-top: 1px solid #303840;
-  border-radius: 0;
-  background: #080b0e;
-  color: #aab5bd;
-  font: 10px/1.2 "Hiragino Sans", "Yu Gothic", Meiryo, system-ui, sans-serif;
-  white-space: nowrap;
-}
-.eightbit-lesson-footer > * { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
-.eightbit-lesson-footer a { color: inherit; text-decoration: none; }
-
-
 /* Canonical outer shell display roles */
 body.eightbit-unified-width > .app {display:grid}
 body.eightbit-unified-width > .master-console-container {display:flex;flex-direction:column}
