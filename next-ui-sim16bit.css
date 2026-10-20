@@ -87,7 +87,6 @@ body:has(.sim16bit-active) .console-main-screen{flex:1 1 0!important;min-height:
 .s16-teacher>div{align-self:start;min-width:0;}
 .s16-teacher h2{color:#ffcb58;}
 .s16-teacher p{background:#f4e4ac;border-radius:10px;color:#252a2e;font-weight:700;font-size:17px;line-height:1.4;padding:8px;}
-.s16-footer{font-size:12px;display:flex;justify-content:space-between;align-items:center;color:#a8b8c5;}
 #s16-help-dialog{max-width:none;width:min(1100px,94vw);height:92dvh;max-height:92dvh;background:#24303b;color:#eef4fa;padding:14px;border:1px solid #8098ae;border-radius:12px;overflow:auto;}
 #s16-help-dialog::backdrop{background:#081019de;}
 .s16-help-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;}
