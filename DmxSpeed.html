@@ -23,27 +23,90 @@ body.dmx-speed-next-ui .screen{min-height:200px}
 </head><body class="eightbit-unified-width dmx-speed-next-ui">
 <div id="shared-console-header-root"></div>
 <script src="next-ui-console-header.js?v=dmx-speed-nav-1"></script>
-<main class="shell">
-<section class="panel intro"><img class="teacher" src="assets/wave_teacher_transparent.svg" alt="前ページと同じ先生"><div><h1>DMXの通信速度</h1><p>前のページで見た通信列車を、今度は「時間」で観察しよう。列車と実波形は同じ信号。1bitを送る速さと、全チャンネルを送り終えるまでの時間は別なんだ。</p></div><div class="metrics"><div class="metric"><span>通信速度</span><strong>250k</strong><small>bit/s</small></div><div class="metric"><span>1bit</span><strong>4</strong><small>µs</small></div><div class="metric"><span>1スロット（11bit）</span><strong>44</strong><small>µs</small></div><div class="metric"><span>更新頻度（選択CH）</span><strong id="metric-hz">約44</strong><small>回/秒・最短条件</small></div></div></section>
-<section class="panel main"><div class="toolbar"><h2>通信を観察する</h2><button class="btn active" id="mode-train" aria-pressed="true">🚂 列車モード</button><button class="btn" id="mode-wave" aria-pressed="false">〰 実波形モード</button></div>
-<div class="screen"><div class="screen-top"><span id="scene-caption">BREAK → MAB → START CODE → CH1〜512 → 次のBREAK</span><span id="clock">通信内時刻：0.000 ms</span></div><div class="scene" id="train-scene"><div class="rails"></div><div class="train-line" id="train-line"></div></div><div class="scene hidden" id="wave-scene"><svg class="wave-svg" id="wave-svg" viewBox="0 0 1100 235" preserveAspectRatio="none" aria-label="時間軸に比例したDMX波形"></svg></div></div>
-<div class="controls"><button class="btn active" id="play">▶ 再生</button><button class="btn" id="reset">↺ 先頭へ</button><button class="btn" id="step">＋ 区間 / 1bit送り</button><span class="control-title">観察用の再生速度</span><button class="btn" data-speed="0.3">ゆっくり</button><button class="btn active" data-speed="1">標準</button><button class="btn" data-speed="3">速く</button></div><div class="note">※ 画面上の移動は学習用のスロー再生。再生倍率を変えても実際の通信速度250kbit/sは変わりません。</div></section>
-<div class="below"><section class="panel sub"><h3>① 送信チャンネル数</h3><div class="controls" id="channel-controls"><button class="btn" data-ch="24">24 CH</button><button class="btn" data-ch="128">128 CH</button><button class="btn" data-ch="256">256 CH</button><button class="btn active" data-ch="512">512 CH</button></div><p>送信するチャンネル数が増えるほど、1パケットに必要な時間が長くなる。</p><div class="readout"><span>送信スロット数<br><strong id="slots">513</strong></span><span>最短パケット時間<br><strong id="duration">22.7 ms</strong></span><span>最大更新頻度の目安<br><strong id="hz">44.0 Hz</strong></span></div></section>
-<section class="panel sub"><h3>② 時間軸の拡大・縮小</h3><div class="controls" id="zoom-controls"><button class="btn" data-zoom="bit">1bit</button><button class="btn" data-zoom="slot">1スロット</button><button class="btn active" data-zoom="packet">1パケット</button></div><p id="zoom-description">BREAKから次のBREAKまでの全体を見る。実波形は時間に比例して描画する。</p><div class="note">計算条件：BREAK 88µs、MAB 8µs、START CODE 1スロット（44µs）、各CH 44µs、追加のMARK時間なし。送信CH数と機器のタイミングによって実際の更新頻度は変わります。</div></section></div>
+<main class="shell dmx-live-shell" aria-labelledby="lesson-title">
+<section class="panel dmx-live-intro"><div><h1 id="lesson-title">DMXの通信速度</h1><p>前のページで見た512CHの通信列車。実際は、<strong>約23ミリ秒で1周</strong>して、また先頭から送信する。目で追えるかな？</p></div><div class="dmx-live-facts"><div><span>通信速度</span><strong>250kbit/s</strong></div><div><span>512CHを送る時間</span><strong>約23ms</strong></div><div><span>1秒間の繰り返し</span><strong>約44回</strong></div></div></section>
+<section class="panel dmx-live-main"><div class="dmx-live-heading"><div><h2>実際の速さを体験しよう</h2><p>止めずに見ていると、通信は絶えず繰り返される。</p></div><div class="dmx-live-controls"><button class="btn active" type="button" id="live-toggle" aria-pressed="true">Ⅱ 停止</button><button class="btn" type="button" id="live-wave-toggle" aria-expanded="false" aria-controls="live-wave-details">波形を見る</button></div></div>
+<div class="dmx-live-track" aria-label="1秒間に約44回通過するDMX通信列車の観察画面">
+<div class="dmx-live-recognizer"><span class="dmx-live-led" id="live-led" aria-hidden="true"></span><span>受信側の認識ポイント</span><small>CH1 のデータ値：192 / 255（教材用）</small></div>
+<div class="dmx-live-beam" aria-hidden="true"></div>
+<div class="dmx-live-train" aria-hidden="true"><span class="dmx-live-engine">🚂</span><span>BREAK</span><span>CH1</span><span>CH2</span><span>…</span><span>CH511</span><span>CH512</span></div>
+<div class="dmx-live-track-label">512CHのデータをまとめて1周期として表示（模式図）</div>
+</div>
+<div class="dmx-live-results"><div><span>1秒間に通過した回数</span><strong id="live-counter">0</strong><small>回 / 直近1秒</small></div><div><span>累計の送信周期</span><strong id="live-total">0</strong><small>回（再生中）</small></div><div><span>送信周期</span><strong>22.7<small>ms</small></strong><small>理論上の最短条件</small></div></div>
+<p class="dmx-live-note">実時間の約44Hzに基づくシミュレーション。iPadの画面更新速度には限界があるため、列車や認識ランプの44回すべてを正確な光の点滅として表示するものではありません。認識ランプは教育用で、実機Nodeの状態表示とは異なります。</p>
+<details id="live-wave-details" class="dmx-live-details"><summary>通信の細かい時間を確認する（詳細説明）</summary><div class="dmx-live-detail-body"><p>DMXは250kbit/sなので1bitは4µs。1スロットは11bitで44µs。512CH＋START CODEの513スロット、BREAK 88µs、MAB 8µsの場合、合計22,668µs（22.668ms）、約44.1回/秒です。実際の出力周期は機器や追加のMARK時間などによって変わります。</p><svg viewBox="0 0 730 120" role="img" aria-label="BREAKから次のBREAKまでのDMX送信タイミングの概念図"><rect x="8" y="30" width="28" height="55" fill="#b75e81"/><rect x="38" y="30" width="17" height="55" fill="#c2a661"/><rect x="57" y="30" width="32" height="55" fill="#926ce2"/><rect x="91" y="30" width="630" height="55" fill="#1c7891"/><g fill="#fff" font-size="15"><text x="8" y="20">BREAK</text><text x="58" y="106">START</text><text x="240" y="65">CH1 → CH2 → … → CH512</text></g></svg><p>これは通信枠の時間比を単純化した図。実際のビット波形は複雑で、受信側が連続して解析します。</p></div></details>
+</section>
+<section class="panel dmx-live-teacher"><img src="assets/wave_teacher_transparent.svg" alt="8bitの先生"><div><h2>先生のひとこと</h2><p>「フェーダーを止めても、DMXは同じデータを何度も送り続けるんだ。現場ではNodeのランプが通信状態を確認する手掛かりになるよ。でも実機のランプは44Hzをそのまま光らせているとは限らないんだ。そして、反応の速いLEDでは、また別の工夫が必要になることもあるよ。」</p></div></section>
 </main>
+<style>
+/* DMX real-time lesson: scoped to avoid changes to the shared header. */
+body.dmx-speed-next-ui>.dmx-live-shell{display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:8px;min-height:0;height:auto;overflow:auto;padding:8px 12px 10px}
+.dmx-live-shell .dmx-live-intro{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 16px}
+.dmx-live-intro h1{margin:0 0 4px;font-size:20px}.dmx-live-intro p{margin:0;font-size:17px;max-width:640px}
+.dmx-live-facts{display:flex;gap:8px;flex-shrink:0}.dmx-live-facts>div{padding:7px 12px;text-align:center;border:1px solid #315a72;border-radius:8px;background:#071727}
+.dmx-live-facts span,.dmx-live-results span{display:block;color:#c3d8e3;font-size:13px}.dmx-live-facts strong{display:block;color:#ffd17a;font-size:22px}
+.dmx-live-shell .dmx-live-main{display:flex;flex-direction:column;gap:10px;padding:12px 14px;min-height:320px}
+.dmx-live-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.dmx-live-heading h2{font-size:18px;margin:0}.dmx-live-heading p{margin:2px 0 0;color:#c7d8e5;font-size:15px}.dmx-live-controls{display:flex;gap:8px}
+.dmx-live-track{position:relative;min-height:195px;flex:1;border:1px solid #31576d;border-radius:9px;overflow:hidden;background:linear-gradient(#0b1b2d,#06111d)}
+.dmx-live-recognizer{position:absolute;left:50%;transform:translateX(-50%);top:10px;z-index:3;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:13px;font-weight:700;white-space:nowrap;background:#0b2130d9;border:1px solid #356278;padding:5px 12px;border-radius:10px}
+.dmx-live-recognizer small{font-size:11px;color:#b8d3df;font-weight:500}.dmx-live-led{display:block;width:20px;height:20px;border-radius:50%;background:#68fbb3;box-shadow:0 0 12px #4cedaa;opacity:1}
+.dmx-live-beam{position:absolute;top:68px;bottom:35px;left:50%;border-left:2px dashed #6aabbaaa;z-index:1}
+.dmx-live-train{position:absolute;top:100px;left:50%;display:flex;align-items:center;gap:6px;transform:translateX(-50%);white-space:nowrap;will-change:opacity,filter;z-index:2}
+.dmx-live-train span{font-weight:700;font-size:14px;padding:8px 11px;color:#d5eff7;background:#15364a;border:1px solid #43839b;border-radius:7px}
+.dmx-live-train .dmx-live-engine{font-size:28px;padding:3px 8px;background:#263444}
+.dmx-live-track-label{position:absolute;bottom:8px;left:0;width:100%;text-align:center;color:#bacfdb;font-size:12px}
+.dmx-live-results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.dmx-live-results>div{background:#091c2b;border:1px solid #31566c;border-radius:8px;text-align:center;padding:7px}
+.dmx-live-results strong{display:inline-block;font-size:27px;line-height:1.3;color:#ffd17a;font-variant-numeric:tabular-nums}.dmx-live-results strong small{font-size:14px}
+.dmx-live-results small{display:block;color:#b8cedd;font-size:12px}
+.dmx-live-note{font-size:12px;color:#c7d8e5;margin:0;line-height:1.4}
+.dmx-live-details{font-size:14px;border-top:1px solid #31566c;padding-top:5px}.dmx-live-details summary{cursor:pointer;color:#9ee6ff;font-weight:700}.dmx-live-detail-body p{margin:7px 0}.dmx-live-detail-body svg{display:block;max-width:100%;height:auto;background:#081b28;border-radius:6px}
+.dmx-live-shell .dmx-live-teacher{display:flex;align-items:center;gap:18px;padding:9px 15px}.dmx-live-teacher img{width:96px;height:100px;object-fit:contain;flex-shrink:0}.dmx-live-teacher h2{margin:0 0 4px;font-size:18px}.dmx-live-teacher p{margin:0;font-size:17px}
+@media(max-width:1100px){.dmx-live-shell .dmx-live-intro{align-items:stretch;flex-direction:column}.dmx-live-facts{justify-content:stretch}.dmx-live-facts>div{flex:1}}
+@media(max-width:680px){.dmx-live-heading{align-items:flex-start;flex-direction:column}.dmx-live-results{grid-template-columns:1fr 1fr 1fr}.dmx-live-facts strong{font-size:17px}.dmx-live-facts>div{padding:6px}.dmx-live-shell .dmx-live-teacher img{width:70px}.dmx-live-teacher p{font-size:15px}.dmx-live-train span{font-size:11px;padding:5px}.dmx-live-train .dmx-live-engine{font-size:22px}}
+</style>
 <script>
-(()=>{'use strict';
-const $=id=>document.getElementById(id), state={mode:'train',channels:512,zoom:'packet',speed:1,playing:false,t:0,last:0};
-const BIT=4,BREAK=88,MAB=8,SLOT=44,START=BREAK+MAB,DATA=START+SLOT;
-const total=()=>DATA+state.channels*SLOT;
-const fmt=n=>n.toLocaleString('ja-JP',{maximumFractionDigits:1});
-const bitOf=(slot,bit)=>{if(bit===0)return 0;if(bit>=9)return 1;if(slot===0)return 0;return ((slot*73+37)>>(bit-1))&1};
-function level(t){if(t<BREAK)return 0;if(t<START)return 1;const rel=t-START,slot=Math.floor(rel/SLOT),bit=Math.min(10,Math.floor((rel%SLOT)/BIT));return bitOf(slot,bit)}
-function segment(t){if(t<BREAK)return 'BREAK';if(t<START)return 'MAB';if(t<DATA)return 'START CODE';return 'CH'+Math.min(state.channels,Math.floor((t-DATA)/SLOT)+1)}
-function carWave(slot){let bits=Array.from({length:8},(_,i)=>bitOf(slot,i+1));let d='M3 '+(bits[0]?7:31);bits.forEach((b,i)=>{const x=3+i*13;d+='H'+x+'V'+(b?7:31)+'H'+(x+13)});return '<svg viewBox="0 0 112 38"><path d="'+d+'" stroke="#67e3f4" stroke-width="2.5" fill="none"/></svg>'}
-function buildTrain(){const wagons=[];wagons.push('<div class="engine"><span class="engine-art">🚂</span><span class="engine-label"><b>BREAK → MAB</b><br>START CODE：通常0<br>通信の先頭</span></div>');const shown=state.channels<=24?Math.min(state.channels,24):10;for(let i=1;i<=shown;i++)wagons.push('<div class="wagon" style="--wc:#5bdfff"><b>CH'+i+'</b>'+carWave(i)+'<small>8bitデータ</small></div>');if(state.channels>shown)wagons.push('<div class="wagon" style="--wc:#9ab2c4"><b>… CH'+(shown+1)+'〜'+(state.channels-1)+'</b><small>連続送信</small></div><div class="wagon" style="--wc:#5bdfff"><b>CH'+state.channels+'</b>'+carWave(state.channels)+'<small>8bitデータ</small></div>');wagons.push('<div class="caboose"><b>🚃 車掌車</b><br>MBB<br><small>次のBREAKへ</small></div>');$('train-line').innerHTML=wagons.join('')}
-function wave(){const svg=$('wave-svg'),tmax=total(),center=state.t;let lo=0,hi=tmax;if(state.zoom==='bit'){lo=Math.max(0,center-24);hi=Math.min(tmax,lo+96)}else if(state.zoom==='slot'){lo=Math.max(0,center-110);hi=Math.min(tmax,lo+440)}const width=1100,x=t=>((t-lo)/(hi-lo))*width;let pieces=['<rect width="1100" height="235" fill="transparent"/>'];for(let i=0;i<=10;i++){let xx=i*110;pieces.push('<line x1="'+xx+'" y1="12" x2="'+xx+'" y2="210" stroke="#28455a" stroke-dasharray="3 5"/><text x="'+xx+'" y="228" fill="#a9c9dc" font-size="13">'+fmt(lo+(hi-lo)*i/10)+' µs</text>')}const segments=[{a:0,b:BREAK,name:'BREAK',fill:'#b83c6633'},{a:BREAK,b:START,name:'MAB',fill:'#c3a44d33'},{a:START,b:DATA,name:'START CODE',fill:'#9067c933'}];for(const z of segments){let a=Math.max(lo,z.a),b=Math.min(hi,z.b);if(b>a){pieces.push('<rect x="'+x(a)+'" y="17" width="'+(x(b)-x(a))+'" height="188" fill="'+z.fill+'"/>');if(x(b)-x(a)>55)pieces.push('<text x="'+((x(a)+x(b))/2)+'" y="32" fill="#d7e6f2" font-size="13" text-anchor="middle">'+z.name+'</text>')}}const step=Math.max(1,Math.ceil((hi-lo)/700));let path='',prev=null;for(let t=lo;t<=hi;t+=step){let y=level(t)?70:176,xx=x(t);if(prev===null)path='M'+xx+' '+y;else if(prev!==y)path+='V'+y;path+='H'+xx;prev=y}path+='H1100';pieces.push('<path d="'+path+'" fill="none" stroke="#55e5ff" stroke-width="3" stroke-linejoin="miter"/>');if(state.t>=lo&&state.t<=hi)pieces.push('<line x1="'+x(state.t)+'" y1="8" x2="'+x(state.t)+'" y2="208" stroke="#ffca67" stroke-width="2"/>');pieces.push('<text x="7" y="63" fill="#b5d0df" font-size="13">MARK / HIGH</text><text x="7" y="195" fill="#b5d0df" font-size="13">SPACE / LOW</text>');svg.innerHTML=pieces.join('')}
-function render(){const ms=total()/1000;const hz=1e6/total();$('slots').textContent=state.channels+1;$('duration').textContent=ms.toFixed(3)+' ms';$('hz').textContent=hz.toFixed(1)+' Hz';$('metric-hz').textContent='約'+Math.round(hz);$('clock').textContent='通信内時刻：'+(state.t/1000).toFixed(3)+' ms / '+segment(state.t);$('scene-caption').textContent=state.mode==='train'?'BREAK → MAB → START CODE → CH1〜'+state.channels+' → 次のBREAK':'MARK（HIGH） / SPACE（LOW）｜時間軸：'+({bit:'約96µs',slot:'約440µs',packet:'1パケット'}[state.zoom]);$('train-scene').classList.toggle('hidden',state.mode!=='train');$('wave-scene').classList.toggle('hidden',state.mode!=='wave');$('mode-train').classList.toggle('active',state.mode==='train');$('mode-wave').classList.toggle('active',state.mode==='wave');$('mode-train').setAttribute('aria-pressed',state.mode==='train');$('mode-wave').setAttribute('aria-pressed',state.mode==='wave');$('play').textContent=state.playing?'Ⅱ 一時停止':'▶ 再生';$('play').classList.toggle('active',state.playing);document.querySelectorAll('[data-ch]').forEach(e=>e.classList.toggle('active',+e.dataset.ch===state.channels));document.querySelectorAll('[data-zoom]').forEach(e=>e.classList.toggle('active',e.dataset.zoom===state.zoom));document.querySelectorAll('[data-speed]').forEach(e=>e.classList.toggle('active',+e.dataset.speed===state.speed));const line=$('train-line'),scene=$('train-scene');if(line&&scene){const visible=scene.clientWidth,full=line.scrollWidth;const progress=state.t/total();line.style.transform='translateX('+(visible-190-progress*(full+visible-190))+'px)'}if(state.mode==='wave')wave()}
-$('mode-train').onclick=()=>{state.mode='train';render()};$('mode-wave').onclick=()=>{state.mode='wave';render()};$('play').onclick=()=>{state.playing=!state.playing;render()};$('reset').onclick=()=>{state.t=0;state.playing=false;render()};$('step').onclick=()=>{state.playing=false;state.t=state.t<BREAK?BREAK:state.t<START?START:Math.min(total(),state.t+BIT);render()};document.querySelectorAll('[data-speed]').forEach(e=>e.onclick=()=>{state.speed=+e.dataset.speed;render()});document.querySelectorAll('[data-ch]').forEach(e=>e.onclick=()=>{state.channels=+e.dataset.ch;state.t=0;buildTrain();render()});document.querySelectorAll('[data-zoom]').forEach(e=>e.onclick=()=>{state.zoom=e.dataset.zoom;$('zoom-description').textContent={bit:'1bit＝4µs。LOWとHIGHの持続時間を拡大して観察する。',slot:'1スロット＝44µs。Start 1bit、Data 8bit、Stop 2bitを観察する。',packet:'BREAKから次のBREAKまでの全体を見る。実波形は時間に比例して描画する。'}[state.zoom];render()});function loop(ts){if(!state.last)state.last=ts;const dt=Math.min(.05,(ts-state.last)/1000);state.last=ts;if(state.playing){state.t+=dt*total()/9*state.speed;if(state.t>=total())state.t%=total();render()}requestAnimationFrame(loop)}buildTrain();render();requestAnimationFrame(loop);
+(() => {
+  "use strict";
+  const counter=document.getElementById("live-counter");
+  const totalEl=document.getElementById("live-total");
+  const led=document.getElementById("live-led");
+  const train=document.querySelector(".dmx-live-train");
+  const toggle=document.getElementById("live-toggle");
+  const details=document.getElementById("live-wave-details");
+  const detailButton=document.getElementById("live-wave-toggle");
+  const packetMs=22.668; // BREAK 88us + MAB 8us + 513 x 44us
+  let running=true, elapsed=0, last=0, count=0, secondsWindow=0, windowPackets=0;
+  function paint(){
+    counter.textContent=String(windowPackets);
+    totalEl.textContent=String(count);
+    toggle.textContent=running?"Ⅱ 停止":"▶ 再開";
+    toggle.classList.toggle("active",running);
+    toggle.setAttribute("aria-pressed",String(running));
+  }
+  toggle.addEventListener("click",()=>{running=!running;last=0;paint();});
+  detailButton.addEventListener("click",()=>{details.open=!details.open;});
+  details.addEventListener("toggle",()=>{detailButton.setAttribute("aria-expanded",String(details.open));});
+  document.addEventListener("visibilitychange",()=>{last=0;}); // Don't count background time.
+  function frame(t){
+    if(!last)last=t;
+    const dt=Math.min(100,t-last);last=t;
+    if(running){
+      elapsed+=dt;
+      secondsWindow+=dt;
+      const next=Math.floor(elapsed/packetMs);
+      if(next>count)count=next;
+      if(secondsWindow>=1000){windowPackets=Math.round(1000/packetMs);secondsWindow%=1000;}
+      const phase=(elapsed%packetMs)/packetMs;
+      // Display sampling is not a physical 44Hz strobe; the true cadence is in the counters.
+      led.style.opacity=String(.38+.62*(phase<.32?.75:.32));
+      led.style.boxShadow=phase<.32?"0 0 14px #4cedaa":"0 0 4px #4cedaa";
+      train.style.opacity=String(.68+.30*(1-phase));
+      train.style.filter=phase<.25?"brightness(1.45)":"brightness(1)";
+    }
+    paint();
+    requestAnimationFrame(frame);
+  }
+  paint();requestAnimationFrame(frame);
 })();
-</script></body></html>
+</script>
+</body></html>
