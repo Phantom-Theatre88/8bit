@@ -98,8 +98,9 @@ body.dmx-speed-next-ui>.dmx-live-shell{display:grid;grid-template-rows:auto minm
       if(secondsWindow>=1000){windowPackets=Math.round(1000/packetMs);secondsWindow%=1000;}
       const phase=(elapsed%packetMs)/packetMs;
       // Display sampling is not a physical 44Hz strobe; the true cadence is in the counters.
-      led.style.opacity=String(.38+.62*(phase<.32?.75:.32));
+      led.style.opacity=String(.22+.78*(192/255)*(phase<.32?1:.42));
       led.style.boxShadow=phase<.32?"0 0 14px #4cedaa":"0 0 4px #4cedaa";
+      train.style.transform="translateX(calc(-50% + "+Math.round((phase-.5)*520)+"px))";
       train.style.opacity=String(.68+.30*(1-phase));
       train.style.filter=phase<.25?"brightness(1.45)":"brightness(1)";
     }
