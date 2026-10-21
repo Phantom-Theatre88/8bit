@@ -37,7 +37,7 @@
   });
   const categoryForPage = {
     'Analog.html':'electric','SinglePhase3.html':'electric','Waveforms.html':'electric',
-    'History.html':'history','HistoryMap.html':'history','ConvexLens.html':'fixture'
+    'History.html':'history','HistoryMap.html':'history','ConvexLens.html':'fixture','DmxSpeed.html':'signal'
   };
   const activeCategory = isTop ? 'dimming' : (categoryForPage[file] || '');
   const brand = header.querySelector('.next-ui-brand');
