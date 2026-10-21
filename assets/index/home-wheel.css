@@ -519,3 +519,35 @@ a.lesson-tile:focus-visible { outline: 2px solid var(--theme-accent); outline-of
 .home-theme-detail[data-theme="history"] {background-image:linear-gradient(90deg,rgba(4,12,21,.91) 0%,rgba(4,12,21,.58) 40%,rgba(4,12,21,.15) 100%),linear-gradient(180deg,rgba(5,12,20,.10) 0%,rgba(5,12,20,.07) 36%,rgba(5,12,20,.54) 100%),url("./category-history-theatre.webp")}
 .home-theme-detail[data-theme="fixture"] {background-image:linear-gradient(90deg,rgba(4,12,21,.91) 0%,rgba(4,12,21,.58) 40%,rgba(4,12,21,.15) 100%),linear-gradient(180deg,rgba(5,12,20,.10) 0%,rgba(5,12,20,.07) 36%,rgba(5,12,20,.54) 100%),url("./category-fixture-lighting.webp")}
 .home-theme-detail[data-theme="future"] {background-image:linear-gradient(90deg,rgba(4,12,21,.91) 0%,rgba(4,12,21,.58) 40%,rgba(4,12,21,.15) 100%),linear-gradient(180deg,rgba(5,12,20,.10) 0%,rgba(5,12,20,.07) 36%,rgba(5,12,20,.54) 100%),url("./category-shoot-focus.webp")}
+
+/* v7 — five-row rotary wheel. Keep all seven themes, artwork and icons. */
+.home-wheel-panel {
+  touch-action:none;
+  perspective:900px;
+}
+.home-wheel-panel .wheel-list {
+  perspective:760px;
+  transform-style:preserve-3d;
+}
+.home-wheel-panel .wheel-theme {
+  height:76px;
+  margin-top:-38px;
+  padding:10px 13px;
+  transform:translate3d(0,var(--wheel-y,0px),var(--wheel-z,0px)) rotateX(var(--wheel-rotate,0deg)) scale(var(--scale,1));
+  opacity:var(--item-opacity,1);
+  transition:transform .26s cubic-bezier(.2,.75,.2,1),opacity .24s,border-color .2s,box-shadow .2s;
+  backface-visibility:visible;
+}
+.home-wheel-panel.is-dragging .wheel-theme {
+  transition:none;
+}
+.home-wheel-panel .wheel-number {font-size:28px;flex-basis:40px;}
+.home-wheel-panel .wheel-name {font-size:19px;line-height:1.15;}
+.home-wheel-panel .wheel-english {font-size:11px;}
+.home-wheel-panel .wheel-icon {flex-basis:27px;width:27px;height:27px;}
+@media(max-width:760px) {
+  .home-wheel-panel .wheel-theme {height:66px;margin-top:-33px;padding:8px 10px;}
+  .home-wheel-panel .wheel-number {font-size:24px;flex-basis:34px;}
+  .home-wheel-panel .wheel-name {font-size:17px;}
+  .home-wheel-panel .wheel-icon {flex-basis:23px;width:23px;height:23px;}
+}
