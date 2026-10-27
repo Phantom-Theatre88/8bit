@@ -48,6 +48,12 @@ const server = http.createServer((req,res)=>{
     if(await page.locator('.next-ui-category-tab').count()!==7)errors.push('Expected seven shared categories');
     const button=page.locator('[data-category="network"]');
     await button.click();if(await button.getAttribute('aria-expanded')!=='true')errors.push('Menu did not open');
+    if(width<790){
+     const reachable=await page.locator('[data-category-menu="network"] .next-ui-dropdown').evaluate(e=>{
+      const r=e.getBoundingClientRect();const hit=document.elementFromPoint(Math.max(1,r.left+12),r.top+20);
+      return !!hit&&e.contains(hit)&&r.left>=0&&r.right<=innerWidth&&r.top>=59;
+     });if(!reachable)errors.push('Narrow-screen dropdown is clipped or unreachable');
+    }
     await page.keyboard.press('Escape');if(await button.getAttribute('aria-expanded')!=='false')errors.push('Escape did not close menu');
     if(await page.locator('[data-category-menu="network"] .next-ui-dropdown').isVisible())errors.push('Closed menu remains visible');
    }
