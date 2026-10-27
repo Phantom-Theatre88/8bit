@@ -67,6 +67,29 @@ const server = http.createServer((req,res)=>{
   }
  });
  await page.goto(base+'Top.html?tab=sim8bit');await page.waitForTimeout(400);
+ await check('All integrated tabs can switch repeatedly and initialize their controls',async()=>{
+  const runtime=[];const listener=e=>runtime.push(e.message);page.on('pageerror',listener);
+  for(const key of [...tabs,...tabs.slice().reverse()]){
+   await page.evaluate(key=>document.querySelector('#main-tab-'+key).click(),key);
+   await page.waitForTimeout(160);
+   assert.ok(await page.locator('#panel-'+key).innerHTML());
+   assert.ok(await page.locator('#main-tab-'+key).evaluate(e=>e.classList.contains('active')));
+   await page.locator('#panel-'+key+' input[type=range]').evaluateAll(es=>es.forEach(e=>{
+    if(!e.getClientRects().length||e.disabled)return;
+    const original=e.value;
+    for(const value of [e.min||'0',e.max||'100',original]){e.value=value;e.dispatchEvent(new Event('input',{bubbles:true}))}
+   }));
+  }
+  page.off('pageerror',listener);assert.deepEqual(runtime,[]);
+ });
+ await page.goto(base+'DmxSpeed.html');await page.waitForTimeout(200);
+ await check('DMX real-time pause, resume and details',async()=>{
+  await page.locator('#live-toggle').click();assert.equal(await page.locator('#live-toggle').getAttribute('aria-pressed'),'false');
+  const stopped=await page.locator('#live-total').textContent();await page.waitForTimeout(150);assert.equal(await page.locator('#live-total').textContent(),stopped);
+  await page.locator('#live-toggle').click();await page.waitForTimeout(150);assert.notEqual(await page.locator('#live-total').textContent(),stopped);
+  await page.locator('#live-wave-toggle').click();assert.ok(await page.locator('#live-wave-details').evaluate(e=>e.open));
+ });
+ await page.goto(base+'Top.html?tab=sim8bit');await page.waitForTimeout(400);
  await check('8-bit values, bits and comparison preserve fader',async()=>{
   for(const value of [0,1,127,191,254,255]){
    await page.locator('#sim8bit-fader').evaluate((e,v)=>{e.value=v;e.dispatchEvent(new Event('input',{bubbles:true}))},value);
