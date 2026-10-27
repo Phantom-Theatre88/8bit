@@ -1,0 +1,1 @@
+{"name":"8bit-lighting-theatre","private":true,"scripts":{"test":"node --test tests/wave-model.test.cjs","test:browser":"node tests/encyclopedia-browser.cjs"},"devDependencies":{"playwright":"1.61.1"}}

@@ -6003,53 +6003,14 @@ body { }
 
 <script id="next-ui-category-navigation">
   (() => {
-    const categoryLessons = {
-      electric: [
-        { value: 'url:Analog.html', label: 'V・W・Aの法則' },
-        { value: 'url:SinglePhase3.html', label: '単相3線' },
-        { value: 'url:Waveforms.html', label: '電気って波なの？' },
-        { value: 'pending:three-phase', label: '三相3線（未実装）', disabled: true }
-      ],
-      dimming: [
-        { value: 'sim8bit', label: '8-bit 調光卓' },
-        { value: 'sim16bit', label: '16-bit 調光卓' }
-      ],
-      signal: [
-        { value: 'simdmx', label: 'DMX通信列車' },
-        { value: 'ledcolormix', label: 'LED色混ぜ' },
-        { value: 'scroller', label: 'Scroller' },
-        { value: 'movinghead', label: 'Moving Head' }
-      ],
-      network: [
-        { value: 'netipaddress', label: 'IPアドレス' },
-        { value: 'netartnet', label: 'DMX on LAN' },
-        { value: 'netbroadcast', label: 'Broadcast / Art-Net 1' },
-        { value: 'netsacn', label: 'Multicast / sACN' },
-        { value: 'explain', label: '結線 / 冗長化' }
-      ],
-      fixture: [
-        { value: 'pending:convex', label: '凸レンズ', disabled: true },
-        { value: 'pending:fresnel', label: 'フレネルレンズ', disabled: true },
-        { value: 'pending:ellipsoidal', label: 'エリプソイダル', disabled: true }
-      ],
-      shoot: [
-        { value: 'pending:shoot', label: '教材を準備中', disabled: true }
-      ]
-    };
-
-    const lessonMeta = {
-      sim8bit:      { category: 'dimming', categoryLabel: '調光', lessonLabel: '8-bit 調光卓' },
-      sim16bit:     { category: 'dimming', categoryLabel: '調光', lessonLabel: '16-bit 調光卓' },
-      simdmx:       { category: 'signal', categoryLabel: '信号', lessonLabel: 'DMX通信列車' },
-      ledcolormix:  { category: 'signal', categoryLabel: '信号', lessonLabel: 'LED色混ぜ' },
-      scroller:     { category: 'signal', categoryLabel: '信号', lessonLabel: 'Scroller' },
-      movinghead:   { category: 'signal', categoryLabel: '信号', lessonLabel: 'Moving Head' },
-      netipaddress: { category: 'network', categoryLabel: 'Network', lessonLabel: 'IPアドレス' },
-      netartnet:    { category: 'network', categoryLabel: 'Network', lessonLabel: 'DMX on LAN' },
-      netbroadcast: { category: 'network', categoryLabel: 'Network', lessonLabel: 'Broadcast / Art-Net 1' },
-      netsacn:      { category: 'network', categoryLabel: 'Network', lessonLabel: 'Multicast / sACN' },
-      explain:      { category: 'network', categoryLabel: 'Network', lessonLabel: '結線 / 冗長化' }
-    };
+    const categoryLessons = Object.fromEntries(Object.entries(window.EightbitNavigation)
+      .map(([key,category]) => [key,category.lessons]));
+    const lessonMeta = {};
+    Object.entries(window.EightbitNavigation).forEach(([category,group]) => {
+      group.lessons.filter(lesson => !lesson.disabled && !lesson.value.startsWith('url:')).forEach(lesson => {
+        lessonMeta[lesson.value] = {category,categoryLabel:group.label,lessonLabel:lesson.label};
+      });
+    });
 
     let selectedCategory = 'dimming';
     let currentLessonValue = 'sim8bit';
