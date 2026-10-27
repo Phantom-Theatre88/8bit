@@ -47,7 +47,7 @@ const server = http.createServer((req,res)=>{
     await page.keyboard.press('Escape');if(await button.getAttribute('aria-expanded')!=='false')errors.push('Escape did not close menu');
     if(await page.locator('[data-category-menu="network"] .next-ui-dropdown').isVisible())errors.push('Closed menu remains visible');
    }
-   if(width===1366&&height===1024)await page.screenshot({path:path.join(out,url.replace(/[^a-z0-9]/gi,'_')+'.png')});
+   if((width===1366&&height===1024)||(width===390&&['History.html','PersonLighting.html','index.html'].includes(url)))await page.screenshot({path:path.join(out,url.replace(/[^a-z0-9]/gi,'_')+'_'+width+'x'+height+'.png')});
    rows.push({url,viewport:[width,height],errors,missing,...state});
    page.off('pageerror',onError);page.off('response',onResponse);
   }
@@ -55,6 +55,17 @@ const server = http.createServer((req,res)=>{
  }
  const page=await browser.newPage({viewport:{width:1366,height:1024}});
  const check=async(name,fn)=>{try{await fn();checks.push({name,pass:true})}catch(e){checks.push({name,pass:false,error:e.message})}};
+ await page.goto(base+'index.html');await page.waitForTimeout(300);
+ await check('Home wheel selects all seven themes and keeps matching lesson lists',async()=>{
+  for(let i=0;i<7;i++){
+   await page.locator('.wheel-control-next').click();await page.waitForTimeout(120);
+   const state=await page.evaluate(()=>{
+    const b=document.querySelector('.wheel-theme[aria-pressed="true"]');
+    const p=[...document.querySelectorAll('.home-theme-detail')].filter(e=>!e.hidden);
+    return {selected:b.dataset.theme,panels:p.map(e=>e.dataset.theme),broken:[...document.images].filter(e=>e.getClientRects().length&&!e.naturalWidth).length};
+   });assert.deepEqual(state.panels,[state.selected]);assert.equal(state.broken,0);
+  }
+ });
  await page.goto(base+'Top.html?tab=sim8bit');await page.waitForTimeout(400);
  await check('8-bit values, bits and comparison preserve fader',async()=>{
   for(const value of [0,1,127,191,254,255]){
@@ -93,7 +104,7 @@ const server = http.createServer((req,res)=>{
  const badLinks=[];for(const link of links){const response=await fetch(link);if(!response.ok)badLinks.push(link)}
  const failures=rows.filter(r=>r.errors.length||r.missing.length||r.images.length||r.width>r.viewport[0]+2);
  fs.writeFileSync(path.join(out,'audit.json'),JSON.stringify({rows,checks,badLinks},null,2));
- console.log(JSON.stringify({pages:rows.length,checks,badLinks,failures},null,2));
+ console.log(JSON.stringify({pages:rows.length,checks,badLinks,failures:failures.map(({url,viewport,errors,missing,images,width})=>({url,viewport,errors,missing,images,width}))},null,2));
  if(failures.length||badLinks.length||checks.some(c=>!c.pass))process.exitCode=1;
  }finally{await browser.close();server.close()}
 })().catch(e=>{console.error(e);server.close();process.exitCode=1});
