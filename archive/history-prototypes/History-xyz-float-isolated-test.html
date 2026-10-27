@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>歴史カード｜XYZ浮遊 独立テスト</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:#0b111a;color:#eaf0f7;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",sans-serif}
+body{display:flex;flex-direction:column}.toolbar{display:flex;align-items:center;flex-wrap:wrap;gap:10px;padding:12px 16px;background:#161f2b;border-bottom:1px solid #334254;z-index:10}
+h1{font-size:16px;margin:0 18px 0 0}button,select{background:#24354a;border:1px solid #54708c;border-radius:7px;color:white;padding:9px 12px;font:inherit;cursor:pointer}
+button:focus-visible,select:focus-visible{outline:2px solid #e9bc77}.hint{font-size:12px;color:#b9cad9}.stats{margin-left:auto;font-size:12px;color:#a9c4d7;font-variant-numeric:tabular-nums}
+#sea{position:relative;flex:1;min-height:300px;overflow:hidden;touch-action:none;cursor:grab;background:radial-gradient(ellipse at 48% 42%,#27435c 0%,#13293e 45%,#09121d 100%);perspective:1000px;user-select:none}
+#sea.dragging{cursor:grabbing}#sea:before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 64px,#ffffff07 65px),repeating-linear-gradient(90deg,transparent 0 64px,#ffffff06 65px)}
+.card{position:absolute;top:0;left:0;width:230px;height:145px;will-change:transform,opacity;transform-origin:center;display:flex;flex-direction:column;border:1px solid #a5b4c4;border-radius:12px;background:linear-gradient(155deg,#3e5367,#1b2939);box-shadow:0 12px 28px #0009;overflow:hidden;cursor:pointer;touch-action:none;text-align:left;color:#f3f5f7;padding:0}
+.card .photo{height:67%;background:linear-gradient(140deg,#b6a17c55,#234b6c77);display:flex;align-items:center;justify-content:center;font-size:36px}
+.card .name{padding:9px 12px;font-weight:700;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card.selected{border:3px solid #f5c777;box-shadow:0 0 22px #e5b96a88,0 15px 36px #000b}
+.legend{padding:9px 16px;background:#121c28;color:#b7c9da;font-size:12px;border-top:1px solid #334254}
+@media(max-width:600px){h1{width:100%}.toolbar{gap:7px}.card{width:190px;height:120px}.stats{margin-left:0}}
+</style></head><body>
+<div class="toolbar"><h1>XYZ浮遊｜独立テスト v1</h1><label>カード数 <select id="count"><option>10</option><option>30</option><option>50</option></select></label><button id="pause">一時停止</button><button id="reset">配置リセット</button><span class="hint">空間をドラッグ／奥のカードをクリック</span><span class="stats" id="stats">準備中</span></div>
+<div id="sea" aria-label="浮遊カードの検証空間"></div>
+<div class="legend">検証項目：常時XYZ移動／前後で拡大縮小／自然な重なり変化／ドラッグの流れと慣性／奥のカードの直接呼び出し。カード内容はテスト用ダミー。</div>
+<script>
+(()=>{
+"use strict";
+const sea=document.getElementById("sea"),stats=document.getElementById("stats");
+const titles=["古代の劇場","松明と炎","太陽光","ギリシャ演劇","ローマ劇場","仮面と役者","舞台装置","灯火の歴史","建築と音響","祭礼と上演"];
+const symbols=["🏛️","🔥","☀️","🎭","🏟️","🎭","⚙️","🕯️","🏗️","📜"];
+let cards=[],paused=false,selected=null,drag=null,last=performance.now(),fps=60,frames=0,fpsAt=last;
+let flow={x:0,y:0,vx:0,vy:0};
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const rnd=(a,b)=>a+Math.random()*(b-a);
+function make(n){
+ sea.replaceChildren();cards=[];selected=null;flow={x:0,y:0,vx:0,vy:0};
+ for(let i=0;i<n;i++){
+  const el=document.createElement("button");el.type="button";el.className="card";
+  const pic=document.createElement("div");pic.className="photo";pic.textContent=symbols[i%10];
+  const name=document.createElement("div");name.className="name";name.textContent=titles[i%10]+" "+(i>=10?Math.floor(i/10)+1:"");
+  el.append(pic,name);sea.appendChild(el);
+  const c={el,i,x:rnd(-.85,.85),y:rnd(-.8,.8),z:rnd(-.75,.75),vx:rnd(-.075,.075),vy:rnd(-.065,.065),vz:rnd(-.11,.11),seed:rnd(0,100),target:null};
+  cards.push(c);
+  el.addEventListener("click",e=>{if(performance.now()<ignoreClickUntil)return;selected=c;cards.forEach(v=>v.el.classList.toggle("selected",v===c));c.target=0.86;});
+ }
+}
+let ignoreClickUntil=0;
+function step(now){
+ const dt=Math.min(.05,(now-last)/1000||0);last=now;
+ if(!paused && !document.hidden){
+  const decay=Math.exp(-dt*1.6);
+  flow.vx*=decay;flow.vy*=decay;
+  flow.x=clamp((flow.x+flow.vx*dt)*Math.exp(-dt*.7),-1.5,1.5);
+  flow.y=clamp((flow.y+flow.vy*dt)*Math.exp(-dt*.7),-1.5,1.5);
+  for(const c of cards){
+   // Independent slow current, not orbit or fixed-slot oscillation.
+   c.vx+=Math.sin(now*.00021+c.seed)*dt*.055;
+   c.vy+=Math.cos(now*.00018+c.seed*1.3)*dt*.052;
+   c.vz+=Math.sin(now*.00017+c.seed*2.1)*dt*.06;
+   c.vx*=Math.exp(-dt*.13);c.vy*=Math.exp(-dt*.13);c.vz*=Math.exp(-dt*.15);
+   const depth=.42+.58*(c.z+1)/2;
+   c.x+=(c.vx+flow.vx*depth*.0015)*dt;
+   c.y+=(c.vy+flow.vy*depth*.0015)*dt;
+   c.z+=c.vz*dt;
+   // Reflect at volume boundaries, with slight separation from the edges.
+   if(c.x>1.12){c.x=1.12;c.vx=-Math.abs(c.vx)}if(c.x< -1.12){c.x=-1.12;c.vx=Math.abs(c.vx)}
+   if(c.y>.96){c.y=.96;c.vy=-Math.abs(c.vy)}if(c.y< -.96){c.y=-.96;c.vy=Math.abs(c.vy)}
+   if(c.z>.94){c.z=.94;c.vz=-Math.abs(c.vz)}if(c.z< -.94){c.z=-.94;c.vz=Math.abs(c.vz)}
+   if(c.target!==null){c.vz+=(c.target-c.z)*dt*1.7;c.vz*=Math.exp(-dt*1.1);if(Math.abs(c.target-c.z)<.035){c.target=null;c.vz=0}}
+  }
+ }
+ const w=sea.clientWidth,h=sea.clientHeight,cw=cards[0]?.el.offsetWidth||230,ch=cards[0]?.el.offsetHeight||145;
+ for(const c of cards){
+  const scale=.48+((c.z+1)/2)*.75;
+  const spanX=Math.max(0,(w-cw*scale)/2),spanY=Math.max(0,(h-ch*scale)/2);
+  const depth=.42+.58*(c.z+1)/2;
+  const px=w/2+clamp(c.x+flow.x*depth*.18,-1.3,1.3)*spanX-cw/2;
+  const py=h/2+clamp(c.y+flow.y*depth*.18,-1.2,1.2)*spanY-ch/2;
+  c.el.style.transform="translate3d("+px.toFixed(1)+"px,"+py.toFixed(1)+"px,0) scale("+scale.toFixed(3)+")";
+  c.el.style.zIndex=String(Math.round((c.z+1)*1000));
+  c.el.style.opacity=String(.63+(c.z+1)*.185);
+  c.el.style.filter=c.z<-.35?"saturate(.8)":"none";
+ }
+ frames++;
+ if(now-fpsAt>650){fps=Math.round(frames*1000/(now-fpsAt));frames=0;fpsAt=now;stats.textContent=cards.length+"枚｜"+fps+" FPS｜演算 "+(paused?"停止":"実行中")}
+ requestAnimationFrame(step);
+}
+sea.addEventListener("pointerdown",e=>{
+ if(e.pointerType==="mouse"&&e.button!==0)return;
+ drag={id:e.pointerId,x:e.clientX,y:e.clientY,t:performance.now(),distance:0};
+ sea.setPointerCapture(e.pointerId);sea.classList.add("dragging");
+});
+sea.addEventListener("pointermove",e=>{
+ if(!drag||e.pointerId!==drag.id)return;
+ const dx=e.clientX-drag.x,dy=e.clientY-drag.y,dt=Math.max(.016,(performance.now()-drag.t)/1000);
+ drag.distance+=Math.hypot(dx,dy);
+ // Impulse shared by the water; different z produces different response.
+ flow.vx=clamp(dx/dt,-1800,1800);flow.vy=clamp(dy/dt,-1800,1800);
+ flow.x=clamp(flow.x+dx/Math.max(200,sea.clientWidth)*2,-1.5,1.5);
+ flow.y=clamp(flow.y+dy/Math.max(200,sea.clientHeight)*2,-1.5,1.5);
+ drag.x=e.clientX;drag.y=e.clientY;drag.t=performance.now();
+});
+function end(e){if(!drag||e.pointerId!==drag.id)return;if(drag.distance>9)ignoreClickUntil=performance.now()+400;drag=null;sea.classList.remove("dragging")}
+sea.addEventListener("pointerup",end);sea.addEventListener("pointercancel",end);
+sea.addEventListener("click",e=>{if(performance.now()<ignoreClickUntil){e.stopPropagation();e.preventDefault()}},true);
+document.getElementById("count").addEventListener("change",e=>make(Number(e.target.value)));
+document.getElementById("pause").addEventListener("click",e=>{paused=!paused;e.target.textContent=paused?"再開":"一時停止"});
+document.getElementById("reset").addEventListener("click",()=>make(Number(document.getElementById("count").value)));
+document.addEventListener("visibilitychange",()=>{last=performance.now()});
+make(10);requestAnimationFrame(step);
+})();
+</script></body></html>
