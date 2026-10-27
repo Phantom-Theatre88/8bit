@@ -147,3 +147,14 @@ body.wave-next-ui .remember-list,
 body.eightbit-console .s16-bottom > .s16-zone:last-child p {
  font-size:var(--eightbit-type-support)!important;
 }
+
+/* The timeline is an explorer with a fixed 38% detail panel in both orientations.
+   An auto-height portrait document collapses its flex-based card stage to zero. */
+@media (orientation:portrait), (max-width:959px) {
+ body.eightbit-unified-width.eightbit-history {
+  height:var(--eightbit-viewport-height)!important;
+  max-height:var(--eightbit-viewport-height)!important;
+  min-height:0!important;
+  overflow:hidden!important;
+ }
+}

@@ -35,6 +35,10 @@ const server = http.createServer((req,res)=>{
      links:[...document.querySelectorAll('a[href]')].map(e=>e.href),
      teachers:[...document.images].filter(e=>visible(e)&&/teacher/.test(e.src)).map(e=>({src:e.getAttribute('src'),width:e.clientWidth,height:e.clientHeight}))};
    });
+   if(url==='History.html'){
+    const stage=await page.locator('#stage').boundingBox();
+    if(!stage||stage.height<180||stage.width<150)errors.push('History card explorer collapsed');
+   }
    if(url.startsWith('Top.html')){
     const key=new URL(url,base).searchParams.get('tab');
     const active=await page.locator('#main-tab-'+key).evaluate(e=>e.classList.contains('active'));
@@ -47,6 +51,7 @@ const server = http.createServer((req,res)=>{
     await page.keyboard.press('Escape');if(await button.getAttribute('aria-expanded')!=='false')errors.push('Escape did not close menu');
     if(await page.locator('[data-category-menu="network"] .next-ui-dropdown').isVisible())errors.push('Closed menu remains visible');
    }
+   await page.locator('.next-ui-console-header *').evaluateAll(es=>es.forEach(e=>{e.scrollLeft=0}));
    if((width===1366&&height===1024)||(width===390&&['History.html','PersonLighting.html','index.html'].includes(url)))await page.screenshot({path:path.join(out,url.replace(/[^a-z0-9]/gi,'_')+'_'+width+'x'+height+'.png')});
    rows.push({url,viewport:[width,height],errors,missing,...state});
    page.off('pageerror',onError);page.off('response',onResponse);
