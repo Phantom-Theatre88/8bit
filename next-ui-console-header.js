@@ -19,7 +19,7 @@
     'Waveforms.html': ['SinglePhase3.html',null],
     'ConvexLens.html': ['index.html',null],
     'PersonLighting.html': ['index.html',null],
-    'DmxSpeed.html': ['Top.html?tab=simdmx',null]
+    'DmxSpeed.html': ['Top.html?tab=simdmx','Top.html?tab=ledcolormix']
   };
   const controls = (file === 'History.html' || file === 'HistoryMap.html')
     ? '<button class="next-ui-page-button" type="button" data-nav-target="index.html">⌂ TOP</button>'

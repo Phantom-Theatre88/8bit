@@ -88,6 +88,8 @@ const server = http.createServer((req,res)=>{
   const stopped=await page.locator('#live-total').textContent();await page.waitForTimeout(150);assert.equal(await page.locator('#live-total').textContent(),stopped);
   await page.locator('#live-toggle').click();await page.waitForTimeout(150);assert.notEqual(await page.locator('#live-total').textContent(),stopped);
   await page.locator('#live-wave-toggle').click();assert.ok(await page.locator('#live-wave-details').evaluate(e=>e.open));
+  await page.locator('[data-nav-target="Top.html?tab=ledcolormix"]').click();
+  await page.waitForURL('**/Top.html?tab=ledcolormix');
  });
  await page.goto(base+'Top.html?tab=sim8bit');await page.waitForTimeout(400);
  await check('8-bit values, bits and comparison preserve fader',async()=>{
