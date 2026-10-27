@@ -10,8 +10,8 @@
     'Analog.html': [null,'SinglePhase3.html'],
     'SinglePhase3.html': ['Analog.html','Waveforms.html'],
     'Waveforms.html': ['SinglePhase3.html',null],
-    'ConvexLens.html': ['index.html',null],
-    'PersonLighting.html': ['index.html',null],
+    'ConvexLens.html': [null,'PersonLighting.html'],
+    'PersonLighting.html': ['ConvexLens.html',null],
     'DmxSpeed.html': ['Top.html?tab=simdmx',null]
   };
   const controls = (file === 'History.html' || file === 'HistoryMap.html')
@@ -37,7 +37,7 @@
   });
   const categoryForPage = {
     'Analog.html':'electric','SinglePhase3.html':'electric','Waveforms.html':'electric',
-    'History.html':'history','HistoryMap.html':'history','ConvexLens.html':'fixture','DmxSpeed.html':'signal'
+    'History.html':'history','HistoryMap.html':'history','ConvexLens.html':'fixture','PersonLighting.html':'fixture','DmxSpeed.html':'signal'
   };
   const activeCategory = isTop ? 'dimming' : (categoryForPage[file] || '');
   const brand = header.querySelector('.next-ui-brand');
