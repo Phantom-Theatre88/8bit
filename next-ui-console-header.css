@@ -488,3 +488,7 @@ body > .next-ui-console-header.next-ui-header .next-ui-tools {
   flex-wrap:nowrap !important;
   order:0 !important;
 }
+
+/* A closed menu stays closed after Escape, even while its button has focus. */
+body > .next-ui-console-header .next-ui-category-menu:not(.open) .next-ui-dropdown {display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+body > .next-ui-console-header .next-ui-category-menu.open .next-ui-dropdown {display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important}

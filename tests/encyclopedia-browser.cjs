@@ -45,6 +45,7 @@ const server = http.createServer((req,res)=>{
     const button=page.locator('[data-category="network"]');
     await button.click();if(await button.getAttribute('aria-expanded')!=='true')errors.push('Menu did not open');
     await page.keyboard.press('Escape');if(await button.getAttribute('aria-expanded')!=='false')errors.push('Escape did not close menu');
+    if(await page.locator('[data-category-menu="network"] .next-ui-dropdown').isVisible())errors.push('Closed menu remains visible');
    }
    if(width===1366&&height===1024)await page.screenshot({path:path.join(out,url.replace(/[^a-z0-9]/gi,'_')+'.png')});
    rows.push({url,viewport:[width,height],errors,missing,...state});
@@ -83,7 +84,7 @@ const server = http.createServer((req,res)=>{
   assert.ok((await page.locator('#teacherSpeech').textContent()).length>5);
   await page.locator('.card').first().dispatchEvent('click');await page.waitForTimeout(450);
   assert.ok(!(await page.locator('#detailText').textContent()).includes('undefined'));
-  await page.locator('#eraTrack').focus();await page.keyboard.press('End');await page.waitForTimeout(300);
+  await page.locator('#eraTrack').focus();await page.keyboard.press('End');await page.waitForTimeout(500);
   assert.equal(await page.locator('.card').count(),0);assert.equal(await page.locator('#sourceNote').textContent(),'');
  });
  await page.close();
