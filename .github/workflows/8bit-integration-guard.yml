@@ -1,0 +1,43 @@
+name: 8bit integration guard
+on:
+  pull_request:
+  push:
+    branches:
+      - work/next-ui-integration-20261028
+  workflow_dispatch:
+jobs:
+  lock-invariants:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify protected navigation and project context
+        shell: python
+        run: |
+          from pathlib import Path
+          import re,sys
+          errors=[]
+          def check(ok,message):
+              if not ok: errors.append(message)
+          required=['AGENTS.md','PROJECT_STATE.md','docs/INTEGRATION_COMPLETION_GATE_20261028.md','History.html','HistoryMap.html','index.html','next-ui-console-header.js','Top.html']
+          for p in required: check(Path(p).is_file(), f'missing required file: {p}')
+          if not errors:
+              home=Path('index.html').read_text()
+              nav=Path('next-ui-console-header.js').read_text()
+              history=Path('History.html').read_text()
+              top=Path('Top.html').read_text()
+              check('History.html' in home,'History entry missing from TOP')
+              check('HistoryMap.html' in history,'History internal map link missing')
+              check('href="HistoryMap.html"' not in home,'History map must stay inside History')
+              check('["古代劇場マップ","HistoryMap.html"]' not in nav,'History map incorrectly listed as standalone lesson')
+              for filename in ['ConvexLens.html','PersonLighting.html']:
+                  check('href="'+filename+'"' not in home,'prototype promoted on TOP: '+filename)
+                  check(not re.search(r'\["[^"]+","'+re.escape(filename)+r'"\]',nav),'prototype promoted in shared menu: '+filename)
+              check('【仮配置・未確定】' in history,'provisional History cards have lost pending label')
+              tabs=set(re.findall(r'id=["\x27]main-tab-([a-z0-9]+)',top))
+              required_tabs={'sim8bit','sim16bit','simdmx','ledcolormix','scroller','movinghead','netipaddress','netartnet','netbroadcast','netsacn','explain'}
+              check(required_tabs.issubset(tabs),'missing interactive lesson tabs: '+str(sorted(required_tabs-tabs)))
+          if errors:
+              print('INTEGRATION GUARD FAILED:')
+              for error in errors: print(' - '+error)
+              sys.exit(1)
+          print('Static LOCK guard passed. This does NOT replace browser/visual validation.')
