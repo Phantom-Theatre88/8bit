@@ -1,6 +1,13 @@
 /* LOCK: Single shared header DOM for all eight lesson pages. Page-specific styles belong below it. */
 (() => {
-  const categories = [["electric","電気","<path d=\"M13.5 2 5 13h6l-.5 9L19 10h-6z\"/>",[["V・W・Aの法則","Analog.html"],["単相3線","SinglePhase3.html"],["電気って波なの？","Waveforms.html"],["三相3線（未実装）",null]]],["dimming","調光","<path d=\"M5 3v18M12 3v18M19 3v18\"/><path d=\"M2 8h6M9 15h6M16 10h6\"/>",[["8-bit 調光卓","sim8bit"],["16-bit 調光卓","sim16bit"]]],["signal","信号","<path d=\"M2 12h4l3-7 5 14 3-7h5\"/>",[["DMX通信列車","simdmx"],["DMXの通信速度","DmxSpeed.html"],["LED色混ぜ","ledcolormix"],["Scroller","scroller"],["Moving Head","movinghead"]]],["network","Network","<rect x=\"9\" y=\"2\" width=\"6\" height=\"5\" rx=\"1\"/><rect x=\"2\" y=\"17\" width=\"6\" height=\"5\" rx=\"1\"/><rect x=\"16\" y=\"17\" width=\"6\" height=\"5\" rx=\"1\"/><path d=\"M12 7v5M5 17v-5h14v5\"/>",[["IPアドレス","netipaddress"],["DMX on LAN","netartnet"],["Broadcast / Art-Net 1","netbroadcast"],["Multicast / sACN","netsacn"],["結線 / 冗長化","explain"]]],["history","照明史","<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 6v6l4 3\"/>",[["舞台照明史 Timeline","History.html"]]],["fixture","灯具","<path d=\"m4 7 12-3v16L4 17z\"/><ellipse cx=\"16\" cy=\"12\" rx=\"3\" ry=\"8\"/><path d=\"M6 17v4h8v-3\"/>",[["平凸レンズ","ConvexLens.html"]]],["shoot","シュート","<circle cx=\"12\" cy=\"12\" r=\"9\"/><circle cx=\"12\" cy=\"12\" r=\"5\"/><path d=\"M12 1v4M12 19v4M1 12h4M19 12h4\"/>",[["教材を準備中",null]]]];
+  const categories = [["electric","電気","<path d=\"M13.5 2 5 13h6l-.5 9L19 10h-6z\"/>",[["V・W・Aの法則","Analog.html"],["単相3線","SinglePhase3.html"],["電気って波なの？","Waveforms.html"],["三相3線（未実装）",null]]],["dimming","調光","<path d=\"M5 3v18M12 3v18M19 3v18\"/><path d=\"M2 8h6M9 15h6M16 10h6\"/>",[["8-bit 調光卓","sim8bit"],["16-bit 調光卓","sim16bit"]]],["signal","信号","<path d=\"M2 12h4l3-7 5 14 3-7h5\"/>",[["DMX通信列車","simdmx"],["DMXの通信速度","DmxSpeed.html"],["LED色混ぜ","ledcolormix"],["Scroller","scroller"],["Moving Head","movinghead"]]],["network","Network","<rect x=\"9\" y=\"2\" width=\"6\" height=\"5\" rx=\"1\"/><rect x=\"2\" y=\"17\" width=\"6\" height=\"5\" rx=\"1\"/><rect x=\"16\" y=\"17\" width=\"6\" height=\"5\" rx=\"1\"/><path d=\"M12 7v5M5 17v-5h14v5\"/>",[["IPアドレス","netipaddress"],["DMX on LAN","netartnet"],["Broadcast / Art-Net 1","netbroadcast"],["Multicast / sACN","netsacn"],["結線 / 冗長化","explain"]]],["history","照明史","<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 6v6l4 3\"/>",[["舞台照明史 Timeline","History.html"],["劇場MAP","HistoryMap.html"]]],["fixture","灯具","<path d=\"m4 7 12-3v16L4 17z\"/><ellipse cx=\"16\" cy=\"12\" rx=\"3\" ry=\"8\"/><path d=\"M6 17v4h8v-3\"/>",[["平凸レンズ","ConvexLens.html"]]],["shoot","シュート","<circle cx=\"12\" cy=\"12\" r=\"9\"/><circle cx=\"12\" cy=\"12\" r=\"5\"/><path d=\"M12 1v4M12 19v4M1 12h4M19 12h4\"/>",[["教材を準備中",null]]]];
+  // The shared header is also the canonical lesson order used by Top.html.
+  window.EightbitNavigation = Object.fromEntries(categories.map(([key,label,,lessons]) => [key, {
+    label, lessons: lessons.map(([title,target]) => ({
+      value: target ? (target.endsWith('.html') ? 'url:'+target : target) : 'pending:'+key,
+      label:title, disabled:!target
+    }))
+  }]));
   const root = document.getElementById('shared-console-header-root');
   if (!root) return;
   const file = location.pathname.split('/').pop() || 'Top.html';
@@ -12,7 +19,7 @@
     'Waveforms.html': ['SinglePhase3.html',null],
     'ConvexLens.html': ['index.html',null],
     'PersonLighting.html': ['index.html',null],
-    'DmxSpeed.html': ['Top.html?tab=simdmx',null]
+    'DmxSpeed.html': ['Top.html?tab=simdmx','Top.html?tab=ledcolormix']
   };
   const controls = (file === 'History.html' || file === 'HistoryMap.html')
     ? '<button class="next-ui-page-button" type="button" data-nav-target="index.html">⌂ TOP</button>'
@@ -37,7 +44,7 @@
   });
   const categoryForPage = {
     'Analog.html':'electric','SinglePhase3.html':'electric','Waveforms.html':'electric',
-    'History.html':'history','HistoryMap.html':'history','ConvexLens.html':'fixture','DmxSpeed.html':'signal'
+    'History.html':'history','HistoryMap.html':'history','ConvexLens.html':'fixture','PersonLighting.html':'shoot','DmxSpeed.html':'signal'
   };
   const activeCategory = isTop ? 'dimming' : (categoryForPage[file] || '');
   const brand = header.querySelector('.next-ui-brand');
@@ -71,4 +78,33 @@
       '<div class="next-ui-dropdown" role="menu">'+items+'</div></div>';
   }).join('');
   header.classList.add('next-ui-console-header');
+  const closeMenus = () => {
+    header.querySelectorAll('.next-ui-category-menu').forEach(menu => {
+      menu.classList.remove('open');
+      menu.querySelector('.next-ui-category-tab').setAttribute('aria-expanded','false');
+    });
+  };
+  // Capture keeps older page-local handlers from toggling the same menu twice.
+  header.addEventListener('click', event => {
+    const button = event.target.closest('.next-ui-category-tab');
+    if (!button) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    const menu = button.closest('.next-ui-category-menu');
+    const open = !menu.classList.contains('open');
+    closeMenus();
+    if (open) { menu.classList.add('open'); button.setAttribute('aria-expanded','true'); }
+  }, true);
+  document.addEventListener('pointerdown', event => {
+    if (!header.contains(event.target)) closeMenus();
+  });
+  header.addEventListener('click', event => {
+    if (event.target.closest('.next-ui-dropdown a, .next-ui-dropdown button')) closeMenus();
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key !== 'Escape') return;
+    const open = header.querySelector('.next-ui-category-menu.open');
+    closeMenus();
+    open?.querySelector('.next-ui-category-tab').focus();
+  });
 })();

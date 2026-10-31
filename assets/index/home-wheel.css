@@ -551,3 +551,18 @@ a.lesson-tile:focus-visible { outline: 2px solid var(--theme-accent); outline-of
   .home-wheel-panel .wheel-name {font-size:17px;}
   .home-wheel-panel .wheel-icon {flex-basis:23px;width:23px;height:23px;}
 }
+
+/* Resolve image URLs beside this stylesheet, including variables used by tiles. */
+:root{
+--home-image-1:url("category-electric-c30a.webp");
+--home-image-2:url("category-dimming-faders.webp");
+--home-image-3:url("category-signal-dmx-5pin.webp");
+--home-image-4:url("category-network-rj45.webp");
+--home-image-5:url("category-history-theatre.webp");
+--home-image-6:url("category-fixture-lighting.webp");
+--home-image-7:url("category-shoot-focus.webp");
+--home-image-8:url("../net/net_ip_01_address.webp");
+--home-image-9:url("../dmx_on_lan/dmxlan_02_packetize_v01.webp");
+--home-image-10:url("../network/bc_01_send_v01.webp");
+--home-image-11:url("../sACN/sacn_01_publish_v01.webp");
+}

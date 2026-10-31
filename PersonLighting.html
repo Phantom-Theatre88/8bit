@@ -25,13 +25,15 @@ body.person-lighting-next-ui .app{}
 .teacher-panel{padding:6px 10px 0;display:grid;grid-template-columns:128px 1fr;gap:10px;overflow:hidden}.teacher-character{width:128px;height:100%;max-height:205px;object-fit:contain;object-position:center bottom;align-self:end}.teacher-copy{min-width:0;display:flex;flex-direction:column}.teacher-copy h3{margin:0 0 5px;color:#ffd04d;font-size:17px}.teacher-speech{position:relative;flex:1;margin:0;padding:10px 12px;border-radius:12px;background:#f2e4b2;color:#151515;font-size:var(--lesson-teacher-font-size,12.5px);line-height:1.55;font-weight:700}.teacher-speech::before{content:"";position:absolute;left:-12px;top:24px;border-top:9px solid transparent;border-bottom:9px solid transparent;border-right:13px solid #f2e4b2}.step-badge{color:#ffc55a;font-weight:900}
 @media(max-height:860px){body.person-lighting-next-ui .app{}.fader-area{min-height:96px}.teacher-character{width:112px}.teacher-panel{grid-template-columns:112px 1fr}.teacher-speech{padding:8px 10px}}
 @media(max-width:1050px){.next-ui-brand{width:108px;font-size:19px;padding-left:12px}.next-ui-category-tab{min-width:88px;padding:0 9px}.next-ui-tools .next-ui-tool:not(.menu){display:none}.status{display:none}.title span{display:none}.main-grid,.bottom-grid{grid-template-columns:1fr}.preview-panel{display:none}.teacher-panel{min-height:185px}.fader-bank{overflow-x:auto;grid-template-columns:repeat(10,74px)}}
+/* Keep the title and fader bank within a narrow portrait viewport. */
+@media(max-width:600px){.topbar{flex-wrap:wrap}.title{flex-wrap:wrap}.title h1{white-space:normal}.main-grid,.bottom-grid,.fader-panel{min-width:0}.teacher-panel{grid-template-columns:100px minmax(0,1fr)}.teacher-character{max-width:100%}}
 </style>
-<link rel="stylesheet" href="next-ui-console-header.css?v=shared-dom-v1">
+<link rel="stylesheet" href="next-ui-console-header.css?v=encyclopedia-20261028">
 <link rel="stylesheet" href="eightbit-layout-width.css?v=8">
 </head>
 <body class="person-lighting-next-ui eightbit-unified-width">
 <div id="shared-console-header-root"></div>
-<script src="next-ui-console-header.js?v=dmx-speed-nav-1"></script>
+<script src="next-ui-console-header.js?v=encyclopedia-20261028"></script>
 <main class="app">
   <header class="topbar">
     <div class="title"><div class="title-icon">◉</div><h1>人物の見え方シミュレーター</h1><span>｜灯具の位置と強さで、人の見え方がどう変わるか</span></div>
