@@ -16,14 +16,16 @@ body.dimming-intro-page{font:16px/1.5 "Hiragino Sans","Yu Gothic",Meiryo,system-
 body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px;width:100%;margin:0 auto;padding:12px 16px 20px;overflow-y:auto;display:flex;flex-direction:column;gap:12px}
 .di-title{border-left:4px solid #2ac7ff;padding:1px 0 1px 14px;flex:none}
 .di-title .di-kicker{font-size:14px;font-weight:800;color:#83dcf9;margin:0}
-.di-title h1{font-size:clamp(23px,2.5vw,33px);line-height:1.32;color:#fff;margin:2px 0 4px}
+.di-title h1{font-size:clamp(22px,2.05vw,27px);line-height:1.32;color:#fff;margin:2px 0 4px}
 .di-title .di-lead{font-size:16px;color:#d8e7ef;margin:0}
 .di-panel{background:linear-gradient(180deg,#202d39,#141d26);border:1px solid #526575;border-radius:9px;min-width:0}
 .di-demo{flex:none;padding:0 16px 10px;overflow:hidden}
 .di-demo-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px solid #3d5363;margin:0 -16px 10px;padding:9px 16px}
 .di-demo-head h2{margin:0;font-size:19px;color:#fff;line-height:1.3}
 .di-demo-head .di-helper{color:#b7d1de;font-size:15px}
-.di-mechanism{display:block;width:100%;height:clamp(300px,43dvh,420px);min-height:300px}
+.di-explanation{margin:2px 0 8px;padding:7px 12px;border-left:3px solid #ffbe79;background:#182834;color:#e7f1f6;font-size:16px;line-height:1.48}
+.di-explanation strong{color:#ffd191}
+.di-mechanism{display:block;width:100%;height:clamp(290px,39dvh,385px);min-height:290px}
 .di-mechanism text{font-family:"Hiragino Sans","Yu Gothic",Meiryo,system-ui,sans-serif}
 .di-mechanism .primary-label{font-size:19px;font-weight:800;fill:#f2f8fb}
 .di-mechanism .secondary-label{font-size:16px;fill:#bdd1df}
@@ -49,7 +51,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 .di-next p{margin:0;font-size:15px;color:#d4e4ec}
 .di-next a{font-size:16px;font-weight:800;color:#081820;text-decoration:none;background:#ffbf73;border-radius:6px;padding:10px 12px;text-align:center}
 .di-note{font-size:14px;color:#bcd0db;margin:0 1px;line-height:1.5}
-@media(max-height:850px) and (min-width:851px){body.dimming-intro-page .dimming-lesson{gap:8px;padding:8px 13px}.di-mechanism{height:clamp(290px,42dvh,350px)}.di-teacher{min-height:88px}.di-teacher img{height:80px}.di-demo-head{margin-bottom:5px}}
+@media(max-height:850px) and (min-width:851px){body.dimming-intro-page .dimming-lesson{gap:8px;padding:8px 13px}.di-mechanism{height:clamp(280px,40dvh,330px)}.di-teacher{min-height:88px}.di-teacher img{height:80px}.di-demo-head{margin-bottom:5px}}
 @media(max-width:850px){.di-footer{grid-template-columns:1fr}.di-mechanism{height:auto;min-height:0;aspect-ratio:900/375}.di-demo{padding:0 9px 8px}.di-demo-head{margin:0 -9px 7px;padding:9px}.di-demo-head{display:block}.di-demo-head .di-helper{display:block}.di-conclusion{flex-wrap:wrap}}
 @media(max-width:560px){body.dimming-intro-page .dimming-lesson{padding:9px;gap:9px}.di-demo{overflow-x:auto}.di-mechanism{min-width:700px;aspect-ratio:900/375}.di-title h1{font-size:23px}.di-teacher img{width:75px;height:90px}.di-teacher{gap:8px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
@@ -63,7 +65,8 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <main class="dimming-lesson">
 <header class="di-title"><p class="di-kicker">DIMMING / 調光の入口</p><h1>調光とは？ ― 光の明るさが、舞台を変える。</h1><p class="di-lead">調光は光の強さを変え、時間・空間・感情を表現するための大切な技術です。</p></header>
 <section class="di-panel di-demo" aria-labelledby="demo-title">
-<div class="di-demo-head"><h2 id="demo-title">フェーダーを上げると、電球が明るくなる</h2><span class="di-helper">左のフェーダーを上下して、動きを見てみよう</span></div>
+<div class="di-demo-head"><h2 id="demo-title">水抵抗器で、電球の明るさを変える</h2><span class="di-helper">フェーダーを上下してみよう</span></div>
+<p class="di-explanation"><strong>フェーダーを上げる</strong>と、ワイヤーで銅板が下がります。塩水に浸かる面積が増えると電流が流れやすくなり、電球が明るくなります。</p>
 <svg class="di-mechanism" viewBox="0 0 900 375" role="group" aria-label="フェーダーを上げると、滑車を通したワイヤーが左の銅板を下げ、水抵抗器を通る電流が増えて電球が明るくなる仕組み">
 <defs>
 <linearGradient id="glassWall" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#a6e8f7" stop-opacity=".2"/><stop offset=".12" stop-color="#a6e8f7" stop-opacity=".02"/><stop offset=".86" stop-color="#c8f5ff" stop-opacity=".02"/><stop offset="1" stop-color="#c8f5ff" stop-opacity=".32"/></linearGradient>
@@ -100,8 +103,9 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <path d="M193 281Q201 265 209 281T225 281" fill="none" stroke="#ffd08f" stroke-width="2.7"/>
 <text class="secondary-label" x="209" y="319" text-anchor="middle">AC電源</text>
 <path id="leftFeed" class="electrical" d="M209 253C244 235 276 201 304 201S335 152 365 152"/>
-<path class="electrical" d="M557 177V157H730V183"/>
-<path class="neutral" d="M730 255V348H209V307"/>
+<!-- Both conductors terminate at the Edison screw base: threaded shell and insulated center tip. -->
+<path class="electrical" d="M557 177V157H650V269H711"/>
+<path class="neutral" d="M733 284V348H209V307"/>
 <!-- BEAKER / SALTWATER -->
 <path d="M270 167V329Q270 338 281 338H622Q633 338 633 329V167" fill="url(#glassWall)" stroke="#96d9ec" stroke-width="3.5"/>
 <path d="M273 222H630V328Q630 335 622 335H281Q273 335 273 328Z" fill="url(#saltwater)"/>
@@ -127,18 +131,22 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <text class="secondary-label" x="450" y="294" text-anchor="middle">浸かる面積が変わる</text>
 <text class="secondary-label" x="575" y="154">右銅板：固定</text>
 <!-- BULB: same asset and layered glow philosophy as current 8-bit dimmer -->
-<circle id="lampHalo" cx="730" cy="220" r="86" fill="url(#bulbGlow)" opacity=".48"/>
+<circle id="lampHalo" cx="730" cy="192" r="86" fill="url(#bulbGlow)" opacity=".48"/>
 <image id="di-bulb" href="assets/Light.webp" x="670" y="153" width="120" height="135" preserveAspectRatio="xMidYMid meet"/>
-<circle id="lampGas" cx="730" cy="210" r="42" fill="url(#bulbGlow)" opacity=".5" style="mix-blend-mode:screen;pointer-events:none"/>
-<ellipse id="lampFilament" cx="730" cy="212" rx="12" ry="9" fill="#fff0a6" opacity=".5" style="mix-blend-mode:screen;pointer-events:none"/>
-<text class="primary-label" x="730" y="310" text-anchor="middle">電球</text>
+<circle id="lampGas" cx="730" cy="194" r="42" fill="url(#bulbGlow)" opacity=".5" style="mix-blend-mode:screen;pointer-events:none"/>
+<ellipse id="lampFilament" cx="730" cy="198" rx="12" ry="9" fill="#fff0a6" opacity=".5" style="mix-blend-mode:screen;pointer-events:none"/>
+<circle cx="711" cy="269" r="4.2" fill="#ffd18a" stroke="#73411d" stroke-width="1.5"/>
+<circle cx="733" cy="284" r="4.2" fill="#c4d6df" stroke="#425a67" stroke-width="1.5"/>
+<text class="secondary-label" x="790" y="270">ねじ部</text>
+<text class="secondary-label" x="790" y="292">中心接点</text>
+<text class="primary-label" x="730" y="314" text-anchor="middle">電球</text>
 <!-- KEY: avoid mistaking rope for the electrical wire -->
 <g transform="translate(796 65)"><path class="cable" d="M0 0H28"/><text class="secondary-label" x="0" y="25">ワイヤー</text><path class="electrical" d="M0 42H28"/><text class="secondary-label" x="0" y="67">電気配線</text></g>
 </svg>
 <div class="di-conclusion"><p id="di-action">フェーダーを上げる → 銅板が下がる → 電球が明るくなる</p><output id="di-readout" aria-live="off">明るさの指示 50%</output></div>
 </section>
 <div class="di-footer">
-<section class="di-panel di-teacher"><img src="assets/wave_teacher_transparent.svg?v=teacher-standard-20261014" alt="照明教材の先生"><div><strong>先生のひとこと</strong><p>電気の流れやすさを変えると、光の明るさも変わるよ。調光は舞台の表現を支える大切な技術なんだ。</p></div></section>
+<section class="di-panel di-teacher"><img src="assets/wave_teacher_transparent.svg?v=teacher-standard-20261014" alt="照明教材の先生"><div><strong>先生のひとこと</strong><p>明るさを変えると、同じ舞台でも時間や気持ちの伝わり方が変わる。だから調光が大切なんだよ。</p></div></section>
 <aside class="di-panel di-next"><p>この仕組みは調光原理の一例。次は、照明卓から明るさをどう指示するのかを見てみよう。</p><a href="Top.html?tab=sim8bit">次へ｜8-bit調光卓 →</a></aside>
 </div>
 <p class="di-note">※水抵抗器と操作機構の教材用模式図です。実際の通電実験はしないでください。光の見え方は説明用の表現です。</p>
