@@ -27,7 +27,7 @@ body.dimming-intro-page .di-device{display:flex;flex-direction:column;min-height
 .di-device-content{padding:8px 11px 3px}
 .di-device-content .lead{margin:0 0 3px;font-weight:800;font-size:16px;color:#fff}
 .di-device-content .detail{margin:0 0 4px;font-size:14px;color:#cbd8e1}
-body.dimming-intro-page .di-circuit{display:block;width:100%;height:170px;max-height:170px;overflow:visible}
+body.dimming-intro-page .di-circuit{display:block;width:100%;height:225px;max-height:225px;overflow:visible}
 .di-circuit text{font-family:"Hiragino Sans","Yu Gothic",Meiryo,system-ui,sans-serif}
 .di-circuit .di-wire{stroke:#ffbb65;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .di-circuit .di-return{stroke:#aebbc5;stroke-width:3;fill:none;stroke-linejoin:round}
@@ -56,7 +56,7 @@ body.dimming-intro-page .di-teacher{display:grid;grid-template-columns:100px 1fr
 .di-teacher .words{font-size:16px;color:#f3f6fa;line-height:1.45}
 .di-teacher .words strong{display:block;color:#ffd18b;margin-bottom:3px}
 .di-teacher a{font-size:14px;color:#c9edff;text-decoration:none;border:1px solid #587586;border-radius:5px;padding:8px;white-space:nowrap}
-@media(max-height:790px) and (min-width:900px){body.dimming-intro-page .dimming-lesson{gap:6px;padding:7px 10px}body.dimming-intro-page .di-circuit{height:175px;max-height:175px}.di-purpose .sequence span{padding:4px 8px}.di-teacher img{height:83px}.di-teacher{min-height:90px!important}}
+@media(max-height:790px) and (min-width:900px){body.dimming-intro-page .dimming-lesson{gap:6px;padding:7px 10px}body.dimming-intro-page .di-circuit{height:205px;max-height:205px}.di-purpose .sequence span{padding:4px 8px}.di-teacher img{height:83px}.di-teacher{min-height:90px!important}}
 @media(max-width:850px){body.dimming-intro-page .di-lower{grid-template-columns:1fr}.di-purpose .next{margin-top:2px}body.dimming-intro-page .di-teacher{grid-template-columns:76px 1fr}.di-teacher img{width:70px;height:80px}.di-teacher a{grid-column:2;justify-self:start}}
 @media(max-width:540px){.di-panel-header{display:block}.di-panel-header span{display:block;margin-top:3px}.di-title h1{font-size:22px}.di-adjust{flex-wrap:wrap}.di-adjust input{flex-basis:55%}}
 </style>
@@ -69,18 +69,26 @@ body.dimming-intro-page .di-teacher{display:grid;grid-template-columns:100px 1fr
 <header class="di-title"><p class="eyebrow">DIMMING / 調光の入口</p><h1>調光とは？ ― 光の明るさが、舞台を変える。</h1><p>調光とは、光の明るさを変えること。舞台では、その変化で時間・空間・感情を表現できます。</p></header>
 <div class="di-lower">
 <section class="di-panel di-device" aria-labelledby="deviceTitle"><div class="di-panel-header"><h2 id="deviceTitle">どうやって電球の明るさを変える？</h2><span>塩水を使う水抵抗式の原理図</span></div>
-<div class="di-device-content"><p class="lead">電球に届く電力を変えると、明るさが変わる。</p><p class="detail">左の銅板は同じ大きさのまま上下し、塩水に浸かる面積だけが変わります。</p>
+<div class="di-device-content"><p class="lead">電球に届く電力を変えると、明るさが変わる。</p><p class="detail">左の銅板を上下すると、塩水に浸かる面積が変わり、電球の明るさが変化します。</p>
 <svg class="di-circuit" viewBox="0 0 560 205" role="img" aria-label="電源から左の上下する銅板、塩水、右の固定銅板、電球、電源へ戻る順の直列回路。銅板の大きさは一定。">
-<defs><radialGradient id="di-halo"><stop stop-color="#ffcf80" stop-opacity=".95"/><stop offset=".42" stop-color="#ffa73f" stop-opacity=".5"/><stop offset="1" stop-color="#ff9d2a" stop-opacity="0"/></radialGradient><radialGradient id="di-glass"><stop stop-color="#fff6c7" stop-opacity=".88"/><stop offset=".3" stop-color="#ffdd7b" stop-opacity=".55"/><stop offset=".7" stop-color="#ff9600" stop-opacity=".19"/><stop offset="1" stop-color="#ff9600" stop-opacity="0"/></radialGradient></defs>
+<defs><radialGradient id="di-halo"><stop stop-color="#ffcf80" stop-opacity=".95"/><stop offset=".42" stop-color="#ffa73f" stop-opacity=".5"/><stop offset="1" stop-color="#ff9d2a" stop-opacity="0"/></radialGradient><radialGradient id="di-glass"><stop stop-color="#fff6c7" stop-opacity=".88"/><stop offset=".3" stop-color="#ffdd7b" stop-opacity=".55"/><stop offset=".7" stop-color="#ff9600" stop-opacity=".19"/><stop offset="1" stop-color="#ff9600" stop-opacity="0"/></radialGradient><linearGradient id="saltDepth" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#49c2ea" stop-opacity=".22"/><stop offset="1" stop-color="#12668e" stop-opacity=".61"/></linearGradient><linearGradient id="copperFace" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#995020"/><stop offset=".4" stop-color="#e8a55d"/><stop offset=".76" stop-color="#c47b3d"/><stop offset="1" stop-color="#8a4723"/></linearGradient><clipPath id="submergedPart"><rect x="111" y="101" width="282" height="75"/></clipPath></defs>
 <path class="di-wire" d="M47 68V25H174"/><path class="di-wire" id="movingLead" d="M174 25V63"/>
 <path class="di-wire" d="M339 77V25H477V65"/><path class="di-return" d="M477 133V184H47V125"/>
 <circle cx="47" cy="97" r="27" fill="#16232c" stroke="#c0ccd3" stroke-width="2"/><path d="M31 98Q39 81 47 98T63 98" fill="none" stroke="#ffbd78" stroke-width="3"/><text class="di-small" x="11" y="149">AC電源</text>
-<path class="di-beaker" d="M106 70V170Q106 177 115 177H388Q397 177 397 170V70"/><path class="di-water" d="M108 101H395V169Q395 174 388 174H115Q108 174 108 169Z"/><path d="M108 101H395" fill="none" stroke="#6fcee9" stroke-width="2"/>
-<rect id="movingPlate" class="di-copper" x="165" y="66" width="18" height="80" rx="2"/>
-<rect id="fixedPlate" class="di-copper" x="330" y="78" width="18" height="89" rx="2"/>
-<path d="M151 96V130M146 101L151 94L156 101M146 124L151 131L156 124" fill="none" stroke="#f9cc8e" stroke-width="2"/>
-<text class="di-label" x="114" y="48">左：上下する銅板</text><text class="di-label" x="304" y="48">右：固定</text>
-<text class="di-label" x="250" y="137" text-anchor="middle">塩水</text><text class="di-small" x="250" y="157" text-anchor="middle">ここを電気が通る</text>
+<path d="M106 70V170Q106 177 115 177H388Q397 177 397 170V70" fill="#0b2933" fill-opacity=".3" stroke="#9ed8ec" stroke-width="3"/>
+<path d="M109 101H394V169Q394 173 389 173H114Q109 173 109 169Z" fill="url(#saltDepth)"/>
+<path d="M109 101Q145 98 178 101T248 101T319 101T394 101" fill="none" stroke="#7de5ff" stroke-width="2.5"/>
+<path d="M113 111V163M386 110V163" fill="none" stroke="#a0ebff" stroke-width="2" opacity=".27"/>
+<g fill="#8fe6ff" opacity=".42"><circle cx="145" cy="144" r="2"/><circle cx="217" cy="162" r="2.5"/><circle cx="291" cy="129" r="1.5"/><circle cx="360" cy="154" r="2"/><circle cx="234" cy="120" r="1.5"/></g>
+<rect id="movingPlate" class="di-copper" x="165" y="66" width="18" height="68" rx="2" fill="url(#copperFace)"/>
+<rect id="movingPlateWet" x="165" y="66" width="18" height="68" rx="2" fill="#f8dc95" fill-opacity=".34" clip-path="url(#submergedPart)" pointer-events="none"/>
+<rect id="fixedPlate" class="di-copper" x="330" y="78" width="18" height="89" rx="2" fill="url(#copperFace)"/>
+<rect x="330" y="101" width="18" height="66" fill="#f8dc95" opacity=".22"/>
+<path d="M152 86V128M147 93L152 86L157 93M147 121L152 128L157 121" fill="none" stroke="#fbd28f" stroke-width="2.4"/>
+<text class="di-label" x="106" y="48">左：銅板を上下</text><text class="di-label" x="311" y="48">右：固定</text>
+<text class="di-label" x="253" y="135" text-anchor="middle">塩水</text><text class="di-small" x="253" y="155" text-anchor="middle">水面は固定</text>
+<path d="M183 144H198L211 158" stroke="#ffdc9c" stroke-width="1.8" fill="none"/>
+<text x="211" y="169" fill="#ffdc9c" font-size="13" font-weight="800">浸かる部分</text>
 <circle id="lampHalo" cx="477" cy="101" r="67" fill="url(#di-halo)" opacity=".48"/>
 <image id="di-bulb" href="assets/Light.webp" x="427" y="46" width="100" height="110" preserveAspectRatio="xMidYMid meet"/>
 <ellipse id="lampGasGlow" class="bulb-glow" cx="477" cy="95" rx="37" ry="39" fill="url(#di-glass)" opacity=".45"/>
@@ -104,6 +112,7 @@ body.dimming-intro-page .di-teacher{display:grid;grid-template-columns:100px 1fr
 (() => {
   const slider=document.getElementById('plateSlider');
   const plate=document.getElementById('movingPlate');
+  const wetPlate=document.getElementById('movingPlateWet');
   const lead=document.getElementById('movingLead');
   const halo=document.getElementById('lampHalo');
   const gasGlow=document.getElementById('lampGasGlow');
@@ -117,7 +126,9 @@ body.dimming-intro-page .di-teacher{display:grid;grid-template-columns:100px 1fr
     const depth=Number(slider.value)/100;
     const y=44+62*depth; // Copper always remains inside the vessel; waterline stays at 101.
     plate.setAttribute('y',y.toFixed(1));
+    wetPlate.setAttribute('y',y.toFixed(1));
     plate.setAttribute('height',String(plateHeight));
+    wetPlate.setAttribute('height',String(plateHeight));
     lead.setAttribute('d','M174 25V'+y.toFixed(1));
     // Reuse the existing Light.webp bulb artwork with layered gas/filament/ambient glow,
     // like the established 8-bit dimmer. Glow is illustrative, not measured light output.
