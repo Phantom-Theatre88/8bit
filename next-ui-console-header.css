@@ -488,3 +488,29 @@ body > .next-ui-console-header.next-ui-header .next-ui-tools {
   flex-wrap:nowrap !important;
   order:0 !important;
 }
+
+/* Canonical text-only identity. Retire the former 8bit-branded image. */
+.next-ui-console-header .next-ui-brand {
+  flex-direction:column !important;
+  gap:3px !important;
+  line-height:1.15 !important;
+  text-decoration:none !important;
+  white-space:nowrap !important;
+}
+.next-ui-console-header .next-ui-brand .lighting-brand-name {
+  display:block;
+  font-family:"Hiragino Sans","Yu Gothic",Meiryo,system-ui,sans-serif;
+  font-size:19px;
+  font-weight:900;
+  letter-spacing:.04em;
+  color:#f7f9fb;
+}
+.next-ui-console-header .next-ui-brand .lighting-brand-subtitle {
+  display:block;
+  margin:0;
+  color:#ffbd66;
+  font-size:12px;
+  font-weight:700;
+  line-height:1;
+  letter-spacing:.08em;
+}
