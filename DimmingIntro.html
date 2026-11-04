@@ -23,8 +23,8 @@ body.dimming-intro-page .di-panel{box-sizing:border-box;flex:none;border:1px sol
 .di-panel-header h2{font-size:17px;line-height:1.3;margin:0;color:#fff}
 .di-panel-header span{font-size:14px;color:#b8c6d0}
 body.dimming-intro-page .di-stage{display:block!important;height:auto!important;min-height:0!important;padding-bottom:8px!important}
-body.dimming-intro-page .di-scenes{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;padding:8px 11px 0;min-height:168px!important;height:168px!important;overflow:visible!important}
-body.dimming-intro-page .di-scene{position:relative;display:block!important;box-sizing:border-box;width:100%!important;height:160px!important;min-height:160px!important;max-height:160px!important;overflow:hidden!important;border:1px solid #4f6070;border-radius:6px;background:#091016}
+body.dimming-intro-page .di-scenes{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;padding:8px 11px 0;min-height:147px!important;height:147px!important;overflow:visible!important}
+body.dimming-intro-page .di-scene{position:relative;display:block!important;box-sizing:border-box;width:100%!important;height:139px!important;min-height:139px!important;max-height:139px!important;overflow:hidden!important;border:1px solid #4f6070;border-radius:6px;background:#091016}
 .di-scene-label{position:absolute;z-index:4;top:7px;left:11px;color:#fff;font-weight:800;font-size:15px;background:#111923cf;border:1px solid #657482;padding:3px 9px;border-radius:4px}
 .di-scene svg{display:block;width:100%;height:100%}
 .di-stage-note{margin:6px 12px 0;color:#dce7ee;font-size:15px;line-height:1.45}
@@ -34,7 +34,7 @@ body.dimming-intro-page .di-device{display:flex;flex-direction:column;min-height
 .di-device-content{padding:8px 11px 3px}
 .di-device-content .lead{margin:0 0 3px;font-weight:800;font-size:16px;color:#fff}
 .di-device-content .detail{margin:0 0 4px;font-size:14px;color:#cbd8e1}
-body.dimming-intro-page .di-circuit{display:block;width:100%;height:195px;max-height:195px;overflow:visible}
+body.dimming-intro-page .di-circuit{display:block;width:100%;height:170px;max-height:170px;overflow:visible}
 .di-circuit text{font-family:"Hiragino Sans","Yu Gothic",Meiryo,system-ui,sans-serif}
 .di-circuit .di-wire{stroke:#ffbb65;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .di-circuit .di-return{stroke:#aebbc5;stroke-width:3;fill:none;stroke-linejoin:round}
@@ -55,8 +55,8 @@ body.dimming-intro-page .di-purpose{display:flex;flex-direction:column;gap:7px;p
 .di-purpose .sequence{display:grid;gap:5px}
 .di-purpose .sequence span{padding:6px 9px;font-size:15px;background:#111d28;border:1px solid #415668;border-radius:4px;font-weight:700}
 .di-purpose .next{margin-top:auto;padding:8px 9px;text-decoration:none;text-align:center;font-size:15px;font-weight:800;color:#13202c;background:#ffc174;border-radius:5px}
-body.dimming-intro-page .di-teacher{display:grid;grid-template-columns:100px 1fr auto;gap:11px;align-items:center;min-height:104px;padding:2px 13px}
-.di-teacher img{display:block;width:95px;height:97px;object-fit:contain;object-position:bottom}
+body.dimming-intro-page .di-teacher{display:grid;grid-template-columns:100px 1fr auto;gap:11px;align-items:center;min-height:88px;padding:2px 13px}
+.di-teacher img{display:block;width:95px;height:85px;object-fit:contain;object-position:bottom}
 .di-teacher .words{font-size:16px;color:#f3f6fa;line-height:1.45}
 .di-teacher .words strong{display:block;color:#ffd18b;margin-bottom:3px}
 .di-teacher a{font-size:14px;color:#c9edff;text-decoration:none;border:1px solid #587586;border-radius:5px;padding:8px;white-space:nowrap}
@@ -98,7 +98,7 @@ body.dimming-intro-page .di-teacher{display:grid;grid-template-columns:100px 1fr
 <aside class="di-panel di-purpose"><h2>調光を知る、最初の一歩</h2>
 <p class="emphasis">大切なのは、光の強さを思いどおりに変えられること。</p>
 <div class="sequence"><span>① 明るさを変える</span><span>② 舞台の印象が変わる</span><span>③ 時間・空間・感情を表現できる</span></div>
-<p>水抵抗式は、電気を流れにくくすることで調光する一例。実際の調光器には、変圧器式やサイリスタ式などもあります。</p>
+<p>水抵抗式は、電気を流れにくくすることで調光する一例。実際の調光器には、変圧器式やサイリスタ式などもあります。<br>※原理を示す教材図であり、実際に塩水を使って通電する実験はしないでください。</p>
 <a class="next" href="Top.html?tab=sim8bit">8-bit調光卓を見る →</a></aside>
 </div>
 <section class="di-panel di-teacher"><img src="assets/wave_teacher_transparent.svg?v=teacher-standard-20261014" alt="照明図鑑の先生"><div class="words"><strong>先生のひとこと</strong>同じ舞台なのに、明るさが違うと印象が変わるでしょう？ 調光は、光で物語を伝えるための大切な技術なんだよ。</div><a href="Waveforms.html">交流の波形へ →</a></section>
@@ -113,10 +113,10 @@ body.dimming-intro-page .di-teacher{display:grid;grid-template-columns:100px 1fr
   const bulb=document.getElementById('di-bulb');
   const output=document.getElementById('plateResult');
   const hint=document.getElementById('plateHint');
-  const plateHeight=80; // The physical copper plate dimensions NEVER change.
+  const plateHeight=68; // Physical plate dimensions stay fixed as it moves.
   const redraw=()=>{
     const depth=Number(slider.value)/100;
-    const y=65+40*depth; // Lowering raises immersed area; waterline remains y=101.
+    const y=44+62*depth; // Copper always remains inside the vessel; waterline stays at 101.
     plate.setAttribute('y',y.toFixed(1));
     plate.setAttribute('height',String(plateHeight));
     lead.setAttribute('d','M174 25V'+y.toFixed(1));
