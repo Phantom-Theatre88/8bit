@@ -117,8 +117,8 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <text class="secondary-label" x="209" y="319" text-anchor="middle">AC電源</text>
 <path id="leftFeed" class="electrical" d="M209 253C244 235 276 201 304 201S335 152 365 152"/>
 <!-- Both conductors terminate at the Edison screw base: threaded shell and insulated center tip. -->
-<path class="electrical" d="M557 177V157H641V267H703"/>
-<path class="neutral" d="M735 286V348H209V307"/>
+<path class="electrical" d="M557 177V157H641V263H696"/>
+<path class="neutral" d="M736 286V348H209V307"/>
 <!-- BEAKER / SALTWATER -->
 <path d="M270 167V329Q270 338 281 338H622Q633 338 633 329V167" fill="url(#glassWall)" stroke="#96d9ec" stroke-width="3.5"/>
 <path d="M273 222H630V328Q630 335 622 335H281Q273 335 273 328Z" fill="url(#saltwater)"/>
@@ -144,17 +144,13 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <text class="secondary-label" x="450" y="294" text-anchor="middle">浸かる面積が変わる</text>
 <text class="secondary-label" x="575" y="154">右銅板：固定</text>
 <!-- BULB: same asset and layered glow philosophy as current 8-bit dimmer -->
-<circle id="lampHalo" cx="730" cy="174" r="99" fill="url(#bulbGlow)" opacity=".48"/>
-<image id="di-bulb" href="assets/Light.webp" x="643" y="102" width="174" height="190" preserveAspectRatio="xMidYMid meet"/>
-<circle id="lampGas" cx="730" cy="175" r="53" fill="url(#bulbGlow)" opacity=".5" style="mix-blend-mode:screen;pointer-events:none"/>
-<ellipse id="lampFilament" cx="730" cy="181" rx="14" ry="10" fill="#fff0a6" opacity=".5" style="mix-blend-mode:screen;pointer-events:none"/>
-<circle cx="703" cy="267" r="4.2" fill="#ffd18a" stroke="#73411d" stroke-width="1.5"/>
-<circle cx="735" cy="286" r="4.2" fill="#c4d6df" stroke="#425a67" stroke-width="1.5"/>
-<text class="secondary-label" x="816" y="268">ねじ部</text>
-<text class="secondary-label" x="816" y="292">中心接点</text>
+<circle id="lampHalo" cx="730" cy="150" r="113" fill="url(#bulbGlow)" opacity=".48"/>
+<image id="di-bulb" href="assets/Light.webp" x="621" y="66" width="218" height="232" preserveAspectRatio="xMidYMid meet"/>
+<circle id="lampGas" cx="730" cy="153" r="62" fill="url(#bulbGlow)" opacity=".5" style="mix-blend-mode:screen;pointer-events:none"/>
+<ellipse id="lampFilament" cx="730" cy="158" rx="16" ry="11" fill="#fff0a6" opacity=".5" style="mix-blend-mode:screen;pointer-events:none"/>
+<circle cx="696" cy="263" r="4.2" fill="#ffd18a" stroke="#73411d" stroke-width="1.5"/>
+<circle cx="736" cy="286" r="4.2" fill="#c4d6df" stroke="#425a67" stroke-width="1.5"/>
 <text class="primary-label" x="730" y="314" text-anchor="middle">電球</text>
-<!-- KEY: avoid mistaking rope for the electrical wire -->
-<g transform="translate(796 65)"><path class="cable" d="M0 0H28"/><text class="secondary-label" x="0" y="25">ワイヤー</text><path class="electrical" d="M0 42H28"/><text class="secondary-label" x="0" y="67">電気配線</text></g>
 </svg>
 <aside class="di-wave-panel" aria-labelledby="di-wave-title">
 <h3 id="di-wave-title">電球にかかる交流電圧</h3>
