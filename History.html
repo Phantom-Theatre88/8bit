@@ -122,7 +122,7 @@ function updateCards(){
    c=document.createElement("button");c.type="button";c.className="card";
    c.innerHTML='<div class="pic">'+(f.data.image?'<img src="'+f.data.image+'" alt="" loading="lazy" decoding="async">':(f.data.icon||'📜'))+'</div><strong>'+f.data.title+'</strong><small>'+f.data.teaser+'</small>';
    c.dataset.born=String(now);stage.appendChild(c);cardByKey.set(f.id,c);
-   c.addEventListener("click",()=>{if(performance.now()-lastMoved<250)return;const i=cards.indexOf(c);if(i<0)return;const count=cards.length;const k=Math.round((rotation-i)/count);target=i+k*count;lastSelected=f[0];title.textContent=f[0];desc.textContent="動作確認用の架空カードです。年代："+yearLabel(f[3])+"〜"+yearLabel(f[4])+"。実際の史実データではありません。"});
+   c.addEventListener("click",()=>{if(performance.now()-lastMoved<250)return;const i=cards.indexOf(c);if(i<0)return;const count=cards.length;const k=Math.round((rotation-i)/count);target=i+k*count;lastSelected=f.id;showDetail(f.data)});
   }cards.push(c)});
  // Preserve the existing ring angle; do not reset to zero on every year boundary.
  if(cards.length){rotation=((rotation%cards.length)+cards.length)%cards.length;target=rotation}else{rotation=0;target=0}
