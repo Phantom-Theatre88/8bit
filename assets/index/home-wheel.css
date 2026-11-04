@@ -551,3 +551,35 @@ a.lesson-tile:focus-visible { outline: 2px solid var(--theme-accent); outline-of
   .home-wheel-panel .wheel-name {font-size:17px;}
   .home-wheel-panel .wheel-icon {flex-basis:23px;width:23px;height:23px;}
 }
+
+/* 2026-11-04: TOP viewport fit and desktop rotary wheel correction.
+   Keep the approved 40:60 composition and all seven existing theme images. */
+@media (min-width:761px) {
+  .home-workspace {
+    height:clamp(370px, calc(100dvh - 425px), 500px);
+  }
+}
+.home-wheel-panel { perspective:900px; touch-action:none; }
+.home-wheel-panel .wheel-list {
+  perspective:900px;
+  transform-style:preserve-3d;
+  -webkit-transform-style:preserve-3d;
+}
+.home-wheel-panel .wheel-theme {
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  transform:translate3d(0,var(--wheel-y,0px),var(--wheel-z,0px)) rotateX(var(--wheel-rotate,0deg)) scale(var(--scale,1));
+  opacity:var(--item-opacity,1);
+  transform-origin:center center;
+  will-change:transform,opacity;
+}
+.home-wheel-panel .wheel-theme:not(.is-selected) {
+  filter:brightness(.88);
+}
+.home-wheel-panel.is-dragging,
+.home-wheel-panel.is-dragging .wheel-theme {
+  cursor:grabbing;
+}
+@media (max-width:760px) {
+  .home-wheel-panel { touch-action:none; }
+}
