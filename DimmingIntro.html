@@ -25,7 +25,19 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 .di-demo-head .di-helper{color:#b7d1de;font-size:15px}
 .di-explanation{margin:2px 0 8px;padding:7px 12px;border-left:3px solid #ffbe79;background:#182834;color:#e7f1f6;font-size:16px;line-height:1.48}
 .di-explanation strong{color:#ffd191}
-.di-mechanism{display:block;width:100%;height:clamp(290px,39dvh,385px);min-height:290px}
+.di-workspace{display:grid;grid-template-columns:minmax(0,7fr) minmax(270px,3fr);gap:12px;align-items:stretch;min-width:0}
+.di-workspace .di-mechanism{display:block;width:100%;height:clamp(290px,39dvh,385px);min-height:290px}
+.di-wave-panel{background:linear-gradient(180deg,#172b39,#111d28);border:1px solid #496273;border-radius:8px;min-width:0;padding:13px 12px 12px;display:flex;flex-direction:column;gap:8px;justify-content:center}
+.di-wave-panel h3{font-size:18px;color:#f5faff;margin:0;line-height:1.3}
+.di-wave-panel .wave-sub{font-size:15px;color:#c0d4e1;margin:0}
+.di-wave-svg{display:block;width:100%;height:auto;min-height:160px}
+.di-wave-svg text{font-family:"Hiragino Sans","Yu Gothic",Meiryo,system-ui,sans-serif;font-size:15px;fill:#bcd2df}
+.di-wave-svg .wave-actual{fill:none;stroke:#ffc47d;stroke-width:3.5;stroke-linejoin:round;stroke-linecap:round}
+.di-wave-svg .wave-reference{fill:none;stroke:#8ca7b7;stroke-opacity:.35;stroke-width:2;stroke-dasharray:4 6}
+.di-wave-svg .wave-area{fill:#ffbc68;fill-opacity:.2}
+.di-wave-explanation{font-size:16px;line-height:1.48;color:#f0f6f9;margin:0}
+.di-wave-explanation strong{color:#ffd18b}
+.di-wave-caption{font-size:14px;color:#abc5d4;margin:0;line-height:1.45}
 .di-mechanism text{font-family:"Hiragino Sans","Yu Gothic",Meiryo,system-ui,sans-serif}
 .di-mechanism .primary-label{font-size:19px;font-weight:800;fill:#f2f8fb}
 .di-mechanism .secondary-label{font-size:16px;fill:#bdd1df}
@@ -51,9 +63,9 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 .di-next p{margin:0;font-size:15px;color:#d4e4ec}
 .di-next a{font-size:16px;font-weight:800;color:#081820;text-decoration:none;background:#ffbf73;border-radius:6px;padding:10px 12px;text-align:center}
 .di-note{font-size:14px;color:#bcd0db;margin:0 1px;line-height:1.5}
-@media(max-height:850px) and (min-width:851px){body.dimming-intro-page .dimming-lesson{gap:8px;padding:8px 13px}.di-mechanism{height:clamp(280px,40dvh,330px)}.di-teacher{min-height:88px}.di-teacher img{height:80px}.di-demo-head{margin-bottom:5px}}
-@media(max-width:850px){.di-footer{grid-template-columns:1fr}.di-mechanism{height:auto;min-height:0;aspect-ratio:900/375}.di-demo{padding:0 9px 8px}.di-demo-head{margin:0 -9px 7px;padding:9px}.di-demo-head{display:block}.di-demo-head .di-helper{display:block}.di-conclusion{flex-wrap:wrap}}
-@media(max-width:560px){body.dimming-intro-page .dimming-lesson{padding:9px;gap:9px}.di-demo{overflow-x:auto}.di-mechanism{min-width:700px;aspect-ratio:900/375}.di-title h1{font-size:23px}.di-teacher img{width:75px;height:90px}.di-teacher{gap:8px}}
+@media(max-height:850px) and (min-width:851px){body.dimming-intro-page .dimming-lesson{gap:8px;padding:8px 13px}.di-workspace .di-mechanism{height:clamp(280px,40dvh,330px)}.di-teacher{min-height:88px}.di-teacher img{height:80px}.di-demo-head{margin-bottom:5px}}
+@media(max-width:850px){.di-workspace{grid-template-columns:1fr}.di-footer{grid-template-columns:1fr}.di-workspace .di-mechanism{height:auto;min-height:0;aspect-ratio:900/375}.di-demo{padding:0 9px 8px}.di-demo-head{margin:0 -9px 7px;padding:9px}.di-demo-head{display:block}.di-demo-head .di-helper{display:block}.di-conclusion{flex-wrap:wrap}}
+@media(max-width:560px){body.dimming-intro-page .dimming-lesson{padding:9px;gap:9px}.di-demo{overflow-x:auto}.di-workspace .di-mechanism{min-width:700px;aspect-ratio:900/375}.di-title h1{font-size:23px}.di-teacher img{width:75px;height:90px}.di-teacher{gap:8px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -67,6 +79,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <section class="di-panel di-demo" aria-labelledby="demo-title">
 <div class="di-demo-head"><h2 id="demo-title">水抵抗器で、電球の明るさを変える</h2><span class="di-helper">フェーダーを上下してみよう</span></div>
 <p class="di-explanation"><strong>フェーダーを上げる</strong>と、ワイヤーで銅板が下がります。塩水に浸かる面積が増えると電流が流れやすくなり、電球が明るくなります。</p>
+<div class="di-workspace">
 <svg class="di-mechanism" viewBox="0 0 900 375" role="group" aria-label="フェーダーを上げると、滑車を通したワイヤーが左の銅板を下げ、水抵抗器を通る電流が増えて電球が明るくなる仕組み">
 <defs>
 <linearGradient id="glassWall" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#a6e8f7" stop-opacity=".2"/><stop offset=".12" stop-color="#a6e8f7" stop-opacity=".02"/><stop offset=".86" stop-color="#c8f5ff" stop-opacity=".02"/><stop offset="1" stop-color="#c8f5ff" stop-opacity=".32"/></linearGradient>
@@ -143,6 +156,23 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <!-- KEY: avoid mistaking rope for the electrical wire -->
 <g transform="translate(796 65)"><path class="cable" d="M0 0H28"/><text class="secondary-label" x="0" y="25">ワイヤー</text><path class="electrical" d="M0 42H28"/><text class="secondary-label" x="0" y="67">電気配線</text></g>
 </svg>
+<aside class="di-wave-panel" aria-labelledby="di-wave-title">
+<h3 id="di-wave-title">電球にかかる交流電圧</h3>
+<p class="wave-sub">フェーダーに連動して、波の高さが変わる</p>
+<svg class="di-wave-svg" viewBox="0 0 340 210" role="img" aria-label="水抵抗式の調光を概念的に表した交流電圧波形。周波数は同じで、振幅が変化する">
+<path d="M19 104H321" stroke="#83a1b4" stroke-width="1.7" stroke-dasharray="5 5"/>
+<path d="M19 28V181" stroke="#526d7c" stroke-width="1.5"/>
+<path id="di-wave-reference" class="wave-reference" d=""/>
+<path id="di-wave-area" class="wave-area" d=""/>
+<path id="di-wave-actual" class="wave-actual" d=""/>
+<text x="24" y="20">＋</text>
+<text x="24" y="199">－</text>
+<text x="325" y="108" text-anchor="end">0</text>
+</svg>
+<p class="di-wave-explanation"><strong id="di-wave-message">波の高さが変わる</strong>と、電球の明るさも変わる。</p>
+<p class="di-wave-caption">※波の塗り面積は電力の変化をイメージする表現。実測波形や電力の計算図ではありません。</p>
+</aside>
+</div>
 <div class="di-conclusion"><p id="di-action">フェーダーを上げる → 銅板が下がる → 電球が明るくなる</p><output id="di-readout" aria-live="off">明るさの指示 50%</output></div>
 </section>
 <div class="di-footer">
@@ -168,6 +198,34 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
   const bulb=document.getElementById('di-bulb');
   const readout=document.getElementById('di-readout');
   const action=document.getElementById('di-action');
+  const wave=document.getElementById('di-wave-actual');
+  const waveArea=document.getElementById('di-wave-area');
+  const waveReference=document.getElementById('di-wave-reference');
+  const waveMessage=document.getElementById('di-wave-message');
+  // Two full AC cycles are always visible: only amplitude changes, not frequency.
+  function sinePath(amplitude){
+    const pts=[];
+    for(let i=0;i<=160;i++){
+      const x=19+302*i/160, y=104-amplitude*Math.sin(4*Math.PI*i/160);
+      pts.push((i===0?'M':'L')+x.toFixed(2)+' '+y.toFixed(2));
+    }
+    return pts.join(' ');
+  }
+  function areaPath(amplitude){
+    let d='';
+    for(let lobe=0;lobe<4;lobe++){
+      const x0=19+302*lobe/4;
+      d+='M'+x0.toFixed(2)+' 104 ';
+      for(let j=0;j<=40;j++){
+        const i=lobe*40+j;
+        const x=19+302*i/160, y=104-amplitude*Math.sin(4*Math.PI*i/160);
+        d+='L'+x.toFixed(2)+' '+y.toFixed(2)+' ';
+      }
+      d+='Z ';
+    }
+    return d;
+  }
+  waveReference.setAttribute('d',sinePath(69));
   let level=.5;
   const clamp=(v)=>Math.max(0,Math.min(1,v));
   function render(v){
@@ -185,6 +243,11 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     gas.setAttribute('opacity',(.02+.87*glow).toFixed(2));
     filament.setAttribute('opacity',(.01+.96*glow).toFixed(2));
     bulb.style.filter='brightness('+(0.54+glow*.82).toFixed(2)+') drop-shadow(0 0 '+(3+glow*17).toFixed(1)+'px rgba(255,173,65,'+(.12+.76*glow).toFixed(2)+'))';
+    // Conceptual resistive dimming: preserve waveform period, vary its amplitude only.
+    const amplitude=69*level;
+    wave.setAttribute('d',sinePath(amplitude));
+    waveArea.setAttribute('d',areaPath(amplitude));
+    waveMessage.textContent=level>=.7?'波の高さが大きい':level>.3?'波の高さが小さくなる':'波の高さが低い';
     const value=Math.round(level*100);
     touch.setAttribute('aria-valuenow',String(value));
     touch.setAttribute('aria-valuetext',value+'パーセントの調光指示');
