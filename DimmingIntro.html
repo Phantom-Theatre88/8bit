@@ -22,14 +22,7 @@ body.dimming-intro-page .di-panel{box-sizing:border-box;flex:none;border:1px sol
 .di-panel-header{display:flex;align-items:center;justify-content:space-between;gap:9px;padding:7px 12px;border-bottom:1px solid #465562}
 .di-panel-header h2{font-size:17px;line-height:1.3;margin:0;color:#fff}
 .di-panel-header span{font-size:14px;color:#b8c6d0}
-body.dimming-intro-page .di-stage{display:block!important;height:auto!important;min-height:0!important;padding-bottom:8px!important}
-body.dimming-intro-page .di-scenes{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;padding:8px 11px 0;min-height:147px!important;height:147px!important;overflow:visible!important}
-body.dimming-intro-page .di-scene{position:relative;display:block!important;box-sizing:border-box;width:100%!important;height:139px!important;min-height:139px!important;max-height:139px!important;overflow:hidden!important;border:1px solid #4f6070;border-radius:6px;background:#091016}
-.di-scene-label{position:absolute;z-index:4;top:7px;left:11px;color:#fff;font-weight:800;font-size:15px;background:#111923cf;border:1px solid #657482;padding:3px 9px;border-radius:4px}
-.di-scene svg{display:block;width:100%;height:100%}
-.di-stage-note{margin:6px 12px 0;color:#dce7ee;font-size:15px;line-height:1.45}
-.di-stage-note strong{color:#ffd18d}
-body.dimming-intro-page .di-lower{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(270px,.75fr);gap:9px;min-height:0;flex:none}
+body.dimming-intro-page .di-lower{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(270px,.65fr);gap:9px;min-height:0;flex:none}
 body.dimming-intro-page .di-device{display:flex;flex-direction:column;min-height:0}
 .di-device-content{padding:8px 11px 3px}
 .di-device-content .lead{margin:0 0 3px;font-weight:800;font-size:16px;color:#fff}
@@ -63,9 +56,9 @@ body.dimming-intro-page .di-teacher{display:grid;grid-template-columns:100px 1fr
 .di-teacher .words{font-size:16px;color:#f3f6fa;line-height:1.45}
 .di-teacher .words strong{display:block;color:#ffd18b;margin-bottom:3px}
 .di-teacher a{font-size:14px;color:#c9edff;text-decoration:none;border:1px solid #587586;border-radius:5px;padding:8px;white-space:nowrap}
-@media(max-height:790px) and (min-width:900px){body.dimming-intro-page .dimming-lesson{gap:6px;padding:7px 10px}body.dimming-intro-page .di-scenes{height:147px!important;min-height:147px!important}body.dimming-intro-page .di-scene{height:139px!important;min-height:139px!important;max-height:139px!important}body.dimming-intro-page .di-circuit{height:175px;max-height:175px}.di-purpose .sequence span{padding:4px 8px}.di-teacher img{height:83px}.di-teacher{min-height:90px!important}}
+@media(max-height:790px) and (min-width:900px){body.dimming-intro-page .dimming-lesson{gap:6px;padding:7px 10px}body.dimming-intro-page .di-circuit{height:175px;max-height:175px}.di-purpose .sequence span{padding:4px 8px}.di-teacher img{height:83px}.di-teacher{min-height:90px!important}}
 @media(max-width:850px){body.dimming-intro-page .di-lower{grid-template-columns:1fr}.di-purpose .next{margin-top:2px}body.dimming-intro-page .di-teacher{grid-template-columns:76px 1fr}.di-teacher img{width:70px;height:80px}.di-teacher a{grid-column:2;justify-self:start}}
-@media(max-width:540px){body.dimming-intro-page .di-scenes{height:133px!important;min-height:133px!important;gap:6px;padding:6px}body.dimming-intro-page .di-scene{height:127px!important;min-height:127px!important;max-height:127px!important}.di-scene-label{font-size:14px;padding:2px 5px}.di-panel-header{display:block}.di-panel-header span{display:block;margin-top:3px}.di-title h1{font-size:22px}.di-adjust{flex-wrap:wrap}.di-adjust input{flex-basis:55%}}
+@media(max-width:540px){.di-panel-header{display:block}.di-panel-header span{display:block;margin-top:3px}.di-title h1{font-size:22px}.di-adjust{flex-wrap:wrap}.di-adjust input{flex-basis:55%}}
 </style>
 </head>
 <body class="dimming-intro-page eightbit-unified-width">
@@ -73,10 +66,7 @@ body.dimming-intro-page .di-teacher{display:grid;grid-template-columns:100px 1fr
 <script src="next-ui-console-header.js?v=dimming-intro-1"></script>
 
 <main class="dimming-lesson">
-<header class="di-title"><p class="eyebrow">DIMMING / 調光の入口</p><h1>調光とは？ ― 光の明るさが、舞台を変える。</h1><p>舞台では光の強さを変えることで、時間・空間・感情の伝わり方まで変えられます。</p></header>
-<section class="di-panel di-stage" aria-labelledby="stageTitle"><div class="di-panel-header"><h2 id="stageTitle">同じ舞台でも、光の明るさで印象が変わる</h2><span>人物も舞台も同じ。変えるのは光の強さだけ。</span></div>
-<div class="di-scenes"><div class="di-scene" role="img" aria-label="明るい舞台。同じ舞台、同じ位置の人物。照明の強さだけが強い。"><span class="di-scene-label">明るい舞台</span><svg viewBox="0 0 520 165" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><radialGradient id="poolB"><stop stop-color="#ffd6a0" stop-opacity=".8"/><stop offset="1" stop-color="#ecab55" stop-opacity="0"/></radialGradient><linearGradient id="beamB" x1="0" y1="0" x2="0.3" y2="1"><stop stop-color="#f9ce86" stop-opacity=".5"/><stop offset="1" stop-color="#ffaf61" stop-opacity="0"/></linearGradient></defs><rect width="520" height="165" fill="#090d15"/><path d="M32 0 H488 L467 125 H53Z" fill="#15202a"/><path d="M0 0H70V148H0ZM450 0H520V148H450Z" fill="#3a1e24"/><path d="M65 0 Q38 57 64 133M454 0 Q481 67 454 133" fill="none" stroke="#77434c" stroke-width="10"/><path d="M76 134H444V151H76Z" fill="#28333d"/><ellipse cx="260" cy="130" rx="155" ry="25" fill="url(#poolB)"/><path d="M213 0 L312 0 L345 125 H177Z" fill="url(#beamB)"/><path d="M256 63c-25 0-25 32-8 40l-9 43h43l-9-43c20-9 15-40-7-40Z" fill="#d2bdab"/><circle cx="260" cy="53" r="15" fill="#d9aa86"/><path d="M250 89L234 120M272 89L290 122" stroke="#bdaca0" stroke-width="8"/><path d="M248 141L245 158M273 141L276 158" stroke="#222830" stroke-width="10"/><path d="M80 149H440" stroke="#53606a" stroke-width="2"/><rect x="75" y="150" width="370" height="15" fill="#10141a"/></svg></div><div class="di-scene" role="img" aria-label="暗い舞台。同じ舞台、同じ位置の人物。照明の強さだけが弱い。"><span class="di-scene-label">暗い舞台</span><svg viewBox="0 0 520 165" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><radialGradient id="poolD"><stop stop-color="#ffd6a0" stop-opacity=".13"/><stop offset="1" stop-color="#ecab55" stop-opacity="0"/></radialGradient><linearGradient id="beamD" x1="0" y1="0" x2="0.3" y2="1"><stop stop-color="#f9ce86" stop-opacity=".05"/><stop offset="1" stop-color="#ffaf61" stop-opacity="0"/></linearGradient></defs><rect width="520" height="165" fill="#090d15"/><path d="M32 0 H488 L467 125 H53Z" fill="#15202a"/><path d="M0 0H70V148H0ZM450 0H520V148H450Z" fill="#3a1e24"/><path d="M65 0 Q38 57 64 133M454 0 Q481 67 454 133" fill="none" stroke="#77434c" stroke-width="10"/><path d="M76 134H444V151H76Z" fill="#28333d"/><ellipse cx="260" cy="130" rx="155" ry="25" fill="url(#poolD)"/><path d="M213 0 L312 0 L345 125 H177Z" fill="url(#beamD)"/><path d="M256 63c-25 0-25 32-8 40l-9 43h43l-9-43c20-9 15-40-7-40Z" fill="#232b34"/><circle cx="260" cy="53" r="15" fill="#2c3137"/><path d="M250 89L234 120M272 89L290 122" stroke="#252d36" stroke-width="8"/><path d="M248 141L245 158M273 141L276 158" stroke="#222830" stroke-width="10"/><path d="M80 149H440" stroke="#53606a" stroke-width="2"/><rect x="75" y="150" width="370" height="15" fill="#10141a"/></svg></div></div>
-<p class="di-stage-note"><strong>調光は、ただ明るくするための機能ではありません。</strong> 光の強さは、時間の流れや物語の空気を表現する大切な要素です。</p></section>
+<header class="di-title"><p class="eyebrow">DIMMING / 調光の入口</p><h1>調光とは？ ― 光の明るさが、舞台を変える。</h1><p>調光とは、光の明るさを変えること。舞台では、その変化で時間・空間・感情を表現できます。</p></header>
 <div class="di-lower">
 <section class="di-panel di-device" aria-labelledby="deviceTitle"><div class="di-panel-header"><h2 id="deviceTitle">どうやって電球の明るさを変える？</h2><span>塩水を使う水抵抗式の原理図</span></div>
 <div class="di-device-content"><p class="lead">電球に届く電力を変えると、明るさが変わる。</p><p class="detail">左の銅板は同じ大きさのまま上下し、塩水に浸かる面積だけが変わります。</p>
@@ -102,12 +92,12 @@ body.dimming-intro-page .di-teacher{display:grid;grid-template-columns:100px 1fr
 <div class="di-adjust"><label for="plateSlider">銅板の深さ</label><input id="plateSlider" type="range" min="0" max="100" value="62" step="1" aria-label="左の銅板を上下する"><output id="plateResult" for="plateSlider" aria-live="off">やや明るい</output></div>
 <p class="di-note" id="plateHint">左の銅板を下げると、浸かる面積が増えて電流が流れやすくなります。</p></section>
 <aside class="di-panel di-purpose"><h2>調光を知る、最初の一歩</h2>
-<p class="emphasis">大切なのは、光の強さを思いどおりに変えられること。</p>
+<p class="emphasis">光の明るさを自在に変えることが、舞台表現を支えます。</p>
 <div class="sequence"><span>① 明るさを変える</span><span>② 舞台の印象が変わる</span><span>③ 時間・空間・感情を表現できる</span></div>
 <p>水抵抗式は、電気を流れにくくすることで調光する一例。実際の調光器には、変圧器式やサイリスタ式などもあります。<br>※原理を示す教材図であり、実際に塩水を使って通電する実験はしないでください。</p>
 <a class="next" href="Top.html?tab=sim8bit">8-bit調光卓を見る →</a></aside>
 </div>
-<section class="di-panel di-teacher"><img src="assets/wave_teacher_transparent.svg?v=teacher-standard-20261014" alt="照明図鑑の先生"><div class="words"><strong>先生のひとこと</strong>同じ舞台なのに、明るさが違うと印象が変わるでしょう？ 調光は、光で物語を伝えるための大切な技術なんだよ。</div><a href="Waveforms.html">交流の波形へ →</a></section>
+<section class="di-panel di-teacher"><img src="assets/wave_teacher_transparent.svg?v=teacher-standard-20261014" alt="照明図鑑の先生"><div class="words"><strong>先生のひとこと</strong>光の明るさを変えるだけでも、舞台の時間や空気を表現できるんだよ。まずは電球の明るさが変わる仕組みを見てみよう。</div><a href="Waveforms.html">交流の波形へ →</a></section>
 </main>
 
 <script>
