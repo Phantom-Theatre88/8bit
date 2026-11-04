@@ -59,6 +59,14 @@ body.dimming-intro-page .di-teacher{display:grid;grid-template-columns:100px 1fr
 @media(max-height:790px) and (min-width:900px){body.dimming-intro-page .dimming-lesson{gap:6px;padding:7px 10px}body.dimming-intro-page .di-circuit{height:205px;max-height:205px}.di-purpose .sequence span{padding:4px 8px}.di-teacher img{height:83px}.di-teacher{min-height:90px!important}}
 @media(max-width:850px){body.dimming-intro-page .di-lower{grid-template-columns:1fr}.di-purpose .next{margin-top:2px}body.dimming-intro-page .di-teacher{grid-template-columns:76px 1fr}.di-teacher img{width:70px;height:80px}.di-teacher a{grid-column:2;justify-self:start}}
 @media(max-width:540px){.di-panel-header{display:block}.di-panel-header span{display:block;margin-top:3px}.di-title h1{font-size:22px}.di-adjust{flex-wrap:wrap}.di-adjust input{flex-basis:55%}}
+.di-vertical-ui{display:flex;align-items:center;gap:8px;min-width:0}
+.di-vertical-ui .di-circuit{flex:1;min-width:0}
+.di-fader{width:93px;flex:none;display:flex;align-items:center;flex-direction:column;gap:4px;background:#122330;border:1px solid #587182;border-radius:7px;padding:7px 5px}
+.di-fader label{font-size:15px;font-weight:800;color:#ffcc84;text-align:center}
+.di-fader .dir{font-size:14px;color:#d2e8f1}
+.di-fader input{writing-mode:vertical-lr;direction:ltr;accent-color:#2ac7ff;width:42px;height:145px;cursor:ns-resize}
+.di-fader output{font-size:14px;color:#fff;font-weight:800;white-space:nowrap}
+@media(max-width:540px){.di-fader{width:76px}.di-fader input{height:115px}.di-fader label{font-size:14px}}
 </style>
 </head>
 <body class="dimming-intro-page eightbit-unified-width">
@@ -70,7 +78,7 @@ body.dimming-intro-page .di-teacher{display:grid;grid-template-columns:100px 1fr
 <div class="di-lower">
 <section class="di-panel di-device" aria-labelledby="deviceTitle"><div class="di-panel-header"><h2 id="deviceTitle">どうやって電球の明るさを変える？</h2><span>塩水を使う水抵抗式の原理図</span></div>
 <div class="di-device-content"><p class="lead">電球に届く電力を変えると、明るさが変わる。</p><p class="detail">左の銅板を上下すると、塩水に浸かる面積が変わり、電球の明るさが変化します。</p>
-<svg class="di-circuit" viewBox="0 0 560 205" role="img" aria-label="電源から左の上下する銅板、塩水、右の固定銅板、電球、電源へ戻る順の直列回路。銅板の大きさは一定。">
+<div class="di-vertical-ui"><div class="di-fader"><label for="plateSlider">銅板を上下</label><span class="dir">浅い ▲</span><input id="plateSlider" type="range" min="0" max="100" value="62" step="1" aria-label="上が浅く、下が深い銅板の上下操作"><span class="dir">深い ▼</span><output id="plateResult" for="plateSlider">やや明るい</output></div><svg class="di-circuit" viewBox="0 0 560 205" role="img" aria-label="電源から左の上下する銅板、塩水、右の固定銅板、電球、電源へ戻る順の直列回路。銅板の大きさは一定。">
 <defs><radialGradient id="di-halo"><stop stop-color="#ffcf80" stop-opacity=".95"/><stop offset=".42" stop-color="#ffa73f" stop-opacity=".5"/><stop offset="1" stop-color="#ff9d2a" stop-opacity="0"/></radialGradient><radialGradient id="di-glass"><stop stop-color="#fff6c7" stop-opacity=".88"/><stop offset=".3" stop-color="#ffdd7b" stop-opacity=".55"/><stop offset=".7" stop-color="#ff9600" stop-opacity=".19"/><stop offset="1" stop-color="#ff9600" stop-opacity="0"/></radialGradient><linearGradient id="saltDepth" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#49c2ea" stop-opacity=".22"/><stop offset="1" stop-color="#12668e" stop-opacity=".61"/></linearGradient><linearGradient id="copperFace" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#995020"/><stop offset=".4" stop-color="#e8a55d"/><stop offset=".76" stop-color="#c47b3d"/><stop offset="1" stop-color="#8a4723"/></linearGradient><clipPath id="submergedPart"><rect x="111" y="101" width="282" height="75"/></clipPath></defs>
 <path class="di-wire" d="M47 68V25H174"/><path class="di-wire" id="movingLead" d="M174 25V63"/>
 <path class="di-wire" d="M339 77V25H477V65"/><path class="di-return" d="M477 133V184H47V125"/>
@@ -97,7 +105,7 @@ body.dimming-intro-page .di-teacher{display:grid;grid-template-columns:100px 1fr
 <text class="di-label" x="477" y="162" text-anchor="middle">電球</text>
 <text class="di-small" x="254" y="202" text-anchor="middle">交流電源 → 左電極 → 塩水 → 右電極 → 電球 → 電源</text>
 </svg></div>
-<div class="di-adjust"><label for="plateSlider">銅板の深さ</label><input id="plateSlider" type="range" min="0" max="100" value="62" step="1" aria-label="左の銅板を上下する"><output id="plateResult" for="plateSlider" aria-live="off">やや明るい</output></div>
+
 <p class="di-note" id="plateHint">左の銅板を下げると、浸かる面積が増えて電流が流れやすくなります。</p></section>
 <aside class="di-panel di-purpose"><h2>調光を知る、最初の一歩</h2>
 <p class="emphasis">光の明るさを自在に変えることが、舞台表現を支えます。</p>
