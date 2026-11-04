@@ -583,3 +583,54 @@ a.lesson-tile:focus-visible { outline: 2px solid var(--theme-accent); outline-of
 @media (max-width:760px) {
   .home-wheel-panel { touch-action:none; }
 }
+
+/* 2026-11-04 / readability pass: >=14 CSS px (~10.5pt at 96dpi).
+   Redistribute height instead of reducing font sizes. */
+@media (min-width:761px) {
+  .home-workspace { height:clamp(390px, calc(100dvh - 395px), 520px); }
+}
+.wheel-heading,.wheel-counter,.wheel-hint { font-size:14px; }
+.wheel-heading { top:12px; }
+.wheel-hint { bottom:12px; }
+.home-wheel-panel .wheel-english { font-size:14px; line-height:1.15; letter-spacing:.04em; }
+.home-wheel-panel .wheel-name { font-size:19px; }
+.home-wheel-panel .wheel-number { font-size:28px; }
+.home-wheel-panel .wheel-theme { min-width:0; }
+.home-wheel-panel .wheel-theme-copy { gap:2px; }
+.home-theme-detail .detail-hero { flex:0 0 39%; padding:15px 24px; }
+.home-theme-detail .detail-hero-copy { max-width:82%; }
+.home-theme-detail .detail-title { font-size:clamp(26px,2.4vw,34px); }
+.home-theme-detail .detail-serial,
+.home-theme-detail .detail-english,
+.home-theme-detail .detail-desc,
+.home-theme-detail .detail-intro { font-size:14px; line-height:1.4; }
+.home-theme-detail .detail-desc { margin-top:7px; }
+.home-theme-detail .detail-intro { margin-top:4px; }
+.home-theme-detail .detail-lessons { padding:10px 15px 12px; }
+.home-theme-detail .detail-lessons-heading { font-size:15px; margin-bottom:8px; }
+.home-theme-detail .lesson-tiles { gap:8px; }
+.home-theme-detail .lesson-tile { min-height:76px; padding:9px 12px; }
+.home-theme-detail .lesson-tile-name { font-size:16px; line-height:1.3; }
+.home-theme-detail .lesson-tile-note { font-size:14px; line-height:1.3; margin-top:3px; white-space:normal; }
+.home-theme-detail .lesson-tile-bottom { font-size:19px; }
+@media(max-width:1120px) and (min-width:761px) {
+  .home-theme-detail .lesson-tile-name { font-size:15px; }
+  .home-wheel-panel .wheel-name { font-size:18px; }
+  .home-theme-detail .detail-hero-copy { max-width:88%; }
+}
+@media(max-width:760px) {
+  .home-workspace { height:auto; }
+  .home-wheel-panel { height:390px; }
+  .home-detail-area { height:520px; }
+  .home-theme-detail .detail-hero { flex-basis:41%; }
+  .home-theme-detail .detail-hero-copy { max-width:94%; }
+  .home-theme-detail .detail-serial,
+  .home-theme-detail .detail-english,
+  .home-theme-detail .detail-desc,
+  .home-theme-detail .detail-intro { font-size:14px; }
+  .home-wheel-panel .wheel-theme { height:74px; margin-top:-37px; }
+  .home-wheel-panel .wheel-name { font-size:17px; }
+  .home-wheel-panel .wheel-english { font-size:14px; }
+  .home-theme-detail .lesson-tile-name { font-size:15px; }
+  .home-theme-detail .lesson-tile-note { font-size:14px; }
+}
