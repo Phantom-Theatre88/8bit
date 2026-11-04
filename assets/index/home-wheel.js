@@ -24,7 +24,7 @@
   function stepSize() {
     // Five visible rows: center, two above and two below.
     // Allow five curved rows without overlapping the heading or controls.
-    return Math.max(108, Math.min(210, (wheel.clientHeight - 112) / (2 * Math.sin(.84))));
+    return Math.max(108, Math.min(210, (wheel.clientHeight - 160) / (2 * Math.sin(.84))));
   }
   function signedOffset(index) {
     let offset = index - selected;
