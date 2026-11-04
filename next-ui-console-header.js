@@ -22,9 +22,9 @@
           '<button class="next-ui-page-button" type="button"'+(target ? ' data-nav-target="'+target+'"' : ' disabled')+'>'+(i ? '次 ▶' : '◀ 前')+'</button>'
         ).join('');
   root.outerHTML =
-    '<header class="next-ui-header next-ui-console-header" aria-label="照明図鑑（照明教科書）共通ナビゲーション">'+
+    '<header class="next-ui-header next-ui-console-header" aria-label="8bit図鑑 共通ナビゲーション">'+
       '<div class="next-ui-header-top">'+
-        '<a class="next-ui-brand" href="index.html" aria-label="照明図鑑（照明教科書）トップへ"></a>'+
+        '<a class="next-ui-brand" href="index.html" aria-label="8bit Lighting Theatre トップへ"></a>'+
         '<nav class="next-ui-category-tabs" aria-label="教材の大分類"></nav>'+
         '<div class="next-ui-tools" aria-label="教材ページ移動">'+
           '<div class="next-ui-page-controls">'+controls+'</div>'+
@@ -42,15 +42,15 @@
   const activeCategory = isTop ? 'dimming' : (categoryForPage[file] || '');
   const brand = header.querySelector('.next-ui-brand');
   if (brand) {
-    brand.setAttribute('aria-label','照明図鑑（照明教科書）トップへ');
+    brand.setAttribute('aria-label','8bit Lighting Theatre トップへ');
     brand.replaceChildren();
-    const name = document.createElement('span');
-    name.className = 'lighting-brand-name';
-    name.textContent = '照明図鑑';
-    const subtitle = document.createElement('small');
-    subtitle.className = 'lighting-brand-subtitle';
-    subtitle.textContent = '照明教科書';
-    brand.append(name, subtitle);
+    const img = document.createElement('img');
+    img.src = 'assets/index/8bit-lighting-theatre-logo-c.svg';
+    img.alt = '8bit Lighting Theatre';
+    img.width = 530;
+    img.height = 239;
+    img.decoding = 'async';
+    brand.append(img);
   }
   const nav = header.querySelector('.next-ui-category-tabs');
   if (!nav) return;
