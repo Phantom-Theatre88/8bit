@@ -42,6 +42,9 @@ body.dimming-intro-page .di-circuit{display:block;width:100%;height:170px;max-he
 .di-circuit .di-beaker{fill:rgba(33,82,107,.25);stroke:#86c9df;stroke-width:2}
 .di-circuit .di-water{fill:rgba(54,158,201,.33)}
 .di-circuit .di-label{fill:#f5f7fa;font-size:15px;font-weight:800}
+.di-circuit .bulb-glow{pointer-events:none;mix-blend-mode:screen}
+.di-circuit #lampGasGlow,.di-circuit #lampFilamentGlow,.di-circuit #lampOuterGlow{transition:opacity .08s linear}
+.di-circuit #di-bulb{pointer-events:none}
 .di-circuit .di-small{fill:#c7d6e2;font-size:13px}
 .di-adjust{display:flex;align-items:center;gap:10px;background:#111d26;border-top:1px solid #3d515e;padding:7px 11px}
 .di-adjust label{font-size:14px;font-weight:800;color:#ffca81;white-space:nowrap}
@@ -78,7 +81,7 @@ body.dimming-intro-page .di-teacher{display:grid;grid-template-columns:100px 1fr
 <section class="di-panel di-device" aria-labelledby="deviceTitle"><div class="di-panel-header"><h2 id="deviceTitle">どうやって電球の明るさを変える？</h2><span>塩水を使う水抵抗式の原理図</span></div>
 <div class="di-device-content"><p class="lead">電球に届く電力を変えると、明るさが変わる。</p><p class="detail">左の銅板は同じ大きさのまま上下し、塩水に浸かる面積だけが変わります。</p>
 <svg class="di-circuit" viewBox="0 0 560 205" role="img" aria-label="電源から左の上下する銅板、塩水、右の固定銅板、電球、電源へ戻る順の直列回路。銅板の大きさは一定。">
-<defs><radialGradient id="di-halo"><stop stop-color="#ffd27e" stop-opacity=".9"/><stop offset="1" stop-color="#ffc16a" stop-opacity="0"/></radialGradient></defs>
+<defs><radialGradient id="di-halo"><stop stop-color="#ffcf80" stop-opacity=".95"/><stop offset=".42" stop-color="#ffa73f" stop-opacity=".5"/><stop offset="1" stop-color="#ff9d2a" stop-opacity="0"/></radialGradient><radialGradient id="di-glass"><stop stop-color="#fff6c7" stop-opacity=".88"/><stop offset=".3" stop-color="#ffdd7b" stop-opacity=".55"/><stop offset=".7" stop-color="#ff9600" stop-opacity=".19"/><stop offset="1" stop-color="#ff9600" stop-opacity="0"/></radialGradient></defs>
 <path class="di-wire" d="M47 68V25H174"/><path class="di-wire" id="movingLead" d="M174 25V63"/>
 <path class="di-wire" d="M339 77V25H477V65"/><path class="di-return" d="M477 133V184H47V125"/>
 <circle cx="47" cy="97" r="27" fill="#16232c" stroke="#c0ccd3" stroke-width="2"/><path d="M31 98Q39 81 47 98T63 98" fill="none" stroke="#ffbd78" stroke-width="3"/><text class="di-small" x="11" y="149">AC電源</text>
@@ -88,8 +91,11 @@ body.dimming-intro-page .di-teacher{display:grid;grid-template-columns:100px 1fr
 <path d="M151 96V130M146 101L151 94L156 101M146 124L151 131L156 124" fill="none" stroke="#f9cc8e" stroke-width="2"/>
 <text class="di-label" x="114" y="48">左：上下する銅板</text><text class="di-label" x="304" y="48">右：固定</text>
 <text class="di-label" x="250" y="137" text-anchor="middle">塩水</text><text class="di-small" x="250" y="157" text-anchor="middle">ここを電気が通る</text>
-<circle id="lampHalo" cx="477" cy="99" r="55" fill="url(#di-halo)" opacity=".62"/>
-<image id="di-bulb" href="assets/Light.webp" x="437" y="59" width="80" height="88" preserveAspectRatio="xMidYMid meet"/>
+<circle id="lampHalo" cx="477" cy="101" r="67" fill="url(#di-halo)" opacity=".48"/>
+<image id="di-bulb" href="assets/Light.webp" x="427" y="46" width="100" height="110" preserveAspectRatio="xMidYMid meet"/>
+<ellipse id="lampGasGlow" class="bulb-glow" cx="477" cy="95" rx="37" ry="39" fill="url(#di-glass)" opacity=".45"/>
+<ellipse id="lampFilamentGlow" class="bulb-glow" cx="477" cy="98" rx="12" ry="9" fill="#ffeb95" opacity=".5"/>
+<circle id="lampOuterGlow" class="bulb-glow" cx="477" cy="99" r="35" fill="url(#di-glass)" opacity=".26"/>
 <text class="di-label" x="477" y="162" text-anchor="middle">電球</text>
 <text class="di-small" x="254" y="202" text-anchor="middle">交流電源 → 左電極 → 塩水 → 右電極 → 電球 → 電源</text>
 </svg></div>
@@ -110,6 +116,9 @@ body.dimming-intro-page .di-teacher{display:grid;grid-template-columns:100px 1fr
   const plate=document.getElementById('movingPlate');
   const lead=document.getElementById('movingLead');
   const halo=document.getElementById('lampHalo');
+  const gasGlow=document.getElementById('lampGasGlow');
+  const filamentGlow=document.getElementById('lampFilamentGlow');
+  const outerGlow=document.getElementById('lampOuterGlow');
   const bulb=document.getElementById('di-bulb');
   const output=document.getElementById('plateResult');
   const hint=document.getElementById('plateHint');
@@ -120,8 +129,14 @@ body.dimming-intro-page .di-teacher{display:grid;grid-template-columns:100px 1fr
     plate.setAttribute('y',y.toFixed(1));
     plate.setAttribute('height',String(plateHeight));
     lead.setAttribute('d','M174 25V'+y.toFixed(1));
-    halo.setAttribute('opacity',(.12+.78*depth).toFixed(2));
-    bulb.style.filter='brightness('+(0.25+depth*1.15).toFixed(2)+') drop-shadow(0 0 '+Math.round(2+depth*18)+'px rgba(255,172,63,'+(.2+.6*depth).toFixed(2)+'))';
+    // Reuse the existing Light.webp bulb artwork with layered gas/filament/ambient glow,
+    // like the established 8-bit dimmer. Glow is illustrative, not measured light output.
+    const glow=Math.pow(depth,1.25);
+    halo.setAttribute('opacity',(.06+.88*glow).toFixed(2));
+    gasGlow.setAttribute('opacity',(.02+.81*glow).toFixed(2));
+    filamentGlow.setAttribute('opacity',(.01+.93*glow).toFixed(2));
+    outerGlow.setAttribute('opacity',(.02+.52*glow).toFixed(2));
+    bulb.style.filter='brightness('+(0.55+glow*.8).toFixed(2)+') drop-shadow(0 0 '+Math.round(2+glow*14)+'px rgba(255,172,63,'+(.1+.75*glow).toFixed(2)+'))';
     output.textContent=depth<.2?'暗い':depth<.55?'やや暗い':depth<.85?'やや明るい':'明るい';
     hint.textContent=depth<.5?'左の銅板を引き上げると、塩水に浸かる面積が減って電流が流れにくくなります。':'左の銅板を下げると、塩水に浸かる面積が増えて電流が流れやすくなります。';
   };
