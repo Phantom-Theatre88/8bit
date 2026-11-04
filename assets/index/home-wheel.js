@@ -23,7 +23,8 @@
 
   function stepSize() {
     // Five visible rows: center, two above and two below.
-    return Math.max(64, Math.min(86, (wheel.clientHeight - 76) / 4.35));
+    // Allow five curved rows without overlapping the heading or controls.
+    return Math.max(108, Math.min(210, (wheel.clientHeight - 112) / (2 * Math.sin(.84))));
   }
   function signedOffset(index) {
     let offset = index - selected;
@@ -43,9 +44,10 @@
       const position = signedOffset(index) - dragPosition;
       const distance = Math.abs(position);
       const visible = distance <= 2.48;
-      button.style.setProperty("--wheel-y", (position * step) + "px");
-      button.style.setProperty("--wheel-z", (-distance * 24) + "px");
-      button.style.setProperty("--wheel-rotate", (-position * 8) + "deg");
+      const angle = position * .42;
+      button.style.setProperty("--wheel-y", (Math.sin(angle) * step) + "px");
+      button.style.setProperty("--wheel-z", ((Math.cos(angle) - 1) * step) + "px");
+      button.style.setProperty("--wheel-rotate", (-angle * 180 / Math.PI) + "deg");
       button.style.setProperty("--scale", String(Math.max(.84, 1 - distance * .055)));
       button.style.setProperty("--item-opacity", String(visible ? Math.max(.58, 1 - distance * .17) : 0));
       button.style.zIndex = String(30 - Math.round(distance * 2));
@@ -87,7 +89,7 @@
   }, { passive: false });
 
   wheel.addEventListener("pointerdown", event => {
-    if (event.pointerType !== "touch" && event.pointerType !== "pen") return;
+    if (event.pointerType === "mouse" && event.button !== 0) return;
     if (event.target.closest(".wheel-control")) return;
     gesture = { id: event.pointerId, y: event.clientY, lastY: event.clientY, lastTime: performance.now(), velocity: 0, start: performance.now(), moved: false };
     dragPosition = 0;
@@ -103,7 +105,7 @@
     gesture.velocity = (event.clientY - gesture.lastY) / dt;
     gesture.lastY = event.clientY;
     gesture.lastTime = now;
-    // Negative dy advances the index. The fractional position follows the finger.
+    // Negative dy advances the index. The fractional position follows pointer or mouse.
     dragPosition = Math.max(-3.3, Math.min(3.3, -dy / stepSize()));
     renderWheel();
   });
