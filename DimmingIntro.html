@@ -219,7 +219,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
   const wave=document.getElementById('di-wave-actual');
   const waveArea=document.getElementById('di-wave-area');
   const waveReference=document.getElementById('di-wave-reference');
-  // Two full AC cycles are always visible: only amplitude changes, not frequency.
+  // Both modes use the same time and voltage scales.
   function sinePath(amplitude){
     const pts=[];
     for(let i=0;i<=160;i++){
@@ -242,8 +242,56 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     }
     return d;
   }
+  function phasePath(amount){
+    const alpha=(1-amount)*Math.PI,pts=[];
+    for(let half=0;half<4;half++){
+      const x0=19+302*half/4,start=x0+302*alpha/(4*Math.PI),sign=half%2===0?1:-1;
+      pts.push('M'+x0.toFixed(2)+' 104 L'+start.toFixed(2)+' 104');
+      if(alpha<Math.PI-1e-8){
+        pts.push('L'+start.toFixed(2)+' '+(104-sign*69*Math.sin(alpha)).toFixed(2));
+        for(let j=1;j<=36;j++){const a=alpha+(Math.PI-alpha)*j/36;pts.push('L'+(x0+302*a/(4*Math.PI)).toFixed(2)+' '+(104-sign*69*Math.sin(a)).toFixed(2));}
+      }
+    }
+    return pts.join(' ');
+  }
+  function phaseArea(amount){
+    const alpha=(1-amount)*Math.PI;
+    if(alpha>=Math.PI-1e-8)return '';
+    let d='';
+    for(let half=0;half<4;half++){
+      const x0=19+302*half/4,sign=half%2===0?1:-1;
+      d+='M'+(x0+302*alpha/(4*Math.PI)).toFixed(2)+' 104 ';
+      for(let j=0;j<=36;j++){const a=alpha+(Math.PI-alpha)*j/36;d+='L'+(x0+302*a/(4*Math.PI)).toFixed(2)+' '+(104-sign*69*Math.sin(a)).toFixed(2)+' ';}
+      d+='Z ';
+    }
+    return d;
+  }
   waveReference.setAttribute('d',sinePath(69));
-  let level=.5;
+  const waterWords='昔の水抵抗器は、水が熱くなって蒸発したんだって。補充に「おしっこ」を使った、なんて逸話も……えへへ、ホントかな？';
+  const scrWords='サイリスタは、波の途中から電気を通すんだよ。赤い点が動くと、電球の明るさも変わるね！';
+  const waterExplanation='塩水に浸かる銅板の面積を変えると、抵抗が変化し、電球への供給電力が変わります。水抵抗式は古い舞台調光方式の一つです。';
+  const scrExplanation='サイリスタは交流の半周期ごとに、通電を始める角度（点弧角）を変えます。波形の一部を通す位相制御です。電流の急な立ち上がりが、唸りの原因になることがあります。';
+  const modeButtons=[...document.querySelectorAll('[data-di-mode]')];
+  const firingDots=document.getElementById('di-firing-dots');
+  let mode='water',level=.5;
+  function switchMode(next){
+    if(next!=='water'&&next!=='scr')return;
+    mode=next;
+    modeButtons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.diMode===mode)));
+    document.querySelectorAll('.di-water-only').forEach(el=>el.toggleAttribute('hidden',mode!=='water'));
+    document.getElementById('di-scr-unit').toggleAttribute('hidden',mode!=='scr');
+    document.getElementById('demo-title').textContent=mode==='water'?'調光ユニットのしくみ｜水抵抗式':'調光ユニットのしくみ｜サイリスタ式';
+    document.getElementById('di-wave-sub').textContent=mode==='water'?'フェーダーに連動して、波の高さが変わる':'赤い点から通電し、波形の通す部分が変わる';
+    document.getElementById('di-wave-summary').textContent=mode==='water'?'波の高さが変わると、電球の明るさも変わる。':'導通開始を遅らせると、電球が暗くなる。';
+    document.getElementById('di-teacher-img').src=mode==='water'?'assets/teacher_shy_story.svg?v=shy-story-20261105-deploy2':'assets/wave_teacher_transparent.svg?v=teacher-standard-20261014';
+    document.getElementById('di-teacher-text').textContent=mode==='water'?waterWords:scrWords;
+    document.getElementById('di-detail-text').textContent=mode==='water'?waterExplanation:scrExplanation;
+    document.querySelector('.di-wave-svg').setAttribute('aria-label',mode==='water'?'水抵抗式の交流電圧。振幅が変化':'サイリスタ式の交流電圧。半周期ごとに点弧角から導通');
+    touch.setAttribute('aria-label',mode==='water'?'フェーダー。上げると銅板が下がり電球が明るくなる':'フェーダー。上げると点弧角が小さくなり電球が明るくなる');
+    render(level);
+  }
+  modeButtons.forEach(b=>b.addEventListener('click',()=>switchMode(b.dataset.diMode)));
+
   const clamp=(v)=>Math.max(0,Math.min(1,v));
   function render(v){
     level=clamp(v);
@@ -260,15 +308,39 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     gas.setAttribute('opacity',(.02+.87*glow).toFixed(2));
     filament.setAttribute('opacity',(.01+.96*glow).toFixed(2));
     bulb.style.filter='brightness('+(0.54+glow*.82).toFixed(2)+') drop-shadow(0 0 '+(3+glow*17).toFixed(1)+'px rgba(255,173,65,'+(.12+.76*glow).toFixed(2)+'))';
-    // Conceptual resistive dimming: preserve waveform period, vary its amplitude only.
-    const amplitude=69*level;
-    wave.setAttribute('d',sinePath(amplitude));
-    waveArea.setAttribute('d',areaPath(amplitude));
+    if(mode==='water'){
+      const amplitude=69*level;
+      wave.setAttribute('d',sinePath(amplitude));
+      waveArea.setAttribute('d',areaPath(amplitude));
+      firingDots.setAttribute('hidden','');
+      firingDots.replaceChildren();
+    }else{
+      wave.setAttribute('d',phasePath(level));
+      waveArea.setAttribute('d',phaseArea(level));
+      firingDots.replaceChildren();
+      if(level>0 && level<1){
+        const alpha=(1-level)*Math.PI;
+        for(let half=0;half<4;half++){
+          const cx=19+302*(half+alpha/Math.PI)/4;
+          const cy=104-(half%2===0?1:-1)*69*Math.sin(alpha);
+          const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
+          dot.setAttribute('cx',cx.toFixed(2));
+          dot.setAttribute('cy',cy.toFixed(2));
+          dot.setAttribute('r','4.4');
+          dot.setAttribute('fill','#ff4d45');
+          firingDots.appendChild(dot);
+        }
+      }
+      firingDots.removeAttribute('hidden');
+      document.getElementById('di-scr-angle').textContent='点弧角 '+Math.round((1-level)*180)+'°';
+    }
     const value=Math.round(level*100);
     touch.setAttribute('aria-valuenow',String(value));
     touch.setAttribute('aria-valuetext',value+'パーセントの調光指示');
     readout.textContent='明るさの指示 '+value+'%';
-    action.textContent=value<10?'フェーダーを下げる → 銅板が上がる → 電球が暗くなる':'フェーダーを上げる → 銅板が下がる → 電球が明るくなる';
+    action.textContent=mode==='water'
+      ?(value<10?'フェーダーを下げる → 銅板が上がる → 電球が暗くなる':'フェーダーを上げる → 銅板が下がる → 電球が明るくなる')
+      :'フェーダーを動かす → 点弧角が変わる → 電球の明るさが変わる';
   }
   function pointerLevel(e){
     const bounds=svg.getBoundingClientRect();
@@ -295,7 +367,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     else return;
     e.preventDefault();render(next);
   });
-  render(level);
+  switchMode('water');
 })();</script>
 </body>
 </html>
