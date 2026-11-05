@@ -323,25 +323,111 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
   const waterWords='昔の水抵抗器は、水が熱くなって蒸発したんだって。補充に「おしっこ」を使った、なんて逸話も……えへへ、ホントかな？';
   const scrWords='サイリスタは、波の途中から電気を通すんだよ。赤い点が動くと、電球の明るさも変わるね！';
   const waterExplanation="水抵抗式は、<strong class=\"di-key\">塩水を電気抵抗として使う</strong>調光方式です。2枚の電極のうち片方を上下させ、<strong class=\"di-key\">塩水に浸かる面積</strong>を変えることで抵抗を調整します。<strong class=\"di-effect\">深く浸すと抵抗が小さくなり電球が明るく</strong>、浅くすると抵抗が大きくなり暗くなります。抵抗器と電球は<strong class=\"di-key\">直列</strong>で、抵抗器で電圧が降下するため、電球にかかる電圧が変わります。電気エネルギーの一部が<strong class=\"di-key\">熱</strong>になるため、水の温度上昇や蒸発、補水が必要でした。";
+  const pwmWords='スイッチの動きはONかOFFだけ。でも、ONでいる時間の割合を変えると、明るさも変えられるよ！ サイリスタとの違いを見てね。';
+  const pwmExplanation="<strong class=\"di-key\">PWM（パルス幅変調）</strong>は、電子スイッチを<strong class=\"di-effect\">ON／OFF</strong>し、一定周期内でONにする時間の割合（<strong class=\"di-key\">デューティ比</strong>）を変える方式です。ON中の電圧の高さは一定でも、ON時間が長いほどLEDに供給される平均電力が増え、明るさを調整できます。サイリスタの位相制御が<strong class=\"di-key\">交流の途中から導通</strong>するのに対し、この図は<strong class=\"di-key\">直流でLEDを駆動するPWM</strong>の例です。ここでのON／OFFは電力スイッチの状態で、DMX信号のデジタル0／1とは別の話です。";
   const scrExplanation="<strong class=\"di-key\">サイリスタ（SCR）</strong>は、大きな電力を電子的にON／OFFできる<strong class=\"di-key\">半導体素子</strong>です。サイリスタ調光では、交流のプラス側とマイナス側に対応した素子を使い、各半周期で電気を通し始める位置（<strong class=\"di-effect\">点弧角</strong>）を変えます。これが<strong class=\"di-key\">位相制御（位相角制御）</strong>です。フェーダーを動かすと通電する時間が変わり、電球への供給電力を調整できます。抵抗で電力を熱として消費する方式より効率が高い一方、急激な電流の立ち上がりでフィラメントや調光器が<strong class=\"di-effect\">唸る</strong>ことがあります。";
   const modeButtons=[...document.querySelectorAll('[data-di-mode]')];
   const firingDots=document.getElementById('di-firing-dots');
-  let mode='water',level=.5;
+  const waveCursor=document.getElementById('di-wave-cursor');
+  const waveLiveDot=document.getElementById('di-wave-live-dot');
+  const playButton=document.getElementById('di-animate-toggle');
+  const scrPositive=document.getElementById('di-scr-positive');
+  const scrNegative=document.getElementById('di-scr-negative');
+  const pwmSwitch=document.getElementById('di-pwm-switch');
+  const scrPositiveState=document.getElementById('di-scr-positive-state');
+  const scrNegativeState=document.getElementById('di-scr-negative-state');
+  const pwmSwitchState=document.getElementById('di-pwm-switch-state');
+  let mode='water',level=.5,playing=false,playStart=null,frameId=null,cyclePosition=0;
+  // PWM here represents switched DC drive of an LED, not the mains voltage.
+  function pwmPath(duty){
+    const pulses=8,w=302/pulses,top=35,baseline=104;
+    let d='M19 '+baseline;
+    for(let k=0;k<pulses;k++){
+      const x=19+w*k,edge=x+w*duty,end=x+w;
+      d+=' L'+x.toFixed(2)+' '+baseline;
+      if(duty>0)d+=' V'+top+' H'+edge.toFixed(2)+' V'+baseline;
+      d+=' H'+end.toFixed(2);
+    }
+    return d;
+  }
+  function pwmArea(duty){
+    if(duty<=0)return '';
+    let d='';
+    for(let k=0;k<8;k++){const x=19+302*k/8,w=302*duty/8;d+='M'+x.toFixed(2)+' 104 V35 H'+(x+w).toFixed(2)+' V104 Z ';}
+    return d;
+  }
+  function setIndicator(rect,label,on){
+    rect.setAttribute('class',on?'di-switch-on':'di-switch-off');
+    label.setAttribute('class',on?'highlight-label di-state-on':'highlight-label di-state-off');
+    label.textContent=on?'ON':'OFF';
+  }
+  function updateLive(position){
+    cyclePosition=position%1;
+    const x=19+302*cyclePosition;
+    waveCursor.setAttribute('x1',x.toFixed(2));
+    waveCursor.setAttribute('x2',x.toFixed(2));
+    const acPhase=4*Math.PI*cyclePosition;
+    const halfPhase=acPhase%Math.PI;
+    const positive=Math.floor(acPhase/Math.PI)%2===0;
+    const alpha=(1-level)*Math.PI;
+    const scrOn=level>0 && (level>=1||halfPhase>=alpha) && halfPhase>0.0001;
+    setIndicator(scrPositive,scrPositiveState,mode==='scr'&&scrOn&&positive);
+    setIndicator(scrNegative,scrNegativeState,mode==='scr'&&scrOn&&!positive);
+    if(mode==='scr'){
+      const state=level===0?'全区間 OFF':scrOn?(positive?'正側 SCR：ON':'負側 SCR：ON'):'点弧待ち：OFF';
+      document.getElementById('di-scr-current-state').textContent=state;
+    }
+    const pulsePos=(cyclePosition*8)%1;
+    const pwmOn=level>=1||(level>0&&pulsePos<level);
+    setIndicator(pwmSwitch,pwmSwitchState,mode==='pwm'&&pwmOn);
+    const y=mode==='water'?104-69*level*Math.sin(acPhase)
+      :mode==='scr'?(scrOn?104-69*Math.sin(acPhase):104)
+      :(pwmOn?35:104);
+    waveLiveDot.setAttribute('cx',x.toFixed(2));
+    waveLiveDot.setAttribute('cy',y.toFixed(2));
+  }
+  function animate(now){
+    if(!playing)return;
+    if(playStart===null)playStart=now;
+    // Two illustrated AC cycles or 8 PWM pulses traverse in four seconds.
+    updateLive(((now-playStart)/4000)%1);
+    frameId=requestAnimationFrame(animate);
+  }
+  function setPlaying(next){
+    playing=next;
+    if(frameId!==null){cancelAnimationFrame(frameId);frameId=null;}
+    playStart=null;
+    playButton.setAttribute('aria-pressed',String(playing));
+    playButton.textContent=playing?'Ⅱ 停止':'▶ ゆっくり見る';
+    waveCursor.toggleAttribute('hidden',!playing);
+    waveLiveDot.toggleAttribute('hidden',!playing);
+    if(playing)frameId=requestAnimationFrame(animate);
+    else updateLive(0);
+  }
+  playButton.addEventListener('click',()=>setPlaying(!playing));
+  document.addEventListener('visibilitychange',()=>{if(document.hidden&&playing)setPlaying(false);});
+
   function switchMode(next){
-    if(next!=='water'&&next!=='scr')return;
+    if(next!=='water'&&next!=='scr'&&next!=='pwm')return;
     mode=next;
     modeButtons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.diMode===mode)));
     document.querySelectorAll('.di-water-only').forEach(el=>el.toggleAttribute('hidden',mode!=='water'));
     document.getElementById('di-scr-unit').toggleAttribute('hidden',mode!=='scr');
-    document.getElementById('demo-title').textContent=mode==='water'?'調光ユニットのしくみ｜水抵抗式':'調光ユニットのしくみ｜サイリスタ式';
-    document.getElementById('di-wave-sub').textContent=mode==='water'?'フェーダーに連動して、波の高さが変わる':'赤い点から通電し、波形の通す部分が変わる';
-    document.getElementById('di-wave-summary').textContent=mode==='water'?'波の高さが変わると、電球の明るさも変わる。':'導通開始を遅らせると、電球が暗くなる。';
+    document.getElementById('di-pwm-unit').toggleAttribute('hidden',mode!=='pwm');
+    document.getElementById('demo-title').textContent=mode==='water'?'調光ユニットのしくみ｜水抵抗式':mode==='scr'?'調光ユニットのしくみ｜サイリスタ式':'調光ユニットのしくみ｜PWM（LED用DC駆動例）';
+    document.getElementById('di-wave-sub').textContent=mode==='water'?'フェーダーに連動して、波の高さが変わる':mode==='scr'?'赤い点から通電し、波形の通す部分が変わる':'ON時間の割合（デューティ比）が変わる';
+    document.getElementById('di-wave-summary').textContent=mode==='water'?'波の高さが変わると、電球の明るさも変わる。':mode==='scr'?'導通開始を遅らせると、電球が暗くなる。':'ONの時間が長いほど、LEDへの平均供給電力が増える。';
     document.getElementById('di-teacher-img').src=mode==='water'?'assets/teacher_shy_story.svg?v=shy-story-20261105-deploy2':'assets/wave_teacher_transparent.svg?v=teacher-standard-20261014';
-    document.getElementById('di-teacher-text').textContent=mode==='water'?waterWords:scrWords;
-    document.getElementById('di-detail-title').textContent=mode==='water'?'水抵抗式調光の仕組み・特徴':'サイリスタ調光の仕組み・特徴';
-    document.getElementById('di-detail-text').innerHTML=mode==='water'?waterExplanation:scrExplanation;
-    document.querySelector('.di-wave-svg').setAttribute('aria-label',mode==='water'?'水抵抗式の交流電圧。振幅が変化':'サイリスタ式の交流電圧。半周期ごとに点弧角から導通');
-    touch.setAttribute('aria-label',mode==='water'?'フェーダー。上げると銅板が下がり電球が明るくなる':'フェーダー。上げると点弧角が小さくなり電球が明るくなる');
+    document.getElementById('di-teacher-text').textContent=mode==='water'?waterWords:mode==='scr'?scrWords:pwmWords;
+    document.getElementById('di-detail-title').textContent=mode==='water'?'水抵抗式調光の仕組み・特徴':mode==='scr'?'サイリスタ調光の仕組み・特徴':'PWM調光の仕組み・特徴';
+    document.getElementById('di-detail-text').innerHTML=mode==='water'?waterExplanation:mode==='scr'?scrExplanation:pwmExplanation;
+    document.querySelector('.di-wave-svg').setAttribute('aria-label',mode==='water'?'水抵抗式の交流電圧。振幅が変化':mode==='scr'?'サイリスタ式の交流電圧。半周期ごとに点弧角から導通':'LED駆動の直流PWM。一定振幅の矩形波でON時間を変える');
+    document.getElementById('di-wave-title').textContent=mode==='pwm'?'LED駆動のPWM電圧（概念図）':'電球にかかる交流電圧';
+    waveReference.toggleAttribute('hidden',mode==='pwm');
+    document.getElementById('di-wave-axis-plus').textContent=mode==='pwm'?'ON':'＋';
+    document.getElementById('di-wave-axis-minus').textContent=mode==='pwm'?'':'－';
+    document.getElementById('di-wave-caption').textContent=mode==='pwm'?'※LED用の直流PWM出力例。実際の周波数・光の見え方は模式表示です。ACの位相制御波形ではありません。':'※塗り面積は電力のイメージです。実測値・計算値ではありません。';
+    touch.setAttribute('aria-label',mode==='water'?'フェーダー。上げると銅板が下がり電球が明るくなる':mode==='scr'?'フェーダー。上げると点弧角が小さくなり電球が明るくなる':'フェーダー。上げるとPWMのON時間の割合が大きくなる');
     render(level);
   }
   modeButtons.forEach(b=>b.addEventListener('click',()=>switchMode(b.dataset.diMode)));
@@ -368,7 +454,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
       waveArea.setAttribute('d',areaPath(amplitude));
       firingDots.setAttribute('hidden','');
       firingDots.replaceChildren();
-    }else{
+    }else if(mode==='scr'){
       wave.setAttribute('d',phasePath(level));
       waveArea.setAttribute('d',phaseArea(level));
       firingDots.replaceChildren();
@@ -387,14 +473,22 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
       }
       firingDots.removeAttribute('hidden');
       document.getElementById('di-scr-angle').textContent='点弧角 '+Math.round((1-level)*180)+'°';
+    }else{
+      wave.setAttribute('d',pwmPath(level));
+      waveArea.setAttribute('d',pwmArea(level));
+      firingDots.setAttribute('hidden','');
+      firingDots.replaceChildren();
+      document.getElementById('di-pwm-duty').textContent='ON時間 '+Math.round(level*100)+'%';
     }
+    updateLive(cyclePosition);
     const value=Math.round(level*100);
     touch.setAttribute('aria-valuenow',String(value));
     touch.setAttribute('aria-valuetext',value+'パーセントの調光指示');
     readout.textContent='明るさの指示 '+value+'%';
     action.textContent=mode==='water'
       ?(value<10?'フェーダーを下げる → 銅板が上がる → 電球が暗くなる':'フェーダーを上げる → 銅板が下がる → 電球が明るくなる')
-      :'フェーダーを動かす → 点弧角が変わる → 電球の明るさが変わる';
+      :mode==='scr'?'フェーダーを動かす → 点弧角が変わる → 電球の明るさが変わる'
+      :'フェーダーを動かす → ON時間の割合が変わる → LEDの明るさが変わる';
   }
   function pointerLevel(e){
     const bounds=svg.getBoundingClientRect();
@@ -422,6 +516,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     e.preventDefault();render(next);
   });
   switchMode('water');
+  setPlaying(false);
 })();</script>
 </body>
 </html>
