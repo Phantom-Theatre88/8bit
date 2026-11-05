@@ -232,3 +232,10 @@
 - KimのMac Safari実画面で縦型電流バーの下部「現在値／最大60A」等が重なる不具合を確認。原因は、グリッド内のバーが `height:100%` と上下マージンを併用し、割当行からはみ出すCSS配置。バーの高さを割当行から余白分を引いた寸法に修正し、最下段ラベルの折り返しと収まりを明示。60Aブレーカー姿図、縦型バー、L1/L2の60A基準線、N表示は保持。
 - 接続数 `MAX_LOADS=12` は現行コードの任意のUI上限であり、電気的根拠も聖典での合意根拠も見つからなかったため撤去。教材の全接続負荷は引き続き合算し、中央図は直近8台を示し、残数は「ほか○台接続中」と表示。削除・全削除・TRIP判定は維持。
 - HTMLのCSS更新URLを `singlephase-meter-label-fix-20261105` とした。GitHub再取得・JavaScript構文・CSS括弧・既存ブレーカー/遮断処理・残負荷表示の保持を確認。Mac Safari実表示・iPad縦横での再確認とGitHub Pages公開成功は別途必要。
+
+
+### 単相3線｜ブレーカーON／TRIP色の識別（2026-11-05）
+
+- 現行の60Aブレーカー姿図・ON／TRIPの文字と切替動作は維持し、文字背景色のみを識別しやすく変更。通常ONは濃緑（`#176a42`）、TRIPは濃赤（`#bd3029`）、文字は白とし、色以外にもON/TRIPの文字を維持する。
+- 実装は `next-ui-singlephase.css` の `.breaker-shell:not(.trip) .handle::after` と `.breaker-shell.trip .handle::after` だけを対象とし、他ページや回路計算には影響しない。Safariキャッシュ回避のため `SinglePhase3.html` のCSS参照を `breaker-status-color-20261105` に更新。
+- GitHub再取得でCSS・HTML・TRIP切替処理および構文を確認済み。公開ブラウザ実表示での確認は未了。
