@@ -106,3 +106,77 @@
     overflow:visible!important;
   }
 }
+
+/* Theme 1-2 portrait reading order:
+   lesson operation -> explanation -> teacher -> key takeaway.
+   The approved landscape grids remain unchanged. */
+@media (orientation:portrait), (max-width:959px) {
+  /* One common reading order for Electric V/W/A and single-phase lessons. */
+  body.analog-next-ui .lesson-bottom,
+  body.singlephase-next-ui .lesson-bottom,
+  body.wave-next-ui .lesson-bottom {
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:none!important;
+    grid-auto-rows:max-content!important;
+    height:auto!important;
+    min-height:0!important;
+    overflow:visible!important;
+    gap:10px!important;
+  }
+  body.analog-next-ui .lesson-bottom > *,
+  body.singlephase-next-ui .lesson-bottom > *,
+  body.wave-next-ui .lesson-bottom > * {
+    grid-column:1!important;
+    grid-row:auto!important;
+    height:auto!important;
+    min-height:0!important;
+  }
+  body.analog-next-ui .lesson-bottom > .bottom-explain,
+  body.singlephase-next-ui .lesson-bottom > .bottom-explain,
+  body.wave-next-ui .lesson-bottom > .bottom-explain {order:1!important}
+  body.wave-next-ui .lesson-bottom > .equipment {order:2!important}
+  body.analog-next-ui .lesson-bottom > .teacher,
+  body.singlephase-next-ui .lesson-bottom > .teacher,
+  body.wave-next-ui .lesson-bottom > .teacher {order:3!important}
+  body.analog-next-ui .lesson-bottom > .bottom-remember,
+  body.singlephase-next-ui .lesson-bottom > .bottom-remember {order:4!important}
+  /* Single-phase panels must not occupy the old landscape grid cells. */
+  body.singlephase-next-ui .lesson-bottom > .teacher {
+    display:grid!important;
+    grid-template-columns:95px minmax(0,1fr)!important;
+    overflow:visible!important;
+  }
+  /* The 8-bit and 16-bit dimming panels share the same lower reading order. */
+  body.eightbit-console .sim8-page-bottom,
+  body.eightbit-console .s16-bottom {
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:none!important;
+    grid-auto-rows:max-content!important;
+    height:auto!important;
+    min-height:0!important;
+    overflow:visible!important;
+  }
+  body.eightbit-console .sim8-page-bottom > *,
+  body.eightbit-console .s16-bottom > * {
+    grid-column:1!important;
+    grid-row:auto!important;
+    min-height:0!important;
+  }
+  body.eightbit-console .sim8-page-bottom > :first-child,
+  body.eightbit-console .s16-bottom > :first-child {order:1!important}
+  body.eightbit-console .sim8-page-bottom > .sim8-teacher-card,
+  body.eightbit-console .s16-bottom > .s16-teacher {order:2!important}
+  body.eightbit-console .sim8-page-bottom > .sim8-remember,
+  body.eightbit-console .s16-bottom > :last-child {order:3!important}
+  /* Dimming introduction has no 'remember' card: place its teacher last. */
+  body.dimming-intro-page .di-footer {
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:none!important;
+    height:auto!important;
+  }
+  body.dimming-intro-page .di-footer > .di-next {order:1!important}
+  body.dimming-intro-page .di-footer > .di-teacher {order:2!important}
+}
