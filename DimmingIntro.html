@@ -399,10 +399,13 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     playStart=null;
     playButton.setAttribute('aria-pressed',String(playing));
     playButton.textContent=playing?'Ⅱ 停止':'▶ ゆっくり見る';
-    waveCursor.toggleAttribute('hidden',!playing);
-    waveLiveDot.toggleAttribute('hidden',!playing);
+    // In electronic modes, pausing freezes the actual switch state at the cursor.
+    // Only the water-resistor mode hides the teaching cursor.
+    const showCursor=mode!=='water';
+    waveCursor.toggleAttribute('hidden',!showCursor);
+    waveLiveDot.toggleAttribute('hidden',!showCursor);
     if(playing)frameId=requestAnimationFrame(animate);
-    else updateLive(0);
+    else updateLive(cyclePosition);
   }
   playButton.addEventListener('click',()=>setPlaying(!playing));
   document.addEventListener('visibilitychange',()=>{if(document.hidden&&playing)setPlaying(false);});
@@ -429,6 +432,13 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     document.getElementById('di-wave-caption').textContent=mode==='pwm'?'※LED用の直流PWM出力例。実際の周波数・光の見え方は模式表示です。ACの位相制御波形ではありません。':'※塗り面積は電力のイメージです。実測値・計算値ではありません。';
     touch.setAttribute('aria-label',mode==='water'?'フェーダー。上げると銅板が下がり電球が明るくなる':mode==='scr'?'フェーダー。上げると点弧角が小さくなり電球が明るくなる':'フェーダー。上げるとPWMのON時間の割合が大きくなる');
     render(level);
+    // SCR/PWM require a moving reference position to explain ON/OFF.
+    // Automatically start the slow teaching playback, except when the user
+    // requests reduced motion in accessibility settings.
+    const reduceMotion=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(mode==='water')setPlaying(false);
+    else if(!reduceMotion)setPlaying(true);
+    else setPlaying(false);
   }
   modeButtons.forEach(b=>b.addEventListener('click',()=>switchMode(b.dataset.diMode)));
 
@@ -516,7 +526,6 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     e.preventDefault();render(next);
   });
   switchMode('water');
-  setPlaying(false);
 })();</script>
 </body>
 </html>
