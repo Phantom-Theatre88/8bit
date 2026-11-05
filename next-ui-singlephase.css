@@ -289,3 +289,16 @@ body.singlephase-next-ui .meter-max {
   body.singlephase-next-ui .meter-track {min-height:0}
   body.singlephase-next-ui .meter {padding:4px 3px}
 }
+
+/* LOCK: breaker state uses distinct status colors; artwork and ON/TRIP behavior unchanged.
+   Green = energized/normal, red = tripped. White lettering retains contrast. */
+body.singlephase-next-ui .breaker-shell:not(.trip) .handle::after {
+  background:#176a42;
+  color:#ffffff;
+  border:1px solid #359763;
+}
+body.singlephase-next-ui .breaker-shell.trip .handle::after {
+  background:#bd3029;
+  color:#ffffff;
+  border:1px solid #f36a60;
+}
