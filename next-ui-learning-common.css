@@ -1,0 +1,17 @@
+/* 8bit theme 1-2: shared teacher containment only.
+   The approved lesson layouts, illustration sizes, colors and individual simulator geometry
+   remain owned by their existing page/module styles. */
+.eightbit-unified-width .eightbit-shared-teacher {
+  min-width:0;
+  box-sizing:border-box;
+}
+.eightbit-unified-width .eightbit-shared-teacher img {
+  display:block;
+  max-width:100%;
+}
+.eightbit-unified-width .eightbit-shared-teacher :is(.teacher-copy,.teacher-intro-wrap,.sim8-teacher-copy,.s16-teacher>div) {
+  min-width:0;
+}
+.eightbit-unified-width .eightbit-shared-teacher :is(.teacher-speech,.sim8-teacher-speech,.di-teacher p,.s16-teacher p) {
+  overflow-wrap:break-word;
+}
