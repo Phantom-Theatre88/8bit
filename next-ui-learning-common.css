@@ -15,3 +15,94 @@
 .eightbit-unified-width .eightbit-shared-teacher :is(.teacher-speech,.sim8-teacher-speech,.di-teacher p,.s16-teacher p) {
   overflow-wrap:break-word;
 }
+
+/* Portrait: the completed landscape V/W/A lesson must reflow rather than
+   inherit height-only fixed rows and clipped speech from old typography CSS.
+   Kept here (loaded last) to preserve the locked landscape presentation. */
+@media (orientation:portrait), (max-width:959px) {
+  body.analog-next-ui.eightbit-unified-width > .app {
+    display:flex!important;
+    flex-direction:column!important;
+    grid-template-rows:none!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow:visible!important;
+  }
+  body.analog-next-ui .app > .topbar,
+  body.analog-next-ui .app > .electric-intro,
+  body.analog-next-ui .app > .layout,
+  body.analog-next-ui .app > .lesson-bottom {
+    flex:0 0 auto!important;
+    height:auto!important;
+    min-height:0!important;
+    overflow:visible!important;
+  }
+  body.analog-next-ui .app > .layout {
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:none!important;
+    grid-auto-rows:max-content!important;
+  }
+  body.analog-next-ui .layout > .left,
+  body.analog-next-ui .layout > .center,
+  body.analog-next-ui .layout > .right {
+    grid-column:auto!important;
+    grid-row:auto!important;
+    min-height:0!important;
+    height:auto!important;
+    overflow:visible!important;
+  }
+  body.analog-next-ui .app > .lesson-bottom {
+    display:grid!important;
+    position:static!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:none!important;
+    grid-auto-rows:max-content!important;
+    gap:8px!important;
+  }
+  body.analog-next-ui .lesson-bottom > .bottom-explain,
+  body.analog-next-ui .lesson-bottom > .teacher,
+  body.analog-next-ui .lesson-bottom > .bottom-remember {
+    grid-column:1!important;
+    grid-row:auto!important;
+    height:auto!important;
+    min-height:0!important;
+    overflow:visible!important;
+  }
+  body.analog-next-ui .lesson-bottom > .teacher {
+    display:grid!important;
+    grid-template-columns:80px minmax(0,1fr)!important;
+    align-items:center!important;
+  }
+  body.analog-next-ui .lesson-bottom > .teacher > .teacher-character {
+    grid-column:1!important;
+    grid-row:1!important;
+    width:80px!important;
+    max-height:128px!important;
+    height:auto!important;
+  }
+  body.analog-next-ui .lesson-bottom > .teacher > .teacher-intro-wrap {
+    grid-column:2!important;
+    grid-row:1!important;
+    margin:0!important;
+    padding:0!important;
+    height:auto!important;
+    min-height:0!important;
+    overflow:visible!important;
+  }
+  body.analog-next-ui .lesson-bottom .speech {
+    max-height:none!important;
+    height:auto!important;
+    overflow:visible!important;
+    font-size:16px!important;
+    line-height:1.45!important;
+  }
+  body.analog-next-ui .bottom-explain .teacher-card.current {
+    grid-column:auto!important;
+    grid-row:auto!important;
+    margin:0!important;
+    max-height:none!important;
+    overflow:visible!important;
+  }
+}
