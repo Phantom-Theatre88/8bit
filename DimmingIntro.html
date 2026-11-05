@@ -71,10 +71,15 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 .di-title{display:flex;flex-wrap:wrap;align-items:center;column-gap:18px;row-gap:5px}
 .di-title .di-kicker{flex-basis:100%}
 .di-title h1{flex:1 1 390px;margin:0}
-.di-method-tabs{display:flex;align-items:center;gap:7px;flex:0 1 auto}
-.di-method-tabs button{line-height:1.35;font-family:inherit;font-size:16px;font-weight:800;min-height:39px;padding:7px 14px;border-radius:7px;border:1px solid #70879a;color:#edf5fa;background:#293845;white-space:nowrap;cursor:pointer;touch-action:manipulation}
-.di-method-tabs button[aria-pressed="true"]{border-color:#f5b45b;color:#ffdfac;background:#65462a;box-shadow:inset 0 -3px #f6aa42}
-.di-method-tabs button:focus-visible{outline:3px solid #ffce71;outline-offset:3px}
+/* Dimming-mode selector: four engraved console segments on one shared chassis.
+   Only the selected mode has a cyan illumination and underline. */
+.di-method-tabs{display:grid;grid-template-columns:repeat(4,max-content);align-items:stretch;gap:2px;flex:0 0 auto;padding:4px;border:1px solid #475c6e;border-radius:5px;background:linear-gradient(180deg,#0a121a,#1e2c38);box-shadow:inset 0 2px 5px #000a,0 1px 0 #4b5f6a55}
+.di-method-tabs button{position:relative;line-height:1.25;font-family:inherit;font-size:14px;font-weight:800;letter-spacing:.015em;min-height:41px;padding:8px 13px;border:1px solid #394d5d;border-bottom-color:#101a23;border-radius:2px;color:#c7d5df;background:linear-gradient(180deg,#233441 0%,#182632 43%,#0b151e 100%);box-shadow:inset 0 1px 0 #ffffff12,inset 0 -2px 0 #0009;white-space:nowrap;cursor:pointer;touch-action:manipulation;transition:background .15s,border-color .15s,box-shadow .15s,color .15s}
+.di-method-tabs button::after{content:"";position:absolute;height:3px;left:12px;right:12px;bottom:0;background:transparent;border-radius:2px 2px 0 0;transition:background .15s,box-shadow .15s}
+.di-method-tabs button[aria-pressed="true"]{border-color:#4caed0;color:#e9faff;background:linear-gradient(180deg,#274657 0%,#1b3b4d 44%,#102939 100%);text-shadow:0 0 6px #93dfff44;box-shadow:inset 0 1px 0 #a0e9ff38,inset 0 -2px 0 #065270,0 0 0 1px #2ac7ff55}
+.di-method-tabs button[aria-pressed="true"]::after{background:#2ac7ff;box-shadow:0 0 10px #2ac7ffb0}
+.di-method-tabs button:hover:not([aria-pressed="true"]){background:linear-gradient(180deg,#2a3b49,#13212c);color:#f2f8fc}
+.di-method-tabs button:focus-visible{outline:2px solid #ffd18b;outline-offset:3px}
 .di-workspace .di-mechanism [hidden],.di-wave-svg [hidden]{display:none!important}
 .di-footer{grid-template-columns:minmax(0,58fr) minmax(260px,42fr);align-items:stretch}
 .di-footer .di-next{grid-column:1;grid-row:1;justify-content:flex-start}
@@ -89,7 +94,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 .di-next p{font-size:16px;line-height:1.5;color:#e1edf4}
 .di-wave-svg #di-firing-dots circle{stroke:#ffe0bc;stroke-width:1.2}
 @media(max-width:850px){.di-title h1{flex-basis:100%}.di-method-tabs{width:100%;flex-wrap:wrap}.di-footer{grid-template-columns:1fr}.di-footer .di-next,.di-footer .di-teacher{grid-column:1;grid-row:auto}}
-@media(max-width:560px){.di-method-tabs button{flex:1}.di-title{gap:7px}}
+@media(max-width:560px){.di-method-tabs{width:100%;grid-template-columns:repeat(4,minmax(0,1fr))}.di-method-tabs button{padding:8px 4px;font-size:12px}.di-title{gap:7px}}
 .di-wave-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .di-wave-heading h3{flex:1 1 150px}
 #di-animate-toggle{font-family:inherit;font-size:13px;line-height:1.3;font-weight:750;color:#d9f3ff;background:#233b4c;border:1px solid #7599ae;border-radius:6px;padding:6px 9px;cursor:pointer;white-space:nowrap}
