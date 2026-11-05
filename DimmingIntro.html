@@ -76,10 +76,10 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 
 
 <main class="dimming-lesson">
-<header class="di-title"><p class="di-kicker">DIMMING / 調光の入口</p><h1>調光とは？ ― 光の明るさが、舞台を変える。</h1><p class="di-lead">調光は光の強さを変え、時間・空間・感情を表現するための大切な技術です。</p></header>
+<header class="di-title"><p class="di-kicker">DIMMING / 調光の入口</p><h1>調光とは？ ― 光の明るさが、舞台を変える。</h1><nav class="di-method-tabs" aria-label="調光ユニット方式の切り替え"><button type="button" data-di-mode="water" aria-pressed="true">水抵抗式</button><button type="button" data-di-mode="scr" aria-pressed="false">サイリスタ式</button></nav></header>
 <section class="di-panel di-demo" aria-labelledby="demo-title">
-<div class="di-demo-head"><h2 id="demo-title">水抵抗器で、電球の明るさを変える</h2><span class="di-helper">フェーダーを上下してみよう</span></div>
-<p class="di-explanation">塩水に浸かる電極の面積を変えると、電気の流れにくさ（<strong>抵抗</strong>）が変わります。これは<strong>可変抵抗</strong>の仕組み。水抵抗器は、20世紀初頭に使われた舞台調光方式の一つです。</p>
+<div class="di-demo-head"><h2 id="demo-title">調光ユニットのしくみ｜水抵抗式</h2><span class="di-helper">フェーダーを上下してみよう</span></div>
+
 <div class="di-workspace">
 <svg class="di-mechanism" viewBox="0 0 900 375" role="group" aria-label="フェーダーを上げると、滑車を通したワイヤーが左の銅板を下げ、水抵抗器を通る電流が増えて電球が明るくなる仕組み">
 <defs>
@@ -95,6 +95,8 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <rect x="68" y="121" width="52" height="142" rx="10" fill="#09131b" stroke="#52687a" stroke-width="2"/>
 <rect x="90" y="137" width="8" height="103" rx="4" fill="#02060a" stroke="#8798a7"/>
 <g stroke="#8195a5" stroke-width="2"><path d="M66 140h11M66 190h11M66 239h11"/></g>
+</g>
+<g class="di-water-only" aria-label="水抵抗式の機械的なワイヤーと滑車">
 <path id="pulleyRope" class="cable" d="M94 240V68A18 18 0 0 1 112 50H332A18 18 0 0 1 350 68V98"/>
 <circle class="pulley" cx="112" cy="68" r="18"/><circle class="pulley" cx="332" cy="68" r="18"/>
 <g fill="none" stroke="#202e3b" stroke-width="3"><circle cx="112" cy="68" r="10"/><circle cx="332" cy="68" r="10"/></g>
@@ -111,6 +113,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <path d="M76 -5H112M76 0H112M76 5H112" stroke="#202d39" stroke-width="2"/>
 </g>
 <rect id="faderTouch" class="fader-hit" x="58" y="119" width="75" height="145" rx="9" fill="transparent" tabindex="0" role="slider" aria-label="フェーダー。上げると銅板が下がり、電球が明るくなる" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50パーセントの指示"/>
+<g class="di-water-only" aria-label="水抵抗式の直列電気回路と水抵抗器">
 <!-- ELECTRICAL: separate amber feed, slate-colored return. Mobile lead is flexible. -->
 <circle cx="209" cy="280" r="27" fill="#14212c" stroke="#bbcad4" stroke-width="2"/>
 <path d="M193 281Q201 265 209 281T225 281" fill="none" stroke="#ffd08f" stroke-width="2.7"/>
@@ -142,6 +145,26 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <rect x="544" y="223" width="26" height="104" fill="#ffe2a2" opacity=".22"/>
 <text class="primary-label" x="450" y="269" text-anchor="middle">塩水</text>
 <text class="secondary-label" x="450" y="294" text-anchor="middle">浸かる面積が変わる</text>
+</g>
+<!-- SCR power-control illustration occupies the former beaker area. Fader stays shared. -->
+<g id="di-scr-unit" hidden aria-label="交流電源からサイリスタ調光器を通り白熱電球へ電力を供給する模式回路">
+ <circle cx="205" cy="281" r="27" fill="#14212c" stroke="#bbcad4" stroke-width="2"/>
+ <path d="M189 281Q197 265 205 281T221 281" fill="none" stroke="#ffd08f" stroke-width="2.7"/>
+ <text class="secondary-label" x="205" y="329" text-anchor="middle">AC電源</text>
+ <path d="M205 254V176H292" class="electrical"/>
+ <path d="M584 176H648V263H696" class="electrical"/>
+ <path d="M736 286V349H205V308" class="neutral"/>
+ <rect x="292" y="116" width="292" height="160" rx="13" fill="#182b38" stroke="#7c9daf" stroke-width="3"/>
+ <rect x="308" y="131" width="260" height="36" rx="6" fill="#304756"/>
+ <text class="primary-label" x="438" y="155" text-anchor="middle">サイリスタ調光器</text>
+ <path d="M308 196H365L414 215L365 234V196M414 215H466" fill="none" stroke="#ffc37a" stroke-width="3.3"/>
+ <path d="M414 215L414 252H461" fill="none" stroke="#62d5ff" stroke-width="3"/>
+ <text class="secondary-label" x="438" y="291" text-anchor="middle">点弧タイミングを変える</text>
+ <path d="M292 176H318V196M466 215H550V176H584" fill="none" stroke="#ffb968" stroke-width="3.3"/>
+ <path d="M168 118H252V149H325" fill="none" stroke="#62d5ff" stroke-width="2.8" stroke-dasharray="6 6"/>
+ <text class="secondary-label" x="204" y="105" text-anchor="middle">操作の指示</text>
+ <text class="highlight-label" id="di-scr-angle" x="438" y="335" text-anchor="middle">点弧角 90°</text>
+</g>
 <!-- BULB: same asset and layered glow philosophy as current 8-bit dimmer -->
 <circle id="lampHalo" cx="730" cy="130" r="113" fill="url(#bulbGlow)" opacity=".48"/>
 <image id="di-bulb" href="assets/Light.webp" x="621" y="66" width="218" height="232" preserveAspectRatio="xMidYMid meet"/>
@@ -152,28 +175,29 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 </svg>
 <aside class="di-wave-panel" aria-labelledby="di-wave-title">
 <h3 id="di-wave-title">電球にかかる交流電圧</h3>
-<p class="wave-sub">フェーダーに連動して、波の高さが変わる</p>
+<p class="wave-sub" id="di-wave-sub">フェーダーに連動して、波の高さが変わる</p>
 <svg class="di-wave-svg" viewBox="0 0 340 210" role="img" aria-label="水抵抗式の調光を概念的に表した交流電圧波形。周波数は同じで、振幅が変化する">
 <path d="M19 104H321" stroke="#83a1b4" stroke-width="1.7" stroke-dasharray="5 5"/>
 <path d="M19 28V181" stroke="#526d7c" stroke-width="1.5"/>
 <path id="di-wave-reference" class="wave-reference" d=""/>
 <path id="di-wave-area" class="wave-area" d=""/>
 <path id="di-wave-actual" class="wave-actual" d=""/>
+<g id="di-firing-dots" aria-label="サイリスタの点弧位置" hidden></g>
 <text x="24" y="20">＋</text>
 <text x="24" y="199">－</text>
 <text x="325" y="108" text-anchor="end">0</text>
 </svg>
-<p class="di-wave-explanation"><strong>波の高さが変わると、電球の明るさも変わる。</strong></p>
+<p class="di-wave-explanation"><strong id="di-wave-summary">波の高さが変わると、電球の明るさも変わる。</strong></p>
 <p class="di-wave-caption">※塗り面積は電力のイメージです。実測値・計算値ではありません。</p>
 </aside>
 </div>
 <div class="di-conclusion"><p id="di-action">フェーダーを上げる → 銅板が下がる → 電球が明るくなる</p><output id="di-readout" aria-live="off">明るさの指示 50%</output></div>
 </section>
 <div class="di-footer">
-<section class="eightbit-shared-teacher di-panel di-teacher"><img src="assets/teacher_shy_story.svg?v=shy-story-20261105-deploy2" alt="照明教材の先生"><div><strong>先生のひとこと</strong><p>昔の水抵抗器は、水が熱くなって蒸発したんだって。補充に「おしっこ」を使った、なんて逸話も……えへへ、ホントかな？</p></div></section>
-<aside class="di-panel di-next"><p>この仕組みは調光原理の一例。次は、照明卓から明るさをどう指示するのかを見てみよう。</p><a href="Top.html?tab=sim8bit">次へ｜8-bit調光卓 →</a></aside>
+<section class="eightbit-shared-teacher di-panel di-teacher"><img id="di-teacher-img" src="assets/teacher_shy_story.svg?v=shy-story-20261105-deploy2" alt="照明教材の先生"><div><strong>先生のひとこと</strong><p id="di-teacher-text">昔の水抵抗器は、水が熱くなって蒸発したんだって。補充に「おしっこ」を使った、なんて逸話も……えへへ、ホントかな？</p></div></section>
+<aside class="di-panel di-next" aria-labelledby="di-detail-title"><h3 id="di-detail-title">方式のしくみ・特徴</h3><p id="di-detail-text">塩水に浸かる銅板の面積を変えると、抵抗が変化し、電球への供給電力が変わります。水抵抗式は古い舞台調光方式の一つです。</p></aside>
 </div>
-<p class="di-note">※水抵抗器と操作機構の教材用模式図です。実際の通電実験はしないでください。光の見え方は説明用の表現です。</p>
+<p class="di-note">※調光方式の仕組みを比較するための模式図。実際の通電実験はしないでください。光の明るさ・波形の面積は概念的表現です。</p>
 </main>
 
 <script>
