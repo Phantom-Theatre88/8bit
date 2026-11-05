@@ -201,3 +201,84 @@ body.singlephase-next-ui .empty {top:132px;font-size:15px;line-height:22px}
 /* The introductory W/V/A recap lives in the preceding lesson. Keep the single
    action sentence full-width on both landscape and portrait layouts. */
 body.singlephase-next-ui .wire-intro-action{margin:0;padding:0 0 0 8px;border-left:2px solid #617080;font-size:16px;line-height:1.5;color:#e4ebf3}
+
+/* LOCK 2026-11-05: Keep the approved 60A breaker illustration intact.
+   Use the unused result-panel space for legible tall current bars.
+   A dashed 60A reference applies to L1/L2 only, NOT to N. */
+body.singlephase-next-ui .right {
+  grid-template-rows:auto 112px minmax(0,1fr) auto auto;
+  min-height:0;
+}
+body.singlephase-next-ui .meters {
+  min-height:0;
+  height:100%;
+  align-items:stretch;
+  gap:8px;
+}
+body.singlephase-next-ui .meter {
+  min-height:0;
+  height:100%;
+  display:grid;
+  grid-template-rows:auto auto minmax(0,1fr) auto;
+  padding:8px 5px 7px;
+}
+body.singlephase-next-ui .meter-track {
+  position:relative;
+  box-sizing:border-box;
+  width:min(74%,76px);
+  height:100%;
+  min-height:100px;
+  margin:5px auto 7px;
+  overflow:visible;
+  background:repeating-linear-gradient(to top,#ffffff0b 0,#ffffff0b 1px,transparent 1px,transparent 20%);
+}
+body.singlephase-next-ui .meter-fill {
+  transition:height .25s ease;
+  border-radius:0 0 3px 3px;
+}
+body.singlephase-next-ui .meter-limit {
+  pointer-events:none;
+  position:absolute;
+  z-index:2;
+  bottom:var(--meter-limit-bottom,66.67%);
+  left:-7px;
+  right:-7px;
+  border-top:2px dashed #ffcf7c;
+}
+body.singlephase-next-ui .meter-limit-label {
+  pointer-events:none;
+  position:absolute;
+  z-index:3;
+  bottom:calc(var(--meter-limit-bottom,66.67%) + 5px);
+  right:0;
+  transform:translateX(0);
+  background:#1a2632;
+  padding:1px 4px;
+  border-radius:3px;
+  color:#ffe0a4;
+  font-size:13px;
+  font-weight:800;
+  line-height:16px;
+}
+body.singlephase-next-ui .meter.n .meter-track {
+  border-color:#536c58;
+}
+body.singlephase-next-ui .meter-max {
+  min-height:20px;
+}
+/* Portrait: the result card expands naturally instead of inheriting a
+   landscape-only fixed grid height. */
+@media (orientation:portrait), (max-width:959px) {
+  body.singlephase-next-ui .right {
+    grid-template-rows:auto 112px minmax(240px,auto) auto auto;
+  }
+  body.singlephase-next-ui .meters {min-height:240px}
+  body.singlephase-next-ui .meter-track {min-height:150px}
+}
+@media (orientation:landscape) and (min-width:960px) and (max-height:820px) {
+  body.singlephase-next-ui .right {
+    grid-template-rows:auto 80px minmax(0,1fr) auto auto;
+  }
+  body.singlephase-next-ui .meter-track {min-height:70px}
+  body.singlephase-next-ui .meter {padding:4px 3px}
+}
