@@ -67,6 +67,22 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 @media(max-height:850px) and (min-width:851px){body.dimming-intro-page .dimming-lesson{gap:8px;padding:8px 13px}.di-workspace .di-mechanism{height:clamp(280px,40dvh,330px)}.di-teacher{min-height:88px}.di-teacher img{height:80px}.di-demo-head{margin-bottom:5px}}
 @media(max-width:850px){.di-workspace{grid-template-columns:1fr}.di-footer{grid-template-columns:1fr}.di-workspace .di-mechanism{height:auto;min-height:0;aspect-ratio:900/375}.di-demo{padding:0 9px 8px}.di-demo-head{margin:0 -9px 7px;padding:9px}.di-demo-head{display:block}.di-demo-head .di-helper{display:block}.di-conclusion{flex-wrap:wrap}}
 @media(max-width:560px){body.dimming-intro-page .dimming-lesson{padding:9px;gap:9px}.di-demo{overflow-x:auto}.di-workspace .di-mechanism{min-width:700px;aspect-ratio:900/375}.di-title h1{font-size:23px}.di-teacher img{width:75px;height:90px}.di-teacher{gap:8px}}
+/* Two-mode pilot: method choice lives in the title; mechanism and wave retain their approved footprint. */
+.di-title{display:flex;flex-wrap:wrap;align-items:center;column-gap:18px;row-gap:5px}
+.di-title .di-kicker{flex-basis:100%}
+.di-title h1{flex:1 1 390px;margin:0}
+.di-method-tabs{display:flex;align-items:center;gap:7px;flex:0 1 auto}
+.di-method-tabs button{line-height:1.35;font-family:inherit;font-size:16px;font-weight:800;min-height:39px;padding:7px 14px;border-radius:7px;border:1px solid #70879a;color:#edf5fa;background:#293845;white-space:nowrap;cursor:pointer;touch-action:manipulation}
+.di-method-tabs button[aria-pressed="true"]{border-color:#f5b45b;color:#ffdfac;background:#65462a;box-shadow:inset 0 -3px #f6aa42}
+.di-method-tabs button:focus-visible{outline:3px solid #ffce71;outline-offset:3px}
+.di-workspace .di-mechanism [hidden],.di-wave-svg [hidden]{display:none!important}
+.di-footer{grid-template-columns:minmax(270px,42fr) minmax(0,58fr)}
+.di-next{justify-content:center;gap:4px;padding:12px 16px}
+.di-next h3{margin:0;color:#ffd18d;font-size:17px}
+.di-next p{font-size:16px;line-height:1.5;color:#e1edf4}
+.di-wave-svg #di-firing-dots circle{stroke:#ffe0bc;stroke-width:1.2}
+@media(max-width:850px){.di-title h1{flex-basis:100%}.di-method-tabs{width:100%;flex-wrap:wrap}.di-footer{grid-template-columns:1fr}}
+@media(max-width:560px){.di-method-tabs button{flex:1}.di-title{gap:7px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
 </style>
 </head>
