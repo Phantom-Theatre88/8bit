@@ -90,6 +90,16 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 .di-wave-svg #di-firing-dots circle{stroke:#ffe0bc;stroke-width:1.2}
 @media(max-width:850px){.di-title h1{flex-basis:100%}.di-method-tabs{width:100%;flex-wrap:wrap}.di-footer{grid-template-columns:1fr}.di-footer .di-next,.di-footer .di-teacher{grid-column:1;grid-row:auto}}
 @media(max-width:560px){.di-method-tabs button{flex:1}.di-title{gap:7px}}
+.di-wave-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.di-wave-heading h3{flex:1 1 150px}
+#di-animate-toggle{font-family:inherit;font-size:13px;line-height:1.3;font-weight:750;color:#d9f3ff;background:#233b4c;border:1px solid #7599ae;border-radius:6px;padding:6px 9px;cursor:pointer;white-space:nowrap}
+#di-animate-toggle[aria-pressed="true"]{color:#102732;background:#93dcf5;border-color:#93dcf5}
+#di-animate-toggle:focus-visible{outline:3px solid #ffe4a8;outline-offset:2px}
+.di-mechanism .di-switch-on{fill:#2e6b55!important;stroke:#9fffc5!important;filter:drop-shadow(0 0 7px #4cf2a483)}
+.di-mechanism .di-switch-off{fill:#273b49;stroke:#8399a8}
+.di-mechanism .di-state-on{fill:#baffd0!important}
+.di-mechanism .di-state-off{fill:#b6c8d3!important}
+.di-wave-svg [hidden]{display:none!important}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -99,7 +109,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 
 
 <main class="dimming-lesson">
-<header class="di-title"><p class="di-kicker">DIMMING / 調光の入口</p><h1>調光とは？ ― 光の明るさが、舞台を変える。</h1><nav class="di-method-tabs" aria-label="調光ユニット方式の切り替え"><button type="button" data-di-mode="water" aria-pressed="true">水抵抗式</button><button type="button" data-di-mode="scr" aria-pressed="false">サイリスタ式</button></nav></header>
+<header class="di-title"><p class="di-kicker">DIMMING / 調光の入口</p><h1>調光とは？ ― 光の明るさが、舞台を変える。</h1><nav class="di-method-tabs" aria-label="調光ユニット方式の切り替え"><button type="button" data-di-mode="water" aria-pressed="true">水抵抗式</button><button type="button" data-di-mode="scr" aria-pressed="false">サイリスタ式</button><button type="button" data-di-mode="pwm" aria-pressed="false">PWM</button></nav></header>
 <section class="di-panel di-demo" aria-labelledby="demo-title">
 <div class="di-demo-head"><h2 id="demo-title">調光ユニットのしくみ｜水抵抗式</h2><span class="di-helper">フェーダーを上下してみよう</span></div>
 
@@ -170,26 +180,41 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <text class="primary-label" x="450" y="269" text-anchor="middle">塩水</text>
 <text class="secondary-label" x="450" y="294" text-anchor="middle">浸かる面積が変わる</text>
 </g>
-<!-- SCR power-control illustration occupies the former beaker area. Fader stays shared. -->
-<g id="di-scr-unit" hidden aria-label="交流電源からサイリスタ調光器を通り白熱電球へ電力を供給する模式回路">
- <circle cx="205" cy="281" r="27" fill="#14212c" stroke="#bbcad4" stroke-width="2"/>
- <path d="M189 281Q197 265 205 281T221 281" fill="none" stroke="#ffd08f" stroke-width="2.7"/>
- <text class="secondary-label" x="205" y="329" text-anchor="middle">AC電源</text>
- <path d="M205 254V176H292" class="electrical"/>
- <path d="M584 176H648V263H696" class="electrical"/>
- <path d="M736 286V349H205V308" class="neutral"/>
- <rect x="292" y="116" width="292" height="160" rx="13" fill="#182b38" stroke="#7c9daf" stroke-width="3"/>
- <rect x="308" y="131" width="260" height="36" rx="6" fill="#304756"/>
- <text class="primary-label" x="438" y="155" text-anchor="middle">サイリスタ調光器</text>
- <rect x="348" y="187" width="101" height="54" rx="7" fill="#2d4554" stroke="#ffc37a" stroke-width="2.5"/>
- <text class="highlight-label" x="398" y="220" text-anchor="middle">SCR</text>
- <path d="M308 215H348M449 215H466" fill="none" stroke="#ffc37a" stroke-width="3.3"/>
- <path d="M398 241V252H461" fill="none" stroke="#62d5ff" stroke-width="3"/>
- <text class="secondary-label" x="438" y="291" text-anchor="middle">点弧タイミングを変える</text>
- <path d="M292 176H318V196M466 215H550V176H584" fill="none" stroke="#ffb968" stroke-width="3.3"/>
- <path d="M168 118H252V149H325" fill="none" stroke="#62d5ff" stroke-width="2.8" stroke-dasharray="6 6"/>
- <text class="secondary-label" x="204" y="105" text-anchor="middle">操作の指示</text>
- <text class="highlight-label" id="di-scr-angle" x="438" y="335" text-anchor="middle">点弧角 90°</text>
+<!-- SCR paired switches: schematic of operation only, not a literal circuit. -->
+<g id="di-scr-unit" hidden aria-label="サイリスタが交流の正負各半周期で点弧する模式図">
+<circle cx="205" cy="281" r="27" fill="#14212c" stroke="#bbcad4" stroke-width="2"/>
+<path d="M189 281Q197 265 205 281T221 281" fill="none" stroke="#ffd08f" stroke-width="2.7"/>
+<text class="secondary-label" x="205" y="329" text-anchor="middle">AC電源</text>
+<path d="M205 254V176H292" class="electrical"/><path d="M584 176H648V263H696" class="electrical"/><path d="M736 286V349H205V308" class="neutral"/>
+<rect x="292" y="116" width="292" height="160" rx="13" fill="#182b38" stroke="#7c9daf" stroke-width="3"/>
+<rect x="308" y="131" width="260" height="36" rx="6" fill="#304756"/><text class="primary-label" x="438" y="155" text-anchor="middle">サイリスタ調光器</text>
+<rect id="di-scr-positive" x="318" y="183" width="116" height="58" rx="8" fill="#273b49" stroke="#8399a8" stroke-width="2.5"/>
+<rect id="di-scr-negative" x="444" y="183" width="116" height="58" rx="8" fill="#273b49" stroke="#8399a8" stroke-width="2.5"/>
+<text class="secondary-label" x="376" y="206" text-anchor="middle">正側 SCR</text>
+<text class="secondary-label" x="502" y="206" text-anchor="middle">負側 SCR</text>
+<text id="di-scr-positive-state" class="highlight-label" x="376" y="230" text-anchor="middle">OFF</text>
+<text id="di-scr-negative-state" class="highlight-label" x="502" y="230" text-anchor="middle">OFF</text>
+<text class="secondary-label" x="438" y="266" text-anchor="middle">点弧でON → 電流ゼロでOFF</text>
+<path d="M168 118H252V149H292" fill="none" stroke="#62d5ff" stroke-width="2.8" stroke-dasharray="6 6"/>
+<text class="secondary-label" x="204" y="105" text-anchor="middle">操作の指示</text>
+<text class="highlight-label" id="di-scr-angle" x="438" y="307" text-anchor="middle">点弧角 90°</text>
+<text id="di-scr-current-state" class="secondary-label" x="438" y="335" text-anchor="middle">点弧を待つ</text>
+</g>
+<!-- PWM example is a DC-powered LED driver, not mains SCR chopping. -->
+<g id="di-pwm-unit" hidden aria-label="LED用PWM直流駆動の電子スイッチ模式図">
+<rect x="166" y="246" width="80" height="65" rx="10" fill="#14212c" stroke="#bbcad4" stroke-width="2"/>
+<text class="primary-label" x="206" y="273" text-anchor="middle">DC</text><text class="secondary-label" x="206" y="296" text-anchor="middle">電源</text>
+<path d="M246 266V176H292" class="electrical"/><path d="M584 176H648V263H696" class="electrical"/><path d="M736 286V349H206V312" class="neutral"/>
+<rect x="292" y="116" width="292" height="160" rx="13" fill="#182b38" stroke="#7c9daf" stroke-width="3"/>
+<rect x="308" y="131" width="260" height="36" rx="6" fill="#304756"/><text class="primary-label" x="438" y="155" text-anchor="middle">LED用 PWM 駆動</text>
+<rect id="di-pwm-switch" x="350" y="180" width="176" height="68" rx="9" fill="#273b49" stroke="#8399a8" stroke-width="3"/>
+<text class="secondary-label" x="438" y="203" text-anchor="middle">電子スイッチ</text>
+<text id="di-pwm-switch-state" class="highlight-label" x="438" y="232" text-anchor="middle">OFF</text>
+<text id="di-pwm-duty" class="highlight-label" x="438" y="304" text-anchor="middle">ON時間 50%</text>
+<text class="secondary-label" x="438" y="332" text-anchor="middle">0V ↔ 駆動電圧</text>
+<path d="M168 118H252V149H292" fill="none" stroke="#62d5ff" stroke-width="2.8" stroke-dasharray="6 6"/>
+<text class="secondary-label" x="204" y="105" text-anchor="middle">操作の指示</text>
+<text class="secondary-label" x="750" y="322" text-anchor="middle">灯具イメージ</text>
 </g>
 <!-- BULB: same asset and layered glow philosophy as current 8-bit dimmer -->
 <circle id="lampHalo" cx="730" cy="130" r="113" fill="url(#bulbGlow)" opacity=".48"/>
@@ -200,7 +225,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <circle cx="736" cy="286" r="4.2" fill="#c4d6df" stroke="#425a67" stroke-width="1.5"/>
 </svg>
 <aside class="di-wave-panel" aria-labelledby="di-wave-title">
-<h3 id="di-wave-title">電球にかかる交流電圧</h3>
+<div class="di-wave-heading"><h3 id="di-wave-title">電球にかかる交流電圧</h3><button id="di-animate-toggle" type="button" aria-pressed="false">▶ ゆっくり見る</button></div>
 <p class="wave-sub" id="di-wave-sub">フェーダーに連動して、波の高さが変わる</p>
 <svg class="di-wave-svg" viewBox="0 0 340 210" role="img" aria-label="水抵抗式の調光を概念的に表した交流電圧波形。周波数は同じで、振幅が変化する">
 <path d="M19 104H321" stroke="#83a1b4" stroke-width="1.7" stroke-dasharray="5 5"/>
@@ -208,13 +233,15 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <path id="di-wave-reference" class="wave-reference" d=""/>
 <path id="di-wave-area" class="wave-area" d=""/>
 <path id="di-wave-actual" class="wave-actual" d=""/>
+<line id="di-wave-cursor" x1="19" x2="19" y1="25" y2="182" stroke="#6cdeff" stroke-width="2.4" stroke-dasharray="5 4" hidden/>
+<circle id="di-wave-live-dot" cx="19" cy="104" r="5" fill="#7cddff" stroke="#09202a" stroke-width="1.5" hidden/>
 <g id="di-firing-dots" aria-label="サイリスタの点弧位置" hidden></g>
-<text x="24" y="20">＋</text>
-<text x="24" y="199">－</text>
+<text id="di-wave-axis-plus" x="24" y="20">＋</text>
+<text id="di-wave-axis-minus" x="24" y="199">－</text>
 <text x="325" y="108" text-anchor="end">0</text>
 </svg>
 <p class="di-wave-explanation"><strong id="di-wave-summary">波の高さが変わると、電球の明るさも変わる。</strong></p>
-<p class="di-wave-caption">※塗り面積は電力のイメージです。実測値・計算値ではありません。</p>
+<p class="di-wave-caption" id="di-wave-caption">※塗り面積は電力のイメージです。実測値・計算値ではありません。</p>
 </aside>
 </div>
 <div class="di-conclusion"><p id="di-action">フェーダーを上げる → 銅板が下がる → 電球が明るくなる</p><output id="di-readout" aria-live="off">明るさの指示 50%</output></div>
