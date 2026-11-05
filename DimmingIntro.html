@@ -76,12 +76,16 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 .di-method-tabs button[aria-pressed="true"]{border-color:#f5b45b;color:#ffdfac;background:#65462a;box-shadow:inset 0 -3px #f6aa42}
 .di-method-tabs button:focus-visible{outline:3px solid #ffce71;outline-offset:3px}
 .di-workspace .di-mechanism [hidden],.di-wave-svg [hidden]{display:none!important}
-.di-footer{grid-template-columns:minmax(270px,42fr) minmax(0,58fr)}
+.di-footer{grid-template-columns:minmax(0,58fr) minmax(260px,42fr);align-items:stretch}
+.di-footer .di-next{grid-column:1;grid-row:1;justify-content:flex-start}
+.di-footer .di-teacher{grid-column:2;grid-row:1;align-self:stretch}
+.di-footer .di-next p{font-size:16px;line-height:1.55}
+.di-footer .di-next h3{margin-bottom:6px}
 .di-next{justify-content:center;gap:4px;padding:12px 16px}
 .di-next h3{margin:0;color:#ffd18d;font-size:17px}
 .di-next p{font-size:16px;line-height:1.5;color:#e1edf4}
 .di-wave-svg #di-firing-dots circle{stroke:#ffe0bc;stroke-width:1.2}
-@media(max-width:850px){.di-title h1{flex-basis:100%}.di-method-tabs{width:100%;flex-wrap:wrap}.di-footer{grid-template-columns:1fr}}
+@media(max-width:850px){.di-title h1{flex-basis:100%}.di-method-tabs{width:100%;flex-wrap:wrap}.di-footer{grid-template-columns:1fr}.di-footer .di-next,.di-footer .di-teacher{grid-column:1;grid-row:auto}}
 @media(max-width:560px){.di-method-tabs button{flex:1}.di-title{gap:7px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
 </style>
@@ -213,8 +217,8 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <div class="di-conclusion"><p id="di-action">フェーダーを上げる → 銅板が下がる → 電球が明るくなる</p><output id="di-readout" aria-live="off">明るさの指示 50%</output></div>
 </section>
 <div class="di-footer">
+<section class="di-panel di-next" aria-labelledby="di-detail-title"><h3 id="di-detail-title">水抵抗式調光の仕組み・特徴</h3><p id="di-detail-text">水抵抗式は、塩水を電気抵抗として使う調光方式です。2枚の電極のうち片方を上下させ、塩水に浸かる面積を変えることで抵抗を調整します。深く浸すと抵抗が小さくなり電球が明るく、浅くすると抵抗が大きくなり暗くなります。抵抗器と電球は直列で、抵抗器で電圧が降下するため、電球にかかる電圧が変わります。電気エネルギーの一部が熱になるため、水の温度上昇や蒸発、補水が必要でした。</p></section>
 <section class="eightbit-shared-teacher di-panel di-teacher"><img id="di-teacher-img" src="assets/teacher_shy_story.svg?v=shy-story-20261105-deploy2" alt="照明教材の先生"><div><strong>先生のひとこと</strong><p id="di-teacher-text">昔の水抵抗器は、水が熱くなって蒸発したんだって。補充に「おしっこ」を使った、なんて逸話も……えへへ、ホントかな？</p></div></section>
-<aside class="di-panel di-next" aria-labelledby="di-detail-title"><h3 id="di-detail-title">方式のしくみ・特徴</h3><p id="di-detail-text">塩水に浸かる銅板の面積を変えると、抵抗が変化し、電球への供給電力が変わります。水抵抗式は古い舞台調光方式の一つです。</p></aside>
 </div>
 <p class="di-note">※調光方式の仕組みを比較するための模式図。実際の通電実験はしないでください。光の明るさ・波形の面積は概念的表現です。</p>
 </main>
@@ -288,8 +292,8 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
   waveReference.setAttribute('d',sinePath(69));
   const waterWords='昔の水抵抗器は、水が熱くなって蒸発したんだって。補充に「おしっこ」を使った、なんて逸話も……えへへ、ホントかな？';
   const scrWords='サイリスタは、波の途中から電気を通すんだよ。赤い点が動くと、電球の明るさも変わるね！';
-  const waterExplanation='塩水に浸かる銅板の面積を変えると、抵抗が変化し、電球への供給電力が変わります。水抵抗式は古い舞台調光方式の一つです。';
-  const scrExplanation='サイリスタは交流の半周期ごとに、通電を始める角度（点弧角）を変えます。波形の一部を通す位相制御です。電流の急な立ち上がりが、唸りの原因になることがあります。';
+  const waterExplanation='水抵抗式は、塩水を電気抵抗として使う調光方式です。2枚の電極のうち片方を上下させ、塩水に浸かる面積を変えることで抵抗を調整します。深く浸すと抵抗が小さくなり電球が明るく、浅くすると抵抗が大きくなり暗くなります。抵抗器と電球は直列で、抵抗器で電圧が降下するため、電球にかかる電圧が変わります。電気エネルギーの一部が熱になるため、水の温度上昇や蒸発、補水が必要でした。';
+  const scrExplanation='サイリスタ（SCR）は、大きな電力を電子的にON／OFFできる半導体素子です。サイリスタ調光では、交流のプラス側とマイナス側に対応した素子を使い、各半周期で電気を通し始める位置（点弧角）を変えます。これが位相制御（位相角制御）です。フェーダーを動かすと通電する時間が変わり、電球への供給電力を調整できます。抵抗で電力を熱として消費する方式より効率が高い一方、急激な電流の立ち上がりでフィラメントや調光器が唸ることがあります。';
   const modeButtons=[...document.querySelectorAll('[data-di-mode]')];
   const firingDots=document.getElementById('di-firing-dots');
   let mode='water',level=.5;
@@ -304,6 +308,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     document.getElementById('di-wave-summary').textContent=mode==='water'?'波の高さが変わると、電球の明るさも変わる。':'導通開始を遅らせると、電球が暗くなる。';
     document.getElementById('di-teacher-img').src=mode==='water'?'assets/teacher_shy_story.svg?v=shy-story-20261105-deploy2':'assets/wave_teacher_transparent.svg?v=teacher-standard-20261014';
     document.getElementById('di-teacher-text').textContent=mode==='water'?waterWords:scrWords;
+    document.getElementById('di-detail-title').textContent=mode==='water'?'水抵抗式調光の仕組み・特徴':'サイリスタ調光の仕組み・特徴';
     document.getElementById('di-detail-text').textContent=mode==='water'?waterExplanation:scrExplanation;
     document.querySelector('.di-wave-svg').setAttribute('aria-label',mode==='water'?'水抵抗式の交流電圧。振幅が変化':'サイリスタ式の交流電圧。半周期ごとに点弧角から導通');
     touch.setAttribute('aria-label',mode==='water'?'フェーダー。上げると銅板が下がり電球が明るくなる':'フェーダー。上げると点弧角が小さくなり電球が明るくなる');
