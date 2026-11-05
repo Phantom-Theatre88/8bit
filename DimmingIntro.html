@@ -109,7 +109,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 
 
 <main class="dimming-lesson">
-<header class="di-title"><p class="di-kicker">DIMMING / 調光の入口</p><h1>調光とは？ ― 光の明るさが、舞台を変える。</h1><nav class="di-method-tabs" aria-label="調光ユニット方式の切り替え"><button type="button" data-di-mode="water" aria-pressed="true">水抵抗式</button><button type="button" data-di-mode="scr" aria-pressed="false">サイリスタ式</button><button type="button" data-di-mode="pwm" aria-pressed="false">PWM</button></nav></header>
+<header class="di-title"><p class="di-kicker">DIMMING / 調光の入口</p><h1>調光とは？ ― 光の明るさが、舞台を変える。</h1><nav class="di-method-tabs" aria-label="調光ユニット方式の切り替え"><button type="button" data-di-mode="water" aria-pressed="true">水抵抗式</button><button type="button" data-di-mode="variac" aria-pressed="false">スライダック</button><button type="button" data-di-mode="scr" aria-pressed="false">サイリスタ式</button><button type="button" data-di-mode="pwm" aria-pressed="false">PWM</button></nav></header>
 <section class="di-panel di-demo" aria-labelledby="demo-title">
 <div class="di-demo-head"><h2 id="demo-title">調光ユニットのしくみ｜水抵抗式</h2><span class="di-helper">フェーダーを上下してみよう</span></div>
 
@@ -124,7 +124,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <clipPath id="di-water-clip"><rect x="277" y="223" width="352" height="114"/></clipPath>
 </defs>
 <!-- PHYSICAL MECHANISM: fixed pulleys and one continuous steel-colored wire. Not electrical wiring. -->
-<g aria-hidden="true">
+<g class="di-fader-only" aria-hidden="true">
 <rect x="30" y="85" width="111" height="202" rx="10" fill="#111e29" stroke="#506b7e" stroke-width="1.5"/>
 <rect x="68" y="121" width="52" height="142" rx="10" fill="#09131b" stroke="#52687a" stroke-width="2"/>
 <rect x="90" y="137" width="8" height="103" rx="4" fill="#02060a" stroke="#8798a7"/>
@@ -138,15 +138,27 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <path d="M112 49V20H332V49" fill="none" stroke="#596b79" stroke-width="5" stroke-linejoin="round"/>
 <path d="M112 20H332" stroke="#8795a0" stroke-width="3"/>
 </g>
-<text class="primary-label" x="92" y="109" text-anchor="middle">フェーダー</text>
-<text class="secondary-label" x="43" y="153" text-anchor="middle">明</text>
-<text class="secondary-label" x="43" y="248" text-anchor="middle">暗</text>
+<text class="primary-label di-fader-only" x="92" y="109" text-anchor="middle">フェーダー</text>
+<text class="secondary-label di-fader-only" x="43" y="153" text-anchor="middle">明</text>
+<text class="secondary-label di-fader-only" x="43" y="248" text-anchor="middle">暗</text>
 <!-- Fader, visible grab handle and large invisible hit track; interactive via pointer and keyboard. -->
-<g id="faderHandle" transform="translate(0 240)" aria-hidden="true">
+<g id="faderHandle" class="di-fader-only" transform="translate(0 240)" aria-hidden="true">
 <rect id="faderKnob" x="65" y="-15" width="58" height="30" rx="5" fill="url(#faderMetal)" stroke="#c5d3dc" stroke-width="2"/>
 <path d="M76 -5H112M76 0H112M76 5H112" stroke="#202d39" stroke-width="2"/>
 </g>
-<rect id="faderTouch" class="fader-hit" x="58" y="119" width="75" height="145" rx="9" fill="transparent" tabindex="0" role="slider" aria-label="フェーダー。上げると銅板が下がり、電球が明るくなる" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50パーセントの指示"/>
+<rect id="faderTouch" class="fader-hit di-fader-only" x="58" y="119" width="75" height="145" rx="9" fill="transparent" tabindex="0" role="slider" aria-label="フェーダー。上げると銅板が下がり、電球が明るくなる" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50パーセントの指示"/>
+<g id="di-variac-knob" hidden aria-label="スライダックの回転ノブ。0～130Vの例">
+<rect x="30" y="85" width="111" height="202" rx="10" fill="#111e29" stroke="#506b7e" stroke-width="1.5"/>
+<text class="primary-label" x="94" y="109" text-anchor="middle">回転ノブ</text>
+<circle cx="95" cy="192" r="51" fill="#0a121a" stroke="#8aa5b8" stroke-width="3"/>
+<circle cx="95" cy="192" r="40" fill="url(#faderMetal)" stroke="#e3eef3" stroke-width="2"/>
+<circle cx="95" cy="192" r="10" fill="#172532" stroke="#ccdbe4" stroke-width="2"/>
+<g id="di-variac-pointer" transform="rotate(-135 95 192)"><path d="M95 160V174" stroke="#ffd18b" stroke-width="6" stroke-linecap="round"/><circle cx="95" cy="152" r="5" fill="#ffd18b" stroke="#57361a" stroke-width="1.4"/></g>
+<text class="secondary-label" x="49" y="263" text-anchor="middle">0</text>
+<text class="secondary-label" x="130" y="263" text-anchor="middle">130</text>
+<text class="highlight-label" id="di-variac-knob-readout" x="94" y="328" text-anchor="middle">65V</text>
+</g>
+<circle id="di-variac-touch" cx="95" cy="192" r="56" fill="transparent" style="cursor:grab;touch-action:none" role="slider" aria-label="回転ノブ。出力電圧を0から130ボルトまで調整" aria-valuemin="0" aria-valuemax="130" aria-valuenow="65" aria-valuetext="65ボルト" tabindex="0" hidden/>
 <g class="di-water-only" aria-label="水抵抗式の直列電気回路と水抵抗器">
 <!-- ELECTRICAL: separate amber feed, slate-colored return. Mobile lead is flexible. -->
 <circle cx="209" cy="280" r="27" fill="#14212c" stroke="#bbcad4" stroke-width="2"/>
@@ -179,6 +191,105 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <rect x="544" y="223" width="26" height="104" fill="#ffe2a2" opacity=".22"/>
 <text class="primary-label" x="450" y="269" text-anchor="middle">塩水</text>
 <text class="secondary-label" x="450" y="294" text-anchor="middle">浸かる面積が変わる</text>
+</g>
+<!-- Fixed toroidal winding and rotary carbon brush. A simplified conceptual wiring diagram. -->
+<g id="di-variac-unit" hidden aria-label="固定コイルの接触ブラシが回転し交流出力電圧を変える単巻変圧器の模式図">
+<circle cx="204" cy="282" r="27" fill="#14212c" stroke="#bbcad4" stroke-width="2"/>
+<path d="M188 283Q196 267 204 283T220 283" fill="none" stroke="#ffd08f" stroke-width="2.7"/>
+<text class="secondary-label" x="204" y="333" text-anchor="middle">AC入力 100V</text>
+<path d="M204 255V174H294" class="electrical"/><path d="M204 309V349H736V286" class="neutral"/>
+<rect x="294" y="62" width="292" height="284" rx="14" fill="#182b38" stroke="#7c9daf" stroke-width="3"/>
+<text x="440" y="91" text-anchor="middle" class="primary-label">スライダック</text>
+<text x="440" y="113" text-anchor="middle" class="secondary-label">可変単巻変圧器</text>
+<circle cx="438" cy="215" r="100" fill="#49362b" stroke="#e1ab70" stroke-width="2"/>
+<circle cx="438" cy="215" r="76" fill="#111b25" stroke="#627a8a" stroke-width="2"/>
+<line x1="382.8" y1="270.2" x2="368.0" y2="285.0" stroke="#ffd18a" stroke-width="3"/>
+<line x1="379.4" y1="266.4" x2="363.6" y2="280.3" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="376.1" y1="262.5" x2="359.5" y2="275.3" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="373.1" y1="258.3" x2="355.7" y2="270.0" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="370.5" y1="254.0" x2="352.3" y2="264.5" stroke="#ffd18a" stroke-width="3"/>
+<line x1="368.0" y1="249.5" x2="349.2" y2="258.8" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="365.9" y1="244.8" x2="346.5" y2="252.9" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="364.1" y1="240.1" x2="344.3" y2="246.8" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="362.7" y1="235.2" x2="342.4" y2="240.6" stroke="#ffd18a" stroke-width="3"/>
+<line x1="361.5" y1="230.2" x2="340.9" y2="234.3" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="360.7" y1="225.2" x2="339.8" y2="227.9" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="360.2" y1="220.1" x2="339.2" y2="221.5" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="360.0" y1="215.0" x2="339.0" y2="215.0" stroke="#ffd18a" stroke-width="3"/>
+<line x1="360.2" y1="209.9" x2="339.2" y2="208.5" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="360.7" y1="204.8" x2="339.8" y2="202.1" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="361.5" y1="199.8" x2="340.9" y2="195.7" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="362.7" y1="194.8" x2="342.4" y2="189.4" stroke="#ffd18a" stroke-width="3"/>
+<line x1="364.1" y1="189.9" x2="344.3" y2="183.2" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="365.9" y1="185.2" x2="346.5" y2="177.1" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="368.0" y1="180.5" x2="349.2" y2="171.2" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="370.5" y1="176.0" x2="352.3" y2="165.5" stroke="#ffd18a" stroke-width="3"/>
+<line x1="373.1" y1="171.7" x2="355.7" y2="160.0" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="376.1" y1="167.5" x2="359.5" y2="154.7" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="379.4" y1="163.6" x2="363.6" y2="149.7" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="382.8" y1="159.8" x2="368.0" y2="145.0" stroke="#ffd18a" stroke-width="3"/>
+<line x1="386.6" y1="156.4" x2="372.7" y2="140.6" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="390.5" y1="153.1" x2="377.7" y2="136.5" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="394.7" y1="150.1" x2="383.0" y2="132.7" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="399.0" y1="147.5" x2="388.5" y2="129.3" stroke="#ffd18a" stroke-width="3"/>
+<line x1="403.5" y1="145.0" x2="394.2" y2="126.2" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="408.2" y1="142.9" x2="400.1" y2="123.5" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="412.9" y1="141.1" x2="406.2" y2="121.3" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="417.8" y1="139.7" x2="412.4" y2="119.4" stroke="#ffd18a" stroke-width="3"/>
+<line x1="422.8" y1="138.5" x2="418.7" y2="117.9" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="427.8" y1="137.7" x2="425.1" y2="116.8" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="432.9" y1="137.2" x2="431.5" y2="116.2" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="438.0" y1="137.0" x2="438.0" y2="116.0" stroke="#ffd18a" stroke-width="3"/>
+<line x1="443.1" y1="137.2" x2="444.5" y2="116.2" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="448.2" y1="137.7" x2="450.9" y2="116.8" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="453.2" y1="138.5" x2="457.3" y2="117.9" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="458.2" y1="139.7" x2="463.6" y2="119.4" stroke="#ffd18a" stroke-width="3"/>
+<line x1="463.1" y1="141.1" x2="469.8" y2="121.3" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="467.8" y1="142.9" x2="475.9" y2="123.5" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="472.5" y1="145.0" x2="481.8" y2="126.2" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="477.0" y1="147.5" x2="487.5" y2="129.3" stroke="#ffd18a" stroke-width="3"/>
+<line x1="481.3" y1="150.1" x2="493.0" y2="132.7" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="485.5" y1="153.1" x2="498.3" y2="136.5" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="489.4" y1="156.4" x2="503.3" y2="140.6" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="493.2" y1="159.8" x2="508.0" y2="145.0" stroke="#ffd18a" stroke-width="3"/>
+<line x1="496.6" y1="163.6" x2="512.4" y2="149.7" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="499.9" y1="167.5" x2="516.5" y2="154.7" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="502.9" y1="171.7" x2="520.3" y2="160.0" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="505.5" y1="176.0" x2="523.7" y2="165.5" stroke="#ffd18a" stroke-width="3"/>
+<line x1="508.0" y1="180.5" x2="526.8" y2="171.2" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="510.1" y1="185.2" x2="529.5" y2="177.1" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="511.9" y1="189.9" x2="531.7" y2="183.2" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="513.3" y1="194.8" x2="533.6" y2="189.4" stroke="#ffd18a" stroke-width="3"/>
+<line x1="514.5" y1="199.8" x2="535.1" y2="195.7" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="515.3" y1="204.8" x2="536.2" y2="202.1" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="515.8" y1="209.9" x2="536.8" y2="208.5" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="516.0" y1="215.0" x2="537.0" y2="215.0" stroke="#ffd18a" stroke-width="3"/>
+<line x1="515.8" y1="220.1" x2="536.8" y2="221.5" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="515.3" y1="225.2" x2="536.2" y2="227.9" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="514.5" y1="230.2" x2="535.1" y2="234.3" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="513.3" y1="235.2" x2="533.6" y2="240.6" stroke="#ffd18a" stroke-width="3"/>
+<line x1="511.9" y1="240.1" x2="531.7" y2="246.8" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="510.1" y1="244.8" x2="529.5" y2="252.9" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="508.0" y1="249.5" x2="526.8" y2="258.8" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="505.5" y1="254.0" x2="523.7" y2="264.5" stroke="#ffd18a" stroke-width="3"/>
+<line x1="502.9" y1="258.3" x2="520.3" y2="270.0" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="499.9" y1="262.5" x2="516.5" y2="275.3" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="496.6" y1="266.4" x2="512.4" y2="280.3" stroke="#bd703b" stroke-width="2.3"/>
+<line x1="493.2" y1="270.2" x2="508.0" y2="285.0" stroke="#ffd18a" stroke-width="3"/>
+<circle cx="438" cy="215" r="34" fill="#1b2d3a" stroke="#708a99" stroke-width="2"/>
+<text class="secondary-label" x="438" y="209" text-anchor="middle">固定</text><text class="secondary-label" x="438" y="232" text-anchor="middle">コイル</text>
+<g id="di-variac-brush-arm" transform="rotate(-135 438 215)">
+<path d="M438 198V138" stroke="#d2e2ea" stroke-width="8" stroke-linecap="round"/>
+<path d="M432 136H444V123H432Z" fill="#3f4a53" stroke="#f5d497" stroke-width="2"/>
+<rect x="433" y="119" width="10" height="13" rx="2" fill="#333" stroke="#ffd18b" stroke-width="1"/></g>
+<circle cx="438" cy="215" r="10" fill="#8c9eab" stroke="#e5f1f6" stroke-width="2"/>
+<text id="di-variac-voltage" class="highlight-label" x="440" y="367" text-anchor="middle">出力 65V</text>
+<text class="secondary-label" x="324" y="330" text-anchor="middle">0V</text>
+<text class="secondary-label" x="552" y="330" text-anchor="middle">130V</text>
+<path d="M586 174H650V263H696" class="electrical"/>
+<path d="M168 121H251V148H294" stroke="#62d5ff" stroke-width="2.7" stroke-dasharray="6 6" fill="none"/>
+<text class="secondary-label" x="205" y="107" text-anchor="middle">ノブ連動</text>
+<text class="highlight-label" id="di-variac-warning" x="698" y="335" text-anchor="middle" hidden>100V超：過電圧</text>
 </g>
 <!-- SCR paired switches: schematic of operation only, not a literal circuit. -->
 <g id="di-scr-unit" hidden aria-label="サイリスタが交流の正負各半周期で点弧する模式図">
