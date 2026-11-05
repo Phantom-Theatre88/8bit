@@ -197,3 +197,7 @@ body.singlephase-next-ui .empty {top:132px;font-size:15px;line-height:22px}
    font-size:16px!important;line-height:23px!important;padding:9px!important;
  }
 }
+
+/* The introductory W/V/A recap lives in the preceding lesson. Keep the single
+   action sentence full-width on both landscape and portrait layouts. */
+body.singlephase-next-ui .wire-intro-action{margin:0;padding:0 0 0 8px;border-left:2px solid #617080;font-size:16px;line-height:1.5;color:#e4ebf3}
