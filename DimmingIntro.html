@@ -43,6 +43,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 .di-mechanism .primary-label{font-size:19px;font-weight:800;fill:#f2f8fb}
 .di-mechanism .secondary-label{font-size:16px;fill:#bdd1df}
 .di-mechanism .highlight-label{font-size:17px;font-weight:800;fill:#ffd18b}
+.di-mechanism .lamp-warning{fill:#ff7272;font-weight:800;stroke:#18232e;stroke-width:4;paint-order:stroke}
 .di-mechanism .electrical{stroke:#ffb968;stroke-width:3.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .di-mechanism .neutral{stroke:#9eb1be;stroke-width:3.2;fill:none;stroke-linejoin:round}
 .di-mechanism .cable{fill:none;stroke:#b3c1cb;stroke-width:3.3;stroke-linecap:round;stroke-linejoin:round}
@@ -107,6 +108,23 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 .di-wave-svg [hidden]{display:none!important}
 #di-animate-toggle[hidden],.di-mechanism [hidden]{display:none!important}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+
+.di-machine-stage:has(.di-water-only:not([hidden])) .di-mechanism{overflow:visible;pointer-events:none}
+.di-machine-stage{display:flex;min-width:0;align-items:stretch;gap:8px}
+.di-machine-stage .di-mechanism{flex:1;min-width:0;width:0}
+.di-operation{flex:0 0 clamp(115px,12vw,170px);display:flex;flex-direction:column;align-items:center;padding:12px 8px;background:#26323e;border:1px solid #617584;border-radius:8px;color:#eff5fa}
+.di-operation[hidden]{display:none}
+.di-operation label{font-size:18px;font-weight:bold}
+.di-operation output{font-size:24px;font-weight:bold;color:#78e2f2}
+.di-control-track{position:relative;flex:1;width:100%;min-height:170px;margin:3px 0}
+.di-control-track div{position:absolute;inset:20px 56% 20px 0;display:flex;flex-direction:column;justify-content:space-between;text-align:right}
+.di-control-track span{line-height:0;font-size:15px}
+#di-large-fader{position:absolute;left:46%;width:54%;height:100%;margin:0;writing-mode:vertical-lr;direction:rtl;appearance:none;background:transparent;cursor:grab;touch-action:none}
+#di-large-fader::-webkit-slider-runnable-track{width:8px;height:100%;background:#101a22;border-radius:5px}
+#di-large-fader::-webkit-slider-thumb{appearance:none;width:48px;height:40px;margin-left:-20px;border:2px solid #172028;border-radius:5px;background:linear-gradient(#d5e0e8,#71808c 44%,#ff7546 45% 54%,#b5c5cf 55%,#4a5964)}
+#di-large-fader::-moz-range-track{width:8px;height:100%;background:#101a22}
+#di-large-fader::-moz-range-thumb{width:46px;height:38px;background:linear-gradient(#d5e0e8,#71808c 44%,#ff7546 45% 54%,#b5c5cf 55%,#4a5964)}
+@media(max-width:560px){.di-machine-stage{min-width:690px}}
 </style>
 </head>
 <body class="dimming-intro-page eightbit-unified-width">
@@ -120,48 +138,25 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <div class="di-demo-head"><h2 id="demo-title">調光ユニットのしくみ｜水抵抗式</h2><span class="di-helper">フェーダーを上下してみよう</span></div>
 
 <div class="di-workspace">
+<div class="di-machine-stage"><div class="di-operation">
+<label for="di-large-fader">フェーダー</label><output for="di-large-fader" id="di-position">50%</output>
+<div class="di-control-track"><div aria-hidden="true"><span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span></div><input type="range" id="di-large-fader" min="0" max="100" step="1" value="50" aria-orientation="vertical"></div></div>
 <svg class="di-mechanism" viewBox="30 0 825 375" role="group" aria-label="フェーダーを上げると、滑車を通したワイヤーが左の銅板を下げ、水抵抗器を通る電流が増えて電球が明るくなる仕組み">
 <defs>
 <linearGradient id="glassWall" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#a6e8f7" stop-opacity=".2"/><stop offset=".12" stop-color="#a6e8f7" stop-opacity=".02"/><stop offset=".86" stop-color="#c8f5ff" stop-opacity=".02"/><stop offset="1" stop-color="#c8f5ff" stop-opacity=".32"/></linearGradient>
 <linearGradient id="saltwater" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#76d8ef" stop-opacity=".23"/><stop offset=".55" stop-color="#229ac8" stop-opacity=".35"/><stop offset="1" stop-color="#096187" stop-opacity=".66"/></linearGradient>
 <linearGradient id="plateMetal" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#8b481f"/><stop offset=".18" stop-color="#d68b4a"/><stop offset=".47" stop-color="#f4ca87"/><stop offset=".73" stop-color="#c98540"/><stop offset="1" stop-color="#76401c"/></linearGradient>
+<linearGradient id="waterThumb" x2="0" y2="1"><stop stop-color="#d5e0e8"/><stop offset=".45" stop-color="#71808c"/><stop offset=".55" stop-color="#b5c5cf"/><stop offset="1" stop-color="#4a5964"/></linearGradient>
 <linearGradient id="faderMetal" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#374451"/><stop offset=".49" stop-color="#b9cbd6"/><stop offset=".53" stop-color="#758c9f"/><stop offset="1" stop-color="#293947"/></linearGradient>
 <radialGradient id="bulbGlow"><stop stop-color="#fff5c5" stop-opacity=".95"/><stop offset=".35" stop-color="#ffc05d" stop-opacity=".58"/><stop offset="1" stop-color="#f69d35" stop-opacity="0"/></radialGradient>
 <clipPath id="di-water-clip"><rect x="277" y="223" width="352" height="114"/></clipPath>
 </defs>
 <!-- PHYSICAL MECHANISM: fixed pulleys and one continuous steel-colored wire. Not electrical wiring. -->
-<g class="di-electronic-fader" hidden aria-hidden="true">
-<rect x="30" y="85" width="111" height="202" rx="10" fill="#111e29" stroke="#506b7e" stroke-width="1.5"/>
-<rect x="68" y="121" width="52" height="142" rx="10" fill="#09131b" stroke="#52687a" stroke-width="2"/>
-<rect x="90" y="137" width="8" height="103" rx="4" fill="#02060a" stroke="#8798a7"/>
-<g stroke="#8195a5" stroke-width="2"><path d="M66 140h11M66 190h11M66 239h11"/></g>
-</g>
 <g class="di-water-only" aria-label="水抵抗式の機械的なワイヤーと滑車">
-<rect x="57" y="119" width="74" height="145" rx="4" fill="#343835" stroke="#99917d" stroke-width="2"/>
-<path d="M76 126V256 M112 126V256" stroke="#b3a186" stroke-width="6"/>
-<path d="M77 126V256 M113 126V256" stroke="#594d3e" stroke-width="2"/>
-<path id="pulleyRope" class="cable" d="M94 228V68A18 18 0 0 1 112 50H332A18 18 0 0 1 350 68V102"/>
-<circle class="pulley" cx="112" cy="68" r="18"/><circle class="pulley" cx="332" cy="68" r="18"/>
-<g fill="none" stroke="#202e3b" stroke-width="3"><circle cx="112" cy="68" r="10"/><circle cx="332" cy="68" r="10"/></g>
-<path id="waterSpokes112" d="M99 68h26 M112 55v26" stroke="#ccd4d7" stroke-width="2.5"/><circle cx="112" cy="68" r="4" fill="#e1e7ed"/><path id="waterSpokes332" d="M319 68h26 M332 55v26" stroke="#ccd4d7" stroke-width="2.5"/><circle cx="332" cy="68" r="4" fill="#e1e7ed"/>
-<path d="M112 49V20H332V49" fill="none" stroke="#596b79" stroke-width="5" stroke-linejoin="round"/>
-<path d="M112 20H332" stroke="#8795a0" stroke-width="3"/>
+<path id="pulleyRope" class="cable" d="M94 223V68A18 18 0 0 1 112 50H332A18 18 0 0 1 350 68V102"/>
+<g id="waterGuide"><circle class="pulley" r="18"/><path id="waterGuideSpokes" d="M-13 0h26 M0 -13v26" stroke="#ccd4d7" stroke-width="2.5"/><circle r="4" fill="#e1e7ed"/></g>
+<circle class="pulley" cx="332" cy="68" r="18"/><path id="waterSpokes332" d="M319 68h26 M332 55v26" stroke="#ccd4d7" stroke-width="2.5"/><circle cx="332" cy="68" r="4" fill="#e1e7ed"/>
 </g>
-<text class="primary-label di-fader-only" x="92" y="109" text-anchor="middle">フェーダー</text>
-<text class="secondary-label di-fader-only" x="43" y="153" text-anchor="middle">明</text>
-<text class="secondary-label di-fader-only" x="43" y="248" text-anchor="middle">暗</text>
-<!-- Fader, visible grab handle and large invisible hit track; interactive via pointer and keyboard. -->
-<g id="faderHandle" class="di-fader-only" transform="translate(0 240)" aria-hidden="true">
-<g class="di-water-only">
-<path d="M72 -6H116V10H72Z" fill="#85745d" stroke="#c7b392" stroke-width="2"/>
-<path d="M90 -6V-12Q94 -19 98 -12V-6Z" fill="#7c827e" stroke="#cdc8b9" stroke-width="2"/>
-<circle cx="94" cy="-12" r="2" fill="#28302d"/>
-<rect x="66" y="-2" width="56" height="12" rx="4" fill="#634635" stroke="#c5a27d" stroke-width="2"/>
-</g><g class="di-electronic-fader" hidden>
-<rect id="faderKnob" x="65" y="-15" width="58" height="30" rx="5" fill="url(#faderMetal)" stroke="#c5d3dc" stroke-width="2"/>
-<path d="M76 -5H112M76 0H112M76 5H112" stroke="#202d39" stroke-width="2"/></g>
-</g>
-<rect id="faderTouch" class="fader-hit di-fader-only" x="58" y="119" width="75" height="145" rx="9" fill="transparent" tabindex="0" role="slider" aria-label="フェーダー。上げると銅板が下がり、電球が明るくなる" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50パーセントの指示"/>
 <g id="di-variac-knob" hidden aria-label="スライダックの回転ノブ。0～130Vの例">
 <rect x="30" y="85" width="111" height="202" rx="10" fill="#111e29" stroke="#506b7e" stroke-width="1.5"/>
 <text class="primary-label" x="94" y="109" text-anchor="middle">回転ノブ</text>
@@ -307,7 +302,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <path d="M586 174H650V263H696" class="electrical"/>
 <path d="M168 121H251V148H294" stroke="#62d5ff" stroke-width="2.7" stroke-dasharray="6 6" fill="none"/>
 <text class="secondary-label" x="205" y="107" text-anchor="middle">ノブ連動</text>
-<text class="highlight-label" id="di-variac-warning" x="698" y="335" text-anchor="middle" hidden>100V超：過電圧</text>
+<text class="lamp-warning" font-size="25" id="di-variac-warning" x="698" y="335" text-anchor="middle" hidden>100V超：過電圧</text>
 </g>
 <!-- SCR paired switches: schematic of operation only, not a literal circuit. -->
 <g id="di-scr-unit" hidden aria-label="サイリスタが交流の正負各半周期で点弧する模式図">
@@ -352,7 +347,8 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <ellipse id="lampFilament" cx="730" cy="138" rx="16" ry="11" fill="#fff0a6" opacity=".5" style="mix-blend-mode:screen;pointer-events:none"/>
 <circle cx="696" cy="263" r="4.2" fill="#ffd18a" stroke="#73411d" stroke-width="1.5"/>
 <circle cx="736" cy="286" r="4.2" fill="#c4d6df" stroke="#425a67" stroke-width="1.5"/>
-</svg>
+<text id="di-burnout" hidden x="730" y="151" text-anchor="middle" class="lamp-warning" font-size="38">球切れ</text>
+</svg></div>
 <aside class="di-wave-panel" aria-labelledby="di-wave-title">
 <div class="di-wave-heading"><h3 id="di-wave-title">電球にかかる交流電圧</h3><button id="di-animate-toggle" type="button" aria-pressed="false">▶ ゆっくり見る</button></div>
 <p class="wave-sub" id="di-wave-sub">フェーダーに連動して、波の高さが変わる</p>
@@ -361,6 +357,10 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <path d="M19 28V181" stroke="#526d7c" stroke-width="1.5"/>
 <path id="di-wave-reference" class="wave-reference" d=""/>
 <path id="di-wave-area" class="wave-area" d=""/>
+<g id="di-100v-guide" hidden>
+<path fill="none" stroke="#9adaee" stroke-width="1.7" stroke-dasharray="7 4"/>
+<text x="318" y="22" text-anchor="end" style="fill:#9adaee">100V（実効値）時の山・谷</text>
+</g>
 <path id="di-wave-actual" class="wave-actual" d=""/>
 <line id="di-wave-cursor" x1="19" x2="19" y1="25" y2="182" stroke="#6cdeff" stroke-width="2.4" stroke-dasharray="5 4" hidden/>
 <circle id="di-wave-live-dot" cx="19" cy="104" r="5" fill="#7cddff" stroke="#09202a" stroke-width="1.5" hidden/>
@@ -386,8 +386,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 (() => {
   'use strict';
   const svg=document.querySelector('.di-mechanism');
-  const touch=document.getElementById('faderTouch');
-  const handle=document.getElementById('faderHandle');
+  const largeFader=document.getElementById('di-large-fader');
   const rope=document.getElementById('pulleyRope');
   const copper=document.getElementById('movingCopper');
   const wet=document.getElementById('wetCopperRect');
@@ -401,6 +400,9 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
   const wave=document.getElementById('di-wave-actual');
   const waveArea=document.getElementById('di-wave-area');
   const waveReference=document.getElementById('di-wave-reference');
+  const ratedAmplitude=69*100/130;
+  const ratedGuide=document.getElementById('di-100v-guide');
+  ratedGuide.querySelector('path').setAttribute('d',`M19 ${104-ratedAmplitude}H321 M19 ${104+ratedAmplitude}H321`);
   // Both modes use the same time and voltage scales.
   function sinePath(amplitude){
     const pts=[];
@@ -550,11 +552,10 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
   function switchMode(next){
     if(next!=='water'&&next!=='variac'&&next!=='scr'&&next!=='pwm')return;
     mode=next;
+    document.querySelector('.di-operation').hidden=mode==='variac';
+    svg.setAttribute('viewBox',mode!=='variac'?'148 0 707 375':'30 0 825 375');
     modeButtons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.diMode===mode)));
     document.querySelectorAll('.di-water-only').forEach(el=>el.toggleAttribute('hidden',mode!=='water'));
-    document.querySelectorAll('.di-fader-only').forEach(el=>el.toggleAttribute('hidden',mode==='variac'));
-    document.querySelectorAll('.di-electronic-fader').forEach(el=>el.toggleAttribute('hidden',mode!=='scr'&&mode!=='pwm'));
-    document.querySelector('.di-fader-only.primary-label').setAttribute('x',mode==='water'?178:92);
     variacKnob.toggleAttribute('hidden',mode!=='variac');
     variacTouch.toggleAttribute('hidden',mode!=='variac');
     document.getElementById('di-variac-unit').toggleAttribute('hidden',mode!=='variac');
@@ -569,13 +570,14 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     document.getElementById('di-detail-text').innerHTML=mode==='water'?waterExplanation:mode==='variac'?variacExplanation:mode==='scr'?scrExplanation:pwmExplanation;
     document.querySelector('.di-wave-svg').setAttribute('aria-label',mode==='water'?'水抵抗式の交流電圧。振幅が変化':mode==='variac'?'スライダックの出力交流電圧。0〜130Vに応じて正弦波の振幅が変化':mode==='scr'?'サイリスタ式の交流電圧。半周期ごとに点弧角から導通':'LED駆動の直流PWM。一定振幅の矩形波でON時間を変える');
     document.getElementById('di-wave-title').textContent=mode==='pwm'?'LED駆動のPWM電圧（概念図）':mode==='variac'?'交流出力電圧（AC 0〜130V）':'電球にかかる交流電圧';
-    waveReference.setAttribute('d',sinePath(mode==='variac'?53:69));
+    ratedGuide.toggleAttribute('hidden',mode!=='variac');
+    waveReference.setAttribute('d',sinePath(mode==='variac'?ratedAmplitude:69));
     playButton.toggleAttribute('hidden',mode==='variac');
     waveReference.toggleAttribute('hidden',mode==='pwm');
     document.getElementById('di-wave-axis-plus').textContent=mode==='pwm'?'ON':'＋';
     document.getElementById('di-wave-axis-minus').textContent=mode==='pwm'?'':'－';
     document.getElementById('di-wave-caption').textContent=mode==='pwm'?'※LED用の直流PWM出力例。実際の周波数・光の見え方は模式表示です。ACの位相制御波形ではありません。':'※塗り面積は電力のイメージです。実測値・計算値ではありません。';
-    touch.setAttribute('aria-label',mode==='water'?'フェーダー。上げると銅板が下がり電球が明るくなる':mode==='scr'?'フェーダー。上げると点弧角が小さくなり電球が明るくなる':'フェーダー。上げるとPWMのON時間の割合が大きくなる');
+    largeFader.setAttribute('aria-label',mode==='water'?'フェーダー。上げると銅板が下がり電球が明るくなる':mode==='scr'?'フェーダー。上げると点弧角が小さくなり電球が明るくなる':'フェーダー。上げるとPWMのON時間の割合が大きくなる');
     render(level);
     // SCR/PWM require a moving reference position to explain ON/OFF.
     // Automatically start the slow teaching playback, except when the user
@@ -588,25 +590,48 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
   modeButtons.forEach(b=>b.addEventListener('click',()=>switchMode(b.dataset.diMode)));
 
   const clamp=(v)=>Math.max(0,Math.min(1,v));
+  function drawWaterWire(copperY){
+    const rect=largeFader.getBoundingClientRect();
+    const matrix=svg.getScreenCTM();
+    if(!matrix || !rect.height)return;
+    const inverse=matrix.inverse();
+    const point=(x,y)=>new DOMPoint(x,y).matrixTransform(inverse);
+    const x=rect.left+rect.width/2;
+    const anchor=point(x,rect.bottom-40-level*(rect.height-40));
+    const guide=point(x,rect.top-3);
+    const gx=guide.x+18, gy=Math.min(guide.y,68);
+    const dx=332-gx, dy=68-gy, length=Math.hypot(dx,dy);
+    const nx=18*dy/length, ny=-18*dx/length;
+    rope.setAttribute('d',`M${anchor.x} ${anchor.y} V${gy} A18 18 0 0 1 ${gx+nx} ${gy+ny} L${332+nx} ${68+ny} A18 18 0 0 1 350 68 V${copperY+4}`);
+    document.getElementById('waterGuide').setAttribute('transform',`translate(${gx} ${gy})`);
+    const angle=level*100/18*180/Math.PI;
+    document.getElementById('waterGuideSpokes').setAttribute('transform',`rotate(${angle})`);
+    document.getElementById('waterSpokes332').setAttribute('transform',`rotate(${angle} 332 68)`);
+  }
+  let variacBurnedOut=false;
   function render(v){
     level=clamp(v);
-    // A fixed pulley: 100 units of upward fader travel = 100 units downward copper travel.
-    const faderY=240-100*level;
+    const percent=Math.round(level*100);
+    largeFader.value=percent;
+    document.getElementById('di-position').value=percent+'%';
     const copperY=98+100*level;
-    handle.setAttribute('transform','translate(0 '+faderY.toFixed(2)+')');
-    rope.setAttribute('d','M94 '+(faderY-12).toFixed(2)+' V68 A18 18 0 0 1 112 50 H332 A18 18 0 0 1 350 68 V'+(copperY+4).toFixed(2));
-    const angle=(240-faderY)/18*180/Math.PI;
-    for(const x of [112,332]){
-      document.getElementById('waterSpokes'+x).setAttribute('transform','rotate('+angle+' '+x+' 68)');
-    }
+    if(mode==='water')drawWaterWire(copperY);
     copper.setAttribute('transform','translate(0 '+copperY.toFixed(2)+')');
     wet.setAttribute('y',copperY.toFixed(2));  // Only translate; physical plate remains 128 units tall.
     feed.setAttribute('d','M209 253 C248 229 273 197 302 201 S334 '+(copperY+30).toFixed(2)+' 362 '+(copperY+24).toFixed(2));
+    const volts=Math.round(130*level);
+    if(mode==='variac'){
+      if(volts===130)variacBurnedOut=true;
+      if(level===0)variacBurnedOut=false;
+    }
+    const burnedOut=mode==='variac' && variacBurnedOut;
+    document.getElementById('di-burnout').toggleAttribute('hidden',!burnedOut);
+    for(const layer of [halo,gas,filament])layer.toggleAttribute('hidden',burnedOut);
     const glow=Math.pow(mode==='variac'?Math.min(1,level*1.3):level,1.35); // illustration only, not a calibrated light-output curve
     halo.setAttribute('opacity',(.04+.91*glow).toFixed(2));
     gas.setAttribute('opacity',(.02+.87*glow).toFixed(2));
     filament.setAttribute('opacity',(.01+.96*glow).toFixed(2));
-    bulb.style.filter='brightness('+(0.54+glow*.82).toFixed(2)+') drop-shadow(0 0 '+(3+glow*17).toFixed(1)+'px rgba(255,173,65,'+(.12+.76*glow).toFixed(2)+'))';
+    bulb.style.filter=burnedOut?'brightness(.44)':'brightness('+(0.54+glow*.82).toFixed(2)+') drop-shadow(0 0 '+(3+glow*17).toFixed(1)+'px rgba(255,173,65,'+(.12+.76*glow).toFixed(2)+'))';
     if(mode==='water'){
       const amplitude=69*level;
       wave.setAttribute('d',sinePath(amplitude));
@@ -653,26 +678,16 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     }
     updateLive(cyclePosition);
     const value=Math.round(level*100);
-    const volts=Math.round(130*level);
     variacTouch.setAttribute('aria-valuenow',String(volts));
     variacTouch.setAttribute('aria-valuetext',volts+'ボルト');
-    touch.setAttribute('aria-valuenow',String(value));
-    touch.setAttribute('aria-valuetext',value+'パーセントの調光指示');
+    largeFader.setAttribute('aria-valuetext',value+'パーセントの調光指示');
     readout.textContent=mode==='variac'?'交流出力 '+volts+'V（入力100V）':'明るさの指示 '+value+'%';
     action.textContent=mode==='water'
       ?(value<10?'フェーダーを下げる → 銅板が上がる → 電球が暗くなる':'フェーダーを上げる → 銅板が下がる → 電球が明るくなる')
+      :burnedOut?'球切れ（教材上の例）。ノブを0Vまで戻すと再開できます。'
       :mode==='variac'?(volts>100?'ノブ → ブラシが移動 → 出力 '+volts+'V（100V定格灯具には過電圧）':'ノブを回す → ブラシが移動 → 取り出す交流電圧が変わる')
       :mode==='scr'?'フェーダーを動かす → 点弧角が変わる → 電球の明るさが変わる'
       :'フェーダーを動かす → ON時間の割合が変わる → LEDの明るさが変わる';
-  }
-  function pointerLevel(e){
-    const bounds=svg.getBoundingClientRect();
-    const pt=svg.createSVGPoint();
-    pt.x=e.clientX;pt.y=e.clientY;
-    const matrix=svg.getScreenCTM();
-    if(!matrix)return level;
-    const p=pt.matrixTransform(matrix.inverse());
-    return clamp((240-p.y)/100);
   }
   let variacDragging=false;
   function knobLevel(e){
@@ -701,22 +716,8 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     else return;
     e.preventDefault();render(next);
   });
-  let dragging=false;
-  touch.addEventListener('pointerdown',e=>{e.preventDefault();dragging=true;touch.setPointerCapture(e.pointerId);render(pointerLevel(e));});
-  touch.addEventListener('pointermove',e=>{if(dragging)render(pointerLevel(e));});
-  function release(){dragging=false;}
-  touch.addEventListener('pointerup',release);
-  touch.addEventListener('pointercancel',release);
-  touch.addEventListener('lostpointercapture',release);
-  touch.addEventListener('keydown',e=>{
-    let next=level;
-    if(e.key==='ArrowUp'||e.key==='ArrowRight')next+=.05;
-    else if(e.key==='ArrowDown'||e.key==='ArrowLeft')next-=.05;
-    else if(e.key==='Home')next=0;
-    else if(e.key==='End')next=1;
-    else return;
-    e.preventDefault();render(next);
-  });
+  largeFader.addEventListener('input',()=>render(Number(largeFader.value)/100));
+  new ResizeObserver(()=>{if(mode==='water')drawWaterWire(98+100*level)}).observe(document.querySelector('.di-machine-stage'));
   switchMode('water');
 })();</script>
 </body>
