@@ -36,7 +36,7 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #ffd1
 .dch-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.dch-links a{color:#d0f0ff;text-decoration:none;background:#163348;border:1px solid #47677a;border-radius:4px;padding:7px 9px;font-size:13px;font-weight:700}
 .dch-source{font-size:13px;color:#b9cedb;margin:0 2px}.dch-source a{color:#8eddfb}
 @media(max-width:900px){.dch-grid,.dch-footer{grid-template-columns:1fr}.dch-head{align-items:stretch}.dch-switch{width:100%}}
-@media(max-width:550px){.dch-lesson{padding:9px;gap:9px}.dch-main{overflow-x:auto}.dch-svg{min-width:690px}.dch-switch button{font-size:14px;padding:8px 5px}.dch-teacher img{width:90px;height:105px}}
+@media(max-width:550px){.dch-lesson{padding:9px;gap:9px}.dch-main{overflow-x:auto}.dch-switch button{font-size:14px;padding:8px 5px}.dch-teacher img{width:90px;height:105px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 
 /* Full iPad landscape viewport; the illustrated operation is the only input. */
@@ -87,7 +87,7 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #ffd1
 .dch-input-value output{font-size:27px;font-weight:900;color:#74e3f4;font-variant-numeric:tabular-nums}
 .dch-fader-wrap{display:flex;justify-content:center;align-items:stretch;gap:15px;flex:1 1 auto;min-height:115px;padding:8px 0}
 .dch-scale{display:flex;flex-direction:column;justify-content:space-between;font-size:15px;text-align:right}
-#dch-fader{writing-mode:vertical-lr;direction:rtl;appearance:none;-webkit-appearance:none;height:100%;width:52px;margin:0;background:transparent;cursor:grab;touch-action:none}
+#dch-fader{writing-mode:vertical-lr;direction:rtl;appearance:none;-webkit-appearance:none;align-self:stretch;height:auto;min-height:0;width:52px;margin:0;background:transparent;cursor:grab;touch-action:none}
 #dch-fader::-webkit-slider-runnable-track{width:6px;background:#111a22;border-radius:4px}
 #dch-fader::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:44px;height:36px;margin-left:-19px;border:2px solid #172028;border-radius:5px;background:linear-gradient(#d5e0e8,#71808c 44%,#ff7546 45%,#ff7546 53%,#b5c5cf 55%,#4a5964);box-shadow:0 3px 8px #000a}
 #dch-fader::-moz-range-track{width:6px;background:#111a22}
@@ -158,6 +158,10 @@ html,body{height:auto;overflow:visible}
 .dch-darkroom #dch-light-photo{height:100%;width:100%;max-height:340px;max-width:220px;object-fit:contain;filter:none!important}
 .dch-darkroom #dch-light-glow{inset:0;background:radial-gradient(circle at 50% 39%,rgba(255,178,52,.72) 0%,rgba(255,133,15,.32) 28%,transparent 68%)}
 #dch-light-filament{position:absolute;z-index:3;left:40%;top:32%;width:20%;height:10%;border-radius:50%;mix-blend-mode:screen;background:#ffe4a2;filter:blur(11px);pointer-events:none}
+.dch-diagram .dch-svg{min-width:0;height:auto;aspect-ratio:660/374;flex:1 0 auto}
+.dch-diagram{min-height:min-content}
+.dch-transport-state,.dch-mechanism .dch-panel-title{flex-wrap:wrap}
+@media(min-width:901px) and (orientation:landscape){.dch-grid{flex:1 0 auto}}
 </style></head>
 <body class="dimming-intro-page eightbit-unified-width">
 <div id="shared-console-header-root"></div><script src="next-ui-console-header.js?v=theme12-shared-20261105"></script>
@@ -234,9 +238,9 @@ html,body{height:auto;overflow:visible}
  <path d="M50 94V104H121V94" fill="none" stroke="#6e7475" stroke-width="9"/>
  <text x="82" y="57" text-anchor="middle" font-size="18" fill="#d4dedf" font-weight="700">DC</text>
  </g>
- <text x="145" y="325" text-anchor="middle" class="small">モーター＋電磁クラッチ</text>
+ <text x="159" y="319" text-anchor="middle" class="small">モーター＋電磁クラッチ</text>
  <path id="dch-motor-link" d="M291 246H316V218H345" stroke="#aebbc0" stroke-width="4" fill="none"/>
- <path d="M384 333V351H165V146" stroke="#60d8fa" stroke-width="3" stroke-dasharray="7 5" fill="none"/>
+ <path d="M384 333V343H41V177H107V137" stroke="#60d8fa" stroke-width="3" stroke-dasharray="7 5" fill="none"/>
  
 </g>
 <!-- Three-dimensional U-type multitap autotransformer inspired by the surviving Tokyo Takarazuka apparatus. -->
@@ -273,11 +277,12 @@ html,body{height:auto;overflow:visible}
  <rect x="344" y="332" width="290" height="9" fill="#181f24" stroke="#849096" stroke-width="2"/>
  <path d="M354 342V348M622 342V348" stroke="#7e7d77" stroke-width="11"/>
 </g>
-<text id="dch-brush-label" x="476" y="361" text-anchor="middle" class="amber">摺動ブラシ 50%</text>
+
 
 </svg>
+</div>
 <div class="dch-diagram-legend"><span>シアン：制御信号・位置の帰還</span><span>アンバー：電圧調整</span></div>
-<div class="dch-transport-state"><strong id="dch-left-state">設定 50% ／ 現在 50%</strong><span id="dch-status">位置追従・停止</span></div></div>
+<div class="dch-transport-state"><strong id="dch-left-state">設定 50% ／ 現在 50%</strong><span id="dch-status">位置追従・停止</span></div>
 <p id="dch-change-text">設定電圧と位置フィードバックを比較し、電磁クラッチ・モーターで刷子を追従させる。</p>
 </section>
 <section class="dch-panel dch-lamp">
@@ -333,7 +338,7 @@ function moveTo(v){target=clamp(v);$('dch-fader').value=String(target);if(mode==
 function updateUI(){
 const pos=actual,brushY=137+(100-pos)/100*162;
 $('dch-brush').setAttribute('transform','translate(0 '+brushY.toFixed(2)+')');
-$('dch-brush-label').textContent='摺動ブラシ '+Math.round(actual)+'%';
+
 $('dch-mechanical-wheel').setAttribute('transform','rotate('+(target*2.7).toFixed(1)+' 87 170)');
 $('dch-mechanical-pulley').setAttribute('transform','translate(224 169) rotate('+(target*2.7).toFixed(1)+')');
 $('dch-wave').setAttribute('d',sine(52*pos/100));

@@ -130,17 +130,20 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <clipPath id="di-water-clip"><rect x="277" y="223" width="352" height="114"/></clipPath>
 </defs>
 <!-- PHYSICAL MECHANISM: fixed pulleys and one continuous steel-colored wire. Not electrical wiring. -->
-<g class="di-fader-only" aria-hidden="true">
+<g class="di-electronic-fader" hidden aria-hidden="true">
 <rect x="30" y="85" width="111" height="202" rx="10" fill="#111e29" stroke="#506b7e" stroke-width="1.5"/>
 <rect x="68" y="121" width="52" height="142" rx="10" fill="#09131b" stroke="#52687a" stroke-width="2"/>
 <rect x="90" y="137" width="8" height="103" rx="4" fill="#02060a" stroke="#8798a7"/>
 <g stroke="#8195a5" stroke-width="2"><path d="M66 140h11M66 190h11M66 239h11"/></g>
 </g>
 <g class="di-water-only" aria-label="水抵抗式の機械的なワイヤーと滑車">
-<path id="pulleyRope" class="cable" d="M94 240V68A18 18 0 0 1 112 50H332A18 18 0 0 1 350 68V98"/>
+<rect x="57" y="119" width="74" height="145" rx="4" fill="#343835" stroke="#99917d" stroke-width="2"/>
+<path d="M76 126V256 M112 126V256" stroke="#b3a186" stroke-width="6"/>
+<path d="M77 126V256 M113 126V256" stroke="#594d3e" stroke-width="2"/>
+<path id="pulleyRope" class="cable" d="M94 228V68A18 18 0 0 1 112 50H332A18 18 0 0 1 350 68V102"/>
 <circle class="pulley" cx="112" cy="68" r="18"/><circle class="pulley" cx="332" cy="68" r="18"/>
 <g fill="none" stroke="#202e3b" stroke-width="3"><circle cx="112" cy="68" r="10"/><circle cx="332" cy="68" r="10"/></g>
-<circle cx="112" cy="68" r="4" fill="#e1e7ed"/><circle cx="332" cy="68" r="4" fill="#e1e7ed"/>
+<path id="waterSpokes112" d="M99 68h26 M112 55v26" stroke="#ccd4d7" stroke-width="2.5"/><circle cx="112" cy="68" r="4" fill="#e1e7ed"/><path id="waterSpokes332" d="M319 68h26 M332 55v26" stroke="#ccd4d7" stroke-width="2.5"/><circle cx="332" cy="68" r="4" fill="#e1e7ed"/>
 <path d="M112 49V20H332V49" fill="none" stroke="#596b79" stroke-width="5" stroke-linejoin="round"/>
 <path d="M112 20H332" stroke="#8795a0" stroke-width="3"/>
 </g>
@@ -149,8 +152,14 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <text class="secondary-label di-fader-only" x="43" y="248" text-anchor="middle">暗</text>
 <!-- Fader, visible grab handle and large invisible hit track; interactive via pointer and keyboard. -->
 <g id="faderHandle" class="di-fader-only" transform="translate(0 240)" aria-hidden="true">
+<g class="di-water-only">
+<path d="M72 -6H116V10H72Z" fill="#85745d" stroke="#c7b392" stroke-width="2"/>
+<path d="M90 -6V-12Q94 -19 98 -12V-6Z" fill="#7c827e" stroke="#cdc8b9" stroke-width="2"/>
+<circle cx="94" cy="-12" r="2" fill="#28302d"/>
+<rect x="66" y="-2" width="56" height="12" rx="4" fill="#634635" stroke="#c5a27d" stroke-width="2"/>
+</g><g class="di-electronic-fader" hidden>
 <rect id="faderKnob" x="65" y="-15" width="58" height="30" rx="5" fill="url(#faderMetal)" stroke="#c5d3dc" stroke-width="2"/>
-<path d="M76 -5H112M76 0H112M76 5H112" stroke="#202d39" stroke-width="2"/>
+<path d="M76 -5H112M76 0H112M76 5H112" stroke="#202d39" stroke-width="2"/></g>
 </g>
 <rect id="faderTouch" class="fader-hit di-fader-only" x="58" y="119" width="75" height="145" rx="9" fill="transparent" tabindex="0" role="slider" aria-label="フェーダー。上げると銅板が下がり、電球が明るくなる" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50パーセントの指示"/>
 <g id="di-variac-knob" hidden aria-label="スライダックの回転ノブ。0～130Vの例">
@@ -544,6 +553,8 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     modeButtons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.diMode===mode)));
     document.querySelectorAll('.di-water-only').forEach(el=>el.toggleAttribute('hidden',mode!=='water'));
     document.querySelectorAll('.di-fader-only').forEach(el=>el.toggleAttribute('hidden',mode==='variac'));
+    document.querySelectorAll('.di-electronic-fader').forEach(el=>el.toggleAttribute('hidden',mode!=='scr'&&mode!=='pwm'));
+    document.querySelector('.di-fader-only.primary-label').setAttribute('x',mode==='water'?178:92);
     variacKnob.toggleAttribute('hidden',mode!=='variac');
     variacTouch.toggleAttribute('hidden',mode!=='variac');
     document.getElementById('di-variac-unit').toggleAttribute('hidden',mode!=='variac');
@@ -583,7 +594,11 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     const faderY=240-100*level;
     const copperY=98+100*level;
     handle.setAttribute('transform','translate(0 '+faderY.toFixed(2)+')');
-    rope.setAttribute('d','M94 '+faderY.toFixed(2)+' V68 A18 18 0 0 1 112 50 H332 A18 18 0 0 1 350 68 V'+copperY.toFixed(2));
+    rope.setAttribute('d','M94 '+(faderY-12).toFixed(2)+' V68 A18 18 0 0 1 112 50 H332 A18 18 0 0 1 350 68 V'+(copperY+4).toFixed(2));
+    const angle=(240-faderY)/18*180/Math.PI;
+    for(const x of [112,332]){
+      document.getElementById('waterSpokes'+x).setAttribute('transform','rotate('+angle+' '+x+' 68)');
+    }
     copper.setAttribute('transform','translate(0 '+copperY.toFixed(2)+')');
     wet.setAttribute('y',copperY.toFixed(2));  // Only translate; physical plate remains 128 units tall.
     feed.setAttribute('d','M209 253 C248 229 273 197 302 201 S334 '+(copperY+30).toFixed(2)+' 362 '+(copperY+24).toFixed(2));
