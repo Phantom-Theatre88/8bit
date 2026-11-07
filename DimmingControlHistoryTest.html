@@ -228,7 +228,7 @@ html,body{height:auto;overflow:visible}
  <text x="82" y="57" text-anchor="middle" font-size="18" fill="#d4dedf" font-weight="700">DC</text>
  </g>
  <text x="145" y="325" text-anchor="middle" class="small">モーター＋電磁クラッチ</text>
- <path d="M291 246H316V205" stroke="#aebbc0" stroke-width="4" fill="none"/>
+ <path id="dch-motor-link" d="M291 246H316V218H345" stroke="#aebbc0" stroke-width="4" fill="none"/>
  <path d="M384 333V351H165V146" stroke="#60d8fa" stroke-width="3" stroke-dasharray="7 5" fill="none"/>
  <text x="169" y="370" text-anchor="middle" class="cyan">ブラシ位置を帰還</text>
 </g>
@@ -287,7 +287,7 @@ html,body{height:auto;overflow:visible}
 <div class="dch-footer">
 <section class="dch-panel dch-text"><h2 id="dch-context">▤ 解説｜1961年の転換</h2>
 <p id="dch-description">東京文化会館のUMS型は、弱電の指示でモーター・クラッチを動かし、ブラシを追従させる。</p>
-<div class="dch-links"><a href="DimmingIntro.html">調光4方式</a><a href="https://sts.kahaku.go.jp/diversity/document/browse/2024_saeki/" target="_blank" rel="noopener noreferrer">史料</a></div>
+<div class="dch-links"><a href="DimmingIntro.html">調光4方式</a><a href="https://sts.kahaku.go.jp/diversity/document/browse/2024_saeki/" target="_blank" rel="noopener noreferrer">史料</a><a href="https://www.marumo.co.jp/company/history/" target="_blank" rel="noopener noreferrer">1934年の実機写真</a></div>
 </section>
 <section class="dch-panel dch-teacher"><img src="assets/wave_teacher_transparent.svg?v=teacher-standard-20261014" alt="照明図鑑の先生"><div><strong>先生のひとこと</strong><p id="dch-teacher-text">操作盤からの指示にブラシが追いつく様子を見よう！</p></div></section>
 <section class="dch-panel dch-remember"><h2>♧ 覚えておこう</h2><p>操作指示と灯具への電力は別。</p><p id="dch-memory">1961年：弱電の指示で電動追従。</p><p>巻線タップ・速度は教材用の模式表現。</p></section>
@@ -319,7 +319,8 @@ $('dch-light-glow').style.opacity=String(.04+Math.pow(pos/100,1.6)*.93);
 $('dch-light-filament').style.opacity=String(.06+Math.pow(pos/100,1.5)*.9);
 $('dch-left-state').textContent='設定 '+target+'% ／ 現在 '+Math.round(actual)+'%';
 $('dch-status').textContent=mode==='mechanical'?'ワイヤと刷子が連動':Math.abs(actual-target)<.3?'指示位置に追従・停止':'モーターで位置追従中';
-$('dch-mech-rope').setAttribute('d','M224 130H291Q301 130 301 141V'+(brushY-16).toFixed(2));
+$('dch-mech-rope').setAttribute('d','M224 130H291Q301 130 301 141V'+(brushY-16).toFixed(2)+'H345');
+$('dch-motor-link').setAttribute('d','M291 246H316V'+brushY.toFixed(2)+'H345');
 }
 function tick(time){
 if(mode!=='electrical'){raf=0;lastTime=null;return;}
