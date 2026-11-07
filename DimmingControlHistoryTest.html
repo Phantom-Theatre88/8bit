@@ -144,6 +144,14 @@ html,body{height:auto;overflow:visible}
 .dch-head{flex-wrap:wrap}
 }
 @media(max-width:580px){.dch-grid{grid-template-columns:1fr}.dch-lesson{padding:9px}.dch-mechanism{min-height:350px}.dch-input{min-height:325px}}
+ 
+/* Historical apparatus illustration: dimensional steel rack, many collectors, travelling carriage. */
+.dch-diagram{position:relative;background:radial-gradient(ellipse at 72% 44%,#243949 0%,#1a2a34 42%,#15232f 100%)}
+.dch-diagram .dch-svg{overflow:visible;filter:drop-shadow(0 8px 9px #02081075)}
+.dch-lamp .dch-darkroom{background:#17202a}
+.dch-darkroom #dch-light-photo{height:100%;width:100%;max-height:340px;max-width:220px;object-fit:contain;filter:none!important}
+.dch-darkroom #dch-light-glow{inset:0;background:radial-gradient(circle at 50% 39%,rgba(255,178,52,.72) 0%,rgba(255,133,15,.32) 28%,transparent 68%)}
+#dch-light-filament{position:absolute;z-index:3;left:40%;top:32%;width:20%;height:10%;border-radius:50%;mix-blend-mode:screen;background:#ffe4a2;filter:blur(11px);pointer-events:none}
 </style></head>
 <body class="dimming-intro-page eightbit-unified-width">
 <div id="shared-console-header-root"></div><script src="next-ui-console-header.js?v=theme12-shared-20261105"></script>
@@ -159,78 +167,115 @@ html,body{height:auto;overflow:visible}
 <div class="dch-step"><button id="dch-minus" type="button">−</button><button id="dch-plus" type="button">＋</button></div></section>
 <section class="dch-panel dch-mechanism">
 <div class="dch-panel-title"><h2 id="dch-title">② しくみを見る｜弱電で位置を指示する</h2><strong id="dch-actual">ブラシ 50%</strong></div>
-<div class="dch-diagram"><p id="dch-change-title">弱電信号で位置を指定する</p><svg class="dch-svg" id="dch-machine" viewBox="198 83 546 300" role="img" aria-label="操作卓、ワイヤまたは制御信号、U型多分岐式調光変圧器の接触刷子、舞台灯具の接続を比較する模式図">
-<defs><linearGradient id="dch-copper" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#a55b2e"/><stop offset=".48" stop-color="#ffc888"/><stop offset="1" stop-color="#8d4a26"/></linearGradient><radialGradient id="dch-glow"><stop stop-color="#ffe9af" stop-opacity=".96"/><stop offset=".3" stop-color="#ffc15d" stop-opacity=".65"/><stop offset="1" stop-color="#ffb04b" stop-opacity="0"/></radialGradient></defs>
-<!-- Operating desk: its fader is a symbolic handle in both configurations. -->
-<rect x="9" y="105" width="190" height="225" rx="13" class="machine"/>
-<text x="104" y="131" text-anchor="middle" class="title">調光操作盤</text>
-<rect x="33" y="167" width="139" height="114" rx="8" fill="#091923" stroke="#638093" stroke-width="2"/>
-<path d="M65 186V258 M106 186V258 M145 186V258" stroke="#71899a" stroke-width="5"/>
-<path d="M65 213H86 M106 215H126 M145 222H166" stroke="#8ad9f3" stroke-width="6" stroke-linecap="round"/>
-<rect id="dch-desk-handle" x="96" y="224" width="20" height="13" rx="3" fill="#5bd5fa" stroke="#e6faff" stroke-width="1.5"/>
-<text x="104" y="309" text-anchor="middle" class="small" id="dch-desk-label">弱電で位置を指示</text>
-<!-- Interact with the depicted fader, not an external range slider. -->
-<rect id="dch-handle-hit" x="84" y="171" width="48" height="106" rx="8" fill="transparent" style="touch-action:none;cursor:ns-resize" tabindex="0" role="slider" aria-orientation="vertical" aria-label="操作盤のフェーダーを上下する" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50パーセント"/>
-<!-- Middle path: two mutually exclusive operating transmission mechanisms -->
+<div class="dch-diagram"><p id="dch-change-title">弱電信号で位置を指定する</p><svg class="dch-svg" id="dch-machine" viewBox="0 0 660 374" role="img" aria-label="1934年の機械式ワイヤと滑車、1961年のモーター・電磁クラッチと位置帰還、鋼製架台に多数の集電子片と摺動刷子を備えたU型多分岐式調光変圧器の実機外観に着想を得た模式図">
+<defs>
+ <linearGradient id="dch-steel" x1="0" y1="0" x2="1" y2=".3"><stop stop-color="#74818b"/><stop offset=".16" stop-color="#283640"/><stop offset=".48" stop-color="#111e27"/><stop offset=".8" stop-color="#48555b"/><stop offset="1" stop-color="#0e1821"/></linearGradient>
+ <linearGradient id="dch-rust" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#3a302b"/><stop offset=".18" stop-color="#a17b50"/><stop offset=".38" stop-color="#2e3030"/><stop offset=".72" stop-color="#806a55"/><stop offset="1" stop-color="#1c262d"/></linearGradient>
+ <linearGradient id="dch-brass" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#463424"/><stop offset=".25" stop-color="#ad7543"/><stop offset=".59" stop-color="#deb16a"/><stop offset="1" stop-color="#302c28"/></linearGradient>
+ <linearGradient id="dch-darkbar" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#161c20"/><stop offset=".4" stop-color="#5f6060"/><stop offset=".75" stop-color="#303b3c"/><stop offset="1" stop-color="#131b20"/></linearGradient>
+ <linearGradient id="dch-sliderail" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ddd5ba"/><stop offset=".2" stop-color="#82796b"/><stop offset=".65" stop-color="#45484b"/><stop offset="1" stop-color="#a89982"/></linearGradient>
+ <radialGradient id="dch-machine-shine"><stop stop-color="#c18c58" stop-opacity=".17"/><stop offset="1" stop-color="#c18c58" stop-opacity="0"/></radialGradient>
+</defs>
+<ellipse cx="468" cy="335" rx="189" ry="18" fill="#020810" opacity=".52"/>
+<ellipse cx="469" cy="205" rx="182" ry="170" fill="url(#dch-machine-shine)"/>
+<!-- Mechanism stage, no duplicate desk or lamp: those live in the completed UI's left and right zones. -->
 <g id="dch-mech-path" hidden>
-<text x="280" y="127" text-anchor="middle" class="title">機械的な連結</text>
-<circle cx="244" cy="226" r="23" fill="#536d7e" stroke="#c9d8df" stroke-width="3"/>
-<circle cx="340" cy="226" r="23" fill="#536d7e" stroke="#c9d8df" stroke-width="3"/>
-<path id="dch-mech-rope" d="M199 201 H244 Q292 177 340 201 H451 V226" class="wire"/>
-<path d="M244 203V249 M221 226H267 M340 203V249 M317 226H363" stroke="#b2c9d4" stroke-width="3"/>
-<text x="293" y="288" text-anchor="middle" class="small">ワイヤロープ＋滑車</text>
-<text x="293" y="306" text-anchor="middle" class="small">動きを直接伝える</text>
-<path d="M356 341H450" stroke="#cad5db" stroke-width="3" stroke-dasharray="6 5"/>
+ <text x="147" y="34" text-anchor="middle" class="title">機械式｜ワイヤロープ</text>
+ <path d="M29 90H277" stroke="#a8bac5" stroke-width="7" stroke-linecap="round"/>
+ <path d="M42 90V115 M277 90V115" stroke="#556877" stroke-width="7"/>
+ <g id="dch-mechanical-wheel">
+ <circle cx="87" cy="170" r="61" fill="#1b2933" stroke="#8d9799" stroke-width="11"/>
+ <circle cx="87" cy="170" r="48" fill="#27353c" stroke="#afafb0" stroke-width="2"/>
+ <g fill="#5d6a70" stroke="#c0c2c0" stroke-width="2">
+ <path d="M83 115h8v110h-8z"/><path d="M32 166h110v8H32z"/>
+ </g><circle cx="87" cy="170" r="14" fill="url(#dch-steel)" stroke="#e3e0d5" stroke-width="4"/>
+ <circle cx="135" cy="170" r="9" fill="#9dacae" stroke="#111f28" stroke-width="3"/>
+ </g>
+ <path d="M149 169H198" stroke="#a2b4bb" stroke-width="11" stroke-linecap="round"/>
+ <g id="dch-mechanical-pulley" transform="translate(224 169)">
+ <circle r="39" fill="#1d2931" stroke="#adb3b5" stroke-width="7"/>
+ <circle r="28" fill="#425360" stroke="#d1d2ce" stroke-width="3"/>
+ <path d="M-28 0H28M0 -28V28" stroke="#9daeb6" stroke-width="5"/>
+ <circle r="9" fill="#d0d5cf" stroke="#425361" stroke-width="4"/>
+ </g>
+ <path d="M224 130V111H313V142" stroke="#c7d2d5" stroke-width="4" fill="none"/>
+ <path id="dch-mech-rope" d="M224 130H291Q301 130 301 141V230" fill="none" stroke="#d0d8d9" stroke-width="3.5" stroke-linecap="round"/>
+ <path d="M224 209V284" stroke="#74838e" stroke-width="4"/>
+ <rect x="211" y="284" width="26" height="39" rx="4" fill="url(#dch-rust)" stroke="#a0a6a6" stroke-width="2"/>
+ <text x="137" y="293" text-anchor="middle" class="small">手動操作・軸・滑車</text>
+ <text x="139" y="319" text-anchor="middle" class="cyan">ワイヤで動きを伝える</text>
 </g>
 <g id="dch-weak-path">
-<text x="306" y="127" text-anchor="middle" class="title">弱電の位置指示</text>
-<path d="M199 226 H247 V185 H278" class="signal"/>
-<path d="M271 179 L283 185 L271 191" fill="none" stroke="#2ac7ff" stroke-width="3"/>
-<rect x="279" y="153" width="82" height="65" rx="8" class="machine"/>
-<text x="320" y="181" text-anchor="middle" class="small">比較</text><text x="320" y="199" text-anchor="middle" class="small">回路</text>
-<path d="M361 185H385" class="signal"/>
-<rect x="385" y="153" width="71" height="65" rx="7" class="machine"/>
-<text x="420" y="180" text-anchor="middle" class="small">電磁</text><text x="420" y="198" text-anchor="middle" class="small">クラッチ</text>
-<rect x="387" y="258" width="68" height="57" rx="6" class="machine"/>
-<text x="421" y="280" text-anchor="middle" class="small">DC</text><text x="421" y="297" text-anchor="middle" class="small">モーター</text>
-<path d="M421 258 V219" stroke="#bdcbd4" stroke-width="5"/>
-<path d="M456 186H481 V222" stroke="#bfcbd4" stroke-width="4" fill="none"/>
-<path d="M543 333V370H320V219" class="signal" stroke-dasharray="7 5"/>
-<text x="420" y="390" text-anchor="middle" class="cyan">位置フィードバック（現在のブラシ位置）</text>
+ <text x="148" y="34" text-anchor="middle" class="title">弱電による遠隔操作</text>
+ <path d="M16 104H98" stroke="#56d4f5" stroke-width="4" stroke-linecap="round"/>
+ <path d="M89 96L105 104L89 112" stroke="#56d4f5" stroke-width="3" fill="none"/>
+ <rect x="107" y="64" width="112" height="80" rx="8" fill="#172831" stroke="#687e8b" stroke-width="2"/>
+ <rect x="116" y="74" width="94" height="29" rx="3" fill="#09151e" stroke="#677b85"/>
+ <path d="M125 88H134V81H144V97H155V84H165V90H176V81H197" stroke="#65d2ed" stroke-width="2" fill="none"/>
+ <g fill="#adbdc4"><circle cx="136" cy="119" r="3"/><circle cx="159" cy="119" r="3"/><circle cx="182" cy="119" r="3"/></g>
+ <text x="162" y="165" text-anchor="middle" class="small">位置比較回路</text>
+ <path d="M219 103H251V160" stroke="#56d4f5" stroke-width="3.5" fill="none"/>
+ <!-- Cylindrical DC motor and coupling, with shaped case, axial shaft, knurling and mounting feet. -->
+ <g transform="translate(72 197)">
+ <rect x="0" y="9" width="153" height="84" rx="28" fill="url(#dch-steel)" stroke="#a4a9a5" stroke-width="3"/>
+ <path d="M15 15V86 M28 12V89 M126 12V89 M138 15V86" stroke="#a1a9a9" opacity=".8" stroke-width="3"/>
+ <ellipse cx="19" cy="51" rx="18" ry="40" fill="#424e55" stroke="#aeb5b6" stroke-width="3"/>
+ <ellipse cx="147" cy="51" rx="13" ry="41" fill="#303b43" stroke="#aab4b6" stroke-width="3"/>
+ <path d="M159 51H215" stroke="#bbc8d0" stroke-width="12" stroke-linecap="round"/>
+ <rect x="162" y="32" width="37" height="37" rx="5" fill="#4f5f69" stroke="#dde2df" stroke-width="3"/>
+ <path d="M171 36V65M181 36V65M191 36V65" stroke="#bac3bd" stroke-width="2"/>
+ <path d="M50 94V104H121V94" fill="none" stroke="#6e7475" stroke-width="9"/>
+ <text x="82" y="57" text-anchor="middle" font-size="18" fill="#d4dedf" font-weight="700">DC</text>
+ </g>
+ <text x="145" y="325" text-anchor="middle" class="small">モーター＋電磁クラッチ</text>
+ <path d="M291 246H316V205" stroke="#aebbc0" stroke-width="4" fill="none"/>
+ <path d="M384 333V351H165V146" stroke="#60d8fa" stroke-width="3" stroke-dasharray="7 5" fill="none"/>
+ <text x="169" y="370" text-anchor="middle" class="cyan">ブラシ位置を帰還</text>
 </g>
-<!-- U-type multitap transformer schematic; 12 illustrative taps rather than the 90-ish actual units. -->
-<rect x="480" y="83" width="247" height="297" rx="12" class="machine"/>
-<text x="603" y="107" text-anchor="middle" class="title">U型多分岐式調光変圧器</text>
-<text x="603" y="127" text-anchor="middle" class="small">巻線タップと摺動刷子</text>
-<rect x="499" y="152" width="56" height="195" rx="6" fill="#5e4030" stroke="#d1a06d" stroke-width="2"/>
-<g id="dch-coils"></g>
-<rect x="564" y="149" width="147" height="198" rx="5" fill="#0b1b26" stroke="#607d8f"/>
-<g id="dch-taps"></g>
-<rect x="661" y="155" width="13" height="187" rx="5" fill="#6c8698" stroke="#d2e1e8"/>
-<g id="dch-brush" transform="translate(0 0)">
-<path d="M669 0H621" stroke="#f7d89f" stroke-width="7" stroke-linecap="round"/>
-<rect x="607" y="-10" width="20" height="20" rx="4" fill="#f3bb71" stroke="#fff0c6" stroke-width="2"/>
+<!-- Three-dimensional U-type multitap autotransformer inspired by the surviving Tokyo Takarazuka apparatus. -->
+<g id="dch-transformer">
+ <path d="M323 56H635L648 67V320H323Z" fill="#0b151b" stroke="#536069" stroke-width="4"/>
+ <path d="M323 56L344 44H647L635 56Z" fill="url(#dch-rust)" stroke="#98867a" stroke-width="2.4"/>
+ <path d="M635 56L648 44V320L635 330Z" fill="#151d20" stroke="#5e696c" stroke-width="2.6"/>
+ <!-- Front frame corners and cross-beams -->
+ <rect x="318" y="51" width="25" height="275" rx="2" fill="url(#dch-steel)" stroke="#7e8b90" stroke-width="2"/>
+ <rect x="610" y="51" width="25" height="275" rx="2" fill="url(#dch-steel)" stroke="#7e8b90" stroke-width="2"/>
+ <rect x="322" y="57" width="312" height="19" fill="url(#dch-steel)" stroke="#75838a" stroke-width="2"/>
+ <rect x="322" y="311" width="312" height="20" fill="url(#dch-steel)" stroke="#697985" stroke-width="2"/>
+ <!-- Upper toroidal winding bank, rather than a stack of flat orange horizontal lines -->
+ <g opacity=".95"><ellipse cx="359" cy="91" rx="7.4" ry="23" fill="none" stroke="#aaa298" stroke-width="5.5"/><path d="M355 76q4 -8 8 0" fill="none" stroke="#d8c6a8" opacity=".6" stroke-width="2"/><ellipse cx="372" cy="91" rx="7.4" ry="23" fill="none" stroke="#626166" stroke-width="5.5"/><path d="M368 76q4 -8 8 0" fill="none" stroke="#d8c6a8" opacity=".6" stroke-width="2"/><ellipse cx="385" cy="91" rx="7.4" ry="23" fill="none" stroke="#626166" stroke-width="5.5"/><path d="M381 76q4 -8 8 0" fill="none" stroke="#d8c6a8" opacity=".6" stroke-width="2"/><ellipse cx="398" cy="91" rx="7.4" ry="23" fill="none" stroke="#aaa298" stroke-width="5.5"/><path d="M394 76q4 -8 8 0" fill="none" stroke="#d8c6a8" opacity=".6" stroke-width="2"/><ellipse cx="411" cy="91" rx="7.4" ry="23" fill="none" stroke="#626166" stroke-width="5.5"/><path d="M407 76q4 -8 8 0" fill="none" stroke="#d8c6a8" opacity=".6" stroke-width="2"/><ellipse cx="424" cy="91" rx="7.4" ry="23" fill="none" stroke="#626166" stroke-width="5.5"/><path d="M420 76q4 -8 8 0" fill="none" stroke="#d8c6a8" opacity=".6" stroke-width="2"/><ellipse cx="437" cy="91" rx="7.4" ry="23" fill="none" stroke="#aaa298" stroke-width="5.5"/><path d="M433 76q4 -8 8 0" fill="none" stroke="#d8c6a8" opacity=".6" stroke-width="2"/><ellipse cx="450" cy="91" rx="7.4" ry="23" fill="none" stroke="#626166" stroke-width="5.5"/><path d="M446 76q4 -8 8 0" fill="none" stroke="#d8c6a8" opacity=".6" stroke-width="2"/><ellipse cx="463" cy="91" rx="7.4" ry="23" fill="none" stroke="#626166" stroke-width="5.5"/><path d="M459 76q4 -8 8 0" fill="none" stroke="#d8c6a8" opacity=".6" stroke-width="2"/><ellipse cx="476" cy="91" rx="7.4" ry="23" fill="none" stroke="#aaa298" stroke-width="5.5"/><path d="M472 76q4 -8 8 0" fill="none" stroke="#d8c6a8" opacity=".6" stroke-width="2"/><ellipse cx="489" cy="91" rx="7.4" ry="23" fill="none" stroke="#626166" stroke-width="5.5"/><path d="M485 76q4 -8 8 0" fill="none" stroke="#d8c6a8" opacity=".6" stroke-width="2"/><ellipse cx="502" cy="91" rx="7.4" ry="23" fill="none" stroke="#626166" stroke-width="5.5"/><path d="M498 76q4 -8 8 0" fill="none" stroke="#d8c6a8" opacity=".6" stroke-width="2"/><ellipse cx="515" cy="91" rx="7.4" ry="23" fill="none" stroke="#aaa298" stroke-width="5.5"/><path d="M511 76q4 -8 8 0" fill="none" stroke="#d8c6a8" opacity=".6" stroke-width="2"/><ellipse cx="528" cy="91" rx="7.4" ry="23" fill="none" stroke="#626166" stroke-width="5.5"/><path d="M524 76q4 -8 8 0" fill="none" stroke="#d8c6a8" opacity=".6" stroke-width="2"/><ellipse cx="541" cy="91" rx="7.4" ry="23" fill="none" stroke="#626166" stroke-width="5.5"/><path d="M537 76q4 -8 8 0" fill="none" stroke="#d8c6a8" opacity=".6" stroke-width="2"/><ellipse cx="554" cy="91" rx="7.4" ry="23" fill="none" stroke="#aaa298" stroke-width="5.5"/><path d="M550 76q4 -8 8 0" fill="none" stroke="#d8c6a8" opacity=".6" stroke-width="2"/><ellipse cx="567" cy="91" rx="7.4" ry="23" fill="none" stroke="#626166" stroke-width="5.5"/><path d="M563 76q4 -8 8 0" fill="none" stroke="#d8c6a8" opacity=".6" stroke-width="2"/><ellipse cx="580" cy="91" rx="7.4" ry="23" fill="none" stroke="#626166" stroke-width="5.5"/><path d="M576 76q4 -8 8 0" fill="none" stroke="#d8c6a8" opacity=".6" stroke-width="2"/><ellipse cx="593" cy="91" rx="7.4" ry="23" fill="none" stroke="#aaa298" stroke-width="5.5"/><path d="M589 76q4 -8 8 0" fill="none" stroke="#d8c6a8" opacity=".6" stroke-width="2"/></g>
+ <path d="M349 112H601V124H349Z" fill="#4e5250" stroke="#a4aba8" stroke-width="2.6"/>
+ <!-- Dark innards: packed ribs, isolated contacts, many vertical collectors -->
+ <rect x="349" y="126" width="258" height="184" fill="#111a1e" stroke="#4b5656" stroke-width="3"/>
+ <rect x="357" y="135" width="8" height="175" rx="1" fill="url(#dch-brass)" stroke="#19232b" stroke-width="1"/><path d="M358 141V301" stroke="#baa480" stroke-opacity=".4" stroke-width="1.1"/><circle cx="361" cy="139" r="2.2" fill="#c3b79b"/><circle cx="361" cy="301" r="2" fill="#9daab4"/><rect x="369" y="135" width="8" height="175" rx="1" fill="url(#dch-darkbar)" stroke="#19232b" stroke-width="1"/><path d="M370 141V301" stroke="#baa480" stroke-opacity=".4" stroke-width="1.1"/><circle cx="373" cy="139" r="2.2" fill="#c3b79b"/><circle cx="373" cy="301" r="2" fill="#9daab4"/><rect x="381" y="135" width="8" height="175" rx="1" fill="url(#dch-brass)" stroke="#19232b" stroke-width="1"/><path d="M382 141V301" stroke="#baa480" stroke-opacity=".4" stroke-width="1.1"/><circle cx="385" cy="139" r="2.2" fill="#c3b79b"/><circle cx="385" cy="301" r="2" fill="#9daab4"/><rect x="393" y="135" width="8" height="175" rx="1" fill="url(#dch-darkbar)" stroke="#19232b" stroke-width="1"/><path d="M394 141V301" stroke="#baa480" stroke-opacity=".4" stroke-width="1.1"/><circle cx="397" cy="139" r="2.2" fill="#c3b79b"/><circle cx="397" cy="301" r="2" fill="#9daab4"/><rect x="405" y="135" width="8" height="175" rx="1" fill="url(#dch-brass)" stroke="#19232b" stroke-width="1"/><path d="M406 141V301" stroke="#baa480" stroke-opacity=".4" stroke-width="1.1"/><circle cx="409" cy="139" r="2.2" fill="#c3b79b"/><circle cx="409" cy="301" r="2" fill="#9daab4"/><rect x="417" y="135" width="8" height="175" rx="1" fill="url(#dch-darkbar)" stroke="#19232b" stroke-width="1"/><path d="M418 141V301" stroke="#baa480" stroke-opacity=".4" stroke-width="1.1"/><circle cx="421" cy="139" r="2.2" fill="#c3b79b"/><circle cx="421" cy="301" r="2" fill="#9daab4"/><rect x="429" y="135" width="8" height="175" rx="1" fill="url(#dch-brass)" stroke="#19232b" stroke-width="1"/><path d="M430 141V301" stroke="#baa480" stroke-opacity=".4" stroke-width="1.1"/><circle cx="433" cy="139" r="2.2" fill="#c3b79b"/><circle cx="433" cy="301" r="2" fill="#9daab4"/><rect x="441" y="135" width="8" height="175" rx="1" fill="url(#dch-darkbar)" stroke="#19232b" stroke-width="1"/><path d="M442 141V301" stroke="#baa480" stroke-opacity=".4" stroke-width="1.1"/><circle cx="445" cy="139" r="2.2" fill="#c3b79b"/><circle cx="445" cy="301" r="2" fill="#9daab4"/><rect x="453" y="135" width="8" height="175" rx="1" fill="url(#dch-brass)" stroke="#19232b" stroke-width="1"/><path d="M454 141V301" stroke="#baa480" stroke-opacity=".4" stroke-width="1.1"/><circle cx="457" cy="139" r="2.2" fill="#c3b79b"/><circle cx="457" cy="301" r="2" fill="#9daab4"/><rect x="465" y="135" width="8" height="175" rx="1" fill="url(#dch-darkbar)" stroke="#19232b" stroke-width="1"/><path d="M466 141V301" stroke="#baa480" stroke-opacity=".4" stroke-width="1.1"/><circle cx="469" cy="139" r="2.2" fill="#c3b79b"/><circle cx="469" cy="301" r="2" fill="#9daab4"/><rect x="477" y="135" width="8" height="175" rx="1" fill="url(#dch-brass)" stroke="#19232b" stroke-width="1"/><path d="M478 141V301" stroke="#baa480" stroke-opacity=".4" stroke-width="1.1"/><circle cx="481" cy="139" r="2.2" fill="#c3b79b"/><circle cx="481" cy="301" r="2" fill="#9daab4"/><rect x="489" y="135" width="8" height="175" rx="1" fill="url(#dch-darkbar)" stroke="#19232b" stroke-width="1"/><path d="M490 141V301" stroke="#baa480" stroke-opacity=".4" stroke-width="1.1"/><circle cx="493" cy="139" r="2.2" fill="#c3b79b"/><circle cx="493" cy="301" r="2" fill="#9daab4"/><rect x="501" y="135" width="8" height="175" rx="1" fill="url(#dch-brass)" stroke="#19232b" stroke-width="1"/><path d="M502 141V301" stroke="#baa480" stroke-opacity=".4" stroke-width="1.1"/><circle cx="505" cy="139" r="2.2" fill="#c3b79b"/><circle cx="505" cy="301" r="2" fill="#9daab4"/><rect x="513" y="135" width="8" height="175" rx="1" fill="url(#dch-darkbar)" stroke="#19232b" stroke-width="1"/><path d="M514 141V301" stroke="#baa480" stroke-opacity=".4" stroke-width="1.1"/><circle cx="517" cy="139" r="2.2" fill="#c3b79b"/><circle cx="517" cy="301" r="2" fill="#9daab4"/><rect x="525" y="135" width="8" height="175" rx="1" fill="url(#dch-brass)" stroke="#19232b" stroke-width="1"/><path d="M526 141V301" stroke="#baa480" stroke-opacity=".4" stroke-width="1.1"/><circle cx="529" cy="139" r="2.2" fill="#c3b79b"/><circle cx="529" cy="301" r="2" fill="#9daab4"/><rect x="537" y="135" width="8" height="175" rx="1" fill="url(#dch-darkbar)" stroke="#19232b" stroke-width="1"/><path d="M538 141V301" stroke="#baa480" stroke-opacity=".4" stroke-width="1.1"/><circle cx="541" cy="139" r="2.2" fill="#c3b79b"/><circle cx="541" cy="301" r="2" fill="#9daab4"/><rect x="549" y="135" width="8" height="175" rx="1" fill="url(#dch-brass)" stroke="#19232b" stroke-width="1"/><path d="M550 141V301" stroke="#baa480" stroke-opacity=".4" stroke-width="1.1"/><circle cx="553" cy="139" r="2.2" fill="#c3b79b"/><circle cx="553" cy="301" r="2" fill="#9daab4"/><rect x="561" y="135" width="8" height="175" rx="1" fill="url(#dch-darkbar)" stroke="#19232b" stroke-width="1"/><path d="M562 141V301" stroke="#baa480" stroke-opacity=".4" stroke-width="1.1"/><circle cx="565" cy="139" r="2.2" fill="#c3b79b"/><circle cx="565" cy="301" r="2" fill="#9daab4"/><rect x="573" y="135" width="8" height="175" rx="1" fill="url(#dch-brass)" stroke="#19232b" stroke-width="1"/><path d="M574 141V301" stroke="#baa480" stroke-opacity=".4" stroke-width="1.1"/><circle cx="577" cy="139" r="2.2" fill="#c3b79b"/><circle cx="577" cy="301" r="2" fill="#9daab4"/><rect x="585" y="135" width="8" height="175" rx="1" fill="url(#dch-darkbar)" stroke="#19232b" stroke-width="1"/><path d="M586 141V301" stroke="#baa480" stroke-opacity=".4" stroke-width="1.1"/><circle cx="589" cy="139" r="2.2" fill="#c3b79b"/><circle cx="589" cy="301" r="2" fill="#9daab4"/><rect x="597" y="135" width="8" height="175" rx="1" fill="url(#dch-brass)" stroke="#19232b" stroke-width="1"/><path d="M598 141V301" stroke="#baa480" stroke-opacity=".4" stroke-width="1.1"/><circle cx="601" cy="139" r="2.2" fill="#c3b79b"/><circle cx="601" cy="301" r="2" fill="#9daab4"/>
+ <rect x="344" y="131" width="6" height="175" fill="#766e64"/>
+ <rect x="604" y="131" width="6" height="175" fill="#928777"/>
+ <!-- Travelling contact assembly, one rigid carriage on the vertical collector bank -->
+ <g id="dch-brush" transform="translate(0 218)">
+  <path d="M345 -14H607V16H345Z" fill="url(#dch-sliderail)" stroke="#d8c4a3" stroke-width="2.6"/>
+  <path d="M350 -9H603" stroke="#ecdfbd" stroke-opacity=".9" stroke-width="2"/>
+  <path d="M351 10H602" stroke="#20292b" stroke-width="3"/>
+  <rect x="364" y="-5" width="8" height="10" rx="2" fill="#ccaa6c" stroke="#483a29" stroke-width="1.5"/><rect x="388" y="-5" width="8" height="10" rx="2" fill="#ccaa6c" stroke="#483a29" stroke-width="1.5"/><rect x="412" y="-5" width="8" height="10" rx="2" fill="#ccaa6c" stroke="#483a29" stroke-width="1.5"/><rect x="436" y="-5" width="8" height="10" rx="2" fill="#ccaa6c" stroke="#483a29" stroke-width="1.5"/><rect x="460" y="-5" width="8" height="10" rx="2" fill="#ccaa6c" stroke="#483a29" stroke-width="1.5"/><rect x="484" y="-5" width="8" height="10" rx="2" fill="#ccaa6c" stroke="#483a29" stroke-width="1.5"/><rect x="508" y="-5" width="8" height="10" rx="2" fill="#ccaa6c" stroke="#483a29" stroke-width="1.5"/><rect x="532" y="-5" width="8" height="10" rx="2" fill="#ccaa6c" stroke="#483a29" stroke-width="1.5"/><rect x="556" y="-5" width="8" height="10" rx="2" fill="#ccaa6c" stroke="#483a29" stroke-width="1.5"/><rect x="580" y="-5" width="8" height="10" rx="2" fill="#ccaa6c" stroke="#483a29" stroke-width="1.5"/>
+  <rect x="462" y="-20" width="32" height="41" rx="5" fill="url(#dch-rust)" stroke="#f4cb8c" stroke-width="3"/>
+  <circle cx="478" cy="1" r="7" fill="#b1babe" stroke="#394a51" stroke-width="2.5"/>
+ </g>
+ <path d="M341 134V303M615 134V303" stroke="#aab5b8" opacity=".75" stroke-width="3"/>
+ <circle cx="329" cy="70" r="3.3" fill="#a3a19a" stroke="#111f28" stroke-width="1.4"/><path d="M327.5 68.5l3 3" stroke="#3e5059" stroke-width=".8"/><circle cx="329" cy="316" r="3.3" fill="#a3a19a" stroke="#111f28" stroke-width="1.4"/><path d="M327.5 314.5l3 3" stroke="#3e5059" stroke-width=".8"/><circle cx="626" cy="70" r="3.3" fill="#a3a19a" stroke="#111f28" stroke-width="1.4"/><path d="M624.5 68.5l3 3" stroke="#3e5059" stroke-width=".8"/><circle cx="626" cy="316" r="3.3" fill="#a3a19a" stroke="#111f28" stroke-width="1.4"/><path d="M624.5 314.5l3 3" stroke="#3e5059" stroke-width=".8"/>
+ <rect x="400" y="54" width="151" height="17" rx="2" fill="#a19a8b" stroke="#e3ceb2" stroke-width="1.3"/>
+ <text x="476" y="66" text-anchor="middle" font-size="10" font-weight="800" fill="#18232a">U 型 多 分 岐 式 調 光 変 圧 器</text>
+ <rect x="344" y="332" width="290" height="9" fill="#181f24" stroke="#849096" stroke-width="2"/>
+ <path d="M354 342V348M622 342V348" stroke="#7e7d77" stroke-width="11"/>
 </g>
-<text id="dch-brush-label" x="603" y="366" text-anchor="middle" class="amber">ブラシ位置 50%</text>
-<!-- Bulb / actual dimmed power path -->
-<path d="M712 227H768V248H788" class="power"/>
-<path d="M797 293H756V354H700" stroke="#9badb7" stroke-width="3" fill="none"/>
-<circle id="dch-bulb-halo" cx="813" cy="254" r="66" fill="url(#dch-glow)" opacity=".45"/>
-<rect x="780" y="224" width="66" height="62" rx="12" fill="#223e50" stroke="#aac8d6" stroke-width="3"/>
-<circle cx="813" cy="251" r="25" fill="#f9c26f" stroke="#ffe6a6" stroke-width="3"/>
-<path d="M796 251Q813 267 830 251" fill="none" stroke="#fff5cc" stroke-width="4"/>
-<text x="812" y="315" text-anchor="middle" class="title">舞台灯具</text><text x="812" y="333" text-anchor="middle" class="small">白熱灯</text>
-<text x="743" y="411" text-anchor="middle" class="amber" >模式出力 約50V</text>
-<rect x="19" y="353" width="202" height="47" rx="6" fill="#152736" stroke="#425d6e"/>
-<text id="dch-left-state" x="120" y="372" text-anchor="middle" class="cyan">設定 50% ／ 指示中</text>
-<text id="dch-status" x="120" y="390" text-anchor="middle" class="small">刷子が指示位置へ移動</text>
+<text id="dch-brush-label" x="476" y="361" text-anchor="middle" class="amber">摺動ブラシ 50%</text>
+<text id="dch-left-state" x="148" y="348" text-anchor="middle" class="cyan">設定 50% ／ 現在 50%</text>
+<text id="dch-status" x="149" y="367" text-anchor="middle" class="small">位置追従・停止</text>
 </svg>
 <div class="dch-diagram-legend"><span>シアン：制御信号・帰還</span><span>アンバー：電圧調整</span></div></div>
 <p id="dch-change-text">設定電圧と位置フィードバックを比較し、電磁クラッチ・モーターで刷子を追従させる。</p>
 </section>
 <section class="dch-panel dch-lamp">
 <h2>③ 灯りを見る</h2><p>操作の結果、灯具はどうなる？</p>
-<div class="dch-darkroom"><div id="dch-light-glow"></div><img id="dch-light-photo" src="assets/Light.webp" alt="白熱電球"></div>
+<div class="dch-darkroom"><div id="dch-light-glow"></div><img id="dch-light-photo" src="assets/Light.webp" alt="白熱電球"><div id="dch-light-filament"></div></div>
 <output id="dch-output-text">模式出力 約50V</output>
 <div class="dch-wave"><h3>灯具への交流電圧（模式図）</h3><svg viewBox="0 0 340 148" role="img" aria-label="出力電圧の正弦波の高さがブラシの位置で変わる">
 <path d="M20 74H326M20 18V132" stroke="#718a9c" stroke-width="1.5"/>
@@ -253,31 +298,28 @@ html,body{height:auto;overflow:visible}
 (() => {
 'use strict';
 const $=id=>document.getElementById(id);
-const ns='http://www.w3.org/2000/svg';
-const coils=$('dch-coils'),taps=$('dch-taps');
-for(let i=0;i<24;i++){const y=159+i*7.6;const line=document.createElementNS(ns,'line');line.setAttribute('x1',500);line.setAttribute('y1',y);line.setAttribute('x2',554);line.setAttribute('y2',y);line.setAttribute('stroke',i%2?'#bb6b3c':'#efac6e');line.setAttribute('stroke-width','4');coils.appendChild(line);}
-for(let i=0;i<12;i++){const y=162+i*16;const bus=document.createElementNS(ns,'line');bus.setAttribute('x1',566);bus.setAttribute('x2',706);bus.setAttribute('y1',y);bus.setAttribute('y2',y);bus.setAttribute('stroke','#b67b4b');bus.setAttribute('stroke-width','3');taps.appendChild(bus);const c=document.createElementNS(ns,'rect');c.setAttribute('x',608);c.setAttribute('y',y-4);c.setAttribute('width',12);c.setAttribute('height',8);c.setAttribute('rx',2);c.setAttribute('fill','#f8ca83');taps.appendChild(c);}
 const sine=(amplitude)=>{let d='';for(let i=0;i<=160;i++){const x=20+306*i/160,y=74-amplitude*Math.sin(4*Math.PI*i/160);d+=(i?'L':'M')+x.toFixed(2)+' '+y.toFixed(2)+' ';}return d;};
 $('dch-wave-ref').setAttribute('d',sine(52));
 let mode='electrical',target=50,actual=50,lastTime=null,raf=0;
 const clamp=v=>Math.max(0,Math.min(100,Math.round(v)));
 function moveTo(v){target=clamp(v);$('dch-fader').value=String(target);if(mode==='mechanical')actual=target;updateUI();startMotion();}
 function updateUI(){
-const pos=actual,brushY=162+(100-pos)/100*176;
+const pos=actual,brushY=137+(100-pos)/100*162;
 $('dch-brush').setAttribute('transform','translate(0 '+brushY.toFixed(2)+')');
-$('dch-brush-label').textContent='ブラシ位置 '+Math.round(actual)+'%';
-$('dch-desk-handle').setAttribute('y',String(253-target/100*68));
+$('dch-brush-label').textContent='摺動ブラシ '+Math.round(actual)+'%';
+$('dch-mechanical-wheel').setAttribute('transform','rotate('+(target*2.7).toFixed(1)+' 87 170)');
+$('dch-mechanical-pulley').setAttribute('transform','translate(224 169) rotate('+(target*2.7).toFixed(1)+')');
 $('dch-wave').setAttribute('d',sine(52*pos/100));
-$('dch-bulb-halo').setAttribute('opacity',String(.04+Math.pow(pos/100,1.6)*.93));
-$('dch-output-text').textContent='模式出力 約'+Math.round(pos)+'V';
+// The right-side completed Light.webp bulb is the only lamp representation.
+$('dch-output-text').textContent='出力電圧のイメージ '+Math.round(pos)+'V';
 $('dch-value').textContent=target+'%';
 $('dch-fader').setAttribute('aria-valuetext',target+'パーセント');
 $('dch-actual').textContent='ブラシ '+Math.round(actual)+'%';
 $('dch-light-glow').style.opacity=String(.04+Math.pow(pos/100,1.6)*.93);
-$('dch-light-photo').style.filter='brightness('+(0.5+.8*Math.pow(pos/100,1.4))+')';
+$('dch-light-filament').style.opacity=String(.06+Math.pow(pos/100,1.5)*.9);
 $('dch-left-state').textContent='設定 '+target+'% ／ 現在 '+Math.round(actual)+'%';
 $('dch-status').textContent=mode==='mechanical'?'ワイヤと刷子が連動':Math.abs(actual-target)<.3?'指示位置に追従・停止':'モーターで位置追従中';
-$('dch-mech-rope').setAttribute('d','M199 201 H244 Q292 177 340 201 H451 V'+brushY.toFixed(2));
+$('dch-mech-rope').setAttribute('d','M224 130H291Q301 130 301 141V'+(brushY-16).toFixed(2));
 }
 function tick(time){
 if(mode!=='electrical'){raf=0;lastTime=null;return;}
@@ -301,7 +343,7 @@ $('dch-weak-path').toggleAttribute('hidden',next!=='electrical');
 if(next==='mechanical')actual=target;
 $('dch-title').textContent=next==='mechanical'?'② しくみを見る｜ワイヤで連動':'② しくみを見る｜弱電の位置指示';
 $('dch-controls-title').textContent=next==='mechanical'?'① 操作ハンドルを動かす':'① フェーダーを動かす';
-$('dch-desk-label').textContent=next==='mechanical'?'機械的な操作連結':'弱電で位置を指示';
+
 $('dch-control-note').textContent=next==='mechanical'?'ハンドルからワイヤで直接連動。':'フェーダーの指示でブラシが追従。';
 $('dch-fader').setAttribute('aria-label',next==='mechanical'?'1934年：機械式操作ハンドル':'1961年：弱電指示フェーダー');
 $('dch-change-title').textContent=next==='mechanical'?'ワイヤロープで力と動きを伝える':'弱電信号で位置を指定する';
