@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>調光の操作はどう変わった？｜8bit 舞台照明図鑑・テスト版</title>
+<link rel="stylesheet" href="next-ui-typography.css"><link rel="stylesheet" href="next-ui-page-shell.css">
+<link rel="stylesheet" href="next-ui-console-header.css?v=shared-dom-v1">
+<link rel="stylesheet" href="eightbit-layout-width.css?v=8">
+<link rel="stylesheet" href="next-ui-learning-common.css?v=theme12-portrait-order-20261105">
+<style>
+:root{color-scheme:dark;font-family:"Hiragino Sans","Yu Gothic",Meiryo,system-ui,sans-serif}
+*{box-sizing:border-box}html,body{margin:0;background:#0e151c;color:#ecf5fb}
+body.dimming-intro-page{font:16px/1.5 "Hiragino Sans","Yu Gothic",Meiryo,system-ui,sans-serif;background:#151d25}
+.dch-lesson{max-width:1420px;width:100%;margin:0 auto;padding:12px 16px 22px;display:flex;flex-direction:column;gap:12px}
+.dch-head{border-left:4px solid #2ac7ff;padding:3px 0 3px 14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.dch-heading{flex:1 1 390px}.dch-kicker{font-size:14px;color:#8fe1ff;font-weight:800;margin:0}
+.dch-head h1{font-size:clamp(22px,2.1vw,28px);margin:2px 0;color:#fff;line-height:1.28}.dch-sub{margin:0;color:#d4e5ef;font-size:15px}
+.dch-panel{background:linear-gradient(180deg,#202d39,#141d26);border:1px solid #526575;border-radius:9px;min-width:0}
+.dch-switch{display:grid;grid-template-columns:1fr 1fr;gap:3px;padding:4px;background:linear-gradient(180deg,#09131c,#20303d);border:1px solid #435e70;border-radius:5px}
+.dch-switch button{padding:9px 17px;min-height:46px;white-space:nowrap;font-size:16px;font-weight:800;font-family:inherit;color:#d6e3ec;background:linear-gradient(#243541,#0a141d);border:1px solid #394e5d;border-radius:3px;cursor:pointer}
+.dch-switch button[aria-pressed=true]{border-color:#53c8f2;background:linear-gradient(#244b60,#103044);color:#fff;box-shadow:inset 0 -3px #2ac7ff,0 0 10px #2ac7ff30}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #ffd18d;outline-offset:2px}
+.dch-grid{display:grid;grid-template-columns:minmax(0,70fr) minmax(300px,30fr);gap:12px}
+.dch-main{padding:0 12px 12px;min-width:0}.dch-panel-title{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:10px 5px;border-bottom:1px solid #405665;margin-bottom:8px}
+.dch-panel-title h2,.dch-panel-title h3{font-size:19px;line-height:1.3;margin:0}.dch-panel-title small{font-size:12px;color:#abc4d5}
+.dch-svg{display:block;width:100%;height:auto;aspect-ratio:890/428}
+.dch-svg text{font-family:"Hiragino Sans","Yu Gothic",Meiryo,sans-serif}.dch-svg .title{font-size:17px;font-weight:800;fill:#f4f8fb}.dch-svg .small{font-size:13px;fill:#c2d9e7}.dch-svg .amber{fill:#ffd18d;font-size:16px;font-weight:800}.dch-svg .cyan{fill:#7fe3ff;font-size:14px;font-weight:800}
+.dch-svg .machine{fill:#132432;stroke:#6c90a4;stroke-width:2}.dch-svg .wire{fill:none;stroke:#bac9d0;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}.dch-svg .signal{stroke:#2ac7ff;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}.dch-svg .power{stroke:#ffc076;stroke-width:4;fill:none;stroke-linejoin:round}
+.dch-svg [hidden]{display:none!important}
+.dch-ctrl{display:flex;gap:12px;align-items:center;border:1px solid #466272;background:#12222e;padding:10px 13px;border-radius:7px;flex-wrap:wrap}
+.dch-ctrl label{font-size:16px;font-weight:800;min-width:120px}.dch-ctrl input{flex:1 1 210px;accent-color:#46cfff;touch-action:pan-y;min-height:26px}.dch-ctrl output{font-size:20px;font-weight:900;color:#ffce8e;min-width:65px;text-align:right}
+.dch-ctrl .note{font-size:13px;color:#bcd0dd;flex-basis:100%;margin:0}
+.dch-compare{padding:12px;display:flex;flex-direction:column;gap:10px}.dch-compare h2{font-size:19px;margin:0}.dch-fact{border-bottom:1px solid #3f5666;padding:5px 0 10px}.dch-fact:last-of-type{border:0}.dch-fact strong{display:block;color:#92e4ff;margin-bottom:3px;font-size:16px}.dch-fact p{margin:0;font-size:15px;line-height:1.48}
+.dch-wave{background:#122431;border:1px solid #405e70;border-radius:6px;padding:9px;margin-top:auto}.dch-wave h3{font-size:15px;margin:0 0 4px}.dch-wave svg{display:block;width:100%;height:auto}.dch-wave p{font-size:13px;color:#b9d0dc;margin:4px 0 0}
+.dch-footer{display:grid;grid-template-columns:minmax(0,58fr) minmax(260px,42fr);gap:12px}
+.dch-text{padding:13px 16px}.dch-text h2{font-size:18px;color:#ffd18d;margin:0 0 8px}.dch-text p{font-size:15px;line-height:1.6;margin:4px 0}.dch-text .key{color:#ffd18d;font-weight:800}.dch-text .effect{color:#8ce3ff;font-weight:800}
+.dch-teacher{padding:10px 12px;display:flex;align-items:center;gap:10px}.dch-teacher img{width:118px;height:132px;object-fit:contain;flex:none}.dch-teacher strong{color:#ffd18d;font-size:16px}.dch-teacher p{font-size:16px;line-height:1.47;margin:3px 0}
+.dch-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.dch-links a{color:#d0f0ff;text-decoration:none;background:#163348;border:1px solid #47677a;border-radius:4px;padding:7px 9px;font-size:13px;font-weight:700}
+.dch-source{font-size:13px;color:#b9cedb;margin:0 2px}.dch-source a{color:#8eddfb}
+@media(max-width:900px){.dch-grid,.dch-footer{grid-template-columns:1fr}.dch-head{align-items:stretch}.dch-switch{width:100%}}
+@media(max-width:550px){.dch-lesson{padding:9px;gap:9px}.dch-main{overflow-x:auto}.dch-svg{min-width:690px}.dch-switch button{font-size:14px;padding:8px 5px}.dch-teacher img{width:90px;height:105px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style></head>
+<body class="dimming-intro-page eightbit-unified-width">
+<div id="shared-console-header-root"></div><script src="next-ui-console-header.js?v=theme12-shared-20261105"></script>
+<main class="dch-lesson">
+<header class="dch-head"><div class="dch-heading"><p class="dch-kicker">DIMMING / 調光の制御と歴史　｜　TEST</p><h1>調光の操作はどう変わった？</h1><p class="dch-sub">同じ「巻線の取り出し位置」を、どうやって遠くから動かしたのか</p></div>
+<nav class="dch-switch" aria-label="歴史的な操作方式を比較"><button id="dch-mechanical" type="button" aria-pressed="false">1934　機械式</button><button id="dch-electrical" type="button" aria-pressed="true">1961　弱電制御</button></nav></header>
+<div class="dch-grid">
+<section class="dch-panel dch-main" aria-labelledby="dch-title"><div class="dch-panel-title"><h2 id="dch-title">比較で見る仕組み｜弱電で位置を指示する</h2><small>史料に基づく1回路の原理模式図・実機の内部結線図ではありません</small></div>
+<svg class="dch-svg" viewBox="0 0 890 428" role="img" aria-label="操作卓、ワイヤまたは制御信号、U型多分岐式調光変圧器の接触刷子、舞台灯具の接続を比較する模式図">
+<defs><linearGradient id="dch-copper" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#a55b2e"/><stop offset=".48" stop-color="#ffc888"/><stop offset="1" stop-color="#8d4a26"/></linearGradient><radialGradient id="dch-glow"><stop stop-color="#ffe9af" stop-opacity=".96"/><stop offset=".3" stop-color="#ffc15d" stop-opacity=".65"/><stop offset="1" stop-color="#ffb04b" stop-opacity="0"/></radialGradient></defs>
+<!-- Operating desk: its fader is a symbolic handle in both configurations. -->
+<rect x="9" y="105" width="190" height="225" rx="13" class="machine"/>
+<text x="104" y="131" text-anchor="middle" class="title">調光操作盤</text>
+<rect x="33" y="167" width="139" height="114" rx="8" fill="#091923" stroke="#638093" stroke-width="2"/>
+<path d="M65 186V258 M106 186V258 M145 186V258" stroke="#71899a" stroke-width="5"/>
+<path d="M65 213H86 M106 215H126 M145 222H166" stroke="#8ad9f3" stroke-width="6" stroke-linecap="round"/>
+<rect id="dch-desk-handle" x="96" y="224" width="20" height="13" rx="3" fill="#5bd5fa" stroke="#e6faff" stroke-width="1.5"/>
+<text x="104" y="309" text-anchor="middle" class="small" id="dch-desk-label">弱電で位置を指示</text>
+<!-- Middle path: two mutually exclusive operating transmission mechanisms -->
+<g id="dch-mech-path" hidden>
+<text x="280" y="127" text-anchor="middle" class="title">機械的な連結</text>
+<circle cx="244" cy="226" r="23" fill="#536d7e" stroke="#c9d8df" stroke-width="3"/>
+<circle cx="340" cy="226" r="23" fill="#536d7e" stroke="#c9d8df" stroke-width="3"/>
+<path id="dch-mech-rope" d="M199 201 H244 Q292 177 340 201 H451 V226" class="wire"/>
+<path d="M244 203V249 M221 226H267 M340 203V249 M317 226H363" stroke="#b2c9d4" stroke-width="3"/>
+<text x="293" y="288" text-anchor="middle" class="small">ワイヤロープ＋滑車</text>
+<text x="293" y="306" text-anchor="middle" class="small">動きを直接伝える</text>
+<path d="M356 341H450" stroke="#cad5db" stroke-width="3" stroke-dasharray="6 5"/>
+</g>
+<g id="dch-weak-path">
+<text x="306" y="127" text-anchor="middle" class="title">弱電の位置指示</text>
+<path d="M199 226 H247 V185 H278" class="signal"/>
+<path d="M271 179 L283 185 L271 191" fill="none" stroke="#2ac7ff" stroke-width="3"/>
+<rect x="279" y="153" width="82" height="65" rx="8" class="machine"/>
+<text x="320" y="181" text-anchor="middle" class="small">比較</text><text x="320" y="199" text-anchor="middle" class="small">回路</text>
+<path d="M361 185H385" class="signal"/>
+<rect x="385" y="153" width="71" height="65" rx="7" class="machine"/>
+<text x="420" y="180" text-anchor="middle" class="small">電磁</text><text x="420" y="198" text-anchor="middle" class="small">クラッチ</text>
+<rect x="387" y="258" width="68" height="57" rx="6" class="machine"/>
+<text x="421" y="280" text-anchor="middle" class="small">DC</text><text x="421" y="297" text-anchor="middle" class="small">モーター</text>
+<path d="M421 258 V219" stroke="#bdcbd4" stroke-width="5"/>
+<path d="M456 186H481 V222" stroke="#bfcbd4" stroke-width="4" fill="none"/>
+<path d="M543 333V370H320V219" class="signal" stroke-dasharray="7 5"/>
+<text x="420" y="390" text-anchor="middle" class="cyan">位置フィードバック（現在のブラシ位置）</text>
+</g>
+<!-- U-type multitap transformer schematic; 12 illustrative taps rather than the 90-ish actual units. -->
+<rect x="480" y="83" width="247" height="297" rx="12" class="machine"/>
+<text x="603" y="107" text-anchor="middle" class="title">U型多分岐式調光変圧器</text>
+<text x="603" y="127" text-anchor="middle" class="small">巻線タップと摺動刷子</text>
+<rect x="499" y="152" width="56" height="195" rx="6" fill="#5e4030" stroke="#d1a06d" stroke-width="2"/>
+<g id="dch-coils"></g>
+<rect x="564" y="149" width="147" height="198" rx="5" fill="#0b1b26" stroke="#607d8f"/>
+<g id="dch-taps"></g>
+<rect x="661" y="155" width="13" height="187" rx="5" fill="#6c8698" stroke="#d2e1e8"/>
+<g id="dch-brush" transform="translate(0 0)">
+<path d="M669 0H621" stroke="#f7d89f" stroke-width="7" stroke-linecap="round"/>
+<rect x="607" y="-10" width="20" height="20" rx="4" fill="#f3bb71" stroke="#fff0c6" stroke-width="2"/>
+</g>
+<text id="dch-brush-label" x="603" y="366" text-anchor="middle" class="amber">ブラシ位置 50%</text>
+<!-- Bulb / actual dimmed power path -->
+<path d="M712 227H768V248H788" class="power"/>
+<path d="M797 293H756V354H700" stroke="#9badb7" stroke-width="3" fill="none"/>
+<circle id="dch-bulb-halo" cx="813" cy="254" r="66" fill="url(#dch-glow)" opacity=".45"/>
+<rect x="780" y="224" width="66" height="62" rx="12" fill="#223e50" stroke="#aac8d6" stroke-width="3"/>
+<circle cx="813" cy="251" r="25" fill="#f9c26f" stroke="#ffe6a6" stroke-width="3"/>
+<path d="M796 251Q813 267 830 251" fill="none" stroke="#fff5cc" stroke-width="4"/>
+<text x="812" y="315" text-anchor="middle" class="title">舞台灯具</text><text x="812" y="333" text-anchor="middle" class="small">白熱灯</text>
+<text x="743" y="411" text-anchor="middle" class="amber" id="dch-output-text">模式出力 約50V</text>
+<rect x="19" y="353" width="202" height="47" rx="6" fill="#152736" stroke="#425d6e"/>
+<text id="dch-left-state" x="120" y="372" text-anchor="middle" class="cyan">設定 50% ／ 指示中</text>
+<text id="dch-status" x="120" y="390" text-anchor="middle" class="small">刷子が指示位置へ移動</text>
+</svg>
+<div class="dch-ctrl"><label for="dch-fader">操作してみよう</label><input id="dch-fader" type="range" min="0" max="100" step="1" value="50" aria-label="調光操作盤の設定位置"><output id="dch-value">50%</output>
+<p class="note" id="dch-control-note">1961年型：フェーダーの設定値に、モーターでブラシ位置が追いつきます。</p></div>
+</section>
+<aside class="dch-panel dch-compare">
+<h2>何が変わった？</h2>
+<div class="dch-fact"><strong>変わらない：巻線から電圧を取り出す</strong><p>U型多分岐式の変圧器を用いる調光原理は共通。ここでは1回路に簡略化している。</p></div>
+<div class="dch-fact"><strong id="dch-change-title">変わった：ワイヤから弱電の指示へ</strong><p id="dch-change-text">設定と現在位置の差を検出し、電磁クラッチ・モーターで刷子を動かす。</p></div>
+<div class="dch-wave"><h3>灯具に加わる交流電圧（模式図）</h3><svg viewBox="0 0 340 148" role="img" aria-label="出力電圧の正弦波の高さがブラシの位置で変わる">
+<path d="M20 74H326M20 18V132" stroke="#718a9c" stroke-width="1.5"/>
+<path id="dch-wave-ref" fill="none" stroke="#839dad" stroke-width="2" stroke-dasharray="5 4"/>
+<path id="dch-wave" fill="none" stroke="#ffc477" stroke-width="3.5" stroke-linecap="round"/>
+<text x="23" y="15" fill="#c3d5df" font-size="12">＋</text><text x="23" y="145" fill="#c3d5df" font-size="12">－</text>
+</svg><p>破線＝100V入力の基準、橙＝灯具への出力。電圧と明るさは簡略表現。</p></div>
+</aside></div>
+<div class="dch-footer">
+<section class="dch-panel dch-text" aria-labelledby="dch-context"><h2 id="dch-context">歴史と技術｜1961年の転換</h2>
+<p id="dch-description">1961年、東京文化会館に<strong class="key">UMS型調光装置</strong>が導入された。<strong class="effect">弱電による完全遠隔操作</strong>を採用し、操作卓の位置指示と実際の刷子位置を比較して電動で追従させる。機械的なワイヤの遠隔連結を必要としないのが重要な変化だ。</p>
+<p>※史料上の構造を理解するため、タップ約90本などの実機構成を<strong class="key">12段の象徴図</strong>に省略。0〜100Vの線形表示は教材上の仮モデルであり、実機特性や実測値を表さない。</p>
+<div class="dch-links"><a href="DimmingIntro.html">調光4方式を見る</a><a href="https://sts.kahaku.go.jp/diversity/document/browse/2024_saeki/" target="_blank" rel="noopener noreferrer">史料：国立科学博物館の調査を読む</a></div>
+</section><section class="dch-panel dch-teacher"><img src="assets/wave_teacher_transparent.svg?v=teacher-standard-20261014" alt="照明図鑑の先生"><div><strong>先生のひとこと</strong><p id="dch-teacher-text">調光の変圧器は同じ仲間でも、指示の伝え方が進化したんだね。フェーダーを急に動かして、ブラシが追いつく様子を見てみよう！</p></div></section></div>
+<p class="dch-source">TEST / 学習用模式図。機器の写真・原図の正確なトレースではありません。出典：佐伯隆夫「舞台照明用調光装置の系統化調査」（2024年）、第5.3節・第5.10節。既存の4方式完成版・共通メニューは変更していません。</p>
+</main>
+<script>
+(() => {
+'use strict';
+const $=id=>document.getElementById(id);
+const ns='http://www.w3.org/2000/svg';
+const coils=$('dch-coils'),taps=$('dch-taps');
+for(let i=0;i<24;i++){const y=159+i*7.6;const line=document.createElementNS(ns,'line');line.setAttribute('x1',500);line.setAttribute('y1',y);line.setAttribute('x2',554);line.setAttribute('y2',y);line.setAttribute('stroke',i%2?'#bb6b3c':'#efac6e');line.setAttribute('stroke-width','4');coils.appendChild(line);}
+for(let i=0;i<12;i++){const y=162+i*16;const bus=document.createElementNS(ns,'line');bus.setAttribute('x1',566);bus.setAttribute('x2',706);bus.setAttribute('y1',y);bus.setAttribute('y2',y);bus.setAttribute('stroke','#b67b4b');bus.setAttribute('stroke-width','3');taps.appendChild(bus);const c=document.createElementNS(ns,'rect');c.setAttribute('x',608);c.setAttribute('y',y-4);c.setAttribute('width',12);c.setAttribute('height',8);c.setAttribute('rx',2);c.setAttribute('fill','#f8ca83');taps.appendChild(c);}
+const sine=(amplitude)=>{let d='';for(let i=0;i<=160;i++){const x=20+306*i/160,y=74-amplitude*Math.sin(4*Math.PI*i/160);d+=(i?'L':'M')+x.toFixed(2)+' '+y.toFixed(2)+' ';}return d;};
+$('dch-wave-ref').setAttribute('d',sine(52));
+let mode='electrical',target=50,actual=50,lastTime=null,raf=0;
+function updateUI(){
+const pos=actual,brushY=162+(100-pos)/100*176;
+$('dch-brush').setAttribute('transform','translate(0 '+brushY.toFixed(2)+')');
+$('dch-brush-label').textContent='ブラシ位置 '+Math.round(actual)+'%';
+$('dch-desk-handle').setAttribute('y',String(253-target/100*68));
+$('dch-wave').setAttribute('d',sine(52*pos/100));
+$('dch-bulb-halo').setAttribute('opacity',String(.04+Math.pow(pos/100,1.6)*.93));
+$('dch-output-text').textContent='模式出力 約'+Math.round(pos)+'V';
+$('dch-value').textContent=target+'%';
+$('dch-left-state').textContent='設定 '+target+'% ／ 現在 '+Math.round(actual)+'%';
+$('dch-status').textContent=mode==='mechanical'?'ワイヤと刷子が連動':Math.abs(actual-target)<.3?'指示位置に追従・停止':'モーターで位置追従中';
+$('dch-mech-rope').setAttribute('d','M199 201 H244 Q292 177 340 201 H451 V'+brushY.toFixed(2));
+}
+function tick(time){
+if(mode!=='electrical'){raf=0;lastTime=null;return;}
+if(lastTime===null)lastTime=time;
+const dt=Math.min((time-lastTime)/1000,.06);lastTime=time;
+// The travel rate is illustrative, not a claimed actual UMS motor speed.
+const speed=22*dt,delta=target-actual;
+actual+=Math.sign(delta)*Math.min(Math.abs(delta),speed);
+updateUI();
+if(Math.abs(target-actual)>.001)raf=requestAnimationFrame(tick);
+else{raf=0;lastTime=null;}
+}
+function startMotion(){if(!raf&&mode==='electrical'&&Math.abs(actual-target)>.001)raf=requestAnimationFrame(tick);}
+function selectMode(next){
+mode=next;
+if(raf){cancelAnimationFrame(raf);raf=0;}lastTime=null;
+$('dch-mechanical').setAttribute('aria-pressed',String(next==='mechanical'));
+$('dch-electrical').setAttribute('aria-pressed',String(next==='electrical'));
+$('dch-mech-path').toggleAttribute('hidden',next!=='mechanical');
+$('dch-weak-path').toggleAttribute('hidden',next!=='electrical');
+if(next==='mechanical')actual=target;
+$('dch-title').textContent=next==='mechanical'?'比較で見る仕組み｜ワイヤで直接動きを伝える':'比較で見る仕組み｜弱電で位置を指示する';
+$('dch-desk-label').textContent=next==='mechanical'?'機械的な操作連結':'弱電で位置を指示';
+$('dch-control-note').textContent=next==='mechanical'?'1934年型：操作するとワイヤが動き、刷子位置が連動します。':'1961年型：設定した位置までモーターで刷子が追いつきます。';
+$('dch-change-title').textContent=next==='mechanical'?'ワイヤロープで力と動きを伝える':'弱電信号で位置を指定する';
+$('dch-change-text').textContent=next==='mechanical'?'操作盤の機構からワイヤロープを介し、離れた変圧器の摺動刷子を動かす。':'設定電圧と位置フィードバックを比較し、電磁クラッチ・モーターで刷子を追従させる。';
+$('dch-context').textContent=next==='mechanical'?'歴史と技術｜1934年の機械式遠隔操作':'歴史と技術｜1961年の転換';
+$('dch-description').innerHTML=next==='mechanical'?'1934年に開場した東京宝塚劇場では、丸茂電機製作所の<strong class="key">U型多分岐式調光変圧器</strong>が採用された。操作盤は<strong class="effect">ワイヤロープによる機械的な遠隔連結</strong>を用い、調光器の摺動刷子を移動させた。操作盤側には歯車・連動機構があり、手動・電動の操作方式も存在した。':'1961年、東京文化会館に<strong class="key">UMS型調光装置</strong>が導入された。<strong class="effect">弱電による完全遠隔操作</strong>を採用し、操作卓の位置指示と実際の刷子位置を比較して電動で追従させる。機械的なワイヤの遠隔連結を必要としないのが重要な変化だ。';
+$('dch-teacher-text').textContent=next==='mechanical'?'水抵抗式で見たワイヤと滑車の考え方が、変圧器の遠隔操作にも使われていたんだね。ブラシを動かすのは人の操作だよ。':'変圧器の原理は残したまま、操作卓から弱電で指示できるようになったんだ。フェーダーを急に動かして追従の様子を見よう！';
+updateUI();startMotion();
+}
+$('dch-mechanical').addEventListener('click',()=>selectMode('mechanical'));
+$('dch-electrical').addEventListener('click',()=>selectMode('electrical'));
+$('dch-fader').addEventListener('input',e=>{target=Number(e.target.value);if(mode==='mechanical')actual=target;updateUI();startMotion();});
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&raf){cancelAnimationFrame(raf);raf=0;lastTime=null;}else if(!document.hidden)startMotion();});
+selectMode('electrical');
+})();
+</script></body></html>
