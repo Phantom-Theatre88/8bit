@@ -38,6 +38,38 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #ffd1
 @media(max-width:900px){.dch-grid,.dch-footer{grid-template-columns:1fr}.dch-head{align-items:stretch}.dch-switch{width:100%}}
 @media(max-width:550px){.dch-lesson{padding:9px;gap:9px}.dch-main{overflow-x:auto}.dch-svg{min-width:690px}.dch-switch button{font-size:14px;padding:8px 5px}.dch-teacher img{width:90px;height:105px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+/* Full iPad landscape viewport; the illustrated operation is the only input. */
+@media(min-width:901px) and (orientation:landscape){
+ html,body{height:100%;overflow:hidden}
+ body.dimming-intro-page{height:100dvh;display:flex;flex-direction:column;overflow:hidden}
+ #shared-console-header-root{flex:0 0 auto}
+ .dch-lesson{flex:1 1 auto;min-height:0;max-height:calc(100dvh - 60px);padding:7px 13px 9px;gap:7px;overflow-y:auto}
+ .dch-head{flex:0 0 auto;min-height:69px;padding-top:0;padding-bottom:0}
+ .dch-kicker{font-size:12px}.dch-head h1{font-size:23px;margin:0}.dch-sub{font-size:13px}
+ .dch-switch button{min-height:38px;padding:5px 13px;font-size:14px}
+ .dch-grid{flex:1 1 auto;min-height:0;grid-template-columns:minmax(0,69fr) minmax(300px,31fr);gap:8px}
+ .dch-main{padding:0 9px 7px;display:flex;flex-direction:column;min-height:0}
+ .dch-panel-title{flex:0 0 auto;margin-bottom:4px;padding:6px 5px}.dch-panel-title h2{font-size:17px}
+ .dch-panel-title small{font-size:10px}
+ .dch-svg{flex:1 1 auto;min-height:0;height:100%;width:100%;aspect-ratio:auto}
+ .dch-status-strip{flex:0 0 auto;min-height:34px;padding:4px 9px}
+ .dch-compare{min-height:0;padding:9px;gap:6px}
+ .dch-compare h2{font-size:17px}
+ .dch-fact{padding:3px 0 6px}.dch-fact strong{font-size:14px}.dch-fact p{font-size:13px}
+ .dch-wave{padding:6px}.dch-wave svg{max-height:110px}.dch-wave h3{font-size:13px}.dch-wave p{font-size:11px}
+ .dch-footer{flex:0 0 auto;gap:8px}
+ .dch-text{padding:8px 11px}.dch-text h2{font-size:16px;margin:0 0 3px}
+ .dch-text p{font-size:13px;line-height:1.38;margin:2px 0}
+ .dch-links{margin-top:4px}.dch-links a{padding:3px 7px;font-size:12px}
+ .dch-teacher{padding:5px 9px;gap:9px}.dch-teacher img{width:91px;height:99px}.dch-teacher p{font-size:13px;line-height:1.4}
+ .dch-source{font-size:11px;line-height:1.2;flex:0 0 auto}
+}
+.dch-svg [role=slider]:focus-visible{outline:none;stroke:#7fe3ff;stroke-width:1.5}
+.dch-status-strip{display:flex;justify-content:space-between;flex-wrap:nowrap;align-items:center}
+.dch-status-strip strong{font-size:14px;color:#bde4f5;font-weight:700}
+.dch-status-strip output{flex:0 0 auto}
+@media(max-width:900px){.dch-svg{aspect-ratio:890/334}}
 </style></head>
 <body class="dimming-intro-page eightbit-unified-width">
 <div id="shared-console-header-root"></div><script src="next-ui-console-header.js?v=theme12-shared-20261105"></script>
@@ -46,7 +78,7 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #ffd1
 <nav class="dch-switch" aria-label="歴史的な操作方式を比較"><button id="dch-mechanical" type="button" aria-pressed="false">1934　機械式</button><button id="dch-electrical" type="button" aria-pressed="true">1961　弱電制御</button></nav></header>
 <div class="dch-grid">
 <section class="dch-panel dch-main" aria-labelledby="dch-title"><div class="dch-panel-title"><h2 id="dch-title">比較で見る仕組み｜弱電で位置を指示する</h2><small>史料に基づく1回路の原理模式図・実機の内部結線図ではありません</small></div>
-<svg class="dch-svg" viewBox="0 0 890 428" role="img" aria-label="操作卓、ワイヤまたは制御信号、U型多分岐式調光変圧器の接触刷子、舞台灯具の接続を比較する模式図">
+<svg class="dch-svg" id="dch-machine" viewBox="0 78 890 334" role="img" aria-label="操作卓、ワイヤまたは制御信号、U型多分岐式調光変圧器の接触刷子、舞台灯具の接続を比較する模式図">
 <defs><linearGradient id="dch-copper" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#a55b2e"/><stop offset=".48" stop-color="#ffc888"/><stop offset="1" stop-color="#8d4a26"/></linearGradient><radialGradient id="dch-glow"><stop stop-color="#ffe9af" stop-opacity=".96"/><stop offset=".3" stop-color="#ffc15d" stop-opacity=".65"/><stop offset="1" stop-color="#ffb04b" stop-opacity="0"/></radialGradient></defs>
 <!-- Operating desk: its fader is a symbolic handle in both configurations. -->
 <rect x="9" y="105" width="190" height="225" rx="13" class="machine"/>
@@ -56,6 +88,8 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #ffd1
 <path d="M65 213H86 M106 215H126 M145 222H166" stroke="#8ad9f3" stroke-width="6" stroke-linecap="round"/>
 <rect id="dch-desk-handle" x="96" y="224" width="20" height="13" rx="3" fill="#5bd5fa" stroke="#e6faff" stroke-width="1.5"/>
 <text x="104" y="309" text-anchor="middle" class="small" id="dch-desk-label">弱電で位置を指示</text>
+<!-- Interact with the depicted fader, not an external range slider. -->
+<rect id="dch-handle-hit" x="84" y="171" width="48" height="106" rx="8" fill="transparent" style="touch-action:none;cursor:ns-resize" tabindex="0" role="slider" aria-orientation="vertical" aria-label="操作盤のフェーダーを上下する" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50パーセント"/>
 <!-- Middle path: two mutually exclusive operating transmission mechanisms -->
 <g id="dch-mech-path" hidden>
 <text x="280" y="127" text-anchor="middle" class="title">機械的な連結</text>
@@ -110,8 +144,7 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #ffd1
 <text id="dch-left-state" x="120" y="372" text-anchor="middle" class="cyan">設定 50% ／ 指示中</text>
 <text id="dch-status" x="120" y="390" text-anchor="middle" class="small">刷子が指示位置へ移動</text>
 </svg>
-<div class="dch-ctrl"><label for="dch-fader">操作してみよう</label><input id="dch-fader" type="range" min="0" max="100" step="1" value="50" aria-label="調光操作盤の設定位置"><output id="dch-value">50%</output>
-<p class="note" id="dch-control-note">1961年型：フェーダーの設定値に、モーターでブラシ位置が追いつきます。</p></div>
+<div class="dch-ctrl dch-status-strip"><strong id="dch-control-note">図の左側のフェーダーを直接上下してみよう。1961年型はブラシが遅れて追いつく。</strong><output id="dch-value">50%</output></div>
 </section>
 <aside class="dch-panel dch-compare">
 <h2>何が変わった？</h2>
@@ -143,6 +176,34 @@ for(let i=0;i<12;i++){const y=162+i*16;const bus=document.createElementNS(ns,'li
 const sine=(amplitude)=>{let d='';for(let i=0;i<=160;i++){const x=20+306*i/160,y=74-amplitude*Math.sin(4*Math.PI*i/160);d+=(i?'L':'M')+x.toFixed(2)+' '+y.toFixed(2)+' ';}return d;};
 $('dch-wave-ref').setAttribute('d',sine(52));
 let mode='electrical',target=50,actual=50,lastTime=null,raf=0;
+const machine=$('dch-machine'),handleHit=$('dch-handle-hit');
+const clamp=v=>Math.max(0,Math.min(100,v));
+function pointerTarget(e){
+  const pt=machine.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;
+  const matrix=machine.getScreenCTM();if(!matrix)return target;
+  const p=pt.matrixTransform(matrix.inverse());
+  return clamp(Math.round((253-p.y)*100/68));
+}
+function moveTo(v){
+  target=clamp(v);if(mode==='mechanical')actual=target;
+  updateUI();startMotion();
+}
+let dragging=false;
+handleHit.addEventListener('pointerdown',e=>{e.preventDefault();dragging=true;handleHit.setPointerCapture(e.pointerId);moveTo(pointerTarget(e));});
+handleHit.addEventListener('pointermove',e=>{if(dragging){e.preventDefault();moveTo(pointerTarget(e));}});
+const releaseHandle=()=>{dragging=false;};
+handleHit.addEventListener('pointerup',releaseHandle);
+handleHit.addEventListener('pointercancel',releaseHandle);
+handleHit.addEventListener('lostpointercapture',releaseHandle);
+handleHit.addEventListener('keydown',e=>{
+ let n=target;
+ if(e.key==='ArrowUp'||e.key==='ArrowRight')n+=5;
+ else if(e.key==='ArrowDown'||e.key==='ArrowLeft')n-=5;
+ else if(e.key==='Home')n=0;
+ else if(e.key==='End')n=100;
+ else return;
+ e.preventDefault();moveTo(n);
+});
 function updateUI(){
 const pos=actual,brushY=162+(100-pos)/100*176;
 $('dch-brush').setAttribute('transform','translate(0 '+brushY.toFixed(2)+')');
@@ -152,6 +213,8 @@ $('dch-wave').setAttribute('d',sine(52*pos/100));
 $('dch-bulb-halo').setAttribute('opacity',String(.04+Math.pow(pos/100,1.6)*.93));
 $('dch-output-text').textContent='模式出力 約'+Math.round(pos)+'V';
 $('dch-value').textContent=target+'%';
+handleHit.setAttribute('aria-valuenow',String(target));
+handleHit.setAttribute('aria-valuetext',target+'パーセント');
 $('dch-left-state').textContent='設定 '+target+'% ／ 現在 '+Math.round(actual)+'%';
 $('dch-status').textContent=mode==='mechanical'?'ワイヤと刷子が連動':Math.abs(actual-target)<.3?'指示位置に追従・停止':'モーターで位置追従中';
 $('dch-mech-rope').setAttribute('d','M199 201 H244 Q292 177 340 201 H451 V'+brushY.toFixed(2));
@@ -178,7 +241,8 @@ $('dch-weak-path').toggleAttribute('hidden',next!=='electrical');
 if(next==='mechanical')actual=target;
 $('dch-title').textContent=next==='mechanical'?'比較で見る仕組み｜ワイヤで直接動きを伝える':'比較で見る仕組み｜弱電で位置を指示する';
 $('dch-desk-label').textContent=next==='mechanical'?'機械的な操作連結':'弱電で位置を指示';
-$('dch-control-note').textContent=next==='mechanical'?'1934年型：操作するとワイヤが動き、刷子位置が連動します。':'1961年型：設定した位置までモーターで刷子が追いつきます。';
+$('dch-control-note').textContent=next==='mechanical'?'図の左の操作ハンドルを動かそう。ワイヤとブラシが一緒に動く。':'図の左のフェーダーを動かそう。ブラシがモーターで後から追いつく。';
+handleHit.setAttribute('aria-label',next==='mechanical'?'1934年の機械式操作ハンドルを上下する':'1961年の弱電指示フェーダーを上下する');
 $('dch-change-title').textContent=next==='mechanical'?'ワイヤロープで力と動きを伝える':'弱電信号で位置を指定する';
 $('dch-change-text').textContent=next==='mechanical'?'操作盤の機構からワイヤロープを介し、離れた変圧器の摺動刷子を動かす。':'設定電圧と位置フィードバックを比較し、電磁クラッチ・モーターで刷子を追従させる。';
 $('dch-context').textContent=next==='mechanical'?'歴史と技術｜1934年の機械式遠隔操作':'歴史と技術｜1961年の転換';
@@ -188,7 +252,7 @@ updateUI();startMotion();
 }
 $('dch-mechanical').addEventListener('click',()=>selectMode('mechanical'));
 $('dch-electrical').addEventListener('click',()=>selectMode('electrical'));
-$('dch-fader').addEventListener('input',e=>{target=Number(e.target.value);if(mode==='mechanical')actual=target;updateUI();startMotion();});
+// Dragging and keyboard operation are attached directly to the illustrated console.
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&raf){cancelAnimationFrame(raf);raf=0;lastTime=null;}else if(!document.hidden)startMotion();});
 selectMode('electrical');
 })();
