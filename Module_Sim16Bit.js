@@ -14,7 +14,7 @@ const Module_Sim16Bit = {
           </div>
           <div class="s16-step"><button data-s16-step="${id}:1" aria-label="${title}を1上げる">＋</button><button data-s16-step="${id}:-1" aria-label="${title}を1下げる">−</button></div></div></section>`;
         return `<div class="s16-page">
-          <header class="s16-title"><h1>16-bit 調光卓</h1><p>「制御とは」のDMX指令 → 8bitの0〜255 → CoarseとFineの2つで65,536段階。</p><button id="s16-help-open">ⓘ 詳細説明</button></header>
+          <header class="s16-title"><h1>16-bit 調光卓</h1><p>8bitの数値指令を2つ使い、Coarse（大）＋Fine（細）で最大65,536通りを表す。</p><button id="s16-help-open">ⓘ 詳細説明</button></header>
           <main class="s16-workbench">
             <section class="s16-zone s16-input"><h2>① 大きく・細かく動かす</h2>
               <div class="s16-faders">${fader('coarse','Coarse','大きく調整',128)}${fader('fine','Fine','細かく調整',64)}</div>
@@ -29,11 +29,11 @@ const Module_Sim16Bit = {
             </section>
             <section class="s16-zone s16-light"><h2>③ 灯りを見る</h2><div class="s16-dark-room"><div id="sim16bit-ambient-glow" class="s16-ambient"></div><div class="s16-bulb"><img src="assets/Light.webp" alt="白熱電球"><div id="sim16bit-gas-glow" class="s16-gas"></div><div id="sim16bit-filament-glow" class="s16-filament"></div></div></div><div class="s16-readout"><span>16-bit値</span><strong id="s16-lamp-total">32,832</strong><span id="s16-light-state">点灯中</span></div><p class="s16-note">灯りは見た目のイメージ。</p></section>
           </main>
-          <section class="s16-bottom"><section class="s16-zone"><h2>▤ 解説</h2><p>前の8bitと同じく、DMXは電圧ではなく数値の指令。</p><p><span class="s16-blue">Coarse</span>で大きく、<span class="s16-green">Fine</span>でその1段を細かく決める。</p></section>
+          <section class="s16-bottom"><section class="s16-zone"><h2>▤ 解説</h2><p>DMXの1つの値は8bit（0〜255）。電力ではなく制御指令。</p><p>16bit対応機器は2つのDMX値を使用。<span class="s16-blue">Coarse</span>で大まかに、<span class="s16-green">Fine</span>でその1段の中を細かく指定する。</p></section>
             <section class="s16-zone s16-teacher eightbit-shared-teacher"><img src="assets/wave_teacher_transparent.svg?v=teacher-standard-20261014" alt="照明教材の先生"><div><h2>先生のひとこと</h2><p id="s16-teacher-message">「制御とは」で見たDMXは指令だね。<br>Coarseを固定して、Fineを動かしてみよう。</p></div></section>
-            <section class="s16-zone"><h2>覚えておこう</h2><p>8-bit：<b>256段階</b><br>16-bit：<b>65,536段階</b></p><p>DMXの2つの8bit値を組み合わせる。<a class="s16-prev-link" href="Top.html?tab=sim8bit">8bitを振り返る</a></p></section></section>
+            <section class="s16-zone"><h2>覚えておこう</h2><p>8-bit：<b>256通り</b><br>16-bit：<b>65,536通り</b>の指令値。</p><p>16bit＝Coarse × 256 ＋ Fine。<br>実際の細かさは受信機側の対応にもよる。<a class="s16-prev-link" href="Top.html?tab=sim8bit">8bitを振り返る</a></p></section></section>
           
-          <dialog id="s16-help-dialog" aria-labelledby="s16-help-title"><div class="s16-help-heading"><h2 id="s16-help-title">16-bitの詳細説明</h2><button id="s16-help-close" aria-label="詳細説明を閉じる">閉じる ×</button></div><p>大きく／細かく調整するしくみの説明図です。図の数値と距離の単位はたとえで、操作中の現在値ではありません。</p><img src="assets/16bit_coarse_fine_infographic.webp" alt="Master、Coarse、Fineの関係と上位・下位8-bitを説明するイラスト"></dialog>
+          <dialog id="s16-help-dialog" aria-labelledby="s16-help-title"><div class="s16-help-heading"><h2 id="s16-help-title">16-bitの詳細説明</h2><button id="s16-help-close" aria-label="詳細説明を閉じる">閉じる ×</button></div><p>DMXの1つのデータ値は8bit（0〜255）。16bit対応の受信機では、Coarse（上位8bit）とFine（下位8bit）の2つのDMX値をまとめて、1つのパラメータをより細かく指定します。</p><p><strong>16bit値＝Coarse × 256 ＋ Fine</strong>。DMXの1つの値が16bitになるわけではありません。下の図は説明例で、操作中の現在値とは異なります。</p><img src="assets/16bit_coarse_fine_infographic.webp" alt="Master、Coarse、Fineの関係と上位・下位8-bitを説明するイラスト"></dialog>
         </div>`;
     },
     init() {
