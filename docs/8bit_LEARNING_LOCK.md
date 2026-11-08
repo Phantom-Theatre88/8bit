@@ -363,3 +363,15 @@
 - 16bitの既存採用Coarse/Fineフェーダー・Master・拡大図・計算式・0/1表示・灯具・先生・詳細説明ボタン・既存イラストは保持。詳細モーダルに2スロットの説明を追加。
 - 参照資料（原理・一次に近い説明）：[Monolithic Power Systems: Single-phase AC/AC Converters](https://www.monolithicpower.com/en/learning/mpscholar/ac-power/ac-ac-power-conversion-techniques/single-phase-ac-ac-converters)（抵抗負荷の位相制御と出力実効電圧式）、[PRG: DMX512 Reference Guide](https://www.prg.com/-/media/Files/US/PRG-Products/VL5-Wash/Controlling-vari-lite-equipment-using-dmx_guide_54.pdf)（8bit/16bitとCoarse/Fine）、[MA Lighting: Attributes](https://help2.malighting.com/utility/en/help/key_attributes.html)（Coarse/Fineの8bit値と16bit値）。
 - JS構文・各DOM要素・CSS括弧と、出力RMSの独立数値積分での照合、8bit/16bitの演算・端値を検査済み。**公開Safari/iPadで説明文の収まり・タブ切替・タッチ連動を確認するまでは今回の改修版を新たな完成LOCKにはしない。**
+
+## 調光テーマ全4教材｜第三者レビュー指摘5件 LOCK（2026-11-08）
+
+Kimの指定により、現行共通UIの「調光とは？」「制御とは？」「8-bit 調光卓」「16-bit 調光卓」を対象に、以下の指摘と優先順位を確定する。レビュー対象コミットは d7bd4586a179b867a5cca5700c6e2040c1f2b0e4。5件とも改修・再確認は未実施。
+
+1. **高｜テーマトップの学習順**　共通ヘッダーの調光教材は4件だが、トップの一覧は3件で「制御とは？」が抜けている。トップからも「調光とは？ → 制御とは？ → 8-bit → 16-bit」の順に選べることを確認条件とする。
+2. **高｜16-bit横画面の本文切れ**　Chromeの表示領域1024×680で、下段の解説は枠148pxに対して本文173px、先生欄は枠148pxに対して内容161pxで、どちらも末尾が隠れる。読みやすい文字サイズで両欄の末尾まで読めることを確認する。
+3. **中｜導入と8-bitのSCR波形のつながり**　導入の50％は点弧角90°。8-bitの直線カーブでは128/255で約50％、実効電圧50.2V、点弧角約114°、抵抗一定の電力約25％となる。導入は点弧角、8-bitの直線は出力実効電圧を操作位置に比例させる例であることを、ページをまたいだ新人が説明から理解できるようにする。
+4. **中｜16-bitのFineの繰り上がり**　Coarse＝0、Fine＝255でFineの「＋」を押すと合計256、Coarse＝1、Fine＝0になる。ドラッグは同じCoarseの段内で止まる。「Coarseを固定して」という案内に対し、操作方法による違いが伝わるようにする。繰り上がりを維持する場合は、＋／−が合計値を1ずつ動かすことをボタンの近くに示す。
+5. **低｜水抵抗式の操作案内**　80％から40％へ下げても「フェーダーを上げる」と表示される。現在値10％を境に選ぶ現行文言と操作方向の食い違いを解消する。上げ下げと銅板の移動方向を示す固定説明でもよい。
+
+画面レビューは取得した現行版をChromeで1024×680、768×1024、390×844に表示して実施。公開配信のキャッシュとiPad Safari実機のタッチ操作は未確認。今回のLOCKの対象は指摘内容と優先順位。
