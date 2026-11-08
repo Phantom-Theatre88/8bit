@@ -54,8 +54,8 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
 .output-note{color:#c2d8e3;font-size:12px;max-width:340px}
 .port{position:absolute;width:4px;height:4px;border-radius:50%;opacity:0;pointer-events:none}
 #port-source{right:10%;top:51%}#port-fader-in{left:29%;top:52%}#port-fader-out{right:31%;top:52%}#port-unit{left:0;top:49%}#port-unit-power{left:50%;bottom:0}#port-unit-out{right:0;top:49%}#port-lamp{left:4%;top:48%}#port-mains{left:50%;top:0}
-.direct-card{min-height:325px;padding:20px 26px;display:none;align-items:center;justify-content:space-between;gap:25px}
-.direct-main{display:flex;align-items:center;gap:22px;flex:1;min-width:0}
+.direct-card{min-height:325px;padding:20px 26px;display:none;align-items:center;justify-content:center;gap:25px}
+.direct-main{display:flex;align-items:center;gap:22px;flex:1;min-width:0;max-width:720px}
 .direct-main > div:last-child{min-width:0;flex:1}
 .direct-card .direct-title{font-size:23px;color:#f1f6fb}.direct-card .direct-lead{color:#cfdce5;line-height:1.7;margin:9px 0 14px;max-width:690px}
 .direct-card .direct-marker{font-size:62px;color:#e5b17f;line-height:1}
@@ -65,12 +65,12 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
 #scene[data-mode="weak"] .source .power-only{display:none}#scene[data-mode="weak"] .source .weak-only{display:grid}
 #scene[data-mode="digital"] .source .power-only{display:none}#scene[data-mode="digital"] .source .digital-only{display:grid}
 #scene[data-mode="weak"] .receiver,#scene[data-mode="digital"] .receiver{display:flex}
-#scene:not([data-mode="power"]) .artifact-dimpac{display:none}
+/* Photo visibility is controlled by scene-row, independently of the wiring panel. */
 #scene[data-mode="power"] .receiver{display:none}
 #scene[data-mode="power"] .power-source,#scene[data-mode="digital"] .power-source{display:none}
-#scene[data-mode="power"] .output-devices{justify-content:center;gap:14px;overflow:visible}
+#scene[data-mode="power"] .output-devices{justify-content:center;overflow:visible}
 #scene[data-mode="weak"] .output-devices,#scene[data-mode="digital"] .output-devices{justify-content:space-evenly}
-#scene[data-mode="power"] .output .lamp{max-width:150px;width:140px}
+#scene[data-mode="power"] .output .lamp{max-width:180px;width:165px}
 #scene[data-mode="weak"] .power-source{display:flex}
 #scene[data-mode="weak"] .output-status,#scene[data-mode="digital"] .output-status{font-size:15px}
 .scene-footer{position:relative;z-index:4;border-top:1px solid #465b6a;padding:8px 4px 0;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:35px}
@@ -122,26 +122,42 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
 #scene[data-mode="weak"] .output-note{font-size:12px}
 #scene[data-mode="weak"] .output-status{font-size:15px;color:#ffd38f}
 @media(max-width:770px){#scene[data-mode="weak"] .output-devices{padding:0 4px}#scene[data-mode="weak"] .power-source{min-width:100px;max-width:140px;font-size:10px}}
-/* Real equipment: compact photo cards, visually secondary to the working model.
-   Photos are loaded directly from credited primary-source sites, not copied
-   into this repository. If remote hosting blocks embedding, show a source link. */
-.artifact-photo{flex:0 0 178px;min-width:0;max-width:178px;padding:6px 7px 7px;display:flex;flex-direction:column;align-items:center;gap:3px;border:1px solid #637b8b;border-radius:7px;background:linear-gradient(180deg,#263745,#15232e);color:#eaf3f9;text-align:center;line-height:1.24}
-.artifact-photo .artifact-photo-head{font-size:11px;color:#9ecadf;font-weight:900;letter-spacing:.04em}
-.artifact-photo>a:first-of-type{display:flex;align-items:center;justify-content:center;width:100%;height:93px;overflow:hidden;background:#d9dde0;border-radius:4px;position:relative}
-.artifact-photo img{max-height:100%;max-width:100%;width:100%;height:100%;object-fit:contain;display:block}
-.artifact-photo img[hidden]{display:none}
-.artifact-photo .photo-fallback{font-size:12px;font-weight:700;color:#1c3c51;padding:8px}
-.artifact-photo .photo-fallback[hidden]{display:none}
-.artifact-photo strong{font-size:12px;line-height:1.24}
-.artifact-photo small{font-size:10px;color:#b6ccd9}
-.artifact-photo .photo-credit{font-size:10px;line-height:1.25;color:#9ad8fa;text-decoration:underline;text-underline-offset:2px}
-#scene[data-mode="power"] .artifact-dimpac{z-index:5}
-.artifact-resistor{flex:0 0 224px;max-width:224px}
-.artifact-resistor>a:first-of-type{height:143px}
-.artifact-resistor strong{font-size:14px}
-@media(max-width:1100px){.artifact-dimpac{flex-basis:146px;max-width:146px}.artifact-photo>a:first-of-type{height:80px}.artifact-resistor{flex-basis:205px;max-width:205px}.artifact-resistor>a:first-of-type{height:127px}}
-@media(max-width:770px){#scene[data-mode="power"] .output-devices{gap:4px}.artifact-dimpac{flex-basis:111px;max-width:111px;padding:4px}.artifact-dimpac>a:first-of-type{height:60px}.artifact-dimpac strong{font-size:10px}.artifact-dimpac small,.artifact-dimpac .photo-credit{font-size:9px}.direct-card{padding:14px;gap:12px}.artifact-resistor{flex-basis:145px;max-width:145px}.artifact-resistor>a:first-of-type{height:94px}}
-@media(max-width:510px){.artifact-dimpac{flex-basis:87px;max-width:87px}.artifact-dimpac>a:first-of-type{height:48px}.artifact-dimpac .photo-credit{font-size:8px}.artifact-resistor{flex-basis:115px;max-width:115px}.artifact-resistor>a:first-of-type{height:73px}.direct-card{gap:6px}.direct-main{gap:6px}.direct-marker{display:none}}
+/* Main interactive circuit at left; independently framed historic equipment at right.
+   Shared teacher/nav styling and every circuit component remain unchanged. */
+.scene-row{display:grid;grid-template-columns:minmax(0,1fr) 258px;align-items:stretch;gap:12px;min-width:0}
+.scene-row .lesson-scene{min-width:0}
+.equipment-panel{min-width:0;min-height:0;padding:12px 12px 14px;display:flex;flex-direction:column;align-items:stretch;gap:8px}
+.equipment-heading{font-size:19px;margin:0;border-bottom:1px solid #465c6d;padding:0 2px 8px;line-height:1.35}
+.equipment-lead{font-size:13px;color:#c6dbe7;line-height:1.4;margin:0 0 5px}
+.artifact-photo{min-width:0;width:100%;display:flex;flex-direction:column;gap:9px;align-items:stretch;color:#eef6fb;text-align:center}
+.artifact-photo .artifact-photo-head{font-size:13px;font-weight:800;color:#ffe0a1;line-height:1.4}
+.artifact-photo>a:first-of-type{display:flex;align-items:center;justify-content:center;width:100%;height:183px;overflow:hidden;background:#e2e5e7;border:1px solid #6c8796;border-radius:7px}
+.artifact-photo img{max-width:100%;max-height:100%;width:100%;height:100%;object-fit:contain;display:block}
+.artifact-photo img[hidden],.artifact-photo .photo-fallback[hidden]{display:none}
+.artifact-photo .photo-fallback{font-size:14px;font-weight:700;color:#1f455b;padding:12px}
+.artifact-photo strong{font-size:16px;line-height:1.35}
+.artifact-photo small{font-size:13px;color:#bed2dd;line-height:1.35}
+.artifact-photo .photo-credit{font-size:12px;color:#99dafb;line-height:1.4;text-decoration:underline;text-underline-offset:2px}
+.scene-row[data-mode="power"] .artifact-resistor,
+.scene-row[data-mode="direct"] .artifact-dimpac{display:none}
+.scene-row[data-mode="weak"],.scene-row[data-mode="digital"]{grid-template-columns:minmax(0,1fr)}
+.scene-row[data-mode="weak"] .equipment-panel,.scene-row[data-mode="digital"] .equipment-panel{display:none}
+@media(min-width:771px) and (max-width:1100px){
+ .scene-row{grid-template-columns:minmax(0,1fr) 215px;gap:9px}
+ .equipment-panel{padding:10px}
+ .artifact-photo>a:first-of-type{height:150px}
+ .artifact-photo strong{font-size:14px}
+ .artifact-photo small{font-size:12px}
+}
+@media(max-width:770px){
+ .scene-row{grid-template-columns:minmax(0,1fr)}
+ .equipment-panel{min-height:0}
+ .artifact-photo{display:grid;grid-template-columns:minmax(100px,30%) minmax(0,1fr);align-items:center;text-align:left;column-gap:12px}
+ .artifact-photo .artifact-photo-head{grid-column:1/-1}
+ .artifact-photo>a:first-of-type{grid-column:1;grid-row:2/span 3;height:125px}
+ .artifact-photo strong,.artifact-photo small,.artifact-photo .photo-credit{grid-column:2}
+ .artifact-photo strong{font-size:15px}
+}
 @media(prefers-reduced-motion:reduce){.flow-flash,.flow-control{animation:none}}
 
 /* Strong-power tab: identical monitoring time/voltage scales on both
@@ -165,6 +181,7 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
 <button type="button" class="mode-tab" role="tab" data-mode="weak" aria-selected="false"><strong>弱電制御</strong><small>フェーダーでDC0〜10V</small></button>
 <button type="button" class="mode-tab" role="tab" data-mode="digital" aria-selected="false"><strong>デジタル制御</strong><small>0／1で指示する</small></button>
 </div>
+<div class="scene-row" id="scene-row" data-mode="power">
 <section class="panel lesson-scene" id="scene" data-mode="power" aria-label="制御方式を操作して比べる">
 <div class="scene-header"><h2 id="scene-title">強電制御｜100Vがフェーダーに来る</h2><output class="live" id="stage-live" aria-live="polite">フェーダー 75%</output></div>
 <div class="scene-ground" id="scene-ground">
@@ -184,15 +201,7 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
  <div class="output-devices">
   <div class="receiver" id="receiver"><strong id="receiver-label">調光ユニット</strong><small id="receiver-sub">指示を受け取る</small><img class="tiny-dmx" id="dmx-media" src="assets/control/dmx-5pin-approved.webp" alt="DMX 5ピンコネクター" hidden><span class="port" id="port-unit"></span><span class="port" id="port-unit-out"></span><span class="port" id="port-unit-power"></span></div>
   <div class="lamp" id="lamp"><div class="lamp-glow" id="lamp-glow"></div><img src="assets/Light.webp" width="220" height="360" alt="既存教材と共通の白熱電球" id="bulb-img"><div class="filament" id="filament"></div><span class="port" id="port-lamp"></span></div>
-  <aside class="artifact-photo artifact-dimpac" aria-label="強電制御の実機写真">
-   <div class="artifact-photo-head">実機を見る</div>
-   <a href="https://www.marumo.co.jp/lineup/tz/" target="_blank" rel="noopener noreferrer" aria-label="丸茂電機の公式ディムパックTZ製品情報を開く">
-    <img src="https://www.marumo.co.jp/marumo_wp/wp-content/themes/marumowp/img/lineup/TZ/tz_6d.jpg" loading="eager" decoding="async" alt="丸茂電機 ディムパック TZ-6D。フェーダーと調光器が一体の操作卓">
-    <span class="photo-fallback" hidden>公式製品写真を開く</span>
-   </a>
-   <strong>ディムパック TZ-6D</strong><small>調光器・フェーダー一体型</small>
-   <a class="photo-credit" href="https://www.marumo.co.jp/lineup/tz/" target="_blank" rel="noopener noreferrer">写真・資料：丸茂電機</a>
-  </aside>
+
  </div>
  <div class="power-source" id="remote-mains"><img src="assets/control/outlet.webp" alt="" width="228" height="332"><span>灯具用電源<br>AC100V（別回路）</span><span class="port" id="port-mains"></span></div>
  <output id="output-state" class="output-status">点灯イメージ 75%</output><p class="output-note" id="output-note">フェーダーから調光された電力が電球へ</p></div>
@@ -202,7 +211,23 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
   <div class="direct-marker" aria-hidden="true">↔</div>
   <div><strong class="direct-title">直接制御は「調光とは」で学習済み</strong><p class="direct-lead">金属抵抗式では、操作部の動きをワイヤロープなどで調光器の接点へ伝えていました。水抵抗式やスライダックの機構は「調光とは」で確認しよう。</p><a class="link-button" href="DimmingIntro.html">「調光とは」へ戻る</a></div>
  </div>
- <aside class="artifact-photo artifact-resistor" aria-label="直接制御の実機写真">
+
+</div>
+<div class="scene-footer"><div class="explain" id="scene-explain"><strong>100Vの電気がフェーダーに来る。</strong> フェーダーを動かして電球の変化を見よう。</div><div class="scheme">図は制御の違いを示す模式図</div></div>
+</section>
+<aside class="panel equipment-panel" id="equipment-panel" aria-label="実機紹介">
+ <h2 class="equipment-heading">実機紹介</h2>
+ <p class="equipment-lead">操作の仕組みと実際の機器を見比べよう。</p>
+   <aside class="artifact-photo artifact-dimpac" aria-label="強電制御の実機写真">
+   <div class="artifact-photo-head">実機を見る</div>
+   <a href="https://www.marumo.co.jp/lineup/tz/" target="_blank" rel="noopener noreferrer" aria-label="丸茂電機の公式ディムパックTZ製品情報を開く">
+    <img src="https://www.marumo.co.jp/marumo_wp/wp-content/themes/marumowp/img/lineup/TZ/tz_6d.jpg" loading="eager" decoding="async" alt="丸茂電機 ディムパック TZ-6D。フェーダーと調光器が一体の操作卓">
+    <span class="photo-fallback" hidden>公式製品写真を開く</span>
+   </a>
+   <strong>ディムパック TZ-6D</strong><small>調光器・フェーダー一体型</small>
+   <a class="photo-credit" href="https://www.marumo.co.jp/lineup/tz/" target="_blank" rel="noopener noreferrer">写真・資料：丸茂電機</a>
+  </aside>
+  <aside class="artifact-photo artifact-resistor" aria-label="直接制御の実機写真">
   <div class="artifact-photo-head">実機を見る</div>
   <a href="https://sts.kahaku.go.jp/diversity/document/browse/2024_saeki/" target="_blank" rel="noopener noreferrer" aria-label="金属抵抗式調光器の出典資料を開く">
    <img src="https://sts.kahaku.go.jp/diversity/document/browse/2024_saeki/images/fig_423.png" loading="lazy" decoding="async" alt="丸茂電機製作所 NW型金属抵抗式調光器単体の記録写真">
@@ -211,9 +236,8 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
   <strong>NW型金属抵抗式調光器</strong><small>接点を機械的に動かす方式</small>
   <a class="photo-credit" href="https://sts.kahaku.go.jp/diversity/document/browse/2024_saeki/" target="_blank" rel="noopener noreferrer">出典：国立科学博物館 調査報告・図4.23</a>
  </aside>
+</aside>
 </div>
-<div class="scene-footer"><div class="explain" id="scene-explain"><strong>100Vの電気がフェーダーに来る。</strong> フェーダーを動かして電球の変化を見よう。</div><div class="scheme">図は制御の違いを示す模式図</div></div>
-</section>
 <div class="legend"><span><i class="swatch power"></i>アンバー：灯具用の電力</span><span><i class="swatch weak"></i>ブルー：弱電の指示・デジタルデータ</span><span>移動する光・数字は理解のための演出</span></div>
 <div class="below"><section class="panel history"><h3>▤ 歴史と位置づけ</h3><p id="history-text">操作器と調光器が一体の強電操作から、低電圧の遠隔操作へ。ここではフェーダーが扱うものを比べよう。</p><div id="next-links"></div></section><section class="panel teacher eightbit-shared-teacher"><img src="assets/wave_teacher_transparent.svg?v=teacher-standard-20261014" alt="先生キャラクター"><div class="teacher-copy"><h3>先生のひとこと</h3><div class="teacher-bubble" id="teacher-message">見た目は同じフェーダー。でも強電制御では、フェーダーが100V系の電気を扱っているよ。</div></div></section></div>
 <p class="note">※理解のための模式図。波形は電圧の時間変化であり、電流が一方向へ移動する図ではありません。強電の出力は可変抵抗式の概念を単純化した正弦波振幅モデルで、すべての調光方式を表すものではありません。帰線・保護回路・調光器内部の配線は省略。電球の光はイメージです。</p>
@@ -248,7 +272,7 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
   if(mode==='power'&&powerOutputTrace&&powerOutputFrom&&powerOutputTo){powerOutputTrace.setAttribute('d',waveformPath(powerOutputFrom,powerOutputTo,value/100));powerOutputTrace.style.opacity='1';if(powerOutputLabel)powerOutputLabel.textContent='出力 '+value+'V（模式）';}
  }
  function updateMode(){
-  const d=models[mode];scene.dataset.mode=mode;$('scene-title').textContent=d.title;$('source-readout').textContent=d.source;
+  const d=models[mode];scene.dataset.mode=mode;$('scene-row').dataset.mode=mode;$('scene-title').textContent=d.title;$('source-readout').textContent=d.source;
   $('source-desc').textContent=d.sourceDesc;$('fader-caption').textContent=d.fader;
   $('output-title').textContent=mode==='digital'?'③ 受信側と電球':mode==='weak'?'③ 調光器と電球':'③ 灯りを見る';
   $('receiver-label').textContent=mode==='digital'?'DMX受信側':'調光ユニット';
