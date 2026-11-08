@@ -175,3 +175,42 @@ html:has(.sim8bit-active) { height:100dvh; min-height:0; overflow:hidden; }
     flex:0 1 auto;
   }
 }
+
+
+/* 2026-11-08: real fader from the completed "制御とは" lesson.
+   One interactive surface: the body and cap are presentation only.
+   Do not recreate the fader with a gradient thumb. */
+.sim8-input .sim8-fader{
+  flex:1 1 0;min-height:160px;display:flex;align-items:stretch;
+  justify-content:center;gap:12px;padding:5px 0;
+}
+.sim8-input .sim8-scale{font-size:16px;line-height:1.3;min-height:0}
+.sim8-input #sim8bit-fader.sim8-fader-figure{
+  position:relative;display:block;align-self:center;flex:none;
+  height:100%;max-height:320px;min-height:0;width:auto;
+  aspect-ratio:278 / 688;
+  writing-mode:horizontal-tb;direction:ltr;
+  appearance:none;-webkit-appearance:none;
+  margin:0;padding:0;background:transparent;
+  cursor:ns-resize;touch-action:none;user-select:none;outline-offset:4px;
+}
+.sim8-fader-figure .sim8-fader-body{
+  display:block;position:absolute;inset:0;width:100%;height:100%;
+  object-fit:fill;pointer-events:none;
+}
+.sim8-fader-figure .sim8-fader-cap{
+  display:block;position:absolute;left:48%;top:28%;width:32%;height:auto;
+  object-fit:contain;z-index:2;pointer-events:none;
+  filter:drop-shadow(1px 3px 3px #0008);
+}
+.sim8-workbench #sim8bit-fader:focus-visible{
+  outline:3px solid #ffce71;outline-offset:4px;border-radius:5px;
+}
+@media(orientation:portrait),(max-width:899px){
+ .sim8-input .sim8-fader{min-height:210px}
+ .sim8-input #sim8bit-fader.sim8-fader-figure{max-height:285px}
+}
+@media(max-width:550px){
+ .sim8-input .sim8-fader{min-height:180px}
+ .sim8-input #sim8bit-fader.sim8-fader-figure{max-height:265px}
+}
