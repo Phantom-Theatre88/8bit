@@ -160,24 +160,21 @@ body.eightbit-console #panel-sim16bit .s16-bottom {min-height:150px;overflow:vis
    Coarse and Fine remain TWO independent 8-bit controls; the horizontal
    Master stays a compact whole-16-bit control per approved 16bit LOCK. */
 .s16-input .s16-fader-card .s16-fader-row{
- display:grid;grid-template-columns:28px minmax(0,1fr) 30px;
+ display:grid;grid-template-columns:minmax(0,1fr) 30px;
  align-items:stretch;justify-content:center;gap:5px;min-width:0;
 }
-.s16-input .s16-fader-row .s16-scale{
- grid-column:1;grid-row:1;min-width:0;justify-content:space-between;
-}
 .s16-input .s16-fader-row .s16-step{
- grid-column:3;grid-row:1;align-self:center;
+ grid-column:2;grid-row:1;align-self:center;
 }
 .s16-input .s16-fader-row .s16-step button{
  width:30px;min-height:36px;max-width:100%;font-size:20px;
 }
 .s16-input .s16-fader-card .s16-fader-figure.s16-vertical{
- grid-column:2;grid-row:1;justify-self:center;align-self:center;
+ grid-column:1;grid-row:1;justify-self:center;align-self:center;
  position:relative;display:block;flex:none;
  writing-mode:horizontal-tb;direction:ltr;
  appearance:none;-webkit-appearance:none;
- width:min(100%,83px);height:auto;
+ width:min(100%,112px);height:auto;
  aspect-ratio:278 / 688;
  max-height:100%;min-height:0;
  padding:0;margin:0;background:transparent;
@@ -193,19 +190,20 @@ body.eightbit-console #panel-sim16bit .s16-bottom {min-height:150px;overflow:vis
  filter:drop-shadow(1px 3px 3px #0008);
 }
 .s16-fader-figure:focus-visible{
- outline:3px solid #ffd06e;outline-offset:4px;border-radius:5px;
+ outline:2px solid #8bb6c7;outline-offset:2px;border-radius:5px;
 }
+.s16-fader-figure:focus:not(:focus-visible){outline:none}
 .s16-prev-link{color:#8de4ff;font-size:16px;margin-left:5px;text-underline-offset:3px}
 .s16-prev-link:focus-visible{outline:3px solid #ffd06e;outline-offset:2px}
 @media(min-width:900px) and (max-width:1150px){
  .s16-input .s16-fader-card .s16-fader-row{
-  grid-template-columns:26px minmax(0,1fr) 28px;gap:3px;
+  grid-template-columns:minmax(0,1fr) 28px;gap:3px;
  }
  .s16-input .s16-fader-row .s16-step button{width:28px}
 }
 @media(max-width:620px){
  .s16-input .s16-fader-card .s16-fader-row{
-  grid-template-columns:28px minmax(0,1fr) 32px;gap:6px;
+  grid-template-columns:minmax(0,1fr) 32px;gap:6px;
  }
- .s16-input .s16-fader-card .s16-fader-figure.s16-vertical{width:min(100%,88px)}
+ .s16-input .s16-fader-card .s16-fader-figure.s16-vertical{width:min(100%,112px)}
 }
