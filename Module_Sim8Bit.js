@@ -1,4 +1,4 @@
-// Compare analog output voltage/waveform with digital DMX/8-bit at one fader position.
+// Compare the SCR phase-controlled load voltage (RMS) against one 8-bit DMX command.
 // Curves are illustrative power laws, not a claim of JATET compliance.
 const Module_Sim8Bit = {
     dmx8Bit: 191,
@@ -22,9 +22,9 @@ const Module_Sim8Bit = {
             <div class="sim8-step"><button id="sim8bit-down" aria-label="DMX値を1下げる">−</button><button id="sim8bit-up" aria-label="DMX値を1上げる">＋</button></div>
           </section>
           <section class="sim8-signal sim8-zone">
-            <div class="sim8-dmx-head"><div><h2>② アナログとデジタルを比べる</h2><p class="sim8-note" id="sim8bit-value-label">灯体へ出す電圧</p></div><div class="sim8-dmx-value"><strong id="sim8bit-num-dmx">86.5</strong><span id="sim8bit-value-unit">V</span></div></div>
+            <div class="sim8-dmx-head"><div><h2>② SCR出力とDMXの8bitを比べる</h2><p class="sim8-note" id="sim8bit-value-label">SCR出力の実効電圧</p></div><div class="sim8-dmx-value"><strong id="sim8bit-num-dmx">86.5</strong><span id="sim8bit-value-unit">V</span></div></div>
             <div class="sim8-views" role="group" aria-label="見る図を選ぶ">
-              <button data-sim8-view="wave" aria-pressed="true">アナログ</button><button data-sim8-view="digital" aria-pressed="false">デジタル</button><button data-sim8-view="curve" aria-pressed="false">電圧カーブ</button>
+              <button data-sim8-view="wave" aria-pressed="true">SCR出力</button><button data-sim8-view="digital" aria-pressed="false">DMX 8bit</button><button data-sim8-view="curve" aria-pressed="false">出力カーブ</button>
             </div>
             <div class="sim8-graph" id="sim8bit-upper-graph-box"></div>
             <div class="sim8-curve-controls"><div class="sim8-curves" role="group" aria-label="出力カーブ">
@@ -128,15 +128,15 @@ const Module_Sim8Bit = {
         const digital = this.current8bitView === 'digital';
         document.getElementById('sim8bit-num-dmx').textContent = digital ? this.dmx8Bit : (100 * factor).toFixed(1);
         document.getElementById('sim8bit-value-unit').textContent = digital ? 'DMX' : 'V';
-        document.getElementById('sim8bit-value-label').textContent = digital ? '灯りへ送る数字の指示：0〜255' : '灯体へ出す電圧：0〜100V';
+        document.getElementById('sim8bit-value-label').textContent = digital ? '調光器への数値指令：0〜255' : 'SCRから灯具へのAC出力（実効値）';
         this.updateBulb(factor, factor);
         document.getElementById('sim8bit-light-state').textContent = this.dmx8Bit === 0 ? '消灯' : this.dmx8Bit === 255 ? '最大の指示で点灯' : '点灯中';
         const teacher = document.getElementById('sim8-teacher-message');
         if (teacher) teacher.innerHTML = this.current8bitView === 'digital'
-          ? '「制御とは」で学んだDMXの指令は数字。<br>8個の0／1で、今の位置をどう表すかな？'
+          ? 'DMXの1つの値は8個の0／1。<br>受信側へ送る指令で、電球の電圧そのものではないよ。'
           : this.current8bitView === 'curve'
-          ? 'フェーダー位置をそのままにして、<br>調光器の出力カーブを変えてみよう。'
-          : '前ページのDC0〜10Vは制御指令。<br>ここは電球側のAC出力波形だよ。混同しないでね。';
+          ? '「直線」は実効電圧が位置に比例する教材例。<br>変わるのは点弧角で、波形を半分に切る意味じゃないよ。'
+          : 'SCRは交流の途中から通電するよ。<br>フェーダー50％＝通電時間50％ではないんだ。';
         this.drawGraph();
     },
     drawGraph(size) {
@@ -147,7 +147,7 @@ const Module_Sim8Bit = {
             const terms = weights.filter(w => (this.dmx8Bit & w) !== 0);
             box.innerHTML = `<h3>8個の0／1で、256段階</h3><p class="sim8-note">1の桁だけ、その下の数字を足します。</p>
               <div class="sim8-bits">${weights.map((w,i) => `<div class="sim8-bit ${this.dmx8Bit & w ? 'on' : ''}"><strong>${(this.dmx8Bit >> (7-i)) & 1}</strong><span>${w}</span></div>`).join('')}</div>
-              <p class="sim8-sum">${terms.length ? terms.join(' ＋ ') : '0'}<br><b>＝ ${this.dmx8Bit}</b></p>`;
+              <p class="sim8-sum">${terms.length ? terms.join(' ＋ ') : '0'}<br><b>＝ ${this.dmx8Bit}</b></p><p class="sim8-note sim8-byte-note">DMXの1つの値＝8bit（0〜255）。これは制御指令。電球へ送る交流電圧とは別。</p>`;
             return;
         }
         const w = size?.w || Math.max(280, box.clientWidth - 16);
@@ -164,11 +164,15 @@ const Module_Sim8Bit = {
             svg += `<path d="M${x0} ${y0}V${y1}H${x1}" fill="none" stroke="#b3bfcb"/>
               <circle cx="${x0+this.dmx8Bit/255*(x1-x0)}" cy="${y1-factor*(y1-y0)}" r="7" fill="#ff4b55" stroke="#fff" stroke-width="2"/>`;
             svg += text(x0,18,'出力電圧 100V') + text(x0,y1+22,'0%') + text(x1,y1+22,'フェーダー位置 100%','end');
-            box.innerHTML = `<h3>フェーダー位置と電圧</h3><svg viewBox="0 0 ${w} ${h}" role="img" aria-label="フェーダー位置と出力電圧の関係">${svg}</svg><p class="sim8-note">赤い点が今の位置。カーブは教材用の例。</p>`;
+            box.innerHTML = `<h3>フェーダー位置とSCRの出力実効電圧</h3><svg viewBox="0 0 ${w} ${h}" role="img" aria-label="フェーダー位置と出力実効電圧の関係">${svg}</svg><p class="sim8-note">直線は実効電圧が位置に比例する教材モデル。ゆっくり／さらにゆっくりは比較用の仮想カーブ。</p>`;
             if (!size) { const s=box.querySelector('svg'); if(s.clientHeight>0) this.drawGraph({w:s.clientWidth,h:s.clientHeight}); }
             return;
         }
         const mid = (y0+y1)/2, amp = (y1-y0)/2 - 5, alpha = this.getFiringAngle(factor * factor);
+        const firingDeg=Math.round(alpha*180/Math.PI);
+        const voltageV=(100*factor).toFixed(1);
+        const powerPct=Math.round(100*factor*factor);
+        const curveName=this.curveMode==='linear'?'直線（電圧比例）':this.curveMode==='jat-a'?'ゆっくり':'さらにゆっくり';
         const px = a => x0 + a/(2*Math.PI)*(x1-x0);
         const py = a => mid - Math.sin(a)*amp;
         const points = Array.from({length:241},(_,i) => `${px(i/240*2*Math.PI)},${py(i/240*2*Math.PI)}`).join(' ');
@@ -182,7 +186,7 @@ const Module_Sim8Bit = {
             if (factor > 0 && factor < 1) svg += `<circle cx="${px(start)}" cy="${py(start)}" r="7" fill="#ff4b55" stroke="#fff" stroke-width="2"/>`;
         }
         svg += text(8,mid+5,'0') + text(px(Math.PI/2),y0,'山','middle') + text(px(3*Math.PI/2),y1+2,'谷','middle') + text(x1,h-4,'時間 →','end');
-        box.innerHTML = `<h3>アナログ：電圧と波形を見る</h3><div class="sim8-legend"><span>┄ 電源（100V）</span><span>━ 灯体へ通す部分</span></div><svg viewBox="0 0 ${w} ${h}" role="img" aria-label="山と谷を含む1周期の波。破線が元の電源、橙色が灯体へ通す部分。赤い点から通し始める。">${svg}</svg><p class="sim8-note">${factor <= 0 ? '0V：電気を通さず、消灯。' : factor >= 1 ? '100V：山も谷も、全部通す。' : '通す部分が変わると、出力電圧も変わる。'}</p>`;
+        box.innerHTML = `<h3>SCRの位相制御｜交流の途中から通電</h3><div class="sim8-legend"><span>┄ 電源（100V・実効値）</span><span>━ 灯具へ通す部分</span></div><svg viewBox="0 0 ${w} ${h}" role="img" aria-label="山と谷を含む1周期の波。破線が元の交流、橙色がSCRの調光出力、赤い点が点弧位置。">${svg}</svg><div class="sim8-scr-explain"><strong>${curveName}｜出力 ${voltageV}V（実効値）・点弧角 約${firingDeg}°</strong><span>位置${Math.round(this.dmx8Bit/255*100)}％＝通電時間${Math.round(this.dmx8Bit/255*100)}％ではない。抵抗一定なら電力は最大の約${powerPct}％。</span></div>`;
         if (!size) { const s=box.querySelector('svg'); if(s.clientHeight>0) this.drawGraph({w:s.clientWidth,h:s.clientHeight}); }
     },
     updateBulb(factor, voltage) {
