@@ -342,19 +342,76 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
  .teacher-bubble{font-size:14px}
 }
 
+
+/* Vertical operation selector. Four real, keyboard-accessible tab buttons,
+   sharing the same grid row as the circuit and the equipment photo.
+   Text stays >=14px: the central teaching graphics are never narrowed
+   further to accommodate decorative copy. */
+@media(min-width:1051px){
+ .scene-row{display:grid;grid-template-columns:150px minmax(0,1fr) 220px;gap:9px;align-items:stretch;min-width:0}
+ .scene-row[data-mode="digital"]{grid-template-columns:150px minmax(0,1fr)}
+ .scene-row .mode-tabs{grid-column:1;grid-row:1;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:repeat(4,minmax(0,1fr));align-self:stretch;gap:8px;min-height:0}
+ .scene-row .lesson-scene{grid-column:2;grid-row:1;min-width:0}
+ .scene-row .equipment-panel{grid-column:3;grid-row:1;min-width:0}
+ .scene-row .mode-tab{min-width:0;min-height:70px;padding:9px 7px;gap:4px}
+ .scene-row .mode-tab strong{font-size:16px;line-height:1.3}
+ .scene-row .mode-tab small{font-size:14px;line-height:1.35;white-space:normal;overflow-wrap:anywhere}
+ .scene-row .mode-tab[aria-selected="true"]{box-shadow:inset 4px 0 #ffa34d,inset 0 -2px #ffa34d}
+ .scene-row .equipment-panel{padding:10px}
+ .scene-row .artifact-photo>a:first-of-type{height:155px}
+ .scene-row .artifact-scr>a:first-of-type{height:135px}
+ /* Text and waveforms in the central drawing must not lie underneath the
+    shared fader image. Labels are centered above their individual wires. */
+ #scene[data-mode="power"] .scene-ground{grid-template-columns:29% 31% 40%}
+ #scene[data-mode="power"] .source-media{max-width:85%;height:116px}
+ #scene[data-mode="power"] .station{padding-left:3px;padding-right:3px}
+ #scene[data-mode="power"] .fader-caption{max-width:100%;line-height:1.3}
+ #scene[data-mode="power"] .output-note{line-height:1.35}
+ #scene[data-mode="weak"] .weak-wave-chart span{font-size:14px}
+ #scene[data-mode="weak"] .weak-wave-compare{gap:8px}
+ #scene[data-mode="weak"] .output-devices{padding-left:3%;padding-right:3%}
+ #scene[data-mode="weak"] .receiver{width:112px}
+ #scene[data-mode="weak"] .lamp{width:118px;max-width:118px}
+}
+@media(min-width:1051px) and (max-width:1220px){
+ .scene-row{grid-template-columns:138px minmax(0,1fr) 194px;gap:8px}
+ .scene-row[data-mode="digital"]{grid-template-columns:138px minmax(0,1fr)}
+ .scene-row .mode-tab{padding:6px 5px}
+ .scene-row .mode-tab strong{font-size:16px}
+ .scene-row .mode-tab small{font-size:14px}
+ .scene-row .equipment-panel{padding:8px}
+ #scene[data-mode="power"] .source-readout{font-size:15px;padding:2px 9px}
+ #scene[data-mode="power"] .fader-figure{max-height:216px}
+ #scene[data-mode="weak"] .weak-wave-panel{padding:6px}
+}
+@media(max-width:1050px){
+ /* A three-column layout at these widths would break the wiring. Keep
+    all four tabs accessible ABOVE the scene rather than make text tiny. */
+ .scene-row,.scene-row[data-mode="digital"]{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+ .scene-row .mode-tabs{grid-column:1;grid-row:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:none;gap:6px}
+ .scene-row .lesson-scene{grid-column:1;grid-row:2}
+ .scene-row .equipment-panel{grid-column:1;grid-row:3}
+ .scene-row .mode-tab{min-height:47px;padding:4px 4px}
+ .scene-row .mode-tab strong,.scene-row .mode-tab small{font-size:14px;line-height:1.25}
+}
+@media(max-width:510px){
+ .scene-row .mode-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .scene-row .mode-tab{min-height:52px}
+}
+
 </style>
 </head>
 <body class="control-page eightbit-unified-width">
 <div id="shared-console-header-root"></div><script src="next-ui-console-header.js?v=theme12-shared-20261105"></script>
 <main class="control-lesson">
 <header class="head"><div><p class="kicker">DIMMING / 制御の入口</p><h1>制御とは？ ― 同じフェーダー、何が違う？</h1></div><p class="head-tip">操作して、ケーブルを通るものを比べよう。</p></header>
-<div class="mode-tabs" role="tablist" aria-label="制御方式の切り替え">
-<button type="button" class="mode-tab" role="tab" data-mode="direct" aria-selected="false"><strong>直接制御</strong><small>前の教材で確認</small></button>
-<button type="button" class="mode-tab" role="tab" data-mode="power" aria-selected="true"><strong>強電制御</strong><small>フェーダーにAC100V</small></button>
-<button type="button" class="mode-tab" role="tab" data-mode="weak" aria-selected="false"><strong>弱電制御</strong><small>フェーダーでDC0〜10V</small></button>
-<button type="button" class="mode-tab" role="tab" data-mode="digital" aria-selected="false"><strong>デジタル制御</strong><small>0／1で指示する</small></button>
-</div>
 <div class="scene-row" id="scene-row" data-mode="power">
+<div class="mode-tabs" role="tablist" aria-label="制御方式の切り替え">
+<button type="button" class="mode-tab" role="tab" data-mode="direct" aria-selected="false"><strong>直接制御</strong><small>機械的に操作</small></button>
+<button type="button" class="mode-tab" role="tab" data-mode="power" aria-selected="true"><strong>強電制御</strong><small>AC100Vの電力</small></button>
+<button type="button" class="mode-tab" role="tab" data-mode="weak" aria-selected="false"><strong>弱電制御</strong><small>DC0〜10Vの指令</small></button>
+<button type="button" class="mode-tab" role="tab" data-mode="digital" aria-selected="false"><strong>デジタル制御</strong><small>0／1のデータ</small></button>
+</div>
 <section class="panel lesson-scene" id="scene" data-mode="power" aria-label="制御方式を操作して比べる">
 <div class="scene-header"><h2 id="scene-title">強電制御｜100Vがフェーダーに来る</h2><output class="live" id="stage-live" aria-live="polite">フェーダー 75%</output></div>
 <div class="scene-ground" id="scene-ground">
@@ -518,7 +575,7 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
    $('weak-output-wave').setAttribute('d',scrWaveformPath([0,24],[240,24],p));
   }
   if(mode==='power')$('source-readout').textContent='AC100V';
-  if(mode==='power'&&powerOutputTrace&&powerOutputFrom&&powerOutputTo){powerOutputTrace.setAttribute('d',waveformPath(powerOutputFrom,powerOutputTo,value/100));powerOutputTrace.style.opacity='1';if(powerOutputLabel)powerOutputLabel.textContent='出力 '+value+'V（模式）';}
+  if(mode==='power'&&powerOutputTrace&&powerOutputFrom&&powerOutputTo){powerOutputTrace.setAttribute('d',waveformPath(powerOutputFrom,powerOutputTo,value/100));powerOutputTrace.style.opacity='1';if(powerOutputLabel)powerOutputLabel.textContent=powerWaveLabel(true);}
  }
  function updateMode(){
   const d=models[mode];scene.dataset.mode=mode;$('scene-row').dataset.mode=mode;$('scene-title').textContent=d.title;$('source-readout').textContent=d.source;
@@ -575,6 +632,13 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
   }
   return d;
  }
+ // Keep labels inside each signal path when the diagram narrows.
+ // The full explanation remains in the scene footer, not over the cables.
+ function powerWaveLabel(isOutput){
+  const compact=ground.getBoundingClientRect().width<790;
+  return isOutput ? (compact?'出力 '+value+'V':'出力 '+value+'V（模式）')
+                  : (compact?'入力 100V':'入力 AC100V（一定）');
+ }
  function addPowerWave(from,to,isOutput,sharedLength=116){
   // The connection remains straight; a 116px monitoring window is drawn
   // at the middle of each wire so both traces have the same time scale.
@@ -590,7 +654,7 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
   label.setAttribute('y',String(my-29));
   label.setAttribute('text-anchor','middle');
   label.setAttribute('class','wave-label');
-  label.textContent=isOutput?'出力 '+value+'V（模式）':'入力 AC100V（一定）';
+  label.textContent=powerWaveLabel(isOutput);
   svg.append(label);
   if(isOutput){powerOutputTrace=trace;powerOutputFrom=wFrom;powerOutputTo=wTo;powerOutputLabel=label;}
  }
