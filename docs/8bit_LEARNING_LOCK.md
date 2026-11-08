@@ -392,4 +392,4 @@ Kimが実機写真を参照して描いた第2案を採用。採用原本は `as
 
 **スライダック内部素材・採用LOCK**　固定の巻線と台座は `assets/control/variac-winding.webp`、回転するアームとブラシは `assets/control/variac-brush.webp` を採用。原本2枚と採用済みノブを「調光とは？」に実装。電圧目盛り盤と巻線を固定し、ノブとアームを操作量に連動させる。
 
-**PWM光源素材・採用LOCK**　砲弾型白色LED（原本 `assets/control/white-led.png`、表示用 `assets/control/white-led.webp`）をPWMの光源に採用。白色の発光を波形カーソル位置の電子スイッチON／OFFと同期させ、停止時は同じ状態を保持する。
+**PWM光源素材・採用LOCK**　砲弾型白色LED（原本 `assets/control/white-led.webp`、表示用 `assets/control/white-led.webp`）をPWMの光源に採用。白色の発光を波形カーソル位置の電子スイッチON／OFFと同期させ、停止時は同じ状態を保持する。
