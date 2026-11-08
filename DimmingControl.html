@@ -539,6 +539,21 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
  #scene[data-mode="weak"] .weak-wave-chart svg{height:48px}
 }
 
+
+/* Axes are HTML text, not SVG coordinates: thin B-grid columns must never
+   make 10V/0V labels 6px high just because the waveform SVG gets narrower. */
+.weak-dc-plot{display:flex;align-items:stretch;gap:3px;width:100%;min-width:0}
+.weak-dc-plot .weak-dc-axis{
+ flex:0 0 30px;display:flex;flex-direction:column;justify-content:space-between;
+ align-items:flex-start;font-size:14px;line-height:1.2;font-weight:700;
+ color:#a8d9eb;white-space:nowrap;padding:0 0 2px;
+}
+.weak-dc-plot svg{flex:1 1 0;width:0;min-width:0}
+.weak-wave-chart path{vector-effect:non-scaling-stroke}
+@media(max-width:1220px) and (min-width:771px){
+ .weak-dc-plot .weak-dc-axis{flex-basis:29px;font-size:14px}
+}
+
 </style>
 </head>
 <body class="control-page eightbit-unified-width">
@@ -582,11 +597,13 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
   <div class="weak-wave-compare">
    <div class="weak-wave-chart weak-dc-chart">
     <span>DC（直流）指令</span>
-    <svg viewBox="0 0 240 48" preserveAspectRatio="none" role="img" aria-label="操作位置で高さが変わり、操作を止めると一定になる直流の制御電圧">
-     <path class="weak-dc-reference" d="M33 11H234 M33 39H234"/>
-     <path class="weak-dc-level" id="weak-input-wave" d="M33 18H234"/>
-     <text x="3" y="15" class="weak-dc-axis">10V</text><text x="3" y="44" class="weak-dc-axis">0V</text>
-    </svg>
+    <div class="weak-dc-plot">
+     <div class="weak-dc-axis" aria-hidden="true"><span>10V</span><span>0V</span></div>
+     <svg viewBox="0 0 240 48" preserveAspectRatio="none" role="img" aria-label="0から10ボルトの範囲でフェーダー操作に従って高さが変化する直流の制御電圧">
+      <path class="weak-dc-reference" d="M6 11H234 M6 39H234"/>
+      <path class="weak-dc-level" id="weak-input-wave" d="M6 18H234"/>
+     </svg>
+    </div>
    </div>
    <div class="weak-wave-chart weak-ac-chart">
     <span>AC（交流）出力</span>
@@ -803,7 +820,7 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
  // Unlike an AC signal it does not oscillate around 0V.
  function dcSignalPath(level){
   const p=Math.max(0,Math.min(1,level)),y=39-28*p;
-  return 'M33 '+y.toFixed(2)+' H234';
+  return 'M6 '+y.toFixed(2)+' H234';
  }
  function scrWaveformPath(from,to,level){
   const dx=to[0]-from[0],dy=to[1]-from[1],len=Math.hypot(dx,dy)||1;
