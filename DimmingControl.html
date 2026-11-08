@@ -243,11 +243,11 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
   }
   return d;
  }
- function addPowerWave(from,to,isOutput){
+ function addPowerWave(from,to,isOutput,sharedLength=116){
   // The connection remains straight; a 116px monitoring window is drawn
   // at the middle of each wire so both traces have the same time scale.
   const dx=to[0]-from[0],dy=to[1]-from[1],len=Math.hypot(dx,dy)||1;
-  const windowLen=Math.min(116,len*.88),ux=dx/len,uy=dy/len;
+  const windowLen=Math.min(sharedLength,len*.88),ux=dx/len,uy=dy/len;
   const mx=(from[0]+to[0])/2,my=(from[1]+to[1])/2;
   const wFrom=[mx-ux*windowLen/2,my-uy*windowLen/2];
   const wTo=[mx+ux*windowLen/2,my+uy*windowLen/2];
@@ -273,7 +273,11 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
    const leftFrom=[a[0],lineY],leftTo=[b[0],lineY];
    const rightFrom=[c[0],lineY],rightTo=[l[0],lineY];
    cable(leftFrom,leftTo,'power',false,true);cable(rightFrom,rightTo,'power',false,true);
-   addPowerWave(leftFrom,leftTo,false);addPowerWave(rightFrom,rightTo,true);
+   const leftLength=Math.hypot(leftTo[0]-leftFrom[0],leftTo[1]-leftFrom[1]);
+   const rightLength=Math.hypot(rightTo[0]-rightFrom[0],rightTo[1]-rightFrom[1]);
+   const sameTimeWindow=Math.min(116,leftLength*.88,rightLength*.88);
+   addPowerWave(leftFrom,leftTo,false,sameTimeWindow);
+   addPowerWave(rightFrom,rightTo,true,sameTimeWindow);
   }
   if(mode==='weak'){
    cable(a,b,'weak');cable(c,u,'weak');cable(m,up,'power');cable(uo,l,'power');
