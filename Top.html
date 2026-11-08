@@ -5369,12 +5369,12 @@
 </style>
 
     <link rel="stylesheet" href="next-ui-all-lessons.css">
-    <link rel="stylesheet" href="next-ui-sim8bit.css?v=20261020-teacher-space1">
+    <link rel="stylesheet" href="next-ui-sim8bit.css?v=20261108-real-fader1">
     <script src="next-ui-lesson-content.js"></script>
 
-    <script src="Module_Sim8Bit.js?v=20261013-compare3"></script>
-    <script src="Module_Sim16Bit.js?v=theme12-shared-20261105"></script>
-    <link rel="stylesheet" href="next-ui-sim16bit.css?v=20261020-legibility1">
+    <script src="Module_Sim8Bit.js?v=20261108-real-fader1"></script>
+    <script src="Module_Sim16Bit.js?v=20261108-real-fader1"></script>
+    <link rel="stylesheet" href="next-ui-sim16bit.css?v=20261108-real-fader1">
     <script src="Module_SimDmx.js?v=dmx-teacher-type-20261015"></script>
     <script src="Module_LEDColorMixing.js?v=cie-img-vivid1"></script>
     <script src="Module_NetIpAddress.js?v=network-layout-v0-4-ip"></script>
@@ -5725,17 +5725,18 @@ body { }
                     <header class="sim8-page-titlebar">
                         <div class="sim8-page-heading">
                             <h1 class="sim8-page-title">8-bit 調光卓</h1>
-                            <div class="sim8-page-sub">同じフェーダー位置で、アナログの電圧とデジタルの数字を見比べよう。</div>
+                            <div class="sim8-page-sub">「制御とは」で学んだ指令の違いを、電球側のAC波形とDMXの8bit数値へつなげよう。</div>
                         </div>
+                        <a class="sim8-back-link" href="DimmingControl.html" title="前の教材「制御とは」に戻る">← 制御とは</a>
                     </header>
                     <section class="sim8-page-main">${moduleHTML}</section>
                     <section class="sim8-page-bottom">
                         <section class="sim8-bottom-card">
                             <h2 class="sim8-bottom-title">▤ 解説</h2>
                             <div class="sim8-explain-list">
-                                <div><b>フェーダー：</b>灯りを変えるつまみ。</div>
-                                <div><b>アナログ：</b>灯体へ出す電圧をVで見る。</div>
-                                <div><b>デジタル：</b><span class="cyan">DMXの指示を0〜255で見る。</span></div>
+                                <div><b>前ページ：</b>DC0〜10Vは調光器への制御指令。</div>
+                                <div><b>アナログ側：</b>灯具へ出すAC電圧と波形（電球側）。</div>
+                                <div><b>デジタル側：</b><span class="cyan">DMXの数値指令を0〜255の8bitで表示。</span></div>
                             </div>
                         </section>
                         <section class="eightbit-shared-teacher sim8-bottom-card sim8-teacher-card">
