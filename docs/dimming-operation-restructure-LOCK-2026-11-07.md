@@ -172,8 +172,18 @@
 ## デジタル制御・実機写真採用（2026-11-08）
 
 - デジタル制御でも他方式と同じ右端「実機紹介」パネルを表示する。中央のDMX B案操作図・ビット列・調光波形・先生は変更しない。1方式につき1つの写真枠を維持する。
-- 採用写真は東芝ライテック公式「PORTABLE DIMSTAR Ⅲ」AL-TUIPT10203-30-2（黒いフィン付きの可搬形DMX/RDM調光器）。公式製品ページ https://www.tlt.co.jp/tlt/products/art/catalogue/console/tuipt.htm および製品写真 https://www.tlt.co.jp/tlt/products/art/catalogue/console/images/AL-TUIPT10203-30-2.jpg で同型番・画像を確認。ETC Sensor3ラックの画像との取り違えを避ける。
+- 旧採用写真（現在は不使用）は東芝ライテック公式「PORTABLE DIMSTAR Ⅲ」AL-TUIPT10203-30-2（黒いフィン付きの可搬形DMX/RDM調光器）。公式製品ページ https://www.tlt.co.jp/tlt/products/art/catalogue/console/tuipt.htm および製品写真 https://www.tlt.co.jp/tlt/products/art/catalogue/console/images/AL-TUIPT10203-30-2.jpg で同型番・画像を確認。ETC Sensor3ラックの画像との取り違えを避ける。
 - サイドパネルではタイトル「ポータブルディムスターⅢ」、補足「東芝ライテック｜DMX/RDM対応・3回路」、写真・製品情報の公式リンクを表示。デジタル以外のタブでは非表示。
 - 現行のデジタル専用「右パネル無し」CSSを撤去し、他3方式と同じ3列グリッドを維持。画面幅1050px以下では操作図と実機紹介を上下に積む。写真読み込みが失敗した場合は公式ページへの代替リンクを表示する。
 - **写真利用の権利確認が必要**：東芝ライテックの「リンクや画像ご使用について」https://www.tlt.co.jp/tlt/information/link/link.htm は無断転載・画像利用を認めず、掲載するサイトURL等の連絡を求めている。GitHub Pagesへの正式掲載にあたって画像使用許可の取得を要する。
 - コード上のJS構文・CSS括弧・DOM・既存4タブ・1フェーダー等は確認済み。公開Safariで実機写真の読み込み・文字の回り込み・中央B案の横幅を確認するまでは完成LOCKとはしない。
+
+
+## デジタル制御写真：ETC Sensor+ 採用（2026-11-08）
+
+- デジタル制御の右端「実機紹介」は、東芝ポータブルディムスターⅢから**ETC Sensor+ 調光モジュール（2.4kW×2回路）**に変更。ユーザーが採用を指示。
+- 出典正本：Wikimedia Commons [Etcdimmer.JPG](https://commons.wikimedia.org/wiki/File:Etcdimmer.JPG)。2006年撮影。元の写真説明は「ETC Sensor+ Dimmer – 2400 watts ×2」。ラック全景ではなく、ラックに組み込む調光モジュール単体の写真として正しくラベルを付ける。
+- 原作者／撮影者 Jordan Green（JWGreen）。ライセンスは [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)。写真は無加工で表示し、撮影者・出典・ライセンスのリンクを右パネルに記載。後日画像加工するときは表示に変更の有無を記録する。
+- 掲載先写真 https://upload.wikimedia.org/wikipedia/commons/c/c3/Etcdimmer.JPG 。旧東芝画像のURL・製品名・メーカー出典クレジットはページから除去。写真は一枚のみ。
+- この写真は**調光モジュール自体がDMX端子を持つという意味ではない**。DMXの指令を受けるラック制御部と、電力を調整する調光モジュールの役割を混同しない。中央のB案図は複数の役割をまとめた概念図として維持。
+- JS構文・CSS・4タブ・既存フェーダー・他方式写真・DMX波形連動は維持。Safariの写真読み込み・横長画像の見やすさは実画面で最終確認する。
