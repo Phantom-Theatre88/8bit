@@ -276,7 +276,7 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
 #scene[data-mode="weak"] .power-source,
 #scene[data-mode="weak"] .receiver small,
 #scene[data-mode="weak"] .weak-command-badge{font-size:14px}
-.weak-dc-axis{font-size:12px}
+.weak-dc-axis{font-size:14px}
 .note-details{font-size:14px;line-height:1.4;color:#c0d5e2}
 .note-details summary{cursor:pointer;min-height:25px;display:list-item;list-style:disclosure-closed inside;padding:3px 2px;touch-action:manipulation}
 .note-details[open] summary{list-style:disclosure-open inside}
@@ -372,9 +372,9 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
    <div class="weak-wave-chart weak-dc-chart">
     <span>DC（直流）0〜10Vの指令</span>
     <svg viewBox="0 0 240 48" preserveAspectRatio="none" role="img" aria-label="操作位置で高さが変わり、操作を止めると一定になる直流の制御電圧">
-     <path class="weak-dc-reference" d="M6 11H234 M6 39H234"/>
-     <path class="weak-dc-level" id="weak-input-wave" d="M6 18H234"/>
-     <text x="7" y="9" class="weak-dc-axis">10V</text><text x="7" y="46" class="weak-dc-axis">0V</text>
+     <path class="weak-dc-reference" d="M33 11H234 M33 39H234"/>
+     <path class="weak-dc-level" id="weak-input-wave" d="M33 18H234"/>
+     <text x="3" y="15" class="weak-dc-axis">10V</text><text x="3" y="44" class="weak-dc-axis">0V</text>
     </svg>
    </div>
    <div class="weak-wave-chart weak-ac-chart">
@@ -586,7 +586,7 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
  // Unlike an AC signal it does not oscillate around 0V.
  function dcSignalPath(level){
   const p=Math.max(0,Math.min(1,level)),y=39-28*p;
-  return 'M6 '+y.toFixed(2)+' H234';
+  return 'M33 '+y.toFixed(2)+' H234';
  }
  function scrWaveformPath(from,to,level){
   const dx=to[0]-from[0],dy=to[1]-from[1],len=Math.hypot(dx,dy)||1;
