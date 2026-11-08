@@ -69,6 +69,43 @@ input[type="range"].vertical{appearance:slider-vertical;-webkit-appearance:slide
 @media(max-width:959px){.workbench{grid-template-columns:1fr 1fr}.result-panel{grid-column:1/-1}.mode-panel,.fader-panel{min-height:335px}.below{grid-template-columns:1fr}}
 @media(max-width:560px){.control-lesson{padding:9px;gap:8px}.workbench{display:flex;flex-direction:column}.mode-buttons{display:grid;grid-template-columns:1fr 1fr}.fader-panel{min-height:270px}.fader-area{min-height:175px}.diagram-flow{grid-template-columns:minmax(60px,1fr) 18px minmax(75px,1fr) 18px minmax(70px,1fr)}.diagram-node strong{font-size:13px}.diagram-node span{font-size:11px}.teacher img{width:85px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important}}
+
+/* Revised 2026-11-08: one actual center fader, physical flow left→right. */
+.mode-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.mode-tabs .mode-btn{text-align:center;min-height:65px;padding:7px 12px}
+.mode-tabs .mode-btn strong{font-size:17px}
+.mode-tabs .mode-btn small{font-size:13px}
+.flowbench{display:grid;grid-template-columns:minmax(0,1fr) 42px minmax(175px,1fr) 42px minmax(0,1fr);gap:8px;align-items:stretch;min-height:480px}
+.flowbench .panel{padding:12px;min-width:0}
+.flowbench h2{font-size:18px;margin:0 0 8px}
+.flowbench h3{font-size:17px;color:#fff;margin:4px 0;text-align:center}
+.input-panel,.result-panel,.fader-panel{display:flex;flex-direction:column;align-items:center}
+.input-panel p,.result-panel p{margin:4px 0;color:#d2e4ef;text-align:center}
+.path-arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;color:#ffbc75}
+.path-arrow span{font-size:36px;font-weight:800}
+.path-arrow small{font-size:12px;line-height:1.4;text-align:center;overflow-wrap:anywhere;max-width:42px}
+.device-image{flex:1;min-height:230px;display:flex;align-items:center;justify-content:center;position:relative;width:100%}
+.source-image img{max-height:295px;max-width:82%;width:auto;object-fit:contain}
+.lamp-image img{max-height:305px;max-width:78%;width:auto;object-fit:contain;position:relative;z-index:1;transition:filter .12s, opacity .12s}
+.light-halo{position:absolute;width:82%;height:66%;border-radius:50%;background:radial-gradient(circle,rgba(255,178,73,.6),rgba(255,178,73,.16) 42%,transparent 74%);opacity:.7;pointer-events:none}
+.fader-panel{justify-content:space-between}
+.fader-panel .fader-value{font-size:25px;margin:0;color:#80e2ff}
+.approved-fader{position:relative;flex:1;min-height:245px;max-height:360px;aspect-ratio:278 / 688;max-width:180px;margin:1px auto 6px}
+.approved-fader .fader-art{display:block;width:100%;height:100%;object-fit:fill}
+.fader-track-cover{position:absolute;left:51%;top:13%;height:76%;width:34%;background:linear-gradient(90deg,#20252b,#151b20 14%,#080c12 24%,#090d12 44%,#0e141a 48%,#1a2128 92%,#232a30);border-radius:5px;opacity:.95}
+.fader-track-cover:after{content:"";position:absolute;left:33%;top:0;bottom:0;width:28%;border-radius:12px;background:#060b11;box-shadow:inset 1px 0 3px #34434e}
+.moving-thumb{position:absolute;left:51%;width:34%;height:10.5%;top:50%;transform:translateY(-50%);border-radius:5px;border:1px solid #b6c8d1;background:linear-gradient(#cbd7e1 0%,#f6f8f9 16%,#8597a3 39%,#2a343e 49%,#f2f5f7 64%,#9eabb4 85%,#667988 100%);box-shadow:0 5px 9px #0009,0 0 0 1px #24323a;pointer-events:none}
+.moving-thumb:after{content:"";position:absolute;top:46%;height:3px;left:0;right:0;background:#ffc17e;box-shadow:0 0 5px #fc9b42}
+.fader-touch{position:absolute;inset:0;width:100%;height:100%;opacity:.001;cursor:ns-resize;touch-action:none;writing-mode:vertical-lr;direction:rtl;-webkit-appearance:slider-vertical;appearance:slider-vertical}
+.flowbench .stepper{display:flex;gap:10px}
+.flowbench .stepper button{min-width:48px}
+.fader-foot{margin:8px 0 0;font-size:13px;color:#a9d3e3;text-align:center}
+.result-panel .readout{font-size:25px;line-height:1.25;color:#ffcf91}
+.result-panel .flow-detail{font-size:14px;padding:9px 10px;background:#182d3a;border-left:3px solid #f8b96b;text-align:left;border-radius:3px;max-width:100%;margin:6px 0}
+.result-panel .links{justify-content:center;margin-top:5px}
+@media(min-width:960px) and (max-height:860px){.flowbench{min-height:330px}.device-image{min-height:170px}.source-image img,.lamp-image img{max-height:225px}.approved-fader{max-height:272px;min-height:210px}}
+@media(max-width:959px){.flowbench{grid-template-columns:minmax(0,1fr) 28px minmax(145px,1fr) 28px minmax(0,1fr);min-height:355px}.path-arrow span{font-size:25px}.path-arrow small{font-size:10px}.source-image img,.lamp-image img{max-height:230px}.mode-tabs .mode-btn small{font-size:12px}}
+@media(max-width:650px){.mode-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.flowbench{grid-template-columns:1fr;gap:4px}.flowbench .panel{min-height:170px}.path-arrow{min-height:40px}.path-arrow span{transform:rotate(90deg)}.path-arrow small{max-width:none}.fader-panel{min-height:380px!important}.approved-fader{height:295px;flex:none}.input-panel,.result-panel{min-height:250px}.source-image img,.lamp-image img{max-height:180px}.flowbench h2{align-self:stretch}}
 </style>
 </head>
 <body class="control-page eightbit-unified-width">
@@ -77,60 +114,68 @@ input[type="range"].vertical{appearance:slider-vertical;-webkit-appearance:slide
 <main class="control-lesson">
 <header class="page-head"><div><p class="kicker">DIMMING / 制御の入口</p><h1>制御とは？ ― 同じフェーダー、違う伝え方。</h1></div><p class="sub">フェーダーを動かして、何が伝わるのかを確かめよう。</p></header>
 <div class="callout"><strong>ここで学ぶこと：</strong> フェーダーの動きが機械へ伝わる、100Vの電力を扱う、0〜10Vの信号を扱う、位置をデジタルの数値にする。操作の違いを比べます。</div>
-<div class="workbench">
-<section class="panel mode-panel"><h2>① 制御方式を選ぶ</h2>
-<div class="mode-buttons" role="group" aria-label="制御方式">
-<button class="mode-btn" type="button" data-mode="direct" aria-pressed="false"><strong>直接制御</strong><small>機械的な動きを伝える</small></button>
-<button class="mode-btn" type="button" data-mode="power" aria-pressed="true"><strong>強電制御</strong><small>フェーダーに AC100V</small></button>
-<button class="mode-btn" type="button" data-mode="analog" aria-pressed="false"><strong>弱電制御</strong><small>フェーダーで DC0〜10V</small></button>
-<button class="mode-btn" type="button" data-mode="digital" aria-pressed="false"><strong>デジタル制御</strong><small>位置を数値として扱う</small></button>
-</div></section>
-<section class="panel fader-panel"><h2>② フェーダーを動かす</h2><output class="fader-value" id="fader-value" for="control-fader">75%</output>
-<div class="fader-area"><div class="scale"><span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span></div>
-<input class="vertical" id="control-fader" type="range" min="0" max="100" value="75" step="1" aria-label="共通フェーダー" orient="vertical"></div>
+<nav class="mode-buttons mode-tabs" aria-label="制御方式の選択">
+<button class="mode-btn" type="button" data-mode="direct" aria-pressed="false"><strong>直接制御</strong><small>機械的な動き</small></button>
+<button class="mode-btn" type="button" data-mode="power" aria-pressed="true"><strong>強電制御</strong><small>フェーダーにAC100V</small></button>
+<button class="mode-btn" type="button" data-mode="analog" aria-pressed="false"><strong>弱電制御</strong><small>フェーダーでDC0〜10V</small></button>
+<button class="mode-btn" type="button" data-mode="digital" aria-pressed="false"><strong>デジタル制御</strong><small>位置を数値にする</small></button>
+</nav>
+<div class="flowbench">
+<section class="panel input-panel"><h2>① 入力を見る</h2>
+  <div class="device-image source-image" id="source-visual"><img src="assets/control/outlet.png" alt="AC100Vコンセント" id="source-img" width="228" height="332"></div>
+  <h3 id="source-title">コンセント・プラグ</h3><p id="source-desc">AC100Vの電源がフェーダーへ</p>
+</section>
+<div class="path-arrow" aria-hidden="true"><span>➜</span><small id="lead-label">AC100V</small></div>
+<section class="panel fader-panel" aria-label="共通の操作フェーダー"><h2>② フェーダーを動かす</h2>
+<output id="fader-value" class="fader-value" for="control-fader">75%</output>
+<div class="approved-fader">
+<img src="assets/control/fader.png" width="278" height="688" alt="" class="fader-art">
+<div class="fader-track-cover" aria-hidden="true"></div>
+<div class="moving-thumb" id="moving-thumb" aria-hidden="true"><span></span></div>
+<input id="control-fader" type="range" min="0" max="100" value="75" step="1" orient="vertical" aria-label="フェーダー操作：0〜100%" class="fader-touch">
+</div>
 <div class="stepper"><button type="button" id="decrease" aria-label="1%下げる">−</button><button type="button" id="increase" aria-label="1%上げる">＋</button></div>
-<p class="fader-foot">操作するフェーダーはこの1本だけ</p></section>
-<section class="panel result-panel"><div class="result-bar"><h2 id="result-title">③ 何が伝わる？｜強電制御</h2><output id="result-value" class="readout" aria-live="polite">操作位置 75%</output></div>
-<div class="diagram">
-<div class="diagram-flow"><div class="diagram-node" id="source-node"><strong>AC100V</strong><span>コンセント</span></div><div class="diagram-arrow">➜<small id="lead-label">電力</small></div><div class="diagram-node" id="mid-node"><strong>フェーダー</strong><span>100V系の操作</span></div><div class="diagram-arrow">➜<small id="out-label">電力</small></div><div class="diagram-node" id="end-node"><strong>電球</strong><span>明るさが変化</span></div></div>
-<div class="bulb-wrap"><div class="bulb-halo" id="bulb-halo" style="--light-alpha:.58"></div>
-<div class="bulb bulb-glow" id="bulb"><svg viewBox="0 0 100 140" role="img" aria-label="明るさが変わる白熱電球の模式図"><defs><radialGradient id="bulb-tint"><stop stop-color="#ffe6a4"/><stop offset=".62" stop-color="#ffd18b" stop-opacity=".35"/><stop offset="1" stop-color="#e0f3ff" stop-opacity=".06"/></radialGradient></defs><path d="M50 9C23 9 9 30 13 56c3 18 20 31 22 50h30c2-19 19-32 22-50C91 30 77 9 50 9Z" fill="url(#bulb-tint)" stroke="#c0d0d9" stroke-width="3"/><path d="M37 105h26v23H37z" fill="#a8afb6" stroke="#f1f4f4" stroke-width="2"/><path d="M37 111h26M37 118h26M39 125h22" stroke="#454d57" stroke-width="3"/><path d="M37 80 43 50l7 15 7-15 7 30M43 50h14" stroke="#ffdc8c" stroke-width="3" fill="none"/><path d="M40 104 44 80M60 104 56 80" stroke="#c8a779" stroke-width="2"/></svg></div></div>
-<div class="flow-detail" id="flow-detail">フェーダーには <strong>AC100V</strong>。操作すると、灯りの明るさが変わります。</div>
+<p class="fader-foot" id="fader-caption">100V系の電気を扱う</p>
+</section>
+<div class="path-arrow" aria-hidden="true"><span>➜</span><small id="out-label">調光出力</small></div>
+<section class="panel result-panel"><h2>③ 灯りを見る</h2>
+<div class="device-image lamp-image"><div class="light-halo" id="bulb-halo"></div><img src="assets/control/bulb.png" width="255" height="435" alt="白熱電球" id="bulb" class="bulb-img"></div>
+<h3 id="end-title">電球の明るさ</h3><output id="result-value" class="readout" aria-live="polite">75%</output>
+<p class="flow-detail" id="flow-detail">フェーダーで操作すると、電球の明るさが変わります。</p>
 <div class="links" id="related-links"></div>
-</div></section></div>
+</section>
+</div>
 <div class="below"><section class="panel history"><h3>▤ 制御の歴史と位置づけ</h3><div id="history-description"><p>機械的な操作から、強電・弱電による操作、さらにデジタルによる指示へ。フェーダーの役割に注目して比べよう。</p></div></section>
 <section class="panel teacher eightbit-shared-teacher"><img src="assets/wave_teacher_transparent.svg?v=teacher-standard-20261014" alt="照明教材の先生"><div class="teacher-copy"><h3>先生のひとこと</h3><p id="teacher-words">同じフェーダーでも、そこで扱うものが違うんだよ。強電では100Vの電気を扱っているよ。</p></div></section></div>
 <p class="note">※教育用の概念図です。実機の内部回路・配線を再現したものではありません。灯りの明るさはイメージです。商用電源を使った配線実験は行わないでください。</p>
 </main>
 <script>
 (()=>{
-const data={
-direct:{title:"直接制御",source:["人の操作","手の動き"],middle:["フェーダー","機械的な伝達"],end:["調光機構","動きが伝わる"],lead:"動き",out:"ワイヤなど",detail:"フェーダーの動きをワイヤなどで機械的に伝える。詳しい機構は「調光とは」で見よう。",history:"水抵抗式や1934年のワイヤ操作式、スライダックなど、機械的な操作を伴う例があります。調光の内部機構は前の教材で確認できます。",teacher:"ここでは機構を繰り返さないよ。ワイヤやノブの動きが、どう伝わるかだけ押さえよう。",links:[["「調光とは」で仕組みを見る","DimmingIntro.html"]]},
-power:{title:"強電制御",source:["AC100V","電源"],middle:["フェーダー","100V系の操作"],end:["電球","明るさが変化"],lead:"電力",out:"調光出力",detail:"フェーダーに <strong>AC100V</strong>。操作すると、電球の明るさが変わります。",history:"操作部で100V系の電気を扱う強電操作。調光器一体型卓の例としてDimPacなどがあります。機種ごとの内部構造はこの教材では扱いません。",teacher:"同じフェーダーでも、ここでは100V系の電気を扱うんだね。弱電制御と切り替えてみよう。",links:[]},
-analog:{title:"弱電制御",source:["DC 0〜10V","制御電圧"],middle:["フェーダー","低電圧の指令"],end:["調光器 → 灯具","遠隔で明るさ変化"],lead:"制御電圧",out:"遠隔指令",detail:"フェーダーは <strong>DC0〜10V</strong> の指令を扱い、離れた調光器が灯具への出力を変えます。",history:"1961年の電動遠隔操作や、1960年代のSCR調光など、操作器と調光装置を離して使う技術が発展しました。ここでは0〜10Vの代表的な弱電制御をモデル化しています。",teacher:"フェーダーに灯具の電力を通すのではなく、低い電圧で『どれくらい明るく』を伝えるよ。",links:[]},
-digital:{title:"デジタル制御",source:["フェーダー位置","操作入力"],middle:["デジタル値","数値に変換"],end:["DMXの指示","調光器・灯具へ"],lead:"位置情報",out:"データ",detail:"フェーダーの位置を<strong>数値</strong>として扱います。8bitでは0〜255、16bitでは2バイトを組み合わせて0〜65,535の値を表現します。",history:"DMX512は1980年代に規格化され、その後、デジタル制御が広まりました。位置などを細かく扱う16bit制御はムービングライトの運用でも重要です。",teacher:"ここから先は完成済みの体験教材で比べよう。8bitは0〜255、16bitはもっと細かく動かせるよ。",links:[["デジタル8bitの教材へ","Top.html?tab=sim8bit"],["デジタル16bitの教材へ","Top.html?tab=sim16bit"]]}
+const modes={
+direct:{title:"直接制御",lead:"動き",out:"機械動作",source:"人の操作",sourceDesc:"ワイヤやノブで力を伝える",fader:"機械的な動きを伝える",end:"調光機構",value:p=>p+"%（操作位置）",detail:"フェーダーの動きを機械的に伝える仕組みです。詳しくは「調光とは」を見てね。",history:"水抵抗式や1934年のワイヤ式、スライダックのように機械的な操作を伴う方式があります。仕組みの説明は「調光とは」にまとめています。",teacher:"直接制御は前のページで見たよね。ここは、操作する力が機構へそのまま伝わることを覚えよう。",links:[["「調光とは」を見る","DimmingIntro.html"]]},
+power:{title:"強電制御",lead:"AC100V",out:"調光出力",source:"コンセント・プラグ",sourceDesc:"AC100Vの電源",fader:"フェーダーにAC100V",end:"電球の明るさ",value:p=>p+"%（操作位置）",detail:"コンセント・プラグ → フェーダー → 電球。100V系の電気を扱い、フェーダーを動かすと灯りが変わります。",history:"強電操作では操作部で100V系の電気を扱います。DimPacなどの調光器一体型卓が例です。回路内部の説明はここでは扱いません。",teacher:"フェーダーの入口にはAC100V。動かした分だけ右の電球が変わる様子を見よう。",links:[]},
+analog:{title:"弱電制御",lead:"DC 0〜10V",out:"指令",source:"制御電圧",sourceDesc:"DC0〜10V",fader:"フェーダーで0〜10Vを扱う",end:"調光器の先の灯り",value:p=>(p/10).toFixed(1)+" V",detail:"フェーダーでDC0〜10Vの制御電圧を扱い、離れた調光器に明るさの指令を送ります。",history:"1961年の電動遠隔操作や1960年代のSCR式など、操作部と調光部を離した方式が発達しました。これは0〜10V方式の概念図です。",teacher:"今度はフェーダーに低い制御電圧。灯具に送る電力そのものとは違うんだよ。",links:[]},
+digital:{title:"デジタル制御",lead:"位置",out:"データ",source:"操作入力",sourceDesc:"フェーダーの位置",fader:"位置をデジタル値にする",end:"調光器・灯具",value:p=>Math.round(p*255/100)+" / 255",detail:"フェーダーの位置を数字で伝えます。8bitは0〜255。16bitは2バイトを組み合わせて、より細かい値で操作できます。",history:"DMX512の規格化（1986年）と普及によりデジタル制御が広がりました。16bitの細かな位置制御はムービングライトでも重要です。",teacher:"同じ手の動きを、数値として送るのがデジタル。続きは完成済みの8bitと16bitの教材で触ってみよう。",links:[["8bit教材へ","Top.html?tab=sim8bit"],["16bit教材へ","Top.html?tab=sim16bit"]]}
 };
 const $=id=>document.getElementById(id);
-let mode="power";const fader=$("control-fader");
+const fader=$("control-fader");let mode="power";
 function render(){
-const d=data[mode],p=Number(fader.value);$("fader-value").textContent=p+"%";$("result-title").textContent="③ 何が伝わる？｜"+d.title;
-$("source-node").innerHTML="<strong>"+d.source[0]+"</strong><span>"+d.source[1]+"</span>";
-$("mid-node").innerHTML="<strong>"+d.middle[0]+"</strong><span>"+d.middle[1]+"</span>";
-$("end-node").innerHTML="<strong>"+d.end[0]+"</strong><span>"+d.end[1]+"</span>";
-$("lead-label").textContent=d.lead;$("out-label").textContent=d.out;
-$("flow-detail").innerHTML=d.detail;$("history-description").innerHTML="<p>"+d.history+"</p>";
-$("teacher-words").textContent=d.teacher;
-const out=mode==="analog"?(p/10).toFixed(1)+" V":mode==="digital"?String(Math.round(p*255/100))+" / 255":mode==="direct"?"移動 "+p+"%":"操作位置 "+p+"%";
-$("result-value").textContent=out;
-$("bulb-halo").style.setProperty("--light-alpha",String(Math.max(.02,p/100*.8)));
-$("bulb").style.opacity=String(Math.max(.3,p/100));
+const d=modes[mode],p=Number(fader.value);
+$("fader-value").textContent=p+"%";$("source-title").textContent=d.source;$("source-desc").textContent=d.sourceDesc;
+$("fader-caption").textContent=d.fader;$("end-title").textContent=d.end;$("lead-label").textContent=d.lead;$("out-label").textContent=d.out;
+$("result-value").textContent=d.value(p);$("flow-detail").textContent=d.detail;
+$("history-description").textContent=d.history;$("teacher-words").textContent=d.teacher;
+$("moving-thumb").style.top=(84-p*.68)+"%";
+$("bulb").style.opacity=Math.max(.18,p/100).toFixed(3);
+$("bulb-halo").style.opacity=(p/100).toFixed(3);
 $("related-links").replaceChildren(...d.links.map(([label,href])=>{const a=document.createElement("a");a.className="link-btn";a.href=href;a.textContent=label;return a;}));
+$("source-img").style.visibility=mode==="power"?"visible":"hidden";
 document.querySelectorAll(".mode-btn").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.mode===mode)));
 }
-document.querySelectorAll(".mode-btn").forEach(b=>b.addEventListener("click",()=>{mode=b.dataset.mode;render();}));
+document.querySelectorAll(".mode-btn").forEach(b=>b.addEventListener("click",()=>{mode=b.dataset.mode;render()}));
 fader.addEventListener("input",render);
-$("decrease").addEventListener("click",()=>{fader.value=Math.max(0,Number(fader.value)-1);render();});
-$("increase").addEventListener("click",()=>{fader.value=Math.min(100,Number(fader.value)+1);render();});
+$("decrease").addEventListener("click",()=>{fader.value=Math.max(0,Number(fader.value)-1);render()});
+$("increase").addEventListener("click",()=>{fader.value=Math.min(100,Number(fader.value)+1);render()});
 render();
 })();
 </script>
