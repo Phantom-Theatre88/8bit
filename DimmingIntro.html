@@ -124,6 +124,16 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 #di-large-fader::-webkit-slider-thumb{appearance:none;width:48px;height:40px;margin-left:-20px;border:2px solid #172028;border-radius:5px;background:linear-gradient(#d5e0e8,#71808c 44%,#ff7546 45% 54%,#b5c5cf 55%,#4a5964)}
 #di-large-fader::-moz-range-track{width:8px;height:100%;background:#101a22}
 #di-large-fader::-moz-range-thumb{width:46px;height:38px;background:linear-gradient(#d5e0e8,#71808c 44%,#ff7546 45% 54%,#b5c5cf 55%,#4a5964)}
+.di-water-art{display:none}
+.di-control-track.water{container-type:size;display:grid;place-items:center}
+.water .di-water-art{display:block;position:relative;width:min(100cqw,40.4cqh);aspect-ratio:278/688}
+.di-water-body{display:block;width:100%;height:100%}
+.di-water-cap{position:absolute;left:48%;width:32%;height:auto;pointer-events:none}
+.di-control-track.water>div,.di-control-track.water>input{display:none}
+.water .di-water-art:focus-within{outline:2px solid #78e2f2}
+#di-water-input{position:absolute;left:0;top:18%;height:66%;width:100%;margin:0;opacity:0;writing-mode:vertical-lr;direction:rtl;appearance:none;touch-action:none;cursor:grab}
+#di-water-input::-webkit-slider-thumb{appearance:none;width:1px;height:1px}
+#di-water-input::-moz-range-thumb{width:1px;height:1px;border:0}
 @media(max-width:560px){.di-machine-stage{min-width:690px}}
 </style>
 </head>
@@ -140,7 +150,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <div class="di-workspace">
 <div class="di-machine-stage"><div class="di-operation">
 <label for="di-large-fader">フェーダー</label><output for="di-large-fader" id="di-position">50%</output>
-<div class="di-control-track"><div aria-hidden="true"><span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span></div><input type="range" id="di-large-fader" min="0" max="100" step="1" value="50" aria-orientation="vertical"></div></div>
+<div class="di-control-track"><span class="di-water-art"><img class="di-water-body" src="assets/control/fader-body.webp" alt=""><img class="di-water-cap" src="assets/control/fader-cap.png" alt=""><input id="di-water-input" type="range" min="0" max="100" value="50" aria-orientation="vertical" aria-label="水抵抗式フェーダー"></span><div aria-hidden="true"><span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span></div><input type="range" id="di-large-fader" min="0" max="100" step="1" value="50" aria-orientation="vertical"></div></div>
 <svg class="di-mechanism" viewBox="30 0 825 375" role="group" aria-label="フェーダーを上げると、滑車を通したワイヤーが左の銅板を下げ、水抵抗器を通る電流が増えて電球が明るくなる仕組み">
 <defs>
 <linearGradient id="glassWall" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#a6e8f7" stop-opacity=".2"/><stop offset=".12" stop-color="#a6e8f7" stop-opacity=".02"/><stop offset=".86" stop-color="#c8f5ff" stop-opacity=".02"/><stop offset="1" stop-color="#c8f5ff" stop-opacity=".32"/></linearGradient>
@@ -386,6 +396,8 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 (() => {
   'use strict';
   const svg=document.querySelector('.di-mechanism');
+  const waterInput=document.getElementById('di-water-input');
+  const waterCap=document.querySelector('.di-water-cap');
   const largeFader=document.getElementById('di-large-fader');
   const rope=document.getElementById('pulleyRope');
   const copper=document.getElementById('movingCopper');
@@ -553,6 +565,8 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
   function switchMode(next){
     if(next!=='water'&&next!=='variac'&&next!=='scr'&&next!=='pwm')return;
     mode=next;
+    largeFader.parentElement.classList.toggle('water',mode==='water');
+    document.querySelector('.di-operation label').htmlFor=mode==='water'?waterInput.id:largeFader.id;
     document.querySelector('.di-operation').hidden=mode==='variac';
     svg.setAttribute('viewBox',mode!=='variac'?'148 0 707 375':'30 0 825 375');
     modeButtons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.diMode===mode)));
@@ -592,14 +606,14 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 
   const clamp=(v)=>Math.max(0,Math.min(1,v));
   function drawWaterWire(copperY){
-    const rect=largeFader.getBoundingClientRect();
+    const rect=waterCap.getBoundingClientRect();
     const matrix=svg.getScreenCTM();
     if(!matrix || !rect.height)return;
     const inverse=matrix.inverse();
     const point=(x,y)=>new DOMPoint(x,y).matrixTransform(inverse);
     const x=rect.left+rect.width/2;
-    const anchor=point(x,rect.bottom-40-level*(rect.height-40));
-    const guide=point(x,rect.top-3);
+    const anchor=point(x,rect.top);
+    const guide=point(x,waterInput.parentElement.getBoundingClientRect().top-3);
     const gx=guide.x+18, gy=Math.min(guide.y,68);
     const dx=332-gx, dy=68-gy, length=Math.hypot(dx,dy);
     const nx=18*dy/length, ny=-18*dx/length;
@@ -614,6 +628,9 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     level=clamp(v);
     const percent=Math.round(level*100);
     largeFader.value=percent;
+    waterInput.value=percent;
+    waterInput.setAttribute('aria-valuetext',percent+'パーセント');
+    waterCap.style.top=(77.5-66*level)+'%';
     document.getElementById('di-position').value=percent+'%';
     const copperY=98+100*level;
     if(mode==='water')drawWaterWire(copperY);
@@ -717,6 +734,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     else return;
     e.preventDefault();render(next);
   });
+  waterInput.addEventListener('input',()=>render(Number(waterInput.value)/100));
   largeFader.addEventListener('input',()=>render(Number(largeFader.value)/100));
   new ResizeObserver(()=>{if(mode==='water')drawWaterWire(98+100*level)}).observe(document.querySelector('.di-machine-stage'));
   switchMode('water');
