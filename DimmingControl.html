@@ -872,10 +872,16 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
    addPowerWave(rightFrom,rightTo,true,sameTimeWindow);
   }
   if(mode==='weak'){
-   // An actual signal from the single fader to the SCR, plus a separate
-   // mains power feed and SCR output. The detailed waveform lives in the
-   // waveform comparison panel rather than crammed into the cable.
-   cable(c,u,'weak');cable(m,up,'power');cable(uo,l,'power');
+   // The B-layout is a teaching diagram, not a perspective illustration.
+   // Keep the control signal and lamp power horizontal along the SCR's
+   // centerline. The separate mains feed connects vertically from below.
+   // Recompute after resize so SVG wires never acquire diagonal "/" strokes.
+   const scrY=(u[1]+uo[1])/2;
+   const faderBox=figure.getBoundingClientRect();
+   const faderExitX=faderBox.right-gr.left+2;
+   cable([faderExitX,scrY],[u[0],scrY],'weak');
+   cable([uo[0],scrY],[l[0],scrY],'power');
+   cable([up[0],m[1]],[up[0],up[1]],'power');
   }
   if(mode==='digital'){cable(a,b,'weak');cable(c,u,'digital');cable(uo,l,'power');pointFrom=c;pointTo=u;
    for(let i=0;i<9;i++){const t=document.createElementNS(NS,'text');t.textContent='01011100'[i%8];t.setAttribute('class','stream-bit');t.setAttribute('text-anchor','middle');svg.append(t);bitNodes.push(t)}
