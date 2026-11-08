@@ -68,6 +68,29 @@ input[type="range"].vertical{appearance:slider-vertical;-webkit-appearance:slide
 @media(min-width:960px) and (max-height:850px){.workbench{min-height:330px}.fader-area{min-height:185px}.bulb-wrap{height:85px}.teacher{min-height:100px}.teacher img{width:90px}}
 @media(max-width:959px){.workbench{grid-template-columns:1fr 1fr}.result-panel{grid-column:1/-1}.mode-panel,.fader-panel{min-height:335px}.below{grid-template-columns:1fr}}
 @media(max-width:560px){.control-lesson{padding:9px;gap:8px}.workbench{display:flex;flex-direction:column}.mode-buttons{display:grid;grid-template-columns:1fr 1fr}.fader-panel{min-height:270px}.fader-area{min-height:175px}.diagram-flow{grid-template-columns:minmax(60px,1fr) 18px minmax(75px,1fr) 18px minmax(70px,1fr)}.diagram-node strong{font-size:13px}.diagram-node span{font-size:11px}.teacher img{width:85px}}
+/* 2026-11-08 LOCK: source (left) -> single working fader (center) -> lamp (right).
+   Mode tabs are navigation, not a second fader or a second signal-flow diagram. */
+.flowbench{grid-template-columns:minmax(190px,1fr) 32px minmax(230px,1.35fr) 32px minmax(190px,1fr);gap:8px}
+.flowbench .fader-panel{grid-column:3;grid-row:1}
+.flowbench .input-panel{grid-column:1;grid-row:1}
+.flowbench .result-panel{grid-column:5;grid-row:1}
+.flowbench .path-arrow:nth-child(2){grid-column:2;grid-row:1}
+.flowbench .path-arrow:nth-child(4){grid-column:4;grid-row:1}
+.flowbench .approved-fader{max-width:195px}
+@media(max-width:959px) and (min-width:651px){
+ .flowbench{grid-template-columns:minmax(125px,1fr) 20px minmax(165px,1.2fr) 20px minmax(125px,1fr)}
+ .flowbench .panel{padding:8px}
+ .path-arrow span{font-size:24px}
+ .path-arrow small{max-width:30px;font-size:10px}
+}
+@media(max-width:650px){
+ .flowbench{display:flex;flex-direction:column}
+ .flowbench .input-panel{order:1}
+ .flowbench .path-arrow:nth-child(2){order:2}
+ .flowbench .fader-panel{order:3}
+ .flowbench .path-arrow:nth-child(4){order:4}
+ .flowbench .result-panel{order:5}
+}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important}}
 
 /* Revised 2026-11-08: one actual center fader, physical flow left→right. */
@@ -121,12 +144,12 @@ input[type="range"].vertical{appearance:slider-vertical;-webkit-appearance:slide
 <button class="mode-btn" type="button" data-mode="digital" aria-pressed="false"><strong>デジタル制御</strong><small>位置を数値にする</small></button>
 </nav>
 <div class="flowbench">
-<section class="panel input-panel"><h2>① 入力を見る</h2>
+<section class="panel input-panel"><h2>① 左｜コンセント・プラグ</h2>
   <div class="device-image source-image" id="source-visual"><img src="assets/control/outlet.png" alt="AC100Vコンセント" id="source-img" width="228" height="332"></div>
   <h3 id="source-title">コンセント・プラグ</h3><p id="source-desc">AC100Vの電源がフェーダーへ</p>
 </section>
 <div class="path-arrow" aria-hidden="true"><span>➜</span><small id="lead-label">AC100V</small></div>
-<section class="panel fader-panel" aria-label="共通の操作フェーダー"><h2>② フェーダーを動かす</h2>
+<section class="panel fader-panel" aria-label="中央の操作フェーダー"><h2>② 中央｜フェーダーを動かす</h2>
 <output id="fader-value" class="fader-value" for="control-fader">75%</output>
 <div class="approved-fader">
 <img src="assets/control/fader.png" width="278" height="688" alt="" class="fader-art">
@@ -138,7 +161,7 @@ input[type="range"].vertical{appearance:slider-vertical;-webkit-appearance:slide
 <p class="fader-foot" id="fader-caption">100V系の電気を扱う</p>
 </section>
 <div class="path-arrow" aria-hidden="true"><span>➜</span><small id="out-label">調光出力</small></div>
-<section class="panel result-panel"><h2>③ 灯りを見る</h2>
+<section class="panel result-panel"><h2>③ 右｜電球を見る</h2>
 <div class="device-image lamp-image"><div class="light-halo" id="bulb-halo"></div><img src="assets/control/bulb.png" width="255" height="435" alt="白熱電球" id="bulb" class="bulb-img"></div>
 <h3 id="end-title">電球の明るさ</h3><output id="result-value" class="readout" aria-live="polite">75%</output>
 <p class="flow-detail" id="flow-detail">フェーダーで操作すると、電球の明るさが変わります。</p>
