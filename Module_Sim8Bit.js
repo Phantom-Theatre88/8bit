@@ -163,7 +163,7 @@ const Module_Sim8Bit = {
             }
             svg += `<path d="M${x0} ${y0}V${y1}H${x1}" fill="none" stroke="#b3bfcb"/>
               <circle cx="${x0+this.dmx8Bit/255*(x1-x0)}" cy="${y1-factor*(y1-y0)}" r="7" fill="#ff4b55" stroke="#fff" stroke-width="2"/>`;
-            svg += text(x0,18,'出力電圧 100V') + text(x0,y1+22,'0%') + text(x1,y1+22,'フェーダー位置 100%','end');
+            svg += text(x0,18,'実効電圧 100V') + text(x0,y1+22,'0%') + text(x1,y1+22,'フェーダー位置 100%','end');
             box.innerHTML = `<h3>フェーダー位置とSCRの出力実効電圧</h3><svg viewBox="0 0 ${w} ${h}" role="img" aria-label="フェーダー位置と出力実効電圧の関係">${svg}</svg><p class="sim8-note">直線は実効電圧が位置に比例する教材モデル。ゆっくり／さらにゆっくりは比較用の仮想カーブ。</p>`;
             if (!size) { const s=box.querySelector('svg'); if(s.clientHeight>0) this.drawGraph({w:s.clientWidth,h:s.clientHeight}); }
             return;
