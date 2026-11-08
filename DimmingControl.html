@@ -671,8 +671,10 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
    The wide digital 5-stage lesson remains centered and separate from photo. */
 .scene-row[data-mode="digital"] .equipment-panel{display:flex}
 .scene-row[data-mode="digital"] .artifact-dmx-dimmer{display:flex}
-.artifact-dmx-dimmer>a:first-of-type{background:#f0f0f0}
+.artifact-dmx-dimmer>a:first-of-type{background:#222c34;height:112px}
 .artifact-dmx-dimmer img{object-fit:contain;object-position:center}
+.artifact-dmx-dimmer .photo-credit{overflow-wrap:anywhere}
+@media(max-width:770px){.artifact-dmx-dimmer>a:first-of-type{height:105px}}
 @media(min-width:1221px){
  .scene-row[data-mode="digital"]{grid-template-columns:150px minmax(0,1fr) 220px}
 }
@@ -798,15 +800,16 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
   <strong>東芝 SCR電球調光ユニット</strong><small>3kW型（1965年）</small>
   <a class="photo-credit" href="https://sts.kahaku.go.jp/material/2025pdf/no386.pdf" target="_blank" rel="noopener noreferrer">写真：国立科学博物館｜未来技術遺産 第00386号</a>
  </aside>
- <aside class="artifact-photo artifact-dmx-dimmer" aria-label="デジタルDMX制御の実機写真">
-  <div class="artifact-photo-head">実機を見る｜DMX調光器</div>
-  <a href="https://www.tlt.co.jp/tlt/products/art/catalogue/console/tuipt.htm" target="_blank" rel="noopener noreferrer" aria-label="東芝ライテックのポータブルディムスターⅢ製品ページを開く">
-   <img src="https://www.tlt.co.jp/tlt/products/art/catalogue/console/images/AL-TUIPT10203-30-2.jpg" loading="lazy" decoding="async" alt="東芝ライテック ポータブルディムスターⅢ AL-TUIPT10203-30-2。黒い放熱フィンを備えた小型の可搬形DMX調光器">
-   <span class="photo-fallback" hidden>東芝ライテック公式の実機写真を見る</span>
+ <aside class="artifact-photo artifact-dmx-dimmer" aria-label="デジタルDMX制御に使われるETC Sensor+の調光モジュール写真">
+  <div class="artifact-photo-head">実機を見る｜ラック用調光モジュール</div>
+  <a href="https://commons.wikimedia.org/wiki/File:Etcdimmer.JPG" target="_blank" rel="noopener noreferrer" aria-label="Wikimedia CommonsでETC Sensor+調光モジュールの写真と利用条件を見る">
+   <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Etcdimmer.JPG" loading="lazy" decoding="async" alt="ETC Sensor+調光モジュール、2.4kW×2回路。内部の銅製コイルなどが見える横長の実機写真">
+   <span class="photo-fallback" hidden>Wikimedia Commonsで実機写真を見る</span>
   </a>
-  <strong>ポータブルディムスターⅢ</strong>
-  <small>東芝ライテック｜DMX/RDM対応・3回路</small>
-  <a class="photo-credit" href="https://www.tlt.co.jp/tlt/products/art/catalogue/console/tuipt.htm" target="_blank" rel="noopener noreferrer">写真・製品情報：東芝ライテック</a>
+  <strong>ETC Sensor+ 調光モジュール</strong>
+  <small>2.4kW × 2回路｜ラックに組み込む調光器</small>
+  <a class="photo-credit" href="https://commons.wikimedia.org/wiki/File:Etcdimmer.JPG" target="_blank" rel="noopener noreferrer">撮影：Jordan Green（JWGreen）／Wikimedia Commons</a>
+  <a class="photo-credit" href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0｜写真は無加工</a>
  </aside>
 </aside>
 </div>
