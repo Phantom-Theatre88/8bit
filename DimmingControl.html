@@ -240,13 +240,102 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
  #scene[data-mode="weak"] .weak-wave-panel h4{font-size:11px}
  #scene[data-mode="weak"] .weak-wave-chart span{font-size:10px}
 }
+
+/* 2026-11-08: iPad landscape layout. Preserve the real fader, accepted circuit
+   and photo assets; recover vertical room instead of shrinking teaching text.
+   The top introduction was redundant with the four tab descriptions. */
+.control-lesson{padding:8px 15px 10px;gap:7px}
+.head{gap:9px}
+.head h1{font-size:clamp(22px,2vw,26px)}
+.kicker{font-size:14px}
+.mode-tabs{gap:8px}
+.mode-tab{min-height:46px;padding:3px 8px;gap:0}
+.mode-tab strong{font-size:16px;line-height:1.25}
+.mode-tab small{font-size:14px;line-height:1.25}
+.lesson-scene{min-height:0;padding:8px 11px}
+.scene-header{padding-bottom:5px}
+.scene-footer{min-height:29px;padding-top:5px}
+.below{min-height:0;gap:9px}
+.history,.teacher{padding:8px 11px}
+.history h3,.teacher h3{margin-bottom:4px}
+.history-details{gap:3px}
+.history-details p,.history p{font-size:14px;line-height:1.36}
+.history-details strong{font-size:14px}
+.teacher-bubble{font-size:14px;line-height:1.37;padding:8px 10px}
+.teacher img{width:89px;height:98px}
+.scene-row{gap:9px}
+.fader-caption{font-size:14px!important}
+.station p,.output-note,.receiver small,.source-symbol small{font-size:14px}
+.equipment-lead,.artifact-photo .artifact-photo-head,.artifact-photo small,.artifact-photo .photo-credit{font-size:14px}
+.scene-footer .scheme,.legend{font-size:14px}
+.legend{gap:11px;line-height:1.3}
+.wave-label,.weak-wire-label,.power-wire-label{font-size:14px}
+#scene[data-mode="weak"] .weak-wave-panel h4,
+#scene[data-mode="weak"] .weak-wave-chart span,
+#scene[data-mode="weak"] .weak-wave-caption,
+#scene[data-mode="weak"] .power-source,
+#scene[data-mode="weak"] .receiver small,
+#scene[data-mode="weak"] .weak-command-badge{font-size:14px}
+.weak-dc-axis{font-size:12px}
+.note-details{font-size:14px;line-height:1.4;color:#c0d5e2}
+.note-details summary{cursor:pointer;min-height:25px;display:list-item;list-style:disclosure-closed inside;padding:3px 2px;touch-action:manipulation}
+.note-details[open] summary{list-style:disclosure-open inside}
+.note-details p{margin:6px 0 0;padding:9px 11px;border:1px solid #40566a;border-radius:6px;background:#1c2934;font-size:14px}
+@media(min-width:960px) and (max-height:950px){
+ .scene-ground{min-height:295px}
+ .fader-station{gap:3px}
+ .fader-figure{height:183px}
+ .fader-readout{font-size:24px}
+ .fader-station .steps{gap:8px}
+ .source-media{height:110px}
+ .source-description{min-height:34px}
+ .output-devices{height:132px}
+ .lamp{height:130px}
+ .lamp img{max-height:124px}
+ .teacher img{width:80px;height:92px}
+ .direct-card{min-height:298px}
+ #scene[data-mode="weak"] .scene-ground{min-height:320px}
+ #scene[data-mode="weak"] .fader-figure{height:179px}
+ #scene[data-mode="weak"] .output-devices{height:118px}
+ #scene[data-mode="weak"] .lamp{height:116px}
+ #scene[data-mode="weak"] .lamp img{max-height:110px}
+ #scene[data-mode="weak"] .weak-wave-panel{padding:6px 8px}
+ #scene[data-mode="weak"] .weak-wave-chart svg{height:40px}
+ #scene[data-mode="weak"] .weak-wave-caption{line-height:1.25}
+}
+@media(max-width:770px){
+ .control-lesson{padding:8px;gap:7px}
+ .mode-tabs{gap:6px}
+ .mode-tab{min-height:46px;padding:4px 6px}
+ .mode-tab strong,.mode-tab small{font-size:14px}
+ .below{gap:8px}
+ .scene-header .live{font-size:16px}
+ .scene-footer .explain{font-size:14px}
+ .station h3{font-size:14px}
+ .station p,.source-symbol small,.receiver strong,.receiver small,.output-note,.output-status,.power-source{font-size:14px}
+ .legend{font-size:14px}
+ .artifact-photo strong,.artifact-photo small,.artifact-photo .photo-credit{font-size:14px}
+ #scene[data-mode="weak"] .weak-wave-panel h4,
+ #scene[data-mode="weak"] .weak-wave-chart span{font-size:14px}
+}
+@media(max-width:510px){
+ .mode-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .mode-tab{min-height:50px}
+ .fader-readout{font-size:20px}
+ .source-readout{font-size:14px}
+ .fader-caption{font-size:14px!important}
+ .scene-footer .explain{font-size:14px}
+ .scene-header h2{font-size:16px}
+ .legend{font-size:14px}
+ .teacher-bubble{font-size:14px}
+}
+
 </style>
 </head>
 <body class="control-page eightbit-unified-width">
 <div id="shared-console-header-root"></div><script src="next-ui-console-header.js?v=theme12-shared-20261105"></script>
 <main class="control-lesson">
 <header class="head"><div><p class="kicker">DIMMING / 制御の入口</p><h1>制御とは？ ― 同じフェーダー、何が違う？</h1></div><p class="head-tip">操作して、ケーブルを通るものを比べよう。</p></header>
-<div class="intro"><strong>ここで見るのは「フェーダーが扱うもの」。</strong> 強電＝100V系の電力／弱電＝DC0〜10Vの指示／デジタル＝0と1のデータ。直接制御の機構は前のページで学べます。</div>
 <div class="mode-tabs" role="tablist" aria-label="制御方式の切り替え">
 <button type="button" class="mode-tab" role="tab" data-mode="direct" aria-selected="false"><strong>直接制御</strong><small>前の教材で確認</small></button>
 <button type="button" class="mode-tab" role="tab" data-mode="power" aria-selected="true"><strong>強電制御</strong><small>フェーダーにAC100V</small></button>
@@ -343,7 +432,9 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
 </div>
 <div class="legend"><span><i class="swatch power"></i>アンバー：灯具用の電力</span><span><i class="swatch weak"></i>ブルー：弱電の指示・デジタルデータ</span><span>移動する光・数字は理解のための演出</span></div>
 <div class="below"><section class="panel history"><h3>▤ 歴史と位置づけ</h3><div id="history-text" class="history-details"><p>方式ごとに、必要になった理由と操作の変化を確認しよう。</p></div><div id="next-links"></div></section><section class="panel teacher eightbit-shared-teacher"><img src="assets/wave_teacher_transparent.svg?v=teacher-standard-20261014" alt="先生キャラクター"><div class="teacher-copy"><h3>先生のひとこと</h3><div class="teacher-bubble" id="teacher-message">見た目は同じフェーダー。でも強電制御では、フェーダーが100V系の電気を扱っているよ。</div></div></section></div>
-<p class="note">※概念図です。DC0〜10Vは明るさを指示する直流の制御電圧で、SCRがそのDCを交流へ変換するわけではありません。交流100Vは実効値（波形の頂点は約141V）。強電タブは可変抵抗式の単純化、弱電タブはSCR位相制御の一例で、実際の制御電圧・出力実効値・光束は単純比例とは限りません。内部配線・帰線・保護回路は省略。</p>
+<details class="note-details"><summary>模式図の注意・補足</summary>
+ <p>DC0〜10Vは明るさを指示する直流の制御電圧で、SCRがそのDCを交流へ変換するわけではありません。交流100Vは実効値（波形の頂点は約141V）。強電タブは可変抵抗式の単純化、弱電タブはSCR位相制御の一例で、実際の制御電圧・出力実効値・光束は単純比例とは限りません。内部配線・帰線・保護回路は省略。</p>
+</details>
 </main>
 <script>
 (()=>{
