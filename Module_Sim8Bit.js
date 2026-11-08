@@ -12,7 +12,6 @@ const Module_Sim8Bit = {
             <p class="sim8-note">前ページと同じフェーダーで操作しよう。</p>
             <div class="sim8-position"><span>フェーダー位置</span><strong id="sim8bit-num-percent">75%</strong></div>
             <div class="sim8-fader">
-              <div class="sim8-scale" aria-hidden="true"><span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span></div>
               <div class="sim8-fader-figure" id="sim8bit-fader" role="slider" tabindex="0"
                    aria-label="8bitのフェーダー位置" aria-orientation="vertical"
                    aria-valuemin="0" aria-valuemax="255" aria-valuenow="191">
@@ -62,7 +61,7 @@ const Module_Sim8Bit = {
             return Math.round(Math.max(0,Math.min(1,(0.84-(y-rect.top)/rect.height)/0.67))*255);
         };
         fader.addEventListener('pointerdown',e=>{
-            e.preventDefault();fader.focus();fader.setPointerCapture(e.pointerId);
+            e.preventDefault();fader.setPointerCapture(e.pointerId);
             this.dmx8Bit=valueAtY(e.clientY);this.updateSystem();
         },options);
         fader.addEventListener('pointermove',e=>{
