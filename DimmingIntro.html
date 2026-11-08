@@ -122,7 +122,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 .di-fader-body{display:block;width:100%;height:100%}
 .di-fader-cap{position:absolute;left:48%;width:32%;height:auto;pointer-events:none}
 .di-fader-art:focus-within{outline:2px solid #78e2f2}
-#di-large-fader{position:absolute;left:0;top:18%;height:66%;width:100%;margin:0;opacity:0;writing-mode:vertical-lr;direction:rtl;appearance:none;touch-action:none;cursor:grab}
+#di-large-fader{position:absolute;inset:0;height:100%;width:100%;margin:0;opacity:0;writing-mode:vertical-lr;direction:rtl;appearance:none;touch-action:none;cursor:grab}
 #di-large-fader::-webkit-slider-thumb{appearance:none;width:1px;height:1px}
 #di-large-fader::-moz-range-thumb{width:1px;height:1px;border:0}
 @media(max-width:560px){.di-machine-stage{min-width:690px}}
@@ -645,6 +645,20 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     else if(e.key==='End')next=1;
     else return;
     e.preventDefault();render(next);
+  });
+  // Map the full touch surface to the printed 0–100% scale.
+  function setFaderFromPointer(event){
+    const rect=largeFader.getBoundingClientRect();
+    if(rect.height)render(Math.round(clamp((.84-(event.clientY-rect.top)/rect.height)/.66)*100)/100);
+  }
+  largeFader.addEventListener('pointerdown',event=>{
+    if(!event.isPrimary || event.button!==0)return;
+    event.preventDefault();
+    largeFader.setPointerCapture(event.pointerId);
+    setFaderFromPointer(event);
+  });
+  largeFader.addEventListener('pointermove',event=>{
+    if(event.isPrimary && largeFader.hasPointerCapture(event.pointerId))setFaderFromPointer(event);
   });
   largeFader.addEventListener('input',()=>render(Number(largeFader.value)/100));
   new ResizeObserver(()=>{if(mode==='water')drawWaterWire(98+100*level)}).observe(document.querySelector('.di-machine-stage'));
