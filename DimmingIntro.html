@@ -373,7 +373,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <p class="di-wave-caption" id="di-wave-caption">※塗り面積は電力のイメージです。実測値・計算値ではありません。</p>
 </aside>
 </div>
-<div class="di-conclusion"><p id="di-action">フェーダーを上げる → 銅板が下がる → 電球が明るくなる</p><output id="di-readout" aria-live="off">明るさの指示 50%</output></div>
+<div class="di-conclusion"><p id="di-action">フェーダーを上げると銅板が下がって電球が明るくなり、下げると銅板が上がって暗くなります。</p><output id="di-readout" aria-live="off">明るさの指示 50%</output></div>
 </section>
 <div class="di-footer">
 <section class="di-panel di-next" aria-labelledby="di-detail-title"><h3 id="di-detail-title">水抵抗式調光の仕組み・特徴</h3><p id="di-detail-text">水抵抗式は、<strong class="di-key">塩水を電気抵抗として使う</strong>調光方式です。2枚の電極のうち片方を上下させ、<strong class="di-key">塩水に浸かる面積</strong>を変えることで抵抗を調整します。<strong class="di-effect">深く浸すと抵抗が小さくなり電球が明るく</strong>、浅くすると抵抗が大きくなり暗くなります。抵抗器と電球は<strong class="di-key">直列</strong>で、抵抗器で電圧が降下するため、電球にかかる電圧が変わります。電気エネルギーの一部が<strong class="di-key">熱</strong>になるため、水の温度上昇や蒸発、補水が必要でした。</p></section>
@@ -397,6 +397,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
   const bulb=document.getElementById('di-bulb');
   const readout=document.getElementById('di-readout');
   const action=document.getElementById('di-action');
+  const waterAction=action.textContent;
   const wave=document.getElementById('di-wave-actual');
   const waveArea=document.getElementById('di-wave-area');
   const waveReference=document.getElementById('di-wave-reference');
@@ -683,7 +684,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     largeFader.setAttribute('aria-valuetext',value+'パーセントの調光指示');
     readout.textContent=mode==='variac'?'交流出力 '+volts+'V（入力100V）':'明るさの指示 '+value+'%';
     action.textContent=mode==='water'
-      ?(value<10?'フェーダーを下げる → 銅板が上がる → 電球が暗くなる':'フェーダーを上げる → 銅板が下がる → 電球が明るくなる')
+      ?waterAction
       :burnedOut?'球切れ（教材上の例）。ノブを0Vまで戻すと再開できます。'
       :mode==='variac'?(volts>100?'ノブ → ブラシが移動 → 出力 '+volts+'V（100V定格灯具には過電圧）':'ノブを回す → ブラシが移動 → 取り出す交流電圧が変わる')
       :mode==='scr'?'フェーダーを動かす → 点弧角が変わる → 電球の明るさが変わる'
