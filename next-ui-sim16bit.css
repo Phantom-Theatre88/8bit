@@ -207,3 +207,14 @@ body.eightbit-console #panel-sim16bit .s16-bottom {min-height:150px;overflow:vis
  }
  .s16-input .s16-fader-card .s16-fader-figure.s16-vertical{width:min(100%,112px)}
 }
+
+/* Size the lower row from its lesson text on landscape tablets. */
+@media (orientation:landscape) and (min-width:960px) {
+  body.eightbit-console #panel-sim16bit .s16-page {
+    grid-template-rows:42px minmax(430px,1fr) max-content!important;
+    overflow-y:auto;
+  }
+  body.eightbit-console #panel-sim16bit .s16-bottom > .s16-zone {
+    min-height:max-content;
+  }
+}
