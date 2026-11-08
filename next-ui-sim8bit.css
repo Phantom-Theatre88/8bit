@@ -234,3 +234,20 @@ html:has(.sim8bit-active) { height:100dvh; min-height:0; overflow:hidden; }
  .sim8-page-titlebar{flex-wrap:wrap}
  .sim8-page-titlebar .sim8-back-link{margin-left:0}
 }
+
+
+/* SCR output is a POWER-stage example; 8bit is a control COMMAND.
+   Two concise live lines beneath the existing waveform leave the original
+   graph/fader/bulb layout intact. Keep text readable at >=16px. */
+.sim8-graph .sim8-scr-explain{
+ display:flex;flex-direction:column;gap:2px;flex:0 0 auto;
+ font-size:16px;line-height:1.3;color:#dbe9f1;
+ padding:4px 2px 2px;border-top:1px solid #465d6c;
+}
+.sim8-graph .sim8-scr-explain strong{font-size:16px;color:#ffcb78;font-weight:800}
+.sim8-graph .sim8-scr-explain span{font-size:16px}
+.sim8-graph .sim8-byte-note{flex:0 0 auto;font-size:16px;line-height:1.35}
+@media(max-height:760px) and (min-width:900px){
+ .sim8-graph .sim8-scr-explain{gap:1px;padding-top:2px;line-height:1.22}
+ .sim8-graph .sim8-scr-explain strong,.sim8-graph .sim8-scr-explain span{font-size:16px;line-height:1.22}
+}
