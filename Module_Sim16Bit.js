@@ -5,10 +5,16 @@ const Module_Sim16Bit = {
         const fader = (id, title, description, value) => `<section class="s16-fader-card ${id}">
           <h3>${title}</h3><p>${description}</p><output id="s16-${id}-value">${value}</output>
           <div class="s16-fader-row"><div class="s16-scale"><span>255</span><span>192</span><span>128</span><span>64</span><span>0</span></div>
-          <input class="s16-vertical" id="s16-${id}" type="range" min="0" max="255" step="1" value="${value}" aria-label="${title}：${description}" orient="vertical">
+          <div class="s16-vertical s16-fader-figure" id="s16-${id}"
+               role="slider" tabindex="0" aria-label="${title}：${description}"
+               aria-orientation="vertical" aria-valuemin="0" aria-valuemax="255"
+               aria-valuenow="${value}">
+            <img class="s16-fader-body" src="assets/control/fader-body.webp" alt="" width="278" height="688">
+            <img class="s16-fader-cap" id="s16-${id}-cap" src="assets/control/fader-cap.png" alt="" width="89" height="89">
+          </div>
           <div class="s16-step"><button data-s16-step="${id}:1" aria-label="${title}を1上げる">＋</button><button data-s16-step="${id}:-1" aria-label="${title}を1下げる">−</button></div></div></section>`;
         return `<div class="s16-page">
-          <header class="s16-title"><h1>16-bit 調光卓</h1><p>大きく動かすCoarseと、細かく合わせるFine。</p><button id="s16-help-open">ⓘ 詳細説明</button></header>
+          <header class="s16-title"><h1>16-bit 調光卓</h1><p>「制御とは」のDMX指令 → 8bitの0〜255 → CoarseとFineの2つで65,536段階。</p><button id="s16-help-open">ⓘ 詳細説明</button></header>
           <main class="s16-workbench">
             <section class="s16-zone s16-input"><h2>① 大きく・細かく動かす</h2>
               <div class="s16-faders">${fader('coarse','Coarse','大きく調整',128)}${fader('fine','Fine','細かく調整',64)}</div>
@@ -25,7 +31,7 @@ const Module_Sim16Bit = {
           </main>
           <section class="s16-bottom"><section class="s16-zone"><h2>▤ 解説</h2><p><span class="s16-blue">Coarse</span>で、大きな位置を決める。</p><p><span class="s16-green">Fine</span>で、その中を細かく合わせる。</p></section>
             <section class="s16-zone s16-teacher eightbit-shared-teacher"><img src="assets/wave_teacher_transparent.svg?v=teacher-standard-20261014" alt="照明教材の先生"><div><h2>先生のひとこと</h2><p id="s16-teacher-message">Coarseを固定して、<br>Fineだけ動かしてみよう。</p></div></section>
-            <section class="s16-zone"><h2>覚えておこう</h2><p>8-bit：<b>256段階</b><br>16-bit：<b>65,536段階</b></p><p>DMXの2つの値を組み合わせる。</p></section></section>
+            <section class="s16-zone"><h2>覚えておこう</h2><p>8-bit：<b>256段階</b><br>16-bit：<b>65,536段階</b></p><p>DMXの2つの8bit値を組み合わせる。<a class="s16-prev-link" href="Top.html?tab=sim8bit">8bitを振り返る</a></p></section></section>
           
           <dialog id="s16-help-dialog" aria-labelledby="s16-help-title"><div class="s16-help-heading"><h2 id="s16-help-title">16-bitの詳細説明</h2><button id="s16-help-close" aria-label="詳細説明を閉じる">閉じる ×</button></div><p>大きく／細かく調整するしくみの説明図です。図の数値と距離の単位はたとえで、操作中の現在値ではありません。</p><img src="assets/16bit_coarse_fine_infographic.webp" alt="Master、Coarse、Fineの関係と上位・下位8-bitを説明するイラスト"></dialog>
         </div>`;
@@ -34,7 +40,30 @@ const Module_Sim16Bit = {
         this.destroy();
         const root=document.querySelector('.s16-page'); if(!root)return;
         this.abort=new AbortController(); const opts={signal:this.abort.signal};
-        for(const id of ['master','coarse','fine'])root.querySelector('#s16-'+id).addEventListener('input',e=>this.setValue(id,Number(e.target.value)),opts);
+        root.querySelector('#s16-master').addEventListener('input',e=>this.setValue('master',Number(e.target.value)),opts);
+        for(const id of ['coarse','fine']){
+            const figure=root.querySelector('#s16-'+id);
+            const atY=y=>{
+                const rect=figure.getBoundingClientRect();
+                const current=id==='coarse'?Math.floor(this.dmx16Bit/256):this.dmx16Bit%256;
+                if(!rect.height)return current;
+                return Math.round(Math.max(0,Math.min(1,(0.84-(y-rect.top)/rect.height)/0.67))*255);
+            };
+            figure.addEventListener('pointerdown',e=>{
+                e.preventDefault();figure.focus();figure.setPointerCapture(e.pointerId);
+                this.setValue(id,atY(e.clientY));
+            },opts);
+            figure.addEventListener('pointermove',e=>{
+                if(figure.hasPointerCapture(e.pointerId))this.setValue(id,atY(e.clientY));
+            },opts);
+            figure.addEventListener('keydown',e=>{
+                const delta={ArrowUp:1,ArrowRight:1,ArrowDown:-1,ArrowLeft:-1,PageUp:10,PageDown:-10}[e.key];
+                if(delta){e.preventDefault();this.adjustFaderValue(id,delta);}
+                else if(e.key==='Home'||e.key==='End'){
+                    e.preventDefault();this.setValue(id,e.key==='Home'?0:255);
+                }
+            },opts);
+        }
         root.querySelectorAll('[data-s16-step]').forEach(b=>b.addEventListener('click',()=>{const [id,delta]=b.dataset.s16Step.split(':');this.adjustFaderValue(id,Number(delta));},opts));
         const dialog=root.querySelector('#s16-help-dialog');
         root.querySelector('#s16-help-open').addEventListener('click',()=>dialog.showModal(),opts);
@@ -59,7 +88,13 @@ const Module_Sim16Bit = {
         const root=document.querySelector('.s16-page');if(!root)return;
         const c=Math.floor(this.dmx16Bit/256),f=this.dmx16Bit%256,total=this.dmx16Bit.toLocaleString('en-US');
         const set=(id,value)=>root.querySelector('#'+id).textContent=value;
-        for(const [id,v]of [['master',this.dmx16Bit],['coarse',c],['fine',f]])root.querySelector('#s16-'+id).value=v;
+        root.querySelector('#s16-master').value=this.dmx16Bit;
+        for(const [id,v] of [['coarse',c],['fine',f]]){
+            const figure=root.querySelector('#s16-'+id);
+            figure.setAttribute('aria-valuenow',String(v));
+            figure.setAttribute('aria-valuetext',id==='coarse'?'Coarse '+v+'（上位8bit）':'Fine '+v+'（下位8bit）');
+            root.querySelector('#s16-'+id+'-cap').style.top=(77.5-66*v/255)+'%';
+        }
         set('s16-coarse-value',c);set('s16-fine-value',f);set('s16-percent',(this.dmx16Bit/65535*100).toFixed(2)+'%');
         set('s16-selected',c);set('s16-calc-coarse',c);set('s16-calc-fine',f);set('s16-total',total);set('s16-lamp-total',total);
         root.querySelector('.s16-center').style.setProperty('--coarse-pos',((c+.5)/256*100)+'%');
