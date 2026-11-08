@@ -29,8 +29,8 @@ const Module_Sim16Bit = {
             </section>
             <section class="s16-zone s16-light"><h2>③ 灯りを見る</h2><div class="s16-dark-room"><div id="sim16bit-ambient-glow" class="s16-ambient"></div><div class="s16-bulb"><img src="assets/Light.webp" alt="白熱電球"><div id="sim16bit-gas-glow" class="s16-gas"></div><div id="sim16bit-filament-glow" class="s16-filament"></div></div></div><div class="s16-readout"><span>16-bit値</span><strong id="s16-lamp-total">32,832</strong><span id="s16-light-state">点灯中</span></div><p class="s16-note">灯りは見た目のイメージ。</p></section>
           </main>
-          <section class="s16-bottom"><section class="s16-zone"><h2>▤ 解説</h2><p><span class="s16-blue">Coarse</span>で、大きな位置を決める。</p><p><span class="s16-green">Fine</span>で、その中を細かく合わせる。</p></section>
-            <section class="s16-zone s16-teacher eightbit-shared-teacher"><img src="assets/wave_teacher_transparent.svg?v=teacher-standard-20261014" alt="照明教材の先生"><div><h2>先生のひとこと</h2><p id="s16-teacher-message">Coarseを固定して、<br>Fineだけ動かしてみよう。</p></div></section>
+          <section class="s16-bottom"><section class="s16-zone"><h2>▤ 解説</h2><p>前の8bitと同じく、DMXは電圧ではなく数値の指令。</p><p><span class="s16-blue">Coarse</span>で大きく、<span class="s16-green">Fine</span>でその1段を細かく決める。</p></section>
+            <section class="s16-zone s16-teacher eightbit-shared-teacher"><img src="assets/wave_teacher_transparent.svg?v=teacher-standard-20261014" alt="照明教材の先生"><div><h2>先生のひとこと</h2><p id="s16-teacher-message">「制御とは」で見たDMXは指令だね。<br>Coarseを固定して、Fineを動かしてみよう。</p></div></section>
             <section class="s16-zone"><h2>覚えておこう</h2><p>8-bit：<b>256段階</b><br>16-bit：<b>65,536段階</b></p><p>DMXの2つの8bit値を組み合わせる。<a class="s16-prev-link" href="Top.html?tab=sim8bit">8bitを振り返る</a></p></section></section>
           
           <dialog id="s16-help-dialog" aria-labelledby="s16-help-title"><div class="s16-help-heading"><h2 id="s16-help-title">16-bitの詳細説明</h2><button id="s16-help-close" aria-label="詳細説明を閉じる">閉じる ×</button></div><p>大きく／細かく調整するしくみの説明図です。図の数値と距離の単位はたとえで、操作中の現在値ではありません。</p><img src="assets/16bit_coarse_fine_infographic.webp" alt="Master、Coarse、Fineの関係と上位・下位8-bitを説明するイラスト"></dialog>
