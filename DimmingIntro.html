@@ -149,6 +149,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <linearGradient id="plateMetal" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#8b481f"/><stop offset=".18" stop-color="#d68b4a"/><stop offset=".47" stop-color="#f4ca87"/><stop offset=".73" stop-color="#c98540"/><stop offset="1" stop-color="#76401c"/></linearGradient>
 <linearGradient id="waterThumb" x2="0" y2="1"><stop stop-color="#d5e0e8"/><stop offset=".45" stop-color="#71808c"/><stop offset=".55" stop-color="#b5c5cf"/><stop offset="1" stop-color="#4a5964"/></linearGradient>
 <linearGradient id="faderMetal" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#374451"/><stop offset=".49" stop-color="#b9cbd6"/><stop offset=".53" stop-color="#758c9f"/><stop offset="1" stop-color="#293947"/></linearGradient>
+<radialGradient id="whiteLedGlow"><stop stop-color="#fff"/><stop offset=".28" stop-color="#f3faff" stop-opacity=".9"/><stop offset="1" stop-color="#d4edff" stop-opacity="0"/></radialGradient>
 <radialGradient id="bulbGlow"><stop stop-color="#fff5c5" stop-opacity=".95"/><stop offset=".35" stop-color="#ffc05d" stop-opacity=".58"/><stop offset="1" stop-color="#f69d35" stop-opacity="0"/></radialGradient>
 <clipPath id="di-water-clip"><rect x="277" y="223" width="352" height="114"/></clipPath>
 </defs>
@@ -254,7 +255,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <g id="di-pwm-unit" hidden aria-label="LED用PWM直流駆動の電子スイッチ模式図">
 <rect x="166" y="246" width="80" height="65" rx="10" fill="#14212c" stroke="#bbcad4" stroke-width="2"/>
 <text class="primary-label" x="206" y="273" text-anchor="middle">DC</text><text class="secondary-label" x="206" y="296" text-anchor="middle">電源</text>
-<path d="M246 266V176H292" class="electrical"/><path d="M584 176H648V263H696" class="electrical"/><path d="M736 286V349H206V312" class="neutral"/>
+<path d="M246 266V176H292" class="electrical"/><path d="M584 176H648V285H714" class="electrical"/><path d="M743 251V349H206V312" class="neutral"/>
 <rect x="292" y="116" width="292" height="160" rx="13" fill="#182b38" stroke="#7c9daf" stroke-width="3"/>
 <rect x="308" y="131" width="260" height="36" rx="6" fill="#304756"/><text class="primary-label" x="438" y="155" text-anchor="middle">LED用 PWM 駆動</text>
 <rect id="di-pwm-switch" x="350" y="180" width="176" height="68" rx="9" fill="#273b49" stroke="#8399a8" stroke-width="3"/>
@@ -264,9 +265,12 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <text class="secondary-label" x="438" y="332" text-anchor="middle">0V ↔ 駆動電圧</text>
 <path d="M168 118H252V149H292" fill="none" stroke="#62d5ff" stroke-width="2.8" stroke-dasharray="6 6"/>
 <text class="secondary-label" x="204" y="105" text-anchor="middle">操作の指示</text>
-<text class="secondary-label" x="750" y="322" text-anchor="middle">灯具イメージ</text>
+<image href="assets/control/white-led.webp" x="650" y="48" width="160" height="240" aria-label="砲弾型白色LED"/>
+<circle id="di-led-glow" cx="730" cy="115" r="54" fill="url(#whiteLedGlow)" opacity="0" pointer-events="none"/>
+<text class="secondary-label" x="690" y="322" text-anchor="middle">白色LED</text>
 </g>
 <!-- BULB: same asset and layered glow philosophy as current 8-bit dimmer -->
+<g id="di-incandescent">
 <circle id="lampHalo" cx="730" cy="130" r="113" fill="url(#bulbGlow)" opacity=".48"/>
 <image id="di-bulb" href="assets/Light.webp" x="621" y="66" width="218" height="232" preserveAspectRatio="xMidYMid meet"/>
 <circle id="lampGas" cx="730" cy="133" r="62" fill="url(#bulbGlow)" opacity=".5" style="mix-blend-mode:screen;pointer-events:none"/>
@@ -274,6 +278,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <circle cx="696" cy="263" r="4.2" fill="#ffd18a" stroke="#73411d" stroke-width="1.5"/>
 <circle cx="736" cy="286" r="4.2" fill="#c4d6df" stroke="#425a67" stroke-width="1.5"/>
 <text id="di-burnout" hidden x="730" y="151" text-anchor="middle" class="lamp-warning" font-size="38">球切れ</text>
+</g>
 </svg></div>
 <aside class="di-wave-panel" aria-labelledby="di-wave-title">
 <div class="di-wave-heading"><h3 id="di-wave-title">電球にかかる交流電圧</h3><button id="di-animate-toggle" type="button" aria-pressed="false">▶ ゆっくり見る</button></div>
@@ -394,6 +399,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
   const playButton=document.getElementById('di-animate-toggle');
   const scrPositive=document.getElementById('di-scr-positive');
   const scrNegative=document.getElementById('di-scr-negative');
+  const ledGlow=document.getElementById('di-led-glow');
   const pwmSwitch=document.getElementById('di-pwm-switch');
   const scrPositiveState=document.getElementById('di-scr-positive-state');
   const scrNegativeState=document.getElementById('di-scr-negative-state');
@@ -445,6 +451,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     }
     const pulsePos=(cyclePosition*8)%1;
     const pwmOn=level>=1||(level>0&&pulsePos<level);
+    if(mode==='pwm')ledGlow.setAttribute('opacity',pwmOn?'1':'0');
     setIndicator(pwmSwitch,pwmSwitchState,mode==='pwm'&&pwmOn);
     const y=mode==='water'?104-69*level*Math.sin(acPhase)
       :mode==='variac'?104-69*level*Math.sin(acPhase)
@@ -480,6 +487,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
   function switchMode(next){
     if(next!=='water'&&next!=='variac'&&next!=='scr'&&next!=='pwm')return;
     mode=next;
+    document.getElementById('di-incandescent').toggleAttribute('hidden',mode==='pwm');
     document.querySelector('.di-helper').textContent=mode==='variac'?'ノブを回して、ブラシの先を見てみよう':'フェーダーを上下してみよう';
     document.querySelector('.di-operation').hidden=mode==='variac';
     svg.setAttribute('viewBox',mode!=='variac'?'148 0 707 375':'30 0 825 375');
