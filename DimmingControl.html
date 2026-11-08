@@ -349,7 +349,9 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
  // External archive/manufacturer images can be blocked by remote hosts;
  // never leave a misleading broken-image icon without a source path.
  document.querySelectorAll('.artifact-photo img').forEach(img=>{
-  img.addEventListener('error',()=>{img.hidden=true;const fallback=img.parentElement.querySelector('.photo-fallback');if(fallback)fallback.hidden=false});
+  const showSource=()=>{img.hidden=true;const fallback=img.parentElement.querySelector('.photo-fallback');if(fallback)fallback.hidden=false};
+  img.addEventListener('error',showSource);
+  if(img.complete && img.naturalWidth===0)showSource();
  });
  updateMode();if(!reduced)requestAnimationFrame(animate);
 })();
