@@ -31,7 +31,7 @@ const Module_Sim16Bit = {
           </main>
           <section class="s16-bottom"><section class="s16-zone"><h2>▤ 解説</h2><p>DMXの1つの値は8bit（0〜255）。電力ではなく制御指令。</p><p>16bit対応機器は2つのDMX値を使用。<span class="s16-blue">Coarse</span>で大まかに、<span class="s16-green">Fine</span>でその1段の中を細かく指定する。</p></section>
             <section class="s16-zone s16-teacher eightbit-shared-teacher"><img src="assets/wave_teacher_transparent.svg?v=teacher-standard-20261014" alt="照明教材の先生"><div><h2>先生のひとこと</h2><p id="s16-teacher-message">「制御とは」で見たDMXは指令だね。<br>Coarseを固定して、Fineを動かしてみよう。</p></div></section>
-            <section class="s16-zone"><h2>覚えておこう</h2><p>8-bit：<b>256通り</b><br>16-bit：<b>65,536通り</b>の指令値。</p><p>16bit＝Coarse × 256 ＋ Fine。<br>実際の細かさは受信機側の対応にもよる。<a class="s16-prev-link" href="Top.html?tab=sim8bit">8bitを振り返る</a></p></section></section>
+            <section class="s16-zone"><h2>覚えておこう</h2><p>8bit＝<b>256通り</b><br>16bit＝<b>65,536通り</b>の指令値。</p><p>Coarse × 256 ＋ Fine。受信機も16bit対応が必要。<a class="s16-prev-link" href="Top.html?tab=sim8bit">8bitへ戻る</a></p></section></section>
           
           <dialog id="s16-help-dialog" aria-labelledby="s16-help-title"><div class="s16-help-heading"><h2 id="s16-help-title">16-bitの詳細説明</h2><button id="s16-help-close" aria-label="詳細説明を閉じる">閉じる ×</button></div><p>DMXの1つのデータ値は8bit（0〜255）。16bit対応の受信機では、Coarse（上位8bit）とFine（下位8bit）の2つのDMX値をまとめて、1つのパラメータをより細かく指定します。</p><p><strong>16bit値＝Coarse × 256 ＋ Fine</strong>。DMXの1つの値が16bitになるわけではありません。下の図は説明例で、操作中の現在値とは異なります。</p><img src="assets/16bit_coarse_fine_infographic.webp" alt="Master、Coarse、Fineの関係と上位・下位8-bitを説明するイラスト"></dialog>
         </div>`;
