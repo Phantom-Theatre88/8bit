@@ -144,9 +144,13 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
 .scene-row[data-mode="direct"] .artifact-dimpac,
 .scene-row[data-mode="direct"] .artifact-scr,
 .scene-row[data-mode="weak"] .artifact-dimpac,
-.scene-row[data-mode="weak"] .artifact-resistor{display:none}
-.scene-row[data-mode="digital"]{grid-template-columns:minmax(0,1fr)}
-.scene-row[data-mode="digital"] .equipment-panel{display:none}
+.scene-row[data-mode="weak"] .artifact-resistor,
+.scene-row[data-mode="direct"] .artifact-dmx-dimmer,
+.scene-row[data-mode="power"] .artifact-dmx-dimmer,
+.scene-row[data-mode="weak"] .artifact-dmx-dimmer,
+.scene-row[data-mode="digital"] .artifact-dimpac,
+.scene-row[data-mode="digital"] .artifact-resistor,
+.scene-row[data-mode="digital"] .artifact-scr{display:none}
 .artifact-scr>a:first-of-type{height:152px;background:#eef1f3;position:relative;overflow:hidden}
 .artifact-scr img{object-fit:cover;object-position:50% 0}
 .artifact-scr small{font-size:12px}
@@ -662,6 +666,23 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
  .digital-data-card code{font-size:14px;letter-spacing:0}
 }
 
+
+/* Digital: the same single-machine photo slot as direct/power/weak.
+   The wide digital 5-stage lesson remains centered and separate from photo. */
+.scene-row[data-mode="digital"] .equipment-panel{display:flex}
+.scene-row[data-mode="digital"] .artifact-dmx-dimmer{display:flex}
+.artifact-dmx-dimmer>a:first-of-type{background:#f0f0f0}
+.artifact-dmx-dimmer img{object-fit:contain;object-position:center}
+@media(min-width:1221px){
+ .scene-row[data-mode="digital"]{grid-template-columns:150px minmax(0,1fr) 220px}
+}
+@media(min-width:1051px) and (max-width:1220px){
+ .scene-row[data-mode="digital"]{grid-template-columns:138px minmax(0,1fr) 194px}
+}
+@media(max-width:1050px){
+ .scene-row[data-mode="digital"]{grid-template-columns:minmax(0,1fr)}
+}
+
 </style>
 </head>
 <body class="control-page eightbit-unified-width">
@@ -777,6 +798,16 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
   <strong>東芝 SCR電球調光ユニット</strong><small>3kW型（1965年）</small>
   <a class="photo-credit" href="https://sts.kahaku.go.jp/material/2025pdf/no386.pdf" target="_blank" rel="noopener noreferrer">写真：国立科学博物館｜未来技術遺産 第00386号</a>
  </aside>
+ <aside class="artifact-photo artifact-dmx-dimmer" aria-label="デジタルDMX制御の実機写真">
+  <div class="artifact-photo-head">実機を見る｜DMX調光器</div>
+  <a href="https://www.tlt.co.jp/tlt/products/art/catalogue/console/tuipt.htm" target="_blank" rel="noopener noreferrer" aria-label="東芝ライテックのポータブルディムスターⅢ製品ページを開く">
+   <img src="https://www.tlt.co.jp/tlt/products/art/catalogue/console/images/AL-TUIPT10203-30-2.jpg" loading="lazy" decoding="async" alt="東芝ライテック ポータブルディムスターⅢ AL-TUIPT10203-30-2。黒い放熱フィンを備えた小型の可搬形DMX調光器">
+   <span class="photo-fallback" hidden>東芝ライテック公式の実機写真を見る</span>
+  </a>
+  <strong>ポータブルディムスターⅢ</strong>
+  <small>東芝ライテック｜DMX/RDM対応・3回路</small>
+  <a class="photo-credit" href="https://www.tlt.co.jp/tlt/products/art/catalogue/console/tuipt.htm" target="_blank" rel="noopener noreferrer">写真・製品情報：東芝ライテック</a>
+ </aside>
 </aside>
 </div>
 <div class="legend"><span><i class="swatch power"></i>アンバー：灯具用の電力</span><span><i class="swatch weak"></i>ブルー：弱電の指示・デジタルデータ</span><span>移動する光・数字は理解のための演出</span></div>
@@ -891,7 +922,7 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
    strong.textContent=heading+'：';span.textContent=description;p.append(strong,span);history.append(p);
   });
   $('teacher-message').textContent=d.teacher;
-  $('equipment-panel').querySelector('.equipment-lead').textContent=mode==='weak'?'弱い指令で大きな電力を制御した実機。':'操作の仕組みと実際の機器を見比べよう。';
+  $('equipment-panel').querySelector('.equipment-lead').textContent=mode==='weak'?'弱い指令で大きな電力を制御した実機。':mode==='digital'?'DMX信号を受けて灯具用電力を調整する実機。':'操作の仕組みと実際の機器を見比べよう。';
   const links=$('next-links');links.replaceChildren();d.links.forEach(x=>{const a=document.createElement('a');a.className='link-button';a.href=x[1];a.textContent=x[0];links.append(a)});
   document.querySelectorAll('.mode-tab').forEach(el=>el.setAttribute('aria-selected',String(el.dataset.mode===mode)));
   renderValue();requestAnimationFrame(drawWires);
