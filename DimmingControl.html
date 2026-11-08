@@ -558,6 +558,110 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
  .weak-dc-plot .weak-dc-axis{flex-basis:29px;font-size:14px}
 }
 
+
+/* 2026-11-08: DMX is a digital COMMAND, never the lamp-power waveform.
+   B-layout follows the same geometry as weak control: fader / 0-1 /
+   DMX dimmer / leading-edge AC example / incandescent lamp. */
+.digital-data-card[hidden],.digital-ac-card[hidden],.digital-path-caption[hidden]{display:none!important}
+.digital-data-card,.digital-ac-card{
+ min-width:0;align-self:center;width:100%;position:relative;z-index:5;
+ display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;
+ padding:9px 5px;border:1px solid #49697b;border-radius:6px;background:#192a36;
+ color:#d6eaf3;text-align:center;
+}
+.digital-data-card strong,.digital-ac-card strong{font-size:15px;line-height:1.3}
+.digital-data-card code{
+ font:700 clamp(14px,1.4vw,19px)/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;
+ letter-spacing:.075em;color:#a3edff;white-space:nowrap;
+ max-width:100%;overflow:visible;
+ text-shadow:0 0 5px #43b7e55e;
+}
+.digital-data-card span,.digital-ac-card span{font-size:14px;line-height:1.3;color:#b8d9e8}
+.digital-ac-card svg{display:block;width:100%;height:68px;overflow:visible}
+.digital-ac-card .scr-reference{opacity:.5}
+.digital-path-caption{
+ color:#c8dfec;font-size:14px;line-height:1.35;
+ margin:0;text-align:center;padding:3px 6px;
+}
+@media(min-width:771px){
+ #scene[data-mode="digital"] .scene-ground{
+  display:grid;min-height:385px;
+  grid-template-columns:minmax(0,24fr) minmax(0,16fr) minmax(0,18fr) minmax(0,18fr) minmax(0,24fr);
+  grid-template-rows:45px 39px minmax(150px,1fr) 69px minmax(45px,auto);
+  align-items:stretch;
+ }
+ #scene[data-mode="digital"] #source-station{display:none}
+ #scene[data-mode="digital"] .fader-station{
+  grid-column:1;grid-row:1 / span 5;align-self:stretch;
+  justify-content:center;gap:5px;padding:4px 3px;min-width:0;
+ }
+ #scene[data-mode="digital"] .output,
+ #scene[data-mode="digital"] .output-devices{display:contents}
+ #scene[data-mode="digital"] #output-title{
+  grid-column:3;grid-row:1;align-self:center;justify-self:center;
+  font-size:15px;line-height:1.3;margin:0;text-align:center;
+ }
+ #scene[data-mode="digital"] .receiver{
+  grid-column:3;grid-row:3;justify-self:center;align-self:center;
+  width:min(118px,100%);min-height:102px;margin:0;z-index:4;padding:6px 4px;
+ }
+ #scene[data-mode="digital"] .receiver strong{font-size:15px;line-height:1.25}
+ #scene[data-mode="digital"] .receiver small{font-size:14px;line-height:1.25}
+ #scene[data-mode="digital"] .lamp{
+  grid-column:5;grid-row:3;justify-self:center;align-self:center;
+  width:min(155px,95%);max-width:100%;height:154px;z-index:4;
+ }
+ #scene[data-mode="digital"] .lamp img{max-height:147px}
+ #scene[data-mode="digital"] .power-source{
+  display:flex;grid-column:3;grid-row:4;justify-self:center;align-self:center;
+  width:100%;min-width:0;max-width:175px;min-height:54px;
+  margin:0;padding:4px 5px;font-size:14px;line-height:1.25;
+ }
+ #scene[data-mode="digital"] .power-source img{width:24px;height:33px;flex:none}
+ #scene[data-mode="digital"] #output-state,
+ #scene[data-mode="digital"] #output-note{display:none}
+ #scene[data-mode="digital"] .digital-data-card{grid-column:2;grid-row:3}
+ #scene[data-mode="digital"] .digital-ac-card{grid-column:4;grid-row:3}
+ #scene[data-mode="digital"] .digital-path-caption{
+  display:block;grid-column:2 / 6;grid-row:5;
+  justify-self:stretch;align-self:center;
+ }
+}
+@media(min-width:771px) and (max-width:1220px){
+ #scene[data-mode="digital"] .scene-ground{
+  grid-template-columns:minmax(0,23fr) minmax(0,17fr) minmax(0,19fr) minmax(0,19fr) minmax(0,22fr);
+ }
+ #scene[data-mode="digital"] .receiver{width:min(110px,100%)}
+ #scene[data-mode="digital"] .lamp{width:min(135px,95%);height:136px}
+ #scene[data-mode="digital"] .lamp img{max-height:129px}
+ .digital-data-card code{font-size:14px;letter-spacing:0}
+}
+@media(max-width:770px){
+ #scene[data-mode="digital"] .scene-ground{
+  display:grid;grid-template-columns:minmax(115px,30%) minmax(0,70%);
+  grid-template-rows:auto auto auto;min-height:0;
+ }
+ #scene[data-mode="digital"] #source-station{display:none}
+ #scene[data-mode="digital"] .fader-station{grid-column:1;grid-row:1;align-self:stretch}
+ #scene[data-mode="digital"] .output{grid-column:2;grid-row:1;display:flex;flex-direction:column}
+ #scene[data-mode="digital"] .output-devices{display:flex}
+ #scene[data-mode="digital"] .power-source{display:flex}
+ #scene[data-mode="digital"] .digital-data-card{grid-column:1;grid-row:2}
+ #scene[data-mode="digital"] .digital-ac-card{grid-column:2;grid-row:2}
+ #scene[data-mode="digital"] .digital-path-caption{
+  display:block;grid-column:1 / -1;grid-row:3;margin-top:5px;
+ }
+ .digital-data-card code{font-size:14px;letter-spacing:0}
+}
+@media(max-width:510px){
+ #scene[data-mode="digital"] .scene-ground{
+  grid-template-columns:minmax(95px,32%) minmax(0,68%);
+ }
+ .digital-data-card,.digital-ac-card{padding:7px 3px}
+ .digital-data-card strong,.digital-ac-card strong{font-size:14px}
+ .digital-data-card code{font-size:14px;letter-spacing:0}
+}
+
 </style>
 </head>
 <body class="control-page eightbit-unified-width">
@@ -619,6 +723,20 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
   </div>
   <p class="weak-wave-caption">青いDCは明るさの指令。SCRは別電源のAC100Vを調整して電球へ送る。左右の電圧尺度は異なります。</p>
  </div>
+ <div class="digital-data-card" id="digital-data-card" hidden>
+  <strong>DMXの0/1データ</strong>
+  <code id="digital-byte" aria-label="このフェーダー位置に対応する8ビット値">10111111</code>
+  <span id="digital-byte-value">8bit 191 / 255</span>
+ </div>
+ <div class="digital-ac-card" id="digital-ac-card" hidden>
+  <strong>AC調光出力</strong>
+  <svg viewBox="0 0 240 48" preserveAspectRatio="none" role="img" aria-label="DMXに対応した位相制御式調光器が電球へ送る交流電圧波形">
+   <path class="scr-reference" id="digital-ac-reference"/>
+   <path class="scr-output" id="digital-output-wave"/>
+  </svg>
+  <span>トライアック式の例</span>
+ </div>
+ <p class="digital-path-caption" id="digital-path-caption" hidden>DMXは明るさの指令。調光器が別電源のAC100Vを調整し、電球へ送る。ここではトライアック式を例示。</p>
 </div>
 <div class="direct-card" id="direct-card">
  <div class="direct-main">
@@ -664,7 +782,7 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
 <div class="legend"><span><i class="swatch power"></i>アンバー：灯具用の電力</span><span><i class="swatch weak"></i>ブルー：弱電の指示・デジタルデータ</span><span>移動する光・数字は理解のための演出</span></div>
 <div class="below"><section class="panel history"><h3>▤ 歴史と位置づけ</h3><div id="history-text" class="history-details"><p>方式ごとに、必要になった理由と操作の変化を確認しよう。</p></div><div id="next-links"></div></section><section class="panel teacher eightbit-shared-teacher"><img src="assets/wave_teacher_transparent.svg?v=teacher-standard-20261014" alt="先生キャラクター"><div class="teacher-copy"><h3>先生のひとこと</h3><div class="teacher-bubble" id="teacher-message">見た目は同じフェーダー。でも強電制御では、フェーダーが100V系の電気を扱っているよ。</div></div></section></div>
 <details class="note-details"><summary>模式図の注意・補足</summary>
- <p>DC0〜10Vは明るさを指示する直流の制御電圧で、SCRがそのDCを交流へ変換するわけではありません。交流100Vは実効値（波形の頂点は約141V）。強電タブは可変抵抗式の単純化、弱電タブはSCR位相制御の一例で、実際の制御電圧・出力実効値・光束は単純比例とは限りません。内部配線・帰線・保護回路は省略。</p>
+ <p>DC0〜10Vは明るさを指示する直流の制御電圧で、SCRがそのDCを交流へ変換するわけではありません。交流100Vは実効値（波形の頂点は約141V）。強電タブは可変抵抗式の単純化、弱電タブはSCR位相制御の一例、デジタルタブはトライアック式DMX調光器の一例です。DMX調光器すべてが位相制御式というわけではなく、制御値・出力実効値・光束は単純比例とは限りません。内部配線・帰線・保護回路は省略。</p>
 </details>
 </main>
 <script>
@@ -708,13 +826,13 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
    links:[['8bit教材でSCRの波形を詳しく見る','Top.html?tab=sim8bit']]
   },
   digital:{
-   title:'デジタル制御｜位置を0と1のデータで送る',source:'フェーダー位置',sourceDesc:'デジタル値へ変換',fader:'位置をデジタル値へ',output:'DMXデータを送る',
+   title:'デジタル制御｜DMXの指令でAC電力を調整',source:'フェーダー位置',sourceDesc:'デジタル値へ変換',fader:'0と1のデータで明るさを指示',output:'DMX調光器が電力を調整',
    history:[
     ['ねらい','多数の灯りへ、より多くの指示をまとめて送ること。'],
-    ['しくみ','フェーダー位置を数値化し、DMXなどで受信側へ送る。8bitは0〜255の256段階。'],
-    ['変化','多くの回路の制御情報を通信線でまとめられる。16bitでは2つの値を組み合わせてさらに細かく指示できる。']
+    ['しくみ','フェーダー位置をDMXの数値で送る。8bitは0〜255の256段階。DMX調光器は別のAC電源を受け、灯具へ調光電力を供給する。図はトライアック式の例。'],
+    ['変化','通信線で多くの回路の指示をまとめられる。16bitでは2つの値を組み合わせて、より細かい指示もできる。']
    ],
-   teacher:'今度は電圧の大きさではなく、0と1で表す数値を送るよ。8bitと16bitの細かな操作は次の教材で体験してね。',
+   teacher:'DMXの0と1は明るさの指令。電球を光らせる電力は別のAC電源から来るよ。右の波形はトライアック式の調光出力の一例だよ。',
    readout:p=>Math.round(p*255/100)+' / 255',
    links:[['デジタル8bitを触る','Top.html?tab=sim8bit'],['デジタル16bitを触る','Top.html?tab=sim16bit']]
   }
@@ -729,7 +847,15 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
   const halo=p>0?' drop-shadow(0 0 '+Math.round(4+20*p)+'px rgba(255,178,59,'+(.17+.73*p).toFixed(2)+'))':'';
   $('bulb-img').style.filter='brightness('+(0.42+0.70*p).toFixed(2)+')'+halo;
   $('output-state').textContent=mode==='digital'?'DMX値 '+Math.round(value*255/100):mode==='weak'?'灯りのイメージ '+value+'%': '点灯イメージ '+value+'%';
-  if(mode==='digital')$('source-readout').textContent='位置 '+value+'%';
+  if(mode==='digital'){
+   const dmxValue=Math.round(value*255/100);
+   const byte=dmxValue.toString(2).padStart(8,'0');
+   $('source-readout').textContent='位置 '+value+'%';
+   $('digital-byte').textContent=byte;
+   $('digital-byte-value').textContent='8bit '+dmxValue+' / 255';
+   $('digital-output-wave').setAttribute('d',scrWaveformPath([0,24],[240,24],p));
+   bitNodes.forEach((n,i)=>{n.textContent=byte[i%8]});
+  }
   if(mode==='weak'){
    $('fader-caption').textContent='明るさの指示を送る';
    $('weak-command-badge').textContent='DC '+(value/10).toFixed(1)+'V';
@@ -742,19 +868,23 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
  function updateMode(){
   const d=models[mode];scene.dataset.mode=mode;$('scene-row').dataset.mode=mode;$('scene-title').textContent=d.title;$('source-readout').textContent=d.source;
   $('source-desc').textContent=d.sourceDesc;$('fader-caption').textContent=d.fader;
-  $('fader-heading').textContent=mode==='weak'?'① 指令を送る':'② フェーダーを動かす';
-  $('output-title').textContent=mode==='digital'?'③ 受信側と電球':mode==='weak'?'② SCRで調光':'③ 灯りを見る';
+  $('fader-heading').textContent=mode==='weak'||mode==='digital'?'① 指令を送る':'② フェーダーを動かす';
+  $('output-title').textContent=mode==='digital'?'② DMX調光器':mode==='weak'?'② SCRで調光':'③ 灯りを見る';
   $('weak-command-badge').hidden=mode!=='weak';
   $('weak-wave-panel').hidden=mode!=='weak';
+  $('digital-data-card').hidden=mode!=='digital';
+  $('digital-ac-card').hidden=mode!=='digital';
+  $('digital-path-caption').hidden=mode!=='digital';
+  if(mode==='digital')$('digital-ac-reference').setAttribute('d',scrWaveformPath([0,24],[240,24],1));
   if(mode==='weak'){
    $('weak-input-wave').setAttribute('d',dcSignalPath(value/100));
    $('weak-ac-reference').setAttribute('d',scrWaveformPath([0,24],[240,24],1));
   }
-  $('receiver-label').textContent=mode==='digital'?'DMX受信側':mode==='weak'?'SCR調光器':'調光ユニット';
-  $('receiver-sub').textContent=mode==='digital'?'データから出力へ':mode==='weak'?'青い指令で通電を制御':'制御指令を受け取る';
+  $('receiver-label').textContent=mode==='digital'?'DMX調光器':mode==='weak'?'SCR調光器':'調光ユニット';
+  $('receiver-sub').textContent=mode==='digital'?'データを受け電力調整':mode==='weak'?'青い指令で通電を制御':'制御指令を受け取る';
   $('dmx-media').hidden=mode!=='digital';
   $('output-note').textContent=mode==='power'?'フェーダーから出た調光電力が電球へ':mode==='weak'?'青＝明るさの指令 ／ アンバー＝灯具の電力':mode==='digital'?'0/1のデータを受けて灯具の明るさへ':'前のページを参照';
-  $('scene-explain').textContent=mode==='power'?'強電：両側の波形は同じ尺度。100%ではともにAC100V（可変抵抗式の簡略モデル）。':mode==='weak'?'弱電：青い0〜10Vの指令でSCRの通電開始位相を調整。灯具電力は別のAC電源から。':mode==='digital'?'デジタル：フェーダーの位置が0と1のビット列で伝わる。':'直接制御は「調光とは」で確認しよう。';
+  $('scene-explain').textContent=mode==='power'?'強電：両側の波形は同じ尺度。100%ではともにAC100V（可変抵抗式の簡略モデル）。':mode==='weak'?'弱電：青い0〜10Vの指令でSCRの通電開始位相を調整。灯具電力は別のAC電源から。':mode==='digital'?'デジタル：DMXの0/1は明るさの指令。調光器は別電源のAC電力を調整する（トライアック式の例）。':'直接制御は「調光とは」で確認しよう。';
   const history=$('history-text');history.replaceChildren();
   d.history.forEach(([heading,description])=>{
    const p=document.createElement('p'),strong=document.createElement('strong'),span=document.createElement('span');
@@ -883,13 +1013,27 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
    cable([uo[0],scrY],[l[0],scrY],'power');
    cable([up[0],m[1]],[up[0],up[1]],'power');
   }
-  if(mode==='digital'){cable(a,b,'weak');cable(c,u,'digital');cable(uo,l,'power');pointFrom=c;pointTo=u;
-   for(let i=0;i<9;i++){const t=document.createElementNS(NS,'text');t.textContent='01011100'[i%8];t.setAttribute('class','stream-bit');t.setAttribute('text-anchor','middle');svg.append(t);bitNodes.push(t)}
+  if(mode==='digital'){
+   // Same B-layout as weak: a command enters the central dimmer and
+   // a separate mains feed supplies the output power.
+   const scrY=(u[1]+uo[1])/2;
+   const faderBox=figure.getBoundingClientRect();
+   const faderExitX=faderBox.right-gr.left+2;
+   pointFrom=[faderExitX,scrY];pointTo=[u[0],scrY];
+   cable(pointFrom,pointTo,'digital');
+   cable([uo[0],scrY],[l[0],scrY],'power');
+   cable([up[0],m[1]],[up[0],up[1]],'power');
+   const byte=Math.round(value*255/100).toString(2).padStart(8,'0');
+   for(let i=0;i<6;i++){
+    const t=document.createElementNS(NS,'text');
+    t.textContent=byte[i%8];t.setAttribute('class','stream-bit');
+    t.setAttribute('text-anchor','middle');svg.append(t);bitNodes.push(t);
+   }
   }
  }
  function animate(ts){if(mode==='digital'&&pointFrom&&pointTo&&bitNodes.length&&!reduced){
   const dx=pointTo[0]-pointFrom[0],dy=pointTo[1]-pointFrom[1];const phase=(ts/2300)%1;
-  bitNodes.forEach((n,i)=>{const q=(phase+i/9)%1;n.setAttribute('x',String(pointFrom[0]+q*dx));n.setAttribute('y',String(pointFrom[1]+q*dy-9));n.style.opacity=q<.08||q>.94?'.18':'1'})
+  bitNodes.forEach((n,i)=>{const q=(phase+i/bitNodes.length)%1;n.setAttribute('x',String(pointFrom[0]+q*dx));n.setAttribute('y',String(pointFrom[1]+q*dy-9));n.style.opacity=q<.08||q>.94?'.18':'1'})
   }
   requestAnimationFrame(animate)
  }
