@@ -9,11 +9,16 @@ const Module_Sim8Bit = {
         <div class="sim8-workbench">
           <section class="sim8-input sim8-zone">
             <h2>① フェーダーを動かす</h2>
-            <p class="sim8-note">同じ位置で、2つの表示を比べよう。</p>
+            <p class="sim8-note">前ページと同じフェーダーで操作しよう。</p>
             <div class="sim8-position"><span>フェーダー位置</span><strong id="sim8bit-num-percent">75%</strong></div>
             <div class="sim8-fader">
-              <div class="sim8-scale"><span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span></div>
-              <input id="sim8bit-fader" type="range" min="0" max="255" step="1" value="191" aria-label="フェーダー：DMX値" orient="vertical">
+              <div class="sim8-scale" aria-hidden="true"><span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span></div>
+              <div class="sim8-fader-figure" id="sim8bit-fader" role="slider" tabindex="0"
+                   aria-label="8bitのフェーダー位置" aria-orientation="vertical"
+                   aria-valuemin="0" aria-valuemax="255" aria-valuenow="191">
+                <img class="sim8-fader-body" src="assets/control/fader-body.webp" alt="" width="278" height="688">
+                <img class="sim8-fader-cap" id="sim8bit-fader-cap" src="assets/control/fader-cap.png" alt="" width="89" height="89">
+              </div>
             </div>
             <div class="sim8-step"><button id="sim8bit-down" aria-label="DMX値を1下げる">−</button><button id="sim8bit-up" aria-label="DMX値を1上げる">＋</button></div>
           </section>
@@ -49,9 +54,29 @@ const Module_Sim8Bit = {
         if (!root) return;
         this.abort = new AbortController();
         const options = {signal: this.abort.signal};
-        root.querySelector('#sim8bit-fader').addEventListener('input', e => {
-            this.dmx8Bit = Number(e.target.value); this.updateSystem();
-        }, options);
+        const fader=root.querySelector('#sim8bit-fader');
+        const valueAtY=(y)=>{
+            const rect=fader.getBoundingClientRect();
+            if (!rect.height) return this.dmx8Bit;
+            // Same approved artwork/throw as DimmingControl: 100% top / 0% bottom.
+            return Math.round(Math.max(0,Math.min(1,(0.84-(y-rect.top)/rect.height)/0.67))*255);
+        };
+        fader.addEventListener('pointerdown',e=>{
+            e.preventDefault();fader.focus();fader.setPointerCapture(e.pointerId);
+            this.dmx8Bit=valueAtY(e.clientY);this.updateSystem();
+        },options);
+        fader.addEventListener('pointermove',e=>{
+            if(fader.hasPointerCapture(e.pointerId)){
+                this.dmx8Bit=valueAtY(e.clientY);this.updateSystem();
+            }
+        },options);
+        fader.addEventListener('keydown',e=>{
+            const delta={ArrowUp:1,ArrowRight:1,ArrowDown:-1,ArrowLeft:-1,PageUp:10,PageDown:-10}[e.key];
+            if(delta){e.preventDefault();this.adjustFaderValue(delta);}
+            else if(e.key==='Home'||e.key==='End'){
+                e.preventDefault();this.dmx8Bit=e.key==='Home'?0:255;this.updateSystem();
+            }
+        },options);
         root.querySelector('#sim8bit-up').addEventListener('click', () => this.adjustFaderValue(1), options);
         root.querySelector('#sim8bit-down').addEventListener('click', () => this.adjustFaderValue(-1), options);
         root.querySelectorAll('[data-sim8-view]').forEach(button => button.addEventListener('click', () => {
@@ -92,8 +117,12 @@ const Module_Sim8Bit = {
     updateSystem() {
         const root = document.querySelector('.sim8-workbench');
         if (!root) return;
-        document.getElementById('sim8bit-fader').value = this.dmx8Bit;
-        document.getElementById('sim8bit-num-percent').textContent = Math.round(this.dmx8Bit / 255 * 100) + '%';
+        const fader=root.querySelector('#sim8bit-fader');
+        const position=this.dmx8Bit/255;
+        fader.setAttribute('aria-valuenow',String(this.dmx8Bit));
+        fader.setAttribute('aria-valuetext',Math.round(position*100)+'パーセント、8bit値 '+this.dmx8Bit);
+        root.querySelector('#sim8bit-fader-cap').style.top=(77.5-66*position)+'%';
+        document.getElementById('sim8bit-num-percent').textContent = Math.round(position*100) + '%';
         root.querySelectorAll('[data-sim8-view]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.sim8View === this.current8bitView)));
         root.querySelectorAll('[data-sim8-curve]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.sim8Curve === this.curveMode)));
         const factor = this.getCurveFactor(this.dmx8Bit, this.curveMode);
@@ -105,10 +134,10 @@ const Module_Sim8Bit = {
         document.getElementById('sim8bit-light-state').textContent = this.dmx8Bit === 0 ? '消灯' : this.dmx8Bit === 255 ? '最大の指示で点灯' : '点灯中';
         const teacher = document.getElementById('sim8-teacher-message');
         if (teacher) teacher.innerHTML = this.current8bitView === 'digital'
-          ? 'DMXは電圧ではなく、数字。<br>同じ位置で表示を比べよう。'
+          ? '「制御とは」で学んだDMXの指令は数字。<br>8個の0／1で、今の位置をどう表すかな？'
           : this.current8bitView === 'curve'
-          ? 'フェーダー位置をそのままにして、<br>カーブを変えるとどうなるかな？'
-          : 'こちらは灯体へ出す電圧と波形。<br>デジタルに切り替えると、同じ位置をどう表すかな？';
+          ? 'フェーダー位置をそのままにして、<br>調光器の出力カーブを変えてみよう。'
+          : '前ページのDC0〜10Vは制御指令。<br>ここは電球側のAC出力波形だよ。混同しないでね。';
         this.drawGraph();
     },
     drawGraph(size) {
