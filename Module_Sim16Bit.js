@@ -4,7 +4,7 @@ const Module_Sim16Bit = {
     getHTML() {
         const fader = (id, title, description, value) => `<section class="s16-fader-card ${id}">
           <h3>${title}</h3><p>${description}</p><output id="s16-${id}-value">${value}</output>
-          <div class="s16-fader-row"><div class="s16-scale"><span>255</span><span>192</span><span>128</span><span>64</span><span>0</span></div>
+          <div class="s16-fader-row">
           <div class="s16-vertical s16-fader-figure" id="s16-${id}"
                role="slider" tabindex="0" aria-label="${title}：${description}"
                aria-orientation="vertical" aria-valuemin="0" aria-valuemax="255"
@@ -50,7 +50,7 @@ const Module_Sim16Bit = {
                 return Math.round(Math.max(0,Math.min(1,(0.84-(y-rect.top)/rect.height)/0.67))*255);
             };
             figure.addEventListener('pointerdown',e=>{
-                e.preventDefault();figure.focus();figure.setPointerCapture(e.pointerId);
+                e.preventDefault();figure.setPointerCapture(e.pointerId);
                 this.setValue(id,atY(e.clientY));
             },opts);
             figure.addEventListener('pointermove',e=>{
