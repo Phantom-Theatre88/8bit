@@ -500,13 +500,43 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
  #scene[data-mode="weak"] .lamp img{max-height:129px}
 }
 @media(max-width:770px){
- /* Portrait/narrow fallback retains the present accessible two-stage view.
-    Do not apply the wide five-slot instructional path at tiny widths. */
+ /* In narrow viewports the SCR, bulb and mains keep their upper row;
+    put BOTH graphs below rather than letting the grid place an extra
+    third content item underneath the fader by accident. */
  body.control-page{min-height:100dvh}
  .scene-row{flex:0 0 auto}
  .scene-row .lesson-scene{display:block}
  .scene-row .scene-ground{display:grid;min-height:340px}
+ #scene[data-mode="weak"] .scene-ground{
+   grid-template-columns:minmax(115px,30%) minmax(0,70%);
+   grid-template-rows:auto auto;
+   min-height:0;
+ }
+ #scene[data-mode="weak"] #source-station{display:none}
+ #scene[data-mode="weak"] .fader-station{
+   grid-column:1;grid-row:1;align-self:stretch;min-width:0;
+ }
+ #scene[data-mode="weak"] .output{
+   grid-column:2;grid-row:1;display:flex;min-width:0;
+ }
+ #scene[data-mode="weak"] .weak-wave-panel{
+   display:block;grid-column:1 / -1;grid-row:2;
+   width:100%;align-self:start;margin:6px 0 0;
+ }
+ #scene[data-mode="weak"] .weak-wave-compare{
+   display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;
+ }
+ #scene[data-mode="weak"] .weak-wave-chart{
+   display:block;width:100%;min-width:0;
+ }
+ #scene[data-mode="weak"] .weak-wave-chart span{font-size:14px}
+ #scene[data-mode="weak"] .weak-command-badge{font-size:14px}
  .teacher img{width:112px;height:126px}
+}
+@media(max-width:510px){
+ #scene[data-mode="weak"] .scene-ground{grid-template-columns:minmax(92px,32%) minmax(0,68%)}
+ #scene[data-mode="weak"] .weak-wave-compare{grid-template-columns:minmax(0,1fr);gap:7px}
+ #scene[data-mode="weak"] .weak-wave-chart svg{height:48px}
 }
 
 </style>
