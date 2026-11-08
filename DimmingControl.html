@@ -399,6 +399,116 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
  .scene-row .mode-tab{min-height:52px}
 }
 
+
+/* B layout 2026-11-08: command voltage BEFORE the middle SCR, load power
+   AFTER it. The separate AC100V source feeds the SCR from below.
+   This is an instructional signal path, not a transformer primary/secondary.
+   Do not shrink device art merely to force a single viewport. */
+body.control-page{display:flex;flex-direction:column;min-height:100vh;min-height:100dvh}
+body.control-page> #shared-console-header-root{flex:0 0 auto}
+body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
+.scene-row{flex:1 0 auto}
+.scene-row .lesson-scene{display:flex;flex-direction:column}
+.scene-row .scene-header,.scene-row .scene-footer{flex:0 0 auto}
+.scene-row .scene-ground{flex:1 0 auto}
+.scene-row .direct-card{flex:1 0 auto}
+@media(min-width:771px){
+ /* Own the actual available space without independent iPad height clamps. */
+ .scene-row .scene-ground{min-height:352px}
+ #scene[data-mode="power"] .fader-figure,
+ #scene[data-mode="digital"] .fader-figure{height:248px;max-height:none}
+ #scene[data-mode="weak"] .fader-figure{height:225px;max-height:none}
+ .below{min-height:175px}
+ .teacher img{width:128px;height:148px}
+ .scene-row .scene-ground #source-station,
+ .scene-row .scene-ground .fader-station{min-width:0}
+ #scene[data-mode="weak"] .scene-ground{
+   display:grid;min-height:385px;
+   grid-template-columns:minmax(0,24fr) minmax(0,16fr) minmax(0,18fr) minmax(0,18fr) minmax(0,24fr);
+   grid-template-rows:45px 39px minmax(150px,1fr) 69px minmax(45px,auto);
+   align-items:stretch;
+ }
+ #scene[data-mode="weak"] #source-station{display:none}
+ #scene[data-mode="weak"] .fader-station{
+   grid-column:1;grid-row:1 / span 5;align-self:stretch;
+   justify-content:center;gap:5px;padding:4px 3px;
+ }
+ #scene[data-mode="weak"] .output,
+ #scene[data-mode="weak"] .output-devices,
+ #scene[data-mode="weak"] .weak-wave-panel,
+ #scene[data-mode="weak"] .weak-wave-compare{display:contents}
+ #scene[data-mode="weak"] .output-title-placeholder{display:none}
+ #scene[data-mode="weak"] #output-title{
+   grid-column:3;grid-row:1;align-self:center;justify-self:center;
+   margin:0;font-size:15px;text-align:center;line-height:1.3;white-space:normal;
+ }
+ #scene[data-mode="weak"] .weak-command-badge{
+   grid-column:2;grid-row:2;justify-self:center;align-self:center;
+   display:block;width:max-content;max-width:100%;min-width:0;
+   margin:0;padding:3px 6px;font-size:14px;white-space:nowrap;
+ }
+ #scene[data-mode="weak"] .receiver{
+   grid-column:3;grid-row:3;justify-self:center;align-self:center;
+   width:min(116px,100%);min-height:88px;margin:0;z-index:4;
+   padding:6px 4px;
+ }
+ #scene[data-mode="weak"] .receiver strong{font-size:15px}
+ #scene[data-mode="weak"] .receiver small{font-size:14px;line-height:1.25}
+ #scene[data-mode="weak"] .lamp{
+   grid-column:5;grid-row:3;justify-self:center;align-self:center;
+   width:min(155px,95%);max-width:100%;height:154px;z-index:4;
+ }
+ #scene[data-mode="weak"] .lamp img{max-height:147px}
+ #scene[data-mode="weak"] .power-source{
+   grid-column:3;grid-row:4;justify-self:center;align-self:center;
+   width:100%;min-width:0;max-width:175px;min-height:54px;
+   margin:0;padding:4px 5px;font-size:14px;line-height:1.24;
+ }
+ #scene[data-mode="weak"] .power-source img{width:24px;height:33px;flex:none}
+ #scene[data-mode="weak"] .weak-wave-panel h4{display:none}
+ #scene[data-mode="weak"] .weak-wave-chart{
+   position:relative;z-index:5;min-width:0;width:100%;
+   justify-self:stretch;align-self:center;display:block;
+   padding:6px 3px 4px;border:1px solid #49697b;border-radius:6px;
+   background:#192a36;
+ }
+ #scene[data-mode="weak"] .weak-dc-chart{grid-column:2;grid-row:3}
+ #scene[data-mode="weak"] .weak-ac-chart{grid-column:4;grid-row:3}
+ #scene[data-mode="weak"] .weak-wave-chart span{
+   display:block;white-space:normal;font-size:14px;line-height:1.3;
+   text-align:center;min-height:36px;margin:0 0 2px;color:#d6eaf3;
+ }
+ #scene[data-mode="weak"] .weak-wave-chart svg{
+   display:block;width:100%;height:63px;overflow:hidden;border-bottom:0;
+ }
+ #scene[data-mode="weak"] .weak-wave-caption{
+   grid-column:2 / 6;grid-row:5;align-self:center;justify-self:stretch;
+   margin:0;padding:3px 6px;text-align:center;color:#c6dfed;
+   font-size:14px;line-height:1.35;
+ }
+ #scene[data-mode="weak"] #output-state,
+ #scene[data-mode="weak"] #output-note{display:none}
+}
+@media(min-width:771px) and (max-width:1220px){
+ #scene[data-mode="weak"] .scene-ground{
+  grid-template-columns:minmax(0,23fr) minmax(0,17fr) minmax(0,19fr) minmax(0,19fr) minmax(0,22fr);
+ }
+ #scene[data-mode="weak"] .weak-wave-chart{padding:4px 2px}
+ #scene[data-mode="weak"] .weak-wave-chart span{font-size:14px}
+ #scene[data-mode="weak"] .receiver{width:min(106px,100%)}
+ #scene[data-mode="weak"] .lamp{width:min(133px,95%);height:136px}
+ #scene[data-mode="weak"] .lamp img{max-height:129px}
+}
+@media(max-width:770px){
+ /* Portrait/narrow fallback retains the present accessible two-stage view.
+    Do not apply the wide five-slot instructional path at tiny widths. */
+ body.control-page{min-height:100dvh}
+ .scene-row{flex:0 0 auto}
+ .scene-row .lesson-scene{display:block}
+ .scene-row .scene-ground{display:grid;min-height:340px}
+ .teacher img{width:112px;height:126px}
+}
+
 </style>
 </head>
 <body class="control-page eightbit-unified-width">
@@ -428,18 +538,20 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
  </div><div class="steps"><button id="step-down" type="button" aria-label="フェーダーを1パーセント下げる">−</button><button id="step-up" type="button" aria-label="フェーダーを1パーセント上げる">＋</button></div><p class="fader-caption" id="fader-caption">このフェーダーに100V系の電気</p>
  <span class="port" id="port-fader-in"></span><span class="port" id="port-fader-out"></span></div>
 <div class="station output" id="output-station"><h3 id="output-title">③ 電球の明るさ</h3>
- <div class="weak-command-badge" id="weak-command-badge" hidden>青い指令：DC 7.5V</div>
+ <div class="weak-command-badge" id="weak-command-badge" hidden>DC 7.5V</div>
  <div class="output-devices">
   <div class="receiver" id="receiver"><strong id="receiver-label">調光ユニット</strong><small id="receiver-sub">指示を受け取る</small><img class="tiny-dmx" id="dmx-media" src="assets/control/dmx-5pin-approved.webp" alt="DMX 5ピンコネクター" hidden><span class="port" id="port-unit"></span><span class="port" id="port-unit-out"></span><span class="port" id="port-unit-power"></span></div>
   <div class="lamp" id="lamp"><div class="lamp-glow" id="lamp-glow"></div><img src="assets/Light.webp" width="220" height="360" alt="既存教材と共通の白熱電球" id="bulb-img"><div class="filament" id="filament"></div><span class="port" id="port-lamp"></span></div>
 
  </div>
  <div class="power-source" id="remote-mains"><img src="assets/control/outlet.webp" alt="" width="228" height="332"><span>別電源：AC100V<br>灯具を点ける電力</span><span class="port" id="port-mains"></span></div>
+
+ <output id="output-state" class="output-status">点灯イメージ 75%</output><p class="output-note" id="output-note">フェーダーから調光された電力が電球へ</p></div>
  <div class="weak-wave-panel" id="weak-wave-panel" aria-label="DCの制御電圧とACの調光出力" hidden>
-  <h4>③ 直流の指令で、交流の通電部分が変わる</h4>
+  <h4>DCの指令 → SCRでAC出力を調整</h4>
   <div class="weak-wave-compare">
    <div class="weak-wave-chart weak-dc-chart">
-    <span>DC（直流）0〜10Vの指令</span>
+    <span>DC（直流）指令</span>
     <svg viewBox="0 0 240 48" preserveAspectRatio="none" role="img" aria-label="操作位置で高さが変わり、操作を止めると一定になる直流の制御電圧">
      <path class="weak-dc-reference" d="M33 11H234 M33 39H234"/>
      <path class="weak-dc-level" id="weak-input-wave" d="M33 18H234"/>
@@ -447,16 +559,15 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
     </svg>
    </div>
    <div class="weak-wave-chart weak-ac-chart">
-    <span>AC（交流）100V系の調光出力</span>
+    <span>AC（交流）出力</span>
     <svg viewBox="0 0 240 48" preserveAspectRatio="none" role="img" aria-label="SCRが交流の通電開始位相を変えて出力する波形">
      <path class="scr-reference" id="weak-ac-reference"/>
      <path class="scr-output" id="weak-output-wave"/>
     </svg>
    </div>
   </div>
-  <p class="weak-wave-caption">青は電圧の大きさで明るさを指示する直流。アンバーは別の電源から来る交流。左右の電圧尺度は異なります。</p>
+  <p class="weak-wave-caption">青いDCは明るさの指令。SCRは別電源のAC100Vを調整して電球へ送る。左右の電圧尺度は異なります。</p>
  </div>
- <output id="output-state" class="output-status">点灯イメージ 75%</output><p class="output-note" id="output-note">フェーダーから調光された電力が電球へ</p></div>
 </div>
 <div class="direct-card" id="direct-card">
  <div class="direct-main">
@@ -570,7 +681,7 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
   if(mode==='digital')$('source-readout').textContent='位置 '+value+'%';
   if(mode==='weak'){
    $('fader-caption').textContent='明るさの指示を送る';
-   $('weak-command-badge').textContent='青い指令：DC '+(value/10).toFixed(1)+'V';
+   $('weak-command-badge').textContent='DC '+(value/10).toFixed(1)+'V';
    $('weak-input-wave').setAttribute('d',dcSignalPath(p));
    $('weak-output-wave').setAttribute('d',scrWaveformPath([0,24],[240,24],p));
   }
@@ -581,7 +692,7 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
   const d=models[mode];scene.dataset.mode=mode;$('scene-row').dataset.mode=mode;$('scene-title').textContent=d.title;$('source-readout').textContent=d.source;
   $('source-desc').textContent=d.sourceDesc;$('fader-caption').textContent=d.fader;
   $('fader-heading').textContent=mode==='weak'?'① 指令を送る':'② フェーダーを動かす';
-  $('output-title').textContent=mode==='digital'?'③ 受信側と電球':mode==='weak'?'② SCRが電力を調整':'③ 灯りを見る';
+  $('output-title').textContent=mode==='digital'?'③ 受信側と電球':mode==='weak'?'② SCRで調光':'③ 灯りを見る';
   $('weak-command-badge').hidden=mode!=='weak';
   $('weak-wave-panel').hidden=mode!=='weak';
   if(mode==='weak'){
