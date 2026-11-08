@@ -114,14 +114,15 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
 #scene[data-mode="weak"] .source-readout{display:none}
 #scene[data-mode="weak"] .source-description{min-height:25px}
 #scene[data-mode="weak"] .output{gap:3px}
-#scene[data-mode="weak"] .output-devices{height:158px;justify-content:space-between;padding:0 15px}
-#scene[data-mode="weak"] .receiver{width:127px;min-height:80px}
-#scene[data-mode="weak"] .lamp{width:145px;height:142px}
+#scene[data-mode="weak"] .scene-ground{grid-template-columns:21% 26% 53%}
+#scene[data-mode="weak"] .output-devices{height:158px;justify-content:space-between;padding:0 8px}
+#scene[data-mode="weak"] .receiver{width:119px;min-height:80px}
+#scene[data-mode="weak"] .lamp{width:121px;height:142px}
 #scene[data-mode="weak"] .lamp img{max-height:139px}
 #scene[data-mode="weak"] .power-source{min-width:158px;max-width:175px;min-height:44px;margin-left:6%;font-size:11px;line-height:1.3;padding:4px 8px}
 #scene[data-mode="weak"] .output-note{font-size:12px}
 #scene[data-mode="weak"] .output-status{font-size:15px;color:#ffd38f}
-@media(max-width:770px){#scene[data-mode="weak"] .output-devices{padding:0 4px}#scene[data-mode="weak"] .power-source{min-width:100px;max-width:140px;font-size:10px}}
+@media(max-width:770px){#scene[data-mode="weak"] .scene-ground{grid-template-columns:20% 25% 55%}#scene[data-mode="weak"] .output-devices{padding:0 4px}#scene[data-mode="weak"] .receiver{width:100px}#scene[data-mode="weak"] .lamp{width:95px}#scene[data-mode="weak"] .power-source{min-width:100px;max-width:140px;font-size:10px}}
 /* Main interactive circuit at left; independently framed historic equipment at right.
    Shared teacher/nav styling and every circuit component remain unchanged. */
 .scene-row{display:grid;grid-template-columns:minmax(0,1fr) 258px;align-items:stretch;gap:12px;min-width:0}
@@ -139,9 +140,17 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
 .artifact-photo small{font-size:13px;color:#bed2dd;line-height:1.35}
 .artifact-photo .photo-credit{font-size:12px;color:#99dafb;line-height:1.4;text-decoration:underline;text-underline-offset:2px}
 .scene-row[data-mode="power"] .artifact-resistor,
-.scene-row[data-mode="direct"] .artifact-dimpac{display:none}
-.scene-row[data-mode="weak"],.scene-row[data-mode="digital"]{grid-template-columns:minmax(0,1fr)}
-.scene-row[data-mode="weak"] .equipment-panel,.scene-row[data-mode="digital"] .equipment-panel{display:none}
+.scene-row[data-mode="power"] .artifact-scr,
+.scene-row[data-mode="direct"] .artifact-dimpac,
+.scene-row[data-mode="direct"] .artifact-scr,
+.scene-row[data-mode="weak"] .artifact-dimpac,
+.scene-row[data-mode="weak"] .artifact-resistor{display:none}
+.scene-row[data-mode="digital"]{grid-template-columns:minmax(0,1fr)}
+.scene-row[data-mode="digital"] .equipment-panel{display:none}
+.artifact-scr>a:first-of-type{height:245px;background:#eef1f3}
+.artifact-scr small{font-size:12px}
+@media(max-width:1100px) and (min-width:771px){.artifact-scr>a:first-of-type{height:213px}}
+@media(max-width:770px){.artifact-scr>a:first-of-type{height:148px}}
 @media(min-width:771px) and (max-width:1100px){
  .scene-row{grid-template-columns:minmax(0,1fr) 215px;gap:9px}
  .equipment-panel{padding:10px}
@@ -168,6 +177,13 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
 .wave-output{stroke:#ffd69c}
 .wave-label{fill:#fff0d2;font:700 11.5px "Hiragino Sans","Yu Gothic",Meiryo,system-ui,sans-serif;paint-order:stroke;stroke:#1d2a36;stroke-width:3px;stroke-linejoin:round}
 @media(max-width:770px){.wave-label{font-size:10px}}
+/* Weak-control SCR example: cyan changes the firing angle, but never
+   carries lamp power. Amber output is phase-chopped mains, with the
+   original AC trace shown faintly at the SAME time/voltage scale. */
+.scr-reference{fill:none;stroke:#b6a18c;stroke-width:1.6;stroke-dasharray:4 5;opacity:.70;stroke-linejoin:round}
+.scr-output{fill:none;stroke:#ffcb83;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;filter:drop-shadow(0 0 4px #ffae48)}
+.scr-wave-label{font:700 12px "Hiragino Sans","Yu Gothic",Meiryo,system-ui,sans-serif;fill:#ffe0a8;paint-order:stroke;stroke:#1e2b36;stroke-width:3px;stroke-linejoin:round}
+@media(max-width:770px){.scr-wave-label{font-size:10px}}
 </style>
 </head>
 <body class="control-page eightbit-unified-width">
@@ -236,11 +252,20 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
   <strong>NW型金属抵抗式調光器</strong><small>接点を機械的に動かす方式</small>
   <a class="photo-credit" href="https://sts.kahaku.go.jp/diversity/document/browse/2024_saeki/" target="_blank" rel="noopener noreferrer">出典：国立科学博物館 調査報告・図4.23</a>
  </aside>
+ <aside class="artifact-photo artifact-scr" aria-label="弱電制御とSCRの実機写真">
+  <div class="artifact-photo-head">実機を見る｜1960年代</div>
+  <a href="https://sts.kahaku.go.jp/material/2025pdf/no386.pdf" target="_blank" rel="noopener noreferrer" aria-label="国立科学博物館の東芝SCR電球調光ユニットの公式資料を開く">
+   <img src="https://sts.kahaku.go.jp/plan/2025/ft_panel18/imgs/img_386.png" loading="lazy" decoding="async" alt="東芝SCR電球調光ユニット。上は3kWのUL-10308-5、下は6kWのUL-10608-5A。">
+   <span class="photo-fallback" hidden>国立科学博物館で実機写真を見る</span>
+  </a>
+  <strong>東芝 SCR電球調光ユニット</strong><small>3kW（1965年）／6kW（1967年）</small>
+  <a class="photo-credit" href="https://sts.kahaku.go.jp/material/2025pdf/no386.pdf" target="_blank" rel="noopener noreferrer">写真：国立科学博物館｜未来技術遺産 第00386号</a>
+ </aside>
 </aside>
 </div>
 <div class="legend"><span><i class="swatch power"></i>アンバー：灯具用の電力</span><span><i class="swatch weak"></i>ブルー：弱電の指示・デジタルデータ</span><span>移動する光・数字は理解のための演出</span></div>
 <div class="below"><section class="panel history"><h3>▤ 歴史と位置づけ</h3><p id="history-text">操作器と調光器が一体の強電操作から、低電圧の遠隔操作へ。ここではフェーダーが扱うものを比べよう。</p><div id="next-links"></div></section><section class="panel teacher eightbit-shared-teacher"><img src="assets/wave_teacher_transparent.svg?v=teacher-standard-20261014" alt="先生キャラクター"><div class="teacher-copy"><h3>先生のひとこと</h3><div class="teacher-bubble" id="teacher-message">見た目は同じフェーダー。でも強電制御では、フェーダーが100V系の電気を扱っているよ。</div></div></section></div>
-<p class="note">※理解のための模式図。波形は電圧の時間変化であり、電流が一方向へ移動する図ではありません。強電の出力は可変抵抗式の概念を単純化した正弦波振幅モデルで、すべての調光方式を表すものではありません。帰線・保護回路・調光器内部の配線は省略。電球の光はイメージです。</p>
+<p class="note">※理解のための模式図。波形は電圧の時間変化であり、電流が一方向へ移動する図ではありません。強電タブは可変抵抗式の正弦波振幅モデル、弱電タブの出力はSCR位相制御式の例です。DC0〜10Vの指令値とSCRの出力実効電圧は単純な比例関係とは限りません。帰線・保護回路・内部配線は省略。電球の光はイメージです。</p>
 </main>
 <script>
 (()=>{
@@ -249,11 +274,11 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
  const scene=$('scene'),ground=$('scene-ground'),svg=$('wire-layer'),figure=$('fader-figure'),cap=$('fader-cap');
  const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
  let mode='power',value=75,wireSegments=[],bitNodes=[],bitStart=0,pointFrom=null,pointTo=null;
- let powerOutputTrace=null,powerOutputFrom=null,powerOutputTo=null,powerOutputLabel=null,weakSignalLabel=null;
+ let powerOutputTrace=null,powerOutputFrom=null,powerOutputTo=null,powerOutputLabel=null,weakSignalLabel=null,scrOutputTrace=null,scrFrom=null,scrTo=null;
  const models={
  direct:{title:'直接制御｜詳しい仕組みは前の教材へ',source:'機械の動き',sourceDesc:'ワイヤ・ノブの操作',fader:'機械的に伝える',output:'',history:'水抵抗式・スライダック・1934年の機械式を「調光とは」で紹介しています。操作部と機構の連動をそちらで確かめよう。',teacher:'直接制御は前のページで見たね。ここでは新しく描き直さず、次の強電・弱電を比べよう。',readout:p=>p+'%',links:[['「調光とは」で機構を見る','DimmingIntro.html']]},
  power:{title:'強電制御｜フェーダーが100V系の電気を扱う',source:'AC100V',sourceDesc:'電源からフェーダーへ',fader:'フェーダーに100V系の電気',output:'電球の明るさ',history:'強電制御では、フェーダーの操作部が灯具用の100V系の電気を扱う。左の入力は常にAC100V、右の出力は電球にかかる電圧がフェーダーで変わる。ここでは可変抵抗式の概念を正弦波の高さで表現。操作器と調光器が一体になった卓の例にディムパックがあるが、機種内部を再現した図ではない。',teacher:'入力の波は100Vで一定。フェーダーを下げると、出力側は正弦波の形を保ったまま小さくなるよ。電球の明るさも見比べよう。',readout:p=>'操作位置 '+p+'%',links:[]},
- weak:{title:'弱電制御｜フェーダーはDC0〜10Vの指示',source:'操作用電源',sourceDesc:'低電圧の操作側',fader:'操作側の低電圧を扱う',output:'調光器へ指示',history:'弱電制御ではフェーダーが扱うのはDC0〜10Vの制御電圧。これだけで電球を点灯させるのではなく、明るさの「指令」を離れた調光ユニットへ送る。調光ユニットには別のAC100V電源が入り、灯具へ必要な電力を供給する。操作する人が高い電圧の回路から離れられるのが大きな違い。',teacher:'0〜10Vになるのはフェーダーから出る制御信号。左側に何Vかを何度も表示するより、青い指令と別の100V電源を見比べよう。',readout:p=>(p/10).toFixed(1)+' V（指令）',links:[]},
+ weak:{title:'弱電制御｜0〜10Vの指令でSCRの電力を操る',source:'操作用電源',sourceDesc:'低電圧の操作側',fader:'フェーダーからDC0〜10Vの指令',output:'SCRで灯具電力を調整',history:'弱電制御では、フェーダーが扱うDC0〜10Vは明るさの指令。ここではSCR（サイリスタ）式を例に、指令に応じて調光ユニットが交流の通電開始位相を調整する。電球を点ける電力は別のAC100V電源から供給され、青い信号線自体では点灯しない。弱電制御はSCR専用ではなく、電動変圧器などにも用いられた。東芝の写真は1965／1967年製の実機。',teacher:'青い指令を変えると、SCRが交流を通し始める位置が変わるよ。破線は元の交流、アンバーが電球へ出す部分。詳しい波形は8bit教材で確かめよう。',readout:p=>(p/10).toFixed(1)+' V（指令）',links:[['8bit教材で波形を詳しく見る','Top.html?tab=sim8bit']]},
  digital:{title:'デジタル制御｜位置を0と1のデータで送る',source:'フェーダー位置',sourceDesc:'デジタル値へ変換',fader:'位置をデジタル値へ',output:'DMXデータを送る',history:'DMX512は1986年に策定され、1980〜90年代に普及。0〜255の8bit値、2バイトを組み合わせた16bitの細かな操作は、次の完成済み教材で体験できます。',teacher:'今度はケーブルに01011100…のようなビット列。実際の通信はずっと速いので、ここはゆっくり見せているよ。',readout:p=>Math.round(p*255/100)+' / 255',links:[['デジタル8bitを触る','Top.html?tab=sim8bit'],['デジタル16bitを触る','Top.html?tab=sim16bit']]}
  };
  function percent(v){return Math.min(100,Math.max(0,Math.round(v)))}
@@ -267,20 +292,25 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
   $('bulb-img').style.filter='brightness('+(0.42+0.70*p).toFixed(2)+')'+halo;
   $('output-state').textContent=mode==='digital'?'DMX値 '+Math.round(value*255/100):mode==='weak'?'灯りのイメージ '+value+'%': '点灯イメージ '+value+'%';
   if(mode==='digital')$('source-readout').textContent='位置 '+value+'%';
-  if(mode==='weak'){ $('fader-caption').textContent='弱電で明るさを指示する'; if(weakSignalLabel)weakSignalLabel.textContent='制御指令 DC '+(value/10).toFixed(1)+'V'; }
+  if(mode==='weak'){
+   $('fader-caption').textContent='弱電で明るさを指示する';
+   if(weakSignalLabel)weakSignalLabel.textContent='制御指令 DC '+(value/10).toFixed(1)+'V';
+   if(scrOutputTrace&&scrFrom&&scrTo)scrOutputTrace.setAttribute('d',scrWaveformPath(scrFrom,scrTo,p));
+  }
   if(mode==='power')$('source-readout').textContent='AC100V';
   if(mode==='power'&&powerOutputTrace&&powerOutputFrom&&powerOutputTo){powerOutputTrace.setAttribute('d',waveformPath(powerOutputFrom,powerOutputTo,value/100));powerOutputTrace.style.opacity='1';if(powerOutputLabel)powerOutputLabel.textContent='出力 '+value+'V（模式）';}
  }
  function updateMode(){
   const d=models[mode];scene.dataset.mode=mode;$('scene-row').dataset.mode=mode;$('scene-title').textContent=d.title;$('source-readout').textContent=d.source;
   $('source-desc').textContent=d.sourceDesc;$('fader-caption').textContent=d.fader;
-  $('output-title').textContent=mode==='digital'?'③ 受信側と電球':mode==='weak'?'③ 調光器と電球':'③ 灯りを見る';
-  $('receiver-label').textContent=mode==='digital'?'DMX受信側':'調光ユニット';
-  $('receiver-sub').textContent=mode==='digital'?'データから出力へ':'制御指令を受け取る';
+  $('output-title').textContent=mode==='digital'?'③ 受信側と電球':mode==='weak'?'③ SCRと電球':'③ 灯りを見る';
+  $('receiver-label').textContent=mode==='digital'?'DMX受信側':mode==='weak'?'SCR調光器':'調光ユニット';
+  $('receiver-sub').textContent=mode==='digital'?'データから出力へ':mode==='weak'?'青い指令で通電を制御':'制御指令を受け取る';
   $('dmx-media').hidden=mode!=='digital';
   $('output-note').textContent=mode==='power'?'フェーダーから出た調光電力が電球へ':mode==='weak'?'青＝明るさの指令 ／ アンバー＝灯具の電力':mode==='digital'?'0/1のデータを受けて灯具の明るさへ':'前のページを参照';
-  $('scene-explain').textContent=mode==='power'?'強電：両側の波形は同じ尺度。100%ではともにAC100V（可変抵抗式の簡略モデル）。':mode==='weak'?'弱電：フェーダーからのDC0〜10Vは指令。灯具の電力は別系統のAC電源から。':mode==='digital'?'デジタル：フェーダーの位置が0と1のビット列で伝わる。':'直接制御は「調光とは」で確認しよう。';
+  $('scene-explain').textContent=mode==='power'?'強電：両側の波形は同じ尺度。100%ではともにAC100V（可変抵抗式の簡略モデル）。':mode==='weak'?'弱電：青い0〜10Vの指令でSCRの通電開始位相を調整。灯具電力は別のAC電源から。':mode==='digital'?'デジタル：フェーダーの位置が0と1のビット列で伝わる。':'直接制御は「調光とは」で確認しよう。';
   $('history-text').textContent=d.history;$('teacher-message').textContent=d.teacher;
+  $('equipment-panel').querySelector('.equipment-lead').textContent=mode==='weak'?'弱い指令で大きな電力を制御した実機。':'操作の仕組みと実際の機器を見比べよう。';
   const links=$('next-links');links.replaceChildren();d.links.forEach(x=>{const a=document.createElement('a');a.className='link-button';a.href=x[1];a.textContent=x[0];links.append(a)});
   document.querySelectorAll('.mode-tab').forEach(el=>el.setAttribute('aria-selected',String(el.dataset.mode===mode)));
   renderValue();requestAnimationFrame(drawWires);
@@ -332,7 +362,35 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
   svg.append(label);
   if(isOutput){powerOutputTrace=trace;powerOutputFrom=wFrom;powerOutputTo=wTo;powerOutputLabel=label;}
  }
- function drawWires(){svg.replaceChildren();wireSegments=[];bitNodes=[];pointFrom=null;pointTo=null;powerOutputTrace=null;powerOutputFrom=null;powerOutputTo=null;powerOutputLabel=null;weakSignalLabel=null;
+ function scrWaveformPath(from,to,level){
+  const dx=to[0]-from[0],dy=to[1]-from[1],len=Math.hypot(dx,dy)||1;
+  const nx=-dy/len,ny=dx/len,amp=15,n=240;
+  const gain=Math.max(0,Math.min(1,level)),cut=(1-gain)*Math.PI;
+  let path='';
+  for(let i=0;i<=n;i++){
+    const t=i/n,phase=t*4*Math.PI;
+    const half=phase%Math.PI;
+    const conducting=gain>=1 || (gain>0 && half>=cut);
+    const waveform=conducting?Math.sin(phase):0;
+    const x=from[0]+dx*t+nx*amp*waveform,y=from[1]+dy*t+ny*amp*waveform;
+    path+=(i?' L':'M')+x.toFixed(2)+' '+y.toFixed(2);
+  }
+  return path;
+ }
+ function addScrOutputWave(from,to){
+   const dx=to[0]-from[0],dy=to[1]-from[1],len=Math.hypot(dx,dy)||1;
+   const scale=Math.min(130,len*.90),ux=dx/len,uy=dy/len;
+   const midX=(from[0]+to[0])/2,midY=(from[1]+to[1])/2;
+   scrFrom=[midX-ux*scale/2,midY-uy*scale/2];
+   scrTo=[midX+ux*scale/2,midY+uy*scale/2];
+   makePath(waveformPath(scrFrom,scrTo,1),'scr-reference');
+   scrOutputTrace=makePath(scrWaveformPath(scrFrom,scrTo,value/100),'scr-output');
+   const label=document.createElementNS(NS,'text');
+   label.setAttribute('x',String(midX));label.setAttribute('y',String(midY-31));
+   label.setAttribute('text-anchor','middle');label.setAttribute('class','scr-wave-label');
+   label.textContent='SCR出力（位相制御）';svg.append(label);
+ }
+ function drawWires(){svg.replaceChildren();wireSegments=[];bitNodes=[];pointFrom=null;pointTo=null;powerOutputTrace=null;powerOutputFrom=null;powerOutputTo=null;powerOutputLabel=null;weakSignalLabel=null;scrOutputTrace=null;scrFrom=null;scrTo=null;
   if(mode==='direct')return;
   const gr=ground.getBoundingClientRect();svg.setAttribute('viewBox','0 0 '+gr.width+' '+gr.height);
   const a=getPoint('port-source'),b=getPoint('port-fader-in'),c=getPoint('port-fader-out'),l=getPoint('port-lamp'),u=getPoint('port-unit'),uo=getPoint('port-unit-out'),m=getPoint('port-mains'),up=getPoint('port-unit-power');
@@ -350,7 +408,9 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
    addPowerWave(rightFrom,rightTo,true,sameTimeWindow);
   }
   if(mode==='weak'){
-   cable(a,b,'weak');cable(c,u,'weak');cable(m,up,'power');cable(uo,l,'power');
+   cable(a,b,'weak');cable(c,u,'weak');cable(m,up,'power');
+   cable(uo,l,'power',false,true);
+   addScrOutputWave(uo,l);
    function labelLine(from,to,str,cls,offset){
     const t=document.createElementNS(NS,'text');t.setAttribute('class',cls);
     t.setAttribute('text-anchor','middle');t.setAttribute('x',String((from[0]+to[0])/2));
