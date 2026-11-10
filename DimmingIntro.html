@@ -126,6 +126,9 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 #di-large-fader::-webkit-slider-thumb{appearance:none;width:1px;height:1px}
 #di-large-fader::-moz-range-thumb{width:1px;height:1px;border:0}
 @media(max-width:560px){.di-machine-stage{min-width:690px}}
+
+/* Dimming accessibility and learning path, scoped to this page. */
+.di-next-chapter{margin:0;text-align:left}.di-next-chapter a{display:inline-flex;align-items:center;min-height:44px;padding:9px 14px;border:1px solid #66889a;border-radius:7px;background:#243b49;color:#b9eeff;font-size:16px;font-weight:800;text-decoration:none}.di-next-chapter a:focus-visible{outline:3px solid #ffd18d;outline-offset:2px}@media(max-width:560px){.di-method-tabs button{font-size:14px}#di-animate-toggle{font-size:14px}}
 </style>
 </head>
 <body class="dimming-intro-page eightbit-unified-width">
@@ -310,6 +313,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <section class="di-panel di-next" aria-labelledby="di-detail-title"><h3 id="di-detail-title">水抵抗式調光の仕組み・特徴</h3><p id="di-detail-text">水抵抗式は、<strong class="di-key">塩水を電気抵抗として使う</strong>調光方式です。2枚の電極のうち片方を上下させ、<strong class="di-key">塩水に浸かる面積</strong>を変えることで抵抗を調整します。<strong class="di-effect">深く浸すと抵抗が小さくなり電球が明るく</strong>、浅くすると抵抗が大きくなり暗くなります。抵抗器と電球は<strong class="di-key">直列</strong>で、抵抗器で電圧が降下するため、電球にかかる電圧が変わります。電気エネルギーの一部が<strong class="di-key">熱</strong>になるため、水の温度上昇や蒸発、補水が必要でした。</p></section>
 <section class="eightbit-shared-teacher di-panel di-teacher"><img id="di-teacher-img" src="assets/teacher_shy_story.svg?v=shy-story-20261105-deploy2" alt="照明教材の先生"><div><strong>先生のひとこと</strong><p id="di-teacher-text">昔の水抵抗器は、水が熱くなって蒸発したんだって。補充に「おしっこ」を使った、なんて逸話も……えへへ、ホントかな？</p></div></section>
 </div>
+<p class="di-next-chapter"><a href="DimmingControl.html">次へ｜同じ灯りを、どう操作してきた？「制御とは？」</a></p>
 <p class="di-note">※調光方式の仕組みを比較するための模式図。実際の通電実験はしないでください。光の明るさ・波形の面積は概念的表現です。</p>
 </main>
 
@@ -545,7 +549,6 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     document.getElementById('waterGuideSpokes').setAttribute('transform',`rotate(${angle})`);
     document.getElementById('waterSpokes332').setAttribute('transform',`rotate(${angle} 332 68)`);
   }
-  let variacBurnedOut=false;
   function render(v){
     level=clamp(v);
     const percent=Math.round(level*100);
@@ -558,11 +561,8 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     wet.setAttribute('y',copperY.toFixed(2));  // Only translate; physical plate remains 128 units tall.
     feed.setAttribute('d','M209 253 C248 229 273 197 302 201 S334 '+(copperY+30).toFixed(2)+' 362 '+(copperY+24).toFixed(2));
     const volts=Math.round(130*level);
-    if(mode==='variac'){
-      if(volts===130)variacBurnedOut=true;
-      if(level===0)variacBurnedOut=false;
-    }
-    const burnedOut=mode==='variac' && variacBurnedOut;
+    // Above 100 V is an overvoltage warning, not a deterministic lamp failure.
+    const burnedOut=false;
     document.getElementById('di-burnout').toggleAttribute('hidden',!burnedOut);
     for(const layer of [halo,gas,filament])layer.toggleAttribute('hidden',burnedOut);
     const glow=Math.pow(mode==='variac'?Math.min(1,level*1.3):level,1.35); // illustration only, not a calibrated light-output curve
@@ -622,7 +622,6 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     readout.textContent=mode==='variac'?'交流出力 '+volts+'V（入力100V）':'明るさの指示 '+value+'%';
     action.textContent=mode==='water'
       ?waterAction
-      :burnedOut?'球切れ（教材上の例）。ノブを0Vまで戻すと再開できます。'
       :mode==='variac'?(volts>100?'ノブ → ブラシが移動 → 出力 '+volts+'V（100V定格灯具には過電圧）':'ノブを回す → ブラシが移動 → 取り出す交流電圧が変わる')
       :mode==='scr'?'フェーダーを動かす → 点弧角が変わる → 電球の明るさが変わる'
       :'フェーダーを動かす → ON時間の割合が変わる → LEDの明るさが変わる';
