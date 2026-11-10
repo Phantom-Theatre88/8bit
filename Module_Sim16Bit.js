@@ -29,7 +29,7 @@ const Module_Sim16Bit = {
             </section>
             <section class="s16-zone s16-light"><h2>③ 灯りを見る</h2><div class="s16-dark-room"><div id="sim16bit-ambient-glow" class="s16-ambient"></div><div class="s16-bulb"><img src="assets/Light.webp" alt="白熱電球"><div id="sim16bit-gas-glow" class="s16-gas"></div><div id="sim16bit-filament-glow" class="s16-filament"></div></div></div><div class="s16-readout"><span>16-bit値</span><strong id="s16-lamp-total">32,832</strong><span id="s16-light-state">点灯中</span></div><p class="s16-note">灯りは見た目のイメージ。</p></section>
           </main>
-          <section class="s16-bottom"><section class="s16-zone"><h2>▤ 解説</h2><p>DMXの1つの値は8bit（0〜255）。電力ではなく制御指令。</p><p>16bit対応機器は2つのDMX値を使用。<span class="s16-blue">Coarse</span>で大まかに、<span class="s16-green">Fine</span>でその1段の中を細かく指定する。</p></section>
+          <section class="s16-bottom"><section class="s16-zone"><h2>▤ 解説</h2><p>DMXの1つの値は8bit（0〜255）。電力ではなく制御指令。</p><p>8bitの256段階では足りないほど滑らかに動かしたいとき、16bitの細かな指令が役立つ。16bit対応機器は2つのDMX値を使用。<span class="s16-blue">Coarse</span>で大まかに、<span class="s16-green">Fine</span>でその1段の中を細かく指定する。</p></section>
             <section class="s16-zone s16-teacher eightbit-shared-teacher"><img src="assets/wave_teacher_transparent.svg?v=teacher-standard-20261014" alt="照明教材の先生"><div><h2>先生のひとこと</h2><p id="s16-teacher-message">FineをドラッグするとCoarseは固定。Fineが255で「＋」を押すと、次の段の0に進むよ。</p></div></section>
             <section class="s16-zone"><h2>覚えておこう</h2><p>8bit＝<b>256通り</b><br>16bit＝<b>65,536通り</b>の指令値。</p><p>Coarse × 256 ＋ Fine。受信機も16bit対応が必要。<a class="s16-prev-link" href="Top.html?tab=sim8bit">8bitへ戻る</a></p></section></section>
           
