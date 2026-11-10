@@ -34,6 +34,10 @@ body:has(.sim8bit-active) { background:#1b232c; }
 .sim8-dmx-value span { font-size:16px; color:#d0dae5; }
 .sim8-views,.sim8-curves { display:flex; gap:6px; }
 .sim8-views button,.sim8-curves button { flex:1; white-space:nowrap; padding-left:5px; padding-right:5px; }
+.sim8-workbench .sim8-to-16bit { display:inline-flex;flex:1;align-items:center;justify-content:center;min-height:36px;padding:5px 9px;border:1px solid #718193;border-radius:6px;background:#344150;color:#e5ecf3;text-decoration:none;font-size:16px;font-weight:700;white-space:nowrap; }
+.sim8-workbench .sim8-to-16bit:hover,.sim8-workbench .sim8-to-16bit:focus-visible { border-color:#74d9f6;color:#eafaff;outline-offset:2px; }
+.sim8-curves [data-sim8-view="curve"] { border-color:#76a9c4; }
+.sim8-curves [data-sim8-view="curve"][aria-pressed="true"] { color:#fff0d7;border-color:#ffad43;background:#654628;box-shadow:inset 0 -2px #ffad43; }
 .sim8-graph { flex:1; min-height:150px; background:#202a35; border:1px solid #647485; border-radius:7px; padding:8px; overflow:hidden; display:flex; flex-direction:column; }
 .sim8-graph svg { width:100%; flex:1; min-height:0; display:block; }
 .sim8-legend { display:flex; justify-content:space-between; font-size:16px; margin-top:3px; }
