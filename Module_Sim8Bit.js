@@ -186,7 +186,7 @@ const Module_Sim8Bit = {
             if (factor > 0 && factor < 1) svg += `<circle cx="${px(start)}" cy="${py(start)}" r="7" fill="#ff4b55" stroke="#fff" stroke-width="2"/>`;
         }
         svg += text(8,mid+5,'0') + text(px(Math.PI/2),y0,'山','middle') + text(px(3*Math.PI/2),y1+2,'谷','middle') + text(x1,h-4,'時間 →','end');
-        box.innerHTML = `<h3>SCRの位相制御｜通電開始位置を見る</h3><div class="sim8-legend"><span>┄ 電源（100V・実効値）</span><span>━ 灯具へ通す部分</span></div><svg viewBox="0 0 ${w} ${h}" role="img" aria-label="山と谷を含む1周期の波。破線が元の交流、橙色がSCRの調光出力、赤い点が点弧位置。">${svg}</svg><div class="sim8-scr-explain"><strong>${curveName}｜出力 ${voltageV}V（実効値）・点弧角 約${firingDeg}°</strong><span>フェーダー％は通電時間や光束の割合ではない。抵抗負荷で計算した電力は約${powerPct}％。</span></div>`;
+        box.innerHTML = `<h3>SCRの位相制御｜通電開始位置を見る</h3><div class="sim8-legend"><span>┄ 電源（100V・実効値）</span><span>━ 灯具へ通す部分</span></div><svg viewBox="0 0 ${w} ${h}" role="img" aria-label="山と谷を含む1周期の波。破線が元の交流、橙色がSCRの調光出力、赤い点が点弧位置。">${svg}</svg><div class="sim8-scr-explain"><strong>${curveName}｜出力 ${voltageV}V（実効値）・点弧角 約${firingDeg}°</strong><span>フェーダー％は通電時間や光束の割合ではない。抵抗負荷で計算した電力は約${powerPct}％。</span></div><p class="sim8-note">※「調光とは？」「制御とは？」は点弧角をフェーダー位置に対応させる模式図。この8bit教材は出力カーブを選べる別モデルなので、同じ50％でも波形の形は一致しません。</p>`;
         if (!size) { const s=box.querySelector('svg'); if(s.clientHeight>0) this.drawGraph({w:s.clientWidth,h:s.clientHeight}); }
     },
     updateBulb(factor, voltage) {
