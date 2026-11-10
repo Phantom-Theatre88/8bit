@@ -698,11 +698,10 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
  
 /* Direct-control historical archive: current UI palette, no changes to other modes. */
 #scene[data-mode="direct"] .direct-card{min-height:320px;padding:12px 17px}
-.direct-archive{display:grid;grid-template-columns:minmax(240px,1fr) minmax(260px,1fr);align-items:center;gap:19px;width:100%}
-.direct-archive-picture{position:relative;display:block;overflow:hidden;background:#14212b;border:1px solid #799caf;border-radius:8px;width:100%;height:290px;padding:0;color:#fff;cursor:zoom-in}
-.direct-archive-picture img{object-fit:contain;width:100%;height:100%}
-.direct-archive-picture span{position:absolute;inset:auto 0 0;background:#132737db;padding:7px;font-size:15px;font-weight:800}
-.direct-archive-text{min-width:0}.direct-archive-text .direct-lead{font-size:16px}.direct-archive-text a{color:#a9e1f8}
+.direct-archive{display:grid;justify-items:center;gap:10px;width:100%;margin:0;text-align:center}
+.direct-archive-picture{display:block;padding:0;border:1px solid #799caf;border-radius:6px;overflow:hidden;cursor:zoom-in;background:white;max-width:100%}
+.direct-archive-picture img{display:block;height:clamp(340px,40vh,480px);width:auto;max-width:100%;object-fit:contain}
+.direct-archive-text{min-width:0}.direct-archive-text .direct-lead{margin:4px auto 8px;font-size:16px}
 .direct-gallery-button{border:1px solid #6cb5d6;border-radius:7px;background:#28516a;color:#effbff;padding:10px 14px;min-height:44px;font-size:16px;font-weight:800;cursor:pointer}
 .direct-gallery{position:fixed;inset:2vh 2vw;margin:auto;max-width:1400px;max-height:96vh;width:96vw;height:94vh;padding:0;color:#e8f0f5;background:#172633;border:1px solid #7291a3;border-radius:10px;box-shadow:0 14px 55px #0009;overflow:hidden}
 .direct-gallery::backdrop{background:#020508dc}
@@ -714,7 +713,7 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
 .direct-gallery-photo div{padding:18px;text-align:center}.direct-gallery-photo div a{display:block;margin-top:8px}
 .direct-gallery-info{overflow:auto;line-height:1.6;padding-right:7px}.direct-gallery-info h2{color:#ffd29a;font-size:21px;margin:8px 0}.direct-gallery-info p{font-size:15px;margin:9px 0}.direct-gallery-info a,.direct-gallery-photo a{color:#93ddfa}.direct-gallery-info small{display:block;color:#afbec9;margin-top:16px}
 .direct-gallery footer nav{display:flex;overflow:auto;gap:4px}.direct-gallery footer nav button{min-width:38px}.direct-gallery footer nav button[aria-current="true"]{border-color:#f8d38b;background:#415668}
-@media(max-width:860px){.direct-archive{grid-template-columns:1fr}.direct-archive-picture{height:200px}.direct-gallery main{grid-template-columns:1fr;grid-template-rows:minmax(0,1.1fr) minmax(0,1fr)}.direct-gallery{width:98vw;height:96vh}}
+@media(max-width:860px){.direct-archive{grid-template-columns:1fr}.direct-archive-picture img{height:clamp(300px,42vh,390px)}.direct-gallery main{grid-template-columns:1fr;grid-template-rows:minmax(0,1.1fr) minmax(0,1fr)}.direct-gallery{width:98vw;height:96vh}}
 </style>
 </head>
 <body class="control-page eightbit-unified-width">
@@ -791,9 +790,9 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
  </div>
  <p class="digital-path-caption" id="digital-path-caption" hidden>DMXは明るさの指令。調光器が別電源のAC100Vを調整し、電球へ送る。ここではトライアック式を例示。</p>
 </div>
-<div class="direct-card" id="direct-card"><div class="direct-archive">
-<button class="direct-archive-picture" id="direct-gallery-open" type="button" aria-haspopup="dialog"><img src="assets/control/history/marumo-resistor.webp" alt="戦前の金属抵抗式調光器の実物写真"><span>実物写真を拡大 ⛶</span></button>
-<div class="direct-archive-text"><strong class="direct-title">かつての照明操作盤と調光設備</strong><p class="direct-lead"><strong class="direct-key">レバーやワイヤ・連結機構</strong>を動かして、<strong class="direct-effect">舞台の明るさを変える</strong>。日本と海外に残る調光設備を実物写真で比べよう。</p><button type="button" class="direct-gallery-button" id="direct-gallery-more">歴史写真6資料を開く</button><p><a href="DimmingIntro.html">←「調光とは」で機構を見る</a></p></div></div></div>
+<div class="direct-card" id="direct-card"><figure class="direct-archive">
+<button class="direct-archive-picture" id="direct-gallery-open" aria-label="金属抵抗器の写真を拡大" type="button" aria-haspopup="dialog"><img src="assets/control/history/marumo-resistor.webp" alt="戦前の金属抵抗式調光器の実物写真"></button>
+<figcaption class="direct-archive-text"><strong class="direct-title">丸茂電機「初期の調光器（金属抵抗器）」</strong><p class="direct-lead"><strong class="direct-key">レバーで抵抗器の接点を動かし</strong>、舞台の明るさを調整しました。</p><button type="button" class="direct-gallery-button" id="direct-gallery-more">写真を拡大・全6資料を見る</button></figcaption></figure></div>
 <dialog id="direct-gallery" class="direct-gallery" aria-labelledby="direct-gallery-title">
 <header><strong>直接制御｜歴史写真資料</strong><button type="button" id="direct-gallery-close">✕ 閉じる</button></header>
 <main><div class="direct-gallery-photo"><img id="direct-gallery-image" alt=""><div id="direct-gallery-fallback" hidden>この写真は原資料で確認できます。<a id="direct-gallery-fallback-link" target="_blank" rel="noopener noreferrer">掲載元を開く</a></div></div>
