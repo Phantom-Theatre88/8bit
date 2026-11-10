@@ -685,6 +685,9 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
  .scene-row[data-mode="digital"]{grid-template-columns:minmax(0,1fr)}
 }
 
+
+/* Dimming accessibility and learning path, scoped to this page. */
+.mode-tab small,.station p,.fader-caption,.receiver small,.output-note,.scene-footer .scheme,.legend,.note,.equipment-lead,.artifact-photo .artifact-photo-head,.artifact-photo small,.artifact-photo .photo-credit,.history-details p,.weak-wave-caption,.weak-wave-chart span,.weak-wave-panel h4,.weak-wire-label,.power-wire-label,.wave-label,.scr-wave-label,.digital-path-caption{font-size:max(14px,1em);line-height:1.4}.mode-tab small{font-size:14px}.scene-footer .scheme{white-space:normal}.artifact-photo small{overflow-wrap:anywhere}
 </style>
 </head>
 <body class="control-page eightbit-unified-width">
@@ -772,7 +775,7 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
 </section>
 <aside class="panel equipment-panel" id="equipment-panel" aria-label="実機紹介">
  <h2 class="equipment-heading">実機紹介</h2>
- <p class="equipment-lead">操作の仕組みと実際の機器を見比べよう。</p>
+ <p class="equipment-lead">フェーダーの操作が、実機ではどんな装置につながるか見てみよう。</p>
    <aside class="artifact-photo artifact-dimpac" aria-label="強電制御の実機写真">
    <div class="artifact-photo-head">実機を見る</div>
    <a href="https://www.marumo.co.jp/lineup/tz/" target="_blank" rel="noopener noreferrer" aria-label="丸茂電機の公式ディムパックTZ製品情報を開く">
@@ -807,7 +810,7 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
    <span class="photo-fallback" hidden>Wikimedia Commonsで実機写真を見る</span>
   </a>
   <strong>ETC Sensor+ 調光モジュール</strong>
-  <small>2.4kW × 2回路｜ラックに組み込む調光器</small>
+  <small>2.4kW × 2回路｜ラックに組み込む調光モジュール。DMX信号はラックの制御部が受け取る。</small>
   <a class="photo-credit" href="https://commons.wikimedia.org/wiki/File:Etcdimmer.JPG" target="_blank" rel="noopener noreferrer">撮影：Jordan Green（JWGreen）／Wikimedia Commons</a>
   <a class="photo-credit" href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0｜写真は無加工</a>
  </aside>
@@ -857,7 +860,7 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
    ],
    teacher:'DCは直流。フェーダーを止めれば電圧は一定で、明るさの指令になるよ。ACは交流。SCRは別電源の交流を指令に応じて調整するんだ。',
    readout:p=>(p/10).toFixed(1)+' V（指令）',
-   links:[['8bit教材でSCR波形と実効電圧の関係を見る','Top.html?tab=sim8bit']]
+   links:[['8bit教材でフェーダーの数値と波形を比べる','Top.html?tab=sim8bit']]
   },
   digital:{
    title:'デジタル制御｜DMXの指令でAC電力を調整',source:'フェーダー位置',sourceDesc:'デジタル値へ変換',fader:'0と1のデータで明るさを指示',output:'DMX調光器が電力を調整',
@@ -868,7 +871,7 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
    ],
    teacher:'DMXの0と1は明るさの指令。電球を光らせる電力は別のAC電源から来るよ。右の波形はトライアック式の調光出力の一例だよ。',
    readout:p=>Math.round(p*255/100)+' / 255',
-   links:[['デジタル8bitを触る','Top.html?tab=sim8bit'],['デジタル16bitを触る','Top.html?tab=sim16bit']]
+   links:[['8bit｜フェーダーの指示を見てみる','Top.html?tab=sim8bit'],['16bit｜もっと細かく動かす','Top.html?tab=sim16bit']]
   }
  };
  function percent(v){return Math.min(100,Math.max(0,Math.round(v)))}
