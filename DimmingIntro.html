@@ -385,13 +385,13 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
   }
   waveReference.setAttribute('d',sinePath(69));
   const waterWords='昔の水抵抗器は、水が熱くなって蒸発したんだって。補充に「おしっこ」を使った、なんて逸話も……えへへ、ホントかな？';
-  const scrWords='赤い点は電気を通し始める位置だよ。このページは点弧角の動きを見せる模式例。8bit教材では実効電圧との関係も比べてみよう！';
+  const scrWords='サイリスタは、波の途中から電気を通すんだよ。赤い点が動くと、電球の明るさも変わるね！';
   const waterExplanation="水抵抗式は、<strong class=\"di-key\">塩水を電気抵抗として使う</strong>調光方式です。2枚の電極のうち片方を上下させ、<strong class=\"di-key\">塩水に浸かる面積</strong>を変えることで抵抗を調整します。<strong class=\"di-effect\">深く浸すと抵抗が小さくなり電球が明るく</strong>、浅くすると抵抗が大きくなり暗くなります。抵抗器と電球は<strong class=\"di-key\">直列</strong>で、抵抗器で電圧が降下するため、電球にかかる電圧が変わります。電気エネルギーの一部が<strong class=\"di-key\">熱</strong>になるため、水の温度上昇や蒸発、補水が必要でした。";
   const variacWords='コイルそのものは回らないよ。回転するブラシが巻線の取り出し位置を変えているんだ。100Vを超える位置にも注目してね！';
   const variacExplanation='<strong class="di-key">スライダック</strong>は、コイルの途中から電圧を取り出す<strong class="di-key">可変単巻変圧器</strong>です。回転ノブに連動して<strong class="di-effect">カーボンブラシが固定された巻線の上を移動</strong>し、取り出す巻数が変わることで交流の<strong class="di-key">出力電圧</strong>を連続的に調整します。この教材では<strong class="di-effect">AC100V入力・0〜130V出力</strong>の例を示します。100Vを超える出力も可能ですが、100V定格の灯具には<strong class="di-effect">過電圧</strong>となるため注意が必要です。水抵抗式とは異なり、電圧を変圧器の巻線から取り出す方式です。<strong class="di-key">単巻変圧器の入力と出力は電気的に絶縁されません。</strong>';
   const pwmWords='スイッチの動きはONかOFFだけ。でも、ONでいる時間の割合を変えると、明るさも変えられるよ！ サイリスタとの違いを見てね。';
   const pwmExplanation="<strong class=\"di-key\">PWM（パルス幅変調）</strong>は、電子スイッチを<strong class=\"di-effect\">ON／OFF</strong>し、一定周期内でONにする時間の割合（<strong class=\"di-key\">デューティ比</strong>）を変える方式です。ON中の電圧の高さは一定でも、ON時間が長いほどLEDに供給される平均電力が増え、明るさを調整できます。サイリスタの位相制御が<strong class=\"di-key\">交流の途中から導通</strong>するのに対し、この図は<strong class=\"di-key\">直流でLEDを駆動するPWM</strong>の例です。ここでのON／OFFは電力スイッチの状態で、DMX信号のデジタル0／1とは別の話です。";
-  const scrExplanation="<strong class=\"di-key\">サイリスタ（SCR）</strong>は、大きな電力を電子的にON／OFFできる<strong class=\"di-key\">半導体素子</strong>です。サイリスタ調光では、交流のプラス側とマイナス側に対応した素子を使い、各半周期で電気を通し始める位置（<strong class=\"di-effect\">点弧角</strong>）を変えます。これが<strong class=\"di-key\">位相制御（位相角制御）</strong>です。フェーダーを動かすと通電する時間が変わり、電球への供給電力を調整できます。抵抗で電力を熱として消費する方式より効率が高い一方、急激な電流の立ち上がりでフィラメントや調光器が<strong class=\"di-effect\">唸る</strong>ことがあります。<strong class=\"di-key\">この入口ページでは点弧角をフェーダー位置に合わせて等間隔に動かす模式例</strong>です。フェーダー50%なら点弧角90°ですが、電球の実効電圧・電力・光束が50%になる意味ではありません。8bit教材の「直線」は実効電圧がフェーダー位置に比例する別の教材モデルです。";
+  const scrExplanation="<strong class=\"di-key\">サイリスタ（SCR）</strong>は、大きな電力を電子的にON／OFFできる<strong class=\"di-key\">半導体素子</strong>です。サイリスタ調光では、交流のプラス側とマイナス側に対応した素子を使い、各半周期で電気を通し始める位置（<strong class=\"di-effect\">点弧角</strong>）を変えます。これが<strong class=\"di-key\">位相制御（位相角制御）</strong>です。フェーダーを動かすと通電する時間が変わり、電球への供給電力を調整できます。抵抗で電力を熱として消費する方式より効率が高い一方、急激な電流の立ち上がりでフィラメントや調光器が<strong class=\"di-effect\">唸る</strong>ことがあります。";
   const modeButtons=[...document.querySelectorAll('[data-di-mode]')];
   const firingDots=document.getElementById('di-firing-dots');
   const waveCursor=document.getElementById('di-wave-cursor');
@@ -513,7 +513,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     waveReference.toggleAttribute('hidden',mode==='pwm');
     document.getElementById('di-wave-axis-plus').textContent=mode==='pwm'?'ON':'＋';
     document.getElementById('di-wave-axis-minus').textContent=mode==='pwm'?'':'－';
-    document.getElementById('di-wave-caption').textContent=mode==='pwm'?'※LED用の直流PWM出力例。実際の周波数・光の見え方は模式表示です。ACの位相制御波形ではありません。':mode==='scr'?'※点弧角を等間隔に動かす模式例。フェーダー50%＝点弧角90°であり、電圧・電力・光束50%ではありません。':'※塗り面積は電力のイメージです。実測値・計算値ではありません。';
+    document.getElementById('di-wave-caption').textContent=mode==='pwm'?'※LED用の直流PWM出力例。実際の周波数・光の見え方は模式表示です。ACの位相制御波形ではありません。':'※塗り面積は電力のイメージです。実測値・計算値ではありません。';
     largeFader.setAttribute('aria-label',mode==='water'?'フェーダー。上げると銅板が下がり電球が明るくなる':mode==='scr'?'フェーダー。上げると点弧角が小さくなり電球が明るくなる':'フェーダー。上げるとPWMのON時間の割合が大きくなる');
     render(level);
     // SCR/PWM require a moving reference position to explain ON/OFF.
