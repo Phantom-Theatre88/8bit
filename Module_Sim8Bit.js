@@ -24,11 +24,11 @@ const Module_Sim8Bit = {
           <section class="sim8-signal sim8-zone">
             <div class="sim8-dmx-head"><div><h2>② SCR出力とDMXの8bitを比べる</h2><p class="sim8-note" id="sim8bit-value-label">SCR出力の実効電圧</p></div><div class="sim8-dmx-value"><strong id="sim8bit-num-dmx">86.5</strong><span id="sim8bit-value-unit">V</span></div></div>
             <div class="sim8-views" role="group" aria-label="見る図を選ぶ">
-              <button data-sim8-view="wave" aria-pressed="true">SCR出力</button><button data-sim8-view="digital" aria-pressed="false">DMX 8bit</button><button data-sim8-view="curve" aria-pressed="false">出力カーブ</button>
+              <button data-sim8-view="wave" aria-pressed="true">SCR出力</button><button data-sim8-view="digital" aria-pressed="false">DMX 8bit</button><a class="sim8-to-16bit" href="Top.html?tab=sim16bit" aria-label="16bit教材へ進む">16bit</a>
             </div>
             <div class="sim8-graph" id="sim8bit-upper-graph-box"></div>
             <div class="sim8-curve-controls"><div class="sim8-curves" role="group" aria-label="出力カーブ">
-              <button data-sim8-curve="linear" aria-pressed="true">直線</button><button data-sim8-curve="jat-a" aria-pressed="false">ゆっくり</button><button data-sim8-curve="jat-b" aria-pressed="false">さらにゆっくり</button>
+              <button data-sim8-view="curve" aria-pressed="false">出力カーブ</button><button data-sim8-curve="linear" aria-pressed="true">直線</button><button data-sim8-curve="jat-a" aria-pressed="false">ゆっくり</button><button data-sim8-curve="jat-b" aria-pressed="false">さらにゆっくり</button>
             </div></div>
 
           </section>
