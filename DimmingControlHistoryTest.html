@@ -162,23 +162,28 @@ html,body{height:auto;overflow:visible}
 .dch-diagram{min-height:min-content}
 .dch-transport-state,.dch-mechanism .dch-panel-title{flex-wrap:wrap}
 @media(min-width:901px) and (orientation:landscape){.dch-grid{flex:1 0 auto}}
+
+/* 2026-11-10: Historical trial — prioritize lighting operation and readable labels. */
+.dch-panel-title small,.dch-transport-state,.dch-transport-state strong,.dch-transport-state span,.dch-diagram-legend,.dch-lamp .dch-wave h3,.dch-lamp .dch-wave p,.dch-links a,.dch-source{font-size:14px;line-height:1.4}
+.dch-svg .small{font-size:15px}
+@media(min-width:960px) and (orientation:landscape){.dch-lesson{max-height:none;height:auto;overflow-y:auto}.dch-footer{max-height:none}.dch-grid{min-height:390px}.dch-diagram .dch-svg{min-height:260px}}
 </style></head>
 <body class="dimming-intro-page eightbit-unified-width">
 <div id="shared-console-header-root"></div><script src="next-ui-console-header.js?v=theme12-shared-20261105"></script>
 <main class="dch-lesson">
-<header class="dch-head"><div class="dch-heading"><p class="dch-kicker">DIMMING / 調光の制御と歴史　｜　TEST</p><h1>調光の操作はどう変わった？</h1><p class="dch-sub">同じ「巻線の取り出し位置」を、どうやって遠くから動かしたのか</p></div>
+<header class="dch-head"><div class="dch-heading"><p class="dch-kicker">DIMMING / 調光の制御と歴史　｜　TEST</p><h1>調光の操作はどう変わった？</h1><p class="dch-sub">舞台から離れた場所で、灯りをどう操れるようになったのか</p></div>
 <nav class="dch-switch" aria-label="歴史的な操作方式を比較"><button id="dch-mechanical" type="button" aria-pressed="false">1934　機械式</button><button id="dch-electrical" type="button" aria-pressed="true">1961　弱電制御</button></nav></header>
 <div class="dch-grid">
 <svg id="dch-operation-bridge" class="dch-operation-bridge" aria-hidden="true" preserveAspectRatio="none"><path id="dch-bridge-rope" fill="none" stroke="#c3cfd2" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><circle id="dch-bridge-sheave" r="12" fill="#344651" stroke="#d2d7d8" stroke-width="4"/><circle id="dch-bridge-axle" r="4" fill="#c8d2d4"/></svg>
 <section class="dch-panel dch-input">
-<h2 id="dch-controls-title">① フェーダーを動かす</h2><p id="dch-control-note">弱電で位置を指示する</p>
+<h2 id="dch-controls-title">① フェーダーを動かす</h2><p id="dch-control-note">フェーダーで灯りを指示する</p>
 <div class="dch-input-value"><span>操作位置</span><output id="dch-value">50%</output></div>
 <div class="dch-fader-wrap"><div class="dch-scale"><span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span></div>
 <input id="dch-fader" type="range" min="0" max="100" value="50" step="1" orient="vertical" aria-label="操作盤のフェーダー"></div>
 <div class="dch-step"><button id="dch-minus" type="button">−</button><button id="dch-plus" type="button">＋</button></div></section>
 <section class="dch-panel dch-mechanism">
-<div class="dch-panel-title"><h2 id="dch-title">② しくみを見る｜弱電で位置を指示する</h2><strong id="dch-actual">ブラシ 50%</strong></div>
-<div class="dch-diagram"><p id="dch-change-title">弱電信号で位置を指定する</p><svg class="dch-svg" id="dch-machine" viewBox="0 0 660 374" role="img" aria-label="1934年の機械式ワイヤと滑車、1961年のモーター・電磁クラッチと位置帰還、鋼製架台に多数の集電子片と摺動刷子を備えたU型多分岐式調光変圧器の実機外観に着想を得た模式図">
+<div class="dch-panel-title"><h2 id="dch-title">② しくみを見る｜フェーダーで灯りを指示する</h2><strong id="dch-actual">ブラシ 50%</strong></div>
+<div class="dch-diagram"><p id="dch-change-title">離れた機械に操作を伝える</p><svg class="dch-svg" id="dch-machine" viewBox="0 0 660 374" role="img" aria-label="1934年の機械式ワイヤと滑車、1961年のモーター・電磁クラッチと位置帰還、鋼製架台に多数の集電子片と摺動刷子を備えたU型多分岐式調光変圧器の実機外観に着想を得た模式図">
 <defs>
  <linearGradient id="dch-steel" x1="0" y1="0" x2="1" y2=".3"><stop stop-color="#74818b"/><stop offset=".16" stop-color="#283640"/><stop offset=".48" stop-color="#111e27"/><stop offset=".8" stop-color="#48555b"/><stop offset="1" stop-color="#0e1821"/></linearGradient>
  <linearGradient id="dch-rust" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#3a302b"/><stop offset=".18" stop-color="#a17b50"/><stop offset=".38" stop-color="#2e3030"/><stop offset=".72" stop-color="#806a55"/><stop offset="1" stop-color="#1c262d"/></linearGradient>
@@ -283,7 +288,7 @@ html,body{height:auto;overflow:visible}
 </div>
 <div class="dch-diagram-legend"><span>シアン：制御信号・位置の帰還</span><span>アンバー：電圧調整</span></div>
 <div class="dch-transport-state"><strong id="dch-left-state">設定 50% ／ 現在 50%</strong><span id="dch-status">位置追従・停止</span></div>
-<p id="dch-change-text">設定電圧と位置フィードバックを比較し、電磁クラッチ・モーターで刷子を追従させる。</p>
+<p id="dch-change-text">フェーダーを動かすと、離れた装置が指示に追いついて灯りを変える。</p>
 </section>
 <section class="dch-panel dch-lamp">
 <h2>③ 灯りを見る</h2><p>操作の結果、灯具はどうなる？</p>
@@ -302,7 +307,7 @@ html,body{height:auto;overflow:visible}
 <div class="dch-links"><a href="DimmingIntro.html">調光4方式</a><a href="https://sts.kahaku.go.jp/diversity/document/browse/2024_saeki/" target="_blank" rel="noopener noreferrer">史料</a><a href="https://www.marumo.co.jp/company/history/" target="_blank" rel="noopener noreferrer">1934年の実機写真</a></div>
 </section>
 <section class="dch-panel dch-teacher"><img src="assets/wave_teacher_transparent.svg?v=teacher-standard-20261014" alt="照明図鑑の先生"><div><strong>先生のひとこと</strong><p id="dch-teacher-text">操作盤からの指示にブラシが追いつく様子を見よう！</p></div></section>
-<section class="dch-panel dch-remember"><h2>♧ 覚えておこう</h2><p>操作指示と灯具への電力は別。</p><p id="dch-memory">1961年：弱電の指示で電動追従。</p><p>巻線タップ・速度は教材用の模式表現。</p></section>
+<section class="dch-panel dch-remember"><h2>♧ 覚えておこう</h2><p>遠くから灯りを操作する方法が変わった。</p><p id="dch-memory">1961年：操作卓から離れた装置へ指示できる。</p><p>巻線タップ・速度は教材用の模式表現。</p></section>
 </div>
 <p class="dch-source">TEST / 学習用模式図。機器の写真・原図の正確なトレースではありません。出典：佐伯隆夫「舞台照明用調光装置の系統化調査」（2024年）、第5.3節・第5.10節。既存の4方式完成版・共通メニューは変更していません。</p>
 </main>
@@ -381,12 +386,12 @@ $('dch-controls-title').textContent=next==='mechanical'?'① 操作ハンドル�
 
 $('dch-control-note').textContent=next==='mechanical'?'ハンドルからワイヤで直接連動。':'フェーダーの指示でブラシが追従。';
 $('dch-fader').setAttribute('aria-label',next==='mechanical'?'1934年：機械式操作ハンドル':'1961年：弱電指示フェーダー');
-$('dch-change-title').textContent=next==='mechanical'?'ワイヤロープで力と動きを伝える':'弱電信号で位置を指定する';
-$('dch-change-text').textContent=next==='mechanical'?'操作盤の機構からワイヤロープを介し、離れた変圧器の摺動刷子を動かす。':'設定電圧と位置フィードバックを比較し、電磁クラッチ・モーターで刷子を追従させる。';
+$('dch-change-title').textContent=next==='mechanical'?'ワイヤロープで力と動きを伝える':'離れた機械に操作を伝える';
+$('dch-change-text').textContent=next==='mechanical'?'操作する手の動きがワイヤを通して伝わり、離れた調光器の動きを変える。':'フェーダーを動かすと、離れた装置が指示に追いついて灯りを変える。';
 $('dch-context').textContent=next==='mechanical'?'歴史と技術｜1934年の機械式遠隔操作':'歴史と技術｜1961年の転換';
 $('dch-description').innerHTML=next==='mechanical'?'1934年に開場した東京宝塚劇場では、丸茂電機製作所の<strong class="key">U型多分岐式調光変圧器</strong>が採用された。操作盤は<strong class="effect">ワイヤロープによる機械的な遠隔連結</strong>を用い、調光器の摺動刷子を移動させた。操作盤側には歯車・連動機構があり、手動・電動の操作方式も存在した。':'1961年、東京文化会館に<strong class="key">UMS型調光装置</strong>が導入された。<strong class="effect">弱電による完全遠隔操作</strong>を採用し、操作卓の位置指示と実際の刷子位置を比較して電動で追従させる。機械的なワイヤの遠隔連結を必要としないのが重要な変化だ。';
-$('dch-memory').textContent=next==='mechanical'?'1934年：ワイヤで摺動ブラシを動かす。':'1961年：弱電の指示で電動機構が追従する。';
-$('dch-teacher-text').textContent=next==='mechanical'?'水抵抗式で見たワイヤと滑車の考え方が、変圧器の遠隔操作にも使われていたんだね。ブラシを動かすのは人の操作だよ。':'変圧器の原理は残したまま、操作卓から弱電で指示できるようになったんだ。フェーダーを急に動かして追従の様子を見よう！';
+$('dch-memory').textContent=next==='mechanical'?'1934年：ワイヤで調光器を動かす。':'1961年：離れた装置が操作卓の指示に追従する。';
+$('dch-teacher-text').textContent=next==='mechanical'?'昔は操作する人の動きをワイヤで伝えていたんだね。舞台の灯りがどう変わるか見てみよう！':'操作卓を離れた場所に置けるようになったよ。フェーダーを動かして、灯りが追いつく様子を見てみよう！';
 updateUI();startMotion();
 }
 $('dch-mechanical').addEventListener('click',()=>selectMode('mechanical'));
