@@ -688,6 +688,13 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
 
 /* Dimming accessibility and learning path, scoped to this page. */
 .mode-tab small,.station p,.fader-caption,.receiver small,.output-note,.scene-footer .scheme,.legend,.note,.equipment-lead,.artifact-photo .artifact-photo-head,.artifact-photo small,.artifact-photo .photo-credit,.history-details p,.weak-wave-caption,.weak-wave-chart span,.weak-wave-panel h4,.weak-wire-label,.power-wire-label,.wave-label,.scr-wave-label,.digital-path-caption{font-size:max(14px,1em);line-height:1.4}.mode-tab small{font-size:14px}.scene-footer .scheme{white-space:normal}.artifact-photo small{overflow-wrap:anywhere}
+
+/* Direct-control emphasis matches the current DimmingIntro learning colors. */
+.direct-card .direct-key,.history-details .direct-key{color:#f9cd91;font-weight:800}
+.direct-card .direct-effect,.history-details .direct-effect{color:#8edcf5;font-weight:800}
+.history-details span strong{white-space:normal;margin-right:0}
+/* No separate beige cushion for the teacher on this page. */
+.teacher .teacher-bubble{background:transparent;color:#e1edf4;border:0;border-radius:0;box-shadow:none;padding:0;font-weight:500;line-height:1.5}
 </style>
 </head>
 <body class="control-page eightbit-unified-width">
@@ -767,7 +774,7 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
 <div class="direct-card" id="direct-card">
  <div class="direct-main">
   <div class="direct-marker" aria-hidden="true">↔</div>
-  <div><strong class="direct-title">直接制御は「調光とは」で学習済み</strong><p class="direct-lead">金属抵抗式では、操作部の動きをワイヤロープなどで調光器の接点へ伝えていました。水抵抗式やスライダックの機構は「調光とは」で確認しよう。</p><a class="link-button" href="DimmingIntro.html">「調光とは」へ戻る</a></div>
+  <div><strong class="direct-title">直接制御は「調光とは」で学習済み</strong><p class="direct-lead">金属抵抗式では、<strong class="direct-key">操作部の動き</strong>を<strong class="direct-key">ワイヤロープ</strong>などで伝え、<strong class="direct-effect">調光器の接点を動かして灯りを変える</strong>仕組みでした。水抵抗式やスライダックの機構は「調光とは」で確認しよう。</p><a class="link-button" href="DimmingIntro.html">「調光とは」へ戻る</a></div>
  </div>
 
 </div>
@@ -925,7 +932,20 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
   const history=$('history-text');history.replaceChildren();
   d.history.forEach(([heading,description])=>{
    const p=document.createElement('p'),strong=document.createElement('strong'),span=document.createElement('span');
-   strong.textContent=heading+'：';span.textContent=description;p.append(strong,span);history.append(p);
+   strong.textContent=heading+'：';
+   if(mode==='direct'){
+    const terms=/灯りを、離れた操作位置から加減|離れた操作位置|操作レバー|ワイヤ|連結機構|金属抵抗器|調光機構を動かした|物理的につなぐ必要がある|距離やワイヤの取り回し/g;
+    let start=0,match;
+    while((match=terms.exec(description))!==null){
+     span.append(document.createTextNode(description.slice(start,match.index)));
+     const emphasis=document.createElement('strong');
+     emphasis.className=/動かした|加減/.test(match[0])?'direct-effect':'direct-key';
+     emphasis.textContent=match[0];span.append(emphasis);
+     start=match.index+match[0].length;
+    }
+    span.append(document.createTextNode(description.slice(start)));
+   }else span.textContent=description;
+   p.append(strong,span);history.append(p);
   });
   $('teacher-message').textContent=d.teacher;
   $('equipment-panel').querySelector('.equipment-lead').textContent=mode==='weak'?'弱い指令で大きな電力を制御した実機。':mode==='digital'?'DMX信号を受けて灯具用電力を調整する実機。':'操作の仕組みと実際の機器を見比べよう。';
