@@ -251,14 +251,14 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <rect id="di-scr-positive" x="318" y="183" width="116" height="58" rx="8" fill="#273b49" stroke="#8399a8" stroke-width="2.5"/>
 <rect id="di-scr-negative" x="444" y="183" width="116" height="58" rx="8" fill="#273b49" stroke="#8399a8" stroke-width="2.5"/>
 <circle id="di-scr-positive-led" class="di-scr-led-off" cx="422" cy="193" r="5"/><circle id="di-scr-negative-led" class="di-scr-led-off" cx="548" cy="193" r="5"/>
-<text class="secondary-label" x="376" y="206" text-anchor="middle">正側 SCR</text>
-<text class="secondary-label" x="502" y="206" text-anchor="middle">負側 SCR</text>
+<text class="secondary-label" x="376" y="206" text-anchor="middle">＋側の波</text>
+<text class="secondary-label" x="502" y="206" text-anchor="middle">－側の波</text>
 <text id="di-scr-positive-state" class="highlight-label" x="376" y="230" text-anchor="middle">OFF</text>
 <text id="di-scr-negative-state" class="highlight-label" x="502" y="230" text-anchor="middle">OFF</text>
-<text class="secondary-label" x="438" y="266" text-anchor="middle">点弧でON → 電流ゼロでOFF</text>
+<text class="secondary-label" x="438" y="266" text-anchor="middle">ON＝電球へ通す ／ OFF＝通さない</text>
 <path d="M168 118H252V149H292" fill="none" stroke="#62d5ff" stroke-width="2.8" stroke-dasharray="6 6"/>
 <text class="secondary-label" x="204" y="105" text-anchor="middle">操作の指示</text>
-<text class="highlight-label" id="di-scr-angle" x="438" y="307" text-anchor="middle">波の途中から通電</text>
+<text class="highlight-label" id="di-scr-angle" x="438" y="307" text-anchor="middle">＋の山と－の谷で交代</text>
 <text id="di-scr-current-state" class="secondary-label" x="438" y="335" text-anchor="middle">点弧を待つ</text>
 </g>
 <!-- PWM example is a DC-powered LED driver, not mains SCR chopping. -->
@@ -396,7 +396,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
   }
   waveReference.setAttribute('d',sinePath(69));
   const waterWords='昔の水抵抗器は、水が熱くなって蒸発したんだって。補充に「おしっこ」を使った、なんて逸話も……えへへ、ホントかな？';
-  const scrWords='サイリスタは、波の途中から電気を通すんだよ。赤い点が動くと、電球の明るさも変わるね！';
+  const scrWords='ON／OFFは電球を点滅させる指示じゃないよ。交流の＋側と－側が交代で電気を通して、通す範囲を変えると明るさが変わるんだ。';
   const waterExplanation="水抵抗式は、<strong class=\"di-key\">塩水を電気抵抗として使う</strong>調光方式です。2枚の電極のうち片方を上下させ、<strong class=\"di-key\">塩水に浸かる面積</strong>を変えることで抵抗を調整します。<strong class=\"di-effect\">深く浸すと抵抗が小さくなり電球が明るく</strong>、浅くすると抵抗が大きくなり暗くなります。抵抗器と電球は<strong class=\"di-key\">直列</strong>で、抵抗器で電圧が降下するため、電球にかかる電圧が変わります。電気エネルギーの一部が<strong class=\"di-key\">熱</strong>になるため、水の温度上昇や蒸発、補水が必要でした。";
   const variacWords='コイルそのものは回らないよ。回転するブラシが巻線の取り出し位置を変えているんだ。100Vを超える位置にも注目してね！';
   const variacExplanation='<strong class="di-key">スライダック</strong>は、コイルの途中から電圧を取り出す<strong class="di-key">可変単巻変圧器</strong>です。回転ノブに連動して<strong class="di-effect">カーボンブラシが固定された巻線の上を移動</strong>し、取り出す巻数が変わることで交流の<strong class="di-key">出力電圧</strong>を連続的に調整します。この教材では<strong class="di-effect">AC100V入力・0〜130V出力</strong>の例を示します。100Vを超える出力も可能ですが、100V定格の灯具には<strong class="di-effect">過電圧</strong>となるため注意が必要です。水抵抗式とは異なり、電圧を変圧器の巻線から取り出す方式です。<strong class="di-key">単巻変圧器の入力と出力は電気的に絶縁されません。</strong>';
@@ -461,7 +461,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     setIndicator(scrPositive,scrPositiveState,mode==='scr'&&scrOn&&positive);
     setIndicator(scrNegative,scrNegativeState,mode==='scr'&&scrOn&&!positive);
     if(mode==='scr'){
-      const state=level===0?'全区間 OFF':scrOn?(positive?'正側 SCR：ON':'負側 SCR：ON'):'点弧待ち：OFF';
+      const state=level===0?'いま：どちらも通さない':scrOn?(positive?'いま：＋の波を電球へ通す':'いま：－の波を電球へ通す'):'いま：まだ電球へ通さない';
       document.getElementById('di-scr-current-state').textContent=state;
     }
     const pulsePos=(cyclePosition*8)%1;
@@ -514,7 +514,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     document.getElementById('di-scr-unit').toggleAttribute('hidden',mode!=='scr');
     document.getElementById('di-pwm-unit').toggleAttribute('hidden',mode!=='pwm');
     document.getElementById('demo-title').textContent=mode==='water'?'調光ユニットのしくみ｜水抵抗式':mode==='variac'?'調光ユニットのしくみ｜スライダック':mode==='scr'?'調光ユニットのしくみ｜サイリスタ式':'調光ユニットのしくみ｜PWM（LED用DC駆動例）';
-    document.getElementById('di-wave-sub').textContent=mode==='water'?'フェーダーに連動して、波の高さが変わる':mode==='variac'?'回転ノブで交流出力電圧を0〜130Vに変える':mode==='scr'?'赤い点から通電し、波形の通す部分が変わる':'ON時間の割合（デューティ比）が変わる';
+    document.getElementById('di-wave-sub').textContent=mode==='water'?'フェーダーに連動して、波の高さが変わる':mode==='variac'?'回転ノブで交流出力電圧を0〜130Vに変える':mode==='scr'?'＋の山は正側SCR、－の谷は負側SCRが担当。ONの間だけ電球へ通す':'ON時間の割合（デューティ比）が変わる';
     document.getElementById('di-wave-summary').textContent=mode==='water'?'波の高さが変わると、電球の明るさも変わる。':mode==='variac'?'正弦波の形はそのまま、出力電圧が変わる。':mode==='scr'?'導通開始を遅らせると、電球が暗くなる。':'ONの時間が長いほど、LEDへの平均供給電力が増える。';
     document.getElementById('di-teacher-img').src=mode==='water'?'assets/teacher_shy_story.svg?v=shy-story-20261105-deploy2':'assets/wave_teacher_transparent.svg?v=teacher-standard-20261014';
     document.getElementById('di-teacher-text').textContent=mode==='water'?waterWords:mode==='variac'?variacWords:mode==='scr'?scrWords:pwmWords;
@@ -617,7 +617,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
         }
       }
       firingDots.removeAttribute('hidden');
-      document.getElementById('di-scr-angle').textContent=level<=0?'通電しない':level>=1?'波の最初から通電':'波の途中から通電';
+      document.getElementById('di-scr-angle').textContent=level<=0?'フェーダー0％：通さない':level>=1?'フェーダー100％：全体を通す':'フェーダーで通す範囲を調整';
     }else{
       wave.setAttribute('d',pwmPath(level));
       waveArea.setAttribute('d',pwmArea(level));
