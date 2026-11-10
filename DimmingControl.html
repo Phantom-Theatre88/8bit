@@ -792,12 +792,12 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
  <p class="digital-path-caption" id="digital-path-caption" hidden>DMXは明るさの指令。調光器が別電源のAC100Vを調整し、電球へ送る。ここではトライアック式を例示。</p>
 </div>
 <div class="direct-card" id="direct-card"><div class="direct-archive">
-<button class="direct-archive-picture" id="direct-gallery-open" type="button" aria-haspopup="dialog"><img src="https://sts.kahaku.go.jp/diversity/document/browse/2024_saeki/images/fig_423.png" alt="戦前の金属抵抗式調光器の実物写真"><span>実物写真を拡大 ⛶</span></button>
+<button class="direct-archive-picture" id="direct-gallery-open" type="button" aria-haspopup="dialog"><img src="assets/control/history/marumo-resistor.jpg" alt="戦前の金属抵抗式調光器の実物写真"><span>実物写真を拡大 ⛶</span></button>
 <div class="direct-archive-text"><strong class="direct-title">かつての照明操作盤と調光設備</strong><p class="direct-lead"><strong class="direct-key">レバーやワイヤ・連結機構</strong>を動かして、<strong class="direct-effect">舞台の明るさを変える</strong>。日本と海外に残る調光設備を実物写真で比べよう。</p><button type="button" class="direct-gallery-button" id="direct-gallery-more">歴史写真6資料を開く</button><p><a href="DimmingIntro.html">←「調光とは」で機構を見る</a></p></div></div></div>
 <dialog id="direct-gallery" class="direct-gallery" aria-labelledby="direct-gallery-title">
 <header><strong>直接制御｜歴史写真資料</strong><button type="button" id="direct-gallery-close">✕ 閉じる</button></header>
 <main><div class="direct-gallery-photo"><img id="direct-gallery-image" alt=""><div id="direct-gallery-fallback" hidden>この写真は原資料で確認できます。<a id="direct-gallery-fallback-link" target="_blank" rel="noopener noreferrer">掲載元を開く</a></div></div>
-<section class="direct-gallery-info"><p id="direct-gallery-count"></p><h2 id="direct-gallery-title"></h2><p id="direct-gallery-date"></p><p id="direct-gallery-original"></p><p id="direct-gallery-caption"></p><a id="direct-gallery-source" target="_blank" rel="noopener noreferrer">元資料・写真の説明を開く ↗</a><small>写真の転載許諾は未確認。画像は元の公開サーバーから読み込みます。</small></section></main>
+<section class="direct-gallery-info"><p id="direct-gallery-count"></p><h2 id="direct-gallery-title"></h2><p id="direct-gallery-date"></p><p id="direct-gallery-original"></p><p id="direct-gallery-caption"></p><a id="direct-gallery-source" target="_blank" rel="noopener noreferrer">元資料・写真の説明を開く ↗</a><a id="direct-gallery-file" target="_blank" rel="noopener noreferrer">掲載元の画像を開く ↗</a><small>写真の転載許諾は未確認です。</small></section></main>
 <footer><button type="button" id="direct-gallery-prev">◀ 前</button><nav id="direct-gallery-pages" aria-label="写真選択"></nav><button type="button" id="direct-gallery-next">次 ▶</button></footer>
 </dialog>
 <div class="scene-footer"><div class="explain" id="scene-explain"><strong>100Vの電気がフェーダーに来る。</strong> フェーダーを動かして電球の変化を見よう。</div><div class="scheme">図は制御の違いを示す模式図</div></div>
@@ -817,7 +817,7 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
   <aside class="artifact-photo artifact-resistor" aria-label="直接制御の実機写真">
   <div class="artifact-photo-head">実機を見る</div>
   <a href="https://sts.kahaku.go.jp/diversity/document/browse/2024_saeki/" target="_blank" rel="noopener noreferrer" aria-label="金属抵抗式調光器の出典資料を開く">
-   <img src="https://sts.kahaku.go.jp/diversity/document/browse/2024_saeki/images/fig_423.png" loading="lazy" decoding="async" alt="丸茂電機製作所 NW型金属抵抗式調光器単体の記録写真">
+   <img src="assets/control/history/marumo-resistor.jpg" loading="lazy" decoding="async" alt="丸茂電機製作所 NW型金属抵抗式調光器単体の記録写真">
    <span class="photo-fallback" hidden>資料の写真を見る</span>
   </a>
   <strong>NW型金属抵抗式調光器</strong><small>接点を機械的に動かす方式</small>
@@ -1127,19 +1127,19 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
  });
 
  const directGalleryEntries=[
-  ['丸茂電機｜金属抵抗式調光器','1920年代の方式／写真撮影年は未確認','原説明：初期の調光器（金属抵抗器）','ワイヤや操作機構を通じて抵抗器の接点を動かし灯りを調整した。','https://sts.kahaku.go.jp/diversity/document/browse/2024_saeki/images/fig_423.png','https://www.marumo.co.jp/company/history/'],
-  ['丸茂電機｜戦前のオートトランス','1930年代の設備／写真撮影年は未確認','原説明：東京宝塚劇場に納入したU型多分岐式調光変圧器と操作盤','日本の舞台照明で使われた大型の変圧器式調光設備。写真の個体識別は原資料参照。','https://prcdn.freetls.fastly.net/release_image/168093/2/168093-2-17ea2084fb9838ad34035120ff54d970-2051x1500.jpg','https://www.marumo.co.jp/company/history/'],
-  ['米国｜Pasadena Playhouse の旧操作盤','1925年設置／写真撮影年は別','原説明：Trumbull「Controlite」照明操作盤。重量約6トン','1925年設置の巨大な照明操作盤。現存する機器の写真。','https://www.historictheatrephotos.com/Resources/Theatre-Photos/Pasadena-Playhouse-Los-Angeles/Photos/Scenic_Workshop/Old_Lighting_Switchboard.jpg','https://www.historictheatrephotos.com/Theatre/Pasadena-Playhouse-Los-Angeles.aspx'],
-  ['米国｜Luxtrol オートトランス操作盤','1974年撮影（1920〜30年代ではない）','原説明：Sayville High School のLuxtrolを用いたGE操作盤','オートトランス式操作盤。時代の違いも比較できる。','https://4.bp.blogspot.com/-bjtYGX7WmT0/W5PXnBomSmI/AAAAAAAAcf8/rODTFOUU8pIluU8Oxhw74cchi01zwkOqgCLcBGAs/s1600/018%2BARIEL%2BDAVIS%2BSWITCHBOARD%2BWITH%2BLUXTROL%2BDIMMERS.JPG','https://vintagetheatrecatalogs.blogspot.com/2016/01/composite-stage-switchboards-with.html'],
-  ['英国｜Glasgow Tivoli のStrand操作盤','1930年3月12日・The Bioscope掲載','原説明：Strand Colour Switchboard and Dimmer Regulator at the Tivoli, Glasgow','1930年の専門誌で紹介された照明操作盤。原写真は出典リンクで開く。','','https://www.arthurlloyd.co.uk/Backstage/ModernStageLighting1930.htm'],
-  ['米国｜Oakland Fox Theatre の操作盤','1928年の劇場設備／現存写真','原説明：Westinghouse five-scene preset board','大型の5シーン・プリセット操作盤。現在は劇場内で保存展示されている。','https://1.bp.blogspot.com/-Bg838z5YKwM/W-NmPPgeePI/AAAAAAAAdhI/DebTK1HzDrAXKR53zuzZnTvIDZjaQWcYACLcBGAs/s640/b%2BOAKLAND%2BFOX%2BDEN%2BBAR%2BWESTINGHOUSE%2BSWITCHBOARD%2B00.jpg','https://vintagetheatrecatalogs.blogspot.com/2016/01/secrets-of-preset-pre-selective.html']
+  ['丸茂電機｜金属抵抗式調光器','1924年の社史掲載項目／撮影年不詳','原説明：初期の調光器（金属抵抗器）','ワイヤや操作機構を通じて抵抗器の接点を動かし灯りを調整した。','assets/control/history/marumo-resistor.jpg','https://www.marumo.co.jp/company/history/','https://www.marumo.co.jp/marumo_wp/wp-content/themes/marumowp/img/company/history/1924.jpg'],
+  ['丸茂電機｜戦前のオートトランス','1934年納入／撮影年不詳','原説明：東京宝塚劇場に納入したU型多分岐式調光変圧器（左）と、操作盤（右）','日本の舞台照明で使われた大型の変圧器式調光設備。写真の個体識別は原資料参照。','assets/control/history/marumo-autotransformer.jpg','https://www.marumo.co.jp/company/history/','https://www.marumo.co.jp/marumo_wp/wp-content/themes/marumowp/img/company/history/1934.jpg'],
+  ['米国｜Pasadena Playhouse の旧操作盤','1925年設置／写真撮影年は別','掲載元の説明（要旨）：Trumbull「Controlite」照明操作盤。重量約6トン','1925年設置の巨大な照明操作盤。現存する機器の写真。','','https://www.historictheatrephotos.com/Theatre/Pasadena-Playhouse-Los-Angeles.aspx','https://www.historictheatrephotos.com/Resources/Theatre-Photos/Pasadena-Playhouse-Los-Angeles/Photos/Scenic_Workshop/Old_Lighting_Switchboard.jpg'],
+  ['米国｜Luxtrol オートトランス操作盤','1974年撮影（1920〜30年代ではない）','掲載元の説明（要旨）：Sayville High School のLuxtrolを用いたGE操作盤','オートトランス式操作盤。時代の違いも比較できる。','assets/control/history/sayville-luxtrol.jpg','https://vintagetheatrecatalogs.blogspot.com/2016/01/composite-stage-switchboards-with.html','https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhKwVzyY4Vot7s5j4Q5YTslxaxNGIP5AuFgeB1JUhn6fZeF9eqobt6HVC6K6bR-PC_FvpH35HDcDRVaTyDZre-4vCegsdfesNIsoFfPLYODnD6G4sDq6EP18hEUas3QEiM47K_KTg9xfIKs/s1600/001.0+AUTOTRANSFORMER+SWITCHBOARD+SAYVILLE+HIGH+SCHOOL+GARY+MUSANTE+FRAME.jpg'],
+  ['英国｜Glasgow Tivoli のStrand操作盤','1930年3月12日・The Bioscope掲載','掲載元の説明（要旨）：Strand Colour Switchboard and Dimmer Regulator at the Tivoli, Glasgow','色ごとの調光を集約した、グラスゴーのTivoliの操作盤。','assets/control/history/glasgow-tivoli.jpg','https://www.arthurlloyd.co.uk/Backstage/ModernStageLighting1930.htm','https://www.arthurlloyd.co.uk/Backstage/Modern%20Stage%20Lighting/StrandColourSwitchboard.jpg'],
+  ['米国｜Oakland Fox Theatre の操作盤','1928年の劇場設備／現存写真','掲載元の説明（要旨）：Westinghouse five-scene preset board','大型の5シーン・プリセット操作盤。現在は劇場内で保存展示されている。','assets/control/history/oakland-fox.jpg','https://vintagetheatrecatalogs.blogspot.com/2016/01/secrets-of-preset-pre-selective.html','https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjGTRRl4H1Mq1VJ4r6Xref_LQLcqskzYmf3aJ8AJTcjXm9u9sPWlz2NWYulpqiSB0IuLuPVPJjN0a3C6D-9yXQayLjqCCF5TDa_yS2tI_1aM-BLAuoMDteWaBZEnuRuvDSnNOEP_hzDtHFd/s1600/b+OAKLAND+FOX+DEN+BAR+WESTINGHOUSE+SWITCHBOARD+00.jpg']
  ];
  const dg=$('direct-gallery'),dimg=$('direct-gallery-image'),df=$('direct-gallery-fallback');let di=0;
  function setDirectGallery(i){
-  di=(i+directGalleryEntries.length)%directGalleryEntries.length;const [name,date,original,caption,src,url]=directGalleryEntries[di];
+  di=(i+directGalleryEntries.length)%directGalleryEntries.length;const [name,date,original,caption,src,url,imageUrl]=directGalleryEntries[di];
   $('direct-gallery-count').textContent=(di+1)+' / 6';$('direct-gallery-title').textContent=name;$('direct-gallery-date').textContent=date;
   $('direct-gallery-original').textContent=original;$('direct-gallery-caption').textContent='教材キャプション：'+caption;
-  $('direct-gallery-source').href=url;$('direct-gallery-fallback-link').href=url;
+  $('direct-gallery-file').href=imageUrl;$('direct-gallery-source').href=url;$('direct-gallery-fallback-link').href=url;
   dimg.hidden=!src;df.hidden=!!src;if(src){dimg.src=src;dimg.alt=name;}
   Array.from($('direct-gallery-pages').children).forEach((b,j)=>b.setAttribute('aria-current',String(j===di)));
  }
