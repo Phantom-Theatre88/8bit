@@ -114,8 +114,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 .di-machine-stage .di-mechanism{flex:1;min-width:0;width:0}
 .di-operation{flex:0 0 clamp(115px,12vw,170px);display:flex;flex-direction:column;align-items:center;padding:12px 8px;background:#26323e;border:1px solid #617584;border-radius:8px;color:#eff5fa}
 .di-operation[hidden]{display:none}
-.di-operation label{font-size:18px;font-weight:bold}
-.di-operation output{font-size:24px;font-weight:bold;color:#78e2f2}
+.di-operation output{display:block;flex:0 0 auto;margin-top:4px;font-size:24px;line-height:1.1;font-weight:bold;color:#78e2f2;text-align:center}
 .di-control-track{position:relative;flex:1;width:100%;min-height:170px;margin:3px 0}
 .di-control-track{container-type:size;display:grid;place-items:center}
 .di-fader-art{display:block;position:relative;width:min(100cqw,40.4cqh);aspect-ratio:278/688}
@@ -143,8 +142,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 
 <div class="di-workspace">
 <div class="di-machine-stage"><div class="di-operation">
-<label for="di-large-fader">フェーダー</label><output for="di-large-fader" id="di-position">50%</output>
-<div class="di-control-track"><span class="di-fader-art"><img class="di-fader-body" src="assets/control/fader-body.webp" alt=""><img class="di-fader-cap" src="assets/control/fader-cap.png" alt=""><input id="di-large-fader" type="range" min="0" max="100" value="50" aria-orientation="vertical"></span></div></div>
+<div class="di-control-track"><span class="di-fader-art"><img class="di-fader-body" src="assets/control/fader-body.webp" alt=""><img class="di-fader-cap" src="assets/control/fader-cap.png" alt=""><input id="di-large-fader" type="range" min="0" max="100" value="50" aria-label="調光フェーダー" aria-orientation="vertical"></span></div><output for="di-large-fader" id="di-position">50%</output></div>
 <svg class="di-mechanism" viewBox="30 0 825 375" role="group" aria-label="フェーダーを上げると、滑車を通したワイヤーが左の銅板を下げ、水抵抗器を通る電流が増えて電球が明るくなる仕組み">
 <defs>
 <linearGradient id="glassWall" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#a6e8f7" stop-opacity=".2"/><stop offset=".12" stop-color="#a6e8f7" stop-opacity=".02"/><stop offset=".86" stop-color="#c8f5ff" stop-opacity=".02"/><stop offset="1" stop-color="#c8f5ff" stop-opacity=".32"/></linearGradient>
