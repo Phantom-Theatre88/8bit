@@ -5403,6 +5403,11 @@ body { }
 <link rel="stylesheet" href="next-ui-learning-common.css?v=theme12-portrait-order-20261105">
 <style>
 @media(max-width:899px), (orientation:portrait) {
+ body.eightbit-console .master-console-container.sim16bit-active,
+ body.eightbit-console .master-console-container.sim16bit-active .console-main-screen,
+ body.eightbit-console #panel-sim16bit.stage-view-panel.active,
+ body.eightbit-console #panel-sim16bit .s16-page { height:auto!important; max-height:none!important; overflow:visible!important; }
+ body.eightbit-console #panel-sim16bit.stage-view-panel.active { position:relative!important; }
  body.eightbit-console #panel-sim16bit .s16-page { grid-template-rows:max-content auto auto!important; }
  body.eightbit-console #panel-sim8bit .sim8-common-page { grid-template-rows:max-content auto auto!important; }
  body.eightbit-console #panel-sim8bit .sim8-page-titlebar { min-height:max-content!important; height:max-content!important; flex:none!important; padding-block:6px!important; }
