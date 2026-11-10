@@ -112,9 +112,9 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 .di-machine-stage:has(.di-water-only:not([hidden])) .di-mechanism{position:relative;z-index:1;overflow:visible;pointer-events:none}
 .di-machine-stage{display:flex;min-width:0;align-items:stretch;gap:8px}
 .di-machine-stage .di-mechanism{flex:1;min-width:0;width:0}
-.di-operation{flex:0 0 clamp(115px,12vw,170px);display:flex;flex-direction:column;align-items:center;padding:12px 8px;background:#26323e;border:1px solid #617584;border-radius:8px;color:#eff5fa}
+.di-operation{position:relative;flex:0 0 clamp(115px,12vw,170px);display:flex;flex-direction:column;align-items:center;padding:12px 8px;background:#26323e;border:1px solid #617584;border-radius:8px;color:#eff5fa}
 .di-operation[hidden]{display:none}
-.di-operation output{display:block;flex:0 0 auto;margin-top:4px;font-size:24px;line-height:1.1;font-weight:bold;color:#78e2f2;text-align:center}
+.di-operation output{position:absolute;left:calc(100% + 12px);top:50%;transform:translateY(-50%);z-index:3;display:block;margin:0;min-width:76px;white-space:nowrap;font-size:24px;line-height:1.1;font-weight:bold;color:#78e2f2;text-align:left;pointer-events:none}
 .di-control-track{position:relative;flex:1;width:100%;min-height:170px;margin:3px 0}
 .di-control-track{container-type:size;display:grid;place-items:center}
 .di-fader-art{display:block;position:relative;width:min(100cqw,40.4cqh);aspect-ratio:278/688}
