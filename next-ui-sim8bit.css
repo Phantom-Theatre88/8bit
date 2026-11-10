@@ -255,3 +255,11 @@ html:has(.sim8bit-active) { height:100dvh; min-height:0; overflow:hidden; }
  .sim8-graph .sim8-scr-explain{gap:1px;padding-top:2px;line-height:1.22}
  .sim8-graph .sim8-scr-explain strong,.sim8-graph .sim8-scr-explain span{font-size:16px;line-height:1.22}
 }
+
+
+/* Match the accepted teacher presentation in DimmingControl: no beige speech cushion. */
+.sim8-teacher-card .sim8-teacher-speech{
+  background:transparent;border:0;border-radius:0;box-shadow:none;
+  color:#e1edf4;font-weight:500;padding:0;line-height:1.5;
+}
+.sim8-teacher-card .sim8-teacher-speech::before{content:none;display:none}
