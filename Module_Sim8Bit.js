@@ -135,7 +135,7 @@ const Module_Sim8Bit = {
         if (teacher) teacher.innerHTML = this.current8bitView === 'digital'
           ? 'DMXの1つの値は8個の0／1。<br>受信側へ送る指令で、電球の電圧そのものではないよ。'
           : this.current8bitView === 'curve'
-          ? '「直線」は実効電圧が位置に比例する教材例。<br>変わるのは点弧角で、波形を半分に切る意味じゃないよ。'
+          ? '「直線」でも、フェーダー50％で波形を半分に切るわけじゃないよ。<br>通電する範囲がどう変わるか見てみよう。'
           : '同じフェーダー位置でも、SCRの波形とDMXの数字は違うものを表しているよ。切り替えて見比べてみよう。';
         this.drawGraph();
     },
@@ -169,9 +169,7 @@ const Module_Sim8Bit = {
             return;
         }
         const mid = (y0+y1)/2, amp = (y1-y0)/2 - 5, alpha = this.getFiringAngle(factor * factor);
-        const firingDeg=Math.round(alpha*180/Math.PI);
         const voltageV=(100*factor).toFixed(1);
-        const powerPct=Math.round(100*factor*factor);
         const curveName=this.curveMode==='linear'?'直線（電圧比例）':this.curveMode==='jat-a'?'ゆっくり':'さらにゆっくり';
         const px = a => x0 + a/(2*Math.PI)*(x1-x0);
         const py = a => mid - Math.sin(a)*amp;
@@ -186,7 +184,7 @@ const Module_Sim8Bit = {
             if (factor > 0 && factor < 1) svg += `<circle cx="${px(start)}" cy="${py(start)}" r="7" fill="#ff4b55" stroke="#fff" stroke-width="2"/>`;
         }
         svg += text(8,mid+5,'0') + text(px(Math.PI/2),y0,'山','middle') + text(px(3*Math.PI/2),y1+2,'谷','middle') + text(x1,h-4,'時間 →','end');
-        box.innerHTML = `<h3>SCRの位相制御｜通電開始位置を見る</h3><div class="sim8-legend"><span>┄ 電源（100V・実効値）</span><span>━ 灯具へ通す部分</span></div><svg viewBox="0 0 ${w} ${h}" role="img" aria-label="山と谷を含む1周期の波。破線が元の交流、橙色がSCRの調光出力、赤い点が点弧位置。">${svg}</svg><div class="sim8-scr-explain"><strong>${curveName}｜出力 ${voltageV}V（実効値）・点弧角 約${firingDeg}°</strong><span>フェーダー％は通電時間や光束の割合ではない。抵抗負荷で計算した電力は約${powerPct}％。</span></div><p class="sim8-note">※「調光とは？」「制御とは？」は点弧角をフェーダー位置に対応させる模式図。この8bit教材は出力カーブを選べる別モデルなので、同じ50％でも波形の形は一致しません。</p>`;
+        box.innerHTML = `<h3>SCRの位相制御｜通電開始位置を見る</h3><div class="sim8-legend"><span>┄ 電源（100V・実効値）</span><span>━ 灯具へ通す部分</span></div><svg viewBox="0 0 ${w} ${h}" role="img" aria-label="山と谷を含む1周期の波。破線が元の交流、橙色がSCRの調光出力、赤い点が点弧位置。">${svg}</svg><div class="sim8-scr-explain"><strong>${curveName}｜灯具への出力 ${voltageV}V（実効値）</strong><span>フェーダーを上げると、交流の通電する範囲が変わり、灯りが明るくなる。フェーダー％と光の明るさは同じ割合ではありません。</span></div><p class="sim8-note">※前の教材は操作と波形の関係を見せる模式図。ここでは出力カーブも選べるため、同じ50％でも波形の形が異なることがあります。</p>`;
         if (!size) { const s=box.querySelector('svg'); if(s.clientHeight>0) this.drawGraph({w:s.clientWidth,h:s.clientHeight}); }
     },
     updateBulb(factor, voltage) {
