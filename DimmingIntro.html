@@ -249,7 +249,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <text class="secondary-label" x="438" y="266" text-anchor="middle">点弧でON → 電流ゼロでOFF</text>
 <path d="M168 118H252V149H292" fill="none" stroke="#62d5ff" stroke-width="2.8" stroke-dasharray="6 6"/>
 <text class="secondary-label" x="204" y="105" text-anchor="middle">操作の指示</text>
-<text class="highlight-label" id="di-scr-angle" x="438" y="307" text-anchor="middle">点弧角 90°</text>
+<text class="highlight-label" id="di-scr-angle" x="438" y="307" text-anchor="middle">波の途中から通電</text>
 <text id="di-scr-current-state" class="secondary-label" x="438" y="335" text-anchor="middle">点弧を待つ</text>
 </g>
 <!-- PWM example is a DC-powered LED driver, not mains SCR chopping. -->
@@ -516,7 +516,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     document.getElementById('di-wave-axis-plus').textContent=mode==='pwm'?'ON':'＋';
     document.getElementById('di-wave-axis-minus').textContent=mode==='pwm'?'':'－';
     document.getElementById('di-wave-caption').textContent=mode==='pwm'?'※LED用の直流PWM出力例。実際の周波数・光の見え方は模式表示です。ACの位相制御波形ではありません。':'※塗り面積は電力のイメージです。実測値・計算値ではありません。';
-    largeFader.setAttribute('aria-label',mode==='water'?'フェーダー。上げると銅板が下がり電球が明るくなる':mode==='scr'?'フェーダー。上げると点弧角が小さくなり電球が明るくなる':'フェーダー。上げるとPWMのON時間の割合が大きくなる');
+    largeFader.setAttribute('aria-label',mode==='water'?'フェーダー。上げると銅板が下がり電球が明るくなる':mode==='scr'?'フェーダー。上げると交流を通す範囲が広がり電球が明るくなる':'フェーダー。上げるとPWMのON時間の割合が大きくなる');
     render(level);
     // SCR/PWM require a moving reference position to explain ON/OFF.
     // Automatically start the slow teaching playback, except when the user
@@ -604,7 +604,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
         }
       }
       firingDots.removeAttribute('hidden');
-      document.getElementById('di-scr-angle').textContent='点弧角 '+Math.round((1-level)*180)+'°';
+      document.getElementById('di-scr-angle').textContent=level<=0?'通電しない':level>=1?'波の最初から通電':'波の途中から通電';
     }else{
       wave.setAttribute('d',pwmPath(level));
       waveArea.setAttribute('d',pwmArea(level));
@@ -621,7 +621,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     action.textContent=mode==='water'
       ?waterAction
       :mode==='variac'?(volts>100?'ノブ → ブラシが移動 → 出力 '+volts+'V（100V定格灯具には過電圧）':'ノブを回す → ブラシが移動 → 取り出す交流電圧が変わる')
-      :mode==='scr'?'フェーダーを動かす → 点弧角が変わる → 電球の明るさが変わる'
+      :mode==='scr'?'フェーダーを動かす → 電気を通す範囲が変わる → 電球の明るさが変わる'
       :'フェーダーを動かす → ON時間の割合が変わる → LEDの明るさが変わる';
   }
   let variacDragging=false;
