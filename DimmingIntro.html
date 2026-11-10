@@ -105,6 +105,14 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 .di-mechanism .di-switch-off{fill:#273b49;stroke:#8399a8}
 .di-mechanism .di-state-on{fill:#baffd0!important}
 .di-mechanism .di-state-off{fill:#b6c8d3!important}
+/* SCR half-cycle status: make ON unmistakable while leaving OFF subdued. */
+#di-scr-unit rect.di-switch-on{fill:#16654c!important;stroke:#9dffd0!important;stroke-width:3.5;filter:drop-shadow(0 0 9px #45ffaaaa)}
+#di-scr-unit rect.di-switch-off{fill:#182a36!important;stroke:#607887!important;stroke-width:2}
+#di-scr-unit text.di-state-on{fill:#eafff2!important;font-size:25px;font-weight:900;paint-order:stroke;stroke:#0d3729;stroke-width:2px;filter:drop-shadow(0 0 5px #53ffbbaa)}
+#di-scr-unit text.di-state-off{fill:#8296a5!important;font-size:20px;font-weight:700}
+#di-scr-unit .di-scr-led-on{fill:#a7ffd1;stroke:#e7fff3;stroke-width:1.5;filter:drop-shadow(0 0 5px #5dffbbee)}
+#di-scr-unit .di-scr-led-off{fill:#344755;stroke:#667c8b;stroke-width:1}
+
 .di-wave-svg [hidden]{display:none!important}
 #di-animate-toggle[hidden],.di-mechanism [hidden]{display:none!important}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
@@ -242,6 +250,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <rect x="308" y="131" width="260" height="36" rx="6" fill="#304756"/><text class="primary-label" x="438" y="155" text-anchor="middle">サイリスタ調光器</text>
 <rect id="di-scr-positive" x="318" y="183" width="116" height="58" rx="8" fill="#273b49" stroke="#8399a8" stroke-width="2.5"/>
 <rect id="di-scr-negative" x="444" y="183" width="116" height="58" rx="8" fill="#273b49" stroke="#8399a8" stroke-width="2.5"/>
+<circle id="di-scr-positive-led" class="di-scr-led-off" cx="422" cy="193" r="5"/><circle id="di-scr-negative-led" class="di-scr-led-off" cx="548" cy="193" r="5"/>
 <text class="secondary-label" x="376" y="206" text-anchor="middle">正側 SCR</text>
 <text class="secondary-label" x="502" y="206" text-anchor="middle">負側 SCR</text>
 <text id="di-scr-positive-state" class="highlight-label" x="376" y="230" text-anchor="middle">OFF</text>
@@ -434,6 +443,10 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     rect.setAttribute('class',on?'di-switch-on':'di-switch-off');
     label.setAttribute('class',on?'highlight-label di-state-on':'highlight-label di-state-off');
     label.textContent=on?'ON':'OFF';
+    if(rect.id==='di-scr-positive'||rect.id==='di-scr-negative'){
+      const led=document.getElementById(rect.id+'-led');
+      led.setAttribute('class',on?'di-scr-led-on':'di-scr-led-off');
+    }
   }
   function updateLive(position){
     cyclePosition=position%1;
