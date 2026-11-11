@@ -755,6 +755,17 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
 .direct-gallery .direct-gallery-photo-next{right:9px}
 .direct-gallery .direct-gallery-photo-arrow:focus-visible{outline:3px solid #ffc877;outline-offset:2px}
 
+
+/* Main-stage historical-photo browsing, independent of the enlarged modal. */
+#scene[data-mode="direct"] .direct-archive-viewer{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-width:0}
+#scene[data-mode="direct"] .direct-archive-viewer .direct-archive-picture{flex:0 1 auto;min-width:0;display:grid;place-items:center;position:relative}
+#scene[data-mode="direct"] .direct-archive-arrow{flex:0 0 48px;width:48px;height:58px;font-size:29px;line-height:1;color:#f5faff;background:#253d50;border:1px solid #83bdda;border-radius:7px;box-shadow:0 3px 8px #0005}
+#scene[data-mode="direct"] .direct-archive-arrow:hover{background:#335a72;border-color:#b2e6fb}
+#scene[data-mode="direct"] .direct-archive-arrow:focus-visible{outline:3px solid #ffcd87;outline-offset:2px}
+#scene[data-mode="direct"] .direct-archive-count{font-weight:800;color:#9de7ff;font-size:14px;margin:0}
+#scene[data-mode="direct"] #direct-archive-fallback{padding:35px 14px;background:#192e3c;color:#d9edf6;font-size:16px;max-width:270px}
+@media(max-width:550px){#scene[data-mode="direct"] .direct-archive-viewer{gap:5px}#scene[data-mode="direct"] .direct-archive-arrow{flex-basis:36px;width:36px;height:48px;font-size:23px}}
+
 </style>
 </head>
 <body class="control-page eightbit-unified-width">
@@ -832,8 +843,8 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
  <p class="digital-path-caption" id="digital-path-caption" hidden>DMXは明るさの指令。調光器が別電源のAC100Vを調整し、電球へ送る。ここではトライアック式を例示。</p>
 </div>
 <div class="direct-card" id="direct-card"><figure class="direct-archive">
-<button class="direct-archive-picture" id="direct-gallery-open" aria-label="金属抵抗器の写真を拡大" type="button" aria-haspopup="dialog"><img src="assets/control/history/marumo-resistor.webp" alt="戦前の金属抵抗式調光器の実物写真"></button>
-<figcaption class="direct-archive-text"><strong class="direct-title">丸茂電機「初期の調光器（金属抵抗器）」</strong><p class="direct-lead"><strong class="direct-key">レバーで抵抗器の接点を動かし</strong>、舞台の明るさを調整しました。</p><button type="button" class="direct-gallery-button" id="direct-gallery-more">写真を拡大・全6資料を見る</button></figcaption></figure></div>
+<div class="direct-archive-viewer"><button type="button" class="direct-archive-arrow" id="direct-archive-prev" aria-label="前の歴史写真">❮</button><button class="direct-archive-picture" id="direct-gallery-open" aria-label="現在の写真を拡大" type="button" aria-haspopup="dialog"><img id="direct-archive-image" src="assets/control/history/marumo-resistor.webp" alt="戦前の金属抵抗式調光器の実物写真"><span id="direct-archive-fallback" hidden>写真は元資料で確認できます</span></button><button type="button" class="direct-archive-arrow" id="direct-archive-next" aria-label="次の歴史写真">❯</button></div>
+<figcaption class="direct-archive-text"><strong class="direct-title" id="direct-archive-title">丸茂電機「初期の調光器（金属抵抗器）」</strong><p class="direct-lead" id="direct-archive-caption"><strong class="direct-key">レバーで抵抗器の接点を動かし</strong>、舞台の明るさを調整しました。</p><p class="direct-archive-count" id="direct-archive-count" aria-live="polite">1 / 6</p><button type="button" class="direct-gallery-button" id="direct-gallery-more">写真を拡大・全6資料を見る</button></figcaption></figure></div>
 <dialog id="direct-gallery" class="direct-gallery" aria-labelledby="direct-gallery-title">
 <header><strong>直接制御｜歴史写真資料</strong><button type="button" id="direct-gallery-close">✕ 閉じる</button></header>
 <main><div class="direct-gallery-photo"><img id="direct-gallery-image" alt=""><button type="button" class="direct-gallery-photo-arrow direct-gallery-photo-prev" id="direct-gallery-photo-prev" aria-label="前の写真">❮</button><button type="button" class="direct-gallery-photo-arrow direct-gallery-photo-next" id="direct-gallery-photo-next" aria-label="次の写真">❯</button><div id="direct-gallery-fallback" hidden>この写真は原資料で確認できます。<a id="direct-gallery-fallback-link" target="_blank" rel="noopener noreferrer">掲載元を開く</a></div></div>
@@ -1175,6 +1186,33 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
   ['米国｜Oakland Fox Theatre の操作盤','1928年の劇場設備／現存写真','掲載元の説明（要旨）：Westinghouse five-scene preset board','大型の5シーン・プリセット操作盤。現在は劇場内で保存展示されている。','assets/control/history/oakland-fox.webp','https://vintagetheatrecatalogs.blogspot.com/2016/01/secrets-of-preset-pre-selective.html','https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjGTRRl4H1Mq1VJ4r6Xref_LQLcqskzYmf3aJ8AJTcjXm9u9sPWlz2NWYulpqiSB0IuLuPVPJjN0a3C6D-9yXQayLjqCCF5TDa_yS2tI_1aM-BLAuoMDteWaBZEnuRuvDSnNOEP_hzDtHFd/s1600/b+OAKLAND+FOX+DEN+BAR+WESTINGHOUSE+SWITCHBOARD+00.jpg']
  ];
  const dg=$('direct-gallery'),dimg=$('direct-gallery-image'),df=$('direct-gallery-fallback');let di=0;
+ const archiveImage=$('direct-archive-image'),archiveFallback=$('direct-archive-fallback');
+ let archiveIndex=0,archiveImageToken=0;
+ function showArchiveItem(i){
+  archiveIndex=(i+directGalleryEntries.length)%directGalleryEntries.length;
+  const [name,date,original,caption,src,url,imageUrl]=directGalleryEntries[archiveIndex];
+  $('direct-archive-title').textContent=name;
+  $('direct-archive-caption').textContent=caption;
+  $('direct-archive-count').textContent=(archiveIndex+1)+' / '+directGalleryEntries.length;
+  $('direct-gallery-open').setAttribute('aria-label',name+'の写真を拡大');
+  archiveFallback.hidden=true;
+  const token=++archiveImageToken;
+  const candidates=[src,imageUrl].filter(Boolean);
+  let position=0;
+  archiveImage.onerror=()=>{
+   if(token!==archiveImageToken)return;
+   position++;
+   if(position<candidates.length){archiveImage.src=candidates[position];}
+   else{archiveImage.hidden=true;archiveFallback.hidden=false;}
+  };
+  archiveImage.onload=()=>{if(token===archiveImageToken){archiveImage.hidden=false;archiveFallback.hidden=true;}};
+  archiveImage.hidden=!candidates.length;
+  if(candidates.length)archiveImage.src=candidates[0];
+  else archiveFallback.hidden=false;
+ }
+ $('direct-archive-prev').addEventListener('click',()=>showArchiveItem(archiveIndex-1));
+ $('direct-archive-next').addEventListener('click',()=>showArchiveItem(archiveIndex+1));
+
  function setDirectGallery(i){
   di=(i+directGalleryEntries.length)%directGalleryEntries.length;const [name,date,original,caption,src,url,imageUrl]=directGalleryEntries[di];
   $('direct-gallery-count').textContent=(di+1)+' / 6';$('direct-gallery-title').textContent=name;$('direct-gallery-date').textContent=date;
@@ -1185,10 +1223,10 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
  }
  dimg.addEventListener('error',()=>{dimg.hidden=true;df.hidden=false;});
  directGalleryEntries.forEach((d,i)=>{const b=document.createElement('button');b.type='button';b.textContent=String(i+1);b.title=d[0];b.addEventListener('click',()=>setDirectGallery(i));$('direct-gallery-pages').append(b);});
- const openDG=()=>{setDirectGallery(0);dg.showModal()};
+ const openDG=()=>{setDirectGallery(archiveIndex);dg.showModal()};
  $('direct-gallery-open').addEventListener('click',openDG);$('direct-gallery-more').addEventListener('click',openDG);
  $('direct-gallery-close').addEventListener('click',()=>dg.close());$('direct-gallery-prev').addEventListener('click',()=>setDirectGallery(di-1));$('direct-gallery-next').addEventListener('click',()=>setDirectGallery(di+1));$('direct-gallery-photo-prev').addEventListener('click',()=>setDirectGallery(di-1));$('direct-gallery-photo-next').addEventListener('click',()=>setDirectGallery(di+1));
- updateMode();if(!reduced)requestAnimationFrame(animate);
+ showArchiveItem(0);updateMode();if(!reduced)requestAnimationFrame(animate);
 })();
 </script>
 </body>
