@@ -13,7 +13,7 @@
 }
 .dimming-unified-page > .dimming-unified-main{
  display:grid;
- grid-template-rows:auto minmax(350px,1fr) auto var(--dimming-footer-height) auto;
+ grid-template-rows:auto minmax(385px,1fr) auto var(--dimming-footer-height) auto;
  gap:var(--dimming-gap);
  flex:1 1 0;min-height:0;
  width:100%;max-width:1420px;margin:0 auto;
@@ -134,7 +134,7 @@
   grid-template-rows:auto minmax(405px,1fr) var(--dimming-footer-height) auto;
  }
  .dimming-unified-page.control-page > .dimming-unified-main{
-  grid-template-rows:auto minmax(330px,1fr) auto var(--dimming-footer-height) auto;
+  grid-template-rows:auto minmax(385px,1fr) auto var(--dimming-footer-height) auto;
  }
  .dimming-unified-page.dimming-intro-page .di-wave-svg{
   height:clamp(110px,15dvh,145px);
