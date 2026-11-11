@@ -136,6 +136,10 @@
  .dimming-unified-page.control-page > .dimming-unified-main{
   grid-template-rows:auto minmax(330px,1fr) auto var(--dimming-footer-height) auto;
  }
+ .dimming-unified-page.dimming-intro-page .di-wave-svg{
+  height:clamp(110px,15dvh,145px);
+  flex-basis:clamp(110px,15dvh,145px);
+ }
 }
 @media(orientation:landscape) and (min-width:851px) and (max-width:1050px){
  .dimming-unified-page{--dimming-footer-height:clamp(160px,21dvh,190px)}
