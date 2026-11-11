@@ -4,7 +4,7 @@
 .dimming-unified-page{
  --dimming-gap:8px;
  --dimming-padding-inline:13px;
- --dimming-footer-height:clamp(156px,18dvh,180px);
+ --dimming-footer-height:clamp(168px,18dvh,190px);
  --dimming-info-fr:57fr;
  --dimming-teacher-fr:43fr;
  --dimming-border:#526c7f;
@@ -21,7 +21,7 @@
  overflow-y:auto;overscroll-behavior-y:contain;
 }
 .dimming-unified-page.dimming-intro-page > .dimming-unified-main{
- grid-template-rows:auto minmax(345px,1fr) var(--dimming-footer-height) auto;
+ grid-template-rows:auto minmax(415px,1fr) var(--dimming-footer-height) auto;
 }
 .dimming-unified-page .dimming-unified-header{
  min-width:0;min-height:0;
@@ -81,7 +81,7 @@
  overflow-y:auto;overscroll-behavior:contain;
 }
 .dimming-unified-page .dimming-unified-footer > .dimming-unified-teacher{
- display:flex;align-items:center;gap:11px;overflow:hidden;
+ display:flex;align-items:center;gap:11px;overflow-y:auto;overflow-x:hidden;
 }
 .dimming-unified-page .dimming-unified-footer .dimming-unified-info h3,
 .dimming-unified-page .dimming-unified-footer .dimming-unified-teacher h3{
@@ -126,12 +126,12 @@
 /* All landscape dimensions use the same sizing system. When it is too short,
    the main content scrolls; no text or approved graphic gets forcibly clipped. */
 @media (orientation:landscape) and (min-width:851px) and (max-height:850px){
- .dimming-unified-page{--dimming-gap:6px;--dimming-footer-height:clamp(145px,19dvh,168px)}
+ .dimming-unified-page{--dimming-gap:6px;--dimming-footer-height:clamp(168px,20dvh,182px)}
  .dimming-unified-page > .dimming-unified-main{
   padding-block:6px;
  }
  .dimming-unified-page.dimming-intro-page > .dimming-unified-main{
-  grid-template-rows:auto minmax(335px,1fr) var(--dimming-footer-height) auto;
+  grid-template-rows:auto minmax(405px,1fr) var(--dimming-footer-height) auto;
  }
  .dimming-unified-page.control-page > .dimming-unified-main{
   grid-template-rows:auto minmax(330px,1fr) auto var(--dimming-footer-height) auto;
