@@ -413,7 +413,7 @@ button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,[role="s
    Do not shrink device art merely to force a single viewport. */
 body.control-page{display:flex;flex-direction:column;min-height:100vh;min-height:100dvh}
 body.control-page> #shared-console-header-root{flex:0 0 auto}
-body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
+/* Shared lesson shell owns the main flex sizing. */
 .scene-row{flex:1 0 auto}
 .scene-row .lesson-scene{display:flex;flex-direction:column}
 .scene-row .scene-header,.scene-row .scene-footer{flex:0 0 auto}
