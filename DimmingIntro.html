@@ -136,6 +136,22 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 
 /* Dimming accessibility and learning path, scoped to this page. */
 .di-next-chapter{margin:0;text-align:left}.di-next-chapter a{display:inline-flex;align-items:center;min-height:44px;padding:9px 14px;border:1px solid #66889a;border-radius:7px;background:#243b49;color:#b9eeff;font-size:16px;font-weight:800;text-decoration:none}.di-next-chapter a:focus-visible{outline:3px solid #ffd18d;outline-offset:2px}@media(max-width:560px){.di-method-tabs button{font-size:14px}#di-animate-toggle{font-size:14px}}
+/* iPad landscape: fit the lesson and the next-chapter link inside the usable screen. */
+@media (orientation:landscape) and (min-width:851px) and (max-height:1050px){
+  body.dimming-intro-page .dimming-lesson{gap:6px;padding:7px 13px 9px}
+  .di-title h1{margin:0;font-size:clamp(22px,1.95vw,26px)}
+  .di-workspace .di-mechanism{height:clamp(244px,32dvh,305px);min-height:244px}
+  .di-demo{padding-bottom:6px}
+  .di-demo-head{padding-top:6px;padding-bottom:6px;margin-bottom:5px}
+  .di-conclusion{margin-top:4px;padding:6px 12px}
+  .di-footer{gap:8px}
+  .di-next{padding:7px 12px}
+  .di-next p{line-height:1.38}
+  .di-teacher{min-height:0;padding:6px 10px}
+  .di-teacher img{height:clamp(88px,11dvh,115px);width:94px}
+  .di-next-chapter a{min-height:36px;padding:6px 11px}
+  .di-note{line-height:1.3}
+}
 </style>
 </head>
 <body class="dimming-intro-page eightbit-unified-width">
@@ -287,7 +303,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <ellipse id="lampFilament" cx="730" cy="138" rx="16" ry="11" fill="#fff0a6" opacity=".5" style="mix-blend-mode:screen;pointer-events:none"/>
 <circle cx="696" cy="263" r="4.2" fill="#ffd18a" stroke="#73411d" stroke-width="1.5"/>
 <circle cx="736" cy="286" r="4.2" fill="#c4d6df" stroke="#425a67" stroke-width="1.5"/>
-<text id="di-burnout" hidden x="730" y="151" text-anchor="middle" class="lamp-warning" font-size="38">球切れ</text>
+<text id="di-burnout" hidden x="730" y="151" text-anchor="middle" class="lamp-warning" font-size="38">球切れ！</text>
 </g>
 </svg></div>
 <aside class="di-wave-panel" aria-labelledby="di-wave-title">
@@ -321,7 +337,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 <section class="eightbit-shared-teacher di-panel di-teacher"><img id="di-teacher-img" src="assets/teacher_shy_story.svg?v=shy-story-20261105-deploy2" alt="照明教材の先生"><div><strong>先生のひとこと</strong><p id="di-teacher-text">昔の水抵抗器は、水が熱くなって蒸発したんだって。補充に「おしっこ」を使った、なんて逸話も……えへへ、ホントかな？</p></div></section>
 </div>
 <p class="di-next-chapter"><a href="DimmingControl.html">次へ｜同じ灯りを、どう操作してきた？「制御とは？」</a></p>
-<p class="di-note">※調光方式の仕組みを比較するための模式図。実際の通電実験はしないでください。光の明るさ・波形の面積は概念的表現です。</p>
+<p class="di-note">※調光方式の比較用模式図。スライダック130Vでの球切れは危険性を伝える教材演出で、実際の電球が必ず即座に切れることを意味しません。通電実験はしないでください。</p>
 </main>
 
 <script>
@@ -398,7 +414,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
   const waterWords='昔の水抵抗器は、水が熱くなって蒸発したんだって。補充に「おしっこ」を使った、なんて逸話も……えへへ、ホントかな？';
   const scrWords='ON／OFFは電球を点滅させる指示じゃないよ。交流の＋側と－側が交代で電気を通して、通す範囲を変えると明るさが変わるんだ。';
   const waterExplanation="水抵抗式は、<strong class=\"di-key\">塩水を電気抵抗として使う</strong>調光方式です。2枚の電極のうち片方を上下させ、<strong class=\"di-key\">塩水に浸かる面積</strong>を変えることで抵抗を調整します。<strong class=\"di-effect\">深く浸すと抵抗が小さくなり電球が明るく</strong>、浅くすると抵抗が大きくなり暗くなります。抵抗器と電球は<strong class=\"di-key\">直列</strong>で、抵抗器で電圧が降下するため、電球にかかる電圧が変わります。電気エネルギーの一部が<strong class=\"di-key\">熱</strong>になるため、水の温度上昇や蒸発、補水が必要でした。";
-  const variacWords='コイルそのものは回らないよ。回転するブラシが巻線の取り出し位置を変えているんだ。100Vを超える位置にも注目してね！';
+  const variacWords='コイルは固定で、回転するブラシが電圧の取り出し位置を変えるよ。100V定格の電球に130Vをかけると危険！ この教材では球切れを演出しているよ。';
   const variacExplanation='<strong class="di-key">スライダック</strong>は、コイルの途中から電圧を取り出す<strong class="di-key">可変単巻変圧器</strong>です。回転ノブに連動して<strong class="di-effect">カーボンブラシが固定された巻線の上を移動</strong>し、取り出す巻数が変わることで交流の<strong class="di-key">出力電圧</strong>を連続的に調整します。この教材では<strong class="di-effect">AC100V入力・0〜130V出力</strong>の例を示します。100Vを超える出力も可能ですが、100V定格の灯具には<strong class="di-effect">過電圧</strong>となるため注意が必要です。水抵抗式とは異なり、電圧を変圧器の巻線から取り出す方式です。<strong class="di-key">単巻変圧器の入力と出力は電気的に絶縁されません。</strong>';
   const pwmWords='スイッチの動きはONかOFFだけ。でも、ONでいる時間の割合を変えると、明るさも変えられるよ！ サイリスタとの違いを見てね。';
   const pwmExplanation="<strong class=\"di-key\">PWM（パルス幅変調）</strong>は、電子スイッチを<strong class=\"di-effect\">ON／OFF</strong>し、一定周期内でONにする時間の割合（<strong class=\"di-key\">デューティ比</strong>）を変える方式です。ON中の電圧の高さは一定でも、ON時間が長いほどLEDに供給される平均電力が増え、明るさを調整できます。サイリスタの位相制御が<strong class=\"di-key\">交流の途中から導通</strong>するのに対し、この図は<strong class=\"di-key\">直流でLEDを駆動するPWM</strong>の例です。ここでのON／OFFは電力スイッチの状態で、DMX信号のデジタル0／1とは別の話です。";
@@ -572,15 +588,15 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     wet.setAttribute('y',copperY.toFixed(2));  // Only translate; physical plate remains 128 units tall.
     feed.setAttribute('d','M209 253 C248 229 273 197 302 201 S334 '+(copperY+30).toFixed(2)+' 362 '+(copperY+24).toFixed(2));
     const volts=Math.round(130*level);
-    // Above 100 V is an overvoltage warning, not a deterministic lamp failure.
-    const burnedOut=false;
+    // Teaching illustration: 130V triggers simulated failure of a 100V-rated bulb; not a physical certainty.
+    const burnedOut=mode==='variac' && volts>=130;
     document.getElementById('di-burnout').toggleAttribute('hidden',!burnedOut);
     for(const layer of [halo,gas,filament])layer.toggleAttribute('hidden',burnedOut);
     const glow=Math.pow(mode==='variac'?Math.min(1,level*1.3):level,1.35); // illustration only, not a calibrated light-output curve
     halo.setAttribute('opacity',(.04+.91*glow).toFixed(2));
     gas.setAttribute('opacity',(.02+.87*glow).toFixed(2));
     filament.setAttribute('opacity',(.01+.96*glow).toFixed(2));
-    bulb.style.filter=burnedOut?'brightness(.44)':'brightness('+(0.54+glow*.82).toFixed(2)+') drop-shadow(0 0 '+(3+glow*17).toFixed(1)+'px rgba(255,173,65,'+(.12+.76*glow).toFixed(2)+'))';
+    bulb.style.filter=burnedOut?'brightness(.26) grayscale(1)':'brightness('+(0.54+glow*.82).toFixed(2)+') drop-shadow(0 0 '+(3+glow*17).toFixed(1)+'px rgba(255,173,65,'+(.12+.76*glow).toFixed(2)+'))';
     if(mode==='water'){
       const amplitude=69*level;
       wave.setAttribute('d',sinePath(amplitude));
@@ -633,7 +649,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
     readout.textContent=mode==='variac'?'交流出力 '+volts+'V（入力100V）':'明るさの指示 '+value+'%';
     action.textContent=mode==='water'
       ?waterAction
-      :mode==='variac'?(volts>100?'ノブ → ブラシが移動 → 出力 '+volts+'V（100V定格灯具には過電圧）':'ノブを回す → ブラシが移動 → 取り出す交流電圧が変わる')
+      :mode==='variac'?(volts>=130?'130V：100V定格電球の球切れを再現（教材上の演出）':volts>100?'ノブ → ブラシが移動 → 出力 '+volts+'V（100V定格灯具には過電圧）':'ノブを回す → ブラシが移動 → 取り出す交流電圧が変わる')
       :mode==='scr'?'フェーダーを動かす → 電気を通す範囲が変わる → 電球の明るさが変わる'
       :'フェーダーを動かす → ON時間の割合が変わる → LEDの明るさが変わる';
   }
