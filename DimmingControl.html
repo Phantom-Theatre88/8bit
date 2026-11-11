@@ -876,8 +876,15 @@ body.control-page> #shared-console-header-root{flex:0 0 auto}
  #scene[data-mode="direct"] .direct-archive-viewer .direct-archive-picture img{height:100%;max-height:100%}
 }
 
+/* A weak-control mode has five intentional rows; their width/height is
+   mode-owned, but stale pre-shared min-heights must not overflow the common stage. */
+@media(orientation:landscape) and (min-width:1051px){
+ #scene[data-mode="weak"] .scene-ground,
+ #scene[data-mode="digital"] .scene-ground{min-height:0;height:100%}
+}
+
 </style>
-<link rel="stylesheet" href="next-ui-dimming-shared.css?v=20261112-unified-4">
+<link rel="stylesheet" href="next-ui-dimming-shared.css?v=20261112-unified-5">
 </head>
 <body class="control-page eightbit-unified-width dimming-unified-page">
 <div id="shared-console-header-root"></div><script src="next-ui-console-header.js?v=20261111-8-16-menu"></script>
