@@ -766,6 +766,101 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
 #scene[data-mode="direct"] #direct-archive-fallback{padding:35px 14px;background:#192e3c;color:#d9edf6;font-size:16px;max-width:270px}
 @media(max-width:550px){#scene[data-mode="direct"] .direct-archive-viewer{gap:5px}#scene[data-mode="direct"] .direct-archive-arrow{flex-basis:36px;width:36px;height:48px;font-size:23px}}
 
+
+/* Unified control-scene layout: same frame height, header, diagram body and footer in all four modes. */
+@media(orientation:landscape) and (min-width:1051px){
+ body.control-page{height:100dvh;min-height:0;overflow:hidden}
+ body.control-page>.control-lesson{
+  height:100%;min-height:0;flex:1 1 0;overflow-y:auto;
+  display:grid;grid-template-rows:auto minmax(0,1fr) auto auto auto;
+  align-content:stretch;gap:6px;padding:7px 13px 7px;
+ }
+ .control-lesson>.head{min-height:0}
+ .control-lesson>.scene-row{
+  display:grid;min-height:0;min-width:0;flex:none;
+  grid-template-columns:150px minmax(0,1fr) 220px;
+  grid-template-rows:minmax(0,1fr);align-items:stretch;overflow:visible;
+ }
+ .control-lesson>.scene-row[data-mode="digital"]{grid-template-columns:150px minmax(0,1fr) 220px}
+ .control-lesson>.scene-row .mode-tabs{grid-column:1;grid-row:1;grid-template-rows:repeat(4,minmax(0,1fr));min-height:0}
+ .control-lesson>.scene-row .mode-tab{min-height:0}
+ .control-lesson>.scene-row .lesson-scene{
+  grid-column:2;grid-row:1;min-height:0;height:100%;
+  display:grid;grid-template-rows:minmax(35px,auto) minmax(0,1fr) auto;
+  padding:8px 10px 6px;overflow:hidden;
+ }
+ .control-lesson>.scene-row .scene-header{min-height:0;padding:0 2px 5px}
+ .control-lesson>.scene-row .scene-ground{
+  min-height:0;height:100%;overflow:hidden;flex:none;align-self:stretch;
+ }
+ .control-lesson>.scene-row .scene-footer{
+  min-height:24px;padding:5px 2px 0;align-self:end;
+  background:#1a2732;
+ }
+ .control-lesson>.scene-row .equipment-panel{
+  grid-column:3;grid-row:1;min-height:0;height:100%;overflow-y:auto;
+ }
+ .control-lesson>.legend{min-height:0}
+ .control-lesson>.below{min-height:0;align-self:stretch;overflow:visible}
+ .control-lesson .history,.control-lesson .teacher{min-height:0}
+ /* Direct gallery: reserve a true layout row for captions and controls. */
+ #scene[data-mode="direct"] .direct-card{
+  display:flex;flex-direction:column;min-height:0;height:100%;
+  padding:5px 10px;overflow:hidden;justify-content:center;
+ }
+ #scene[data-mode="direct"] .direct-archive{
+  display:grid;grid-template-rows:minmax(0,1fr) auto;
+  gap:5px;min-height:0;max-height:100%;align-content:center;
+ }
+ #scene[data-mode="direct"] .direct-archive-viewer{min-height:0;height:100%;max-height:100%}
+ #scene[data-mode="direct"] .direct-archive-viewer .direct-archive-picture{
+  max-height:100%;height:100%;min-height:0;
+ }
+ #scene[data-mode="direct"] .direct-archive-picture img{
+  height:100%;max-height:clamp(145px,28dvh,248px);object-fit:contain;
+ }
+ #scene[data-mode="direct"] .direct-archive-text{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  min-height:0;margin:0;
+ }
+ #scene[data-mode="direct"] .direct-archive-text .direct-title{font-size:18px;line-height:1.25}
+ #scene[data-mode="direct"] .direct-archive-text .direct-lead{font-size:14px;line-height:1.25;margin:0}
+ #scene[data-mode="direct"] .direct-archive-count{line-height:1.15}
+ #scene[data-mode="direct"] .direct-gallery-button{
+  min-height:33px;padding:4px 11px;font-size:14px;
+ }
+ /* Weak and digital flow diagrams use the SAME available diagram row. */
+ #scene[data-mode="weak"] .scene-ground,
+ #scene[data-mode="digital"] .scene-ground{
+  display:grid;min-height:0;height:100%;
+  grid-template-rows:minmax(25px,auto) minmax(25px,auto) minmax(125px,1fr) minmax(49px,auto) minmax(30px,auto);
+ }
+ #scene[data-mode="weak"] .fader-station,
+ #scene[data-mode="digital"] .fader-station{min-height:0;gap:2px}
+ #scene[data-mode="weak"] .fader-figure,
+ #scene[data-mode="digital"] .fader-figure{height:clamp(130px,22dvh,195px);max-height:100%}
+ #scene[data-mode="weak"] .weak-wave-caption,
+ #scene[data-mode="digital"] .digital-path-caption{
+  margin:0;padding:0 4px;font-size:13px;line-height:1.2;
+  align-self:center;min-height:0;
+ }
+ #scene[data-mode="weak"] .receiver,
+ #scene[data-mode="digital"] .receiver{min-height:0}
+ #scene[data-mode="weak"] .power-source,
+ #scene[data-mode="digital"] .power-source{min-height:45px}
+}
+@media(orientation:landscape) and (min-width:1051px) and (max-height:790px){
+ body.control-page>.control-lesson{gap:5px;padding:5px 12px}
+ .control-lesson>.below .history-details p{line-height:1.28;margin:2px 0}
+ #scene[data-mode="direct"] .direct-archive-picture img{max-height:clamp(125px,25dvh,210px)}
+ #scene[data-mode="direct"] .direct-archive-text .direct-title{font-size:17px}
+}
+@media(orientation:landscape) and (min-width:1051px) and (max-height:660px){
+ body.control-page>.control-lesson{display:flex;overflow-y:auto;height:auto}
+ .control-lesson>.scene-row{flex:0 0 auto;min-height:395px}
+ .control-lesson>.scene-row .lesson-scene{min-height:395px}
+}
+
 </style>
 </head>
 <body class="control-page eightbit-unified-width">
