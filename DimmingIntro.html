@@ -153,30 +153,19 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
   .di-note{line-height:1.3}
 }
 
-/* Same information hierarchy as DimmingControl: stable history + flexible teacher width. */
-@media(orientation:landscape) and (min-width:851px){
- .di-footer{display:flex;gap:9px;align-items:stretch;min-height:0}
- .di-footer .di-next{flex:0 0 57%;width:57%;min-width:0;grid-column:auto;grid-row:auto;padding:9px 12px}
- .di-footer .di-teacher{flex:1 1 0;width:auto;min-width:0;grid-column:auto;grid-row:auto;min-height:0;padding:8px 12px}
- .di-footer .di-teacher img{width:92px;height:clamp(92px,12dvh,118px)}
- .di-footer .di-next p{font-size:14px;line-height:1.38}
- .di-footer .di-next h3{margin-bottom:5px}
-}
 .di-teacher-copy{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:5px}
 .di-teacher-copy strong{margin-bottom:0}
-.di-teacher-next{display:inline-flex;align-items:center;justify-content:center;min-height:34px;margin-top:4px;padding:5px 12px;border-radius:6px;border:1px solid #6bbfdf;background:#25516a;color:#e9faff;font-weight:800;font-size:14px;text-decoration:none}
-.di-teacher-next:hover{background:#346781}
-.di-teacher-next:focus-visible{outline:3px solid #ffd186;outline-offset:2px}
-@media(max-width:850px){.di-footer .di-teacher{display:flex}.di-teacher-copy{align-items:flex-start}}
+
 
 </style>
+<link rel="stylesheet" href="next-ui-dimming-shared.css?v=20261112-common-1">
 </head>
-<body class="dimming-intro-page eightbit-unified-width">
+<body class="dimming-intro-page eightbit-unified-width dimming-unified-page">
 <div id="shared-console-header-root"></div>
 <script src="next-ui-console-header.js?v=20261111-8-16-menu"></script>
 
 
-<main class="dimming-lesson">
+<main class="dimming-lesson dimming-unified-main">
 <header class="di-title"><p class="di-kicker">DIMMING / 調光の入口</p><h1>調光とは？ ― 光の明るさが、舞台を変える。</h1><nav class="di-method-tabs" aria-label="調光ユニット方式の切り替え"><button type="button" data-di-mode="water" aria-pressed="true">水抵抗式</button><button type="button" data-di-mode="variac" aria-pressed="false">スライダック</button><button type="button" data-di-mode="scr" aria-pressed="false">サイリスタ式</button><button type="button" data-di-mode="pwm" aria-pressed="false">PWM</button></nav></header>
 <section class="di-panel di-demo" aria-labelledby="demo-title">
 <div class="di-demo-head"><h2 id="demo-title">調光ユニットのしくみ｜水抵抗式</h2><span class="di-helper">フェーダーを上下してみよう</span></div>
@@ -349,9 +338,9 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 </div>
 <div class="di-conclusion"><p id="di-action">フェーダーを上げると銅板が下がって電球が明るくなり、下げると銅板が上がって暗くなります。</p><output id="di-readout" aria-live="off">明るさの指示 50%</output></div>
 </section>
-<div class="di-footer">
-<section class="di-panel di-next" aria-labelledby="di-detail-title"><h3 id="di-detail-title">水抵抗式調光の仕組み・特徴</h3><p id="di-detail-text">水抵抗式は、<strong class="di-key">塩水を電気抵抗として使う</strong>調光方式です。2枚の電極のうち片方を上下させ、<strong class="di-key">塩水に浸かる面積</strong>を変えることで抵抗を調整します。<strong class="di-effect">深く浸すと抵抗が小さくなり電球が明るく</strong>、浅くすると抵抗が大きくなり暗くなります。抵抗器と電球は<strong class="di-key">直列</strong>で、抵抗器で電圧が降下するため、電球にかかる電圧が変わります。電気エネルギーの一部が<strong class="di-key">熱</strong>になるため、水の温度上昇や蒸発、補水が必要でした。</p></section>
-<section class="eightbit-shared-teacher di-panel di-teacher"><img id="di-teacher-img" src="assets/teacher_shy_story.svg?v=shy-story-20261105-deploy2" alt="照明教材の先生"><div class="di-teacher-copy"><strong>先生のひとこと</strong><p id="di-teacher-text">昔の水抵抗器は、水が熱くなって蒸発したんだって。補充に「おしっこ」を使った、なんて逸話も……えへへ、ホントかな？</p><a class="di-teacher-next" href="DimmingControl.html">次へ｜制御とは？ ❯</a></div></section>
+<div class="di-footer dimming-unified-footer">
+<section class="di-panel di-next dimming-unified-info" aria-labelledby="di-detail-title"><h3 id="di-detail-title">水抵抗式調光の仕組み・特徴</h3><p id="di-detail-text">水抵抗式は、<strong class="di-key">塩水を電気抵抗として使う</strong>調光方式です。2枚の電極のうち片方を上下させ、<strong class="di-key">塩水に浸かる面積</strong>を変えることで抵抗を調整します。<strong class="di-effect">深く浸すと抵抗が小さくなり電球が明るく</strong>、浅くすると抵抗が大きくなり暗くなります。抵抗器と電球は<strong class="di-key">直列</strong>で、抵抗器で電圧が降下するため、電球にかかる電圧が変わります。電気エネルギーの一部が<strong class="di-key">熱</strong>になるため、水の温度上昇や蒸発、補水が必要でした。</p></section>
+<section class="eightbit-shared-teacher di-panel di-teacher dimming-unified-teacher"><img id="di-teacher-img" src="assets/teacher_shy_story.svg?v=shy-story-20261105-deploy2" alt="照明教材の先生"><div class="di-teacher-copy dimming-unified-teacher-copy"><strong>先生のひとこと</strong><p id="di-teacher-text">昔の水抵抗器は、水が熱くなって蒸発したんだって。補充に「おしっこ」を使った、なんて逸話も……えへへ、ホントかな？</p><a class="di-teacher-next dimming-unified-next" href="DimmingControl.html">次へ｜制御とは？ ❯</a></div></section>
 </div>
 
 <p class="di-note">※調光方式の比較用模式図。スライダック130Vでの球切れは危険性を伝える教材演出で、実際の電球が必ず即座に切れることを意味しません。通電実験はしないでください。</p>
