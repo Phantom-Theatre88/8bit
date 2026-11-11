@@ -1311,6 +1311,23 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
    addPowerWave(rightFrom,rightTo,true,sameTimeWindow);
   }
   if(mode==='weak'){
+   // Keep the AC waveform's zero axis on the SCR-to-lamp wiring baseline.
+   // Measure live geometry rather than assuming a fixed shift at iPad sizes.
+   const acCard=ground.querySelector('.weak-ac-chart');
+   if(acCard){
+    acCard.style.transform='';
+    if(window.matchMedia('(min-width: 771px)').matches){
+     const waveformSvg=acCard.querySelector('svg');
+     const waveformBox=waveformSvg.getBoundingClientRect();
+     const unitIn=getPoint('port-unit');
+     const unitOut=getPoint('port-unit-out');
+     const lineY=(unitIn[1]+unitOut[1])/2;
+     const svgCenterY=waveformBox.top+waveformBox.height/2-gr.top;
+     if(waveformBox.height>0){
+      acCard.style.transform='translateY('+(lineY-svgCenterY).toFixed(2)+'px)';
+     }
+    }
+   }
    // The B-layout is a teaching diagram, not a perspective illustration.
    // Keep the control signal and lamp power horizontal along the SCR's
    // centerline. The separate mains feed connects vertically from below.
