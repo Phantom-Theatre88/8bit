@@ -14,7 +14,7 @@
 *{box-sizing:border-box}
 html,body{margin:0;background:#0e151c;color:#f0f5f8}
 body.dimming-intro-page{font:16px/1.5 "Hiragino Sans","Yu Gothic",Meiryo,system-ui,sans-serif;background:#151d25}
-body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px;width:100%;margin:0 auto;padding:12px 16px 20px;overflow-y:auto;display:flex;flex-direction:column;gap:12px}
+/* Page/grid height, gutters and flow are owned by next-ui-dimming-shared.css. */
 .di-title{border-left:4px solid #2ac7ff;padding:1px 0 1px 14px;flex:none}
 .di-title .di-kicker{font-size:14px;font-weight:800;color:#83dcf9;margin:0}
 .di-title h1{font-size:clamp(22px,2.05vw,27px);line-height:1.32;color:#fff;margin:2px 0 4px}
@@ -67,7 +67,7 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 .di-note{font-size:14px;color:#bcd0db;margin:0 1px;line-height:1.5}
 @media(max-height:850px) and (min-width:851px){.di-demo-head{margin-bottom:5px}}
 @media(max-width:850px){.di-workspace{grid-template-columns:1fr}.di-workspace .di-mechanism{height:auto;min-height:0;aspect-ratio:900/375}.di-demo{padding:0 9px 8px}.di-demo-head{margin:0 -9px 7px;padding:9px}.di-demo-head{display:block}.di-demo-head .di-helper{display:block}.di-conclusion{flex-wrap:wrap}}
-@media(max-width:560px){body.dimming-intro-page .dimming-lesson{padding:9px;gap:9px}.di-demo{overflow-x:auto}.di-workspace .di-mechanism{min-width:700px;aspect-ratio:900/375}.di-title h1{font-size:23px}.di-teacher img{width:92px;height:110px}.di-teacher{gap:8px}}
+@media(max-width:560px){.di-demo{overflow-x:auto}.di-workspace .di-mechanism{min-width:700px;aspect-ratio:900/375}.di-title h1{font-size:23px}.di-teacher img{width:92px;height:110px}.di-teacher{gap:8px}}
 /* Two-mode pilot: method choice lives in the title; mechanism and wave retain their approved footprint. */
 .di-title{display:flex;flex-wrap:wrap;align-items:center;column-gap:18px;row-gap:5px}
 .di-title .di-kicker{flex-basis:100%}
