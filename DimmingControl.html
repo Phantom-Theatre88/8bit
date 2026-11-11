@@ -941,6 +941,27 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
  #scene[data-mode="direct"] .direct-archive-text{gap:5px}
 }
 
+
+/* Main photo always fits its assigned viewport; no cropped equipment or broken-image glyphs. */
+#scene[data-mode="direct"] .direct-archive,
+#scene[data-mode="direct"] .direct-archive-viewer,
+#scene[data-mode="direct"] .direct-archive-viewer .direct-archive-picture{min-width:0;min-height:0}
+#scene[data-mode="direct"] .direct-archive-viewer .direct-archive-picture{overflow:hidden;background:#192935}
+#scene[data-mode="direct"] .direct-archive-viewer .direct-archive-picture img{
+ display:block;max-width:100%;max-height:100%;width:100%;height:100%;
+ min-width:0;min-height:0;object-fit:contain;object-position:center;
+}
+#scene[data-mode="direct"] .direct-archive-viewer .direct-archive-picture img[hidden],
+#scene[data-mode="direct"] .direct-archive-viewer .direct-archive-picture span[hidden]{display:none!important}
+#scene[data-mode="direct"] #direct-archive-fallback{display:block;width:100%;max-width:100%;padding:18px;color:#deeff9;background:#182b39}
+#scene[data-mode="direct"] .archive-source-hint{display:block;margin-top:8px;color:#a8d7ea;font-size:13px}
+#scene[data-mode="direct"] .direct-archive-source-link{font-size:14px;color:#94ddfa;text-decoration:underline;text-underline-offset:3px}
+@media(min-width:1051px){
+ #scene[data-mode="direct"] .direct-archive-viewer{align-self:stretch;overflow:hidden}
+ #scene[data-mode="direct"] .direct-archive-viewer .direct-archive-picture{height:100%;max-height:100%;flex:1 1 0;align-self:stretch}
+ #scene[data-mode="direct"] .direct-archive-viewer .direct-archive-picture img{height:100%;max-height:100%}
+}
+
 </style>
 </head>
 <body class="control-page eightbit-unified-width">
@@ -1018,8 +1039,8 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
  <p class="digital-path-caption" id="digital-path-caption" hidden>DMXは明るさの指令。調光器が別電源のAC100Vを調整し、電球へ送る。ここではトライアック式を例示。</p>
 </div>
 <div class="direct-card" id="direct-card"><figure class="direct-archive">
-<div class="direct-archive-viewer"><button type="button" class="direct-archive-arrow" id="direct-archive-prev" aria-label="前の歴史写真">❮</button><button class="direct-archive-picture" id="direct-gallery-open" aria-label="現在の写真を拡大" type="button" aria-haspopup="dialog"><img id="direct-archive-image" src="assets/control/history/marumo-resistor.webp" alt="戦前の金属抵抗式調光器の実物写真"><span id="direct-archive-fallback" hidden>写真は元資料で確認できます</span></button><button type="button" class="direct-archive-arrow" id="direct-archive-next" aria-label="次の歴史写真">❯</button></div>
-<figcaption class="direct-archive-text"><strong class="direct-title" id="direct-archive-title">丸茂電機「初期の調光器（金属抵抗器）」</strong><p class="direct-lead" id="direct-archive-caption"><strong class="direct-key">レバーで抵抗器の接点を動かし</strong>、舞台の明るさを調整しました。</p><p class="direct-archive-count" id="direct-archive-count" aria-live="polite">1 / 6</p><button type="button" class="direct-gallery-button" id="direct-gallery-more">写真を拡大・全6資料を見る</button></figcaption></figure></div>
+<div class="direct-archive-viewer"><button type="button" class="direct-archive-arrow" id="direct-archive-prev" aria-label="前の歴史写真">❮</button><button class="direct-archive-picture" id="direct-gallery-open" aria-label="現在の写真を拡大" type="button" aria-haspopup="dialog"><img id="direct-archive-image" src="assets/control/history/marumo-resistor.webp" alt="戦前の金属抵抗式調光器の実物写真"><span id="direct-archive-fallback" hidden>この写真は元資料で確認できます。<span class="archive-source-hint">右側の「掲載元を見る」から開いてね。</span></span></button><button type="button" class="direct-archive-arrow" id="direct-archive-next" aria-label="次の歴史写真">❯</button></div>
+<figcaption class="direct-archive-text"><strong class="direct-title" id="direct-archive-title">丸茂電機「初期の調光器（金属抵抗器）」</strong><p class="direct-lead" id="direct-archive-caption"><strong class="direct-key">レバーで抵抗器の接点を動かし</strong>、舞台の明るさを調整しました。</p><p class="direct-archive-count" id="direct-archive-count" aria-live="polite">1 / 6</p><a class="direct-archive-source-link" id="direct-archive-source-link" href="https://www.marumo.co.jp/company/history/" target="_blank" rel="noopener noreferrer">掲載元を見る</a><button type="button" class="direct-gallery-button" id="direct-gallery-more">写真を拡大・全6資料を見る</button></figcaption></figure></div>
 <dialog id="direct-gallery" class="direct-gallery" aria-labelledby="direct-gallery-title">
 <header><strong>直接制御｜歴史写真資料</strong><button type="button" id="direct-gallery-close">✕ 閉じる</button></header>
 <main><div class="direct-gallery-photo"><img id="direct-gallery-image" alt=""><button type="button" class="direct-gallery-photo-arrow direct-gallery-photo-prev" id="direct-gallery-photo-prev" aria-label="前の写真">❮</button><button type="button" class="direct-gallery-photo-arrow direct-gallery-photo-next" id="direct-gallery-photo-next" aria-label="次の写真">❯</button><div id="direct-gallery-fallback" hidden>この写真は原資料で確認できます。<a id="direct-gallery-fallback-link" target="_blank" rel="noopener noreferrer">掲載元を開く</a></div></div>
@@ -1391,9 +1412,10 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
   $('direct-archive-caption').textContent=caption;
   $('direct-archive-count').textContent=(archiveIndex+1)+' / '+directGalleryEntries.length;
   $('direct-gallery-open').setAttribute('aria-label',name+'の写真を拡大');
+  $('direct-archive-source-link').href=url;
   archiveFallback.hidden=true;
   const token=++archiveImageToken;
-  const candidates=[src,imageUrl].filter(Boolean);
+  const candidates=src?[src]:[]; // No unstable external hotlinks inside the learning panel.
   let position=0;
   archiveImage.onerror=()=>{
    if(token!==archiveImageToken)return;
