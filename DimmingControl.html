@@ -862,42 +862,6 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
 }
 
 
-/* Stable explanation height; teacher fills available horizontal space. */
-@media(min-width:1051px) and (orientation:landscape){
- body.control-page .control-lesson>.below{
-  display:flex;align-items:stretch;gap:9px;
-  height:clamp(155px,18dvh,178px);min-height:0;max-height:none;
-  flex:0 0 auto;overflow:visible;
- }
- body.control-page .control-lesson>.below>.history{
-  flex:0 0 57%;width:57%;min-width:0;height:100%;overflow-y:auto;
- }
- body.control-page .control-lesson>.below>.teacher{
-  flex:1 1 0;width:auto;min-width:0;height:100%;overflow:hidden;
- }
- body.control-page .control-lesson .history-details{gap:2px}
- body.control-page .control-lesson .history-details p{margin:0;line-height:1.34}
- body.control-page .control-lesson .teacher-copy{
-  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
-  min-width:0;min-height:0;gap:3px;
- }
- body.control-page .control-lesson .teacher-copy h3{margin:0}
- body.control-page .control-lesson .teacher-bubble{line-height:1.38}
-}
-/* Next-lesson prompt belongs to the teacher, not the explanation. */
-.teacher-next-button{
- display:inline-flex;align-items:center;justify-content:center;
- margin-top:5px;min-height:34px;padding:5px 12px;
- font-size:14px;font-weight:800;color:#e9faff;
- background:#25516a;border:1px solid #6bbfdf;border-radius:6px;
- text-align:center;cursor:pointer;
-}
-.teacher-next-button:hover{background:#346781}
-.teacher-next-button:focus-visible{outline:3px solid #ffd186;outline-offset:2px}
-@media(max-width:1050px){
- .below .teacher-copy{display:flex;flex-direction:column;align-items:flex-start;gap:5px}
- .teacher-next-button{max-width:100%}
-}
 /* Direct-control photo is larger on the left, caption and controls on the right. */
 @media(min-width:1051px){
  #scene[data-mode="direct"] .direct-archive{
@@ -963,10 +927,11 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
 }
 
 </style>
+<link rel="stylesheet" href="next-ui-dimming-shared.css?v=20261112-common-1">
 </head>
-<body class="control-page eightbit-unified-width">
+<body class="control-page eightbit-unified-width dimming-unified-page">
 <div id="shared-console-header-root"></div><script src="next-ui-console-header.js?v=20261111-8-16-menu"></script>
-<main class="control-lesson">
+<main class="control-lesson dimming-unified-main">
 <header class="head"><div><p class="kicker">DIMMING / 制御の入口</p><h1>制御とは？ ― 同じフェーダー、何が違う？</h1></div><p class="head-tip">操作して、ケーブルを通るものを比べよう。</p></header>
 <div class="scene-row" id="scene-row" data-mode="direct">
 <div class="mode-tabs" role="tablist" aria-label="制御方式の切り替え">
@@ -1093,7 +1058,7 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
 </aside>
 </div>
 <div class="legend"><span><i class="swatch power"></i>アンバー：灯具用の電力</span><span><i class="swatch weak"></i>ブルー：弱電の指示・デジタルデータ</span><span>移動する光・数字は理解のための演出</span></div>
-<div class="below"><section class="panel history"><h3>▤ 歴史と位置づけ</h3><div id="history-text" class="history-details"><p>方式ごとに、必要になった理由と操作の変化を確認しよう。</p></div></section><section class="panel teacher eightbit-shared-teacher"><img src="assets/wave_teacher_transparent.svg?v=teacher-standard-20261014" alt="先生キャラクター"><div class="teacher-copy"><h3>先生のひとこと</h3><div class="teacher-bubble" id="teacher-message">見た目は同じフェーダー。でも強電制御では、フェーダーが100V系の電気を扱っているよ。</div><button type="button" id="teacher-next-button" class="teacher-next-button">次へ｜強電制御を見る ❯</button></div></section></div>
+<div class="below dimming-unified-footer"><section class="panel history dimming-unified-info"><h3>▤ 歴史と位置づけ</h3><div id="history-text" class="history-details"><p>方式ごとに、必要になった理由と操作の変化を確認しよう。</p></div></section><section class="panel teacher eightbit-shared-teacher dimming-unified-teacher"><img src="assets/wave_teacher_transparent.svg?v=teacher-standard-20261014" alt="先生キャラクター"><div class="teacher-copy dimming-unified-teacher-copy"><h3>先生のひとこと</h3><div class="teacher-bubble" id="teacher-message">見た目は同じフェーダー。でも強電制御では、フェーダーが100V系の電気を扱っているよ。</div><button type="button" id="teacher-next-button" class="teacher-next-button dimming-unified-next">次へ｜強電制御を見る ❯</button></div></section></div>
 <details class="note-details"><summary>模式図の注意・補足</summary>
  <p>DC0〜10Vは明るさを指示する直流の制御電圧で、SCRがそのDCを交流へ変換するわけではありません。交流100Vは実効値（波形の頂点は約141V）。強電タブは可変抵抗式の単純化、弱電タブはSCR位相制御の一例、デジタルタブはトライアック式DMX調光器の一例です。DMX調光器すべてが位相制御式というわけではなく、制御値・出力実効値・光束は単純比例とは限りません。内部配線・帰線・保護回路は省略。</p>
 </details>
