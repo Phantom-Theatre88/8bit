@@ -1,38 +1,84 @@
-/* Shared source of truth for DimmingIntro + DimmingControl layout.
-   Keep physical mechanism, waveforms, galleries, and equipment-specific artwork in page CSS.
-   2026-11-12: common viewport budget, footer proportions, typography and learning CTA. */
+/* Dimming lessons: one shared layout source, 2026-11-12.
+   Applies only to DimmingIntro.html / DimmingControl.html via dimming-unified-*.
+   Physical mechanisms, dimmer diagrams, photos and controls remain page-specific. */
 .dimming-unified-page{
  --dimming-gap:8px;
- --dimming-page-padding-inline:13px;
+ --dimming-padding-inline:13px;
  --dimming-footer-height:clamp(156px,18dvh,180px);
- --dimming-history-share:57fr;
- --dimming-teacher-share:43fr;
+ --dimming-info-fr:57fr;
+ --dimming-teacher-fr:43fr;
+ --dimming-border:#526c7f;
  --dimming-panel-gap:9px;
- --dimming-panel-border:#526c7f;
- display:flex;flex-direction:column;
- height:100dvh;min-height:0;overflow:hidden;
+ display:flex;flex-direction:column;height:100dvh;min-height:0;overflow:hidden;
 }
 .dimming-unified-page > .dimming-unified-main{
- width:100%;max-width:1420px;
- margin:0 auto;padding:7px var(--dimming-page-padding-inline) 8px;
- flex:1 1 0;min-height:0;overflow-y:auto;gap:var(--dimming-gap);
+ display:grid;
+ grid-template-rows:auto minmax(350px,1fr) auto var(--dimming-footer-height) auto;
+ gap:var(--dimming-gap);
+ flex:1 1 0;min-height:0;
+ width:100%;max-width:1420px;margin:0 auto;
+ padding:7px var(--dimming-padding-inline) 8px;
+ overflow-y:auto;overscroll-behavior-y:contain;
+}
+.dimming-unified-page.dimming-intro-page > .dimming-unified-main{
+ grid-template-rows:auto minmax(345px,1fr) var(--dimming-footer-height) auto;
+}
+.dimming-unified-page .dimming-unified-header{
+ min-width:0;min-height:0;
+ border-left:4px solid #2bcaff;padding:1px 0 1px 14px;
+}
+.dimming-unified-page .dimming-unified-header h1{
+ margin:1px 0;font-size:clamp(22px,2.05vw,27px);
+ font-weight:800;line-height:1.33;color:#f5f8fc;
+}
+.dimming-unified-page .dimming-unified-header .di-kicker,
+.dimming-unified-page .dimming-unified-header .kicker{
+ font-size:14px;line-height:1.3;font-weight:800;color:#83dcf9;margin:0;
+}
+.dimming-unified-page .dimming-unified-stage{
+ min-width:0;min-height:0;height:100%;
+ border:1px solid var(--dimming-border);
+ border-radius:8px;
+ background:linear-gradient(180deg,#202e3b,#1a2530);
+}
+.dimming-unified-page.dimming-intro-page .dimming-unified-stage{
+ display:flex;flex-direction:column;overflow:hidden;
+}
+.dimming-unified-page.dimming-intro-page .dimming-unified-stage .di-workspace{
+ flex:1 1 0;min-height:0;
+}
+.dimming-unified-page.dimming-intro-page .dimming-unified-stage .di-mechanism{
+ height:100%;min-height:0;max-height:100%;
+}
+.dimming-unified-page.control-page .scene-row{
+ min-height:0;align-self:stretch;
+}
+.dimming-unified-page.control-page .dimming-unified-stage{
+ display:grid;grid-template-rows:minmax(34px,auto) minmax(0,1fr) auto;
+ overflow:hidden;
+}
+.dimming-unified-page.control-page .dimming-unified-stage .scene-ground{
+ min-height:0;height:100%;overflow:hidden;
 }
 .dimming-unified-page .dimming-unified-footer{
  display:grid;
- grid-template-columns:minmax(0,var(--dimming-history-share)) minmax(0,var(--dimming-teacher-share));
- gap:var(--dimming-panel-gap);align-items:stretch;
- height:var(--dimming-footer-height);min-height:0;max-height:none;
- flex:0 0 var(--dimming-footer-height);overflow:visible;
+ grid-template-columns:minmax(0,var(--dimming-info-fr)) minmax(0,var(--dimming-teacher-fr));
+ gap:var(--dimming-panel-gap);
+ align-items:stretch;
+ height:100%;min-height:0;max-height:none;
+ margin:0;overflow:visible;
 }
 .dimming-unified-page .dimming-unified-footer > .dimming-unified-info,
 .dimming-unified-page .dimming-unified-footer > .dimming-unified-teacher{
- grid-column:auto;grid-row:auto;min-width:0;min-height:0;
- width:auto;height:100%;margin:0;
- border:1px solid var(--dimming-panel-border);border-radius:8px;
+ grid-column:auto;grid-row:auto;
+ flex:none;width:auto;min-width:0;
+ height:100%;min-height:0;margin:0;
+ border:1px solid var(--dimming-border);border-radius:8px;
  padding:9px 12px;
 }
 .dimming-unified-page .dimming-unified-footer > .dimming-unified-info{
- display:block;overflow-y:auto;overscroll-behavior:contain;
+ display:flex;flex-direction:column;justify-content:flex-start;gap:2px;
+ overflow-y:auto;overscroll-behavior:contain;
 }
 .dimming-unified-page .dimming-unified-footer > .dimming-unified-teacher{
  display:flex;align-items:center;gap:11px;overflow:hidden;
@@ -49,86 +95,77 @@
  display:flex;flex-direction:column;gap:3px;
 }
 .dimming-unified-page .dimming-unified-footer > .dimming-unified-teacher > img{
- width:94px;height:clamp(90px,12dvh,120px);
- max-height:100%;object-fit:contain;object-position:center bottom;
- align-self:end;flex:0 0 auto;
+ display:block;flex:0 0 auto;align-self:end;
+ width:94px;height:clamp(90px,12dvh,120px);max-height:100%;
+ object-fit:contain;object-position:center bottom;
 }
 .dimming-unified-page .dimming-unified-footer .dimming-unified-teacher-copy{
- flex:1 1 0;min-width:0;min-height:0;display:flex;
- flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;
+ flex:1 1 0;min-width:0;min-height:0;
+ display:flex;flex-direction:column;align-items:flex-start;
+ justify-content:center;gap:4px;
 }
 .dimming-unified-page .dimming-unified-footer .dimming-unified-teacher-copy > strong{
- margin:0;color:#ffd18d;font-size:16px;
+ color:#ffd18d;font-size:16px;margin:0;
 }
 .dimming-unified-page .dimming-unified-footer .dimming-unified-teacher-copy p,
 .dimming-unified-page .dimming-unified-footer .dimming-unified-teacher-copy .teacher-bubble{
  margin:0;padding:0;border:0;border-radius:0;box-shadow:none;
  background:transparent;color:#e1edf4;font-size:14px;
- line-height:1.4;font-weight:500;
+ font-weight:500;line-height:1.4;
 }
 .dimming-unified-page .dimming-unified-next{
  display:inline-flex;align-items:center;justify-content:center;
- margin:4px 0 0;padding:5px 12px;
- min-height:34px;max-width:100%;
- border:1px solid #6bbfdf;border-radius:6px;
+ margin:4px 0 0;min-height:34px;max-width:100%;
+ padding:5px 12px;border:1px solid #6bbfdf;border-radius:6px;
  background:#25516a;color:#e9faff;
- font-family:inherit;font-size:14px;font-weight:800;
- text-decoration:none;text-align:center;cursor:pointer;
+ font-size:14px;font-weight:800;line-height:1.3;
+ text-align:center;text-decoration:none;cursor:pointer;
 }
 .dimming-unified-page .dimming-unified-next:hover{background:#346781}
 .dimming-unified-page .dimming-unified-next:focus-visible{outline:3px solid #ffd186;outline-offset:2px}
-/* Shared iPad landscape layout budget, with diagram-specific sizing left local. */
-@media(orientation:landscape) and (min-width:1051px){
- .dimming-unified-page > .dimming-unified-main{height:100%;overflow-y:auto}
- .dimming-unified-page.control-page > .dimming-unified-main{
-  display:grid;grid-template-rows:auto minmax(0,1fr) auto var(--dimming-footer-height) auto;
-  align-content:stretch;
+/* All landscape dimensions use the same sizing system. When it is too short,
+   the main content scrolls; no text or approved graphic gets forcibly clipped. */
+@media (orientation:landscape) and (min-width:851px) and (max-height:850px){
+ .dimming-unified-page{--dimming-gap:6px;--dimming-footer-height:clamp(145px,19dvh,168px)}
+ .dimming-unified-page > .dimming-unified-main{
+  padding-block:6px;
  }
- .dimming-unified-page.control-page > .dimming-unified-main > .dimming-unified-footer{
-  height:100%;min-height:0;max-height:none;flex:none;
+ .dimming-unified-page.dimming-intro-page > .dimming-unified-main{
+  grid-template-rows:auto minmax(335px,1fr) var(--dimming-footer-height) auto;
+ }
+ .dimming-unified-page.control-page > .dimming-unified-main{
+  grid-template-rows:auto minmax(330px,1fr) auto var(--dimming-footer-height) auto;
  }
 }
 @media(orientation:landscape) and (min-width:851px) and (max-width:1050px){
- .dimming-unified-page{--dimming-footer-height:clamp(158px,20dvh,185px)}
+ .dimming-unified-page{--dimming-footer-height:clamp(160px,21dvh,190px)}
 }
 @media(max-width:850px),(orientation:portrait){
  .dimming-unified-page{height:auto;min-height:100dvh;overflow:visible}
- .dimming-unified-page > .dimming-unified-main{height:auto;min-height:0;overflow:visible}
+ .dimming-unified-page > .dimming-unified-main,
+ .dimming-unified-page.control-page > .dimming-unified-main,
+ .dimming-unified-page.dimming-intro-page > .dimming-unified-main{
+  display:flex;flex-direction:column;
+  height:auto;min-height:0;overflow:visible;
+ }
+ .dimming-unified-page .dimming-unified-stage{height:auto;min-height:0;overflow:visible}
+ .dimming-unified-page.dimming-intro-page .dimming-unified-stage .di-mechanism{
+  height:auto;max-height:none;
+ }
+ .dimming-unified-page.control-page .dimming-unified-stage .scene-ground{
+  height:auto;overflow:visible;
+ }
  .dimming-unified-page .dimming-unified-footer{
   display:grid;grid-template-columns:minmax(0,1fr);
-  height:auto;min-height:0;max-height:none;flex:none;
+  height:auto;min-height:0;max-height:none;
  }
  .dimming-unified-page .dimming-unified-footer > .dimming-unified-info,
  .dimming-unified-page .dimming-unified-footer > .dimming-unified-teacher{
   height:auto;max-height:none;overflow:visible;
  }
 }
-@media(orientation:landscape) and (min-width:1051px) and (max-height:660px){
- .dimming-unified-page{height:auto;min-height:100dvh;overflow:visible}
- .dimming-unified-page > .dimming-unified-main{height:auto;overflow:visible}
- .dimming-unified-page.control-page > .dimming-unified-main{
-  display:flex;flex-direction:column;
- }
- .dimming-unified-page .dimming-unified-footer{height:auto;min-height:156px;flex:none}
- .dimming-unified-page .dimming-unified-footer > .dimming-unified-info{overflow:visible}
-}
-
-/* Common lesson heading and stage chrome, regardless of the diagram's own DOM. */
-.dimming-unified-page .dimming-unified-header{
- min-height:0;flex:0 0 auto;
- border-left:4px solid #2bcaff;
- padding:1px 0 1px 14px;
-}
-.dimming-unified-page .dimming-unified-header h1{
- margin:1px 0;font-size:clamp(22px,2.05vw,27px);
- font-weight:800;line-height:1.33;color:#f5f8fc;
-}
-.dimming-unified-page .dimming-unified-header .di-kicker,
-.dimming-unified-page .dimming-unified-header .kicker{
- font-size:14px;line-height:1.3;font-weight:800;color:#83dcf9;margin:0;
-}
-.dimming-unified-page .dimming-unified-stage{
- min-width:0;min-height:0;
- border:1px solid #526c7f;border-radius:8px;
- background:linear-gradient(180deg,#202e3b,#1a2530);
+/* Narrow heights are allowed to scroll. No hidden footer or microscopic type. */
+@media(orientation:landscape) and (min-width:851px) and (max-height:660px){
+ .dimming-unified-page{--dimming-footer-height:170px}
+ .dimming-unified-page > .dimming-unified-main{overflow-y:auto}
 }
