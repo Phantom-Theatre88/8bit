@@ -56,17 +56,17 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 .di-conclusion{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#12222e;border:1px solid #395363;border-radius:7px;padding:9px 14px;margin-top:6px}
 .di-conclusion p{font-size:16px;font-weight:700;color:#fff;margin:0}
 .di-conclusion output{font-size:18px;color:#ffca83;font-weight:900;white-space:nowrap}
-.di-footer{display:grid;grid-template-columns:minmax(0,1fr) minmax(245px,.6fr);gap:12px;flex:none}
-.di-teacher{display:flex;align-items:center;gap:12px;padding:9px 14px;min-height:134px}
-.di-teacher img{width:118px;height:134px;object-fit:contain;object-position:bottom;flex:none}
-.di-teacher strong{display:block;color:#ffd18d;font-size:16px;margin-bottom:3px}
-.di-teacher p{font-size:16px;margin:0;line-height:1.48}
-.di-next{padding:13px 16px;display:flex;flex-direction:column;justify-content:center;gap:9px}
-.di-next p{margin:0;font-size:15px;color:#d4e4ec}
-.di-next a{font-size:16px;font-weight:800;color:#081820;text-decoration:none;background:#ffbf73;border-radius:6px;padding:10px 12px;text-align:center}
+
+
+
+
+
+
+
+
 .di-note{font-size:14px;color:#bcd0db;margin:0 1px;line-height:1.5}
-@media(max-height:850px) and (min-width:851px){body.dimming-intro-page .dimming-lesson{gap:8px;padding:8px 13px}.di-workspace .di-mechanism{height:clamp(280px,40dvh,330px)}.di-teacher{min-height:88px}.di-teacher img{height:118px}.di-demo-head{margin-bottom:5px}}
-@media(max-width:850px){.di-workspace{grid-template-columns:1fr}.di-footer{grid-template-columns:1fr}.di-workspace .di-mechanism{height:auto;min-height:0;aspect-ratio:900/375}.di-demo{padding:0 9px 8px}.di-demo-head{margin:0 -9px 7px;padding:9px}.di-demo-head{display:block}.di-demo-head .di-helper{display:block}.di-conclusion{flex-wrap:wrap}}
+@media(max-height:850px) and (min-width:851px){.di-demo-head{margin-bottom:5px}}
+@media(max-width:850px){.di-workspace{grid-template-columns:1fr}.di-workspace .di-mechanism{height:auto;min-height:0;aspect-ratio:900/375}.di-demo{padding:0 9px 8px}.di-demo-head{margin:0 -9px 7px;padding:9px}.di-demo-head{display:block}.di-demo-head .di-helper{display:block}.di-conclusion{flex-wrap:wrap}}
 @media(max-width:560px){body.dimming-intro-page .dimming-lesson{padding:9px;gap:9px}.di-demo{overflow-x:auto}.di-workspace .di-mechanism{min-width:700px;aspect-ratio:900/375}.di-title h1{font-size:23px}.di-teacher img{width:92px;height:110px}.di-teacher{gap:8px}}
 /* Two-mode pilot: method choice lives in the title; mechanism and wave retain their approved footprint. */
 .di-title{display:flex;flex-wrap:wrap;align-items:center;column-gap:18px;row-gap:5px}
@@ -82,19 +82,19 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 .di-method-tabs button:hover:not([aria-pressed="true"]){background:linear-gradient(180deg,#2a3b49,#13212c);color:#f2f8fc}
 .di-method-tabs button:focus-visible{outline:2px solid #ffd18b;outline-offset:3px}
 .di-workspace .di-mechanism [hidden],.di-wave-svg [hidden]{display:none!important}
-.di-footer{grid-template-columns:minmax(0,58fr) minmax(260px,42fr);align-items:stretch}
-.di-footer .di-next{grid-column:1;grid-row:1;justify-content:flex-start}
-.di-footer .di-teacher{grid-column:2;grid-row:1;align-self:stretch}
-.di-footer .di-next p{font-size:16px;line-height:1.55}
-.di-footer .di-next h3{margin-bottom:6px}
+
+
+
+
+
 .di-next .di-key{color:#f9cd91;font-weight:800}
 .di-next .di-effect{color:#8edcf5;font-weight:800}
 .di-next p{overflow-wrap:break-word}
-.di-next{justify-content:center;gap:4px;padding:12px 16px}
-.di-next h3{margin:0;color:#ffd18d;font-size:17px}
-.di-next p{font-size:16px;line-height:1.5;color:#e1edf4}
+
+
+
 .di-wave-svg #di-firing-dots circle{stroke:#ffe0bc;stroke-width:1.2}
-@media(max-width:850px){.di-title h1{flex-basis:100%}.di-method-tabs{width:100%;flex-wrap:wrap}.di-footer{grid-template-columns:1fr}.di-footer .di-next,.di-footer .di-teacher{grid-column:1;grid-row:auto}}
+@media(max-width:850px){.di-title h1{flex-basis:100%}.di-method-tabs{width:100%;flex-wrap:wrap}}
 @media(max-width:560px){.di-method-tabs{width:100%;grid-template-columns:repeat(4,minmax(0,1fr))}.di-method-tabs button{padding:8px 4px;font-size:12px}.di-title{gap:7px}}
 .di-wave-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .di-wave-heading h3{flex:1 1 150px}
@@ -135,30 +135,22 @@ body.dimming-intro-page .dimming-lesson{flex:1 1 0;min-height:0;max-width:1420px
 @media(max-width:560px){.di-machine-stage{min-width:690px}}
 
 /* Dimming accessibility and learning path, scoped to this page. */
-.di-next-chapter{margin:0;text-align:left}.di-next-chapter a{display:inline-flex;align-items:center;min-height:44px;padding:9px 14px;border:1px solid #66889a;border-radius:7px;background:#243b49;color:#b9eeff;font-size:16px;font-weight:800;text-decoration:none}.di-next-chapter a:focus-visible{outline:3px solid #ffd18d;outline-offset:2px}@media(max-width:560px){.di-method-tabs button{font-size:14px}#di-animate-toggle{font-size:14px}}
+@media(max-width:560px){.di-method-tabs button{font-size:14px}#di-animate-toggle{font-size:14px}}
 /* iPad landscape: fit the lesson and the next-chapter link inside the usable screen. */
 @media (orientation:landscape) and (min-width:851px) and (max-height:1050px){
-  body.dimming-intro-page .dimming-lesson{gap:6px;padding:7px 13px 9px}
   .di-title h1{margin:0;font-size:clamp(22px,1.95vw,26px)}
-  .di-workspace .di-mechanism{height:clamp(244px,32dvh,305px);min-height:244px}
   .di-demo{padding-bottom:6px}
   .di-demo-head{padding-top:6px;padding-bottom:6px;margin-bottom:5px}
   .di-conclusion{margin-top:4px;padding:6px 12px}
-  .di-footer{gap:8px}
-  .di-next{padding:7px 12px}
-  .di-next p{line-height:1.38}
-  .di-teacher{min-height:0;padding:6px 10px}
-  .di-teacher img{height:clamp(88px,11dvh,115px);width:94px}
-  .di-next-chapter a{min-height:36px;padding:6px 11px}
   .di-note{line-height:1.3}
 }
 
-.di-teacher-copy{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:5px}
-.di-teacher-copy strong{margin-bottom:0}
+
+
 
 
 </style>
-<link rel="stylesheet" href="next-ui-dimming-shared.css?v=20261112-common-2">
+<link rel="stylesheet" href="next-ui-dimming-shared.css?v=20261112-unified-3">
 </head>
 <body class="dimming-intro-page eightbit-unified-width dimming-unified-page">
 <div id="shared-console-header-root"></div>
