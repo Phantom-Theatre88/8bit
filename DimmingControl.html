@@ -717,21 +717,59 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
 .direct-gallery-info{overflow:auto;line-height:1.6;padding-right:7px}.direct-gallery-info h2{color:#ffd29a;font-size:21px;margin:8px 0}.direct-gallery-info p{font-size:15px;margin:9px 0}.direct-gallery-info a,.direct-gallery-photo a{color:#93ddfa}.direct-gallery-info small{display:block;color:#afbec9;margin-top:16px}
 .direct-gallery footer nav{display:flex;overflow:auto;gap:4px}.direct-gallery footer nav button{min-width:38px}.direct-gallery footer nav button[aria-current="true"]{border-color:#f8d38b;background:#415668}
 @media(max-width:860px){.direct-archive{grid-template-columns:1fr}.direct-archive-picture img{height:clamp(300px,42vh,390px)}.direct-gallery main{grid-template-columns:1fr;grid-template-rows:minmax(0,1.1fr) minmax(0,1fr)}.direct-gallery{width:98vw;height:96vh}}
+
+/* Responsive viewport allocation for the current iPad landscape common header. */
+@media(orientation:landscape) and (min-width:960px){
+ body.control-page{height:100dvh;min-height:0;overflow:hidden}
+ body.control-page>.control-lesson{flex:1 1 0;min-height:0;overflow-y:auto;padding:6px 13px 7px;gap:5px}
+ .control-lesson>.head{flex:0 0 auto}
+ .control-lesson>.scene-row{flex:1 1 0;min-height:0}
+ .control-lesson .scene-row .mode-tabs{min-height:0;grid-template-rows:repeat(4,minmax(0,1fr))}
+ .control-lesson .scene-row .mode-tab{min-height:0;padding:5px}
+ .control-lesson .scene-row .lesson-scene{min-height:0;padding:7px 10px 6px}
+ .control-lesson .scene-row .scene-ground{min-height:0;flex:1 1 0}
+ .control-lesson #scene[data-mode="weak"] .scene-ground,
+ .control-lesson #scene[data-mode="digital"] .scene-ground{min-height:0}
+ .control-lesson .scene-row .direct-card{min-height:0;flex:1 1 0;padding:6px 12px}
+ .control-lesson .direct-archive{gap:5px}
+ .control-lesson .direct-archive-picture img{height:clamp(150px,31dvh,285px)}
+ .control-lesson .direct-archive-text .direct-lead{margin:2px auto 4px}
+ .control-lesson .direct-gallery-button{min-height:34px;padding:5px 10px}
+ .control-lesson .scene-row .equipment-panel{min-height:0;overflow:hidden;padding:8px;gap:4px}
+ .control-lesson .artifact-photo>a:first-of-type{height:clamp(80px,14dvh,150px)}
+ .control-lesson .legend{flex:0 0 auto}
+ .control-lesson .below{flex:0 0 auto;min-height:0;gap:8px}
+ .control-lesson .history,.control-lesson .teacher{padding:7px 10px}
+ .control-lesson .teacher img{width:86px;height:clamp(83px,12dvh,112px)}
+ .control-lesson .history-details p{line-height:1.32}
+ .control-lesson .note-details{flex:0 0 auto}
+ .control-lesson #scene[data-mode="power"] .fader-figure,
+ .control-lesson #scene[data-mode="digital"] .fader-figure,
+ .control-lesson #scene[data-mode="weak"] .fader-figure{height:clamp(155px,25dvh,228px);max-height:100%}
+}
+#scene .lamp-glow{transform:translateY(-14%) scaleY(.88);transform-origin:center center}
+#scene .filament{top:23%}
+.direct-gallery-photo{position:relative}
+.direct-gallery .direct-gallery-photo-arrow{position:absolute;z-index:5;top:50%;transform:translateY(-50%);width:46px;height:56px;display:grid;place-items:center;padding:0;background:#142b3de8;color:#fff;border:1px solid #9dd9f2;border-radius:7px;font-size:28px;line-height:1;box-shadow:0 3px 12px #0009}
+.direct-gallery .direct-gallery-photo-prev{left:9px}
+.direct-gallery .direct-gallery-photo-next{right:9px}
+.direct-gallery .direct-gallery-photo-arrow:focus-visible{outline:3px solid #ffc877;outline-offset:2px}
+
 </style>
 </head>
 <body class="control-page eightbit-unified-width">
 <div id="shared-console-header-root"></div><script src="next-ui-console-header.js?v=20261111-8-16-menu"></script>
 <main class="control-lesson">
 <header class="head"><div><p class="kicker">DIMMING / 制御の入口</p><h1>制御とは？ ― 同じフェーダー、何が違う？</h1></div><p class="head-tip">操作して、ケーブルを通るものを比べよう。</p></header>
-<div class="scene-row" id="scene-row" data-mode="power">
+<div class="scene-row" id="scene-row" data-mode="direct">
 <div class="mode-tabs" role="tablist" aria-label="制御方式の切り替え">
-<button type="button" class="mode-tab" role="tab" data-mode="direct" aria-selected="false"><strong>直接制御</strong><small>機械的に操作</small></button>
-<button type="button" class="mode-tab" role="tab" data-mode="power" aria-selected="true"><strong>強電制御</strong><small>AC100Vの電力</small></button>
+<button type="button" class="mode-tab" role="tab" data-mode="direct" aria-selected="true"><strong>直接制御</strong><small>機械的に操作</small></button>
+<button type="button" class="mode-tab" role="tab" data-mode="power" aria-selected="false"><strong>強電制御</strong><small>AC100Vの電力</small></button>
 <button type="button" class="mode-tab" role="tab" data-mode="weak" aria-selected="false"><strong>弱電制御</strong><small>DC0〜10Vの指令</small></button>
 <button type="button" class="mode-tab" role="tab" data-mode="digital" aria-selected="false"><strong>デジタル制御</strong><small>0／1のデータ</small></button>
 </div>
-<section class="panel lesson-scene" id="scene" data-mode="power" aria-label="制御方式を操作して比べる">
-<div class="scene-header"><h2 id="scene-title">強電制御｜100Vがフェーダーに来る</h2><output class="live" id="stage-live" aria-live="polite">フェーダー 75%</output></div>
+<section class="panel lesson-scene" id="scene" data-mode="direct" aria-label="制御方式を操作して比べる">
+<div class="scene-header"><h2 id="scene-title">直接制御｜人の動きを機械で伝える</h2><output class="live" id="stage-live" aria-live="polite">フェーダー 75%</output></div>
 <div class="scene-ground" id="scene-ground">
 <svg class="wire-layer" id="wire-layer" aria-hidden="true"></svg>
 <div class="station source" id="source-station"><h3 id="source-title">① 電源・入力</h3>
@@ -798,7 +836,7 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
 <figcaption class="direct-archive-text"><strong class="direct-title">丸茂電機「初期の調光器（金属抵抗器）」</strong><p class="direct-lead"><strong class="direct-key">レバーで抵抗器の接点を動かし</strong>、舞台の明るさを調整しました。</p><button type="button" class="direct-gallery-button" id="direct-gallery-more">写真を拡大・全6資料を見る</button></figcaption></figure></div>
 <dialog id="direct-gallery" class="direct-gallery" aria-labelledby="direct-gallery-title">
 <header><strong>直接制御｜歴史写真資料</strong><button type="button" id="direct-gallery-close">✕ 閉じる</button></header>
-<main><div class="direct-gallery-photo"><img id="direct-gallery-image" alt=""><div id="direct-gallery-fallback" hidden>この写真は原資料で確認できます。<a id="direct-gallery-fallback-link" target="_blank" rel="noopener noreferrer">掲載元を開く</a></div></div>
+<main><div class="direct-gallery-photo"><img id="direct-gallery-image" alt=""><button type="button" class="direct-gallery-photo-arrow direct-gallery-photo-prev" id="direct-gallery-photo-prev" aria-label="前の写真">❮</button><button type="button" class="direct-gallery-photo-arrow direct-gallery-photo-next" id="direct-gallery-photo-next" aria-label="次の写真">❯</button><div id="direct-gallery-fallback" hidden>この写真は原資料で確認できます。<a id="direct-gallery-fallback-link" target="_blank" rel="noopener noreferrer">掲載元を開く</a></div></div>
 <section class="direct-gallery-info"><p id="direct-gallery-count"></p><h2 id="direct-gallery-title"></h2><p id="direct-gallery-date"></p><p id="direct-gallery-original"></p><p id="direct-gallery-caption"></p><a id="direct-gallery-source" target="_blank" rel="noopener noreferrer">元資料・写真の説明を開く ↗</a><a id="direct-gallery-file" target="_blank" rel="noopener noreferrer">掲載元の画像を開く ↗</a><small>写真の転載許諾は未確認です。</small></section></main>
 <footer><button type="button" id="direct-gallery-prev">◀ 前</button><nav id="direct-gallery-pages" aria-label="写真選択"></nav><button type="button" id="direct-gallery-next">次 ▶</button></footer>
 </dialog>
@@ -859,7 +897,7 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
  const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
  const scene=$('scene'),ground=$('scene-ground'),svg=$('wire-layer'),figure=$('fader-figure'),cap=$('fader-cap');
  const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- let mode='power',value=75,wireSegments=[],bitNodes=[],bitStart=0,pointFrom=null,pointTo=null;
+ let mode='direct',value=75,wireSegments=[],bitNodes=[],bitStart=0,pointFrom=null,pointTo=null;
  let powerOutputTrace=null,powerOutputFrom=null,powerOutputTo=null,powerOutputLabel=null,weakSignalLabel=null,scrOutputTrace=null,scrFrom=null,scrTo=null;
  const models={
   direct:{
@@ -1010,7 +1048,7 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
  function powerWaveLabel(isOutput){
   const compact=ground.getBoundingClientRect().width<790;
   return isOutput ? (compact?'出力 '+value+'V':'出力 '+value+'V（模式）')
-                  : (compact?'入力 100V':'入力 AC100V（一定）');
+                  : '入力 AC100V';
  }
  function addPowerWave(from,to,isOutput,sharedLength=116){
   // The connection remains straight; a 116px monitoring window is drawn
@@ -1023,9 +1061,9 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
   makePath(pathFor(wFrom,wTo,false),'wave-centerline');
   const trace=makePath(waveformPath(wFrom,wTo,isOutput?value/100:1),isOutput?'wave-output':'wave-input');
   const label=document.createElementNS(NS,'text');
-  label.setAttribute('x',String(mx));
+  label.setAttribute('x',String(isOutput?mx:to[0]-10));
   label.setAttribute('y',String(my-29));
-  label.setAttribute('text-anchor','middle');
+  label.setAttribute('text-anchor',isOutput?'middle':'end');
   label.setAttribute('class','wave-label');
   label.textContent=powerWaveLabel(isOutput);
   svg.append(label);
@@ -1149,7 +1187,7 @@ body.control-page> .control-lesson{flex:1 0 auto;min-height:0}
  directGalleryEntries.forEach((d,i)=>{const b=document.createElement('button');b.type='button';b.textContent=String(i+1);b.title=d[0];b.addEventListener('click',()=>setDirectGallery(i));$('direct-gallery-pages').append(b);});
  const openDG=()=>{setDirectGallery(0);dg.showModal()};
  $('direct-gallery-open').addEventListener('click',openDG);$('direct-gallery-more').addEventListener('click',openDG);
- $('direct-gallery-close').addEventListener('click',()=>dg.close());$('direct-gallery-prev').addEventListener('click',()=>setDirectGallery(di-1));$('direct-gallery-next').addEventListener('click',()=>setDirectGallery(di+1));
+ $('direct-gallery-close').addEventListener('click',()=>dg.close());$('direct-gallery-prev').addEventListener('click',()=>setDirectGallery(di-1));$('direct-gallery-next').addEventListener('click',()=>setDirectGallery(di+1));$('direct-gallery-photo-prev').addEventListener('click',()=>setDirectGallery(di-1));$('direct-gallery-photo-next').addEventListener('click',()=>setDirectGallery(di+1));
  updateMode();if(!reduced)requestAnimationFrame(animate);
 })();
 </script>
