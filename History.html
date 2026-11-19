@@ -524,10 +524,10 @@ const fixtureMeta={
 // Date windows above are ONLY display-testing estimates; original item.date/source retained.
 const fixtures=Object.entries(items).filter(([id])=>fixtureMeta[id]).map(([id,d])=>{const m=fixtureMeta[id];return {id,data:d,theme:m.theme,start:m.start,end:m.end}});
 // Place the new articles within the existing time slider and theme selector.
-researchedHistoryCards.forEach(r=>{const start=r.year<0?r.year-60:r.year-35;const end=r.year<0?r.year+60:r.year+35;fixtures.push({id:r.id,data:items[r.id],theme:r.theme,start,end});});
+researchedHistoryCards.forEach(r=>{const start=r.year<0?r.year-60:r.year-35;const end=r.year<0?r.year+60:r.year+35;fixtures.push({id:r.id,data:items[r.id],theme:r.theme,start,end,anchor:r.year});});
 let visibleKey="",lastSelected=null;const cardByKey=new Map();let slideDirection=1;
 function updateCards(){
- const p=historyPeriods[periodIndex];const found=fixtures.filter(f=>f.theme===theme&&f.start<=p.max&&f.end>=p.min);
+ const p=historyPeriods[periodIndex];const found=fixtures.filter(f=>f.theme===theme&&(f.anchor===undefined?(f.start<=p.max&&f.end>=p.min):(f.anchor>=p.min&&f.anchor<=p.max)));
  const key=found.map(f=>f.id).join("|");if(key===visibleKey)return;
  visibleKey=key;lastSelected=null;focusCard=null;
  const now=performance.now(),nextKeys=new Set(found.map(f=>f.id));
