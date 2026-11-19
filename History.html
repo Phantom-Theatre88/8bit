@@ -633,16 +633,31 @@ function stateFor(id,i,count){if(driftStates.has(id))return driftStates.get(id);
 function frame(t){const dt=Math.min(.045,Math.max(.001,(t-last)/1000));last=t;renderThemes(dt);
  const w=stage.clientWidth,h=stage.clientHeight;
  const current=new Set([...cardByKey.keys()]);for(const id of driftStates.keys()){if(!current.has(id))driftStates.delete(id)}
- cards.forEach((c,i)=>{const id=[...cardByKey.entries()].find(([,el])=>el===c)?.[0];if(!id)return;
+ // Keep cards independently drifting, while gently pushing overlapping cards apart.
+ const shown=[...cardByKey.keys()];
+ const fx=Math.max(100,w-220),fy=Math.max(100,h-190);
+ for(let a=0;a<shown.length;a++)for(let b=a+1;b<shown.length;b++){
+  const A=stateFor(shown[a],a,shown.length),B=stateFor(shown[b],b,shown.length);
+  const dx=(A.x-B.x)*fx,dy=(A.y-B.y)*fy;
+  const sa=.77+(shown[a]===focusCard?1.15:A.z)*.37;
+  const sb=.77+(shown[b]===focusCard?1.15:B.z)*.37;
+  const minX=90*(sa+sb)+14,minY=125*(sa+sb)+10;
+  if(Math.abs(dx)>=minX||Math.abs(dy)>=minY)continue;
+  const pushX=(minX-Math.abs(dx))/minX,pushY=(minY-Math.abs(dy))/minY;
+  const force=Math.min(.014,dt*.32)*Math.min(pushX,pushY);
+  if(pushX<pushY){const sign=Math.sign(dx)||((a+b)%2?1:-1);A.x=clamp(A.x+sign*force,-.43,.43);B.x=clamp(B.x-sign*force,-.43,.43)}
+  else{const sign=Math.sign(dy)||((a+b)%2?1:-1);A.y=clamp(A.y+sign*force,-.4,.4);B.y=clamp(B.y-sign*force,-.4,.4)}
+ }
+ cards.forEach((c,i)=>{const id=shown[i];if(!id)return;
  const st=stateFor(id,i,cards.length);
  if(!matchMedia("(prefers-reduced-motion: reduce)").matches && id!==focusCard){
   st.x+=st.vx*dt;st.y+=st.vy*dt;st.z+=st.vz*dt;
-  if(Math.abs(st.x)>.39){st.x=Math.sign(st.x)*.39;st.vx*=-1}
-  if(Math.abs(st.y)>.35){st.y=Math.sign(st.y)*.35;st.vy*=-1}
+  if(Math.abs(st.x)>.43){st.x=Math.sign(st.x)*.43;st.vx*=-1}
+  if(Math.abs(st.y)>.4){st.y=Math.sign(st.y)*.4;st.vy*=-1}
   if(st.z<.1||st.z>.95){st.z=Math.max(.1,Math.min(.95,st.z));st.vz*=-1}
  }
- const z=id===focusCard?1.15:st.z,scale=.33+z*.52;
- const x=st.x*Math.max(0,w-190),y=st.y*Math.max(0,h-240);
+ const z=id===focusCard?1.15:st.z,scale=.77+z*.37;
+ const x=st.x*Math.max(0,w-220),y=st.y*Math.max(0,h-190);
  c.style.transform='translate3d('+x.toFixed(1)+'px,'+y.toFixed(1)+'px,0) scale('+scale.toFixed(3)+')';
  c.style.opacity=String(Math.min(1,.67+z*.29));c.style.zIndex=String(Math.round(z*1000)+10);
  c.classList.toggle("focus",id===focusCard);
