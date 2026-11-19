@@ -497,7 +497,7 @@ const fixtureMeta={
  chorus:{theme:1,start:-499,end:-250},comicActors:{theme:1,start:-399,end:-250},masks:{theme:6,start:-399,end:-250},costumes:{theme:6,start:-399,end:-250},dionysos:{theme:8,start:-499,end:-100},festivals:{theme:7,start:-499,end:-100},patrons:{theme:7,start:-350,end:-100},romanChange:{theme:4,start:-100,end:350},paintedPanels:{theme:2,start:-300,end:-100},heightDifference:{theme:4,start:-499,end:-100},delphi:{theme:5,start:-399,end:100},delos:{theme:5,start:-299,end:100}
 };
 // Date windows above are ONLY display-testing estimates; original item.date/source retained.
-const fixtures=Object.entries(items).map(([id,d])=>{const m=fixtureMeta[id];return {id,data:d,theme:m.theme,start:m.start,end:m.end}});
+const fixtures=Object.entries(items).filter(([id])=>fixtureMeta[id]).map(([id,d])=>{const m=fixtureMeta[id];return {id,data:d,theme:m.theme,start:m.start,end:m.end}});
 // Place the new articles within the existing time slider and theme selector.
 researchedHistoryCards.forEach(r=>{const start=r.year<0?r.year-60:r.year-35;const end=r.year<0?r.year+60:r.year+35;fixtures.push({id:r.id,data:items[r.id],theme:r.theme,start,end});});
 let visibleKey="",lastSelected=null;const cardByKey=new Map();let slideDirection=1;
