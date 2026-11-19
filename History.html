@@ -598,7 +598,7 @@ function renderThemes(dt){
  });
 }
 const themeStep=()=>Math.min(105,Math.max(64,themeBox.clientHeight/5.9));
-themeBox.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse"&&e.button!==0)return;const now=performance.now();themeDrag={id:e.pointerId,start:e.clientY,base:themePos,time:now,lastY:e.clientY,lastT:now,velocity:0,moved:false};themeBox.setPointerCapture(e.pointerId);themeBox.classList.add("dragging")});
+themeBox.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse"&&e.button!==0)return;const now=performance.now();themeDrag={id:e.pointerId,start:e.clientY,base:themePos,time:now,lastY:e.clientY,lastT:now,velocity:0,moved:false,tapIndex:[...themeBox.children].indexOf(e.target.closest(".theme"))};themeBox.setPointerCapture(e.pointerId);themeBox.classList.add("dragging")});
 themeBox.addEventListener("pointermove",e=>{
  if(!themeDrag||themeDrag.id!==e.pointerId)return;
  const now=performance.now(),dy=e.clientY-themeDrag.start,step=themeStep();
@@ -612,7 +612,7 @@ themeBox.addEventListener("pointermove",e=>{
 function endTheme(e){
  if(!themeDrag||e.pointerId!==themeDrag.id)return;
  const d=themeDrag,now=performance.now(),delta=e.clientY-d.start,elapsed=Math.max(1,now-d.time),step=themeStep();
- if(!d.moved){themeDrag=null;themeBox.classList.remove("dragging");if(themeBox.hasPointerCapture(e.pointerId))themeBox.releasePointerCapture(e.pointerId);return}
+ if(!d.moved){themeDrag=null;themeBox.classList.remove("dragging");if(themeBox.hasPointerCapture(e.pointerId))themeBox.releasePointerCapture(e.pointerId);if(d.tapIndex>=0){setTheme(d.tapIndex);themeMovedAt=now}return}
  const current=d.base-delta/step,recent=(now-d.lastT<100)?d.velocity:0;
  const overall=-(delta/step)/(elapsed/1000),flick=Math.abs(delta)>12&&elapsed<360;
  const v=flick?clamp(recent*.55+overall*.45,-14,14):0;
