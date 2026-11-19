@@ -522,10 +522,19 @@ const researchedHistoryCards=[
     "image": ""
   }
 ];
+// Consolidate duplicate ancient-sunlight test cards into the sourced history article.
+// Retain the theme illustration as Rolodex artwork, not an independent history event.
+// The underlying provisional data remains available for future evidence review.
+const greekSunArticle=researchedHistoryCards.find(r=>r.id==="greekSunStudy");
+if(greekSunArticle){
+ greekSunArticle.title="古代ギリシャ劇場の自然光";
+ greekSunArticle.teaser="野外劇場では太陽と天空光が舞台を照らし、時刻・天候・劇場の向きで見え方が変化した。";
+ greekSunArticle.body="古代ギリシャの野外劇場では、舞台に届く太陽光と天空光が基本的な照明環境だった。観客や俳優の見え方は上演時刻、天候、劇場の地形・方角に左右される。現存する遺跡の姿には後世の改修も含まれるため、一つの劇場の方角から古典期の上演方法を一律に推定することはできない。劇場建築と光の関係を、各劇場の年代と資料に照らして読み解く。";
+}
 researchedHistoryCards.forEach(r=>{items[r.id]={title:r.title,displayTitle:r.title,date:r.date,region:r.region,categoryLabel:names[r.theme],size:"medium",icon:"📜",image:r.image||"",imageAlt:r.image?"関連する既存の劇場写真（資料本文の図版ではありません）":"",teaser:r.teaser,summary:r.teaser,body:"【資料台帳に基づく仮記事】"+r.body,teacher:"原資料を開いて、記録された事実と後世の解釈を分けて読んでみよう。",source:"資料台帳 "+r.refs+"｜原著・研究本文と画像権利は個別確認",detailLink:r.url,detailLinkLabel:"原資料・研究ページを開く"};});
 
 const fixtureMeta={
- themeLighting:{theme:3,start:-499,end:-350},sun:{theme:3,start:-499,end:-350},greekTheatre:{theme:5,start:-499,end:-300},
+ greekTheatre:{theme:5,start:-499,end:-300},
  theatron:{theme:0,start:-499,end:-250},orchestra:{theme:0,start:-499,end:-250},skene:{theme:0,start:-499,end:-200},proskenion:{theme:0,start:-300,end:-100},parodos:{theme:0,start:-499,end:-100},prohedria:{theme:0,start:-499,end:-100},
  chorus:{theme:1,start:-499,end:-250},comicActors:{theme:1,start:-399,end:-250},masks:{theme:6,start:-399,end:-250},costumes:{theme:6,start:-399,end:-250},dionysos:{theme:8,start:-499,end:-100},festivals:{theme:7,start:-499,end:-100},patrons:{theme:7,start:-350,end:-100},romanChange:{theme:4,start:-100,end:350},paintedPanels:{theme:2,start:-300,end:-100},heightDifference:{theme:4,start:-499,end:-100},delphi:{theme:5,start:-399,end:100},delos:{theme:5,start:-299,end:100}
 };
@@ -662,7 +671,7 @@ function frame(t){const dt=Math.min(.045,Math.max(.001,(t-last)/1000));last=t;re
  c.style.opacity=String(Math.min(1,.67+z*.29));c.style.zIndex=String(Math.round(z*1000)+10);
  c.classList.toggle("focus",id===focusCard);
  });
- counter.textContent=cards.length+"枚 ／ 全51枚（資料カード含む）";
+ counter.textContent=cards.length+"枚 ／ 全"+fixtures.length+"枚（資料カード含む）";
  requestAnimationFrame(frame)}
 function move(dir){if(!cards.length)return;const ids=[...cardByKey.keys()];const n=ids.indexOf(focusCard);const next=ids[(n+dir+ids.length)%ids.length];const item=fixtures.find(f=>f.id===next);if(item){focusCard=next;lastSelected=next;showDetail(item.data)}}
 document.getElementById("prev").onclick=()=>move(-1);
