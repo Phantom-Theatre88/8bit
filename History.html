@@ -41,8 +41,16 @@ body{}
 .history-float p{line-height:1.9;white-space:pre-wrap}.history-float a{color:#f3c88a;overflow-wrap:anywhere}
 .history-float .close-float{position:sticky;top:0;float:right;background:#354a60;color:white;border:1px solid #8ca6bd;border-radius:6px;padding:8px 12px;cursor:pointer}
 @media(max-width:850px){.period-track{grid-template-columns:repeat(4,minmax(0,1fr));gap:3px}.era-bar{height:94px}.period-button{height:40px;font-size:11px}.period-button small{font-size:9px;margin-top:1px}.era-label{display:none}}
+
+/* 2026-11-19 LOCK: overview below, complete article in float. */
+.panel{flex:0 0 23%;height:23%;max-height:23%;min-height:0;overflow-y:auto;padding:14px 24px;box-sizing:border-box}
+.panel .lead-copy{max-width:1100px}.panel h2{font-size:clamp(18px,1.6vw,24px);margin:2px 0 6px}.panel #detailText{font-size:14px;line-height:1.65}
+.panel .lead-summary{display:none}.panel .selected-link button{margin-top:10px}
+.main{flex:1 1 auto;min-height:0}.stage{min-height:0}.themes{width:230px}
+.float-picture img{display:block;max-width:100%;max-height:350px;object-fit:contain;border-radius:8px;margin:12px auto}
+@media(max-width:720px){.panel{flex-basis:25%;height:25%;max-height:25%;padding:10px 12px}.themes{width:105px}.theme{width:96px;margin-left:-48px}}
 </style><link rel="stylesheet" href="eightbit-layout-width.css?v=8">
-</head><body class="eightbit-unified-width"><div id="shared-console-header-root"></div><script src="next-ui-console-header.js?v=dmx-speed-nav-1"></script><header><b>舞台照明史 / HISTORY</b><a href="index.html" class="home-link">⌂ 教材トップ</a></header><nav class="era-bar" aria-label="演劇史の時代区分"><span class="era-label">THEATRE HISTORY</span><div id="periodTrack" class="period-track" role="group" aria-label="出来事から時代を選ぶ"></div></nav><div class="main"><aside class="themes" id="themes"></aside><main class="stage" id="stage"><div class="stage-label">カードがゆっくり漂う空間</div><div class="counter" id="counter"></div><div class="ring"></div><button class="arrow prev" id="prev" aria-label="前のカード">‹</button><button class="arrow next" id="next" aria-label="次のカード">›</button></main></div><section class="panel"><h2 id="detailTitle">カードを選択</h2><p id="detailText">気になるカードを選んで、演劇の出来事とその年代、一次資料をたどろう。</p><div class="detail-grid"><div id="selectedPicture" class="selected-picture"></div><div class="detail-copy"><div id="detailKicker" class="detail-kicker"></div><h3>要約</h3><p id="detailSummary"></p><h3>解説</h3><p id="detailBody"></p><div id="sourceNote" class="source-note"></div><div id="selectedLink" class="selected-link"></div></div><aside class="teacher-pane"><h3>先生のひとこと</h3><p id="teacherSpeech"></p><img src="assets/wave_teacher_transparent.svg?v=teacher-standard-20261014" alt="照明教材の先生" loading="lazy"></aside></div><div class="note">※ カード表示期間は暫定値。古代編の仮カードは史実未確定で、出典の原文照合が必要です。</div></section><div class="history-float" id="historyFloat" hidden role="dialog" aria-modal="true" aria-labelledby="floatTitle"><article><button class="close-float" id="closeHistoryFloat" type="button">✕ 閉じる</button><h2 id="floatTitle"></h2><p id="floatMeta"></p><h3>歴史の出来事</h3><p id="floatSummary"></p><h3>背景・技術・表現</h3><p id="floatBody"></p><h3>根拠資料と確認状況</h3><p id="floatSource"></p><div id="floatLink"></div></article></div><script>
+</head><body class="eightbit-unified-width"><div id="shared-console-header-root"></div><script src="next-ui-console-header.js?v=dmx-speed-nav-1"></script><header><b>舞台照明史 / HISTORY</b><a href="index.html" class="home-link">⌂ 教材トップ</a></header><nav class="era-bar" aria-label="演劇史の時代区分"><span class="era-label">THEATRE HISTORY</span><div id="periodTrack" class="period-track" role="group" aria-label="出来事から時代を選ぶ"></div></nav><div class="main"><aside class="themes" id="themes"></aside><main class="stage" id="stage"><div class="stage-label">カードがゆっくり漂う空間</div><div class="counter" id="counter"></div><div class="ring"></div><button class="arrow prev" id="prev" aria-label="前のカード">‹</button><button class="arrow next" id="next" aria-label="次のカード">›</button></main></div><section class="panel" aria-label="選択したカードの概要"><div class="lead-copy"><div id="detailKicker" class="detail-kicker"></div><h2 id="detailTitle">カードを選択</h2><p id="detailText">演劇の出来事を選び、その年代と歴史をたどろう。</p><p id="detailSummary" class="lead-summary"></p><div id="selectedLink" class="selected-link"></div></div></section><div class="history-float" id="historyFloat" hidden role="dialog" aria-modal="true" aria-labelledby="floatTitle"><article><button class="close-float" id="closeHistoryFloat" type="button">✕ 閉じる</button><h2 id="floatTitle"></h2><p id="floatMeta"></p><h3>歴史の出来事</h3><p id="floatSummary"></p><h3>背景・技術・表現</h3><p id="floatBody"></p><div id="floatPicture" class="float-picture"></div><h3>先生のひとこと</h3><p id="floatTeacher"></p><h3>根拠資料と確認状況</h3><p id="floatSource"></p><div id="floatLink"></div></article></div><script>
 (()=>{"use strict";const names=["用語","人物・職業","機構・技術","光源・照明","劇場建築","劇場・遺跡","作品・上演","社会・制度","文化・思想"],labels=["太陽光","松明","かがり火","蝋燭","油灯","劇場","舞台装置","仮面","祭礼","上演","建築","照明"],emoji=["☀️","🔥","🔥","🕯️","🏺","🏛️","⚙️","🎭","🎪","🎟️","🏗️","💡"];const stage=document.getElementById("stage"),themeBox=document.getElementById("themes"),counter=document.getElementById("counter"),title=document.getElementById("detailTitle"),desc=document.getElementById("detailText");let theme=3,rotation=0,target=0,drag=null,last=performance.now(),lastMoved=0;document.documentElement.style.setProperty('--panel-height','38%');const cards=[];let themePos=3,themeTarget=3,themeDrag=null,themeMovedAt=0,themeWheelLock=0;
 // LOCK (2025-12-02): eight theatre/lighting history periods. The event comes first; dates belong to each article.
 const historyPeriods=[
@@ -518,7 +526,7 @@ researchedHistoryCards.forEach(r=>{items[r.id]={title:r.title,displayTitle:r.tit
 
 const fixtureMeta={
  themeLighting:{theme:3,start:-499,end:-350},sun:{theme:3,start:-499,end:-350},greekTheatre:{theme:5,start:-499,end:-300},
- theatron:{theme:4,start:-499,end:-250},orchestra:{theme:4,start:-499,end:-250},skene:{theme:4,start:-499,end:-200},proskenion:{theme:4,start:-300,end:-100},parodos:{theme:4,start:-499,end:-100},prohedria:{theme:7,start:-499,end:-100},
+ theatron:{theme:0,start:-499,end:-250},orchestra:{theme:0,start:-499,end:-250},skene:{theme:0,start:-499,end:-200},proskenion:{theme:0,start:-300,end:-100},parodos:{theme:0,start:-499,end:-100},prohedria:{theme:0,start:-499,end:-100},
  chorus:{theme:1,start:-499,end:-250},comicActors:{theme:1,start:-399,end:-250},masks:{theme:6,start:-399,end:-250},costumes:{theme:6,start:-399,end:-250},dionysos:{theme:8,start:-499,end:-100},festivals:{theme:7,start:-499,end:-100},patrons:{theme:7,start:-350,end:-100},romanChange:{theme:4,start:-100,end:350},paintedPanels:{theme:2,start:-300,end:-100},heightDifference:{theme:4,start:-499,end:-100},delphi:{theme:5,start:-399,end:100},delos:{theme:5,start:-299,end:100}
 };
 // Date windows above are ONLY display-testing estimates; original item.date/source retained.
@@ -550,46 +558,70 @@ function updateCards(){
  // Preserve the existing ring angle; do not reset to zero on every year boundary.
  if(cards.length){rotation=((rotation%cards.length)+cards.length)%cards.length;target=rotation}else{rotation=0;target=0}
 }
-function showDetail(d){title.textContent=d.displayTitle||d.title;desc.textContent=d.summary;const pic=document.getElementById("selectedPicture");if(pic){pic.innerHTML=d.image?'<img src="'+d.image+'" alt="" loading="lazy">':"";}document.getElementById("detailKicker").textContent=d.categoryLabel+"｜"+d.date+"｜"+d.region;document.getElementById("detailSummary").textContent=d.summary;document.getElementById("detailBody").textContent=d.body;document.getElementById("sourceNote").textContent=d.source;document.getElementById("teacherSpeech").textContent=d.teacher;const link=document.getElementById("selectedLink");if(link){link.innerHTML="<button type=\"button\" id=\"openHistoryFloat\">記事・一次資料を詳しく読む</button>";document.getElementById("openHistoryFloat").onclick=()=>openHistoryFloat(d)}}
-function openHistoryFloat(d){const m=document.getElementById("historyFloat");document.getElementById("floatTitle").textContent=d.displayTitle||d.title;document.getElementById("floatMeta").textContent=d.date+" ／ "+d.region+" ／ "+d.categoryLabel;document.getElementById("floatSummary").textContent=d.summary;document.getElementById("floatBody").textContent=d.body;document.getElementById("floatSource").textContent=d.source;const link=document.getElementById("floatLink");link.innerHTML="";if(d.detailLink){const a=document.createElement("a");a.href=d.detailLink;a.target="_blank";a.rel="noopener noreferrer";a.textContent=d.detailLinkLabel||"一次資料へ";link.appendChild(a)}m.hidden=false;document.getElementById("closeHistoryFloat").focus()}
+function showDetail(d){title.textContent=d.displayTitle||d.title;desc.textContent=d.summary;document.getElementById("detailKicker").textContent=d.categoryLabel+"｜"+d.date+"｜"+d.region;document.getElementById("detailSummary").textContent="";const link=document.getElementById("selectedLink");link.innerHTML="<button type=\"button\" id=\"openHistoryFloat\">詳しい記事・写真・一次資料を読む</button>";document.getElementById("openHistoryFloat").onclick=()=>openHistoryFloat(d)}
+function openHistoryFloat(d){const m=document.getElementById("historyFloat");document.getElementById("floatTitle").textContent=d.displayTitle||d.title;document.getElementById("floatMeta").textContent=d.date+" ／ "+d.region+" ／ "+d.categoryLabel;document.getElementById("floatSummary").textContent=d.summary;document.getElementById("floatBody").textContent=d.body;document.getElementById("floatSource").textContent=d.source;const picture=document.getElementById("floatPicture");picture.innerHTML="";if(d.image){const img=document.createElement("img");img.src=d.image;img.alt=d.imageAlt||d.title;img.loading="lazy";picture.appendChild(img)}document.getElementById("floatTeacher").textContent=d.teacher||"";const link=document.getElementById("floatLink");link.innerHTML="";if(d.detailLink){const a=document.createElement("a");a.href=d.detailLink;a.target="_blank";a.rel="noopener noreferrer";a.textContent=d.detailLinkLabel||"一次資料へ";link.appendChild(a)}m.hidden=false;document.getElementById("closeHistoryFloat").focus()}
 document.getElementById("closeHistoryFloat").onclick=()=>document.getElementById("historyFloat").hidden=true;
 document.getElementById("historyFloat").addEventListener("click",e=>{if(e.target.id==="historyFloat")e.currentTarget.hidden=true});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")document.getElementById("historyFloat").hidden=true});
 function updateContext(){const p=historyPeriods[periodIndex];document.querySelector(".stage-label").textContent=p.label+" ／ "+names[theme]+"　← カードは水中のように漂います →";title.textContent=p.label+" × "+names[theme];desc.textContent="演劇の出来事から探索し、カードを選ぶと年代と歴史資料を知ることができます。";updateCards()}
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-function setTheme(t,animate=true){const old=theme;const next=((Math.round(t)%names.length)+names.length)%names.length;theme=next;themeTarget=next;if(animate&&next!==old&&themeBox.children.length===names.length){const el=themeBox.children[next];if(el){el.classList.remove('flipping');void el.offsetWidth;el.classList.add('flipping');setTimeout(()=>el.classList.remove('flipping'),580)}}title.textContent=names[theme]+"｜インデックス";updateContext();}
-names.forEach((n,i)=>{const b=document.createElement("button");b.type="button";b.className="theme";b.innerHTML='<span class="theme-art"></span><span class="theme-symbol" aria-hidden="true">'+["📖","🎭","⚙️","☀️","🏛️","🏟️","🎟️","⚖️","💭"][i]+'</span><span class="theme-name">'+n+'</span><span class="flap-top"></span><span class="flap-bottom"></span>';b.addEventListener("click",()=>{if(performance.now()-themeMovedAt<280)return;setTheme(i)});if(i===3){b.querySelector(".theme-art").style.backgroundImage='linear-gradient(#07131b55,#07131b88),url("assets/history/theme_light_B.webp")';b.querySelector(".theme-art").style.backgroundSize="cover";b.querySelector(".theme-art").style.backgroundPosition="center"}themeBox.appendChild(b)});
-function renderThemes(dt){if(!themeDrag){themePos+=(themeTarget-themePos)*(1-Math.exp(-dt*15));if(Math.abs(themeTarget-themePos)<.001)themePos=themeTarget}
- const step=Math.min(105,Math.max(64,themeBox.clientHeight/5.9));const height=themeBox.clientHeight;
- [...themeBox.children].forEach((el,i)=>{const d=i-themePos,ad=Math.abs(d),y=d*step;
- el.style.transform="translate3d(0,"+y.toFixed(2)+"px,0) rotateX("+(clamp(-d*6,-12,12)).toFixed(2)+"deg)";
- el.style.opacity=String(clamp(1-Math.max(0,ad-2.3)*.65,0,1));el.style.visibility=(ad>2.65||Math.abs(y)>height*.62)?"hidden":"visible";
- el.style.zIndex=String(100-Math.round(ad*10));el.classList.toggle("active",i===theme)});
+// LOCK: The nine-topic Rolodex is a continuous wheel in both directions.
+const wheelCount=names.length;
+const wrapTheme=n=>((Math.round(n)%wheelCount)+wheelCount)%wheelCount;
+function activateThemePosition(position,animate=true){
+ const next=wrapTheme(position),old=theme;
+ themeTarget=position;theme=next;
+ if(animate&&next!==old&&themeBox.children.length===wheelCount){const el=themeBox.children[next];if(el){el.classList.remove("flipping");void el.offsetWidth;el.classList.add("flipping");setTimeout(()=>el.classList.remove("flipping"),580)}}
+ if(next!==old){updateContext()}
+}
+function setTheme(index,animate=true){
+ const normalized=wrapTheme(index),near=normalized+Math.round((themeTarget-normalized)/wheelCount)*wheelCount;
+ activateThemePosition(near,animate);
+}
+names.forEach((n,i)=>{
+ const b=document.createElement("button");b.type="button";b.className="theme";
+ b.innerHTML='<span class="theme-art"></span><span class="theme-symbol" aria-hidden="true">'+["📖","🎭","⚙️","☀️","🏛️","🏟️","🎟️","⚖️","💭"][i]+'</span><span class="theme-name">'+n+'</span><span class="flap-top"></span><span class="flap-bottom"></span>';
+ b.addEventListener("click",()=>{if(performance.now()-themeMovedAt<180)return;setTheme(i)});
+ if(i===3){b.querySelector(".theme-art").style.backgroundImage='linear-gradient(#07131b55,#07131b88),url("assets/history/theme_light_B.webp")';b.querySelector(".theme-art").style.backgroundSize="cover";b.querySelector(".theme-art").style.backgroundPosition="center"}
+ themeBox.appendChild(b);
+});
+function renderThemes(dt){
+ if(!themeDrag){themePos+=(themeTarget-themePos)*(1-Math.exp(-dt*15));if(Math.abs(themeTarget-themePos)<.001)themePos=themeTarget}
+ const step=Math.min(105,Math.max(64,themeBox.clientHeight/5.9)),height=themeBox.clientHeight;
+ [...themeBox.children].forEach((el,i)=>{
+  const d=((i-themePos+wheelCount*1000+wheelCount/2)%wheelCount)-wheelCount/2,ad=Math.abs(d),y=d*step;
+  el.style.transform="translate3d(0,"+y.toFixed(2)+"px,0) rotateX("+clamp(-d*6,-12,12).toFixed(2)+"deg)";
+  el.style.opacity=String(clamp(1-Math.max(0,ad-2.3)*.65,0,1));
+  el.style.visibility=(ad>2.65||Math.abs(y)>height*.62)?"hidden":"visible";
+  el.style.zIndex=String(100-Math.round(ad*10));
+  el.classList.toggle("active",i===theme);el.setAttribute("aria-pressed",i===theme?"true":"false");
+ });
 }
 const themeStep=()=>Math.min(105,Math.max(64,themeBox.clientHeight/5.9));
 themeBox.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse"&&e.button!==0)return;const now=performance.now();themeDrag={id:e.pointerId,start:e.clientY,base:themePos,time:now,lastY:e.clientY,lastT:now,velocity:0,moved:false};themeBox.setPointerCapture(e.pointerId);themeBox.classList.add("dragging")});
-themeBox.addEventListener("pointermove",e=>{if(!themeDrag||themeDrag.id!==e.pointerId)return;const now=performance.now(),dy=e.clientY-themeDrag.start,step=themeStep();
- themePos=clamp(themeDrag.base-dy/step,0,names.length-1);themeTarget=themePos;
- const liveIndex=clamp(Math.round(themePos),0,names.length-1);if(liveIndex!==theme)setTheme(liveIndex,true);
+themeBox.addEventListener("pointermove",e=>{
+ if(!themeDrag||themeDrag.id!==e.pointerId)return;
+ const now=performance.now(),dy=e.clientY-themeDrag.start,step=themeStep();
+ themePos=themeDrag.base-dy/step;themeTarget=themePos;
+ const liveIndex=wrapTheme(themePos);if(liveIndex!==theme){theme=liveIndex;updateContext()}
  const elapsed=Math.max(1,now-themeDrag.lastT),instant=-(e.clientY-themeDrag.lastY)/step/elapsed*1000;
  if(now-themeDrag.lastT<120)themeDrag.velocity=themeDrag.velocity*.45+clamp(instant,-18,18)*.55;
  themeDrag.lastY=e.clientY;themeDrag.lastT=now;
  if(Math.abs(dy)>5){themeDrag.moved=true;themeMovedAt=now}
 });
-function endTheme(e){if(!themeDrag||e.pointerId!==themeDrag.id)return;
+function endTheme(e){
+ if(!themeDrag||e.pointerId!==themeDrag.id)return;
  const d=themeDrag,now=performance.now(),delta=e.clientY-d.start,elapsed=Math.max(1,now-d.time),step=themeStep();
- const current=clamp(d.base-delta/step,0,names.length-1);
- const recent=(now-d.lastT<100)?d.velocity:0;
- const overall=-(delta/step)/(elapsed/1000);
- const flick=Math.abs(delta)>12&&elapsed<360;
+ const current=d.base-delta/step,recent=(now-d.lastT<100)?d.velocity:0;
+ const overall=-(delta/step)/(elapsed/1000),flick=Math.abs(delta)>12&&elapsed<360;
  const v=flick?clamp(recent*.55+overall*.45,-14,14):0;
- const projected=clamp(current+v*.18,0,names.length-1);
- if(d.moved||Math.abs(delta)>5){themePos=current;setTheme(Math.round(projected),false);themeMovedAt=now}
- themeDrag=null;themeBox.classList.remove("dragging");
- if(themeBox.hasPointerCapture(e.pointerId))themeBox.releasePointerCapture(e.pointerId);
+ activateThemePosition(Math.round(current+v*.18),true);
+ themeDrag=null;themeBox.classList.remove("dragging");themeMovedAt=now;
+ if(themeBox.hasPointerCapture(e.pointerId))themeBox.releasePointerCapture(e.pointerId)
 }
-themeBox.addEventListener("pointerup",endTheme);themeBox.addEventListener("pointercancel",e=>{if(!themeDrag||e.pointerId!==themeDrag.id)return;setTheme(Math.round(themePos),false);themeDrag=null;themeBox.classList.remove("dragging")});
-themeBox.addEventListener("wheel",e=>{e.preventDefault();const now=performance.now();if(now-themeWheelLock<105)return;themeWheelLock=now;setTheme(clamp(themeTarget+(e.deltaY>0?1:-1),0,names.length-1))},{passive:false});
+themeBox.addEventListener("pointerup",endTheme);
+themeBox.addEventListener("pointercancel",e=>{if(!themeDrag||e.pointerId!==themeDrag.id)return;activateThemePosition(Math.round(themePos),false);themeDrag=null;themeBox.classList.remove("dragging")});
+themeBox.addEventListener("wheel",e=>{e.preventDefault();const now=performance.now();if(now-themeWheelLock<105)return;themeWheelLock=now;activateThemePosition(Math.round(themeTarget)+(e.deltaY>0?1:-1),true)},{passive:false});
 // Independent X/Y/Z swimming motion. No carousel, synchronized orbit, or fixed-position wobble.
 const driftStates=new Map();let focusCard=null;
 function stateFor(id,i,count){if(driftStates.has(id))return driftStates.get(id);
