@@ -1,0 +1,781 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>照明史｜奥行きカード構成 検証版</title><link rel="stylesheet" href="next-ui-typography.css"><link rel="stylesheet" href="next-ui-page-shell.css"><link rel="stylesheet" href="next-ui-console-header.css?v=shared-dom-v1"><style>
+*{box-sizing:border-box}html,body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",sans-serif;background:#0a1019;color:#f0f2f6}body{}header{height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:#182331;border-bottom:1px solid #35465a}header b{font-size:17px}header span{font-size:12px;color:#a9bdce}.main{display:flex;flex:1;min-height:0}.themes{width:250px;flex-shrink:0;background:#111d2b;border-right:1px solid #34465a;position:relative;overflow:hidden;touch-action:none;user-select:none;perspective:550px;cursor:grab}.themes.dragging{cursor:grabbing}.themes:before,.themes:after{content:'';position:absolute;left:0;right:0;height:20%;z-index:20;pointer-events:none}.themes:before{top:0;background:linear-gradient(#111d2b,transparent)}.themes:after{bottom:0;background:linear-gradient(transparent,#111d2b)}.theme{position:absolute;left:50%;top:50%;width:226px;height:58px;margin-left:-113px;margin-top:-29px;margin-top:-24px;display:flex;align-items:center;justify-content:center;text-align:center;border:1px solid #3d5368;border-radius:8px;color:#b6c7d7;font-size:13px;background:#26374a;backface-visibility:hidden;will-change:transform,opacity;cursor:pointer;transform-origin:center}.theme.active{background:#654a2f;border:2px solid #efbd78;color:#fff;font-weight:700;font-size:17px;box-shadow:0 8px 26px #0009;height:106px;margin-top:-53px;padding:10px 12px;line-height:1.4;white-space:normal}.stage{position:relative;flex:1;min-width:0;overflow:hidden;touch-action:pan-y;user-select:none;background:radial-gradient(ellipse at 50% 44%,#2c4255,#172739 56%,#0d1825)}.stage:after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 70px #070e19b0}.stage-label{position:absolute;left:20px;top:15px;font-size:13px;color:#a8bacc;z-index:1000}.counter{position:absolute;right:20px;top:15px;font-size:13px;color:#eac58b;z-index:1000}.ring{position:absolute;left:50%;top:50%;width:min(70vw,670px);height:min(32vw,240px);border:1px dashed #7e9cb666;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none}.card{position:absolute;top:50%;left:50%;width:178px;height:250px;margin:-125px 0 0 -89px;border-radius:10px;border:1px solid #a5b4c5;background:#243448;box-shadow:0 14px 32px #000a;overflow:hidden;padding:0;color:white;cursor:pointer;transform-origin:center;will-change:transform,opacity;transition:box-shadow .15s,border-color .15s}.card.focus{border:3px solid #f1c47d;box-shadow:0 0 24px #e9bd7780,0 16px 32px #000c}.pic{height:73%;display:flex;align-items:center;justify-content:center;font-size:54px;background:linear-gradient(145deg,#516a7d,#2b4156)}.card strong{position:absolute;top:0;left:0;right:0;z-index:2;display:block;font-size:16px;padding:9px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left;background:linear-gradient(90deg,#101d2af2,#101d2ab8);border-bottom:1px solid #ffffff33}.card small{position:absolute;bottom:0;left:0;right:0;display:block;color:#dce8f2;padding:9px 10px;font-size:12px;line-height:1.4;background:#1b2a3b;text-align:left;min-height:27%}.arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:1100;background:#1a2b3cbf;border:1px solid #7c91a4;border-radius:50%;width:43px;height:43px;color:#fff;font-size:24px;cursor:pointer}.prev{left:12px}.next{right:12px}.panel{height:var(--panel-height, 27%);min-height:120px;max-height:48%;flex-shrink:0;overflow:auto;border-top:1px solid #52647a;background:#182534;padding:16px 22px}.panel h2{margin:0 0 8px;font-size:20px;color:#f2c77f}.panel p{margin:0;font-size:14px;line-height:1.7;color:#d2dce6}.note{font-size:11px;color:#94a7b8;margin-top:7px}@media(min-width:721px) and (max-width:1050px){.themes{width:250px}.theme{width:226px;margin-left:-113px}}@media(max-width:720px){header{height:46px}header b{font-size:13px}header span{font-size:10px}.themes{width:92px}.theme{width:86px;height:48px;margin-left:-43px;margin-top:-24px;font-size:10px}.theme.active{font-size:12px;height:88px;margin-top:-44px;padding:7px 4px}.card{width:124px;height:175px;margin:-87.5px 0 0 -62px}.pic{height:73%;font-size:38px}.card strong{font-size:13px;padding:7px 6px}.card small{font-size:10px;padding:7px 6px}.panel{min-height:116px;padding:10px 13px}.panel h2{font-size:16px}.panel p{font-size:12px}.arrow{width:32px;height:32px;font-size:18px}.stage-label{font-size:10px;left:8px}.counter{font-size:10px;right:8px}}
+ .ratio-controls{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.ratio-controls button{background:#273a4d;border:1px solid #6d8296;color:#e8eef4;border-radius:6px;padding:5px 8px;font-size:12px;cursor:pointer}.ratio-controls button[aria-pressed=true]{background:#9a6b3e;border-color:#f0c37c;color:white}.ratio-controls span{font-size:11px;color:#c4d1dc}@media(max-width:720px){.ratio-controls button{padding:4px 6px;font-size:10px}.ratio-controls span{display:none}}  .themes{background:linear-gradient(90deg,#09121d,#23364a 8%,#152437 92%,#08111c);border-right:2px solid #60768a}.theme{border-radius:4px;background:linear-gradient(#354a60 0 48%,#0a1724 49% 51%,#27394e 52%);border:1px solid #7e91a4;box-shadow:0 3px 8px #0008;transform-style:preserve-3d}.theme:after{content:'';position:absolute;top:50%;left:0;right:0;height:2px;background:#060c14;box-shadow:0 1px 1px #a7b3be55;pointer-events:none}.theme.active{background:linear-gradient(#927049 0 48%,#23180f 49% 51%,#745532 52%)}.theme.flipping{animation:flap .32s ease-in-out}@keyframes flap{0%{filter:brightness(1);transform:rotateX(0deg)}42%{filter:brightness(.6);transform:rotateX(-65deg)}65%{filter:brightness(.85);transform:rotateX(18deg)}100%{filter:brightness(1);transform:rotateX(0deg)}}@media(max-width:720px){.themes{width:92px}.theme{width:86px}} 
+/* LOCK: selected split flap uses one photo-like surface; title above hinge */
+.theme{overflow:hidden;isolation:isolate}
+.theme .theme-art{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .18s;background:linear-gradient(140deg,#57788b 0%,#2b4758 48%,#172c3b 100%)}
+.theme .theme-art:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#06131b88 0%,transparent 40%,#07131cb8 100%)}
+.theme .theme-symbol{position:absolute;left:0;right:0;top:55%;font-size:38px;transform:translateY(-20%);opacity:0;pointer-events:none;text-shadow:0 2px 8px #000}
+.theme .theme-name{position:relative;z-index:4;display:block;font-weight:700}
+.theme.active .theme-art,.theme.active .theme-symbol{opacity:1}
+.theme.active{display:flex;align-items:flex-start;justify-content:center;padding-top:13px}
+.theme.active .theme-name{width:100%;text-align:center;padding:2px 3px 6px;background:#06172399;border-radius:3px}
+.theme:after{z-index:3}
+.theme.active:after{top:50%}
+.theme .flap-top{position:absolute;top:0;left:0;right:0;height:50%;z-index:7;pointer-events:none;transform-origin:bottom center;opacity:0;backface-visibility:hidden;background:linear-gradient(#9c7951,#61452c);border-bottom:2px solid #17130f}
+.theme .flap-bottom{position:absolute;top:50%;left:0;right:0;height:50%;z-index:6;pointer-events:none;transform-origin:top center;opacity:0;background:linear-gradient(#765334,#3d2b20);border-top:2px solid #17130f}
+.theme.active.flipping{animation:none}
+.theme.active.flipping .flap-top{animation:splitTop .29s ease-in forwards}
+.theme.active.flipping .flap-bottom{animation:splitBottom .29s .22s ease-out forwards}
+@keyframes splitTop{0%{opacity:1;transform:rotateX(0)}98%{opacity:1;transform:rotateX(-88deg)}100%{opacity:0;transform:rotateX(-90deg)}}
+@keyframes splitBottom{0%{opacity:1;transform:rotateX(90deg)}99%{opacity:1;transform:rotateX(0)}100%{opacity:0;transform:rotateX(0)}}
+@media(max-width:720px){.theme .theme-symbol{font-size:23px}.theme.active{padding-top:8px}.theme.active .theme-name{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.theme.active.flipping .flap-top,.theme.active.flipping .flap-bottom{animation:none}}
+.era-bar{height:76px;flex:none;display:flex;align-items:center;gap:8px;padding:8px 18px;background:linear-gradient(#1e3042,#111e2c);border-bottom:1px solid #52657a;touch-action:pan-y;user-select:none}.era-label{font-size:12px;color:#c4d3df;white-space:nowrap}.era-track{flex:1;min-width:0;display:flex;gap:5px;height:100%;align-items:center;touch-action:pan-y}.era-btn{flex:1;min-width:0;height:48px;border:1px solid #62768b;background:#263a4d;color:#c9d5e1;border-radius:7px;font-size:15px;cursor:pointer;transition:background .14s,transform .14s}.era-btn.selected{background:#91683d;border:2px solid #f1c47d;color:white;font-weight:700;transform:translateY(-2px)}.era-hint{font-size:11px;color:#94aabd;white-space:nowrap}@media(max-width:720px){.era-bar{height:59px;padding:5px 7px;gap:4px}.era-label,.era-hint{display:none}.era-track{gap:3px}.era-btn{height:43px;font-size:12px}} .era-track{position:relative;height:62px;cursor:ew-resize;touch-action:none;overflow:visible;display:block}.era-rail{position:absolute;left:7%;right:7%;top:26px;height:8px;border-radius:8px;background:linear-gradient(#07111c,#3c5368);box-shadow:inset 0 2px 5px #000b,0 1px 0 #8498a666}.era-marks{position:absolute;left:7%;right:7%;inset-block:0;display:flex;justify-content:space-between;align-items:stretch}.era-mark{position:relative;width:0;display:flex;align-items:flex-end;justify-content:center;padding-bottom:0;font-size:13px;color:#9eafc0;white-space:nowrap;pointer-events:none}.era-mark:before{content:'';position:absolute;top:19px;left:-1px;width:2px;height:21px;background:#90a4b6}.era-mark.current{color:#f5cc88;font-weight:bold}.era-thumb{position:absolute;left:7%;top:5px;width:44px;height:39px;border-radius:6px;transform:translateX(-50%);background:linear-gradient(#e4bd7d,#92693c);border:2px solid #ffdfaa;box-shadow:0 4px 12px #000c;display:flex;align-items:center;justify-content:center;color:#18202b;pointer-events:none;will-change:left}.era-grip{font-size:20px;font-weight:900;letter-spacing:-3px}.era-track:focus-visible{outline:2px solid #f1c47d;outline-offset:3px}@media(max-width:720px){.era-track{height:48px}.era-rail{top:18px}.era-mark{font-size:11px;padding-bottom:0}.era-mark:before{top:12px;height:18px}.era-thumb{top:0;width:32px;height:32px}.era-grip{font-size:15px}} .year-readout{min-width:120px;text-align:center;font-weight:800;color:#ffcf84;font-size:18px;font-variant-numeric:tabular-nums}.era-track{touch-action:none}.era-mark{font-variant-numeric:tabular-nums;font-size:11px}.era-bar{height:84px}.era-thumb{width:40px;height:46px;top:0;background:linear-gradient(90deg,#555b64,#e2e6e9 20%,#929ba5 46%,#4b515c 52%,#e2e6e9 82%,#666d78);border:1px solid #d5dce2;box-shadow:0 4px 12px #000d}.era-grip{color:#222;font-size:19px}.era-rail{top:29px}.era-mark:before{top:22px}.era-mark{padding-bottom:0}@media(max-width:720px){.era-bar{height:65px}.year-readout{font-size:12px;min-width:78px}.era-rail{top:22px}.era-thumb{height:35px;width:28px}.era-mark{font-size:9px}.era-mark:before{top:16px}} .era-mark{pointer-events:none}.era-track{touch-action:none!important}.era-thumb{transition:none!important}.era-bar{position:relative;z-index:2000}.card{transition:opacity .12s ease,box-shadow .15s,border-color .15s}.stage .counter{max-width:65%;text-align:right}.card .pic img{width:100%;height:100%;object-fit:cover;display:block}.selected-picture img{height:78px;max-width:160px;object-fit:cover;border-radius:8px}.selected-picture{float:right;margin:0 0 8px 12px}.selected-link a{color:#f2c789}.panel{overflow:auto} .panel{height:38%;min-height:0;max-height:none;overflow-y:auto}.panel h2{font-size:clamp(20px,2vw,28px);line-height:1.35}.panel p{font-size:clamp(14px,1.15vw,17px);line-height:1.7}.card strong{font-size:clamp(15px,1.3vw,19px);white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.card small{font-size:clamp(11px,1vw,14px);line-height:1.35;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.detail-grid{display:grid;grid-template-columns:minmax(120px,18%) minmax(0,1fr) minmax(170px,22%);gap:18px;margin-top:12px;align-items:start}.detail-copy h3,.teacher-pane h3{margin:8px 0 4px;font-size:14px;color:#f2c77f}.detail-copy p,.teacher-pane p{margin:0 0 8px}.detail-kicker,.source-note{font-size:12px;color:#9fb0c1;line-height:1.6}.selected-picture{float:none;margin:0}.selected-picture img{height:auto;width:100%;max-width:100%;max-height:190px;object-fit:contain}.teacher-pane{position:relative;padding:10px;border-left:1px solid #52647a}.teacher-pane img{width:72px;max-height:110px;object-fit:contain;float:right}.theme .theme-art{background-size:cover;background-position:center}.home-link{color:#e9c48c;text-decoration:none;font-size:13px}@media(max-width:720px){.detail-grid{grid-template-columns:80px minmax(0,1fr);gap:8px}.teacher-pane{grid-column:1/-1;border-left:0;border-top:1px solid #52647a}.panel h2{font-size:19px}.panel p{font-size:13px}.card strong{font-size:13px}.card small{font-size:10px}} /* LOCK: detail occupies exactly 38% of the available History workspace.
+   The header and year fader are excluded from this workspace. */
+.main{flex:1 1 0;min-height:0}
+.panel{flex:0 0 38%;height:38%;min-height:0;max-height:38%;box-sizing:border-box;overflow-y:auto}
+body{}
+
+/* Existing composition, corrected theatre-period navigation and floating-card balance. */
+.period-track{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:5px;width:100%;height:100%;align-items:center}
+.period-button{height:58px;border:1px solid #536d83;border-radius:8px;background:#22364a;color:#d4e1ed;font:inherit;font-size:12px;line-height:1.15;cursor:pointer;padding:5px 3px;min-width:0}
+.period-button span,.period-button small{display:block}.period-button small{font-size:10px;color:#9eb5ca;margin-top:4px}
+.period-button.selected{background:#74532f;color:#fff;border:2px solid #f0bd77;box-shadow:0 0 0 1px #f0bd7740}
+.era-bar{height:78px}.stage-label{max-width:72%;pointer-events:none}.ring{display:none}
+.card{touch-action:manipulation}.card.focus{border-color:#f4c47f}.panel .detail-copy p{line-height:1.85}
+.selected-link button{margin:10px 0;padding:9px 16px;color:#172637;background:#f0c47d;border:0;border-radius:7px;font-weight:700;cursor:pointer}
+.history-float[hidden]{display:none}.history-float{position:fixed;inset:0;z-index:10000;background:#050c15d9;display:flex;align-items:center;justify-content:center;padding:20px}
+.history-float article{position:relative;width:min(960px,94vw);max-height:90vh;overflow:auto;padding:28px 32px;border-radius:16px;background:#1a2a3a;border:1px solid #647a90;color:#e4edf5;box-shadow:0 22px 65px #000b}
+.history-float h2{margin:0 0 12px;color:#f1c780}.history-float h3{color:#f1c780;margin:22px 0 8px;font-size:15px}
+.history-float p{line-height:1.9;white-space:pre-wrap}.history-float a{color:#f3c88a;overflow-wrap:anywhere}
+.history-float .close-float{position:sticky;top:0;float:right;background:#354a60;color:white;border:1px solid #8ca6bd;border-radius:6px;padding:8px 12px;cursor:pointer}
+@media(max-width:850px){.period-track{grid-template-columns:repeat(4,minmax(0,1fr));gap:3px}.era-bar{height:94px}.period-button{height:40px;font-size:11px}.period-button small{font-size:9px;margin-top:1px}.era-label{display:none}}
+
+/* LOCK: period image must stay behind cards; preserve legibility and credit. */
+.stage{background-image:linear-gradient(90deg,#0b1a2ee8 0%,#10243bbd 35%,#0d1a2dd5 100%),var(--history-era-photo,linear-gradient(135deg,#273c50,#101d2b));background-size:cover;background-position:center center;transition:background-image .25s ease}
+.era-photo-credit{position:absolute;right:18px;bottom:8px;font-size:10px;line-height:1.3;color:#d5e1eccc;background:#081521ba;border-radius:4px;padding:4px 6px;z-index:1050}
+.era-photo-credit a{color:#cfe0f6}
+.card.focus{box-shadow:0 0 30px #e9bd77a6,0 20px 45px #000d}
+@media(max-width:720px){.era-photo-credit{font-size:8px;right:7px}}
+/* 2026-11-19 LOCK: overview below, complete article in float. */
+.panel{flex:0 0 23%;height:23%;max-height:23%;min-height:0;overflow-y:auto;padding:14px 24px;box-sizing:border-box}
+.panel .lead-copy{max-width:1100px}.panel h2{font-size:clamp(18px,1.6vw,24px);margin:2px 0 6px}.panel #detailText{font-size:14px;line-height:1.65}
+.panel .lead-summary{display:none}.panel .selected-link button{margin-top:10px}
+.main{flex:1 1 auto;min-height:0}.stage{min-height:0}.themes{width:230px}
+.float-picture img{display:block;max-width:100%;max-height:350px;object-fit:contain;border-radius:8px;margin:12px auto}
+@media(max-width:720px){.panel{flex-basis:25%;height:25%;max-height:25%;padding:10px 12px}.themes{width:105px}.theme{width:96px;margin-left:-48px}}
+
+/* 2026-11-19: theatre-history full-field layout; original thematic cards remain stored. */
+body.eightbit-unified-width{min-height:100vh;display:flex;flex-direction:column;overflow:hidden}
+header{flex:0 0 auto}
+.era-bar{flex:0 0 77px}
+.main{flex:1 1 0;min-height:440px;display:block;position:relative}
+.themes,.panel{display:none!important}
+.stage{width:100%;height:100%;min-height:0;touch-action:none}
+.stage-label{top:16px;left:245px;font-size:13px;max-width:55%}
+.stage .counter{right:22px;top:17px}
+.flap-selector{position:absolute;top:16px;left:16px;width:210px;z-index:1600;border:1px solid #b08c5b;border-radius:9px;background:#0d1723e8;box-shadow:0 12px 28px #000a;padding:8px 10px;color:#e7cf9e;touch-action:none}
+.flap-head{font-size:10px;font-weight:700;letter-spacing:.14em;text-align:center;margin:1px 0 7px}
+.flap-controls{display:flex;align-items:stretch;gap:4px;height:58px}
+.flap-controls button{border:1px solid #6f7e8b;border-radius:4px;color:#fff;background:#26374a;cursor:pointer;padding:0}
+#flapPrev,#flapNext{width:25px;font-size:10px}
+#flapFace{flex:1;position:relative;background:linear-gradient(#344c64 0 48%,#0b1520 49%,#08121b 51%,#30465b 52%);font-weight:800;font-size:15px;text-shadow:0 1px 3px #000}
+#flapFace.flap-turn{animation:history-flap .38s ease}
+@keyframes history-flap{0%{transform:perspective(500px) rotateX(-8deg);filter:brightness(1.3)}45%{transform:perspective(500px) rotateX(20deg);filter:brightness(.65)}100%{transform:perspective(500px) rotateX(0);filter:brightness(1)}}
+.flap-hint{text-align:center;font-size:10px;color:#b0c0cd;margin-top:6px}
+.stage .card{width:260px;height:180px;margin:-90px 0 0 -130px;display:grid;grid-template-columns:55% 45%;grid-template-rows:1fr auto;padding:12px;gap:5px;background:linear-gradient(145deg,#1c2c3aef,#111a24f2);border-radius:12px;border:1px solid #9d855f;box-shadow:0 14px 34px #000c;text-align:left}
+.stage .card .pic{grid-column:2;grid-row:1/3;width:100%;height:100%;min-height:0;border-radius:7px;overflow:hidden;background:#1f384f}
+.stage .card strong{grid-column:1;grid-row:1;font-size:16px;line-height:1.3;align-self:end;padding:0;margin:0;white-space:normal}
+.stage .card small{grid-column:1;grid-row:2;font-size:11px;line-height:1.35;align-self:start;padding:0;margin:0}
+.stage .card.focus{border-color:#f6c47e;border-width:2px}
+.history-float{z-index:10000}
+@media(max-width:800px){.era-bar{flex-basis:95px}.main{min-height:320px}.flap-selector{width:170px;top:9px;left:8px}.stage-label{left:192px;font-size:11px;max-width:53%}.stage .card{width:205px;height:145px;margin:-72px 0 0 -102px;padding:8px}.stage .card strong{font-size:13px}.stage .card small{font-size:9px}}
+@media(prefers-reduced-motion:reduce){#flapFace.flap-turn{animation:none}}
+
+/* Depth-composition proof, isolated from production History.html. */
+.stage{background-position:center center;background-size:cover}
+.stage::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(to bottom,#0c192834 0%,transparent 30%,#0815204d 85%,#07111fcc 100%)}
+.stage .card{width:258px;height:174px;margin:-87px 0 0 -129px;grid-template-columns:52% 48%;grid-template-rows:1fr;padding:11px;gap:8px;overflow:hidden;isolation:isolate;background:linear-gradient(135deg,#0c1724f5,#203246ec);border:1px solid #a78d68;border-radius:12px;box-shadow:0 10px 25px #0009,0 2px 5px #0008}
+.stage .card .pic{grid-column:2;grid-row:1;min-width:0;height:100%;border-radius:7px;overflow:hidden;background:#1e364a}
+.stage .card .card-copy{grid-column:1;grid-row:1;display:flex;flex-direction:column;justify-content:center;gap:10px;min-width:0;z-index:1}
+.stage .card strong{font-size:clamp(14px,1.45vw,19px);line-height:1.25;margin:0;display:block;max-height:3.75em;overflow:hidden}
+.stage .card small{font-size:11px;line-height:1.45;margin:0;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}
+.stage .card.distant .card-copy small{display:none}
+.stage .card.distant{box-shadow:0 5px 17px #000a}
+.archive-pending{width:100%;height:100%;padding:10px 5px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(160deg,#263e50,#102333);color:#c8b18b;text-align:center}
+.archive-pending:before{content:"";width:40px;height:40px;border:1px solid #9e8b6970;border-radius:50%;background:repeating-linear-gradient(-35deg,transparent 0 7px,#d4bf9120 7px 8px)}
+.archive-pending span{font-size:8px;letter-spacing:.12em}
+.archive-pending em{font-size:10px;font-style:normal;color:#e1d5bd}
+.stage-label{color:#e3d4b6;text-shadow:0 2px 5px #000}
+#counter{z-index:1900;background:#0b1928a9;border-radius:5px;padding:5px 9px}
+.flap-selector{z-index:1800}
+@media(max-width:800px){.stage .card{width:218px;height:148px;margin:-74px 0 0 -109px}.stage .card strong{font-size:13px}.stage .card small{font-size:9px}.archive-pending span{font-size:7px}}
+</style><link rel="stylesheet" href="eightbit-layout-width.css?v=8">
+</head><body class="eightbit-unified-width"><div id="shared-console-header-root"></div><script src="next-ui-console-header.js?v=dmx-speed-nav-1"></script><header><b>舞台照明史 / HISTORY</b><a href="index.html" class="home-link">⌂ 教材トップ</a></header><nav class="era-bar" aria-label="演劇史の時代区分"><span class="era-label">THEATRE HISTORY</span><div id="periodTrack" class="period-track" role="group" aria-label="出来事から時代を選ぶ"></div></nav><div class="main"><aside class="themes" id="themes" aria-hidden="true" hidden></aside><main class="stage" id="stage"><div class="flap-selector" id="flapSelector" aria-label="9テーマでカードを整理"><div class="flap-head">THEME SELECTOR</div><div class="flap-controls"><button id="flapPrev" type="button" aria-label="前のテーマ">▲</button><button id="flapFace" type="button" aria-label="テーマ切替：現在は全テーマ"><span id="flapCurrent">全テーマ</span></button><button id="flapNext" type="button" aria-label="次のテーマ">▼</button></div><div class="flap-hint">上下にスワイプして分類</div></div><div class="stage-label">カードがゆっくり漂う空間</div><div class="counter" id="counter"></div><div class="era-photo-credit" id="eraPhotoCredit" hidden></div><div class="ring"></div><button class="arrow prev" id="prev" aria-label="前のカード">‹</button><button class="arrow next" id="next" aria-label="次のカード">›</button></main></div><section class="panel" aria-label="選択したカードの概要"><div class="lead-copy"><div id="detailKicker" class="detail-kicker"></div><h2 id="detailTitle">カードを選択</h2><p id="detailText">演劇の出来事を選び、その年代と歴史をたどろう。</p><p id="detailSummary" class="lead-summary"></p><div id="selectedLink" class="selected-link"></div></div></section><div class="history-float" id="historyFloat" hidden role="dialog" aria-modal="true" aria-labelledby="floatTitle"><article><button class="close-float" id="closeHistoryFloat" type="button">✕ 閉じる</button><h2 id="floatTitle"></h2><p id="floatMeta"></p><h3>歴史の出来事</h3><p id="floatSummary"></p><h3>背景・技術・表現</h3><p id="floatBody"></p><div id="floatPicture" class="float-picture"></div><h3>先生のひとこと</h3><p id="floatTeacher"></p><h3>根拠資料と確認状況</h3><p id="floatSource"></p><div id="floatLink"></div></article></div><script>
+(()=>{"use strict";const names=["用語","人物・職業","機構・技術","光源・照明","劇場建築","劇場・遺跡","作品・上演","社会・制度","文化・思想"],labels=["太陽光","松明","かがり火","蝋燭","油灯","劇場","舞台装置","仮面","祭礼","上演","建築","照明"],emoji=["☀️","🔥","🔥","🕯️","🏺","🏛️","⚙️","🎭","🎪","🎟️","🏗️","💡"];const stage=document.getElementById("stage"),themeBox=document.getElementById("themes"),counter=document.getElementById("counter"),title=document.getElementById("detailTitle"),desc=document.getElementById("detailText");let theme=-1,rotation=0,target=0,drag=null,last=performance.now(),lastMoved=0;document.documentElement.style.setProperty('--panel-height','38%');const cards=[];let themePos=3,themeTarget=3,themeDrag=null,themeMovedAt=0,themeWheelLock=0;
+// LOCK (2025-12-02): eight theatre/lighting history periods. The event comes first; dates belong to each article.
+const historyPeriods=[
+ {id:"origins",label:"演劇の起源",range:"〜紀元前5世紀",min:-900,max:-500},
+ {id:"greece",label:"ギリシャ・ローマ",range:"紀元前5世紀〜2世紀",min:-499,max:200},
+ {id:"medieval",label:"中世・ルネサンス",range:"3〜16世紀",min:201,max:1599},
+ {id:"baroque",label:"バロック・宮廷劇場",range:"17〜18世紀",min:1600,max:1799},
+ {id:"gas",label:"ガス灯と近代劇場",range:"19世紀",min:1800,max:1899},
+ {id:"electric",label:"電気と照明デザイン",range:"1900〜1979年",min:1900,max:1979},
+ {id:"dmx",label:"DMXとデジタル制御",range:"1980〜1999年",min:1980,max:1999},
+ {id:"led",label:"LEDと現代の劇場",range:"2000年〜",min:2000,max:2100}
+];
+let periodIndex=1;
+const yearLabel=y=>y<=0?"紀元前"+(1-y)+"年":"西暦"+y+"年";
+function renderEra(){const track=document.getElementById("periodTrack");track.innerHTML="";historyPeriods.forEach((p,i)=>{const b=document.createElement("button");b.type="button";b.className="period-button"+(i===periodIndex?" selected":"");b.setAttribute("aria-pressed",i===periodIndex?"true":"false");b.innerHTML='<span>'+p.label+'</span><small>'+p.range+'</small>';b.addEventListener("click",()=>setPeriod(i));track.appendChild(b)})}
+function setPeriod(i){const next=Math.max(0,Math.min(historyPeriods.length-1,Math.round(i)));if(next!==periodIndex){periodIndex=next;slideDirection=1;updateContext();renderEra()}}
+// Test fixtures only: fabricated dates and labels, NOT historical evidence.
+const items={
+  themeLighting:{
+    period:"ancient",title:"光源・照明",displayTitle:"光源・照明｜古代編のテーマ",
+    date:"古代",region:"古代ギリシャ・ローマ",category:"source",categoryLabel:"テーマ / 光源・照明",
+    size:"theme-b",icon:"☀",image:"assets/history/theme_light_B.webp",
+    imageAlt:"照明器具を組み合わせたLOCK済みテーマビジュアル",
+    eraImage:"assets/history/sun_ai_reference.webp",
+    teaser:"舞台を照らした光の歴史をたどる。",
+    summary:"古代編の光源・照明テーマ。まずは野外劇場で用いられた太陽光・天空光からたどる。",
+    body:"このテーマカードは9テーマ構成のB案表示検証です。左に全時代共通の照明ビジュアル、右に古代編の太陽光キー画像を表示しています。照明の歴史的説明は個別の太陽光カードを参照してください。",
+    teacher:"左のビジュアルは全時代共通、右の太陽光は古代編のキー画像だよ。",
+    source:"テーマ表示検証用（歴史的事実の根拠は太陽光カードに記載）"
+  },
+  sun:{
+    period:"ancient",
+    title:"太陽光",
+    displayTitle:"太陽光｜最初の舞台照明",
+    date:"紀元前5世紀頃",
+    region:"古代ギリシャ",
+    category:"source",
+    categoryLabel:"光源 / 劇場・舞台環境",
+    size:"large",
+    icon:"☀",
+    image:"assets/history/sun_ai_reference.webp",
+    imageAlt:"太陽光を表現したAI生成イメージ",
+    teaser:"野外劇場では、自然環境そのものが舞台の光だった。",
+    summary:"古代ギリシャの野外劇場では、太陽・天空光など自然環境そのものが舞台の光を決めていた。",
+    body:"紀元前5世紀頃の古代ギリシャ劇場では、上演は屋外で行われ、舞台の光は太陽と天空光に依存していた。照明装置を操作する以前の段階では、時間帯や天候そのものが舞台の見え方を変える条件だった。",
+    teacher:"悲劇などは上演順によって夕方になり、最後は日没の頃まで上演された、という話もあるよ。自然光そのものが舞台の変化になっていたんだね。",
+    source:"基礎資料：国立科学博物館 2024「舞台照明用調光装置の系統化調査」"
+  },
+  greekTheatre:{
+    period:"ancient",
+    title:"古代ギリシャ劇場",
+    displayTitle:"古代ギリシャ劇場｜劇場を巡る入口",
+    date:"紀元前5世紀頃〜",
+    showDateInCard:false,
+    region:"古代ギリシャ",
+    category:"theatre",
+    categoryLabel:"劇場・舞台環境",
+    size:"medium",
+    icon:"🏛",
+    image:"assets/history/sunlight/01_epidaurus_greek_theatre.webp",
+    imageAlt:"古代ギリシャ劇場の代表例として見るエピダウロス劇場",
+    teaser:"斜面を利用した客席と、コロスが歌い踊るオルケストラを持つ野外劇場。",
+    summary:"斜面を利用したテアトロン（観客席）と、コロスが歌い踊るオルケストラを中心に構成された野外劇場。古代ギリシャ各地に造られ、地域や年代によってその形は異なる。",
+    body:"古代ギリシャの劇場は、山や丘の斜面を利用してテアトロン（観客席）を設け、その下にコロスが歌い踊るオルケストラを置く構成を基本とした。オルケストラの背後には、のちにスケネと呼ばれる舞台建築が発達し、上演空間の構成も時代とともに変化した。現存する劇場の多くは後世に改築されており、紀元前5世紀の劇場が現在見える完成形のまま存在していたわけではない。地域ごとの違い、建設年代、ヘレニズム期・ローマ期の改築を分けて見ることで、古代ギリシャ劇場が一つの固定した形式ではなかったことが分かる。上演は屋外の自然光の中で行われ、劇場そのものが当時の照明環境の一部だった。代表画像のエピダウロス劇場は紀元前4世紀の代表例であり、紀元前5世紀の劇場そのものではない。",
+    teacher:"一つの劇場を『古代ギリシャ劇場の完成形』として決めつけず、地域・年代・改築の違いを見比べながら進もう。",
+    source:"調査台帳：docs/ancient_greek_theatres_master.md｜UNESCO Ancient Greek Theatres / Attic Inscriptions Online / Paga 2010 / Takeuchi & Wilson 2023",
+    detailLink:"HistoryMap.html?from=greekTheatre",
+    detailLinkLabel:"地図で劇場を巡る"
+  }
+};
+
+// 古代編・18候補の仮置き。正式採用・史実確定ではない。
+const ancientPreviewCards=[{"id":"theatron","title":"テアトロン","categoryLabel":"観客席","date":"紀元前5世紀頃〜","teaser":"斜面を利用して観客を迎える席。","source":"R04・R05","icon":"🏛"},{"id":"orchestra","title":"オルケストラ","categoryLabel":"舞台構造","date":"紀元前5世紀頃〜","teaser":"コロスが歌い踊る上演空間。","source":"R04・R05","icon":"◯"},{"id":"skene","title":"スケネ","categoryLabel":"舞台建築","date":"古典期〜","teaser":"舞台背後の建築。時代とともに発達する。","source":"R01・R05","icon":"▤"},{"id":"proskenion","title":"プロスケニオン","categoryLabel":"舞台構造","date":"ヘレニズム期","teaser":"スケネ前方の構造とその変化。","source":"R05","icon":"▥"},{"id":"parodos","title":"パロドス","categoryLabel":"舞台への出入口","date":"古典期〜","teaser":"観客席と舞台空間の間にある通路。","source":"追加根拠要","icon":"↗"},{"id":"prohedria","title":"プロエドリア","categoryLabel":"名誉席","date":"古代ギリシャ","teaser":"特別な座席に表れる社会的な区分。","source":"R04・R05","icon":"♛"},{"id":"chorus","title":"コロス","categoryLabel":"演劇の担い手","date":"紀元前5世紀頃〜","teaser":"集団で歌い踊る演劇の重要な構成要素。","source":"追加根拠要","icon":"♫"},{"id":"comicActors","title":"喜劇俳優","categoryLabel":"演劇の担い手","date":"紀元前4世紀頃","teaser":"陶器に残る喜劇俳優の姿を見る。","source":"R12・R16","icon":"🎭"},{"id":"masks","title":"仮面","categoryLabel":"衣裳・小道具","date":"紀元前4世紀頃","teaser":"図像に描かれた俳優の仮面。","source":"R12","icon":"🎭"},{"id":"costumes","title":"喜劇の衣裳","categoryLabel":"衣裳・小道具","date":"紀元前4世紀頃","teaser":"詰め物など特徴ある衣裳の描写。","source":"R12","icon":"♧"},{"id":"dionysos","title":"ディオニュソスと演劇","categoryLabel":"演劇文化","date":"古代ギリシャ","teaser":"神への祭礼と演劇との関係を探る。","source":"R12・追加根拠要","icon":"🍇"},{"id":"festivals","title":"祭礼と劇場","categoryLabel":"演劇文化","date":"古代ギリシャ","teaser":"劇場と地域の祭礼との結びつき。","source":"R04・R13","icon":"⚑"},{"id":"patrons","title":"市民と名誉制度","categoryLabel":"劇場と社会","date":"紀元前4世紀末頃","teaser":"共同体への貢献と名誉・特権の関係。","source":"R13・追加根拠要","icon":"♙"},{"id":"romanChange","title":"ギリシャからローマへ","categoryLabel":"劇場の変化","date":"ローマ期","teaser":"劇場の構造に加えられた後世の変更。","source":"R04・R05","icon":"🏟"},{"id":"paintedPanels","title":"舞台背景の描画パネル","categoryLabel":"舞台装置","date":"ヘレニズム期","teaser":"プロスケニオンと背景表現の手がかり。","source":"R05","icon":"▧"},{"id":"heightDifference","title":"客席と舞台の高低差","categoryLabel":"劇場構造","date":"古代ギリシャ","teaser":"斜面と舞台の位置関係を見る。","source":"R05","icon":"↕"},{"id":"delphi","title":"デルフィ劇場","categoryLabel":"遺跡を巡る","date":"紀元前4世紀〜","teaser":"神域と祭礼、後世の改修が残る劇場。","source":"R04","icon":"🏛"},{"id":"delos","title":"デロス劇場","categoryLabel":"遺跡を巡る","date":"紀元前4〜3世紀","teaser":"ヘレニズム期の劇場構造を学ぶ遺跡。","source":"R05","icon":"🏛"}];
+ancientPreviewCards.forEach((x)=>{
+  items[x.id]={period:"ancient",title:x.title,displayTitle:x.title+"｜仮カード",date:x.date,region:"古代ギリシャ・ローマ",category:x.id==="delphi"||x.id==="delos"?"theatre":"culture",categoryLabel:x.categoryLabel,size:"preview",icon:x.icon,teaser:x.teaser,summary:x.teaser,body:"【仮配置・未確定】"+x.teaser+" 詳細本文・図版は原文照合後に制作する。",teacher:"このカードは配置と分類を確認するための仮カードだよ。",source:"資料候補："+x.source+"｜採用前に原文確認が必要"};
+});
+
+// 2026-11-19: R01–R35 research-based provisional article cards.
+// Publication years and historical dates are kept distinct. Images use existing, credited local assets only.
+const researchedHistoryCards=[
+  {
+    "id": "greekSunStudy",
+    "year": -450,
+    "theme": 3,
+    "title": "古代劇場の太陽と影",
+    "date": "紀元前5世紀を対象",
+    "region": "古代ギリシャ",
+    "teaser": "野外劇場の太陽光は、上演時刻や客席の方角によって舞台の見え方を変えた。",
+    "body": "劇場の立地・方角と光の変化を考える。特定の劇場の方向を一つの理由だけで説明することはできない。",
+    "refs": "R01・R02",
+    "url": "https://www.didaskalia.net/issues/8/22/",
+    "image": "assets/history/sunlight/01_epidaurus_greek_theatre.webp"
+  },
+  {
+    "id": "choragicDuties",
+    "year": -430,
+    "theme": 7,
+    "title": "コレゴスと劇祭の費用",
+    "date": "紀元前5世紀を中心",
+    "region": "アッティカ",
+    "teaser": "祭礼の上演は、出資者と共同体の支えによって成立した。",
+    "body": "奉納碑や弁論には、コロスにかかった費用と公的な名誉が記録されている。支出額を標準費用とみなさず、個別の史料として読む。",
+    "refs": "R25・R27・R35",
+    "url": "https://www.atticinscriptions.com/inscription/IGI3/1027bis",
+    "image": ""
+  },
+  {
+    "id": "ikarionFestival",
+    "year": -430,
+    "theme": 7,
+    "title": "イカリオンの地方劇祭",
+    "date": "紀元前5世紀",
+    "region": "アッティカ・イカリオン",
+    "teaser": "アテナイ中心部の外にも、共同体が支えたディオニュシアがあった。",
+    "body": "碑文の断片から、地方祭礼の財政と運営をたどる。欠損部の復元は確定事項と区別する。",
+    "refs": "R26",
+    "url": "https://www.ascsa.edu.gr/publications/hesperia/article/84/1/97-147",
+    "image": "assets/history/maps/attica/ikarion.webp"
+  },
+  {
+    "id": "athensPublicHonours",
+    "year": -325,
+    "theme": 7,
+    "title": "劇場で支援者を讃える",
+    "date": "紀元前4世紀を中心",
+    "region": "アテナイ",
+    "teaser": "劇場は演劇を観るだけでなく、支援者を公に顕彰する場でもあった。",
+    "body": "碑文と祭礼の記録から、布告や奉納が都市の記憶に結びつく過程を読む。碑文の復元箇所は留保して扱う。",
+    "refs": "R13・R25",
+    "url": "https://doi.org/10.1093/bics/qbaf017",
+    "image": ""
+  },
+  {
+    "id": "comicVase",
+    "year": -385,
+    "theme": 1,
+    "title": "喜劇俳優の仮面と衣裳",
+    "date": "紀元前390〜380年頃",
+    "region": "南イタリア・アプリア",
+    "teaser": "陶器に描かれた俳優の姿から、仮面と特徴的な衣裳を知る。",
+    "body": "同時代の図像は貴重な手がかり。ただし、描かれた場面を特定の上演の記録写真のように扱うことはできない。",
+    "refs": "R12・R16",
+    "url": "https://www.clevelandart.org/art/1989.73",
+    "image": ""
+  },
+  {
+    "id": "delphiSite",
+    "year": -320,
+    "theme": 5,
+    "title": "デルフィの劇場と祭礼",
+    "date": "紀元前4世紀以降",
+    "region": "ギリシャ・デルフィ",
+    "teaser": "神域の劇場は祭礼と結びつき、時代を重ねて改修された。",
+    "body": "現在の遺構は単一年の姿ではない。観客席、支援者の刻銘、ローマ期の変更を時代別に読む。",
+    "refs": "R04",
+    "url": "https://diazoma.gr/en/theaters/ancient-theatre-of-delphi/",
+    "image": "assets/history/maps/greek-world/delphi.webp"
+  },
+  {
+    "id": "delosSite",
+    "year": -280,
+    "theme": 5,
+    "title": "デロスの劇場と舞台装置",
+    "date": "紀元前314〜250年頃",
+    "region": "ギリシャ・デロス",
+    "teaser": "建設に長い年月を要した劇場には、客席と舞台背景の工夫が残る。",
+    "body": "プロスケニオンの描画パネルを、演じる場所と背景表現の関係から読み解く。",
+    "refs": "R05",
+    "url": "https://diazoma.gr/en/theaters/theatre-of-delos/",
+    "image": "assets/history/maps/greek-world/delos.webp"
+  },
+  {
+    "id": "iasosDionysia",
+    "year": -150,
+    "theme": 7,
+    "title": "イアソスの芸術家と観客",
+    "date": "紀元前2世紀頃",
+    "region": "小アジア・イアソス",
+    "teaser": "演劇祭を支えた寄付者、芸術家、観客の関係が碑文に残る。",
+    "body": "無料観劇を支える仕組みと地域社会をたどる。アテナイと同一の制度と決めつけない。",
+    "refs": "R22",
+    "url": "https://ora.ox.ac.uk/objects/uuid%3A165252f5-3231-402a-814e-3c5ece6669c6",
+    "image": ""
+  },
+  {
+    "id": "blackSeaDionysia",
+    "year": -100,
+    "theme": 8,
+    "title": "黒海沿岸へ広がる劇場文化",
+    "date": "古代（詳細年代精査中）",
+    "region": "イストロス・トミス",
+    "teaser": "黒海の都市にも、祭礼と芸術家を顕彰する記録が残る。",
+    "body": "宗教、都市の支援者、上演文化の結びつきを地域ごとに追う。ギリシャ文化の単純な複製とは扱わない。",
+    "refs": "R34",
+    "url": "https://ora.ox.ac.uk/objects/uuid%3A165252f5-3231-402a-814e-3c5ece6669c6",
+    "image": ""
+  },
+  {
+    "id": "jacobeanCandles",
+    "year": 1610,
+    "theme": 3,
+    "title": "蝋燭が照らす英国の屋内劇場",
+    "date": "17世紀初頭",
+    "region": "英国",
+    "teaser": "窓と蝋燭の光が、舞台と観客席の見え方を変えていた。",
+    "body": "ブリストル大学の実寸復元と測光研究を手がかりに考える。復元実験は2004〜2005年で、劇場の年代とは分けて示す。",
+    "refs": "R24・R17",
+    "url": "https://www.bristol.ac.uk/drama/jacobean/research3.html",
+    "image": ""
+  },
+  {
+    "id": "sabbattini1638",
+    "year": 1638,
+    "theme": 2,
+    "title": "Sabbattiniの舞台技術書",
+    "date": "1638年",
+    "region": "イタリア",
+    "teaser": "舞台装置、遠近法、灯火を扱う技術書が刊行された。",
+    "body": "『Pratica di fabricar scene e machine ne’ teatri』の木版図は、当時の装置の発想を直接伝える一次資料。記述された技術がすべての劇場へ普及したとは限らない。",
+    "refs": "R06",
+    "url": "https://digitalcollections.folger.edu/bib353348-501786",
+    "image": ""
+  },
+  {
+    "id": "kingsTheatreOil",
+    "year": 1781,
+    "theme": 7,
+    "title": "劇場の油灯と運営費",
+    "date": "1780〜1782年",
+    "region": "ロンドン・King's Theatre",
+    "teaser": "照明の歴史は光源だけでなく、消耗品や維持費の歴史でもある。",
+    "body": "1787年の訴訟記録に残るランプ供給の勘定から、日々の劇場運営を読み解く。一劇場の記録を全劇場へ一般化しない。",
+    "refs": "R32",
+    "url": "https://doi.org/10.1017/S0307883300014991",
+    "image": ""
+  },
+  {
+    "id": "gasMelodrama",
+    "year": 1810,
+    "theme": 3,
+    "title": "ガス灯が変えた観客体験",
+    "date": "1802〜1818年を対象",
+    "region": "ロンドン",
+    "teaser": "ガス灯は舞台と客席の見え方を変え、熱や空気の問題も生んだ。",
+    "body": "初期メロドラマの研究を通して、明るさと観客経験の変化を考える。地域によって導入時期は異なる。",
+    "refs": "R15",
+    "url": "https://www.tandfonline.com/doi/full/10.1080/0950236X.2024.2380573",
+    "image": ""
+  },
+  {
+    "id": "gustavus1833",
+    "year": 1833,
+    "theme": 6,
+    "title": "ガス照明とスペクタクル",
+    "date": "1833年",
+    "region": "ロンドン",
+    "teaser": "舞台の光は観客を驚かせる表現にもなった。",
+    "body": "『Gustavus the Third』の上演を通して、ロンドンとパリ間で照明技術への関心が移動した事例を扱う。",
+    "refs": "R09",
+    "url": "https://doi.org/10.1017/S0954586717000039",
+    "image": ""
+  },
+  {
+    "id": "arcOpera1849",
+    "year": 1849,
+    "theme": 6,
+    "title": "パリ・オペラ座の人工の太陽",
+    "date": "1849年",
+    "region": "フランス・パリ",
+    "teaser": "オペラ『預言者』では、アーク灯が日の出や火災の効果に使われた。",
+    "body": "電気の強い光が舞台効果を変えた一作品の事例。1849年に劇場全体が電化されたという意味ではない。",
+    "refs": "R23",
+    "url": "https://doi.org/10.1093/oq/kbaf020",
+    "image": ""
+  },
+  {
+    "id": "trouve1885",
+    "year": 1885,
+    "theme": 2,
+    "title": "身体に取り付ける電気の光",
+    "date": "1885年",
+    "region": "フランス",
+    "teaser": "電池で光る宝飾品や舞台用装置が発明資料に描かれた。",
+    "body": "Gustave Trouvéの原著から、身体に付ける電気の光という発想を読む。一般普及の証拠とは区別する。",
+    "refs": "R11",
+    "url": "https://catalogue.bnf.fr/ark:/12148/cb315005044",
+    "image": ""
+  },
+  {
+    "id": "electrificationEra",
+    "year": 1890,
+    "theme": 3,
+    "title": "劇場の電化と安全",
+    "date": "1883〜1913年を対象",
+    "region": "ヨーロッパ",
+    "teaser": "電気照明の導入は、火災や換気など劇場環境の課題とも結びついた。",
+    "body": "劇場電化の速度は地域や運営者ごとに異なる。照明の美学と設備の安全を併せて読む。",
+    "refs": "R14",
+    "url": "https://www.cambridge.org/core/journals/theatre-research-international/article/abs/bulbs-onstage-theatrical-hygiene-and-the-electrification-of-performance/5A399DFFF4012137676DD48914471B86",
+    "image": ""
+  },
+  {
+    "id": "appia1895",
+    "year": 1895,
+    "theme": 8,
+    "title": "Appiaと立体空間の光",
+    "date": "1895年",
+    "region": "ヨーロッパ",
+    "teaser": "光は舞台を単に明るくするだけでなく、俳優と空間を形づくる要素として考えられた。",
+    "body": "Appiaの原著は平面書割への批判と、身体・立体・光の関係を示す。理論の発表と一般劇場への普及は別の問題である。",
+    "refs": "R20",
+    "url": "https://gallica.bnf.fr/ark:/12148/bpt6k97988964",
+    "image": ""
+  },
+  {
+    "id": "imperial1911",
+    "year": 1911,
+    "theme": 2,
+    "title": "帝国劇場と近代調光",
+    "date": "1911年",
+    "region": "日本・東京",
+    "teaser": "日本の劇場設備の近代化を、調光装置の系譜から見る。",
+    "body": "国立科学博物館の系統化調査を入口に、当時の調光設備を位置づける。機器仕様や『初』の断定は個別の一次資料で再確認する。",
+    "refs": "R19",
+    "url": "https://sts.kahaku.go.jp/diversity/document/browse/2024_saeki/",
+    "image": ""
+  },
+  {
+    "id": "littleTheaters1921",
+    "year": 1921,
+    "theme": 2,
+    "title": "小劇場へ広がる照明実務",
+    "date": "1921年",
+    "region": "米国",
+    "teaser": "灯具配置や俳優の顔にできる影を、実用書が具体的に解説した。",
+    "body": "『Producing in Little Theaters』第9章の図版を出典として参照する。資料の対象は1920年代米国の実務である。",
+    "refs": "R03・R18",
+    "url": "https://www.loc.gov/resource/gdcmassbookdig.producinginlittl00str/?st=brief",
+    "image": ""
+  },
+  {
+    "id": "lightingHandbook1923",
+    "year": 1923,
+    "theme": 2,
+    "title": "照明技術を図版でたどる",
+    "date": "1923年",
+    "region": "米国",
+    "teaser": "灯火、ガス、アーク灯、電球、調光装置の変化を同時代の技術書で見る。",
+    "body": "メーカー資料の歴史説明と機器図版を活用する。宣伝的記述は別資料と照合する。",
+    "refs": "R07",
+    "url": "https://archive.org/details/TheatreLightingPastAndPresent",
+    "image": ""
+  },
+  {
+    "id": "kabukiDimming1925",
+    "year": 1925,
+    "theme": 2,
+    "title": "第三期歌舞伎座の調光設備",
+    "date": "1925年",
+    "region": "日本・東京",
+    "teaser": "歌舞伎座の設備を、近代日本の調光技術の流れに置く。",
+    "body": "国立科学博物館の調査報告を手がかりに、設備記録と年代を照合する。",
+    "refs": "R19",
+    "url": "https://sts.kahaku.go.jp/diversity/document/browse/2024_saeki/",
+    "image": ""
+  },
+  {
+    "id": "kabuki1927",
+    "year": 1927,
+    "theme": 3,
+    "title": "歌舞伎座の照明設備",
+    "date": "1927年",
+    "region": "日本・東京",
+    "teaser": "第三期歌舞伎座の灯具、電力、上演上の工夫が同時代の論文に記録された。",
+    "body": "設備の構成と、歌舞伎で何を見せようとしたかを区別して読む。1927年の一劇場の記録を江戸期全体に一般化しない。",
+    "refs": "R28",
+    "url": "https://doi.org/10.2150/jieij1917.11.6_420",
+    "image": ""
+  },
+  {
+    "id": "takarazuka1934",
+    "year": 1934,
+    "theme": 2,
+    "title": "東京宝塚劇場の調光設備",
+    "date": "1934年",
+    "region": "日本・東京",
+    "teaser": "劇場の操作卓と調光装置の発達を、設備史からたどる。",
+    "body": "1934年の設備事例を他館の調光方式と比較する。個別の回路・操作機構は原資料照合後に詳細化する。",
+    "refs": "R19",
+    "url": "https://sts.kahaku.go.jp/diversity/document/browse/2024_saeki/",
+    "image": ""
+  },
+  {
+    "id": "peggyClark",
+    "year": 1950,
+    "theme": 1,
+    "title": "Peggy Clarkの照明設計資料",
+    "date": "1936〜1970年代中心",
+    "region": "米国",
+    "teaser": "照明図面やキューシートは、デザインの思考と実務を後世に残す。",
+    "body": "所蔵目録の多数の公演資料から、仕込み図、仕様書、ノートをたどる。個々の公演図版は箱・フォルダを確認して採用する。",
+    "refs": "R33",
+    "url": "https://hdl.loc.gov/loc.music/eadmus.mu012015",
+    "image": ""
+  },
+  {
+    "id": "rosenthalTour",
+    "year": 1950,
+    "theme": 1,
+    "title": "照明デザインを次の劇場へ",
+    "date": "1940年代以降",
+    "region": "米国",
+    "teaser": "ツアーや再演では、仕込み図・キューを別の劇場に合わせて移し替える。",
+    "body": "Jean RosenthalとMaxine Glorskyの所蔵資料を入口に、照明の再現と変更の実務を学ぶ。",
+    "refs": "R21",
+    "url": "https://hdl.loc.gov/loc.music/eadmus.mu020001",
+    "image": ""
+  },
+  {
+    "id": "lightingProfession1953",
+    "year": 1953,
+    "theme": 1,
+    "title": "舞台照明という仕事",
+    "date": "1953年",
+    "region": "日本",
+    "teaser": "照明の仕事は灯具の操作だけでなく、戯曲や演出と結びつく。",
+    "body": "『舞臺照明の仕事』を通じ、専門職としての照明設計を考える。本文未確認部分は断定せず、書誌情報から出発する。",
+    "refs": "R08",
+    "url": "https://ndlsearch.ndl.go.jp/books/R100000002-I000000899261",
+    "image": ""
+  },
+  {
+    "id": "noh1963",
+    "year": 1963,
+    "theme": 3,
+    "title": "能舞台の自然光と人工光",
+    "date": "1963年",
+    "region": "日本",
+    "teaser": "能舞台の光を、拡散光・光色・配光の観点から検討した論文がある。",
+    "body": "当時の設計論と2013年の実測研究を比較する。後世の実測条件を過去の標準値に置き換えない。",
+    "refs": "R29・R31",
+    "url": "https://doi.org/10.2150/jieij1917.47.9_440",
+    "image": "assets/history/sunlight/04_itsukushima_noh_stage.webp"
+  },
+  {
+    "id": "nisseiKabuki1964",
+    "year": 1964,
+    "theme": 3,
+    "title": "日生劇場の歌舞伎照明実測",
+    "date": "1964年",
+    "region": "日本・東京",
+    "teaser": "『勧進帳』の照明配置と鉛直面照度が、図表を伴う論文に記録された。",
+    "body": "方向、明るさ、衣裳・化粧の見え方を実測結果と著者の解釈に分けて読む。公演日との照合は別途必要。",
+    "refs": "R30",
+    "url": "https://doi.org/10.2150/jieij1917.48.6_242",
+    "image": ""
+  },
+  {
+    "id": "computerBoard1976",
+    "year": 1976,
+    "theme": 2,
+    "title": "コンピュータ調光卓の登場",
+    "date": "1970年代・詳細年要照合",
+    "region": "英国国立劇場",
+    "teaser": "レパートリー上演の運用要求が、メモリー制御の開発を後押しした。",
+    "body": "PDP-11を使った英国国立劇場のLightboardを、開発史と現場運用の双方から見る。正確な導入日は原文確認後に確定する。",
+    "refs": "R10",
+    "url": "https://theatrecrafts.com/archive/documents/1391_Lightboard-at-50-Sightline_Bertenshaw-Summer-2026.pdf",
+    "image": ""
+  }
+];
+// Consolidate duplicate ancient-sunlight test cards into the sourced history article.
+// Retain the theme illustration as Rolodex artwork, not an independent history event.
+// The underlying provisional data remains available for future evidence review.
+const greekSunArticle=researchedHistoryCards.find(r=>r.id==="greekSunStudy");
+if(greekSunArticle){
+ greekSunArticle.title="古代ギリシャ劇場の自然光";
+ greekSunArticle.teaser="野外劇場では太陽と天空光が舞台を照らし、時刻・天候・劇場の向きで見え方が変化した。";
+ greekSunArticle.body="古代ギリシャの野外劇場では、舞台に届く太陽光と天空光が基本的な照明環境だった。観客や俳優の見え方は上演時刻、天候、劇場の地形・方角に左右される。現存する遺跡の姿には後世の改修も含まれるため、一つの劇場の方角から古典期の上演方法を一律に推定することはできない。劇場建築と光の関係を、各劇場の年代と資料に照らして読み解く。";
+}
+researchedHistoryCards.forEach(r=>{items[r.id]={title:r.title,displayTitle:r.title,date:r.date,region:r.region,categoryLabel:names[r.theme],size:"medium",icon:"📜",image:r.image||"",imageAlt:r.image?"関連する既存の劇場写真（資料本文の図版ではありません）":"",teaser:r.teaser,summary:r.teaser,body:"【資料台帳に基づく仮記事】"+r.body,teacher:"原資料を開いて、記録された事実と後世の解釈を分けて読んでみよう。",source:"資料台帳 "+r.refs+"｜原著・研究本文と画像権利は個別確認",detailLink:r.url,detailLinkLabel:"原資料・研究ページを開く"};});
+
+const fixtureMeta={
+ greekTheatre:{theme:5,start:-499,end:-300},
+ theatron:{theme:0,start:-499,end:-250},orchestra:{theme:0,start:-499,end:-250},skene:{theme:0,start:-499,end:-200},proskenion:{theme:0,start:-300,end:-100},parodos:{theme:0,start:-499,end:-100},prohedria:{theme:0,start:-499,end:-100},
+ chorus:{theme:1,start:-499,end:-250},comicActors:{theme:1,start:-399,end:-250},masks:{theme:6,start:-399,end:-250},costumes:{theme:6,start:-399,end:-250},dionysos:{theme:8,start:-499,end:-100},festivals:{theme:7,start:-499,end:-100},patrons:{theme:7,start:-350,end:-100},romanChange:{theme:4,start:-100,end:350},paintedPanels:{theme:2,start:-300,end:-100},heightDifference:{theme:4,start:-499,end:-100},delphi:{theme:5,start:-399,end:100},delos:{theme:5,start:-299,end:100}
+};
+// Date windows above are ONLY display-testing estimates; original item.date/source retained.
+const fixtures=Object.entries(items).filter(([id])=>fixtureMeta[id]).map(([id,d])=>{const m=fixtureMeta[id];return {id,data:d,theme:m.theme,start:m.start,end:m.end}});
+// Place the new articles within the existing time slider and theme selector.
+researchedHistoryCards.forEach(r=>{const start=r.year<0?r.year-60:r.year-35;const end=r.year<0?r.year+60:r.year+35;fixtures.push({id:r.id,data:items[r.id],theme:r.theme,start,end,anchor:r.year});});
+let visibleKey="",lastSelected=null;const cardByKey=new Map();let slideDirection=1;
+function updateCards(){
+ const p=historyPeriods[periodIndex];const found=fixtures.filter(f=>(f.anchor===undefined?(f.start<=p.max&&f.end>=p.min):(f.anchor>=p.min&&f.anchor<=p.max)));
+ const key=found.map(f=>f.id).join("|");if(key===visibleKey)return;
+ visibleKey=key;lastSelected=null;focusCard=null;
+ const now=performance.now(),nextKeys=new Set(found.map(f=>f.id));
+ // Retiring cards slide into the rear of the ring instead of vanishing on the cut.
+ for(const [key,c] of cardByKey){if(nextKeys.has(key))continue;
+  cardByKey.delete(key);
+  const ghost=c.cloneNode(true),x=parseFloat(c.dataset.x||0),y=parseFloat(c.dataset.y||0),scale=parseFloat(c.dataset.scale||1);
+  ghost.classList.remove("focus");ghost.style.pointerEvents="none";ghost.style.zIndex="5";stage.appendChild(ghost);
+  ghost.style.transform="translate3d("+x+"px,"+y+"px,0) scale("+scale+")";
+  ghost.animate([{transform:"translate3d("+x+"px,"+y+"px,0) scale("+scale+")",opacity:parseFloat(c.style.opacity||1)},{transform:"translate3d("+(x+slideDirection*95)+"px,"+(y-52)+"px,0) scale("+(scale*.6)+")",opacity:0}],{duration:380,easing:"ease-in",fill:"forwards"}).finished.then(()=>ghost.remove()).catch(()=>ghost.remove());
+  c.remove();
+ }
+ cards.length=0;
+ found.forEach(f=>{let c=cardByKey.get(f.id);if(!c){
+   c=document.createElement("button");c.type="button";c.className="card";
+   c.innerHTML='<div class="pic">'+(f.data.image?'<img src="'+f.data.image+'" alt="" loading="lazy" decoding="async">':'<div class="archive-pending"><span>HISTORY ARCHIVE</span><em>史料画像準備中</em></div>')+'</div><div class="card-copy"><strong>'+f.data.title+'</strong><small>'+f.data.teaser+'</small></div>';
+   c.dataset.born=String(now);stage.appendChild(c);cardByKey.set(f.id,c);
+   c.addEventListener("click",()=>{lastSelected=f.id;focusCard=f.id;openHistoryFloat(f.data);const st=driftStates.get(f.id);if(st){st.z=1.15;st.vz=0} });
+  }cards.push(c)});
+ // Preserve the existing ring angle; do not reset to zero on every year boundary.
+ if(cards.length){rotation=((rotation%cards.length)+cards.length)%cards.length;target=rotation}else{rotation=0;target=0}
+}
+function showDetail(d){title.textContent=d.displayTitle||d.title;desc.textContent=d.summary;document.getElementById("detailKicker").textContent=d.categoryLabel+"｜"+d.date+"｜"+d.region;document.getElementById("detailSummary").textContent="";const link=document.getElementById("selectedLink");link.innerHTML="<button type=\"button\" id=\"openHistoryFloat\">詳しい記事・写真・一次資料を読む</button>";document.getElementById("openHistoryFloat").onclick=()=>openHistoryFloat(d)}
+function openHistoryFloat(d){const m=document.getElementById("historyFloat");document.getElementById("floatTitle").textContent=d.displayTitle||d.title;document.getElementById("floatMeta").textContent=d.date+" ／ "+d.region+" ／ "+d.categoryLabel;document.getElementById("floatSummary").textContent=d.summary;document.getElementById("floatBody").textContent=d.body;document.getElementById("floatSource").textContent=d.source;const picture=document.getElementById("floatPicture");picture.innerHTML="";if(d.image){const img=document.createElement("img");img.src=d.image;img.alt=d.imageAlt||d.title;img.loading="lazy";picture.appendChild(img)}document.getElementById("floatTeacher").textContent=d.teacher||"";const link=document.getElementById("floatLink");link.innerHTML="";if(d.detailLink){const a=document.createElement("a");a.href=d.detailLink;a.target="_blank";a.rel="noopener noreferrer";a.textContent=d.detailLinkLabel||"一次資料へ";link.appendChild(a)}m.hidden=false;document.getElementById("closeHistoryFloat").focus()}
+document.getElementById("closeHistoryFloat").onclick=()=>document.getElementById("historyFloat").hidden=true;
+document.getElementById("historyFloat").addEventListener("click",e=>{if(e.target.id==="historyFloat")e.currentTarget.hidden=true});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")document.getElementById("historyFloat").hidden=true});
+function updateContext(){const p=historyPeriods[periodIndex];document.querySelector(".stage-label").textContent=p.label+" ／ "+(theme<0?"全テーマ":names[theme])+"　← カードを選ぶと記事が開きます →";title.textContent=p.label+" × "+(theme<0?"全テーマ":names[theme]);const entries=fixtures.filter(f=>(f.anchor===undefined?(f.start<=p.max&&f.end>=p.min):(f.anchor>=p.min&&f.anchor<=p.max))&&(theme<0||f.theme===theme));desc.textContent=entries.length?entries.slice(0,2).map(f=>f.data.teaser).join("　")+"　気になるカードを選ぶと、その時代の背景と年代を知ることができます。":"この組み合わせの記事は調査・制作中です。別のテーマを選ぶと収録済みの出来事を探索できます。";document.getElementById("detailKicker").textContent=p.range+" ／ 収録記事 "+entries.length+"件";document.getElementById("selectedLink").innerHTML="";const credit=document.getElementById("eraPhotoCredit");if(periodIndex===1){stage.style.setProperty("--history-era-photo",'url("assets/history/sunlight/01_epidaurus_greek_theatre.webp")');credit.hidden=false;credit.innerHTML='背景：エピダウロス劇場（紀元前4世紀の遺構）・<a href="https://commons.wikimedia.org/wiki/File:The_great_theater_of_Epidaurus,_designed_by_Polykleitos_the_Younger_in_the_4th_century_BC,_Sanctuary_of_Asklepeios_at_Epidaurus,_Greece_(14015010416).jpg" target="_blank" rel="noopener noreferrer">Carole Raddato / CC BY-SA 2.0</a>';}else{stage.style.removeProperty("--history-era-photo");credit.hidden=true;credit.textContent="";}updateCards()}
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+// LOCK: The nine-topic Rolodex is a continuous wheel in both directions.
+const wheelCount=names.length;
+const wrapTheme=n=>((Math.round(n)%wheelCount)+wheelCount)%wheelCount;
+function activateThemePosition(position,animate=true){
+ const next=wrapTheme(position),old=theme;
+ themeTarget=position;theme=next;
+ if(animate&&next!==old&&themeBox.children.length===wheelCount){const el=themeBox.children[next];if(el){el.classList.remove("flipping");void el.offsetWidth;el.classList.add("flipping");setTimeout(()=>el.classList.remove("flipping"),580)}}
+ if(next!==old){updateContext()}
+}
+function setTheme(index,animate=true){
+ const normalized=wrapTheme(index),near=normalized+Math.round((themeTarget-normalized)/wheelCount)*wheelCount;
+ activateThemePosition(near,animate);
+}
+names.forEach((n,i)=>{
+ const b=document.createElement("button");b.type="button";b.className="theme";
+ b.innerHTML='<span class="theme-art"></span><span class="theme-symbol" aria-hidden="true">'+["📖","🎭","⚙️","☀️","🏛️","🏟️","🎟️","⚖️","💭"][i]+'</span><span class="theme-name">'+n+'</span><span class="flap-top"></span><span class="flap-bottom"></span>';
+ b.addEventListener("click",()=>{if(performance.now()-themeMovedAt<180)return;setTheme(i)});
+ if(i===3){b.querySelector(".theme-art").style.backgroundImage='linear-gradient(#07131b55,#07131b88),url("assets/history/theme_light_B.webp")';b.querySelector(".theme-art").style.backgroundSize="cover";b.querySelector(".theme-art").style.backgroundPosition="center"}
+ themeBox.appendChild(b);
+});
+function renderThemes(dt){
+ if(!themeDrag){themePos+=(themeTarget-themePos)*(1-Math.exp(-dt*15));if(Math.abs(themeTarget-themePos)<.001)themePos=themeTarget}
+ const step=Math.min(105,Math.max(64,themeBox.clientHeight/5.9)),height=themeBox.clientHeight;
+ [...themeBox.children].forEach((el,i)=>{
+  const d=((i-themePos+wheelCount*1000+wheelCount/2)%wheelCount)-wheelCount/2,ad=Math.abs(d),y=d*step;
+  el.style.transform="translate3d(0,"+y.toFixed(2)+"px,0) rotateX("+clamp(-d*6,-12,12).toFixed(2)+"deg)";
+  el.style.opacity=String(clamp(1-Math.max(0,ad-2.3)*.65,0,1));
+  el.style.visibility=(ad>2.65||Math.abs(y)>height*.62)?"hidden":"visible";
+  el.style.zIndex=String(100-Math.round(ad*10));
+  el.classList.toggle("active",i===theme);el.setAttribute("aria-pressed",i===theme?"true":"false");
+ });
+}
+const themeStep=()=>Math.min(105,Math.max(64,themeBox.clientHeight/5.9));
+themeBox.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse"&&e.button!==0)return;const now=performance.now();themeDrag={id:e.pointerId,start:e.clientY,base:themePos,time:now,lastY:e.clientY,lastT:now,velocity:0,moved:false,tapIndex:[...themeBox.children].indexOf(e.target.closest(".theme"))};themeBox.setPointerCapture(e.pointerId);themeBox.classList.add("dragging")});
+themeBox.addEventListener("pointermove",e=>{
+ if(!themeDrag||themeDrag.id!==e.pointerId)return;
+ const now=performance.now(),dy=e.clientY-themeDrag.start,step=themeStep();
+ themePos=themeDrag.base-dy/step;themeTarget=themePos;
+ const liveIndex=wrapTheme(themePos);if(liveIndex!==theme){theme=liveIndex;updateContext()}
+ const elapsed=Math.max(1,now-themeDrag.lastT),instant=-(e.clientY-themeDrag.lastY)/step/elapsed*1000;
+ if(now-themeDrag.lastT<120)themeDrag.velocity=themeDrag.velocity*.45+clamp(instant,-18,18)*.55;
+ themeDrag.lastY=e.clientY;themeDrag.lastT=now;
+ if(Math.abs(dy)>5){themeDrag.moved=true;themeMovedAt=now}
+});
+function endTheme(e){
+ if(!themeDrag||e.pointerId!==themeDrag.id)return;
+ const d=themeDrag,now=performance.now(),delta=e.clientY-d.start,elapsed=Math.max(1,now-d.time),step=themeStep();
+ if(!d.moved){themeDrag=null;themeBox.classList.remove("dragging");if(themeBox.hasPointerCapture(e.pointerId))themeBox.releasePointerCapture(e.pointerId);if(d.tapIndex>=0){setTheme(d.tapIndex);themeMovedAt=now}return}
+ const current=d.base-delta/step,recent=(now-d.lastT<100)?d.velocity:0;
+ const overall=-(delta/step)/(elapsed/1000),flick=Math.abs(delta)>12&&elapsed<360;
+ const v=flick?clamp(recent*.55+overall*.45,-14,14):0;
+ activateThemePosition(Math.round(current+v*.18),true);
+ themeDrag=null;themeBox.classList.remove("dragging");themeMovedAt=now;
+ if(themeBox.hasPointerCapture(e.pointerId))themeBox.releasePointerCapture(e.pointerId)
+}
+themeBox.addEventListener("pointerup",endTheme);
+themeBox.addEventListener("pointercancel",e=>{if(!themeDrag||e.pointerId!==themeDrag.id)return;activateThemePosition(Math.round(themePos),false);themeDrag=null;themeBox.classList.remove("dragging")});
+themeBox.addEventListener("wheel",e=>{e.preventDefault();const now=performance.now();if(now-themeWheelLock<105)return;themeWheelLock=now;activateThemePosition(Math.round(themeTarget)+(e.deltaY>0?1:-1),true)},{passive:false});
+// Independent X/Y/Z swimming motion. No carousel, synchronized orbit, or fixed-position wobble.
+const driftStates=new Map();let focusCard=null;
+
+// Composition test: readable front cards, navigable middle distance, continuous archive behind.
+const depthSlots=[
+ {x:.22,y:.39,z:1.05,a:1},{x:.52,y:.67,z:1.03,a:1},
+ {x:.79,y:.38,z:1.04,a:1},{x:.47,y:.32,z:.92,a:.96},
+ {x:.77,y:.78,z:.69,a:.80},{x:.27,y:.77,z:.67,a:.79},
+ {x:.69,y:.16,z:.62,a:.76},{x:.34,y:.18,z:.61,a:.77},
+ {x:.91,y:.60,z:.58,a:.73},{x:.12,y:.61,z:.55,a:.72},
+ {x:.48,y:.13,z:.38,a:.52},{x:.89,y:.21,z:.36,a:.49},
+ {x:.16,y:.19,z:.34,a:.48},{x:.69,y:.91,z:.32,a:.44},
+ {x:.28,y:.90,z:.30,a:.42},{x:.95,y:.86,z:.27,a:.40},
+ {x:.60,y:.10,z:.27,a:.38},{x:.10,y:.86,z:.24,a:.37}
+];
+const motionStarted=performance.now();
+let manualAdvance=0,flowVX=0,flowVY=0;
+function stateFor(id,i,count){
+ if(driftStates.has(id))return driftStates.get(id);
+ const seed=[...id].reduce((n,c)=>((n*33+c.charCodeAt(0))>>>0),17);
+ const slot=depthSlots[i%depthSlots.length];
+ const st={x:slot.x,y:slot.y,z:slot.z,a:slot.a,seed,
+  driftX:.008+(seed%7)*.0015,driftY:.007+((seed>>>4)%7)*.001,
+  phase:(seed%628)/100};
+ driftStates.set(id,st);return st;
+}
+function frame(t){
+ const dt=Math.min(.05,Math.max(.001,(t-last)/1000));last=t;
+ const w=stage.clientWidth,h=stage.clientHeight;
+ const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+ const selected=fixtures.filter(f=>cardByKey.has(f.id)&&(theme<0||f.theme===theme)).map(f=>f.id);
+ const others=fixtures.filter(f=>cardByKey.has(f.id)&&theme>=0&&f.theme!==theme).map(f=>f.id);
+ const autoStep=reduced?0:Math.floor((t-motionStarted)/14500);
+ const advance=manualAdvance+autoStep;
+ const order=selected.length?selected.slice(advance%selected.length).concat(selected.slice(0,advance%selected.length),others):others;
+ const spanX=Math.max(220,w-310),spanY=Math.max(160,h-245);
+ const elapsed=(t-motionStarted)/1000;
+ const retained=new Set(order);for(const id of driftStates.keys())if(!retained.has(id))driftStates.delete(id);
+ order.forEach((id,index)=>{
+  const c=cardByKey.get(id),st=stateFor(id,index,order.length);
+  if(!c)return;
+  const matched=theme<0||fixtures.some(f=>f.id===id&&f.theme===theme);
+  const slot=depthSlots[Math.min(index,depthSlots.length-1)];
+  const beyond=index>=depthSlots.length;
+  // Beyond the near-visible archive are more cards, faintly waiting in perspective.
+  const shadow={x:.53+Math.sin(index*2.39)*.17,y:.12+Math.cos(index*1.79)*.10,z:.14,a:.075};
+  const target=(beyond||!matched)?shadow:slot;
+  const focus=id===focusCard;
+  const smoothing=Math.min(1,dt*(focus?5:1.55));
+  st.x+=(target.x-st.x)*smoothing;st.y+=(target.y-st.y)*smoothing;
+  st.z+=((focus?1.20:target.z)-st.z)*smoothing;
+  st.a+=((focus?1:target.a)-st.a)*smoothing;
+  const bobX=reduced?0:Math.sin(elapsed*.22+st.phase)*st.driftX;
+  const bobY=reduced?0:Math.cos(elapsed*.17+st.phase)*st.driftY;
+  const wiggleZ=reduced?0:Math.sin(elapsed*.13+st.phase)*.014;
+  const depth=st.z+wiggleZ;
+  const scale=focus?1.29:(.35+depth*.78);
+  const x=(st.x-.5)*spanX+(bobX+flowVX*depth)*spanX;
+  const y=(st.y-.5)*spanY+(bobY+flowVY*depth)*spanY;
+  c.style.transform='translate3d('+x.toFixed(1)+'px,'+y.toFixed(1)+'px,0) scale('+scale.toFixed(3)+')';
+  c.style.opacity=String(Math.max(.04,Math.min(1,st.a)));
+  c.style.filter='brightness('+Math.max(.56,.72+depth*.28).toFixed(2)+')';
+  c.style.zIndex=String(focus?3000:100+Math.round(depth*1000));
+  c.style.pointerEvents=(beyond&&!focus)?"none":"auto";
+  c.classList.toggle("focus",focus);
+  c.classList.toggle("distant",depth<.48);
+ });
+ flowVX*=Math.exp(-dt*1.8);flowVY*=Math.exp(-dt*1.8);
+ counter.textContent=cardByKey.size+"枚の歴史 ／ 手前から奥へ探索（全"+fixtures.length+"枚収録）";
+ requestAnimationFrame(frame);
+}
+function move(dir){if(!cards.length)return;const ids=[...cardByKey.keys()];const n=ids.indexOf(focusCard);const next=ids[(n+dir+ids.length)%ids.length];const item=fixtures.find(f=>f.id===next);if(item){focusCard=next;lastSelected=next;showDetail(item.data)}}
+document.getElementById("prev").onclick=()=>move(-1);
+document.getElementById("next").onclick=()=>move(1);
+
+// Swipe the historical field to send a gentle current through the card depth.
+stage.addEventListener("pointerdown",e=>{
+ if(e.target.closest("button"))return;
+ drag={id:e.pointerId,x:e.clientX,y:e.clientY,originX:e.clientX,originY:e.clientY};
+ stage.setPointerCapture(e.pointerId);
+});
+stage.addEventListener("pointermove",e=>{
+ if(!drag||drag.id!==e.pointerId)return;
+ const dx=e.clientX-drag.x,dy=e.clientY-drag.y;
+ flowVX=Math.max(-.065,Math.min(.065,flowVX+dx/Math.max(300,stage.clientWidth)*.7));
+ flowVY=Math.max(-.065,Math.min(.065,flowVY+dy/Math.max(200,stage.clientHeight)*.7));
+ drag.x=e.clientX;drag.y=e.clientY;
+});
+stage.addEventListener("pointerup",e=>{
+ if(drag&&drag.id===e.pointerId&&Math.hypot(e.clientX-drag.originX,e.clientY-drag.originY)>48){manualAdvance++;focusCard=null}
+ drag=null;
+});
+stage.addEventListener("pointercancel",()=>drag=null);
+renderEra();updateContext();requestAnimationFrame(frame)})();
+</script></body></html>
