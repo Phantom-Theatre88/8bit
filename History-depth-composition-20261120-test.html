@@ -104,7 +104,9 @@ header{flex:0 0 auto}
 .depth-explore{position:absolute;left:20px;bottom:18px;z-index:1900;background:#132536dc;color:#f3d49d;border:1px solid #d9ae72;border-radius:8px;padding:9px 14px;font-weight:700;font-size:12px;cursor:pointer;box-shadow:0 7px 18px #0009}.depth-explore:hover{background:#29445b}@media(max-width:800px){.depth-explore{font-size:10px;padding:7px 9px}}
 
 /* Nov 20 correction: single history heading in shared header; era selection uses one row. */
-body.eightbit-unified-width>header{display:none!important}
+body.eightbit-unified-width>header:not(.next-ui-console-header){display:none!important}
+body.eightbit-unified-width>header.next-ui-console-header{display:block!important;flex:0 0 auto!important}
+.next-ui-console-header .next-ui-header-top{display:flex!important}
 .era-label{display:none!important}
 .era-bar{height:67px!important;flex:0 0 67px!important;padding:4px 11px!important}
 .period-track{width:100%;gap:7px}
@@ -121,8 +123,23 @@ body.eightbit-unified-width>header{display:none!important}
 .flap-hint{font-size:12px}
 .archive-pending em{font-size:12px}
 @media(max-width:800px){.era-bar{height:91px!important;flex-basis:91px!important}.period-button{height:40px;font-size:11px}.stage .card{width:220px;height:151px;margin:-75.5px 0 0 -110px;padding:8px}.stage .card strong{font-size:15px}.stage .card small{font-size:10px}.flap-selector{width:176px}.stage-label{left:198px;font-size:11px}}
+
+/* Explicitly preserve the common 8bit navigation in the test page. */
+body.eightbit-unified-width #shared-console-header-root{display:contents!important}
+body.eightbit-unified-width .next-ui-console-header{display:block!important;visibility:visible!important}
+#flapFace{overflow:visible;perspective:650px;isolation:isolate;transform-style:preserve-3d}
+#flapCurrent{position:relative;display:flex;align-items:center;justify-content:center;height:100%;width:100%}
+.flap-panel{position:absolute;left:0;right:0;height:50%;overflow:hidden;backface-visibility:hidden;pointer-events:none;z-index:5;background:linear-gradient(180deg,#38516a,#23364a)}
+.flap-panel[hidden]{display:none!important}
+.flap-panel-upper{top:0;transform-origin:center bottom;border-bottom:1px solid #0b1520}
+.flap-panel-lower{bottom:0;transform-origin:center top;background:linear-gradient(180deg,#263b50,#38516a);border-top:1px solid #61778b}
+.flap-panel span{display:flex;position:absolute;left:0;right:0;height:200%;align-items:center;justify-content:center;white-space:nowrap;font-size:19px;font-weight:800;text-shadow:0 1px 3px #000}
+.flap-panel-upper span{top:0}
+.flap-panel-lower span{bottom:0}
+#flapFace.flap-turn{animation:none!important}
+@media(max-width:800px){.flap-panel span{font-size:15px}}
 </style><link rel="stylesheet" href="eightbit-layout-width.css?v=8">
-</head><body class="eightbit-unified-width"><div id="shared-console-header-root"></div><script src="next-ui-console-header.js?v=dmx-speed-nav-1"></script><header><b>舞台照明史 / HISTORY</b><a href="index.html" class="home-link">⌂ 教材トップ</a></header><nav class="era-bar" aria-label="演劇史の時代区分"><span class="era-label">THEATRE HISTORY</span><div id="periodTrack" class="period-track" role="group" aria-label="出来事から時代を選ぶ"></div></nav><div class="main"><aside class="themes" id="themes" aria-hidden="true" hidden></aside><main class="stage" id="stage"><div class="flap-selector" id="flapSelector" aria-label="9テーマでカードを整理"><div class="flap-head">THEME SELECTOR</div><div class="flap-controls"><button id="flapPrev" type="button" aria-label="前のテーマ">▲</button><button id="flapFace" type="button" aria-label="テーマ切替：現在は全テーマ"><span id="flapCurrent">全テーマ</span></button><button id="flapNext" type="button" aria-label="次のテーマ">▼</button></div><div class="flap-hint">上下にスワイプして分類</div></div><div class="stage-label">カードがゆっくり漂う空間</div><div class="counter" id="counter"></div><button class="depth-explore" id="depthExplore" type="button">奥の歴史を探す →</button><div class="era-photo-credit" id="eraPhotoCredit" hidden></div><div class="ring"></div><button class="arrow prev" id="prev" aria-label="前のカード">‹</button><button class="arrow next" id="next" aria-label="次のカード">›</button></main></div><section class="panel" aria-label="選択したカードの概要"><div class="lead-copy"><div id="detailKicker" class="detail-kicker"></div><h2 id="detailTitle">カードを選択</h2><p id="detailText">演劇の出来事を選び、その年代と歴史をたどろう。</p><p id="detailSummary" class="lead-summary"></p><div id="selectedLink" class="selected-link"></div></div></section><div class="history-float" id="historyFloat" hidden role="dialog" aria-modal="true" aria-labelledby="floatTitle"><article><button class="close-float" id="closeHistoryFloat" type="button">✕ 閉じる</button><h2 id="floatTitle"></h2><p id="floatMeta"></p><h3>歴史の出来事</h3><p id="floatSummary"></p><h3>背景・技術・表現</h3><p id="floatBody"></p><div id="floatPicture" class="float-picture"></div><h3>先生のひとこと</h3><p id="floatTeacher"></p><h3>根拠資料と確認状況</h3><p id="floatSource"></p><div id="floatLink"></div></article></div><script>
+</head><body class="eightbit-unified-width"><div id="shared-console-header-root"></div><script src="next-ui-console-header.js?v=dmx-speed-nav-1"></script><header><b>舞台照明史 / HISTORY</b><a href="index.html" class="home-link">⌂ 教材トップ</a></header><nav class="era-bar" aria-label="演劇史の時代区分"><span class="era-label">THEATRE HISTORY</span><div id="periodTrack" class="period-track" role="group" aria-label="出来事から時代を選ぶ"></div></nav><div class="main"><aside class="themes" id="themes" aria-hidden="true" hidden></aside><main class="stage" id="stage"><div class="flap-selector" id="flapSelector" aria-label="9テーマでカードを整理"><div class="flap-head">THEME SELECTOR</div><div class="flap-controls"><button id="flapPrev" type="button" aria-label="前のテーマ">▲</button><button id="flapFace" type="button" aria-label="テーマ切替：現在は全テーマ"><span id="flapCurrent">全テーマ</span><span class="flap-panel flap-panel-upper" id="flapUpper" aria-hidden="true"><span id="flapUpperText">全テーマ</span></span><span class="flap-panel flap-panel-lower" id="flapLower" aria-hidden="true"><span id="flapLowerText">全テーマ</span></span></button><button id="flapNext" type="button" aria-label="次のテーマ">▼</button></div><div class="flap-hint">上下にスワイプして分類</div></div><div class="stage-label">カードがゆっくり漂う空間</div><div class="counter" id="counter"></div><button class="depth-explore" id="depthExplore" type="button">奥の歴史を探す →</button><div class="era-photo-credit" id="eraPhotoCredit" hidden></div><div class="ring"></div><button class="arrow prev" id="prev" aria-label="前のカード">‹</button><button class="arrow next" id="next" aria-label="次のカード">›</button></main></div><section class="panel" aria-label="選択したカードの概要"><div class="lead-copy"><div id="detailKicker" class="detail-kicker"></div><h2 id="detailTitle">カードを選択</h2><p id="detailText">演劇の出来事を選び、その年代と歴史をたどろう。</p><p id="detailSummary" class="lead-summary"></p><div id="selectedLink" class="selected-link"></div></div></section><div class="history-float" id="historyFloat" hidden role="dialog" aria-modal="true" aria-labelledby="floatTitle"><article><button class="close-float" id="closeHistoryFloat" type="button">✕ 閉じる</button><h2 id="floatTitle"></h2><p id="floatMeta"></p><h3>歴史の出来事</h3><p id="floatSummary"></p><h3>背景・技術・表現</h3><p id="floatBody"></p><div id="floatPicture" class="float-picture"></div><h3>先生のひとこと</h3><p id="floatTeacher"></p><h3>根拠資料と確認状況</h3><p id="floatSource"></p><div id="floatLink"></div></article></div><script>
 (()=>{"use strict";const names=["用語","人物・職業","機構・技術","光源・照明","劇場建築","劇場・遺跡","作品・上演","社会・制度","文化・思想"],labels=["太陽光","松明","かがり火","蝋燭","油灯","劇場","舞台装置","仮面","祭礼","上演","建築","照明"],emoji=["☀️","🔥","🔥","🕯️","🏺","🏛️","⚙️","🎭","🎪","🎟️","🏗️","💡"];const stage=document.getElementById("stage"),themeBox=document.getElementById("themes"),counter=document.getElementById("counter"),title=document.getElementById("detailTitle"),desc=document.getElementById("detailText");let theme=-1,rotation=0,target=0,drag=null,last=performance.now(),lastMoved=0;document.documentElement.style.setProperty('--panel-height','38%');const cards=[];let themePos=3,themeTarget=3,themeDrag=null,themeMovedAt=0,themeWheelLock=0;
 // LOCK (2025-12-02): eight theatre/lighting history periods. The event comes first; dates belong to each article.
 const historyPeriods=[
@@ -797,12 +814,30 @@ const flapSelector=document.getElementById("flapSelector");
 const flapFace=document.getElementById("flapFace");
 const flapCurrent=document.getElementById("flapCurrent");
 const choices=["全テーマ",...names];let flapChoice=0,flapGesture=null,flapSuppressUntil=0;
+const flapUpper=document.getElementById("flapUpper"),flapLower=document.getElementById("flapLower");
+const flapUpperText=document.getElementById("flapUpperText"),flapLowerText=document.getElementById("flapLowerText");
+let flapAnimationToken=0;
 function selectFlap(next){
+ const old=choices[flapChoice];
  flapChoice=((next%choices.length)+choices.length)%choices.length;
+ const label=choices[flapChoice];
+ if(old===label)return;
  theme=flapChoice?flapChoice-1:-1;
- flapCurrent.textContent=choices[flapChoice];
- flapFace.setAttribute("aria-label","テーマ切替：現在は"+choices[flapChoice]);
- flapFace.classList.remove("flap-turn");void flapFace.offsetWidth;flapFace.classList.add("flap-turn");
+ const token=++flapAnimationToken;
+ flapUpper.getAnimations().forEach(a=>a.cancel());
+ flapLower.getAnimations().forEach(a=>a.cancel());
+ flapUpperText.textContent=old;
+ flapLowerText.textContent=label;
+ flapUpper.hidden=false;flapLower.hidden=false;
+ flapCurrent.textContent=label;
+ flapFace.setAttribute("aria-label","テーマ切替：現在は"+label);
+ if(matchMedia("(prefers-reduced-motion: reduce)").matches){
+  flapUpper.hidden=true;flapLower.hidden=true;
+ }else{
+  const top=flapUpper.animate([{transform:"rotateX(0deg)",opacity:1},{transform:"rotateX(-90deg)",opacity:.15}],{duration:175,easing:"ease-in",fill:"forwards"});
+  const bottom=flapLower.animate([{transform:"rotateX(90deg)",opacity:.15},{transform:"rotateX(0deg)",opacity:1}],{delay:175,duration:175,easing:"ease-out",fill:"forwards"});
+  bottom.finished.then(()=>{if(token===flapAnimationToken){top.cancel();bottom.cancel();flapUpper.hidden=true;flapLower.hidden=true;}}).catch(()=>{});
+ }
  focusCard=null;updateContext();
 }
 document.getElementById("flapPrev").addEventListener("click",e=>{if(performance.now()<flapSuppressUntil){e.preventDefault();return}selectFlap(flapChoice-1)});
