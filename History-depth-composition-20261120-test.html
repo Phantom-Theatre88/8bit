@@ -704,7 +704,7 @@ let manualAdvance=0,flowVX=0,flowVY=0;
 function stateFor(id,i,count){
  if(driftStates.has(id))return driftStates.get(id);
  const seed=[...id].reduce((n,c)=>((n*33+c.charCodeAt(0))>>>0),17);
- const slot=depthSlots[i%depthSlots.length];
+ const slot=i>=depthSlots.length?{x:.53+Math.sin(i*2.39)*.17,y:.12+Math.cos(i*1.79)*.10,z:.14,a:.075}:depthSlots[i];
  const st={x:slot.x,y:slot.y,z:slot.z,a:slot.a,seed,
   driftX:.008+(seed%7)*.0015,driftY:.007+((seed>>>4)%7)*.001,
   phase:(seed%628)/100};
@@ -714,7 +714,7 @@ function frame(t){
  const dt=Math.min(.05,Math.max(.001,(t-last)/1000));last=t;
  const w=stage.clientWidth,h=stage.clientHeight;
  const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
- const selected=fixtures.filter(f=>cardByKey.has(f.id)&&(theme<0||f.theme===theme)).map(f=>f.id);
+ const selected=fixtures.filter(f=>cardByKey.has(f.id)&&(theme<0||f.theme===theme)).sort((a,b)=>Number(Boolean(b.data.image))-Number(Boolean(a.data.image))).map(f=>f.id);
  const others=fixtures.filter(f=>cardByKey.has(f.id)&&theme>=0&&f.theme!==theme).map(f=>f.id);
  const autoStep=reduced?0:Math.floor((t-motionStarted)/14500);
  const advance=manualAdvance+autoStep;
@@ -755,7 +755,7 @@ function frame(t){
  counter.textContent=cardByKey.size+"枚の歴史 ／ 手前から奥へ探索（全"+fixtures.length+"枚収録）";
  requestAnimationFrame(frame);
 }
-function move(dir){if(!cards.length)return;const ids=[...cardByKey.keys()];const n=ids.indexOf(focusCard);const next=ids[(n+dir+ids.length)%ids.length];const item=fixtures.find(f=>f.id===next);if(item){focusCard=next;lastSelected=next;showDetail(item.data)}}
+function move(dir){if(!cards.length)return;const ids=[...cardByKey.keys()];const n=ids.indexOf(focusCard);const next=ids[(n+dir+ids.length)%ids.length];const item=fixtures.find(f=>f.id===next);if(item){focusCard=next;lastSelected=next;openHistoryFloat(item.data)}}
 document.getElementById("prev").onclick=()=>move(-1);
 document.getElementById("next").onclick=()=>move(1);
 
