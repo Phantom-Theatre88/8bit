@@ -756,7 +756,7 @@ function frame(t){
   const c=cardByKey.get(id);if(!c)return;
   const st=stateFor(id,index,order.length);
   const matched=index<selected.length;
-  const rank=matched?((index-progress)%n+n)%n:depthSlots.length+2+(index-selected.length)%4;
+  const rank=matched?((index+progress)%n+n)%n:depthSlots.length+2+(index-selected.length)%4;
   const k=Math.floor(rank),frac=rank-k,blend=frac*frac*(3-2*frac);
   const a=depthAt(k,matched?n:order.length);
   const b=depthAt((k+1)%Math.max(1,matched?n:order.length),matched?n:order.length);
