@@ -102,6 +102,25 @@ header{flex:0 0 auto}
 .flap-selector{z-index:1800}
 @media(max-width:800px){.stage .card{width:218px;height:148px;margin:-74px 0 0 -109px}.stage .card strong{font-size:13px}.stage .card small{font-size:9px}.archive-pending span{font-size:7px}}
 .depth-explore{position:absolute;left:20px;bottom:18px;z-index:1900;background:#132536dc;color:#f3d49d;border:1px solid #d9ae72;border-radius:8px;padding:9px 14px;font-weight:700;font-size:12px;cursor:pointer;box-shadow:0 7px 18px #0009}.depth-explore:hover{background:#29445b}@media(max-width:800px){.depth-explore{font-size:10px;padding:7px 9px}}
+
+/* Nov 20 correction: single history heading in shared header; era selection uses one row. */
+body.eightbit-unified-width>header{display:none!important}
+.era-label{display:none!important}
+.era-bar{height:67px!important;flex:0 0 67px!important;padding:4px 11px!important}
+.period-track{width:100%;gap:7px}
+.period-button{height:54px;font-size:clamp(13px,1.1vw,16px);font-weight:700}
+.period-button small{font-size:clamp(10px,.8vw,12px)}
+.stage-label{font-size:15px;left:260px;top:12px;max-width:60%}
+.stage .card strong{font-size:clamp(18px,1.6vw,23px);line-height:1.23}
+.stage .card small{font-size:clamp(12px,1.05vw,15px);line-height:1.48}
+.stage .card{width:294px;height:195px;margin:-97.5px 0 0 -147px;gap:10px;padding:12px}
+.flap-selector{width:225px}
+.flap-head{font-size:12px}
+.flap-controls{height:69px}
+#flapFace{font-size:19px}
+.flap-hint{font-size:12px}
+.archive-pending em{font-size:12px}
+@media(max-width:800px){.era-bar{height:91px!important;flex-basis:91px!important}.period-button{height:40px;font-size:11px}.stage .card{width:220px;height:151px;margin:-75.5px 0 0 -110px;padding:8px}.stage .card strong{font-size:15px}.stage .card small{font-size:10px}.flap-selector{width:176px}.stage-label{left:198px;font-size:11px}}
 </style><link rel="stylesheet" href="eightbit-layout-width.css?v=8">
 </head><body class="eightbit-unified-width"><div id="shared-console-header-root"></div><script src="next-ui-console-header.js?v=dmx-speed-nav-1"></script><header><b>舞台照明史 / HISTORY</b><a href="index.html" class="home-link">⌂ 教材トップ</a></header><nav class="era-bar" aria-label="演劇史の時代区分"><span class="era-label">THEATRE HISTORY</span><div id="periodTrack" class="period-track" role="group" aria-label="出来事から時代を選ぶ"></div></nav><div class="main"><aside class="themes" id="themes" aria-hidden="true" hidden></aside><main class="stage" id="stage"><div class="flap-selector" id="flapSelector" aria-label="9テーマでカードを整理"><div class="flap-head">THEME SELECTOR</div><div class="flap-controls"><button id="flapPrev" type="button" aria-label="前のテーマ">▲</button><button id="flapFace" type="button" aria-label="テーマ切替：現在は全テーマ"><span id="flapCurrent">全テーマ</span></button><button id="flapNext" type="button" aria-label="次のテーマ">▼</button></div><div class="flap-hint">上下にスワイプして分類</div></div><div class="stage-label">カードがゆっくり漂う空間</div><div class="counter" id="counter"></div><button class="depth-explore" id="depthExplore" type="button">奥の歴史を探す →</button><div class="era-photo-credit" id="eraPhotoCredit" hidden></div><div class="ring"></div><button class="arrow prev" id="prev" aria-label="前のカード">‹</button><button class="arrow next" id="next" aria-label="次のカード">›</button></main></div><section class="panel" aria-label="選択したカードの概要"><div class="lead-copy"><div id="detailKicker" class="detail-kicker"></div><h2 id="detailTitle">カードを選択</h2><p id="detailText">演劇の出来事を選び、その年代と歴史をたどろう。</p><p id="detailSummary" class="lead-summary"></p><div id="selectedLink" class="selected-link"></div></div></section><div class="history-float" id="historyFloat" hidden role="dialog" aria-modal="true" aria-labelledby="floatTitle"><article><button class="close-float" id="closeHistoryFloat" type="button">✕ 閉じる</button><h2 id="floatTitle"></h2><p id="floatMeta"></p><h3>歴史の出来事</h3><p id="floatSummary"></p><h3>背景・技術・表現</h3><p id="floatBody"></p><div id="floatPicture" class="float-picture"></div><h3>先生のひとこと</h3><p id="floatTeacher"></p><h3>根拠資料と確認状況</h3><p id="floatSource"></p><div id="floatLink"></div></article></div><script>
 (()=>{"use strict";const names=["用語","人物・職業","機構・技術","光源・照明","劇場建築","劇場・遺跡","作品・上演","社会・制度","文化・思想"],labels=["太陽光","松明","かがり火","蝋燭","油灯","劇場","舞台装置","仮面","祭礼","上演","建築","照明"],emoji=["☀️","🔥","🔥","🕯️","🏺","🏛️","⚙️","🎭","🎪","🎟️","🏗️","💡"];const stage=document.getElementById("stage"),themeBox=document.getElementById("themes"),counter=document.getElementById("counter"),title=document.getElementById("detailTitle"),desc=document.getElementById("detailText");let theme=-1,rotation=0,target=0,drag=null,last=performance.now(),lastMoved=0;document.documentElement.style.setProperty('--panel-height','38%');const cards=[];let themePos=3,themeTarget=3,themeDrag=null,themeMovedAt=0,themeWheelLock=0;
@@ -597,7 +616,7 @@ const fixtures=Object.entries(items).filter(([id])=>fixtureMeta[id]).map(([id,d]
 researchedHistoryCards.forEach(r=>{const start=r.year<0?r.year-60:r.year-35;const end=r.year<0?r.year+60:r.year+35;fixtures.push({id:r.id,data:items[r.id],theme:r.theme,start,end,anchor:r.year});});
 let visibleKey="",lastSelected=null;const cardByKey=new Map();let slideDirection=1;
 function updateCards(){
- const p=historyPeriods[periodIndex];const found=fixtures.filter(f=>(f.anchor===undefined?(f.start<=p.max&&f.end>=p.min):(f.anchor>=p.min&&f.anchor<=p.max)));
+ const p=historyPeriods[periodIndex];const found=fixtures.filter(f=>{const year=f.anchor===undefined?Math.round((f.start+f.end)/2):f.anchor;return year>=p.min&&year<=p.max});
  const key=found.map(f=>f.id).join("|");if(key===visibleKey)return;
  visibleKey=key;lastSelected=null;focusCard=null;
  const now=performance.now(),nextKeys=new Set(found.map(f=>f.id));
@@ -625,7 +644,7 @@ function openHistoryFloat(d){const m=document.getElementById("historyFloat");doc
 document.getElementById("closeHistoryFloat").onclick=()=>document.getElementById("historyFloat").hidden=true;
 document.getElementById("historyFloat").addEventListener("click",e=>{if(e.target.id==="historyFloat")e.currentTarget.hidden=true});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")document.getElementById("historyFloat").hidden=true});
-function updateContext(){const p=historyPeriods[periodIndex];document.querySelector(".stage-label").textContent=p.label+" ／ "+(theme<0?"全テーマ":names[theme])+"　← カードを選ぶと記事が開きます →";title.textContent=p.label+" × "+(theme<0?"全テーマ":names[theme]);const entries=fixtures.filter(f=>(f.anchor===undefined?(f.start<=p.max&&f.end>=p.min):(f.anchor>=p.min&&f.anchor<=p.max))&&(theme<0||f.theme===theme));desc.textContent=entries.length?entries.slice(0,2).map(f=>f.data.teaser).join("　")+"　気になるカードを選ぶと、その時代の背景と年代を知ることができます。":"この組み合わせの記事は調査・制作中です。別のテーマを選ぶと収録済みの出来事を探索できます。";document.getElementById("detailKicker").textContent=p.range+" ／ 収録記事 "+entries.length+"件";document.getElementById("selectedLink").innerHTML="";const credit=document.getElementById("eraPhotoCredit");if(periodIndex===1){stage.style.setProperty("--history-era-photo",'url("assets/history/sunlight/01_epidaurus_greek_theatre.webp")');credit.hidden=false;credit.innerHTML='背景：エピダウロス劇場（紀元前4世紀の遺構）・<a href="https://commons.wikimedia.org/wiki/File:The_great_theater_of_Epidaurus,_designed_by_Polykleitos_the_Younger_in_the_4th_century_BC,_Sanctuary_of_Asklepeios_at_Epidaurus,_Greece_(14015010416).jpg" target="_blank" rel="noopener noreferrer">Carole Raddato / CC BY-SA 2.0</a>';}else{stage.style.removeProperty("--history-era-photo");credit.hidden=true;credit.textContent="";}updateCards()}
+function updateContext(){const p=historyPeriods[periodIndex];document.querySelector(".stage-label").textContent=p.label+" ／ "+(theme<0?"全テーマ":names[theme])+"　← カードを選ぶと記事が開きます →";title.textContent=p.label+" × "+(theme<0?"全テーマ":names[theme]);const entries=fixtures.filter(f=>{const year=f.anchor===undefined?Math.round((f.start+f.end)/2):f.anchor;return year>=p.min&&year<=p.max&&(theme<0||f.theme===theme)});desc.textContent=entries.length?entries.slice(0,2).map(f=>f.data.teaser).join("　")+"　気になるカードを選ぶと、その時代の背景と年代を知ることができます。":"この組み合わせの記事は調査・制作中です。別のテーマを選ぶと収録済みの出来事を探索できます。";document.getElementById("detailKicker").textContent=p.range+" ／ 収録記事 "+entries.length+"件";document.getElementById("selectedLink").innerHTML="";const credit=document.getElementById("eraPhotoCredit");if(periodIndex===1){stage.style.setProperty("--history-era-photo",'url("assets/history/sunlight/01_epidaurus_greek_theatre.webp")');credit.hidden=false;credit.innerHTML='背景：エピダウロス劇場（紀元前4世紀の遺構）・<a href="https://commons.wikimedia.org/wiki/File:The_great_theater_of_Epidaurus,_designed_by_Polykleitos_the_Younger_in_the_4th_century_BC,_Sanctuary_of_Asklepeios_at_Epidaurus,_Greece_(14015010416).jpg" target="_blank" rel="noopener noreferrer">Carole Raddato / CC BY-SA 2.0</a>';}else{stage.style.removeProperty("--history-era-photo");credit.hidden=true;credit.textContent="";}updateCards()}
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 // LOCK: The nine-topic Rolodex is a continuous wheel in both directions.
 const wheelCount=names.length;
@@ -701,8 +720,8 @@ const depthSlots=[
  {x:.60,y:.10,z:.27,a:.38},{x:.10,y:.86,z:.24,a:.37}
 ];
 const motionStarted=performance.now();
-let manualAdvance=0,flowVX=0,flowVY=0;
-document.getElementById("depthExplore").onclick=()=>{manualAdvance++;focusCard=null};
+let manualAdvance=0,displayAdvance=0,flowVX=0,flowVY=0;
+document.getElementById("depthExplore").onclick=()=>{manualAdvance+=1;focusCard=null};
 function stateFor(id,i,count){
  if(driftStates.has(id))return driftStates.get(id);
  const seed=[...id].reduce((n,c)=>((n*33+c.charCodeAt(0))>>>0),17);
@@ -712,46 +731,57 @@ function stateFor(id,i,count){
   phase:(seed%628)/100};
  driftStates.set(id,st);return st;
 }
+function depthAt(rank,count){
+ const n=depthSlots.length;
+ if(rank>=n){
+  const a=(rank-n)/Math.max(1,count-n);
+  return {x:.52+Math.sin(a*Math.PI*1.6)*.16,y:.13+Math.cos(a*Math.PI*1.6)*.06,z:.12,a:.045};
+ }
+ return depthSlots[rank];
+}
 function frame(t){
- const dt=Math.min(.05,Math.max(.001,(t-last)/1000));last=t;
+ const dt=Math.min(.06,Math.max(.001,(t-last)/1000));last=t;
  const w=stage.clientWidth,h=stage.clientHeight;
  const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
  const selected=fixtures.filter(f=>cardByKey.has(f.id)&&(theme<0||f.theme===theme)).sort((a,b)=>Number(Boolean(b.data.image))-Number(Boolean(a.data.image))).map(f=>f.id);
  const others=fixtures.filter(f=>cardByKey.has(f.id)&&theme>=0&&f.theme!==theme).map(f=>f.id);
- const autoStep=reduced?0:Math.floor((t-motionStarted)/14500);
- const advance=manualAdvance+autoStep;
- const order=selected.length?selected.slice(advance%selected.length).concat(selected.slice(0,advance%selected.length),others):others;
- const spanX=Math.max(220,w-310),spanY=Math.max(160,h-245);
+ const order=selected.concat(others);
+ const n=Math.max(1,selected.length);
+ const spanX=Math.max(220,w-340),spanY=Math.max(160,h-265);
  const elapsed=(t-motionStarted)/1000;
+ displayAdvance+=(manualAdvance-displayAdvance)*Math.min(1,dt*1.9);
+ const progress=(reduced?0:elapsed/20)+displayAdvance;
  const retained=new Set(order);for(const id of driftStates.keys())if(!retained.has(id))driftStates.delete(id);
  order.forEach((id,index)=>{
-  const c=cardByKey.get(id),st=stateFor(id,index,order.length);
-  if(!c)return;
-  const matched=theme<0||fixtures.some(f=>f.id===id&&f.theme===theme);
-  const slot=depthSlots[Math.min(index,depthSlots.length-1)];
-  const beyond=index>=depthSlots.length;
-  // Beyond the near-visible archive are more cards, faintly waiting in perspective.
-  const shadow={x:.53+Math.sin(index*2.39)*.17,y:.12+Math.cos(index*1.79)*.10,z:.14,a:.075};
-  const target=(beyond||!matched)?shadow:slot;
+  const c=cardByKey.get(id);if(!c)return;
+  const st=stateFor(id,index,order.length);
+  const matched=index<selected.length;
+  const rank=matched?((index-progress)%n+n)%n:depthSlots.length+2+(index-selected.length)%4;
+  const k=Math.floor(rank),frac=rank-k,blend=frac*frac*(3-2*frac);
+  const a=depthAt(k,matched?n:order.length);
+  const b=depthAt((k+1)%Math.max(1,matched?n:order.length),matched?n:order.length);
+  const target=matched?{
+    x:a.x+(b.x-a.x)*blend,y:a.y+(b.y-a.y)*blend,
+    z:a.z+(b.z-a.z)*blend,a:a.a+(b.a-a.a)*blend
+  }:{x:.54+Math.sin(index*2.3)*.17,y:.15+Math.cos(index*1.9)*.07,z:.13,a:.055};
   const focus=id===focusCard;
-  const smoothing=Math.min(1,dt*(focus?5:1.55));
-  st.x+=(target.x-st.x)*smoothing;st.y+=(target.y-st.y)*smoothing;
-  st.z+=((focus?1.20:target.z)-st.z)*smoothing;
+  const smoothing=Math.min(1,dt*(focus?5:2.7));
+  st.x+=((focus?.5:target.x)-st.x)*smoothing;
+  st.y+=((focus?.52:target.y)-st.y)*smoothing;
+  st.z+=((focus?1.28:target.z)-st.z)*smoothing;
   st.a+=((focus?1:target.a)-st.a)*smoothing;
-  const bobX=reduced?0:Math.sin(elapsed*.22+st.phase)*st.driftX;
-  const bobY=reduced?0:Math.cos(elapsed*.17+st.phase)*st.driftY;
-  const wiggleZ=reduced?0:Math.sin(elapsed*.13+st.phase)*.014;
-  const depth=st.z+wiggleZ;
-  const scale=focus?1.29:(.35+depth*.78);
-  const x=(st.x-.5)*spanX+(bobX+flowVX*depth)*spanX;
-  const y=(st.y-.5)*spanY+(bobY+flowVY*depth)*spanY;
+  const bobX=reduced?0:Math.sin(elapsed*.23+st.phase)*st.driftX;
+  const bobY=reduced?0:Math.cos(elapsed*.19+st.phase)*st.driftY;
+  const bobZ=reduced?0:Math.sin(elapsed*.11+st.phase)*.018;
+  const depth=st.z+bobZ,scale=focus?1.25:.36+depth*.72;
+  const x=(st.x-.5+bobX+flowVX*depth)*spanX;
+  const y=(st.y-.5+bobY+flowVY*depth)*spanY;
   c.style.transform='translate3d('+x.toFixed(1)+'px,'+y.toFixed(1)+'px,0) scale('+scale.toFixed(3)+')';
-  c.style.opacity=String(Math.max(.04,Math.min(1,st.a)));
-  c.style.filter='brightness('+Math.max(.56,.72+depth*.28).toFixed(2)+')';
+  c.style.opacity=String(Math.max(.025,Math.min(1,st.a)));
+  c.style.filter='brightness('+Math.max(.55,.74+depth*.26).toFixed(2)+')';
   c.style.zIndex=String(focus?3000:100+Math.round(depth*1000));
-  c.style.pointerEvents=(beyond&&!focus)?"none":"auto";
-  c.classList.toggle("focus",focus);
-  c.classList.toggle("distant",depth<.48);
+  c.style.pointerEvents=(!matched||st.a<.16)&&!focus?"none":"auto";
+  c.classList.toggle("focus",focus);c.classList.toggle("distant",depth<.48);
  });
  flowVX*=Math.exp(-dt*1.8);flowVY*=Math.exp(-dt*1.8);
  counter.textContent=cardByKey.size+"枚の歴史 ／ 手前から奥へ探索（全"+fixtures.length+"枚収録）";
@@ -762,6 +792,48 @@ document.getElementById("prev").onclick=()=>move(-1);
 document.getElementById("next").onclick=()=>move(1);
 
 // Swipe the historical field to send a gentle current through the card depth.
+// Compact split-flap selector: continuous wrap, swipe, click and wheel.
+const flapSelector=document.getElementById("flapSelector");
+const flapFace=document.getElementById("flapFace");
+const flapCurrent=document.getElementById("flapCurrent");
+const choices=["全テーマ",...names];let flapChoice=0,flapGesture=null,flapSuppressUntil=0;
+function selectFlap(next){
+ flapChoice=((next%choices.length)+choices.length)%choices.length;
+ theme=flapChoice?flapChoice-1:-1;
+ flapCurrent.textContent=choices[flapChoice];
+ flapFace.setAttribute("aria-label","テーマ切替：現在は"+choices[flapChoice]);
+ flapFace.classList.remove("flap-turn");void flapFace.offsetWidth;flapFace.classList.add("flap-turn");
+ focusCard=null;updateContext();
+}
+document.getElementById("flapPrev").addEventListener("click",e=>{if(performance.now()<flapSuppressUntil){e.preventDefault();return}selectFlap(flapChoice-1)});
+document.getElementById("flapNext").addEventListener("click",e=>{if(performance.now()<flapSuppressUntil){e.preventDefault();return}selectFlap(flapChoice+1)});
+flapFace.addEventListener("click",e=>{if(performance.now()<flapSuppressUntil){e.preventDefault();return}selectFlap(flapChoice+1)});
+flapSelector.addEventListener("pointerdown",e=>{
+ if(e.pointerType==="mouse"&&e.button!==0)return;
+ flapGesture={id:e.pointerId,y:e.clientY,stepY:e.clientY,moved:false};
+ flapSelector.setPointerCapture(e.pointerId);
+});
+flapSelector.addEventListener("pointermove",e=>{
+ if(!flapGesture||e.pointerId!==flapGesture.id)return;
+ const delta=flapGesture.stepY-e.clientY;
+ if(Math.abs(e.clientY-flapGesture.y)>6)flapGesture.moved=true;
+ if(Math.abs(delta)>=26){
+  const steps=Math.trunc(delta/26);
+  selectFlap(flapChoice+steps);
+  flapGesture.stepY-=steps*26;
+  flapSuppressUntil=performance.now()+350;
+ }
+});
+flapSelector.addEventListener("pointerup",e=>{
+ if(flapGesture&&e.pointerId===flapGesture.id&&flapGesture.moved)flapSuppressUntil=performance.now()+350;
+ flapGesture=null;
+});
+flapSelector.addEventListener("pointercancel",()=>flapGesture=null);
+let flapWheelAt=0;
+flapSelector.addEventListener("wheel",e=>{
+ e.preventDefault();const now=performance.now();
+ if(now-flapWheelAt>170&&Math.abs(e.deltaY)>1){selectFlap(flapChoice+(e.deltaY>0?1:-1));flapWheelAt=now}
+},{passive:false});
 stage.addEventListener("pointerdown",e=>{
  if(e.target.closest("button"))return;
  drag={id:e.pointerId,x:e.clientX,y:e.clientY,originX:e.clientX,originY:e.clientY};
